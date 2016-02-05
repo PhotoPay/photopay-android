@@ -217,7 +217,7 @@
 <ol>
 <li>In Eclipse, create a new <em>Android library project</em> in your workspace.</li>
 <li>Clear the <code>src</code> and <code>res</code> folders.</li>
-<li>Unzip the <code>LibRecognizer.aar</code> file. You can rename it to zip and then unzip it or use any tool.</li>
+<li>Unzip the <code>LibRecognizer.aar</code> file. You can rename it to zip and then unzip it using any tool.</li>
 <li>Copy the <code>classes.jar</code> to <code>libs</code> folder of your Eclipse library project. If <code>libs</code> folder does not exist, create it.</li>
 <li>Copy the contents of <code>jni</code> folder to <code>libs</code> folder of your Eclipse library project.</li>
 <li>Replace the <code>res</code> folder on library project with the <code>res</code> folder of the <code>LibRecognizer.aar</code> file.</li>
@@ -228,6 +228,7 @@
 <ol>
 <li>In the project you want to use the library (henceforth, "target project") add the library project as a dependency</li>
 <li>Open the <code>AndroidManifest.xml</code> file inside <code>LibRecognizer.aar</code> file and make sure to copy all permissions, features and activities to the <code>AndroidManifest.xml</code> file of the target project.</li>
+<li>Copy the contents of <code>assets</code> folder from <code>LibRecognizer.aar</code> into <code>assets</code> folder of target project. If <code>assets</code> folder in target project does not exist, create it.</li>
 <li>Clean and Rebuild your target project</li>
 <li>If you plan to use ProGuard, add same statements as in <a href="#quickIntegration">Android studio guide</a> to your ProGuard configuration file.</li>
 <li>Add appcompat-v7 library to your workspace and reference it by target project (modern ADT plugin for Eclipse does this automatically for all new android projects).</li>
@@ -496,7 +497,7 @@ intent<span class="pl-k">.</span>putExtra(<span class="pl-smi">ScanActivity</spa
 <h4>
 <a id="user-content-modifying-other-resources" class="anchor" href="#modifying-other-resources" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Modifying other resources.</h4>
 
-<p>Generally, you can also change other resources that <code>ScanActivity</code> uses, but you are encouraged to create your own custom scan activity instead (see <a href="#recognizerView">Embedding <code>RecognizerView</code> into custom scan activity</a>). Just do not modify the contents of <code>raw</code> folder, as it contains files required for native part of the library - without those files <em>PhotoPay</em> will not work.</p>
+<p>Generally, you can also change other resources that <code>ScanActivity</code> uses, but you are encouraged to create your own custom scan activity instead (see <a href="#recognizerView">Embedding <code>RecognizerView</code> into custom scan activity</a>).</p>
 
 <h4>
 <a id="user-content-changing-viewfinder-appearance" class="anchor" href="#changing-viewfinder-appearance" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Changing viewfinder appearance</h4>
@@ -3940,7 +3941,7 @@ from the current recognition process. Which metadata will be available depends o
 <h1>
 <a id="user-content--translation-and-localization" class="anchor" href="#-translation-and-localization" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-translation"></a> Translation and localization</h1>
 
-<p><code>PhotoPay</code> can be localized to any language. If you are using <code>RecognizerView</code> in your custom scan activity, you should handle localization as in any other Android app - <code>RecognizerView</code> does not use strings nor drawables, it only uses raw resources from <code>res/raw</code> folder. Those resources must not be touched as they are required for recognition to work correctly.</p>
+<p><code>PhotoPay</code> can be localized to any language. If you are using <code>RecognizerView</code> in your custom scan activity, you should handle localization as in any other Android app - <code>RecognizerView</code> does not use strings nor drawables, it only uses assets from <code>assets/microblink</code> folder. Those assets must not be touched as they are required for recognition to work correctly.</p>
 
 <p>However, if you use our builtin <code>ScanActivity</code> activity, it will use resources packed with library project to display strings and images on top of camera view. We have already prepared string in several languages which you can use out of the box. You can also <a href="#stringChanging">modify those strings</a>, or you can <a href="#addLanguage">add your own language</a>.</p>
 
