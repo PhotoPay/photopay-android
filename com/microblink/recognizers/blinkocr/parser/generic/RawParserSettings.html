@@ -119,7 +119,8 @@ var activeTableTab = "activeTableTab";
 <pre>public class <span class="typeNameLabel">RawParserSettings</span>
 extends <a href="../../../../../../com/microblink/recognizers/blinkocr/parser/OcrParserSettings.html" title="class in com.microblink.recognizers.blinkocr.parser">OcrParserSettings</a>
 implements android.os.Parcelable</pre>
-<div class="block">Created by dodo on 02/03/15.</div>
+<div class="block">Represents a parser which simply returns the string version of OCR result, without
+ performing any smarter parse operations.</div>
 </li>
 </ul>
 </div>
@@ -186,7 +187,9 @@ implements android.os.Parcelable</pre>
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/blinkocr/parser/generic/RawParserSettings.html#RawParserSettings--">RawParserSettings</a></span>()</code>&nbsp;</td>
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/blinkocr/parser/generic/RawParserSettings.html#RawParserSettings--">RawParserSettings</a></span>()</code>
+<div class="block">Constructor for Raw Parser Settings, initialised with default OCR engine options.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -206,8 +209,7 @@ implements android.os.Parcelable</pre>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="../../../../../../com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html" title="class in com.microblink.recognizers.blinkocr.engine">BlinkOCREngineOptions</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/blinkocr/parser/generic/RawParserSettings.html#getOcrEngineOptions--">getOcrEngineOptions</a></span>()</code>
-<div class="block">Returns the OCR engine options used in Raw OCR parsing or null if default options should be
- used.</div>
+<div class="block">Returns the OCR engine options used in Raw OCR parser.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
@@ -220,7 +222,7 @@ implements android.os.Parcelable</pre>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/blinkocr/parser/generic/RawParserSettings.html#setOcrEngineOptions-com.microblink.recognizers.blinkocr.engine.BlinkOCREngineOptions-">setOcrEngineOptions</a></span>(<a href="../../../../../../com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html" title="class in com.microblink.recognizers.blinkocr.engine">BlinkOCREngineOptions</a>&nbsp;options)</code>
-<div class="block">Sets the OCR engine options used in Raw OCR parsing.</div>
+<div class="block">Sets the OCR engine options used in Raw OCR parser.</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
@@ -295,6 +297,11 @@ implements android.os.Parcelable</pre>
 <li class="blockList">
 <h4>RawParserSettings</h4>
 <pre>public&nbsp;RawParserSettings()</pre>
+<div class="block">Constructor for Raw Parser Settings, initialised with default OCR engine options.
+ To customise scanning experience, you should specify custom OCR engine options, see
+ <a href="../../../../../../com/microblink/recognizers/blinkocr/parser/generic/RawParserSettings.html#setOcrEngineOptions-com.microblink.recognizers.blinkocr.engine.BlinkOCREngineOptions-"><code>setOcrEngineOptions(BlinkOCREngineOptions)</code></a> and/or you should enable reusing of
+ time redundant information between consecutive video frames to improve OCR quality with
+ <a href="../../../../../../com/microblink/recognizers/blinkocr/parser/generic/RawParserSettings.html#setUseSieve-boolean-"><code>setUseSieve(boolean)</code></a>.</div>
 </li>
 </ul>
 </li>
@@ -342,11 +349,10 @@ implements android.os.Parcelable</pre>
 <li class="blockList">
 <h4>getOcrEngineOptions</h4>
 <pre>public&nbsp;<a href="../../../../../../com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html" title="class in com.microblink.recognizers.blinkocr.engine">BlinkOCREngineOptions</a>&nbsp;getOcrEngineOptions()</pre>
-<div class="block">Returns the OCR engine options used in Raw OCR parsing or null if default options should be
- used.</div>
+<div class="block">Returns the OCR engine options used in Raw OCR parser.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>OCR engine options or null</dd>
+<dd>OCR engine options used in Raw OCR parser</dd>
 </dl>
 </li>
 </ul>
@@ -357,10 +363,10 @@ implements android.os.Parcelable</pre>
 <li class="blockList">
 <h4>setOcrEngineOptions</h4>
 <pre>public&nbsp;void&nbsp;setOcrEngineOptions(<a href="../../../../../../com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html" title="class in com.microblink.recognizers.blinkocr.engine">BlinkOCREngineOptions</a>&nbsp;options)</pre>
-<div class="block">Sets the OCR engine options used in Raw OCR parsing. Set null to use default options.</div>
+<div class="block">Sets the OCR engine options used in Raw OCR parser.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>options</code> - OCR engine options used in Raw OCR parsing</dd>
+<dd><code>options</code> - OCR engine options used in Raw OCR parser</dd>
 </dl>
 </li>
 </ul>

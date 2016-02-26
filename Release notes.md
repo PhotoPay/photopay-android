@@ -1,5 +1,8 @@
 # Release notes
 
+## 5.5.1
+- fixed ANR on Samsung Galaxy S3 Mini version
+
 ## 5.5.0
 - support for scanning custom camera frames via DirectAPI
 - fixed bug on some devices causing it to never start scanning if device was not shaken

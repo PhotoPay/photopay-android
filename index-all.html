@@ -605,6 +605,8 @@
 <dd>
 <div class="block">Converts this image into Android Bitmap.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/microblink/recognizers/RecognitionResultConstants.html#COUNTRY_ID">COUNTRY_ID</a></span> - Static variable in interface com.microblink.recognizers.<a href="com/microblink/recognizers/RecognitionResultConstants.html" title="interface in com.microblink.recognizers">RecognitionResultConstants</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/view/BaseCameraView.html#create--">create()</a></span> - Method in class com.microblink.view.<a href="com/microblink/view/BaseCameraView.html" title="class in com.microblink.view">BaseCameraView</a></dt>
 <dd>
 <div class="block">Creates the view and its subviews and initializes camera settings.</div>
@@ -1770,8 +1772,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/recognizers/blinkocr/parser/generic/RawParserSettings.html#getOcrEngineOptions--">getOcrEngineOptions()</a></span> - Method in class com.microblink.recognizers.blinkocr.parser.generic.<a href="com/microblink/recognizers/blinkocr/parser/generic/RawParserSettings.html" title="class in com.microblink.recognizers.blinkocr.parser.generic">RawParserSettings</a></dt>
 <dd>
-<div class="block">Returns the OCR engine options used in Raw OCR parsing or null if default options should be
- used.</div>
+<div class="block">Returns the OCR engine options used in Raw OCR parser.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/microblink/recognizers/photopay/netherlands/slip/DutchSlipRecognizerSettings.html#getOcrLineDetectionStartPercentage--">getOcrLineDetectionStartPercentage()</a></span> - Method in class com.microblink.recognizers.photopay.netherlands.slip.<a href="com/microblink/recognizers/photopay/netherlands/slip/DutchSlipRecognizerSettings.html" title="class in com.microblink.recognizers.photopay.netherlands.slip">DutchSlipRecognizerSettings</a></dt>
 <dd>&nbsp;</dd>
@@ -1838,9 +1839,13 @@
 <div class="block">Get the result of parser in given parser group.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/microblink/ocr/ScanConfiguration.html#getParserName--">getParserName()</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/ScanConfiguration.html" title="class in com.microblink.ocr">ScanConfiguration</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the name of the parser.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/ocr/ScanConfiguration.html#getParserSettings--">getParserSettings()</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/ScanConfiguration.html" title="class in com.microblink.ocr">ScanConfiguration</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the parser settings that will be used to instatiate parser.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/recognizers/photopay/kosovo/code128/KosovoCode128RecognitionResult.html#getPayerAccount--">getPayerAccount()</a></span> - Method in class com.microblink.recognizers.photopay.kosovo.code128.<a href="com/microblink/recognizers/photopay/kosovo/code128/KosovoCode128RecognitionResult.html" title="class in com.microblink.recognizers.photopay.kosovo.code128">KosovoCode128RecognitionResult</a></dt>
 <dd>
 <div class="block">Returns the payer account number</div>
@@ -2271,10 +2276,18 @@
 </dd>
 <dt><span class="memberNameLink"><a href="com/microblink/metadata/TextMetadata.html#getText--">getText()</a></span> - Method in class com.microblink.metadata.<a href="com/microblink/metadata/TextMetadata.html" title="class in com.microblink.metadata">TextMetadata</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/microblink/ocr/ScanConfiguration.html#getText-android.content.Context-">getText(Context)</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/ScanConfiguration.html" title="class in com.microblink.ocr">ScanConfiguration</a></dt>
+<dd>
+<div class="block">Returns the text that will be displayed when parser is active.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/ocr/ScanConfiguration.html#getTextResource--">getTextResource()</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/ScanConfiguration.html" title="class in com.microblink.ocr">ScanConfiguration</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/microblink/ocr/ScanConfiguration.html#getTitle--">getTitle()</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/ScanConfiguration.html" title="class in com.microblink.ocr">ScanConfiguration</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the resource ID representing text that will be displayed when parser is active.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/microblink/ocr/ScanConfiguration.html#getTitle-android.content.Context-">getTitle(Context)</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/ScanConfiguration.html" title="class in com.microblink.ocr">ScanConfiguration</a></dt>
+<dd>
+<div class="block">Returns title that will be displayed.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/recognizers/BaseRecognitionResult.html#getTitle--">getTitle()</a></span> - Method in class com.microblink.recognizers.<a href="com/microblink/recognizers/BaseRecognitionResult.html" title="class in com.microblink.recognizers">BaseRecognitionResult</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/recognizers/blinkbarcode/bardecoder/BarDecoderScanResult.html#getTitle--">getTitle()</a></span> - Method in class com.microblink.recognizers.blinkbarcode.bardecoder.<a href="com/microblink/recognizers/blinkbarcode/bardecoder/BarDecoderScanResult.html" title="class in com.microblink.recognizers.blinkbarcode.bardecoder">BarDecoderScanResult</a></dt>
@@ -2288,7 +2301,9 @@
 <dt><span class="memberNameLink"><a href="com/microblink/recognizers/LibraryInfoResult.html#getTitle--">getTitle()</a></span> - Method in class com.microblink.recognizers.<a href="com/microblink/recognizers/LibraryInfoResult.html" title="class in com.microblink.recognizers">LibraryInfoResult</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/ocr/ScanConfiguration.html#getTitleResource--">getTitleResource()</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/ScanConfiguration.html" title="class in com.microblink.ocr">ScanConfiguration</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the resource ID representing title that will be displayed or 0 if resource ID is not available.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/recognizers/photopay/uk/slip/UnitedKingdomSlipRecognitionResult.html#getTransactionCode--">getTransactionCode()</a></span> - Method in class com.microblink.recognizers.photopay.uk.slip.<a href="com/microblink/recognizers/photopay/uk/slip/UnitedKingdomSlipRecognitionResult.html" title="class in com.microblink.recognizers.photopay.uk.slip">UnitedKingdomSlipRecognitionResult</a></dt>
 <dd>
 <div class="block">Returns the slip transaction code or 0 if such code does not exist.</div>
@@ -2497,6 +2512,10 @@
 <dd>
 <div class="block">Returns true if camera has got torch.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html#isCasePostprocessorEnabled--">isCasePostprocessorEnabled()</a></span> - Method in class com.microblink.recognizers.blinkocr.engine.<a href="com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html" title="class in com.microblink.recognizers.blinkocr.engine">BlinkOCREngineOptions</a></dt>
+<dd>
+<div class="block">Returns whether case postprocessing is enabled.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html#isColorDropoutEnabled--">isColorDropoutEnabled()</a></span> - Method in class com.microblink.recognizers.blinkocr.engine.<a href="com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html" title="class in com.microblink.recognizers.blinkocr.engine">BlinkOCREngineOptions</a></dt>
 <dd>
 <div class="block">Returns true if the additional image processing which drops background colors will be performed.</div>
@@ -2509,12 +2528,20 @@
 <dd>
 <div class="block">Returns true if current video frame should be available in MetadataListener.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html#isCutoffCharFilterEnabled--">isCutoffCharFilterEnabled()</a></span> - Method in class com.microblink.recognizers.blinkocr.engine.<a href="com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html" title="class in com.microblink.recognizers.blinkocr.engine">BlinkOCREngineOptions</a></dt>
+<dd>
+<div class="block">Returns whether cutoff char filter is enabled.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/metadata/MetadataSettings.html#isDebugMetadataAllowed--">isDebugMetadataAllowed()</a></span> - Method in class com.microblink.metadata.<a href="com/microblink/metadata/MetadataSettings.html" title="class in com.microblink.metadata">MetadataSettings</a></dt>
 <dd>
 <div class="block">Returns true if debug metadata will be available in MetadataListener.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/microblink/geometry/Quadrilateral.html#isDefaultQuad--">isDefaultQuad()</a></span> - Method in class com.microblink.geometry.<a href="com/microblink/geometry/Quadrilateral.html" title="class in com.microblink.geometry">Quadrilateral</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html#isDetectFlippedTextEnabled--">isDetectFlippedTextEnabled()</a></span> - Method in class com.microblink.recognizers.blinkocr.engine.<a href="com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html" title="class in com.microblink.recognizers.blinkocr.engine">BlinkOCREngineOptions</a></dt>
+<dd>
+<div class="block">Returns whether flipped text detection is enabled.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/metadata/MetadataSettings.ImageMetadataSettings.DebugImageMetadataSettings.html#isDetectionImageEnabled--">isDetectionImageEnabled()</a></span> - Method in class com.microblink.metadata.<a href="com/microblink/metadata/MetadataSettings.ImageMetadataSettings.DebugImageMetadataSettings.html" title="class in com.microblink.metadata">MetadataSettings.ImageMetadataSettings.DebugImageMetadataSettings</a></dt>
 <dd>
 <div class="block">Returns true if detection image will be available in MetadataListener.</div>
@@ -2585,6 +2612,10 @@
 <dd>
 <div class="block">Returns true if char is italic.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html#isLineGroupingEnabled--">isLineGroupingEnabled()</a></span> - Method in class com.microblink.recognizers.blinkocr.engine.<a href="com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html" title="class in com.microblink.recognizers.blinkocr.engine">BlinkOCREngineOptions</a></dt>
+<dd>
+<div class="block">Returns whether line grouping is enabled.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/metadata/MetadataSettings.ImageMetadataSettings.DebugImageMetadataSettings.html#isMarkedDewarpedImageEnabled--">isMarkedDewarpedImageEnabled()</a></span> - Method in class com.microblink.metadata.<a href="com/microblink/metadata/MetadataSettings.ImageMetadataSettings.DebugImageMetadataSettings.html" title="class in com.microblink.metadata">MetadataSettings.ImageMetadataSettings.DebugImageMetadataSettings</a></dt>
 <dd>
 <div class="block">Returns true if marked dewarped debug image should be available in MetadataListener.</div>
@@ -2592,6 +2623,10 @@
 <dt><span class="memberNameLink"><a href="com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#isMRZParsed--">isMRZParsed()</a></span> - Method in class com.microblink.recognizers.blinkid.mrtd.<a href="com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html" title="class in com.microblink.recognizers.blinkid.mrtd">MRTDRecognitionResult</a></dt>
 <dd>
 <div class="block">Returns true if Machine Readable Zone has been parsed, false otherwise.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html#isNoisePostprocessingEnabled--">isNoisePostprocessingEnabled()</a></span> - Method in class com.microblink.recognizers.blinkocr.engine.<a href="com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html" title="class in com.microblink.recognizers.blinkocr.engine">BlinkOCREngineOptions</a></dt>
+<dd>
+<div class="block">Returns whether noise postprocessing is enabled.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/microblink/recognizers/blinkbarcode/pdf417/Pdf417RecognizerSettings.html#isNullQuietZoneAllowed--">isNullQuietZoneAllowed()</a></span> - Method in class com.microblink.recognizers.blinkbarcode.pdf417.<a href="com/microblink/recognizers/blinkbarcode/pdf417/Pdf417RecognizerSettings.html" title="class in com.microblink.recognizers.blinkbarcode.pdf417">Pdf417RecognizerSettings</a></dt>
 <dd>&nbsp;</dd>
@@ -2628,6 +2663,10 @@
 <dt><span class="memberNameLink"><a href="com/microblink/view/BaseCameraView.html#isPinchToZoomAllowed--">isPinchToZoomAllowed()</a></span> - Method in class com.microblink.view.<a href="com/microblink/view/BaseCameraView.html" title="class in com.microblink.view">BaseCameraView</a></dt>
 <dd>
 <div class="block">Returns true if camera view will handle pinch events to manage camera zoom level.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html#isRatioPostprocessorEnabled--">isRatioPostprocessorEnabled()</a></span> - Method in class com.microblink.recognizers.blinkocr.engine.<a href="com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html" title="class in com.microblink.recognizers.blinkocr.engine">BlinkOCREngineOptions</a></dt>
+<dd>
+<div class="block">Returns whether ratio postprocessor is enabled.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/microblink/geometry/Rectangle.html#isRelative--">isRelative()</a></span> - Method in class com.microblink.geometry.<a href="com/microblink/geometry/Rectangle.html" title="class in com.microblink.geometry">Rectangle</a></dt>
 <dd>
@@ -2699,6 +2738,10 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/hardware/orientation/Orientation.html#isVertical--">isVertical()</a></span> - Method in enum com.microblink.hardware.orientation.<a href="com/microblink/hardware/orientation/Orientation.html" title="enum in com.microblink.hardware.orientation">Orientation</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html#isWordProcessingEnabled--">isWordProcessingEnabled()</a></span> - Method in class com.microblink.recognizers.blinkocr.engine.<a href="com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html" title="class in com.microblink.recognizers.blinkocr.engine">BlinkOCREngineOptions</a></dt>
+<dd>
+<div class="block">Returns whether word processing is enabled.</div>
+</dd>
 </dl>
 <a name="I:K">
 <!--   -->
@@ -2767,8 +2810,6 @@
 <dd>
 <div class="block">Loads all resources that are required for native processing.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="com/microblink/ocr/ScanConfiguration.html#loadTitle-android.content.Context-">loadTitle(Context)</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/ScanConfiguration.html" title="class in com.microblink.ocr">ScanConfiguration</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/geometry/Point.html#log--">log()</a></span> - Method in class com.microblink.geometry.<a href="com/microblink/geometry/Point.html" title="class in com.microblink.geometry">Point</a></dt>
 <dd>
 <div class="block">Logs the point coordinates to LOG_DEBUG log.</div>
@@ -3497,10 +3538,13 @@
 </dd>
 <dt><a href="com/microblink/recognizers/blinkocr/parser/generic/RawParserSettings.html" title="class in com.microblink.recognizers.blinkocr.parser.generic"><span class="typeNameLink">RawParserSettings</span></a> - Class in <a href="com/microblink/recognizers/blinkocr/parser/generic/package-summary.html">com.microblink.recognizers.blinkocr.parser.generic</a></dt>
 <dd>
-<div class="block">Created by dodo on 02/03/15.</div>
+<div class="block">Represents a parser which simply returns the string version of OCR result, without
+ performing any smarter parse operations.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/microblink/recognizers/blinkocr/parser/generic/RawParserSettings.html#RawParserSettings--">RawParserSettings()</a></span> - Constructor for class com.microblink.recognizers.blinkocr.parser.generic.<a href="com/microblink/recognizers/blinkocr/parser/generic/RawParserSettings.html" title="class in com.microblink.recognizers.blinkocr.parser.generic">RawParserSettings</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructor for Raw Parser Settings, initialised with default OCR engine options.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/recognizers/RecognitionResultConstants.html#RECIPIENT_ADDRESS">RECIPIENT_ADDRESS</a></span> - Static variable in interface com.microblink.recognizers.<a href="com/microblink/recognizers/RecognitionResultConstants.html" title="interface in com.microblink.recognizers">RecognitionResultConstants</a></dt>
 <dd>
 <div class="block">Key for accessing Recipient address element.</div>
@@ -3724,10 +3768,17 @@
 <dd>&nbsp;</dd>
 <dt><a href="com/microblink/ocr/ScanConfiguration.html" title="class in com.microblink.ocr"><span class="typeNameLink">ScanConfiguration</span></a> - Class in <a href="com/microblink/ocr/package-summary.html">com.microblink.ocr</a></dt>
 <dd>
-<div class="block">Created by dodo on 03/03/15.</div>
+<div class="block">This class will hold a combination of parser settings, parser name, parser title (shown in UI),
+ and parser message (shown in UI).</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/microblink/ocr/ScanConfiguration.html#ScanConfiguration-int-int-java.lang.String-com.microblink.recognizers.blinkocr.parser.OcrParserSettings-">ScanConfiguration(int, int, String, OcrParserSettings)</a></span> - Constructor for class com.microblink.ocr.<a href="com/microblink/ocr/ScanConfiguration.html" title="class in com.microblink.ocr">ScanConfiguration</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructor which takes string resource ID's for string that will appear in UI.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/microblink/ocr/ScanConfiguration.html#ScanConfiguration-java.lang.String-java.lang.String-java.lang.String-com.microblink.recognizers.blinkocr.parser.OcrParserSettings-">ScanConfiguration(String, String, String, OcrParserSettings)</a></span> - Constructor for class com.microblink.ocr.<a href="com/microblink/ocr/ScanConfiguration.html" title="class in com.microblink.ocr">ScanConfiguration</a></dt>
+<dd>
+<div class="block">Constructor which takes normal strings for text that appears in UI.</div>
+</dd>
 <dt><a href="com/microblink/activity/ScanFOV.html" title="class in com.microblink.activity"><span class="typeNameLink">ScanFOV</span></a> - Class in <a href="com/microblink/activity/package-summary.html">com.microblink.activity</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/activity/ScanFOV.html#ScanFOV--">ScanFOV()</a></span> - Constructor for class com.microblink.activity.<a href="com/microblink/activity/ScanFOV.html" title="class in com.microblink.activity">ScanFOV</a></dt>
@@ -3814,6 +3865,10 @@
 <dd>
 <div class="block">Sets the camera type that will be used.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html#setCasePostprocessorEnabled-boolean-">setCasePostprocessorEnabled(boolean)</a></span> - Method in class com.microblink.recognizers.blinkocr.engine.<a href="com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html" title="class in com.microblink.recognizers.blinkocr.engine">BlinkOCREngineOptions</a></dt>
+<dd>
+<div class="block">If enabled, classification will be aided by character position in line.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/geometry/Quadrilateral.html#setColor-int-">setColor(int)</a></span> - Method in class com.microblink.geometry.<a href="com/microblink/geometry/Quadrilateral.html" title="class in com.microblink.geometry">Quadrilateral</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html#setColorDropoutEnabled-boolean-">setColorDropoutEnabled(boolean)</a></span> - Method in class com.microblink.recognizers.blinkocr.engine.<a href="com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html" title="class in com.microblink.recognizers.blinkocr.engine">BlinkOCREngineOptions</a></dt>
@@ -3824,6 +3879,11 @@
 <dd>
 <div class="block">Sets whether current video frame should be available in MetadataListener.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html#setCutoffCharFilterEnabled-boolean-">setCutoffCharFilterEnabled(boolean)</a></span> - Method in class com.microblink.recognizers.blinkocr.engine.<a href="com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html" title="class in com.microblink.recognizers.blinkocr.engine">BlinkOCREngineOptions</a></dt>
+<dd>
+<div class="block">If enabled, all chars that are classified as cutoff, in other words chars
+ that exceed image bounds, will be removed from the result.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html#setDebugImageMetadataSettings-com.microblink.metadata.MetadataSettings.ImageMetadataSettings.DebugImageMetadataSettings-">setDebugImageMetadataSettings(MetadataSettings.ImageMetadataSettings.DebugImageMetadataSettings)</a></span> - Method in class com.microblink.metadata.<a href="com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html" title="class in com.microblink.metadata">MetadataSettings.ImageMetadataSettings</a></dt>
 <dd>
 <div class="block">Sets object containing settings defining which debug images should be available in MetadataListener.</div>
@@ -3831,6 +3891,11 @@
 <dt><span class="memberNameLink"><a href="com/microblink/metadata/MetadataSettings.html#setDebugMetadataAllowed-boolean-">setDebugMetadataAllowed(boolean)</a></span> - Method in class com.microblink.metadata.<a href="com/microblink/metadata/MetadataSettings.html" title="class in com.microblink.metadata">MetadataSettings</a></dt>
 <dd>
 <div class="block">Sets whether debug metadata should be available in MetadataListener.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html#setDetectFlippedTextEnabled-boolean-">setDetectFlippedTextEnabled(boolean)</a></span> - Method in class com.microblink.recognizers.blinkocr.engine.<a href="com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html" title="class in com.microblink.recognizers.blinkocr.engine">BlinkOCREngineOptions</a></dt>
+<dd>
+<div class="block">If enabled, OCR will produce result for the input image and for
+ input image rotated by 180 degrees.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/microblink/metadata/MetadataSettings.ImageMetadataSettings.DebugImageMetadataSettings.html#setDetectionImageEnabled-boolean-">setDetectionImageEnabled(boolean)</a></span> - Method in class com.microblink.metadata.<a href="com/microblink/metadata/MetadataSettings.ImageMetadataSettings.DebugImageMetadataSettings.html" title="class in com.microblink.metadata">MetadataSettings.ImageMetadataSettings.DebugImageMetadataSettings</a></dt>
 <dd>
@@ -3935,6 +4000,10 @@
 <dd>
 <div class="block">Set license key and unlock the library.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html#setLineGroupingEnabled-boolean-">setLineGroupingEnabled(boolean)</a></span> - Method in class com.microblink.recognizers.blinkocr.engine.<a href="com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html" title="class in com.microblink.recognizers.blinkocr.engine">BlinkOCREngineOptions</a></dt>
+<dd>
+<div class="block">If line grouping is enabled, chars are grouped into lines.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/geometry/Quadrilateral.html#setMargins-int-int-int-int-int-">setMargins(int, int, int, int, int)</a></span> - Method in class com.microblink.geometry.<a href="com/microblink/geometry/Quadrilateral.html" title="class in com.microblink.geometry">Quadrilateral</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/metadata/MetadataSettings.ImageMetadataSettings.DebugImageMetadataSettings.html#setMarkedDewarpedImageEnabled-boolean-">setMarkedDewarpedImageEnabled(boolean)</a></span> - Method in class com.microblink.metadata.<a href="com/microblink/metadata/MetadataSettings.ImageMetadataSettings.DebugImageMetadataSettings.html" title="class in com.microblink.metadata">MetadataSettings.ImageMetadataSettings.DebugImageMetadataSettings</a></dt>
@@ -3970,6 +4039,10 @@
 <dd>
 <div class="block">Sets the minimum height of the line of thxt given in pixels.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html#setNoisePostprocessingEnabled-boolean-">setNoisePostprocessingEnabled(boolean)</a></span> - Method in class com.microblink.recognizers.blinkocr.engine.<a href="com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html" title="class in com.microblink.recognizers.blinkocr.engine">BlinkOCREngineOptions</a></dt>
+<dd>
+<div class="block">If enabled noisy lines will be removed from the result.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/recognizers/blinkbarcode/pdf417/Pdf417RecognizerSettings.html#setNullQuietZoneAllowed-boolean-">setNullQuietZoneAllowed(boolean)</a></span> - Method in class com.microblink.recognizers.blinkbarcode.pdf417.<a href="com/microblink/recognizers/blinkbarcode/pdf417/Pdf417RecognizerSettings.html" title="class in com.microblink.recognizers.blinkbarcode.pdf417">Pdf417RecognizerSettings</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/recognizers/settings/RecognitionSettings.html#setNumMsBeforeTimeout-int-">setNumMsBeforeTimeout(int)</a></span> - Method in class com.microblink.recognizers.settings.<a href="com/microblink/recognizers/settings/RecognitionSettings.html" title="class in com.microblink.recognizers.settings">RecognitionSettings</a></dt>
@@ -3978,7 +4051,7 @@
 </dd>
 <dt><span class="memberNameLink"><a href="com/microblink/recognizers/blinkocr/parser/generic/RawParserSettings.html#setOcrEngineOptions-com.microblink.recognizers.blinkocr.engine.BlinkOCREngineOptions-">setOcrEngineOptions(BlinkOCREngineOptions)</a></span> - Method in class com.microblink.recognizers.blinkocr.parser.generic.<a href="com/microblink/recognizers/blinkocr/parser/generic/RawParserSettings.html" title="class in com.microblink.recognizers.blinkocr.parser.generic">RawParserSettings</a></dt>
 <dd>
-<div class="block">Sets the OCR engine options used in Raw OCR parsing.</div>
+<div class="block">Sets the OCR engine options used in Raw OCR parser.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/microblink/metadata/MetadataSettings.ImageMetadataSettings.DebugImageMetadataSettings.html#setOcrInputImageEnabled-boolean-">setOcrInputImageEnabled(boolean)</a></span> - Method in class com.microblink.metadata.<a href="com/microblink/metadata/MetadataSettings.ImageMetadataSettings.DebugImageMetadataSettings.html" title="class in com.microblink.metadata">MetadataSettings.ImageMetadataSettings.DebugImageMetadataSettings</a></dt>
 <dd>
@@ -4019,9 +4092,13 @@
  to BaseCameraView.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/microblink/ocr/ScanConfiguration.html#setParserName-java.lang.String-">setParserName(String)</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/ScanConfiguration.html" title="class in com.microblink.ocr">ScanConfiguration</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Sets the name of the parser.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/ocr/ScanConfiguration.html#setParserSettings-com.microblink.recognizers.blinkocr.parser.OcrParserSettings-">setParserSettings(OcrParserSettings)</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/ScanConfiguration.html" title="class in com.microblink.ocr">ScanConfiguration</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Sets the parser settings that will be used to instatiate parser.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/view/BaseCameraView.html#setPhotoMode-boolean-">setPhotoMode(boolean)</a></span> - Method in class com.microblink.view.<a href="com/microblink/view/BaseCameraView.html" title="class in com.microblink.view">BaseCameraView</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/view/BaseCameraView.html#setPinchToZoomAllowed-boolean-">setPinchToZoomAllowed(boolean)</a></span> - Method in class com.microblink.view.<a href="com/microblink/view/BaseCameraView.html" title="class in com.microblink.view">BaseCameraView</a></dt>
@@ -4030,6 +4107,11 @@
 </dd>
 <dt><span class="memberNameLink"><a href="com/microblink/geometry/Quadrilateral.html#setPoints-com.microblink.geometry.Point-com.microblink.geometry.Point-com.microblink.geometry.Point-com.microblink.geometry.Point-">setPoints(Point, Point, Point, Point)</a></span> - Method in class com.microblink.geometry.<a href="com/microblink/geometry/Quadrilateral.html" title="class in com.microblink.geometry">Quadrilateral</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html#setRatioPostprocessorEnabled-boolean-">setRatioPostprocessorEnabled(boolean)</a></span> - Method in class com.microblink.recognizers.blinkocr.engine.<a href="com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html" title="class in com.microblink.recognizers.blinkocr.engine">BlinkOCREngineOptions</a></dt>
+<dd>
+<div class="block">If enabled, char quality will be influenced by character ratio difference
+ from the original character in font specified by classification.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/recognizers/photopay/croatia/slip/CroatianSlipRecognizerSettings.html#setReadPayerName-boolean-">setReadPayerName(boolean)</a></span> - Method in class com.microblink.recognizers.photopay.croatia.slip.<a href="com/microblink/recognizers/photopay/croatia/slip/CroatianSlipRecognizerSettings.html" title="class in com.microblink.recognizers.photopay.croatia.slip">CroatianSlipRecognizerSettings</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/recognizers/photopay/croatia/slip/CroatianSlipRecognizerSettings.html#setReadPaymentDescription-boolean-">setReadPaymentDescription(boolean)</a></span> - Method in class com.microblink.recognizers.photopay.croatia.slip.<a href="com/microblink/recognizers/photopay/croatia/slip/CroatianSlipRecognizerSettings.html" title="class in com.microblink.recognizers.photopay.croatia.slip">CroatianSlipRecognizerSettings</a></dt>
@@ -4139,12 +4221,22 @@
 <div class="block">Sets whether camera view will handle tap events to ask camera to perform autofocus
  on tapped area.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/microblink/ocr/ScanConfiguration.html#setText-java.lang.String-">setText(String)</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/ScanConfiguration.html" title="class in com.microblink.ocr">ScanConfiguration</a></dt>
+<dd>
+<div class="block">Sets the text that will be displayed when parser is active.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/ocr/ScanConfiguration.html#setTextResource-int-">setTextResource(int)</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/ScanConfiguration.html" title="class in com.microblink.ocr">ScanConfiguration</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Sets the resource ID representing text that will be displayed when parser is active.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/ocr/ScanConfiguration.html#setTitle-java.lang.String-">setTitle(String)</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/ScanConfiguration.html" title="class in com.microblink.ocr">ScanConfiguration</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Sets the title that will be displayed.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/ocr/ScanConfiguration.html#setTitleResource-int-">setTitleResource(int)</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/ScanConfiguration.html" title="class in com.microblink.ocr">ScanConfiguration</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Sets the resource ID representing title that will be displayed.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/view/BaseCameraView.html#setTorchState-boolean-com.microblink.hardware.SuccessCallback-">setTorchState(boolean, SuccessCallback)</a></span> - Method in class com.microblink.view.<a href="com/microblink/view/BaseCameraView.html" title="class in com.microblink.view">BaseCameraView</a></dt>
 <dd>
 <div class="block">Turns the torch on the camera on or off.</div>
@@ -4180,6 +4272,12 @@
 <dt><span class="memberNameLink"><a href="com/microblink/image/ImageFrame.html#setVisiblePart-com.microblink.geometry.Rectangle-">setVisiblePart(Rectangle)</a></span> - Method in class com.microblink.image.<a href="com/microblink/image/ImageFrame.html" title="class in com.microblink.image">ImageFrame</a></dt>
 <dd>
 <div class="block">sets the region that defines the visible part of frame</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html#setWordProcessingEnabled-boolean-">setWordProcessingEnabled(boolean)</a></span> - Method in class com.microblink.recognizers.blinkocr.engine.<a href="com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html" title="class in com.microblink.recognizers.blinkocr.engine">BlinkOCREngineOptions</a></dt>
+<dd>
+<div class="block">If the option is enabled, words in the OCR result will be
+ processed and possibly classified as numbers, lower case
+ words, upper case, ...</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/microblink/view/BaseCameraView.html#setZoomLevel-float-">setZoomLevel(float)</a></span> - Method in class com.microblink.view.<a href="com/microblink/view/BaseCameraView.html" title="class in com.microblink.view">BaseCameraView</a></dt>
 <dd>
