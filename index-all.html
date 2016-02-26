@@ -414,6 +414,16 @@
 </dd>
 <dt><span class="memberNameLink"><a href="com/microblink/recognizers/blinkocr/BlinkOCRRecognizerSettings.html#BlinkOCRRecognizerSettings--">BlinkOCRRecognizerSettings()</a></span> - Constructor for class com.microblink.recognizers.blinkocr.<a href="com/microblink/recognizers/blinkocr/BlinkOCRRecognizerSettings.html" title="class in com.microblink.recognizers.blinkocr">BlinkOCRRecognizerSettings</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/microblink/image/ImageBuilder.html#buildImageFromCamera1NV21Frame-byte:A-int-int-com.microblink.hardware.orientation.Orientation-com.microblink.geometry.Rectangle-">buildImageFromCamera1NV21Frame(byte[], int, int, Orientation, Rectangle)</a></span> - Static method in class com.microblink.image.<a href="com/microblink/image/ImageBuilder.html" title="class in com.microblink.image">ImageBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/microblink/image/ImageBuilder.html#buildImageFromCamera2Image-android.media.Image-com.microblink.hardware.orientation.Orientation-com.microblink.geometry.Rectangle-">buildImageFromCamera2Image(Image, Orientation, Rectangle)</a></span> - Static method in class com.microblink.image.<a href="com/microblink/image/ImageBuilder.html" title="class in com.microblink.image">ImageBuilder</a></dt>
+<dd>
+<div class="block">Builds image object from Camera2 frame in YUV_420_888 format.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/microblink/image/ImageBuilder.html#buildImageFromNativeContext-long-">buildImageFromNativeContext(long)</a></span> - Static method in class com.microblink.image.<a href="com/microblink/image/ImageBuilder.html" title="class in com.microblink.image">ImageBuilder</a></dt>
+<dd>
+<div class="block">Builds image object from native context.</div>
+</dd>
 </dl>
 <a name="I:C">
 <!--   -->
@@ -1021,6 +1031,8 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/recognizers/RecognitionResultConstants.html#DOCUMENT_ISSUE_DATE">DOCUMENT_ISSUE_DATE</a></span> - Static variable in interface com.microblink.recognizers.<a href="com/microblink/recognizers/RecognitionResultConstants.html" title="interface in com.microblink.recognizers">RecognitionResultConstants</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/microblink/recognizers/RecognitionResultConstants.html#DOCUMENT_ISSUING_AUTHORITY">DOCUMENT_ISSUING_AUTHORITY</a></span> - Static variable in interface com.microblink.recognizers.<a href="com/microblink/recognizers/RecognitionResultConstants.html" title="interface in com.microblink.recognizers">RecognitionResultConstants</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/geometry/Point.html#draw-android.graphics.Canvas-android.graphics.Paint-int-">draw(Canvas, Paint, int)</a></span> - Method in class com.microblink.geometry.<a href="com/microblink/geometry/Point.html" title="class in com.microblink.geometry">Point</a></dt>
 <dd>
 <div class="block">Draws the point to given canvas with given paint.</div>
@@ -1341,6 +1353,10 @@
 <dd>
 <div class="block">Use this method to get all barcode data in one byte array.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/microblink/recognizers/blinkocr/BlinkOCRRecognizerSettings.html#getAllowUnparsedResults--">getAllowUnparsedResults()</a></span> - Method in class com.microblink.recognizers.blinkocr.<a href="com/microblink/recognizers/blinkocr/BlinkOCRRecognizerSettings.html" title="class in com.microblink.recognizers.blinkocr">BlinkOCRRecognizerSettings</a></dt>
+<dd>
+<div class="block">Checks whether unparsed results are allowed.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/recognizers/photopay/AmountCurrencyResult.html#getAmount--">getAmount()</a></span> - Method in class com.microblink.recognizers.photopay.<a href="com/microblink/recognizers/photopay/AmountCurrencyResult.html" title="class in com.microblink.recognizers.photopay">AmountCurrencyResult</a></dt>
 <dd>
 <div class="block">Returns the scanned amount in smallest currency (e.g.</div>
@@ -1497,7 +1513,9 @@
 <dt><span class="memberNameLink"><a href="com/microblink/activity/ScanOcrLine.html#getDefaultOrientation--">getDefaultOrientation()</a></span> - Method in class com.microblink.activity.<a href="com/microblink/activity/ScanOcrLine.html" title="class in com.microblink.activity">ScanOcrLine</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/geometry/Rectangle.html#getDefaultROI--">getDefaultROI()</a></span> - Static method in class com.microblink.geometry.<a href="com/microblink/geometry/Rectangle.html" title="class in com.microblink.geometry">Rectangle</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the default rectangle that defines the whole image or view</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/view/NotSupportedReason.html#getDescription--">getDescription()</a></span> - Method in enum com.microblink.view.<a href="com/microblink/view/NotSupportedReason.html" title="enum in com.microblink.view">NotSupportedReason</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/metadata/detection/DetectionMetadata.html#getDetectionStatus--">getDetectionStatus()</a></span> - Method in class com.microblink.metadata.detection.<a href="com/microblink/metadata/detection/DetectionMetadata.html" title="class in com.microblink.metadata.detection">DetectionMetadata</a></dt>
@@ -2385,7 +2403,11 @@
 <dd>
 <div class="block">Created by dodo on 16/12/14.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="com/microblink/image/Image.html#Image-long-">Image(long)</a></span> - Constructor for class com.microblink.image.<a href="com/microblink/image/Image.html" title="class in com.microblink.image">Image</a></dt>
+<dt><a href="com/microblink/image/ImageBuilder.html" title="class in com.microblink.image"><span class="typeNameLink">ImageBuilder</span></a> - Class in <a href="com/microblink/image/package-summary.html">com.microblink.image</a></dt>
+<dd>
+<div class="block">Created by dodo on 10/02/16.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/microblink/image/ImageBuilder.html#ImageBuilder--">ImageBuilder()</a></span> - Constructor for class com.microblink.image.<a href="com/microblink/image/ImageBuilder.html" title="class in com.microblink.image">ImageBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/microblink/image/ImageFormat.html" title="enum in com.microblink.image"><span class="typeNameLink">ImageFormat</span></a> - Enum in <a href="com/microblink/image/package-summary.html">com.microblink.image</a></dt>
 <dd>
@@ -2606,6 +2628,10 @@
 <dt><span class="memberNameLink"><a href="com/microblink/view/BaseCameraView.html#isPinchToZoomAllowed--">isPinchToZoomAllowed()</a></span> - Method in class com.microblink.view.<a href="com/microblink/view/BaseCameraView.html" title="class in com.microblink.view">BaseCameraView</a></dt>
 <dd>
 <div class="block">Returns true if camera view will handle pinch events to manage camera zoom level.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/microblink/geometry/Rectangle.html#isRelative--">isRelative()</a></span> - Method in class com.microblink.geometry.<a href="com/microblink/geometry/Rectangle.html" title="class in com.microblink.geometry">Rectangle</a></dt>
+<dd>
+<div class="block">Return true if rectangle is given in relative coordinates.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/microblink/view/BaseCameraView.LayoutParams.html#isRotatable--">isRotatable()</a></span> - Method in class com.microblink.view.<a href="com/microblink/view/BaseCameraView.LayoutParams.html" title="class in com.microblink.view">BaseCameraView.LayoutParams</a></dt>
 <dd>&nbsp;</dd>
@@ -3545,7 +3571,7 @@
 </dd>
 <dt><a href="com/microblink/directApi/Recognizer.html" title="class in com.microblink.directApi"><span class="typeNameLink">Recognizer</span></a> - Class in <a href="com/microblink/directApi/package-summary.html">com.microblink.directApi</a></dt>
 <dd>
-<div class="block">Created by dodo on 12/01/15.</div>
+<div class="block">DirectAPI Recognizer singleton that can be used to perform recognition of Bitmaps and Images.</div>
 </dd>
 <dt><a href="com/microblink/directApi/Recognizer.State.html" title="enum in com.microblink.directApi"><span class="typeNameLink">Recognizer.State</span></a> - Enum in <a href="com/microblink/directApi/package-summary.html">com.microblink.directApi</a></dt>
 <dd>&nbsp;</dd>
@@ -3578,7 +3604,9 @@
 <dt><a href="com/microblink/geometry/Rectangle.html" title="class in com.microblink.geometry"><span class="typeNameLink">Rectangle</span></a> - Class in <a href="com/microblink/geometry/package-summary.html">com.microblink.geometry</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/geometry/Rectangle.html#Rectangle-float-float-float-float-">Rectangle(float, float, float, float)</a></span> - Constructor for class com.microblink.geometry.<a href="com/microblink/geometry/Rectangle.html" title="class in com.microblink.geometry">Rectangle</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Rectangle constructor.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/directApi/frame/BitmapCameraFrame.html#recycle--">recycle()</a></span> - Method in class com.microblink.directApi.frame.<a href="com/microblink/directApi/frame/BitmapCameraFrame.html" title="class in com.microblink.directApi.frame">BitmapCameraFrame</a></dt>
 <dd>
 <div class="block">Used for recycling frame buffer back into camera so its buffer can be reused for new camera frame.</div>
@@ -3760,6 +3788,10 @@
 <dt><span class="memberNameLink"><a href="com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setAllowUnparsedResults-boolean-">setAllowUnparsedResults(boolean)</a></span> - Method in class com.microblink.recognizers.blinkid.mrtd.<a href="com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html" title="class in com.microblink.recognizers.blinkid.mrtd">MRTDRecognizerSettings</a></dt>
 <dd>
 <div class="block">Set this to true to allow obtaining results that have not been parsed by SDK.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/microblink/recognizers/blinkocr/BlinkOCRRecognizerSettings.html#setAllowUnparsedResults-boolean-">setAllowUnparsedResults(boolean)</a></span> - Method in class com.microblink.recognizers.blinkocr.<a href="com/microblink/recognizers/blinkocr/BlinkOCRRecognizerSettings.html" title="class in com.microblink.recognizers.blinkocr">BlinkOCRRecognizerSettings</a></dt>
+<dd>
+<div class="block">Sets whether unparsed results will be allowed.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/microblink/view/BaseCameraView.html#setAnimateRotation-boolean-">setAnimateRotation(boolean)</a></span> - Method in class com.microblink.view.<a href="com/microblink/view/BaseCameraView.html" title="class in com.microblink.view">BaseCameraView</a></dt>
 <dd>
@@ -4326,6 +4358,8 @@
 <dt><span class="memberNameLink"><a href="com/microblink/geometry/Rectangle.html#toString--">toString()</a></span> - Method in class com.microblink.geometry.<a href="com/microblink/geometry/Rectangle.html" title="class in com.microblink.geometry">Rectangle</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/hardware/orientation/Orientation.html#toString--">toString()</a></span> - Method in enum com.microblink.hardware.orientation.<a href="com/microblink/hardware/orientation/Orientation.html" title="enum in com.microblink.hardware.orientation">Orientation</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/microblink/metadata/detection/QuadrilateralDetectionMetadata.html#toString--">toString()</a></span> - Method in class com.microblink.metadata.detection.<a href="com/microblink/metadata/detection/QuadrilateralDetectionMetadata.html" title="class in com.microblink.metadata.detection">QuadrilateralDetectionMetadata</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/ocr/ScanConfiguration.html#toString--">toString()</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/ScanConfiguration.html" title="class in com.microblink.ocr">ScanConfiguration</a></dt>
 <dd>&nbsp;</dd>
