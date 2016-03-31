@@ -2932,8 +2932,8 @@ The following is a list of available parsers:
 
 - Swedish amount parser - represented by [SweAmountParserSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/sweden/SweAmountParserSettings.html)
 	- used for parsing amounts from OCR of Swedish payment slips
-- Swedish bank giro number parser - represented by [SweBankGiroParserSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/sweden/SweBankGiroParserSettings.html)
-	- used for parsing bank giro numbers from OCR of Swedish payment slips
+- Swedish giro number parser - represented by [SweGiroParserSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/sweden/SweGiroParserSettings.html)
+	- used for parsing bank giro and plus giro numbers from OCR of Swedish payment slips
 - Swedish payment reference number parser - represented by [SweReferenceParserSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/sweden/SweReferenceParserSettings.html)
 	- used for parsing payment reference numbers from OCR of Swedish payment slips
 - Swedish slip code parser - represented by [SweSlipCodeParserSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/sweden/SweSlipCodeParserSettings.html)
