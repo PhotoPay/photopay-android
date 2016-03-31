@@ -16,6 +16,7 @@
 * [Using direct API for recognition of Android Bitmaps](#directAPI)
   * [Understanding DirectAPI's state machine](#directAPIStateMachine)
   * [Using DirectAPI while RecognizerView is active](#directAPIWithRecognizer)
+  * [Obtaining various metadata with _MetadataListener_](#metadataListener)
   * [Using ImageListener to obtain images that are being processed](#imageListener)
 * [Recognition settings and results](#recognitionSettingsAndResults)
   * [[Recognition settings](https://photopay.github.io/photopay-android/com/microblink/recognizers/settings/RecognitionSettings.html)](#recognitionSettings)
@@ -41,6 +42,9 @@
   * [Scanning machine-readable travel documents](#mrtd)
   * [Scanning segments with BlinkOCR recognizer](#blinkOCR)
 * [Translation and localization](#translation)
+* [Embedding _PhotoPay_ inside another SDK](#embedAAR)
+  * [_PhotoPay_ licensing model](#licensingModel)
+  * [Ensuring the final app gets all resources required by _PhotoPay_](#sdkIntegrationIntoApp)
 * [Processor architecture considerations](#archConsider)
   * [Reducing the final size of your app](#reduceSize)
   * [Combining _PhotoPay_ with other native libraries](#combineNativeLibraries)
@@ -58,6 +62,8 @@ The package contains Android Archive (AAR) that contains everything you need to 
  - _PhotoPayDemoCustomSegmentScan_ demonstrates advanced integration of SegmentScan feature within custom scan activity
  - _PhotoPayDirectAPIDemo_ demonstrates how to perform scanning of [Android Bitmaps](https://developer.android.com/reference/android/graphics/Bitmap.html)
  
+Source code of all demo apps is given to you to show you how to perform integration of _PhotoPay_ SDK into your app. You can use this source code and all resources as you wish. You can use demo apps as basis for creating your own app, or you can copy/paste code and/or resources from demo apps into your app and use them as you wish without even asking us for permission.
+
 _PhotoPay_ is supported on Android SDK version 10 (Android 2.3.3) or later.
 
 The library contains several activities that are responsible for camera control and recognition:
@@ -367,7 +373,9 @@ This section will discuss possible parameters that can be sent over `Intent` for
 	intent.putExtra(ScanActivity.EXTRAS_SHOW_OCR_RESULT_MODE, (Parcelable) ShowOcrResultMode.STATIC_CHARS);
 	```
 
-* **`ScanActivity.EXTRAS_IMAGE_LISTENER`** - with this extra you can set your implementation of [ImageListener interface](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) that will obtain images that are being processed. Make sure that your [ImageListener](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) implementation correctly implements [Parcelable](https://developer.android.com/reference/android/os/Parcelable.html) interface with static [CREATOR](https://developer.android.com/reference/android/os/Parcelable.Creator.html) field. Without this, you might encounter a runtime error. For more information and example, see [Using ImageListener to obtain images that are being processed](#imageListener).
+* **`ScanActivity.EXTRAS_IMAGE_LISTENER`** - with this extra you can set your implementation of [ImageListener interface](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) that will obtain images that are being processed. Make sure that your [ImageListener](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) implementation correctly implements [Parcelable](https://developer.android.com/reference/android/os/Parcelable.html) interface with static [CREATOR](https://developer.android.com/reference/android/os/Parcelable.Creator.html) field. Without this, you might encounter a runtime error. For more information and example, see [Using ImageListener to obtain images that are being processed](#imageListener). By default, _ImageListener_ will receive all possible images that become available during recognition process. This will introduce performance penalty because most of those images will probably not be used so sending them will just waste time. To control which images should become available to _ImageListener_, you can also set [ImageMetadata settings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html) with `ScanActivity.EXTRAS_IMAGE_METADATA_SETTINGS`
+
+* **`ScanActivity.EXTRAS_IMAGE_METADATA_SETTINGS`** - with this extra you can set [ImageMetadata settings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html) which will define which images will be sent to [ImageListener interface](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) given via `ScanActivity.EXTRAS_IMAGE_LISTENER` extra. If _ImageListener_ is not given via Intent, then this extra has no effect. You can see example usage of _ImageMetadata Settings_ in chapter [Obtaining various metadata with _MetadataListener_](#metadataListener) and in provided demo apps.
 
 * **`ScanActivity.EXTRAS_HELP_INTENT`** - with this extra you can set fully initialized intent that will be sent when user clicks the help button. You can put any extras you want to your intent - all will be delivered to your activity when user clicks the help button. If you do not set help intent, help button will not be shown in camera interface. To set the intent for help activity, use the following code snippet:
 	
@@ -453,10 +461,12 @@ This section will discuss possible parameters that can be sent over `Intent` for
 	intent.putExtra(ScanActivity.EXTRAS_SHOW_OCR_RESULT_MODE, (Parcelable) ShowOcrResultMode.STATIC_CHARS);
 	```
 
-* **`ScanActivity.EXTRAS_IMAGE_LISTENER`** - with this extra you can set your implementation of [ImageListener interface](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) that will obtain images that are being processed. Make sure that your [ImageListener](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) implementation correctly implements [Parcelable](https://developer.android.com/reference/android/os/Parcelable.html) interface with static [CREATOR](https://developer.android.com/reference/android/os/Parcelable.Creator.html) field. Without this, you might encounter a runtime error. For more information and example, see [Using ImageListener to obtain images that are being processed](#imageListener).
+* **`ScanActivity.EXTRAS_IMAGE_LISTENER`** - with this extra you can set your implementation of [ImageListener interface](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) that will obtain images that are being processed. Make sure that your [ImageListener](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) implementation correctly implements [Parcelable](https://developer.android.com/reference/android/os/Parcelable.html) interface with static [CREATOR](https://developer.android.com/reference/android/os/Parcelable.Creator.html) field. Without this, you might encounter a runtime error. For more information and example, see [Using ImageListener to obtain images that are being processed](#imageListener). By default, _ImageListener_ will receive all possible images that become available during recognition process. This will introduce performance penalty because most of those images will probably not be used so sending them will just waste time. To control which images should become available to _ImageListener_, you can also set [ImageMetadata settings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html) with `ScanActivity.EXTRAS_IMAGE_METADATA_SETTINGS`
+
+* **`ScanActivity.EXTRAS_IMAGE_METADATA_SETTINGS`** - with this extra you can set [ImageMetadata settings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html) which will define which images will be sent to [ImageListener interface](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) given via `ScanActivity.EXTRAS_IMAGE_LISTENER` extra. If _ImageListener_ is not given via Intent, then this extra has no effect. You can see example usage of _ImageMetadata Settings_ in chapter [Obtaining various metadata with _MetadataListener_](#metadataListener) and in provided demo apps.
 
 ## <a name="recognizerView"></a> Embedding `RecognizerView` into custom scan activity
-This section will discuss how to embed `RecognizerView` into your scan activity and perform scan.
+This section will discuss how to embed [RecognizerView](https://photopay.github.io/photopay-android/com/microblink/view/recognition/RecognizerView.html) into your scan activity and perform scan.
 
 1. First make sure that `RecognizerView` is a member field in your activity. This is required because you will need to pass all activity's lifecycle events to `RecognizerView`.
 2. It is recommended to keep your scan activity in one orientation, such as `portrait` or `landscape`. Setting `sensor` as scan activity's orientation will trigger full restart of activity whenever device orientation changes. This will provide very poor user experience because both camera and _PhotoPay_ native library will have to be restarted every time. There are measures for this behaviour and will be discussed [later](#scanOrientation).
@@ -748,12 +758,12 @@ Second boolean parameter indicates whether or not metering areas should be autom
 
 ##### <a name="recognizerView_setMetadataListener"></a> [`setMetadadaListener(MetadataListener, MetadataSettings)`](https://photopay.github.io/photopay-android/com/microblink/view/recognition/RecognizerView.html#setMetadataListener-com.microblink.metadata.MetadataListener-com.microblink.metadata.MetadataSettings-)
 You can use this method to define [metadata listener](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataListener.html) that will obtain various metadata
-from the current recognition process. Which metadata will be available depends on [metadata settings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html). For more information and examples, check demo applications.
+from the current recognition process. Which metadata will be available depends on [metadata settings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html). For more information and examples, check demo applications and section [Obtaining various metadata with _MetadataListener_](#metadataListener).
 
 ##### <a name="recognizerView_setLicenseKey1"></a> [`setLicenseKey(String licenseKey)`](https://photopay.github.io/photopay-android/com/microblink/view/recognition/RecognizerView.html#setLicenseKey-java.lang.String-)
 This method sets the license key that will unlock all features of the native library. You can obtain your license key from [PhotoPay website](https://photopay.net/).
 
-##### <a name="recognizerView_setLicenseKey2"></a> [`setLicenseKey(String licenseKey, String licenseOwner)`](https://photopay.github.io/photopay-android/com/microblink/view/recognition/RecognizerView.html#setLicenseKey-java.lang.String-java.lang.String-)
+##### <a name="recognizerView_setLicenseKey2"></a> [`setLicenseKey(String licenseKey, String licensee)`](https://photopay.github.io/photopay-android/com/microblink/view/recognition/RecognizerView.html#setLicenseKey-java.lang.String-java.lang.String-)
 Use this method to set a license key that is bound to a licensee, not the application package name. You will use this method when you obtain a license key that allows you to use _PhotoPay_ SDK in multiple applications. You can obtain your license key from [PhotoPay website](https://photopay.net/).
 
 # <a name="directAPI"></a> Using direct API for recognition of Android Bitmaps
@@ -856,7 +866,91 @@ DirectAPI's Recognizer singleton is actually a state machine which can be in one
 ## <a name="directAPIWithRecognizer"></a> Using DirectAPI while RecognizerView is active
 Both [RecognizerView](#recognizerView) and DirectAPI recognizer use the same internal singleton that manages native code. This singleton handles initialization and termination of native library and propagating recognition settings to native library. It is possible to use RecognizerView and DirectAPI together, as internal singleton will make sure correct synchronization and correct recognition settings are used. If you run into problems while using DirectAPI in combination with RecognizerView, [let us know](http://help.microblink.com)!
 
+## <a name="metadataListener"></a> Obtaining various metadata with _MetadataListener_
+
+This section will give an example how to use [Metadata listener](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataListener.html) to obtain various metadata, such as object detection location, images that are being processed and much more. Which metadata will be obtainable is configured with [Metadata settings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html). You must set both _MetadataSettings_ and your implementation of _MetadataListener_ before calling [create](#recognizerView_create) method of [RecognizerView](#recognizerView). Setting them after causes undefined behaviour.
+
+The following code snippet shows how to configure _MetadataSettings_ to obtain detection location, video frame that was used to perform and dewarped image of the document being scanned (**NOTE:** the availability of metadata depends on currently active recognisers and their settings. Not all recognisers can produce all types of metadata. Check [Recognition settings and results](#recognitionSettingsAndResults) article for more information about recognisers and their settings):
+
+```java
+// this snippet should be in onCreate method of your scanning activity
+
+MetadataSettings ms = new MetadataSettings();
+// enable receiving of detection location
+ms.setDetectionMetadataAllowed(true);
+
+// ImageMetadataSettings contains settings for defining which images will be returned
+MetadataSettings.ImageMetadataSettings ims = new MetadataSettings.ImageMetadataSettings();
+// enable returning of dewarped images, if they are available
+ims.setDewarpedImageEnabled(true);
+// enable returning of image that was used to obtain valid scanning result
+ims.setSuccessfulScanFrameEnabled(true)
+
+// set ImageMetadataSettings to MetadataSettings object
+ms.setImageMetadataSettings(ims);
+
+// this line must be called before mRecognizerView.create()
+mRecognizerView.setMetadataListener(myMetadataListener, ms);
+```
+
+The following snippet shows one possible implementation of _MetadataListener_:
+
+```java
+public class MyMetadataListener implements MetadataListener {
+
+	/**
+	 * Called when metadata is available.
+	 */
+    @Override
+    public void onMetadataAvailable(Metadata metadata) {
+    	// detection location will be available as DetectionMetadata
+        if (metadata instanceof DetectionMetadata) {
+        	// DetectionMetadata contains DetectorResult which is null if object detection
+        	// has failed and non-null otherwise
+        	// Let's assume that we have a QuadViewManager which can display animated frame
+        	// around detected object (for reference, please check javadoc and demo apps)
+            DetectorResult dr = ((DetectionMetadata) metadata).getDetectionResult();
+            if (dr == null) {
+            	// animate frame to default location if detection has failed
+                mQuadViewManager.animateQuadToDefaultPosition();
+            } else if (dr instanceof QuadDetectorResult) {
+            	// otherwise, animate frame to detected location
+                mQuadViewManager.animateQuadToDetectionPosition((QuadDetectorResult) dr);
+            }
+        // images will be available inside ImageMetadata
+        } else if (metadata instanceof ImageMetadata) {
+        	// obtain image
+        	
+        	// Please note that Image's internal buffers are valid only
+        	// until this method ends. If you want to save image for later,
+        	// obtained a cloned image with image.clone().
+        	
+            Image image = ((ImageMetadata) metadata).getImage();
+            // to convert the image to Bitmap, call image.convertToBitmap()
+            
+            // after this line, image gets disposed. If you want to save it
+            // for later, you need to clone it with image.clone()
+        }
+    }
+}
+```
+
+Here are javadoc links to all classes that appeared in previous code snippet:
+
+- [Metadata](https://photopay.github.io/photopay-android/com/microblink/metadata/Metadata.html)
+- [DetectionMetadata](https://photopay.github.io/photopay-android/com/microblink/metadata/DetectionMetadata.html)
+- [DetectorResult](https://photopay.github.io/photopay-android/com/microblink/detectors/DetectorResult.html)
+- [QuadViewManager](https://photopay.github.io/photopay-android/com/microblink/view/viewfinder/quadview/QuadViewManager.html)
+- [QuadDetectorResult](https://photopay.github.io/photopay-android/com/microblink/detectors/quad/QuadDetectorResult.html)
+- [ImageMetadata](https://photopay.github.io/photopay-android/com/microblink/metadata/ImageMetadata.html)
+- [Image](https://photopay.github.io/photopay-android/com/microblink/image/Image.html)
+
 ## <a name="imageListener"></a> Using ImageListener to obtain images that are being processed
+
+There are two ways of obtaining images that are being processed:
+
+- if _ScanActivity_ is being used to perform scanning, then you need to implement [ImageListener interface](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) and send your implementation via Intent to _ScanActivity_. Note that while this seems easier, this actually introduces a large performance penalty because _ImageListener_ will receive all images, including ones you do not actually need, except in cases when you also provide [ImageMetadata settings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html) with `ScanActivity.EXTRAS_IMAGE_METADATA_SETTINGS` extra.
+- if [RecognizerView](#recognizerView) is directly embedded into your scanning activity, then you should initialise it with [Metadata settings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html) and your implementation of [Metadata listener interface](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataListener.html). The _MetadataSettings_ will define which metadata will be reported to _MetadataListener_. The metadata can contain various data, such as images, object detection location etc. To see documentation and example how to use _MetadataListener_ to obtain images and other metadata, see section [Obtaining various metadata with _MetadataListener_](#metadataListener).
 
 This section will give an example how to implement [ImageListener interface](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) that will obtain images that are being processed. `ImageListener` has only one method that needs to be implemented: `onImageAvailable(Image)`. This method is called whenever library has available image for current processing step. [Image](https://photopay.github.io/photopay-android/com/microblink/image/Image.html) is class that contains all information about available image, including buffer with image pixels. Image can be in several format and of several types. [ImageFormat](https://photopay.github.io/photopay-android/com/microblink/image/ImageFormat.html) defines the pixel format of the image, while [ImageType](https://photopay.github.io/photopay-android/com/microblink/image/ImageType.html) defines the type of the image. `ImageListener` interface extends android's [Parcelable interface](https://developer.android.com/reference/android/os/Parcelable.html) so it is possible to send implementations via [intents](https://developer.android.com/reference/android/content/Intent.html).
 
@@ -921,6 +1015,8 @@ public class MyImageListener implements ImageListener {
                 }
             }
         }
+        // after this line, image gets disposed. If you want to save it
+        // for later, you need to clone it with image.clone()
     }
 
     /**
@@ -2818,6 +2914,10 @@ The following is a list of available parsers:
 - Raw parser - represented by [RawParserSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/generic/RawParserSettings.html)
 	- used for obtaining raw OCR result
 
+- Regex parser - represented by [RegexParserSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/regex/RegexParserSettings.html)
+	- used for parsing arbitrary regular expressions
+	- please note that some features, like back references, match grouping and certain regex metacharacters are not supported. See javadoc for more info.
+
 - Croatian reference parser - represented by [CroReferenceParserSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/croatia/CroReferenceParserSettings.html)
 	- used for parsing croatian payment reference numbers from OCR result
 
@@ -2896,6 +2996,52 @@ To modify an existing string, the best approach would be to:
 5. create an entry in the file with the value for the string which you want. For example ```<string name="PhotoPayHelp">Pomoć</string>```
 6. repeat for all the string you wish to change
 
+# <a name="embedAAR"></a> Embedding _PhotoPay_ inside another SDK
+
+When creating your own SDK which depends on _PhotoPay_, you should consider following cases:
+
+- [_PhotoPay_ licensing model](#licensingModel)
+- [ensuring final app gets all classes and resources that are required by _PhotoPay_](#sdkIntegrationIntoApp)
+
+## <a name="licensingModel"></a> _PhotoPay_ licensing model
+
+_PhotoPay_ supports two types of licenses: 
+
+- application licenses
+- library licenses.
+
+### <a name="appLicence"></a> Application licenses
+
+Application license keys are bound to application's [package name](http://tools.android.com/tech-docs/new-build-system/applicationid-vs-packagename). This means that each app must have its own license key in order to be able to use _PhotoPay_. This model is appropriate when integrating _PhotoPay_ directly into app, however if you are creating SDK that depends on _PhotoPay_, you would need separate _PhotoPay_ license key for each of your clients using your SDK. This is not practical, so you should contact us at [help.microblink.com](http://help.microblink.com) and we can provide you a library license key.
+
+### <a name="libLicence"></a> Library licenses
+
+Library license keys are bound to licensee name. You will provide your licensee name with your inquiry for library license key. Unlike application license keys, library license keys must be set together with licensee name:
+
+- when using _ScanActivity_, you should provide licensee name with extra `ScanActivity.EXTRAS_LICENSEE`, for example:
+
+	```java
+	// set the license key
+	intent.putExtra(ScanActivity.EXTRAS_LICENSE_KEY, "Enter_License_Key_Here");
+	intent.putExtra(ScanActivity.EXTRAS_LICENSEE, "Enter_Licensee_Here");
+	```
+	
+- when using [RecognizerView](#recognizerView), you should use [method that accepts both license key and licensee](#recognizerView_setLicenseKey2), for example:
+
+	```java
+	mRecognizerView.setLicenseKey("Enter_License_Key_Here", "Enter_Licensee_Here");
+	```
+	
+## <a name="sdkIntegrationIntoApp"></a> Ensuring the final app gets all resources required by _PhotoPay_
+
+At the time of writing this documentation, [Android does not have support for combining multiple AAR libraries into single fat AAR](https://stackoverflow.com/questions/20700581/android-studio-how-to-package-single-aar-from-multiple-library-projects/20715155#20715155). The problem is that resource merging is done while building application, not while building AAR, so application must be aware of all its dependencies. **There is no official Android way of "hiding" third party AAR within your AAR.**
+
+This problem is usually solved with transitive Maven dependencies, i.e. when publishing your AAR to Maven you specify dependencies of your AAR so they are automatically referenced by app using your AAR. Besides this, there are also several other approaches you can try:
+
+- you can ask your clients to reference _PhotoPay_ in their app when integrating your SDK
+- since the problem lies in resource merging part you can try avoiding this step by ensuring your library will not use any component from _PhotoPay_ that uses resources (i.e. _ScanActivity_). You can perform [custom UI integration](#recognizerView) while taking care that all resources (strings, layouts, images, ...) used are solely from your AAR, not from _PhotoPay_. Then, in your AAR you should not reference `LibRecognizer.aar` as gradle dependency, instead you should unzip it and copy its assets to your AAR’s assets folder, its classes.jar to your AAR’s lib folder (which should be referenced by gradle as jar dependency) and contents of its jni folder to your AAR’s src/main/jniLibs folder.
+- Another approach is to use [3rd party unofficial gradle script](https://github.com/adwiv/android-fat-aar) that aim to combine multiple AARs into single fat AAR. Use this script at your own risk.
+
 # <a name="archConsider"></a> Processor architecture considerations
 
 _PhotoPay_ is distributed with both ARMv7, ARM64, x86 and x86_64 native library binaries.
@@ -2962,11 +3108,33 @@ For more information about creating APK splits with gradle, check [this article 
 
 After generating multiple APK's, you need to upload them to Google Play. For tutorial and rules about uploading multiple APK's to Google Play, please read the [official Google article about multiple APKs](https://developer.android.com/google/play/publishing/multiple-apks.html).
 
-However, if you are using Eclipse, things get really complicated. Eclipse does not support build flavors and you will either need to remove support for some processors or create three different library projects from `LibRecognizer.aar` - each one for specific processor architecture. In the next section, we will discuss how to remove processor architecture support from Eclipse library project.
+### Removing processor architecture support in gradle without using APK splits
+
+If you will not be distributing your app via Google Play or for some other reasons you want to have single APK of smaller size, you can completely remove support for certaing CPU architecture from your APK. **This is not recommended as this has [consequences](#archConsequences)**.
+
+To remove certain CPU arhitecture, add following statement to your `android` block inside `build.gradle`:
+
+```
+android {
+	...
+	exclude 'lib/<ABI>/libBlinkPhotoPay.so'
+}
+```
+
+where `<ABI>` represents the CPU architecture you want to remove:
+
+- to remove ARMv7 support, use `exclude 'lib/armeabi-v7a/libBlinkPhotoPay.so'`
+- to remove x86 support, use `exclude 'lib/x86/libBlinkPhotoPay.so'`
+- to remove ARM64 support, use `exclude 'lib/arm64-v8a/libBlinkPhotoPay.so'`
+- to remove x86_64 support, use `exclude 'lib/x86_64/libBlinkPhotoPay.so'`
+
+You can also remove multiple processor architectures by specifying `exclude` directive multiple times. Just bear in mind that removing processor architecture will have sideeffects on performance and stability of your app. Please read [this](#archConsequences) for more information.
 
 ### Removing processor architecture support in Eclipse
 
 This section assumes that you have set up and prepared your Eclipse project from `LibRecognizer.aar` as described in chapter [Eclipse integration instructions](#eclipseIntegration).
+
+If you are using Eclipse, removing processor architecture support gets really complicated. Eclipse does not support build flavors and you will either need to remove support for some processors or create several different library projects from `LibRecognizer.aar` - each one for specific processor architecture. 
 
 Native libraryies in eclipse library project are located in subfolder `libs`:
 
@@ -2982,7 +3150,7 @@ To remove a support for processor architecture, you should simply delete appropr
 - to remove ARM64 support, delete folder `libs/arm64-v8a`
 - to remove x86_64 support, delete folder `libs/x86_64`
 
-### Consequences of removing processor architecture
+### <a name="archConsequences"></a> Consequences of removing processor architecture
 
 However, removing a processor architecture has some consequences:
 
@@ -2991,7 +3159,7 @@ However, removing a processor architecture has some consequences:
 - by removing x86 support, _PhotoPay_ will not work on devices that have x86 processor, except in situations when devices have ARM emulator - in that case, _PhotoPay_ will work, but will be slow
 - by removing x86_64 support, _PhotoPay_ will not use 64-bit optimizations on x86_64 processor, but if x86 support is not removed, _PhotoPay_ should work
 
-Our recommendation is to include all architectures into your app - it will work on all devices and will provide best user experience. However, if you really need to reduce the size of your app, we recommend releasing separate version of your app for each processor architecture.
+Our recommendation is to include all architectures into your app - it will work on all devices and will provide best user experience. However, if you really need to reduce the size of your app, we recommend releasing separate version of your app for each processor architecture. It is easiest to do that with [APK splits](#reduceSize).
 
 ## <a name="combineNativeLibraries"></a> Combining _PhotoPay_ with other native libraries
 

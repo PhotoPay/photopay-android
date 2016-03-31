@@ -1,5 +1,22 @@
 # Release notes
 
+## 5.6.0
+- FailedDetectionMetadata, PointsDetectionMetadata and QuadDetectionMetadata have been replaced with DetectionMetadata which now holds a DetectorResult
+    - DetectorResult is more flexible as it allows more different detection types to be added in future
+- fixed several possible crashes in camera management
+- updated to NDK r11
+- fixed autofocus bug on LG devices when metering areas or non-default zoom level were set
+- fixed autofocus bug on LG G4 (not related to bug above)
+- added new options to BlinkOcrEngineOptions
+- added RegexParser which can parse almost any regular expression from OCR result
+- fixed user interface problems in provided BlinkOCRActivity on devices with low density screens
+- support for parsing PlusGiro numbers in Swedish segment scan
+    - existing SweBankGiroParserSettings has been renamed to SweGiroParserSettings
+    - SweGiroParser can now parse both BankGiro and PlusGiro
+    - two slip code digits are appended to SweGiroParser result  
+- fixed missing last digit (check digit) in SweReferenceParser result
+
+
 ## 5.5.1
 - fixed ANR on Samsung Galaxy S3 Mini version
 
