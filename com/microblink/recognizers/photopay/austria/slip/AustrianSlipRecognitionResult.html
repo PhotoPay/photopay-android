@@ -350,7 +350,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getBLZ</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getBLZ()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getBLZ()</pre>
 <div class="block">Returns bank code (BLZ) of the receiver bank (e.g. 0034000)</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -364,7 +365,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getAccountNumber</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getAccountNumber()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getAccountNumber()</pre>
 <div class="block">Returns bank account number to which the payment goes</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -378,7 +380,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getReferenceNumber</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getReferenceNumber()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getReferenceNumber()</pre>
 <div class="block">Returns the reference of the payment</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -392,7 +395,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getIBAN</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getIBAN()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getIBAN()</pre>
 <div class="block">Returns the international bank account number of the account to which the payment goes</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -406,7 +410,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getBelegart</h4>
-<pre>public&nbsp;int&nbsp;getBelegart()</pre>
+<pre>@Nullable
+public&nbsp;int&nbsp;getBelegart()</pre>
 <div class="block">Returns type of the payslip (30 or 32 for SEPA, 40, 42, 10, etc. for old non-SEPA slips, 0 if form id not recognized)</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -420,7 +425,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getBelegNummer</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getBelegNummer()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getBelegNummer()</pre>
 <div class="block">Used to identify slip type</div>
 </li>
 </ul>
@@ -430,7 +436,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getRecipientName</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getRecipientName()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getRecipientName()</pre>
 <div class="block">Returns the name of the receiving side</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -444,7 +451,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getCustomerData</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getCustomerData()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getCustomerData()</pre>
 <div class="block">Returns special customer related data (Kundendaten)</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -458,7 +466,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockListLast">
 <li class="blockList">
 <h4>getTaxNumber</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getTaxNumber()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getTaxNumber()</pre>
 <div class="block">Returns the tax number (Steuernummer) - used in payslip type 10 (see getBelegart)</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>

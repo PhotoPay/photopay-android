@@ -26,12 +26,15 @@
   * [Scanning Croatian payslips](#croPayslip)
   * [Scanning Croatian Pdf417 barcode payslips](#croPdf417)
   * [Scanning Croatian QRCode payslips](#croQRCode)
+  * [Scanning Czech payslips](#czechPayslip)
+  * [Scanning Czech payment QR codes](#czechQRCode)
+  * [Scanning Dutch payslips](#dutchOcrLine)
   * [Scanning German payslips](#germanPayslip)
   * [Scanning German QR codes](#germanQRCode)
   * [Scanning Hungarian payslips](#hungarianPayslip)
   * [Scanning Kosovo payslips (OCR line)](#kosovoOcrLine)
   * [Scanning Kosovo payslips (Code128 barcode)](#kosovoCode128)
-  * [Scanning Dutch payslips](#dutchOcrLine)
+  * [Scanning Slovak payBySquare QR codes](#slovakQRCode)
   * [Scanning Slovenian payslips](#slovenianPayslip)
   * [Scanning Swiss payslips](#swissPayslip)
   * [Scanning UK Giro slip OCR line](#ukGiroOcrLine)
@@ -40,7 +43,16 @@
   * [Scanning one dimensional barcodes with _PhotoPay_'s implementation](#custom1DBarDecoder)
   * [Scanning barcodes with ZXing implementation](#zxing)
   * [Scanning machine-readable travel documents](#mrtd)
+  * [Scanning front side of Croatian ID documents](#croID_front)
+  * [Scanning back side of Croatian ID documents](#croID_back)
   * [Scanning segments with BlinkOCR recognizer](#blinkOCR)
+  * [Scanning templated documents with BlinkOCR recognizer](#blinkOCR_templating)
+  * [Performing detection of various documents](#detectorRecognizer)
+* [Detection settings and results](#detectionSettingsAndResults)
+  * [Detection of documents with Machine Readable Zone](#mrtdDetector)
+  * [Detection of documents with Document Detector](#documentDetector)
+  * [Detection of faces with Face Detector](#faceDetector)
+  * [Combining detectors with MultiDetector](#multiDetector)
 * [Translation and localization](#translation)
 * [Embedding _PhotoPay_ inside another SDK](#embedAAR)
   * [_PhotoPay_ licensing model](#licensingModel)
@@ -69,8 +81,9 @@ _PhotoPay_ is supported on Android SDK version 10 (Android 2.3.3) or later.
 The library contains several activities that are responsible for camera control and recognition:
 
 - `ScanActivity` contains default scanning UI for most _PhotoPay_ country standards, like Croatia, Austria, Slovenia, Germany, Belgium, ...
-- `ScanOcrLine` activity contains scanning UI specifically designed for payment slips that contain OCR line, like in Netherlands and Kosovo
+- `ScanOcrLine` activity contains scanning UI specifically designed for payment slips that contain OCR line, like in Kosovo.
 - `ScanFOV` activity contains alternate UI design for slips containing OCR line. This activity is by default used when scanning UK and Swiss slips.
+- `ScanFovWithInfo` activity is similar to ScanFOV activity. Additionally, it displays messages about detection status to user. This activity is by default used when scanning Dutch slips.
 - `Pdf417ScanActivity` is designed for scanning barcodes
 - `ScanCard` is designed for scanning ID documents and passports
 - `BlinkOCRActivity` is specifically designed for segment scanning. Unlike other activities, `BlinkOCRActivity` does not extend `BaseScanActivity`, so it requires a bit different initialization parameters. Please see _PhotopayDemo_ app for example and read [section about customizing `BlinkOCRActivity`](#segmentScanActivityCustomization).
@@ -96,7 +109,7 @@ You can also create your own scanning UI - you just need to embed `RecognizerVie
 	```
 	dependencies {
    		compile project(':LibRecognizer')
- 		compile "com.android.support:appcompat-v7:23.1.1"
+ 		compile "com.android.support:appcompat-v7:23.4.0"
 	}
 	```
 5. If you plan to use ProGuard, add following lines to your `proguard-rules.pro`:
@@ -107,6 +120,17 @@ You can also create your own scanning UI - you just need to embed `RecognizerVie
 	-dontwarn android.hardware.**
 	-dontwarn android.support.v4.**
 	```
+	
+### <a name="androidStudio_importAAR_javadoc"></a> Import Javadoc to Android Studio
+
+1. In Android Studio project sidebar, ensure [project view is enabled](https://developer.android.com/sdk/installing/studio-androidview.html)
+2. Expand `External Libraries` entry (usually this is the last entry in project view)
+3. Locate `LibRecognizer-unspecified` entry, right click on it and select `Library Properties...`
+4. A `Library Properties` pop-up window will appear
+5. Click the `+` button in bottom left corner of the window
+6. Window for choosing JAR file will appear
+7. Find and select `LibRecognizer-javadoc.jar` file which is located in root folder of the SDK distribution
+8. Click `OK`
 	
 ## <a name="eclipseIntegration"></a> Eclipse integration instructions
 
@@ -249,7 +273,7 @@ Even before starting the scan activity, you should check if _PhotoPay_ is suppor
 
 OpenGL ES 2.0 can be used to accelerate _PhotoPay's_ processing but is not mandatory. However, it should be noted that if OpenGL ES 2.0 is not available processing time will be significantly large, especially on low end devices. 
 
-Android 2.3 is the minimum android version on which _PhotoPay_ is supported.
+Android 2.3 is the minimum android version on which _PhotoPay_ is supported. For best performance and compatibility, we recommend Android 5.0 or newer.
 
 Camera video preview resolution also matters. In order to perform successful scans, camera preview resolution cannot be too low. _PhotoPay_ requires minimum 480p camera preview resolution in order to perform scan. It must be noted that camera preview resolution is not the same as the video record resolution, although on most devices those are the same. However, there are some devices that allow recording of HD video (720p resolution), but do not allow high enough camera preview resolution (for example, [Sony Xperia Go](http://www.gsmarena.com/sony_xperia_go-4782.php) supports video record resolution at 720p, but camera preview resolution is only 320p - _PhotoPay_ does not work on that device).
 
@@ -285,19 +309,19 @@ if(!RecognizerCompatibility.cameraHasAutofocus(CameraType.CAMERA_BACKFACE, this)
 
 This section will discuss possible parameters that can be sent over `Intent` for `ScanActivity` activity that can customize default behaviour. There are several intent extras that can be sent to `ScanActivity` actitivy:
 
-* **`ScanActivity.EXTRAS_CAMERA_TYPE`** - with this extra you can define which camera on device will be used. To set the extra to intent, use the following code snippet:
+* <a name="intent_EXTRAS_CAMERA_TYPE" href="#intent_EXTRAS_CAMERA_TYPE">#</a> **`ScanActivity.EXTRAS_CAMERA_TYPE`** - with this extra you can define which camera on device will be used. To set the extra to intent, use the following code snippet:
 	
 	```java
 	intent.putExtra(ScanActivity.EXTRAS_CAMERA_TYPE, (Parcelable)CameraType.CAMERA_FRONTFACE);
 	```
 	
-* **`ScanActivity.EXTRAS_CAMERA_ASPECT_MODE`** - with this extra you can define which [camera aspect mode](https://photopay.github.io/photopay-android/com/microblink/view/CameraAspectMode.html) will be used. If set to `ASPECT_FIT` (default), then camera preview will be letterboxed inside available view space. If set to `ASPECT_FILL`, camera preview will be zoomed and cropped to use the entire view space. To set the extra to intent, use the following code snippet:
+* <a name="intent_EXTRAS_CAMERA_ASPECT_MODE" href="#intent_EXTRAS_CAMERA_ASPECT_MODE">#</a> **`ScanActivity.EXTRAS_CAMERA_ASPECT_MODE`** - with this extra you can define which [camera aspect mode](https://photopay.github.io/photopay-android/com/microblink/view/CameraAspectMode.html) will be used. If set to `ASPECT_FIT` (default), then camera preview will be letterboxed inside available view space. If set to `ASPECT_FILL`, camera preview will be zoomed and cropped to use the entire view space. To set the extra to intent, use the following code snippet:
 
 	```java
 	intent.putExtra(ScanActivity.EXTRAS_CAMERA_ASPECT_MODE, (Parcelable)CameraAspectMode.ASPECT_FIT);
 	```
 	
-* **`ScanActivity.EXTRAS_RECOGNITION_SETTINGS`** - with this extra you can define settings that affect whole recognition process. This includes both array of recognizer settings and global recognition settings. More information about recognition settings can be found in chapter [Recognition settings and results](#recognitionSettingsAndResults). To set the extra to intent, use the following code snippet:
+* <a name="intent_EXTRAS_RECOGNITION_SETTINGS" href="#intent_EXTRAS_RECOGNITION_SETTINGS">#</a> **`ScanActivity.EXTRAS_RECOGNITION_SETTINGS`** - with this extra you can define settings that affect whole recognition process. This includes both array of recognizer settings and global recognition settings. More information about recognition settings can be found in chapter [Recognition settings and results](#recognitionSettingsAndResults). To set the extra to intent, use the following code snippet:
 	
 	```java
 	RecognitionSettings recognitionSettings = new RecognitionSettings();
@@ -308,43 +332,43 @@ This section will discuss possible parameters that can be sent over `Intent` for
 	intent.putExtra(ScanActivity.EXTRAS_RECOGNITION_SETTINGS, recognitionSettings);
 	```
 		
-* **`ScanActivity.EXTRAS_RECOGNITION_RESULTS`** - you can use this extra in `onActivityResult` method of calling activity to obtain recognition results. For more information about recognition settings and result, see [Recognition settings and results](#recognitionSettingsAndResults). You can use the following snippet to obtain scan results:
+* <a name="intent_EXTRAS_RECOGNITION_RESULTS" href="#intent_EXTRAS_RECOGNITION_RESULTS">#</a> **`ScanActivity.EXTRAS_RECOGNITION_RESULTS`** - you can use this extra in `onActivityResult` method of calling activity to obtain recognition results. For more information about recognition settings and result, see [Recognition settings and results](#recognitionSettingsAndResults). You can use the following snippet to obtain scan results:
 
 	```java
 	RecognitionResults results = data.getParcelableExtra(ScanActivity.EXTRAS_RECOGNITION_RESULTS);
 	```
 	
-* **`ScanActivity.EXTRAS_OPTIMIZE_CAMERA_FOR_NEAR_SCANNING`** - with this extra you can give a hint to _PhotoPay_ to optimize camera parameters for near object scanning. When camera parameters are optimized for near object scanning, macro focus mode will be preferred over autofocus mode. Thus, camera will have easier time focusing on to near objects, but might have harder time focusing on far objects. If you expect that most of your scans will be performed by holding the device very near the object, turn on that parameter. By default, this parameter is set to false.
+* <a name="intent_EXTRAS_OPTIMIZE_CAMERA_FOR_NEAR_SCANNING" href="#intent_EXTRAS_OPTIMIZE_CAMERA_FOR_NEAR_SCANNING">#</a> **`ScanActivity.EXTRAS_OPTIMIZE_CAMERA_FOR_NEAR_SCANNING`** - with this extra you can give a hint to _PhotoPay_ to optimize camera parameters for near object scanning. When camera parameters are optimized for near object scanning, macro focus mode will be preferred over autofocus mode. Thus, camera will have easier time focusing on to near objects, but might have harder time focusing on far objects. If you expect that most of your scans will be performed by holding the device very near the object, turn on that parameter. By default, this parameter is set to false.
 	
-* **`ScanActivity.EXTRAS_BEEP_RESOURCE`** - with this extra you can set the resource ID of the sound to be played when scan completes. You can use following snippet to set this extra:
+* <a name="intent_EXTRAS_BEEP_RESOURCE" href="#intent_EXTRAS_BEEP_RESOURCE">#</a> **`ScanActivity.EXTRAS_BEEP_RESOURCE`** - with this extra you can set the resource ID of the sound to be played when scan completes. You can use following snippet to set this extra:
 
 	```java
 	intent.putExtra(ScanActivity.EXTRAS_BEEP_RESOURCE, R.raw.beep);
     ```
-* **`ScanActivity.EXTRAS_SPLASH_SCREEN_LAYOUT_RESOURCE`** - with this extra you can set the resource ID of the layout that will be used as camera splash screen while camera is being initialized. You can use following snippet to set this extra:
+* <a name="intent_EXTRAS_SPLASH_SCREEN_LAYOUT_RESOURCE" href="#intent_EXTRAS_SPLASH_SCREEN_LAYOUT_RESOURCE">#</a> **`ScanActivity.EXTRAS_SPLASH_SCREEN_LAYOUT_RESOURCE`** - with this extra you can set the resource ID of the layout that will be used as camera splash screen while camera is being initialized. You can use following snippet to set this extra:
 
 	```java
 	intent.putExtra(ScanActivity. EXTRAS_SPLASH_SCREEN_LAYOUT_RESOURCE, R.layout.camera_splash);
     ```
 	
-* **`ScanActivity.EXTRAS_SHOW_FOCUS_RECTANGLE`** - with this extra you can enable showing of rectangle that displays area camera uses to measure focus and brightness when automatically adjusting its parameters. You can enable showing of this rectangle with following code snippet:
+* <a name="intent_EXTRAS_SHOW_FOCUS_RECTANGLE" href="#intent_EXTRAS_SHOW_FOCUS_RECTANGLE">#</a> **`ScanActivity.EXTRAS_SHOW_FOCUS_RECTANGLE`** - with this extra you can enable showing of rectangle that displays area camera uses to measure focus and brightness when automatically adjusting its parameters. You can enable showing of this rectangle with following code snippet:
 
 	```java
 	intent.putExtra(ScanActivity.EXTRAS_SHOW_FOCUS_RECTANGLE, true);
 	```
 	
-* **`ScanActivity.EXTRAS_ALLOW_PINCH_TO_ZOOM`** - with this extra you can set whether pinch to zoom will be allowed on camera activity. Default is `false`. To enable pinch to zoom gesture on camera activity, use the following code snippet:
+* <a name="intent_EXTRAS_ALLOW_PINCH_TO_ZOOM" href="#intent_EXTRAS_ALLOW_PINCH_TO_ZOOM">#</a> **`ScanActivity.EXTRAS_ALLOW_PINCH_TO_ZOOM`** - with this extra you can set whether pinch to zoom will be allowed on camera activity. Default is `false`. To enable pinch to zoom gesture on camera activity, use the following code snippet:
 
 	```java
 	intent.putExtra(ScanActivity.EXTRAS_ALLOW_PINCH_TO_ZOOM, true);
 	```
-* **`ScanActivity.EXTRAS_CAMERA_VIDEO_PRESET`** - with this extra you can set the video resolution preset that will be used when choosing camera resolution for scanning. For more information, see [javadoc](https://photopay.github.io/photopay-android/com/microblink/hardware/camera/VideoResolutionPreset.html). For example, to use 720p video resolution preset, use the following code snippet:
+* <a name="intent_EXTRAS_CAMERA_VIDEO_PRESET" href="#intent_EXTRAS_CAMERA_VIDEO_PRESET">#</a> **`ScanActivity.EXTRAS_CAMERA_VIDEO_PRESET`** - with this extra you can set the video resolution preset that will be used when choosing camera resolution for scanning. For more information, see [javadoc](https://photopay.github.io/photopay-android/com/microblink/hardware/camera/VideoResolutionPreset.html). For example, to use 720p video resolution preset, use the following code snippet:
 
 	```java
 	intent.putExtra(ScanActivity.EXTRAS_CAMERA_VIDEO_PRESET, (Parcelable)VideoResolutionPreset.VIDEO_RESOLUTION_720p);
 	```
 
-* **`ScanActivity.EXTRAS_LICENSE_KEY`** - with this extra you can set the license key for _PhotoPay_. You can obtain your licence key from [PhotoPay website](https://photopay.net/) or you can contact us at [http://help.microblink.com](http://help.microblink.com). Once you obtain a license key, you can set it with following snippet:
+* <a name="intent_EXTRAS_LICENSE_KEY" href="#intent_EXTRAS_LICENSE_KEY">#</a> **`ScanActivity.EXTRAS_LICENSE_KEY`** - with this extra you can set the license key for _PhotoPay_. You can obtain your licence key from [PhotoPay website](https://photopay.net/) or you can contact us at [http://help.microblink.com](http://help.microblink.com). Once you obtain a license key, you can set it with following snippet:
 
 	```java
 	// set the license key
@@ -359,25 +383,25 @@ This section will discuss possible parameters that can be sent over `Intent` for
 	intent.putExtra(ScanActivity.EXTRAS_LICENSEE, "Enter_Licensee_Here");
 	```
 
-* **`ScanActivity.EXTRAS_SHOW_OCR_RESULT`** - with this extra you can define whether OCR result should be drawn on camera preview as it arrives. This is enabled by default, to disable it, use the following snippet:
+* <a name="intent_EXTRAS_SHOW_OCR_RESULT" href="#intent_EXTRAS_SHOW_OCR_RESULT">#</a> **`ScanActivity.EXTRAS_SHOW_OCR_RESULT`** - with this extra you can define whether OCR result should be drawn on camera preview as it arrives. This is enabled by default, to disable it, use the following snippet:
 
 	```java
 	// enable showing of OCR result
 	intent.putExtra(ScanActivity.EXTRAS_SHOW_OCR_RESULT, false);
 	```
 
-* **`ScanActivity.EXTRAS_SHOW_OCR_RESULT_MODE`** - if OCR result should be drawn on camera preview, this extra defines how it will be drawn. Here you need to pass instance of [ShowOcrResultMode](https://photopay.github.io/photopay-android/com/microblink/activity/ShowOcrResultMode.html). By default, `ShowOcrResultMode.ANIMATED_DOTS` is used. You can also enable `ShowOcrResultMode.STATIC_CHARS` to draw recognized chars instead of dots. To set this extra, use the following snippet:
+* <a name="intent_EXTRAS_SHOW_OCR_RESULT_MODE" href="#intent_EXTRAS_SHOW_OCR_RESULT_MODE">#</a> **`ScanActivity.EXTRAS_SHOW_OCR_RESULT_MODE`** - if OCR result should be drawn on camera preview, this extra defines how it will be drawn. Here you need to pass instance of [ShowOcrResultMode](https://photopay.github.io/photopay-android/com/microblink/activity/ShowOcrResultMode.html). By default, `ShowOcrResultMode.ANIMATED_DOTS` is used. You can also enable `ShowOcrResultMode.STATIC_CHARS` to draw recognized chars instead of dots. To set this extra, use the following snippet:
 
 	```java
 	// display colored static chars instead of animated dots
 	intent.putExtra(ScanActivity.EXTRAS_SHOW_OCR_RESULT_MODE, (Parcelable) ShowOcrResultMode.STATIC_CHARS);
 	```
 
-* **`ScanActivity.EXTRAS_IMAGE_LISTENER`** - with this extra you can set your implementation of [ImageListener interface](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) that will obtain images that are being processed. Make sure that your [ImageListener](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) implementation correctly implements [Parcelable](https://developer.android.com/reference/android/os/Parcelable.html) interface with static [CREATOR](https://developer.android.com/reference/android/os/Parcelable.Creator.html) field. Without this, you might encounter a runtime error. For more information and example, see [Using ImageListener to obtain images that are being processed](#imageListener). By default, _ImageListener_ will receive all possible images that become available during recognition process. This will introduce performance penalty because most of those images will probably not be used so sending them will just waste time. To control which images should become available to _ImageListener_, you can also set [ImageMetadata settings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html) with `ScanActivity.EXTRAS_IMAGE_METADATA_SETTINGS`
+* <a name="intent_EXTRAS_IMAGE_LISTENER" href="#intent_EXTRAS_IMAGE_LISTENER">#</a> **`ScanActivity.EXTRAS_IMAGE_LISTENER`** - with this extra you can set your implementation of [ImageListener interface](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) that will obtain images that are being processed. Make sure that your [ImageListener](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) implementation correctly implements [Parcelable](https://developer.android.com/reference/android/os/Parcelable.html) interface with static [CREATOR](https://developer.android.com/reference/android/os/Parcelable.Creator.html) field. Without this, you might encounter a runtime error. For more information and example, see [Using ImageListener to obtain images that are being processed](#imageListener). By default, _ImageListener_ will receive all possible images that become available during recognition process. This will introduce performance penalty because most of those images will probably not be used so sending them will just waste time. To control which images should become available to _ImageListener_, you can also set [ImageMetadata settings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html) with `ScanActivity.EXTRAS_IMAGE_METADATA_SETTINGS`
 
-* **`ScanActivity.EXTRAS_IMAGE_METADATA_SETTINGS`** - with this extra you can set [ImageMetadata settings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html) which will define which images will be sent to [ImageListener interface](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) given via `ScanActivity.EXTRAS_IMAGE_LISTENER` extra. If _ImageListener_ is not given via Intent, then this extra has no effect. You can see example usage of _ImageMetadata Settings_ in chapter [Obtaining various metadata with _MetadataListener_](#metadataListener) and in provided demo apps.
+* <a name="intent_EXTRAS_IMAGE_METADATA_SETTINGS" href="#intent_EXTRAS_IMAGE_METADATA_SETTINGS">#</a> **`ScanActivity.EXTRAS_IMAGE_METADATA_SETTINGS`** - with this extra you can set [ImageMetadata settings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html) which will define which images will be sent to [ImageListener interface](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) given via `ScanActivity.EXTRAS_IMAGE_LISTENER` extra. If _ImageListener_ is not given via Intent, then this extra has no effect. You can see example usage of _ImageMetadata Settings_ in chapter [Obtaining various metadata with _MetadataListener_](#metadataListener) and in provided demo apps.
 
-* **`ScanActivity.EXTRAS_HELP_INTENT`** - with this extra you can set fully initialized intent that will be sent when user clicks the help button. You can put any extras you want to your intent - all will be delivered to your activity when user clicks the help button. If you do not set help intent, help button will not be shown in camera interface. To set the intent for help activity, use the following code snippet:
+* <a name="intent_EXTRAS_HELP_INTENT" href="#intent_EXTRAS_HELP_INTENT">#</a> **`ScanActivity.EXTRAS_HELP_INTENT`** - with this extra you can set fully initialized intent that will be sent when user clicks the help button. You can put any extras you want to your intent - all will be delivered to your activity when user clicks the help button. If you do not set help intent, help button will not be shown in camera interface. To set the intent for help activity, use the following code snippet:
 	
 	```java
 	/** Set the intent which will be sent when user taps help button. 
@@ -405,19 +429,19 @@ To change the colour of viewfinder in `ScanActivity`, change or override the col
 
 This section will discuss possible parameters that can be sent over `Intent` for `BlinkOCRActivity` activity that can customize default behaviour. There are several intent extras that can be sent to `BlinkOCRActivity` actitivy:
 	
-* **`BlinkOCRActivity.EXTRAS_SCAN_CONFIGURATION`** - with this extra you must set the array of [ScanConfiguration](https://photopay.github.io/photopay-android/com/microblink/ocr/ScanConfiguration.html) objects. Each `ScanConfiguration` object will define specific scan configuration that will be performed. `ScanConfiguration` defines two string resource ID's - title of the scanned item and text that will be displayed above field where scan is performed. Besides that it defines the name of scanned item and object defining the OCR parser settings. More information about parser settings can be found in chapter [Scanning segments with BlinkOCR recognizer](#blinkOCR). Here is only important that each scan configuration represents a single parser group and BlinkOCRActivity ensures that only one parser group is active at a time. After defining scan configuration array, you need to put it into intent extra with following code snippet:
+* <a name="intent_EXTRAS_SCAN_CONFIGURATION" href="#intent_EXTRAS_SCAN_CONFIGURATION">#</a> **`BlinkOCRActivity.EXTRAS_SCAN_CONFIGURATION`** - with this extra you must set the array of [ScanConfiguration](https://photopay.github.io/photopay-android/com/microblink/ocr/ScanConfiguration.html) objects. Each `ScanConfiguration` object will define specific scan configuration that will be performed. `ScanConfiguration` defines two string resource ID's - title of the scanned item and text that will be displayed above field where scan is performed. Besides that it defines the name of scanned item and object defining the OCR parser settings. More information about parser settings can be found in chapter [Scanning segments with BlinkOCR recognizer](#blinkOCR). Here is only important that each scan configuration represents a single parser group and BlinkOCRActivity ensures that only one parser group is active at a time. After defining scan configuration array, you need to put it into intent extra with following code snippet:
 	
 	```java
 	intent.putExtra(BlinkOCRActivity.EXTRAS_SCAN_CONFIGURATION, confArray);
 	```
 	
-* **`BlinkOCRActivity.EXTRAS_SCAN_RESULTS`** - you can use this extra in `onActivityResult` method of calling activity to obtain bundle with recognition results. Bundle will contain only strings representing scanned data under keys defined with each scan configuration. If you also need to obtain OCR result structure, then you need to perform [advanced integration](#recognizerView). You can use the following snippet to obtain scan results:
+* <a name="intent_EXTRAS_SCAN_RESULTS" href="#intent_EXTRAS_SCAN_RESULTS">#</a> **`BlinkOCRActivity.EXTRAS_SCAN_RESULTS`** - you can use this extra in `onActivityResult` method of calling activity to obtain bundle with recognition results. Bundle will contain only strings representing scanned data under keys defined with each scan configuration. If you also need to obtain OCR result structure, then you need to perform [advanced integration](#recognizerView). You can use the following snippet to obtain scan results:
 
 	```java
 	Bundle results = data.getBundle(BlinkOCRActivity.EXTRAS_SCAN_RESULTS);
 	```
 	
-* **`BlinkOCRActivity.EXTRAS_HELP_INTENT`** - with this extra you can set fully initialized intent that will be sent when user clicks the help button. You can put any extras you want to your intent - all will be delivered to your activity when user clicks the help button. If you do not set help intent, help button will not be shown in camera interface. To set the intent for help activity, use the following code snippet:
+* <a name="intent_BOCR_EXTRAS_HELP_INTENT" href="#intent_BOCR_EXTRAS_HELP_INTENT">#</a> **`BlinkOCRActivity.EXTRAS_HELP_INTENT`** - with this extra you can set fully initialized intent that will be sent when user clicks the help button. You can put any extras you want to your intent - all will be delivered to your activity when user clicks the help button. If you do not set help intent, help button will not be shown in camera interface. To set the intent for help activity, use the following code snippet:
 	
 	```java
 	/** Set the intent which will be sent when user taps help button. 
@@ -426,13 +450,13 @@ This section will discuss possible parameters that can be sent over `Intent` for
 	 * */
 	intent.putExtra(BlinkOCRActivity.EXTRAS_HELP_INTENT, new Intent(this, HelpActivity.class));
 	```
-* **`BlinkOCRActivity.EXTRAS_CAMERA_VIDEO_PRESET`** - with this extra you can set the video resolution preset that will be used when choosing camera resolution for scanning. For more information, see [javadoc](https://photopay.github.io/photopay-android/com/microblink/hardware/camera/VideoResolutionPreset.html). For example, to use 720p video resolution preset, use the following code snippet:
+* <a name="intent_BOCR_EXTRAS_CAMERA_VIDEO_PRESET" href="#intent_BOCR_EXTRAS_CAMERA_VIDEO_PRESET">#</a> **`BlinkOCRActivity.EXTRAS_CAMERA_VIDEO_PRESET`** - with this extra you can set the video resolution preset that will be used when choosing camera resolution for scanning. For more information, see [javadoc](https://photopay.github.io/photopay-android/com/microblink/hardware/camera/VideoResolutionPreset.html). For example, to use 720p video resolution preset, use the following code snippet:
 
 	```java
 	intent.putExtra(BlinkOCRActivity.EXTRAS_CAMERA_VIDEO_PRESET, (Parcelable)VideoResolutionPreset.VIDEO_RESOLUTION_720p);
 	```
 
-* **`ScanActivity.EXTRAS_LICENSE_KEY`** - with this extra you can set the license key for _PhotoPay_. You can obtain your licence key from [PhotoPay website](https://photopay.net/) or you can contact us at [http://help.microblink.com](http://help.microblink.com). Once you obtain a license key, you can set it with following snippet:
+* <a name="intent_EXTRAS_LICENSE_KEY" href="#intent_EXTRAS_LICENSE_KEY">#</a> **`ScanActivity.EXTRAS_LICENSE_KEY`** - with this extra you can set the license key for _PhotoPay_. You can obtain your licence key from [PhotoPay website](https://photopay.net/) or you can contact us at [http://help.microblink.com](http://help.microblink.com). Once you obtain a license key, you can set it with following snippet:
 
 	```java
 	// set the license key
@@ -447,23 +471,23 @@ This section will discuss possible parameters that can be sent over `Intent` for
 	intent.putExtra(ScanActivity.EXTRAS_LICENSEE, "Enter_Licensee_Here");
 	```
 
-* **`ScanActivity.EXTRAS_SHOW_OCR_RESULT`** - with this extra you can define whether OCR result should be drawn on camera preview as it arrives. This is enabled by default, to disable it, use the following snippet:
+* <a name="intent_EXTRAS_SHOW_OCR_RESULT" href="#intent_EXTRAS_SHOW_OCR_RESULT">#</a> **`ScanActivity.EXTRAS_SHOW_OCR_RESULT`** - with this extra you can define whether OCR result should be drawn on camera preview as it arrives. This is enabled by default, to disable it, use the following snippet:
 
 	```java
 	// enable showing of OCR result
 	intent.putExtra(ScanActivity.EXTRAS_SHOW_OCR_RESULT, false);
 	```
 
-* **`ScanActivity.EXTRAS_SHOW_OCR_RESULT_MODE`** - if OCR result should be drawn on camera preview, this extra defines how it will be drawn. Here you need to pass instance of [ShowOcrResultMode](https://photopay.github.io/photopay-android/com/microblink/activity/ShowOcrResultMode.html). By default, `ShowOcrResultMode.ANIMATED_DOTS` is used. You can also enable `ShowOcrResultMode.STATIC_CHARS` to draw recognized chars instead of dots. To set this extra, use the following snippet:
+* <a name="intent_EXTRAS_SHOW_OCR_RESULT_MODE" href="#intent_EXTRAS_SHOW_OCR_RESULT_MODE">#</a> **`ScanActivity.EXTRAS_SHOW_OCR_RESULT_MODE`** - if OCR result should be drawn on camera preview, this extra defines how it will be drawn. Here you need to pass instance of [ShowOcrResultMode](https://photopay.github.io/photopay-android/com/microblink/activity/ShowOcrResultMode.html). By default, `ShowOcrResultMode.ANIMATED_DOTS` is used. You can also enable `ShowOcrResultMode.STATIC_CHARS` to draw recognized chars instead of dots. To set this extra, use the following snippet:
 
 	```java
 	// display colored static chars instead of animated dots
 	intent.putExtra(ScanActivity.EXTRAS_SHOW_OCR_RESULT_MODE, (Parcelable) ShowOcrResultMode.STATIC_CHARS);
 	```
 
-* **`ScanActivity.EXTRAS_IMAGE_LISTENER`** - with this extra you can set your implementation of [ImageListener interface](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) that will obtain images that are being processed. Make sure that your [ImageListener](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) implementation correctly implements [Parcelable](https://developer.android.com/reference/android/os/Parcelable.html) interface with static [CREATOR](https://developer.android.com/reference/android/os/Parcelable.Creator.html) field. Without this, you might encounter a runtime error. For more information and example, see [Using ImageListener to obtain images that are being processed](#imageListener). By default, _ImageListener_ will receive all possible images that become available during recognition process. This will introduce performance penalty because most of those images will probably not be used so sending them will just waste time. To control which images should become available to _ImageListener_, you can also set [ImageMetadata settings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html) with `ScanActivity.EXTRAS_IMAGE_METADATA_SETTINGS`
+* <a name="intent_EXTRAS_IMAGE_LISTENER" href="#intent_EXTRAS_IMAGE_LISTENER">#</a> **`ScanActivity.EXTRAS_IMAGE_LISTENER`** - with this extra you can set your implementation of [ImageListener interface](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) that will obtain images that are being processed. Make sure that your [ImageListener](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) implementation correctly implements [Parcelable](https://developer.android.com/reference/android/os/Parcelable.html) interface with static [CREATOR](https://developer.android.com/reference/android/os/Parcelable.Creator.html) field. Without this, you might encounter a runtime error. For more information and example, see [Using ImageListener to obtain images that are being processed](#imageListener). By default, _ImageListener_ will receive all possible images that become available during recognition process. This will introduce performance penalty because most of those images will probably not be used so sending them will just waste time. To control which images should become available to _ImageListener_, you can also set [ImageMetadata settings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html) with `ScanActivity.EXTRAS_IMAGE_METADATA_SETTINGS`
 
-* **`ScanActivity.EXTRAS_IMAGE_METADATA_SETTINGS`** - with this extra you can set [ImageMetadata settings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html) which will define which images will be sent to [ImageListener interface](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) given via `ScanActivity.EXTRAS_IMAGE_LISTENER` extra. If _ImageListener_ is not given via Intent, then this extra has no effect. You can see example usage of _ImageMetadata Settings_ in chapter [Obtaining various metadata with _MetadataListener_](#metadataListener) and in provided demo apps.
+* <a name="intent_EXTRAS_IMAGE_METADATA_SETTINGS" href="#intent_EXTRAS_IMAGE_METADATA_SETTINGS">#</a> **`ScanActivity.EXTRAS_IMAGE_METADATA_SETTINGS`** - with this extra you can set [ImageMetadata settings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html) which will define which images will be sent to [ImageListener interface](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) given via `ScanActivity.EXTRAS_IMAGE_LISTENER` extra. If _ImageListener_ is not given via Intent, then this extra has no effect. You can see example usage of _ImageMetadata Settings_ in chapter [Obtaining various metadata with _MetadataListener_](#metadataListener) and in provided demo apps.
 
 ## <a name="recognizerView"></a> Embedding `RecognizerView` into custom scan activity
 This section will discuss how to embed [RecognizerView](https://photopay.github.io/photopay-android/com/microblink/view/recognition/RecognizerView.html) into your scan activity and perform scan.
@@ -949,7 +973,7 @@ Here are javadoc links to all classes that appeared in previous code snippet:
 
 There are two ways of obtaining images that are being processed:
 
-- if _ScanActivity_ is being used to perform scanning, then you need to implement [ImageListener interface](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) and send your implementation via Intent to _ScanActivity_. Note that while this seems easier, this actually introduces a large performance penalty because _ImageListener_ will receive all images, including ones you do not actually need, except in cases when you also provide [ImageMetadata settings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html) with `ScanActivity.EXTRAS_IMAGE_METADATA_SETTINGS` extra.
+- if _ScanActivity_ is being used to perform scanning, then you need to implement [ImageListener interface](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) and send your implementation via Intent to _ScanActivity_. Note that while this seems easier, this actually introduces a large performance penalty because _ImageListener_ will receive all images, including ones you do not actually need, except in cases when you also provide [ImageMetadata settings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html) with [`ScanActivity.EXTRAS_IMAGE_METADATA_SETTINGS`](#intent_EXTRAS_IMAGE_METADATA_SETTINGS) extra.
 - if [RecognizerView](#recognizerView) is directly embedded into your scanning activity, then you should initialise it with [Metadata settings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html) and your implementation of [Metadata listener interface](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataListener.html). The _MetadataSettings_ will define which metadata will be reported to _MetadataListener_. The metadata can contain various data, such as images, object detection location etc. To see documentation and example how to use _MetadataListener_ to obtain images and other metadata, see section [Obtaining various metadata with _MetadataListener_](#metadataListener).
 
 This section will give an example how to implement [ImageListener interface](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) that will obtain images that are being processed. `ImageListener` has only one method that needs to be implemented: `onImageAvailable(Image)`. This method is called whenever library has available image for current processing step. [Image](https://photopay.github.io/photopay-android/com/microblink/image/Image.html) is class that contains all information about available image, including buffer with image pixels. Image can be in several format and of several types. [ImageFormat](https://photopay.github.io/photopay-android/com/microblink/image/ImageFormat.html) defines the pixel format of the image, while [ImageType](https://photopay.github.io/photopay-android/com/microblink/image/ImageType.html) defines the type of the image. `ImageListener` interface extends android's [Parcelable interface](https://developer.android.com/reference/android/os/Parcelable.html) so it is possible to send implementations via [intents](https://developer.android.com/reference/android/content/Intent.html).
@@ -1062,6 +1086,10 @@ Sets whether or not outputting of multiple scan results from same image is allow
 
 ##### [`setNumMsBeforeTimeout(int)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/settings/RecognitionSettings.html#setNumMsBeforeTimeout-int-)
 Sets the number of miliseconds _PhotoPay_ will attempt to perform the scan it exits with timeout error. On timeout returned array of `BaseRecognitionResults` inside [RecognitionResults](https://photopay.github.io/photopay-android/com/microblink/recognizers/RecognitionResults.html) might be null, empty or may contain only elements that are not valid ([`isValid`](https://photopay.github.io/photopay-android/com/microblink/recognizers/BaseRecognitionResult.html#isValid--) returns `false`) or are empty ([`isEmpty`](https://photopay.github.io/photopay-android/com/microblink/recognizers/BaseRecognitionResult.html#isEmpty--) returns `true`).
+
+**NOTE**: Please be aware that time counting does not start from the moment when scanning starts. Instead it starts from the moment when at least one `BaseRecognitionResult` becomes available which is neither [empty](https://photopay.github.io/photopay-android/com/microblink/recognizers/BaseRecognitionResult.html#isEmpty--) nor [valid](https://photopay.github.io/photopay-android/com/microblink/recognizers/BaseRecognitionResult.html#isValid--).
+
+The reason for this is the better user experience in cases when for example timeout is set to 10 seconds and user starts scanning and leaves device lying on table for 9 seconds and then points the device towards the object it wants to scan: in such case it is better to let that user scan the object it wants instead of completing scan with empty scan result as soon as 10 seconds timeout ticks out.
 
 ##### [`setFrameQualityEstimationMode(FrameQualityEstimationMode)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/settings/RecognitionSettings.html#setFrameQualityEstimationMode-com.microblink.recognizers.settings.RecognitionSettings.FrameQualityEstimationMode-)
 Sets the mode of the frame quality estimation. Frame quality estimation is the process of estimating the quality of video frame so only best quality frames can be chosen for processing so no time is wasted on processing frames that are of too poor quality to contain any meaningful information. It is **not** used when performing recognition of [Android bitmaps](https://developer.android.com/reference/android/graphics/Bitmap.html) using [Direct API](#directAPI). You can choose 3 different frame quality estimation modes: automatic, always on and always off.
@@ -1701,6 +1729,214 @@ Returns the due date for payment. Available only for HUB3 slips.
 ##### `String getOptionalData()`
 Returns optional data (available only on some HUB3 barcodes).
 
+## <a name="czechPayslip"></a> Scanning Czech payslips
+
+This section discusses the setting up of Czech payslip recognizer and obtaining results from it.
+
+### Setting up Czech payslip recognizer
+
+To activate Czech payslip recognizer, you need to create [CzechSlipRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/czechia/slip/AustrianSlipRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	CzechSlipRecognizerSettings sett = new CzechSlipRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+### Obtaining results from Czech payslip recognizer
+
+Czech payslip recognizer produces [CzechSlipRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/czechia/slip/CzechSlipRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `CzechSlipRecognitionResult` class. See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof CzechSlipRecognitionResult) {
+			CzechSlipRecognitionResult result = (CzechSlipRecognitionResult) baseResult;
+			
+	        // you can use getters of CzechSlipRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+	        	int amount = result.getAmount();
+        		String account = result.getAccountNumber();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+Available getters are:
+
+##### `boolean isValid()`
+Returns `true` if scan result is valid, i.e. if all required elements were scanned with good confidence and can be used. If `false` is returned that indicates that some crucial data fields are missing. You should ask user to try scanning again. If you keep getting `false` (i.e. invalid data) for certain payslip, please report that as a bug to [help.microblink.com](http://help.microblink.com). Please include problematic payslips.
+
+##### `boolean isEmpty()`
+Returns `true` if scan result is empty, i.e. nothing was scanned. All getters should return `null` for empty result.
+
+##### `String getCurrency()`
+Returns the currency in which payment should be performed. This is always "CZK".
+
+##### `int getAmount()`
+Returns the amount in cents. For example, `53,42 CZK` will be returned as `5342`.
+
+##### `BigDecimal getParsedAmount()`
+Returns the parsed amount in euros. Unlike `getAmount`, this method returns the `BigDecimal` type, which can hold decimal numbers without having floating point precision errors as floats and doubles have.
+
+##### `String getAccountNumber()`
+Returns the bank account number.
+
+##### `String getBankCode()`
+Returns the bank code. The code contains 4 digits.
+
+##### `String getVariableSymbol()`
+Returns the variable symbol. The symbol contains up to 10 digits. If symbols is not available returns `null` or empty string.
+
+##### `String getConstantSymbol()`
+Returns the constant symbol. The symbol contains up to 4 digits. If symbols is not available returns `null` or empty string.
+
+##### `String getSpecificSymbol()`
+Returns the specific symbol. The symbol contains up to 10 digits. If symbols is not available returns `null` or empty string.
+
+## <a name="czechQRCode"></a> Scanning Czech payment QR codes
+
+This section discusses the setting up of Czech payment QR code recognizer and obtaining results from it. Supported QR codes are only those that are formatted according to Czech Banking Association standard.
+
+### Setting up Czech payment QR code recognizer
+
+To activate Czech payment QR code recognizer, you need to create [CzechQRCodeRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/czechia/qr/CzechQRCodeRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	CzechQRCodeRecognizerSettings sett = new CzechQRCodeRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [CzechQRCodeRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/czechia/qr/CzechQRCodeRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/czechia/qr/CzechQRCodeRecognizerSettings.html) for more information.**
+
+### Obtaining results from Czech payment QR code recognizer
+
+Czech payment QR recognizer produces [CzechQRCodeRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/czechia/qr/CzechQRCodeRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `CzechQRCodeRecognitionResult ` class. See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof CzechQRCodeRecognitionResult) {
+			CzechQRCodeRecognitionResult result = (CzechQRCodeRecognitionResult) baseResult;
+			
+	        // you can use getters of CzechQRCodeRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+	        	int amount = result.getAmount();
+        		String account = result.getIBAN();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/czechia/qr/CzechQRCodeRecognitionResult.html).**
+
+## <a name="dutchOcrLine"></a> Scanning Dutch payslips
+
+This section discusses the setting up of Dutch payslip recognizer and obtaining results from it.
+
+### Setting up Dutch payslip recognizer
+
+To activate Dutch payslip recognizer, you need to create [DutchSlipRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/netherlands/slip/DutchSlipRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	DutchSlipRecognizerSettings sett = new DutchSlipRecognizerSettings();
+	// define the start location on the image where OCR line will be searched
+	sett.setOcrLineDetectionStartPercentage(0.6f)
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+`DutchSlipRecognizerSettings` has following methods for tweaking the recognition:
+
+##### `setOcrLineDetectionStartPercentage(float)`
+With this method you can define the start location on the image where OCR line will be searched. Start location is defined as percentage of the image height. Minimum allowed value is 0.05f (almost at the top of the screen - 5% of image height is margin). Maximum allowed value is 0.75f (almost at the bottom of the screen - 5% of image height is margin). The size of the OCR line box is always 20% of the image height and currently cannot be changed. If invalid value is set, it will be automatically corrected to nearest valid value.
+
+### Obtaining results from Dutch payslip recognizer
+
+Dutch payslip recognizer produces [DutchSlipRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/netherlands/slip/DutchSlipRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `DutchSlipRecognitionResult` class. See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof DutchSlipRecognitionResult) {
+			DutchSlipRecognitionResult result = (DutchSlipRecognitionResult) baseResult;
+			
+	        // you can use getters of DutchSlipRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+		        int amount = result.getAmount();
+		        String iban = result.getIBAN();
+		        if(iban == null || "".equals(iban)) {
+		        	// IBAN does not exist, old slip with account number was scanned
+		        	String account = result.getAccountNumber();
+		        }
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+Available getters are:
+
+##### `boolean isValid()`
+Returns `true` if scan result is valid, i.e. if all required elements were scanned with good confidence and can be used. If `false` is returned that indicates that some crucial data fields are missing. You should ask user to try scanning again. If you keep getting `false` (i.e. invalid data) for certain payslip, please report that as a bug to [help.microblink.com](http://help.microblink.com). Please include problematic payslips.
+
+##### `boolean isEmpty()`
+Returns `true` if scan result is empty, i.e. nothing was scanned. All getters should return `null` for empty result.
+
+##### `String getCurrency()`
+Returns the currency in which payment should be performed. This is always "EUR".
+
+##### `int getAmount()`
+Returns the amount in cents. For example, `53,42 EUR` will be returned as `5342`.
+
+##### `BigDecimal getParsedAmount()`
+Returns the parsed amount in euros. Unlike `getAmount`, this method returns the `BigDecimal` type, which can hold decimal numbers without having floating point precision errors as floats and doubles have.
+
+##### `String getReferenceNumber()`
+Returns the scanned payment reference number.
+
+##### `String getAccountNumber()`
+Returns the scanned account number, if it exists.
+
+##### `String getIBAN()`
+Returns the scanned IBAN, if it exists.
+
+##### `String getRecipientName()`
+Returns the name of the recipient, if it exists.
+
 ## <a name="germanPayslip"></a> Scanning German payslips
 
 This section discusses the setting up of German payslip recognizer and obtaining results from it.
@@ -2135,19 +2371,17 @@ Returns the scanned payer account number, if it exists.
 ##### `String getUtilityID()`
 Returns the scanned utility ID, if it exists.
 
-## <a name="dutchOcrLine"></a> Scanning Dutch payslips
+## <a name="slovakQRCode"></a> Scanning Slovak payBySquare QR codes
 
-This section discusses the setting up of Dutch payslip recognizer and obtaining results from it.
+This section discusses the setting up of Slovak payBySquare QR code recognizer and obtaining results from it. Recognizer supports scanning of PAY by square QR codes (usually printed inside blue frame). Current version does not support scanning of INVOICE by square QR codes (usually printed inside orange frame).
 
-### Setting up Dutch payslip recognizer
+### Setting up Slovak payBySquare QR code recognizer
 
-To activate Dutch payslip recognizer, you need to create [DutchSlipRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/netherlands/slip/DutchSlipRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+To activate Slovak payBySquare QR code recognizer, you need to create [SlovakQRCodeRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovakia/qr/SlovakQRCodeRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
 
 ```java
 private RecognizerSettings[] setupSettingsArray() {
-	DutchSlipRecognizerSettings sett = new DutchSlipRecognizerSettings();
-	// define the start location on the image where OCR line will be searched
-	sett.setOcrLineDetectionStartPercentage(0.6f)
+	SlovakQRCodeRecognizerSettings sett = new SlovakQRCodeRecognizerSettings();
 	
 	// now add sett to recognizer settings array that is used to configure
 	// recognition
@@ -2155,32 +2389,25 @@ private RecognizerSettings[] setupSettingsArray() {
 }
 ```
 
-`DutchSlipRecognizerSettings` has following methods for tweaking the recognition:
+**You can also tweak recognition parameters with methods of [SlovakQRCodeRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovakia/qr/SlovakQRCodeRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovakia/qr/SlovakQRCodeRecognizerSettings.html) for more information.**
 
-##### `setOcrLineDetectionStartPercentage(float)`
-With this method you can define the start location on the image where OCR line will be searched. Start location is defined as percentage of the image height. Minimum allowed value is 0.05f (almost at the top of the screen - 5% of image height is margin). Maximum allowed value is 0.75f (almost at the bottom of the screen - 5% of image height is margin). The size of the OCR line box is always 20% of the image height and currently cannot be changed. If invalid value is set, it will be automatically corrected to nearest valid value.
+### Obtaining results from Slovak payBySquare QR code recognizer
 
-### Obtaining results from Dutch payslip recognizer
-
-Dutch payslip recognizer produces [DutchSlipRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/netherlands/slip/DutchSlipRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `DutchSlipRecognitionResult` class. See the following snippet for an example:
+Slovak payBySquare QR recognizer produces [SlovakQRCodeRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovakia/qr/SlovakQRCodeRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `SlovakQRCodeRecognitionResult ` class. See the following snippet for an example:
 
 ```java
 @Override
 public void onScanningDone(RecognitionResults results) {
 	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
 	for(BaseRecognitionResult baseResult : dataArray) {
-		if(baseResult instanceof DutchSlipRecognitionResult) {
-			DutchSlipRecognitionResult result = (DutchSlipRecognitionResult) baseResult;
+		if(baseResult instanceof CzechQRCodeRecognitionResult) {
+			SlovakQRCodeRecognitionResult result = (SlovakQRCodeRecognitionResult) baseResult;
 			
-	        // you can use getters of DutchSlipRecognitionResult class to 
+	        // you can use getters of SlovakQRCodeRecognitionResult class to 
 	        // obtain scanned information
 	        if(result.isValid() && !result.isEmpty()) {
-		        int amount = result.getAmount();
-		        String iban = result.getIBAN();
-		        if(iban == null || "".equals(iban)) {
-		        	// IBAN does not exist, old slip with account number was scanned
-		        	String account = result.getAccountNumber();
-		        }
+	        	int amount = result.getAmount();
+        		String account = result.getIBAN();
 	        } else {
 	        	// not all relevant data was scanned, ask user
 	        	// to try again
@@ -2190,31 +2417,7 @@ public void onScanningDone(RecognitionResults results) {
 }
 ```
 
-Available getters are:
-
-##### `boolean isValid()`
-Returns `true` if scan result is valid, i.e. if all required elements were scanned with good confidence and can be used. If `false` is returned that indicates that some crucial data fields are missing. You should ask user to try scanning again. If you keep getting `false` (i.e. invalid data) for certain payslip, please report that as a bug to [help.microblink.com](http://help.microblink.com). Please include problematic payslips.
-
-##### `boolean isEmpty()`
-Returns `true` if scan result is empty, i.e. nothing was scanned. All getters should return `null` for empty result.
-
-##### `String getCurrency()`
-Returns the currency in which payment should be performed. This is always "EUR".
-
-##### `int getAmount()`
-Returns the amount in cents. For example, `53,42 EUR` will be returned as `5342`.
-
-##### `BigDecimal getParsedAmount()`
-Returns the parsed amount in euros. Unlike `getAmount`, this method returns the `BigDecimal` type, which can hold decimal numbers without having floating point precision errors as floats and doubles have.
-
-##### `String getReferenceNumber()`
-Returns the scanned payment reference number.
-
-##### `String getAccountNumber()`
-Returns the scanned account number, if it exists.
-
-##### `String getIBAN()`
-Returns the scanned IBAN, if it exists.
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovakia/qr/SlovakQRCodeRecognitionResult.html).**
 
 ## <a name="slovenianPayslip"></a> Scanning Slovenian payslips
 
@@ -2765,24 +2968,58 @@ To activate MRTD recognizer, you need to create [MRTDRecognizerSettings](https:/
 
 ```java
 private RecognizerSettings[] setupSettingsArray() {
-	MRTDRecognizerSettings sett = new MRTDRecognizerSettings();
-	
-	// now add sett to recognizer settings array that is used to configure
-	// recognition
-	return new RecognizerSettings[] { sett };
+    MRTDRecognizerSettings sett = new MRTDRecognizerSettings();
+    
+    // now add sett to recognizer settings array that is used to configure
+    // recognition
+    return new RecognizerSettings[] { sett };
 }
 ```
 
 `MRTDRecognizerSettings` has following methods for tweaking the recognition:
 
-##### `setAllowUnparsedResults(boolean)`
+##### [`setAllowUnparsedResults(boolean)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setAllowUnparsedResults-boolean-)
 Set this to `true` to allow obtaining results that have not been parsed by SDK. By default this is off. The reason for this is that we want to ensure best possible data quality when returning results. For that matter we internally parse the MRZ and extract all data, taking all possible OCR mistakes into account. However, if you happen to have a document with MRZ that has format our internal parser still does not support, you need to allow returning of unparsed results. Unparsed results will not contain parsed data, but will contain OCR result received from OCR engine, so you can parse data yourself.
 
-##### `setShowMRZ(boolean)`
+##### [`setShowMRZ(boolean)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setShowMRZ-boolean-)
 Set this to `true` if you use [MetadataListener](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataListener.html) and you want to obtain image containing only Machine Readable Zone. The reported ImageType will be [DEWARPED](https://photopay.github.io/photopay-android/com/microblink/image/ImageType.html#DEWARPED) and image name will be `"MRZ"`. You will also need to enable [obtaining of dewarped images](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html#setDewarpedImageEnabled-boolean-) in [MetadataSettings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html). By default, this is turned off.
 
-##### `setShowFullDocument(boolean)`
+##### [`setShowFullDocument(boolean)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setShowFullDocument-boolean-)
 Set this to `true` if you use [MetadataListener](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataListener.html) and you want to obtain image containing full document containing Machine Readable Zone. The document image's orientation will be corrected. The reported ImageType will be [DEWARPED](https://photopay.github.io/photopay-android/com/microblink/image/ImageType.html#DEWARPED) and image name will be `"MRTD"`.  You will also need to enable [obtaining of dewarped images](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html#setDewarpedImageEnabled-boolean-) in [MetadataSettings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html). By default, this is turned off.
+
+### Extracting additional fields of interest from machine-readable travel documents (Templating API)
+
+If MRTD document contains additional fields of interest that should be extracted together with information from machine readable zone (MRZ), you can achieve this by specifying the locations of this fields relative to full document detection and choosing appropriate parsers that will be used to extract data from them. Additionally, it is possible to support multiple document types containing the MRZ zone (e.g. different versions of the ID card). To achieve this, document classifier, which classify the document based on the MRZ result, should be implemented and provided to the MRTD recognizer and locations of additional fields should be defined for each document type, as separate location sets.
+
+Following methods in [MRTDRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html) are available for tweaking the recognition of additional fields:
+
+##### [`void addParser(String, OcrParserSettings)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/templating/TemplatingRecognizerSettings.html#addParser-java.lang.String-com.microblink.recognizers.blinkocr.parser.OcrParserSettings-)
+Adds parser with given name and parser settings to default parser group. Parser settings determine the parser that will be used.
+
+##### [`void addParserToParserGroup(String, String, OcrParserSettings)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/templating/TemplatingRecognizerSettings.html#addParserToParserGroup-java.lang.String-java.lang.String-com.microblink.recognizers.blinkocr.parser.OcrParserSettings-)
+Adds parser with given name and parser settings to chosen parser group. Parser settings determine the parser that will be used.
+
+##### [`void setParserDecodingInfos(DecodingInfo[])`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setParserDecodingInfos-com.microblink.detectors.DecodingInfo:A-)
+Sets the decoding infos for desired additional document elements that should be recognized
+together with MRZ zone. Use this method if document contains additional information (elements) of interest that should be recognized together with MRZ and only one document type is expected.
+The position of each additional element is represented as [DecodingInfo](https://photopay.github.io/photopay-android/com/microblink/detectors/DecodingInfo.html) object which holds the location for that element of interest (relative to full document detection) and the desired dewarp height (in number of pixels), for that location. **Name of the decoding info must be equal to the name of the parser group** that will be used for parsing that element.
+
+If you want to support multiple document types containing MRZ, and if they can be distinguished using MRZ result, use method [`setParserDecodingInfos(DecodingInfo[], String)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setParserDecodingInfos-com.microblink.detectors.DecodingInfo:A-java.lang.String-) for setting the decoding infos for each document type and method [`setDocumentClassifier(MRTDDocumentClassifier)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setDocumentClassifier-com.microblink.recognizers.blinkid.mrtd.MRTDDocumentClassifier-)
+for setting the document classifier.
+
+##### [`void setParserDecodingInfos(DecodingInfo[], String)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setParserDecodingInfos-com.microblink.detectors.DecodingInfo:A-java.lang.String-)
+Sets the named decoding info set, for specific document type, whose elements contain location
+information about additional document elements that should be recognized together with
+the MRZ zone. Use this method if document contains additional information (elements) of interest that should be recognized together with MRZ zone and there are multiple document types that can be distinguished using the MRZ result. The position of each additional element is represented as [DecodingInfo](https://photopay.github.io/photopay-android/com/microblink/detectors/DecodingInfo.html) object which holds the location for that element of interest (relative to full document detection) and the desired dewarp height (in number of pixels), for that location. <b>Name of the decoding info must be equal to the name of the parser group</b> that will be used for parsing that element. Additionally, for document classification, set the document classifier using the method [`setDocumentClassifier(MRTDDocumentClassifier)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setDocumentClassifier-com.microblink.recognizers.blinkid.mrtd.MRTDDocumentClassifier-).
+
+##### [`void setDocumentClassifier(MRTDDocumentClassifier)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setDocumentClassifier-com.microblink.recognizers.blinkid.mrtd.MRTDDocumentClassifier-)
+Sets the MRTD document classifier that can be used for classification of the documents based on the MRZ zone result. This method should be used if multiple MRTD document types are expected and additional information (elements) of interest should be recognized. In addition, decoding infos for each document type should be set with [`setParserDecodingInfos(DecodingInfo[], String)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setParserDecodingInfos-com.microblink.detectors.DecodingInfo:A-java.lang.String-) method. **For each document type, name of the decoding info set must be equal to the corresponding classifier result.**
+
+### Implementing the MRTDDocumentClassifier
+[MRTDDocumentClassifier](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDDocumentClassifier.html) is interface that should be implemented to support the classification of MRTD documents based on data extracted from the MRZ zone. Classifier is used to determine which set of decoding infos will be used to extract non-MRZ data. This interface extends the [Parcelable](http://developer.android.com/reference/android/os/Parcelable.html) interface and the parcelization should be implemented. Besides that, following method has to be implemented:
+
+##### [`String classifyDocument(MRTDRecognitionResult)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDDocumentClassifier.html#classifyDocument-com.microblink.recognizers.blinkid.mrtd.MRTDRecognitionResult-)
+Based on [MRTDRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html) classifies the MRTD document. For each MRTD document type that you want to support, returned result string has to be equal to the name of the corresponding set of [DecodingInfo](https://photopay.github.io/photopay-android/com/microblink/detectors/DecodingInfo.html) objects which are defined for that document type. Named decoding info sets should be defined using [`setParserDecodingInfos(DecodingInfo[], String)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setParserDecodingInfos-com.microblink.detectors.DecodingInfo:A-java.lang.String-) method.
 
 ### Obtaining results from machine-readable travel documents recognizer
 
@@ -2791,29 +3028,48 @@ MRTD recognizer produces [MRTDRecognitionResult](https://photopay.github.io/phot
 ```java
 @Override
 public void onScanningDone(RecognitionResults results) {
-	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
-	for(BaseRecognitionResult baseResult : dataArray) {
-		if(baseResult instanceof MRTDRecognitionResult) {
-			MRTDRecognitionResult result = (MRTDRecognitionResult) baseResult;
-			
-	        // you can use getters of MRTDRecognitionResult class to 
-	        // obtain scanned information
-	        if(result.isValid() && !result.isEmpty()) {
-				if(result.isMRZParsed()) {
-					String primaryId = result.getPrimaryId();
-					String secondaryId = result.getSecondaryId();
-					String documentNumber = result.getDocumentNumber();
-				} else {
-					OcrResult rawOcr = result.getOcrResult();
-					// attempt to parse OCR result by yourself
-					// or ask user to try again
-				}		 
-	        } else {
-	        	// not all relevant data was scanned, ask user
-	        	// to try again
-	        }
-		}
-	}
+    BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+    for(BaseRecognitionResult baseResult : dataArray) {
+        if(baseResult instanceof MRTDRecognitionResult) {
+            MRTDRecognitionResult result = (MRTDRecognitionResult) baseResult;
+            
+            // you can use getters of MRTDRecognitionResult class to 
+            // obtain scanned information
+            if(result.isValid() && !result.isEmpty()) {
+                if(result.isMRZParsed()) {
+                    String primaryId = result.getPrimaryId();
+                    String secondaryId = result.getSecondaryId();
+                    String documentNumber = result.getDocumentNumber();
+                } else {
+                    OcrResult rawOcr = result.getOcrResult();
+                    // attempt to parse OCR result by yourself
+                    // or ask user to try again
+                }
+                // If additional fields of interest are expected, obtain
+                // results here. Here we assume that each parser is the only parser in its
+                // group, and parser name is equal to the group name.
+                // e.g. we have member variable
+                // private String[] mParserNames = new String[]{address, dateOfBirth};
+                for (String parserName : mParserNames) {
+                    // use getParsedResult(String parserGroupName, String parserName)
+                    String groupName = parserName;
+                    String parsedResult = result.getParsedResult(groupName, parserName);
+                    // check whether parsing was successfull (parsedResult is not null nor empty)
+                    if (parsedResult != null && !parsedResult.isEmpty()) {
+                        // do something with the result
+                    } else {
+                        // you can read unparsed raw ocr result if parsing was unsuccessful
+                        // use getOcrResult(String parserGroupName)
+                        String ocrResult = result.getOcrResult(groupName);
+                        // attempt to parse OCR result by yourself
+                    }
+                }
+            } else {
+                // not all relevant data was scanned, ask user
+                // to try again
+            }
+        }
+    }
 }
 ```
 
@@ -2826,13 +3082,13 @@ Returns `true` if scan result is valid, i.e. if all required elements were scann
 Returns `true` if scan result is empty, i.e. nothing was scanned. All getters should return `null` for empty result.
 
 ##### `String getPrimaryId()`
-Returns the primary indentifier. If there is more than one component, they are separated with space.
+Returns the primary identifier. If there is more than one component, they are separated with space.
 
 ##### `String getSecondaryId()`
 Returns the secondary identifier. If there is more than one component, they are separated with space.
 
 ##### `String getIssuer()`
-Returns three-letter or two-letter code which indicate the issuing State. Three-letter codes are based on `Aplha-3` codes for entities specified in `ISO 3166-1`, with extensions for certain States. Two-letter codes are based on `Aplha-2` codes for entities specified in `ISO 3166-1`, with extensions for certain States.
+Returns three-letter or two-letter code which indicate the issuing State. Three-letter codes are based on `Alpha-3` codes for entities specified in `ISO 3166-1`, with extensions for certain States. Two-letter codes are based on `Alpha-2` codes for entities specified in `ISO 3166-1`, with extensions for certain States.
 
 ##### `String getDateOfBirth()`
 Returns holder's date of birth in format `YYMMDD`.
@@ -2841,7 +3097,7 @@ Returns holder's date of birth in format `YYMMDD`.
 Returns document number. Document number contains up to 9 characters.
 
 ##### `String getNationality()`
-Returns nationality of the holder represented by a three-letter or two-letter code. Three-letter codes are based on `Alpha-3` codes for entities specified in `ISO 3166-1`, with extensions for certain States. Two-letter codes are based on `Aplha-2` codes for entities specified in `ISO 3166-1`, with extensions for certain States.
+Returns nationality of the holder represented by a three-letter or two-letter code. Three-letter codes are based on `Alpha-3` codes for entities specified in `ISO 3166-1`, with extensions for certain States. Two-letter codes are based on `Alpha-2` codes for entities specified in `ISO 3166-1`, with extensions for certain States.
 
 ##### `String getSex()`
 Returns sex of the card holder. Sex is specified by use of the single initial, capital letter `F` for female, `M` for male or `<` for unspecified.
@@ -2866,6 +3122,120 @@ Returns `true` if Machine Readable Zone has been parsed, `false` otherwise. `fal
 
 ##### `OcrResult getOcrResult()`
 Returns the raw [OCR result](https://photopay.github.io/photopay-android/com/microblink/results/ocr/OcrResult.html) that was used for parsing data. If `isMRZParsed()` returns `false`, you can use OCR result to parse data by yourself.
+
+##### Getters for obtaining results of additional fields of interest:
+
+##### `String getParsedResult(String)`
+Returns the result of parser with the given name from default parsing group. If parsing has failed, returns null or empty string.
+
+##### `String getParsedResult(String, String)`
+Returns the result of parser in given parser group, with the given parser name. If parsing has failed, returns null or empty string.
+
+##### `OcrResult getOcrResult(String)`
+Returns the OCR result for given parser group. If there is no OCR result for requested parser group, returns null.
+
+## <a name="croID_front"></a> Scanning front side of Croatian ID documents
+
+This section will discuss the setting up of Croatian ID Front Side recognizer and obtaining results from it.
+
+### Setting up Croatian ID card front side recognizer
+
+To activate Croatian ID front side recognizer, you need to create [CroatianIDFrontSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/croatia/front/CroatianIDFrontSideRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	CroatianIDFrontSideRecognizerSettings sett = new CroatianIDFrontSideRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [CroatianIDFrontSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/croatia/front/CroatianIDFrontSideRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/croatia/front/CroatianIDFrontSideRecognizerSettings.html) for more information.**
+
+### Obtaining results from Croatian ID card front side recognizer
+
+Croatian ID front side recognizer produces [CroatianIDFrontSideRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/croatia/front/CroatianIDFrontSideRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `CroatianIDFrontSideRecognitionResult ` class. 
+
+**Note:** `CroatianIDFrontSideRecognitionResult ` extends [BlinkOCRRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof CroatianIDFrontSideRecognitionResult) {
+			CroatianIDFrontSideRecognitionResult result = (CroatianIDFrontSideRecognitionResult) baseResult;
+			
+	        // you can use getters of CroatianIDFrontSideRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String firstName = result.getFirstName();
+				String lastName = result.getLastName();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/croatia/front/CroatianIDFrontSideRecognitionResult.html).**
+
+## <a name="croID_back"></a> Scanning back side of Croatian ID documents
+
+This section will discuss the setting up of Croatian ID Back Side recognizer and obtaining results from it.
+
+### Setting up Croatian ID card back side recognizer
+
+To activate Croatian ID back side recognizer, you need to create [CroatianIDBackSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/croatia/back/CroatianIDBackSideRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	CroatianIDBackSideRecognizerSettings sett = new CroatianIDBackSideRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [CroatianIDBackSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/croatia/back/CroatianIDBackSideRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/croatia/back/CroatianIDBackSideRecognizerSettings.html) for more information.**
+
+### Obtaining results from Croatian ID card back side recognizer
+
+Croatian ID back side recognizer produces [CroatianIDBackSideRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/croatia/back/CroatianIDBackSideRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `CroatianIDBackSideRecognitionResult ` class. 
+
+**Note:** `CroatianIDBackSideRecognitionResult` extends [MRTDRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof CroatianIDFrontSideRecognitionResult) {
+			CroatianIDBackSideRecognitionResult result = (CroatianIDBackSideRecognitionResult) baseResult;
+			
+	        // you can use getters of CroatianIDBackSideRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String address = result.getAddress();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/croatia/back/CroatianIDBackSideRecognitionResult.html).**
 
 ## <a name="blinkOCR"></a> Scanning segments with BlinkOCR recognizer
 
@@ -2921,6 +3291,9 @@ The following is a list of available parsers:
 - Croatian reference parser - represented by [CroReferenceParserSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/croatia/CroReferenceParserSettings.html)
 	- used for parsing croatian payment reference numbers from OCR result
 
+- Czech account number parser - represented by [CzAccountParserSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/czechia/CzAccountParserSettings.html)
+	- used for parsing czech account number in domestic format (národní formát)
+
 - Austrian reference parser - represented by [AusReferenceParserSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/austria/AusReferenceParserSettings.html)
 	- used for parsing austrian payment reference (Kundendaten) numbers from OCR result
 
@@ -2958,6 +3331,393 @@ The following is a list of available parsers:
 	- used for parsing bank account numbers from payment slips issued in Montenegro
 - Montenegro payment reference number parser - represented by [MeReferenceParserSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/montenegro/MeReferenceParserSettings.html)
 	- used for parsing payment reference numbers from payment slips issued in Montenegro
+
+### <a name="blinkOCR_results"></a> Obtaining results from BlinkOCR recognizer
+
+BlinkOCR recognizer produces [BlinkOCRRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `BlinkOCRRecognitionResult` class. See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof BlinkOCRRecognitionResult) {
+			BlinkOCRRecognitionResult result = (BlinkOCRRecognitionResult) baseResult;
+			
+	        // you can use getters of BlinkOCRRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+	        	 // use the parser name provided to BlinkOCRRecognizerSettings to
+	        	 // obtain parsed result provided by given parser
+	        	 // obtain result of "myAmountParser" in default parsing group
+		        String parsedAmount = result.getParsedResult("myAmountParser");
+		        // note that parsed result can be null or empty even if result
+		        // is marked as non-empty and valid
+		        if(parsedAmount != null && !parsedAmount.isEmpty()) {
+		        	// do whatever you want with parsed result
+		        }
+		        // obtain OCR result for default parsing group
+		        // OCR result exists if result is valid and non-empty
+		        OcrResult ocrResult = result.getOcrResult();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+Available getters are:
+
+##### `boolean isValid()`
+Returns `true` if scan result contains at least one OCR result in one parsing group.
+
+##### `boolean isEmpty()`
+Returns `true` if scan result is empty, i.e. nothing was scanned. All getters should return `null` for empty result.
+
+##### `String getParsedResult(String parserName)`
+Returns the parsed result provided by parser with name `parserName` added to default parser group. If parser with name `parserName` does not exists in default parser group, returns `null`. If parser exists, but has failed to parse any data, returns empty string.
+
+##### `String getParsedResult(String parserGroupName, String parserName)`
+Returns the parsed result provided by parser with name `parserName` added to parser group named `parserGroupName`. If parser with name `parserName` does not exists in parser group with name `parserGroupName` or if parser group does not exists, returns `null`. If parser exists, but has failed to parse any data, returns empty string.
+
+##### `OcrResult getOcrResult()`
+Returns the [OCR result](https://photopay.github.io/photopay-android/com/microblink/results/ocr/OcrResult.html) structure for default parser group.
+
+##### `OcrResult getOcrResult(String parserGroupName)`
+Returns the [OCR result](https://photopay.github.io/photopay-android/com/microblink/results/ocr/OcrResult.html) structure for parser group named `parserGroupName`.
+
+## <a name="blinkOCR_templating"></a> Scanning templated documents with BlinkOCR recognizer
+
+This section discusses the setting up of BlinkOCR recognizer for scanning templated documents. Please check demo app for examples.
+
+Templated document is any document which is defined by its template. Template contains the information about how the document should be detected, i.e. found on the camera scene and information about which part of document contains which useful information.
+
+### Defining how document should be detected
+
+Before performing OCR of the document, _PhotoPay_ first needs to find its location on camera scene. In order to perform detection, you need to define [DetectorSettings](https://photopay.github.io/photopay-android/com/microblink/detectors/DetectorSettings.html) which will be used to instantiate detector which perform document detection. You can set detector settings with method [`setDetectorSettings(DetectorSettings)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognizerSettings.html#setDetectorSettings-com.microblink.detectors.DetectorSettings-). If you do not set detector settings, BlinkOCR recognizer will work in [Segment scan mode](#blinkOCR).
+
+You can find out more information about about detectors that can be used in section [Detection settings and results](#detectionSettingsAndResults).
+
+### Defining how document should be recognized
+
+After document has been detected, it will be recognized. This is done in following way:
+
+1. the detector produces a [DetectorResult](https://photopay.github.io/photopay-android/com/microblink/detectors/DetectorResult.html) which contains one or more detection locations.
+2. based on array of [DecodingInfos](https://photopay.github.io/photopay-android/com/microblink/detectors/DecodingInfo.html) that were defined as part of concrete [DetectorSettings](https://photopay.github.io/photopay-android/com/microblink/detectors/DetectorSettings.html) (see [`setDecodingInfos(DecodingInfo[])`](https://photopay.github.io/photopay-android/com/microblink/detectors/quad/QuadDetectorSettings.html#setDecodingInfos-com.microblink.detectors.DecodingInfo:A-) method of `QuadDetectorSettings`), for each element of array following is performed:
+	- location defined in [DecodingInfo](https://photopay.github.io/photopay-android/com/microblink/detectors/DecodingInfo.html) is dewarped to image of height defined within `DecodingInfo`
+	- a parser group that has same name as current `DecodingInfo` is searched and if it is found, optimal OCR settings for all parsers from that parser group is calculated
+	- using optimal OCR settings OCR of the dewarped image is performed
+	- finally, OCR result is parsed with each parser from that parser group
+	- if parser group with the same name as current `DecodingInfo` cannot be found, no OCR will be performed, however image will be reported via [MetadataListener](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataListener.html) if receiving of [DEWARPED images](https://photopay.github.io/photopay-android/com/microblink/image/ImageType.html#DEWARPED) has [been enabled](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html#setDewarpedImageEnabled-boolean-)
+3. if no [DocumentClassifier](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/DocumentClassifier.html) has been given with [`setDocumentClassifier(DocumentClassifier)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognizerSettings.html#setDocumentClassifier-com.microblink.recognizers.blinkocr.DocumentClassifier-), recognition is done. If `DocumentClassifier` exists, its method [`classify(BlinkOCRRecognitionResult)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/DocumentClassifier.html#classifyDocument-com.microblink.recognizers.blinkocr.BlinkOCRRecognitionResult-) is called to determine which type document has been detected
+4. If classifier returned string which is same as one used previously to [setup parser decoding infos](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognizerSettings.html#setParserDecodingInfos-com.microblink.detectors.DecodingInfo:A-java.lang.String-), then this array of `DecodingInfos` is obtained and step 2. is performed again with obtained array of `DecodingInfos`.
+
+### When to use [DocumentClassifier](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/DocumentClassifier.html)?
+
+If you plan scanning several different documents of same size, for example different ID cards, which are all 85x54 mm (credit card) size, then you need to use `DocumentClassifer` to classify the type of document so correct [DecodingInfo](https://photopay.github.io/photopay-android/com/microblink/detectors/DecodingInfo.html) array can be used for obtaining relevant information. An example would be the case where you need to scan both front sides of croatian and german ID cards - the location of first and last names are not same on both documents. Therefore, you first need to classify the document based on some discriminative features.
+
+If you plan supporting only single document type, then you do not need to use `DocumentClassifier`.
+
+### How to implement [DocumentClassifier](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/DocumentClassifier.html)?
+
+[DocumentClassifier](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/DocumentClassifier.html) is interface that should be implemented to support classification of documents that cannot be differentiated by detector. Classification result is used to determine which set of decoding infos will be used to extract classification-specific data. This interface extends the [Parcelable](http://developer.android.com/reference/android/os/Parcelable.html) interface and the parcelization should be implemented. Besides that, following method has to be implemented:
+
+##### [`String classifyDocument(BlinkOCRRecognitionResult extractionResult)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/DocumentClassifier.html#classifyDocument-com.microblink.recognizers.blinkocr.BlinkOCRRecognitionResult-)
+
+Based on [BlinkOCRRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognitionResult.html) which contains data extracted from decoding infos inherent to detector, classifies the document. For each document type that you want to support, returned result string has to be equal to the name of the corresponding set of [DecodingInfo](https://photopay.github.io/photopay-android/com/microblink/detectors/DecodingInfo.html) objects which are defined for that document type. Named decoding info sets should be defined using [`setParserDecodingInfos(DecodingInfo[], String)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognizerSettings.html#setParserDecodingInfos-com.microblink.detectors.DecodingInfo:A-java.lang.String-) method.
+
+### How to obtain recognition results?
+
+Just like when using BlinkOCR recognizer in [segment scan mode](#blinkOCR), same principles apply here. You use the same approach as discussed in [Obtaining results from BlinkOCR recognizer](#blinkOCR_results). Just keep in mind to use parser group names that are equal to decoding info names. Check demo app that is delivered with SDK for detailed example.
+
+## <a name="detectorRecognizer"></a> Performing detection of various documents
+
+This section will discuss how to set up a special kind of recognizer called `DetectorRecognizer` whose only purpose is to perform a detection of a document and return position of the detected document on the image or video frame.
+
+### Setting up Detector Recognizer
+
+To activate Detector Recognizer, you need to create [DetectorRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DetectorRecognizerSettings.html) and add it to `RecognizerSettings` array. When creating `DetectorRecognizerSettings`, you need to initialize it with already prepared [DetectorSettings](https://photopay.github.io/photopay-android/com/microblink/detectors/DetectorSettings.html). Check [this chapter](#detectionSettingsAndResults) for more information about available detectors and how to configure them.
+
+You can use the following code snippet to create `DetectorRecognizerSettings` and add it to `RecognizerSettings` array:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	DetectorRecognizerSettings sett = new DetectorRecognizerSettings(setupDetector());
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+Please note that snippet above assumes existance of method `setupDetector()` which returns a fully configured `DetectorSettings` as explained in chapter [Detection settings and results](#detectionSettingsAndResults).
+
+### Obtaining results from Detector Recognizer
+
+Detector Recognizer produces [DetectorRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DetectorRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `DetectorRecognitionResult` class. See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof DetectorRecognitionResult) {
+			DetectorRecognitionResult result = (DetectorRecognitionResult) baseResult;
+			
+	        // you can use getters of DetectorRecognitionResult class to 
+	        // obtain detection result
+	        if(result.isValid() && !result.isEmpty()) {
+				DetectorResult detection = result.getDetectorResult();
+				// the type of DetectorResults depends on type of configured
+				// detector when setting up the DetectorRecognizer
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+Available getters are:
+
+##### `boolean isValid()`
+Returns `true` if detection result is valid, i.e. if all required elements were detected with good confidence and can be used. If `false` is returned that indicates that some crucial data is missing. You should ask user to try scanning again. If you keep getting `false` (i.e. invalid data) for certain document, please report that as a bug to [help.microblink.com](http://help.microblink.com). Please include high resolution photographs of problematic documents.
+
+##### `boolean isEmpty()`
+Returns `true` if scan result is empty, i.e. nothing was scanned. All getters should return `null` for empty result.
+
+##### `DetectorResult getDetectorResult()`
+Returns the [DetectorResult](https://photopay.github.io/photopay-android/com/microblink/detectors/DetectorResult.html) generated by detector that was used to configure Detector Recognizer.
+
+# <a name="detectionSettingsAndResults"></a> Detection settings and results
+
+This chapter will discuss various detection settings used to configure different detectors that some recognizers can use to perform object detection prior performing further recognition of detected object's contents.
+
+Each detector has its own version of `DetectorSettings` which derives [DetectorSettings](https://photopay.github.io/photopay-android/com/microblink/detectors/DetectorSettings.html) class. Besides that, each detector also produces its own version of `DetectorResult` which derives [DetectorResult](https://photopay.github.io/photopay-android/com/microblink/detectors/DetectorResult.html) class. Appropriate recognizers, such as [Detector Recognizer](#detectorRecognizer), require `DetectorSettings` for their initialization and provide `DetectorResult` in their recognition result.
+
+#### [DetectorSettings](https://photopay.github.io/photopay-android/com/microblink/detectors/DetectorSettings.html)
+
+Abstract `DetectorSettings` contains following setters that are inherited by all derived settings objects:
+
+##### `setDisplayDetectedLocation(boolean)`
+
+Defines whether detection location will be delivered as detection metadata to [MetadataListener](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataListener.html). In order for this to work, you need to set `MetadataListener` to [RecognizerView](https://photopay.github.io/photopay-android/com/microblink/view/recognition/RecognizerView.html}) and you need to allow receiving of detection metadata in [MetadataSettings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html#setDetectionMetadataAllowed(boolean)).
+
+#### [DetectorResult](https://photopay.github.io/photopay-android/com/microblink/detectors/DetectorResult.html)
+
+Abstract `DetectorResult` contains following getters that are inherited by all derived result objects:
+
+##### `DetectionCode getDetectionCode()`
+
+Returns the [Detection code](https://photopay.github.io/photopay-android/com/microblink/detectors/DetectorResult.DetectionCode.html) which indicates the status of detection (failed, fallback or success).
+
+## <a name="mrtdDetector"></a> Detection of documents with Machine Readable Zone
+
+This section discusses how to use MRTD detector to perform detection of Machine Readable Zones used in various Machine Readable Travel Documents (MRTDs - ID cards and passports). This detector is used internally in [Machine Readable Travel Documents recognizer](#mrtd) to perform detection of Machine Readable Zone (MRZ) prior performing OCR and data extraction.
+
+### Setting up MRTD detector
+
+To use MRTD detector, you need to create [MRTDDetectorSettings](https://photopay.github.io/photopay-android/com/microblink/detectors/quad/mrtd/MRTDDetectorSettings.html) and give it to appropriate recognizer. You can use following snippet to perform that:
+
+```java
+private DetectorSettings setupDetector() {
+	MRTDDetectorSettings settings = new MRTDDetectorSettings();
+
+	// with following setter you can control whether you want to detect
+	// machine readable zone only or full travel document
+	settings.setDetectFullDocument(false);
+	
+	return settings;
+}
+```
+
+As you can see from the snippet, `MRTDDetectorSettings` can be tweaked with following methods:
+
+##### `setDetectFullDocument(boolean)`
+
+This method allows you to enable detection of full Machine Readable Travel Documents. The position of the document is calculated from location of detected Machine Readable Zone. If this is set to `false` (default), then only location of Machine Readable Zone will be returned.
+
+### Obtaining MRTD detection result
+
+MRTD detector produces [MRTDDetectorResult](https://photopay.github.io/photopay-android/com/microblink/detectors/quad/mrtd/MRTDDetectorResult.html). You can use `instanceof` operator to check if obtained `DetectorResult` is instance of `MRTDDetectorResult` class. See the following snippet for an example:
+
+```java
+public void handleDetectorResult(DetectorResult detResult) {
+	if (detResult instanceof MRTDDetectorResult) {
+		MRTDDetectorResult result = (MRTDDetectorResult) detResult;
+		Quadrilateral pos = result.getDetectionLocation();
+	}
+}
+```
+
+The available getters of `MRTDDetectorResults` are as follows:
+
+##### `Quadrilateral getDetectionLocation()`
+
+Returns the [Quadrilateral](https://photopay.github.io/photopay-android/com/microblink/geometry/Quadrilateral.html) containing the position of detection. If position is empty, all four Quadrilateral points will have coordinates `(0,0)`.
+
+##### `int[] getElementsCountPerLine()`
+
+Returns the array of integers defining the number of char-like elements per each line of detected machine readable zone.
+
+##### `MRTDDetectionCode getMRTDDetectionCode()`
+
+Returns the [MRTDDetectionCode enum](https://photopay.github.io/photopay-android/com/microblink/detectors/quad/mrtd/MRTDDetectorResult.MRTDDetectionCode.html) defining the type of detection or `null` if nothing was detected.
+
+## <a name="documentDetector"></a> Detection of documents with Document Detector
+
+This section discusses how to use Document detector to perform detection of documents of certain aspect ratios. This detector can be used to detect cards, cheques, A4-sized documents, receipts and much more.
+
+### Setting up of Document Detector
+
+To use Document Detector, you need to create [DocumentDetectorSettings](https://photopay.github.io/photopay-android/com/microblink/detectors/document/DocumentDetectorSettings.html). When creating `DocumentDetectorSettings` you need to specify at least one [DocumentSpecification](https://photopay.github.io/photopay-android/com/microblink/detectors/document/DocumentSpecification.html) which defines how specific document should be detected. `DocumentSpecification` can be created directly or from [preset](https://photopay.github.io/photopay-android/com/microblink/detectors/document/DocumentSpecification.html#createFromPreset(com.microblink.detectors.document.DocumentSpecificationPreset)) (recommended). Please refer to [javadoc](https://photopay.github.io/photopay-android/com/microblink/detectors/document/DocumentSpecification.html) for more information on document specification.
+
+In the following snippet, we will show how to setup `DocumentDetectorSettings` to perform detection of credit cards:
+
+```java
+private DetectorSettings setupDetector() {
+	DocumentSpecification cardDoc = DocumentSpecification.createFromPreset(DocumentSpecificationPreset.DOCUMENT_SPECIFICATION_PRESET_ID1_CARD);
+
+	DocumentDetectorSettings settings = new DocumentDetectorSettings(new DocumentSpecification[] {cardDoc});
+
+	// require at least 3 subsequent close detections (in 3 subsequent 
+	// video frames) to treat detection as 'stable'
+	settings.setNumStableDetectionsThreshold(3)
+	
+	return settings;
+}
+```
+
+As you can see from the snippet, `DocumentDetectorSettings` can be tweaked with following methods:
+
+##### `setNumStableDetectionsThreshold(int)`
+
+Sets the number of subsequent close detections must occur before treating document detection as stable. Default is 1. Larger number guarantees more robust document detection at price of slower performance.
+
+##### `setDocumentSpecifications(DocumentSpecification[])`
+
+Sets the array of document specifications that define documents that can be detected. See javadoc for [DocumentSpecification](https://photopay.github.io/photopay-android/com/microblink/detectors/document/DocumentSpecification.html) for more information about document specifications.
+
+### Obtaining document detection result
+
+Document detector produces [DocumentDetectorResult](https://photopay.github.io/photopay-android/com/microblink/detectors/document/DocumentDetectorResult.html). You can use `instanceof` operator to check if obtained `DetectorResult` is instance of `DocumentDetectorResult` class. See the following snippet for an example:
+
+```java
+public void handleDetectorResult(DetectorResult detResult) {
+	if (detResult instanceof DocumentDetectorResult) {
+		DocumentDetectorResult result = (DocumentDetectorResult) detResult;
+		Quadrilateral pos = result.getDetectionLocation();
+	}
+}
+```
+
+Available getters of `DocumentDetectorResult` are as follows:
+
+##### `Quadrilateral getDetectionLocation()`
+
+Returns the [Quadrilateral](https://photopay.github.io/photopay-android/com/microblink/geometry/Quadrilateral.html) containing the position of detection. If position is empty, all four Quadrilateral points will have coordinates `(0,0)`.
+
+##### `double getAspectRatio()`
+
+Returns the aspect ratio of detected document. This will be equal to aspect ratio of one of `DocumentSpecification` objects given to `DocumentDetectorSettings`.
+
+##### `ScreenOrientation getScreenOrientation()`
+
+Returns the orientation of the screen that was active at the moment document was detected.
+
+## <a name="faceDetector"></a> Detection of faces with Face Detector
+
+This section discusses how to use face detector to perform detection of faces on  various documents.
+
+### Setting up Face Detector
+
+To use Face Detector, you need to create [FaceDetectorSettings](https://photopay.github.io/photopay-android/com/microblink/detectors/face/FaceDetectorSettings.html) and give it to appropriate recognizer. You can use following snippet to perform that:
+
+```java
+private DetectorSettings setupDetector() {
+	// following constructor initializes FaceDetector settings
+	// and requests height of dewarped image to be 300 pixels
+	FaceDetectorSettings settings = new FaceDetectorSettings(300);
+	return settings;
+}
+```
+
+`FaceDetectorSettings` can be tweaked with following methods:
+
+##### `setDecodingInfo(DecodingInfo)`
+
+This method allows you to control how detection will be dewarped. `DecodingInfo ` constains `Rectangle` which defines position in detected location that is interesting, expressed as relative rectangle with respect to detected rectangle and height to which detection will be dewarped. Fore more info check out [DecodingInfo](https://photopay.github.io/photopay-android/com/microblink/detectors/DecodingInfo.html).
+
+
+##### `setDecodingInfo(int)`
+
+This method allows you to control how detection will be dewarped (same as creating `DecodingInfo` containing `Rectangle` initialized with (0.f, 0.f, 1.f, 1.f) and given dewarp height.
+
+### Obtaining face detection result
+
+Face Detector produces [FaceDetectorResult](https://photopay.github.io/photopay-android/com/microblink/detectors/face/FaceDetectorResult.html). You can use `instanceof` operator to check if obtained `DetectorResult` is instance of `FaceDetectorResult ` class. See the following snippet for an example:
+
+```java
+public void handleDetectorResult(DetectorResult detResult) {
+	if (detResult instanceof FaceDetectorResult) {
+		FaceDetectorResult result = (FaceDetectorResult) detResult;
+		Quadrilateral[] locations = result.getDetectionLocations();
+	}
+}
+```
+
+The available getters of `FaceDetectorResults` are as follows:
+
+##### `Quadrilateral[] getDetectionLocations()`
+
+Returns the locations of detections in coordinate system of image on which detection was performed or `null` if detection was not successful.
+
+##### `Quadrilateral[] getTransformedDetectionLocations()`
+
+Returns the locations of detections in normalized coordinate system of visible camera frame or `null` if detection was not successful.
+
+## <a name="multiDetector"></a> Combining detectors with MultiDetector
+
+This section discusses how to use Multi detector to combine multiple different detectors.
+
+### Setting up Multi Detector
+
+To use Multi Detector, you need to create [MultiDetectorSettings](https://photopay.github.io/photopay-android/com/microblink/detectors/multi/MultiDetectorSettings.html). When creating `MultiDetectorSettings` you need to specify at least one other `DetectorSettings` that will be wrapped with Multi Detector. In the following snippet, we demonstrate how to create a Multi detector that wraps both [MRTDDetector](#mrtdDetector) and [Document Detector](#documentDetector) and has ability to detect either Machine Readable Zone or card document:
+
+```java
+private DetectorSettings setupDetector() {
+	DocumentSpecification cardDoc = DocumentSpecification.createFromPreset(DocumentSpecificationPreset.DOCUMENT_SPECIFICATION_PRESET_ID1_CARD);
+	DocumentDetectorSettings dds = new DocumentDetectorSettings(new DocumentSpecification[] {cardDoc});
+
+	MRTDDetectorSettings mrtds = new MRTDDetectorSettings(100);
+
+    MultiDetectorSettings mds = new MultiDetectorSettings(new DetectorSettings[] {dds, mrtds});
+	
+	return mds;
+}
+```
+
+### Obtaining results from Multi Detector
+
+Multi detector produces [MultiDetectorResult](https://photopay.github.io/photopay-android/com/microblink/detectors/multi/MultiDetectorResult.html). You can use `instanceof` operator to check if obtained `DetectorResult` is instance of `MultiDetectorResult` class. See the following snippet for an example:
+
+```java
+public void handleDetectorResult(DetectorResult detResult) {
+	if (detResult instanceof MultiDetectorResult) {
+		MultiDetectorResult result = (MultiDetectorResult) detResult;
+		DetectorResults[] results = result.getDetectionResults();
+	}
+}
+```
+
+As you can see from the snippet, `MultiDetectorResult` contains one getter:
+
+##### `getDetectionResults()`
+
+Returns the array of detection results contained within. You can iterate over the array to inspect each detection result's contents.
 
 # <a name="translation"></a> Translation and localization
 
@@ -3117,7 +3877,9 @@ To remove certain CPU arhitecture, add following statement to your `android` blo
 ```
 android {
 	...
-	exclude 'lib/<ABI>/libBlinkPhotoPay.so'
+	packagingOptions {
+		exclude 'lib/<ABI>/libBlinkPhotoPay.so'
+	}
 }
 ```
 

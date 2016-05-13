@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -101,7 +101,12 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../../com/microblink/recognizers/settings/RecognizerSettings.html" title="class in com.microblink.recognizers.settings">com.microblink.recognizers.settings.RecognizerSettings</a></li>
 <li>
 <ul class="inheritance">
+<li><a href="../../../../../com/microblink/recognizers/templating/TemplatingRecognizerSettings.html" title="class in com.microblink.recognizers.templating">com.microblink.recognizers.templating.TemplatingRecognizerSettings</a></li>
+<li>
+<ul class="inheritance">
 <li>com.microblink.recognizers.blinkid.mrtd.MRTDRecognizerSettings</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -117,8 +122,8 @@ var activeTableTab = "activeTableTab";
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">MRTDRecognizerSettings</span>
-extends <a href="../../../../../com/microblink/recognizers/settings/RecognizerSettings.html" title="class in com.microblink.recognizers.settings">RecognizerSettings</a></pre>
-<div class="block">Created by igor on 11/20/14.</div>
+extends <a href="../../../../../com/microblink/recognizers/templating/TemplatingRecognizerSettings.html" title="class in com.microblink.recognizers.templating">TemplatingRecognizerSettings</a></pre>
+<div class="block">Represents settings for recognizer that can recognize MRZ zone of the travel document.</div>
 </li>
 </ul>
 </div>
@@ -156,7 +161,18 @@ extends <a href="../../../../../com/microblink/recognizers/settings/RecognizerSe
 <td class="colFirst"><code>static android.os.Parcelable.Creator&lt;<a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html" title="class in com.microblink.recognizers.blinkid.mrtd">MRTDRecognizerSettings</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#CREATOR">CREATOR</a></span></code>&nbsp;</td>
 </tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#kDefaultDecodingInfoSet">kDefaultDecodingInfoSet</a></span></code>&nbsp;</td>
+</tr>
 </table>
+<ul class="blockList">
+<li class="blockList"><a name="fields.inherited.from.class.com.microblink.recognizers.templating.TemplatingRecognizerSettings">
+<!--   -->
+</a>
+<h3>Fields inherited from class&nbsp;com.microblink.recognizers.templating.<a href="../../../../../com/microblink/recognizers/templating/TemplatingRecognizerSettings.html" title="class in com.microblink.recognizers.templating">TemplatingRecognizerSettings</a></h3>
+<code><a href="../../../../../com/microblink/recognizers/templating/TemplatingRecognizerSettings.html#kDefaultParserGroup">kDefaultParserGroup</a></code></li>
+</ul>
 <ul class="blockList">
 <li class="blockList"><a name="fields.inherited.from.class.com.microblink.recognizers.settings.RecognizerSettings">
 <!--   -->
@@ -203,55 +219,89 @@ extends <a href="../../../../../com/microblink/recognizers/settings/RecognizerSe
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>protected void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#finalize--">finalize</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#areUnparsedResultsAllowed--">areUnparsedResultsAllowed</a></span>()</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#getAllowUnparsedResults--">getAllowUnparsedResults</a></span>()</code>
 <div class="block">Returns true if returning of results that have failed to parse data is allowed.</div>
 </td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#isShowingFullDocument--">isShowingFullDocument</a></span>()</code>
 <div class="block">Returns true if image of full document containing MRZ will be given to MetadataListener.</div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#isShowingMRZ--">isShowingMRZ</a></span>()</code>
 <div class="block">Returns true if image of Machine Readable Zone will be given to ImageListener.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setAllowUnparsedResults-boolean-">setAllowUnparsedResults</a></span>(boolean&nbsp;allowUnparsed)</code>
 <div class="block">Set this to true to allow obtaining results that have not been parsed by SDK.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setDocumentClassifier-com.microblink.recognizers.blinkid.mrtd.MRTDDocumentClassifier-">setDocumentClassifier</a></span>(<a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDDocumentClassifier.html" title="interface in com.microblink.recognizers.blinkid.mrtd">MRTDDocumentClassifier</a>&nbsp;documentClassifier)</code>
+<div class="block">Sets the <a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDDocumentClassifier.html" title="interface in com.microblink.recognizers.blinkid.mrtd"><code>MRTDDocumentClassifier</code></a> that can be used for classification of the documents based
+ on the MRZ zone result.</div>
+</td>
+</tr>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setParserDecodingInfos-com.microblink.detectors.DecodingInfo:A-">setParserDecodingInfos</a></span>(<a href="../../../../../com/microblink/detectors/DecodingInfo.html" title="class in com.microblink.detectors">DecodingInfo</a>[]&nbsp;decodingInfos)</code>
+<div class="block">Sets the decoding infos for desired additional document elements that should be recognized
+ together with MRZ zone.</div>
+</td>
+</tr>
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setParserDecodingInfos-com.microblink.detectors.DecodingInfo:A-java.lang.String-">setParserDecodingInfos</a></span>(<a href="../../../../../com/microblink/detectors/DecodingInfo.html" title="class in com.microblink.detectors">DecodingInfo</a>[]&nbsp;decodingInfos,
+                      java.lang.String&nbsp;decodingInfoSet)</code>
+<div class="block">Sets the named decoding info set, for specific document type, whose elements contain location
+ information about additional document elements that should be recognized together with
+ the MRZ zone.</div>
+</td>
+</tr>
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setShowFullDocument-boolean-">setShowFullDocument</a></span>(boolean&nbsp;showFullDocument)</code>
 <div class="block">Set this to true if you use MetadataListener and you want to obtain image containing
  full document containing Machine Readable Zone.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setShowMRZ-boolean-">setShowMRZ</a></span>(boolean&nbsp;showMRZ)</code>
 <div class="block">Set this to true if you use ImageListener and you want to obtain image containing
  only Machine Readable Zone.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#writeToParcel-android.os.Parcel-int-">writeToParcel</a></span>(android.os.Parcel&nbsp;dest,
              int&nbsp;flags)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.com.microblink.recognizers.templating.TemplatingRecognizerSettings">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;com.microblink.recognizers.templating.<a href="../../../../../com/microblink/recognizers/templating/TemplatingRecognizerSettings.html" title="class in com.microblink.recognizers.templating">TemplatingRecognizerSettings</a></h3>
+<code><a href="../../../../../com/microblink/recognizers/templating/TemplatingRecognizerSettings.html#addParser-java.lang.String-com.microblink.recognizers.blinkocr.parser.OcrParserSettings-">addParser</a>, <a href="../../../../../com/microblink/recognizers/templating/TemplatingRecognizerSettings.html#addParserToParserGroup-java.lang.String-java.lang.String-com.microblink.recognizers.blinkocr.parser.OcrParserSettings-">addParserToParserGroup</a>, <a href="../../../../../com/microblink/recognizers/templating/TemplatingRecognizerSettings.html#initFromParcel-android.os.Parcel-">initFromParcel</a>, <a href="../../../../../com/microblink/recognizers/templating/TemplatingRecognizerSettings.html#removeAllParserDecodingInfoSets--">removeAllParserDecodingInfoSets</a>, <a href="../../../../../com/microblink/recognizers/templating/TemplatingRecognizerSettings.html#removeAllParsers--">removeAllParsers</a>, <a href="../../../../../com/microblink/recognizers/templating/TemplatingRecognizerSettings.html#removeAllParsersFromGroup-java.lang.String-">removeAllParsersFromGroup</a>, <a href="../../../../../com/microblink/recognizers/templating/TemplatingRecognizerSettings.html#removeParser-java.lang.String-">removeParser</a>, <a href="../../../../../com/microblink/recognizers/templating/TemplatingRecognizerSettings.html#removeParserDecodingInfoSet-java.lang.String-">removeParserDecodingInfoSet</a>, <a href="../../../../../com/microblink/recognizers/templating/TemplatingRecognizerSettings.html#removeParserFromParserGroup-java.lang.String-java.lang.String-">removeParserFromParserGroup</a></code></li>
+</ul>
+<ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.com.microblink.recognizers.settings.RecognizerSettings">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;com.microblink.recognizers.settings.<a href="../../../../../com/microblink/recognizers/settings/RecognizerSettings.html" title="class in com.microblink.recognizers.settings">RecognizerSettings</a></h3>
-<code><a href="../../../../../com/microblink/recognizers/settings/RecognizerSettings.html#describeContents--">describeContents</a>, <a href="../../../../../com/microblink/recognizers/settings/RecognizerSettings.html#finalize--">finalize</a>, <a href="../../../../../com/microblink/recognizers/settings/RecognizerSettings.html#getNativeContext--">getNativeContext</a>, <a href="../../../../../com/microblink/recognizers/settings/RecognizerSettings.html#isEnabled--">isEnabled</a>, <a href="../../../../../com/microblink/recognizers/settings/RecognizerSettings.html#requiresAutofocus--">requiresAutofocus</a>, <a href="../../../../../com/microblink/recognizers/settings/RecognizerSettings.html#requiresLandscapeMode--">requiresLandscapeMode</a>, <a href="../../../../../com/microblink/recognizers/settings/RecognizerSettings.html#setEnabled-boolean-">setEnabled</a></code></li>
+<code><a href="../../../../../com/microblink/recognizers/settings/RecognizerSettings.html#describeContents--">describeContents</a>, <a href="../../../../../com/microblink/recognizers/settings/RecognizerSettings.html#getNativeContext--">getNativeContext</a>, <a href="../../../../../com/microblink/recognizers/settings/RecognizerSettings.html#isEnabled--">isEnabled</a>, <a href="../../../../../com/microblink/recognizers/settings/RecognizerSettings.html#requiresAutofocus--">requiresAutofocus</a>, <a href="../../../../../com/microblink/recognizers/settings/RecognizerSettings.html#requiresLandscapeMode--">requiresLandscapeMode</a>, <a href="../../../../../com/microblink/recognizers/settings/RecognizerSettings.html#setEnabled-boolean-">setEnabled</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
@@ -274,6 +324,19 @@ extends <a href="../../../../../com/microblink/recognizers/settings/RecognizerSe
 <!--   -->
 </a>
 <h3>Field Detail</h3>
+<a name="kDefaultDecodingInfoSet">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>kDefaultDecodingInfoSet</h4>
+<pre>public static final&nbsp;java.lang.String kDefaultDecodingInfoSet</pre>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../../constant-values.html#com.microblink.recognizers.blinkid.mrtd.MRTDRecognizerSettings.kDefaultDecodingInfoSet">Constant Field Values</a></dd>
+</dl>
+</li>
+</ul>
 <a name="CREATOR">
 <!--   -->
 </a>
@@ -323,20 +386,24 @@ extends <a href="../../../../../com/microblink/recognizers/settings/RecognizerSe
  you need to allow returning of unparsed results. Unparsed results will not contain parsed
  data, but will contain OCR result received from OCR engine, so you can parse data yourself.</div>
 <dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../../com/microblink/recognizers/templating/TemplatingRecognizerSettings.html#setAllowUnparsedResults-boolean-">setAllowUnparsedResults</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../com/microblink/recognizers/templating/TemplatingRecognizerSettings.html" title="class in com.microblink.recognizers.templating">TemplatingRecognizerSettings</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>allowUnparsed</code> - allow returning of unparsed OCR data</dd>
 </dl>
 </li>
 </ul>
-<a name="areUnparsedResultsAllowed--">
+<a name="getAllowUnparsedResults--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>areUnparsedResultsAllowed</h4>
-<pre>public&nbsp;boolean&nbsp;areUnparsedResultsAllowed()</pre>
+<h4>getAllowUnparsedResults</h4>
+<pre>public&nbsp;boolean&nbsp;getAllowUnparsedResults()</pre>
 <div class="block">Returns true if returning of results that have failed to parse data is allowed.</div>
 <dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../../com/microblink/recognizers/templating/TemplatingRecognizerSettings.html#getAllowUnparsedResults--">getAllowUnparsedResults</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../com/microblink/recognizers/templating/TemplatingRecognizerSettings.html" title="class in com.microblink.recognizers.templating">TemplatingRecognizerSettings</a></code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>true if returning of results that have failed to parse data is allowed.</dd>
 </dl>
@@ -405,6 +472,106 @@ extends <a href="../../../../../com/microblink/recognizers/settings/RecognizerSe
 </dl>
 </li>
 </ul>
+<a name="setParserDecodingInfos-com.microblink.detectors.DecodingInfo:A-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setParserDecodingInfos</h4>
+<pre>public&nbsp;void&nbsp;setParserDecodingInfos(@Nullable
+                                   <a href="../../../../../com/microblink/detectors/DecodingInfo.html" title="class in com.microblink.detectors">DecodingInfo</a>[]&nbsp;decodingInfos)</pre>
+<div class="block">Sets the decoding infos for desired additional document elements that should be recognized
+ together with MRZ zone.
+
+ Use this method if document contains additional information (elements) of interest that
+ should be recognized together with MRZ and only one document type is expected.
+ The position of each additional element is represented as <a href="../../../../../com/microblink/detectors/DecodingInfo.html" title="class in com.microblink.detectors"><code>DecodingInfo</code></a> object which
+ holds the location for that element of interest (relative to full document detection) and the
+ desired dewarp height (in number of pixels), for that location. <b>Name of the decoding info
+ must be equal to the name of the parser group</b> that will be used for parsing that element. <br>
+ If you want to support the multiple document types containing MRZ, and if they can be distinguished using
+ the MRZ result, use method <a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setParserDecodingInfos-com.microblink.detectors.DecodingInfo:A-java.lang.String-"><code>setParserDecodingInfos(DecodingInfo[], String)</code></a> for setting the
+ decoding infos for each document type and method <a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setDocumentClassifier-com.microblink.recognizers.blinkid.mrtd.MRTDDocumentClassifier-"><code>setDocumentClassifier(MRTDDocumentClassifier)</code></a>
+ for setting the document classifier.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>decodingInfos</code> - Array that contains the decoding infos for additional document elements of
+                      interest that should be recognized together with MRZ. If <code>null</code>
+                      is set, then only the recognition of MRZ will be performed, as by default.</dd>
+</dl>
+</li>
+</ul>
+<a name="setParserDecodingInfos-com.microblink.detectors.DecodingInfo:A-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setParserDecodingInfos</h4>
+<pre>public&nbsp;void&nbsp;setParserDecodingInfos(@NonNull
+                                   <a href="../../../../../com/microblink/detectors/DecodingInfo.html" title="class in com.microblink.detectors">DecodingInfo</a>[]&nbsp;decodingInfos,
+                                   @NonNull
+                                   java.lang.String&nbsp;decodingInfoSet)</pre>
+<div class="block">Sets the named decoding info set, for specific document type, whose elements contain location
+ information about additional document elements that should be recognized together with
+ the MRZ zone.
+
+ Use this method if document contains additional information (elements) of interest that should
+ be recognized together with MRZ zone and there are multiple document types that can be
+ distinguished using the MRZ result. <br>
+ The position of each additional element is represented as <a href="../../../../../com/microblink/detectors/DecodingInfo.html" title="class in com.microblink.detectors"><code>DecodingInfo</code></a> object which
+ holds the location for that element of interest (relative to full document detection) and the
+ desired dewarp height (in number of pixels), for that location. <b>Name of the decoding info
+ must be equal to the name of the parser group</b> that will be used for parsing that element. <br>
+ Additionally, for document classification, set the document classifier using the method
+ <a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setDocumentClassifier-com.microblink.recognizers.blinkid.mrtd.MRTDDocumentClassifier-"><code>setDocumentClassifier(MRTDDocumentClassifier)</code></a>.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../../com/microblink/recognizers/templating/TemplatingRecognizerSettings.html#setParserDecodingInfos-com.microblink.detectors.DecodingInfo:A-java.lang.String-">setParserDecodingInfos</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../com/microblink/recognizers/templating/TemplatingRecognizerSettings.html" title="class in com.microblink.recognizers.templating">TemplatingRecognizerSettings</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>decodingInfos</code> - Array that contains the decoding infos for additional document elements of
+                      interest that should be recognized together with the MRZ zone.</dd>
+<dd><code>decodingInfoSet</code> - Name of the decoding info set, must be equal to the classifier result
+                        for corresponding document type.</dd>
+</dl>
+</li>
+</ul>
+<a name="setDocumentClassifier-com.microblink.recognizers.blinkid.mrtd.MRTDDocumentClassifier-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setDocumentClassifier</h4>
+<pre>public&nbsp;void&nbsp;setDocumentClassifier(@Nullable
+                                  <a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDDocumentClassifier.html" title="interface in com.microblink.recognizers.blinkid.mrtd">MRTDDocumentClassifier</a>&nbsp;documentClassifier)</pre>
+<div class="block">Sets the <a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDDocumentClassifier.html" title="interface in com.microblink.recognizers.blinkid.mrtd"><code>MRTDDocumentClassifier</code></a> that can be used for classification of the documents based
+ on the MRZ zone result. This method should be used if multiple MRTD document types are expected
+ and additional information (elements) of interest should be recognized. In addition, decoding
+ infos for each document type should be set with method <a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setParserDecodingInfos-com.microblink.detectors.DecodingInfo:A-java.lang.String-"><code>setParserDecodingInfos(DecodingInfo[], String)</code></a>
+ method. <b>For each document type, name of the decoding info set must be equal to corresponding classifier result.</b></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>documentClassifier</code> - Document classifier that will be used for document classification based on the MRZ results.
+                           Classifier result, for each document type, must be equal to the name of the corresponding
+                           decoding info set for that document type.</dd>
+</dl>
+</li>
+</ul>
+<a name="finalize--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>finalize</h4>
+<pre>protected&nbsp;void&nbsp;finalize()
+                 throws java.lang.Throwable</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../../com/microblink/recognizers/settings/RecognizerSettings.html#finalize--">finalize</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../com/microblink/recognizers/settings/RecognizerSettings.html" title="class in com.microblink.recognizers.settings">RecognizerSettings</a></code></dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.lang.Throwable</code></dd>
+</dl>
+</li>
+</ul>
 <a name="writeToParcel-android.os.Parcel-int-">
 <!--   -->
 </a>
@@ -413,6 +580,12 @@ extends <a href="../../../../../com/microblink/recognizers/settings/RecognizerSe
 <h4>writeToParcel</h4>
 <pre>public&nbsp;void&nbsp;writeToParcel(android.os.Parcel&nbsp;dest,
                           int&nbsp;flags)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code>writeToParcel</code>&nbsp;in interface&nbsp;<code>android.os.Parcelable</code></dd>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../../com/microblink/recognizers/templating/TemplatingRecognizerSettings.html#writeToParcel-android.os.Parcel-int-">writeToParcel</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../com/microblink/recognizers/templating/TemplatingRecognizerSettings.html" title="class in com.microblink.recognizers.templating">TemplatingRecognizerSettings</a></code></dd>
+</dl>
 </li>
 </ul>
 </li>

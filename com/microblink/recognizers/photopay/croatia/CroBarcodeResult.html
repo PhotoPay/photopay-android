@@ -125,7 +125,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <hr>
 <br>
-<pre>public class <span class="typeNameLabel">CroBarcodeResult</span>
+<pre>public abstract class <span class="typeNameLabel">CroBarcodeResult</span>
 extends <a href="../../../../../com/microblink/recognizers/photopay/AmountCurrencyResult.html" title="class in com.microblink.recognizers.photopay">AmountCurrencyResult</a></pre>
 <div class="block">Created by igor on 1/14/15.</div>
 </li>
@@ -403,7 +403,8 @@ extends <a href="../../../../../com/microblink/recognizers/photopay/AmountCurren
 <ul class="blockList">
 <li class="blockList">
 <h4>getRecipientName</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getRecipientName()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getRecipientName()</pre>
 <div class="block">Returns the name of the receiving side</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -417,7 +418,8 @@ extends <a href="../../../../../com/microblink/recognizers/photopay/AmountCurren
 <ul class="blockList">
 <li class="blockList">
 <h4>getRecipientAddress</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getRecipientAddress()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getRecipientAddress()</pre>
 <div class="block">Returns address of the payment receiver</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -431,7 +433,8 @@ extends <a href="../../../../../com/microblink/recognizers/photopay/AmountCurren
 <ul class="blockList">
 <li class="blockList">
 <h4>getRecipientDetailedAddress</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getRecipientDetailedAddress()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getRecipientDetailedAddress()</pre>
 <div class="block">Returns detailed address of the payment receiver; available only for HUB3 slips</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -445,7 +448,8 @@ extends <a href="../../../../../com/microblink/recognizers/photopay/AmountCurren
 <ul class="blockList">
 <li class="blockList">
 <h4>getBankCode</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getBankCode()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getBankCode()</pre>
 <div class="block">Returns bank code of the receiver bank (e.g. 2360000 for ZABA)</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -459,7 +463,8 @@ extends <a href="../../../../../com/microblink/recognizers/photopay/AmountCurren
 <ul class="blockList">
 <li class="blockList">
 <h4>getAccountNumber</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getAccountNumber()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getAccountNumber()</pre>
 <div class="block">Returns bank account number to which the payment goes</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -473,7 +478,8 @@ extends <a href="../../../../../com/microblink/recognizers/photopay/AmountCurren
 <ul class="blockList">
 <li class="blockList">
 <h4>getIBAN</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getIBAN()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getIBAN()</pre>
 <div class="block">Returns the international bank account number of the account to which the payment goes</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -487,7 +493,8 @@ extends <a href="../../../../../com/microblink/recognizers/photopay/AmountCurren
 <ul class="blockList">
 <li class="blockList">
 <h4>getPayerBankCode</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getPayerBankCode()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getPayerBankCode()</pre>
 <div class="block">Returns bank code of the payer bank  (e.g. 2360000 for ZABA) - available only in some HUB1 barcodes</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -501,7 +508,8 @@ extends <a href="../../../../../com/microblink/recognizers/photopay/AmountCurren
 <ul class="blockList">
 <li class="blockList">
 <h4>getPayerAccountNumber</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getPayerAccountNumber()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getPayerAccountNumber()</pre>
 <div class="block">Returns the account number of the payer (available only in some HUB1 barcodes)</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -515,7 +523,8 @@ extends <a href="../../../../../com/microblink/recognizers/photopay/AmountCurren
 <ul class="blockList">
 <li class="blockList">
 <h4>getPayerIBAN</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getPayerIBAN()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getPayerIBAN()</pre>
 <div class="block">Returns the international bank account number of the payer account (available only in some HUB1 barcodes)</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -529,7 +538,8 @@ extends <a href="../../../../../com/microblink/recognizers/photopay/AmountCurren
 <ul class="blockList">
 <li class="blockList">
 <h4>getReferenceNumber</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getReferenceNumber()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getReferenceNumber()</pre>
 <div class="block">Returns the reference of the payment</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -543,7 +553,8 @@ extends <a href="../../../../../com/microblink/recognizers/photopay/AmountCurren
 <ul class="blockList">
 <li class="blockList">
 <h4>getReferenceModel</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getReferenceModel()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getReferenceModel()</pre>
 <div class="block">Returns the reference model of the payment</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -557,7 +568,8 @@ extends <a href="../../../../../com/microblink/recognizers/photopay/AmountCurren
 <ul class="blockList">
 <li class="blockList">
 <h4>getPayerReferenceModel</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getPayerReferenceModel()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getPayerReferenceModel()</pre>
 <div class="block">Returns the payer reference model (available only on HUB1 barcodes)</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -571,7 +583,8 @@ extends <a href="../../../../../com/microblink/recognizers/photopay/AmountCurren
 <ul class="blockList">
 <li class="blockList">
 <h4>getPayerReferenceNumber</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getPayerReferenceNumber()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getPayerReferenceNumber()</pre>
 <div class="block">Returns the payer reference number (available only on HUB1 barcodes)</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -585,7 +598,8 @@ extends <a href="../../../../../com/microblink/recognizers/photopay/AmountCurren
 <ul class="blockList">
 <li class="blockList">
 <h4>getDueDate</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getDueDate()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getDueDate()</pre>
 <div class="block">Returns the due date for payment; available only for HUB3 slips</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -599,7 +613,8 @@ extends <a href="../../../../../com/microblink/recognizers/photopay/AmountCurren
 <ul class="blockList">
 <li class="blockList">
 <h4>getPaymentDescription</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getPaymentDescription()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getPaymentDescription()</pre>
 <div class="block">Returns description of the payment</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -613,7 +628,8 @@ extends <a href="../../../../../com/microblink/recognizers/photopay/AmountCurren
 <ul class="blockList">
 <li class="blockList">
 <h4>getPurposeCode</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getPurposeCode()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getPurposeCode()</pre>
 <div class="block">Returns string that represents the purpose code on HUB3</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -627,7 +643,8 @@ extends <a href="../../../../../com/microblink/recognizers/photopay/AmountCurren
 <ul class="blockList">
 <li class="blockList">
 <h4>getPaymentDescriptionCode</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getPaymentDescriptionCode()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getPaymentDescriptionCode()</pre>
 <div class="block">Returns string that represents the payment description code on HUB1</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -641,7 +658,8 @@ extends <a href="../../../../../com/microblink/recognizers/photopay/AmountCurren
 <ul class="blockList">
 <li class="blockList">
 <h4>getPayerName</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getPayerName()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getPayerName()</pre>
 <div class="block">Returns name of the payer</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -655,7 +673,8 @@ extends <a href="../../../../../com/microblink/recognizers/photopay/AmountCurren
 <ul class="blockList">
 <li class="blockList">
 <h4>getPayerAddress</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getPayerAddress()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getPayerAddress()</pre>
 <div class="block">Returns the address of the payer.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -669,7 +688,8 @@ extends <a href="../../../../../com/microblink/recognizers/photopay/AmountCurren
 <ul class="blockList">
 <li class="blockList">
 <h4>getPayerDetailedAddress</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getPayerDetailedAddress()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getPayerDetailedAddress()</pre>
 <div class="block">Returns detailed address of the payer; available only for HUB3 slips</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -683,7 +703,8 @@ extends <a href="../../../../../com/microblink/recognizers/photopay/AmountCurren
 <ul class="blockList">
 <li class="blockList">
 <h4>getOptionalData</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getOptionalData()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getOptionalData()</pre>
 <div class="block">Returns additional data available at the end of HUB3 QR and PDF417 barcode</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -697,7 +718,8 @@ extends <a href="../../../../../com/microblink/recognizers/photopay/AmountCurren
 <ul class="blockListLast">
 <li class="blockList">
 <h4>getSlipID</h4>
-<pre>public&nbsp;<a href="../../../../../com/microblink/recognizers/photopay/croatia/CroatianSlipId.html" title="enum in com.microblink.recognizers.photopay.croatia">CroatianSlipId</a>&nbsp;getSlipID()</pre>
+<pre>@Nullable
+public&nbsp;<a href="../../../../../com/microblink/recognizers/photopay/croatia/CroatianSlipId.html" title="enum in com.microblink.recognizers.photopay.croatia">CroatianSlipId</a>&nbsp;getSlipID()</pre>
 <div class="block">Returns slip ID (e.g HUB3_BARCODE)</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>

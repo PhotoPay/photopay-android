@@ -500,8 +500,9 @@ extends <a href="../../../../com/microblink/view/BaseCameraView.html" title="cla
 <ul class="blockList">
 <li class="blockList">
 <h4>RecognizerView</h4>
-<pre>public&nbsp;RecognizerView(android.content.Context&nbsp;context,
-                      android.util.AttributeSet&nbsp;attrSet)</pre>
+<pre>@UiThread
+public&nbsp;RecognizerView(android.content.Context&nbsp;context,
+                                android.util.AttributeSet&nbsp;attrSet)</pre>
 </li>
 </ul>
 <a name="RecognizerView-android.content.Context-">
@@ -510,7 +511,8 @@ extends <a href="../../../../com/microblink/view/BaseCameraView.html" title="cla
 <ul class="blockListLast">
 <li class="blockList">
 <h4>RecognizerView</h4>
-<pre>public&nbsp;RecognizerView(android.content.Context&nbsp;context)</pre>
+<pre>@UiThread
+public&nbsp;RecognizerView(android.content.Context&nbsp;context)</pre>
 </li>
 </ul>
 </li>
@@ -527,7 +529,8 @@ extends <a href="../../../../com/microblink/view/BaseCameraView.html" title="cla
 <ul class="blockList">
 <li class="blockList">
 <h4>create</h4>
-<pre>public&nbsp;void&nbsp;create()</pre>
+<pre>@UiThread
+public&nbsp;void&nbsp;create()</pre>
 <div class="block">This method must be called from activity's onCreate. If not called, recognition will not work.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
@@ -561,7 +564,8 @@ extends <a href="../../../../com/microblink/view/BaseCameraView.html" title="cla
 <ul class="blockList">
 <li class="blockList">
 <h4>start</h4>
-<pre>public final&nbsp;void&nbsp;start()</pre>
+<pre>@UiThread
+public final&nbsp;void&nbsp;start()</pre>
 <div class="block">This method must be called from activity's onStart. If not called, recognition will not work.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
@@ -575,7 +579,8 @@ extends <a href="../../../../com/microblink/view/BaseCameraView.html" title="cla
 <ul class="blockList">
 <li class="blockList">
 <h4>stop</h4>
-<pre>public final&nbsp;void&nbsp;stop()</pre>
+<pre>@UiThread
+public final&nbsp;void&nbsp;stop()</pre>
 <div class="block">This method must be called from activity's onStop. If not called, recognition will not work.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
@@ -589,7 +594,8 @@ extends <a href="../../../../com/microblink/view/BaseCameraView.html" title="cla
 <ul class="blockList">
 <li class="blockList">
 <h4>resume</h4>
-<pre>public final&nbsp;void&nbsp;resume()</pre>
+<pre>@UiThread
+public final&nbsp;void&nbsp;resume()</pre>
 <div class="block">This method must be called from activity's onResume. If not called, recognition will not work.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
@@ -603,7 +609,8 @@ extends <a href="../../../../com/microblink/view/BaseCameraView.html" title="cla
 <ul class="blockList">
 <li class="blockList">
 <h4>resumeScanning</h4>
-<pre>public final&nbsp;void&nbsp;resumeScanning(boolean&nbsp;resetState)</pre>
+<pre>@UiThread
+public final&nbsp;void&nbsp;resumeScanning(boolean&nbsp;resetState)</pre>
 <div class="block">This method resumes scanning loop that was paused by calling <a href="../../../../com/microblink/view/recognition/RecognizerView.html#pauseScanning--"><code>pauseScanning()</code></a>.
  If resetState is 'true', <a href="../../../../com/microblink/view/recognition/RecognizerView.html#resetRecognitionState--"><code>resetRecognitionState()</code></a> will be called.
  If resetState is 'false', recognition state will not be reset, so scanning after resume may use old scan data
@@ -624,7 +631,8 @@ extends <a href="../../../../com/microblink/view/BaseCameraView.html" title="cla
 <ul class="blockList">
 <li class="blockList">
 <h4>pauseScanning</h4>
-<pre>public final&nbsp;void&nbsp;pauseScanning()</pre>
+<pre>@UiThread
+public final&nbsp;void&nbsp;pauseScanning()</pre>
 <div class="block">Pauses the scanning loop. But keeps camera active.
  You can resume scanning by calling <a href="../../../../com/microblink/view/recognition/RecognizerView.html#resumeScanning-boolean-"><code>resumeScanning(boolean)</code></a>.
  <a href="../../../../com/microblink/view/recognition/RecognizerView.html#pauseScanning--"><code>pauseScanning()</code></a> and <a href="../../../../com/microblink/view/recognition/RecognizerView.html#resumeScanning-boolean-"><code>resumeScanning(boolean)</code></a> are counting calls. This means
@@ -638,7 +646,8 @@ extends <a href="../../../../com/microblink/view/BaseCameraView.html" title="cla
 <ul class="blockList">
 <li class="blockList">
 <h4>pause</h4>
-<pre>public final&nbsp;void&nbsp;pause()</pre>
+<pre>@UiThread
+public final&nbsp;void&nbsp;pause()</pre>
 <div class="block">This method must be called from activity's onPause. If not called, recognition will not work.
  This method pauses the camera.</div>
 <dl>
@@ -666,7 +675,8 @@ extends <a href="../../../../com/microblink/view/BaseCameraView.html" title="cla
 <ul class="blockList">
 <li class="blockList">
 <h4>destroy</h4>
-<pre>public final&nbsp;void&nbsp;destroy()</pre>
+<pre>@UiThread
+public final&nbsp;void&nbsp;destroy()</pre>
 <div class="block">This method must be called from activity's onDestroy. If not called, recognition will not work.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
@@ -706,7 +716,8 @@ extends <a href="../../../../com/microblink/view/BaseCameraView.html" title="cla
 <ul class="blockList">
 <li class="blockList">
 <h4>resetRecognitionState</h4>
-<pre>public final&nbsp;void&nbsp;resetRecognitionState()</pre>
+<pre>@UiThread
+public final&nbsp;void&nbsp;resetRecognitionState()</pre>
 <div class="block">Resets the recognizer state, i.e. deletes the cached data from multiple recognitions.</div>
 </li>
 </ul>
@@ -730,7 +741,8 @@ extends <a href="../../../../com/microblink/view/BaseCameraView.html" title="cla
 <ul class="blockList">
 <li class="blockList">
 <h4>reconfigureRecognizers</h4>
-<pre>public&nbsp;void&nbsp;reconfigureRecognizers(<a href="../../../../com/microblink/recognizers/settings/RecognitionSettings.html" title="class in com.microblink.recognizers.settings">RecognitionSettings</a>&nbsp;recognitionSettings)</pre>
+<pre>@UiThread
+public&nbsp;void&nbsp;reconfigureRecognizers(<a href="../../../../com/microblink/recognizers/settings/RecognitionSettings.html" title="class in com.microblink.recognizers.settings">RecognitionSettings</a>&nbsp;recognitionSettings)</pre>
 <div class="block">Use this method to reconfigure available recognizers.
  Unlike setRecognitionSettings, this method can be called when recognizers are active.</div>
 <dl>
@@ -794,8 +806,10 @@ extends <a href="../../../../com/microblink/view/BaseCameraView.html" title="cla
 <ul class="blockList">
 <li class="blockList">
 <h4>setLicenseKey</h4>
-<pre>public final&nbsp;void&nbsp;setLicenseKey(java.lang.String&nbsp;licenseKey)
-                         throws <a href="../../../../com/microblink/recognition/InvalidLicenceKeyException.html" title="class in com.microblink.recognition">InvalidLicenceKeyException</a></pre>
+<pre>@UiThread
+public final&nbsp;void&nbsp;setLicenseKey(@NonNull
+                                          java.lang.String&nbsp;licenseKey)
+                                   throws <a href="../../../../com/microblink/recognition/InvalidLicenceKeyException.html" title="class in com.microblink.recognition">InvalidLicenceKeyException</a></pre>
 <div class="block">Set license key and unlock the library. Application package will be used to validate license key.
  This method must be called before calling create to have effect.</div>
 <dl>
@@ -812,9 +826,11 @@ extends <a href="../../../../com/microblink/view/BaseCameraView.html" title="cla
 <ul class="blockList">
 <li class="blockList">
 <h4>setLicenseKey</h4>
-<pre>public final&nbsp;void&nbsp;setLicenseKey(java.lang.String&nbsp;licenseKey,
-                                java.lang.String&nbsp;licensee)
-                         throws <a href="../../../../com/microblink/recognition/InvalidLicenceKeyException.html" title="class in com.microblink.recognition">InvalidLicenceKeyException</a></pre>
+<pre>@UiThread
+public final&nbsp;void&nbsp;setLicenseKey(@NonNull
+                                          java.lang.String&nbsp;licenseKey,
+                                          java.lang.String&nbsp;licensee)
+                                   throws <a href="../../../../com/microblink/recognition/InvalidLicenceKeyException.html" title="class in com.microblink.recognition">InvalidLicenceKeyException</a></pre>
 <div class="block">Set license key and unlock the library. Also define licensee that will be used to validate license key.
  This method must be called before calling create to have effect.</div>
 <dl>
@@ -832,8 +848,9 @@ extends <a href="../../../../com/microblink/view/BaseCameraView.html" title="cla
 <ul class="blockList">
 <li class="blockList">
 <h4>setScanningRegion</h4>
-<pre>public final&nbsp;void&nbsp;setScanningRegion(<a href="../../../../com/microblink/geometry/Rectangle.html" title="class in com.microblink.geometry">Rectangle</a>&nbsp;scanningRegion,
-                                    boolean&nbsp;rotateRegionWithDevice)</pre>
+<pre>@UiThread
+public final&nbsp;void&nbsp;setScanningRegion(<a href="../../../../com/microblink/geometry/Rectangle.html" title="class in com.microblink.geometry">Rectangle</a>&nbsp;scanningRegion,
+                                              boolean&nbsp;rotateRegionWithDevice)</pre>
 <div class="block">Define scanning region as a rectangle. Also define whether scanning region will rotate when
  device orientation changes.
  <p/>
@@ -953,7 +970,8 @@ extends <a href="../../../../com/microblink/view/BaseCameraView.html" title="cla
 <ul class="blockList">
 <li class="blockList">
 <h4>setRecognitionSettings</h4>
-<pre>public&nbsp;void&nbsp;setRecognitionSettings(<a href="../../../../com/microblink/recognizers/settings/RecognitionSettings.html" title="class in com.microblink.recognizers.settings">RecognitionSettings</a>&nbsp;recognitionSettings)</pre>
+<pre>@UiThread
+public&nbsp;void&nbsp;setRecognitionSettings(<a href="../../../../com/microblink/recognizers/settings/RecognitionSettings.html" title="class in com.microblink.recognizers.settings">RecognitionSettings</a>&nbsp;recognitionSettings)</pre>
 <div class="block">Sets the generic settings that affect all recognizers and whole recognition process.
  This method must be called before calling create to have effect.</div>
 <dl>
@@ -968,7 +986,9 @@ extends <a href="../../../../com/microblink/view/BaseCameraView.html" title="cla
 <ul class="blockList">
 <li class="blockList">
 <h4>setScanResultListener</h4>
-<pre>public&nbsp;void&nbsp;setScanResultListener(<a href="../../../../com/microblink/view/recognition/ScanResultListener.html" title="interface in com.microblink.view.recognition">ScanResultListener</a>&nbsp;scanResultListener)</pre>
+<pre>@UiThread
+public&nbsp;void&nbsp;setScanResultListener(@NonNull
+                                            <a href="../../../../com/microblink/view/recognition/ScanResultListener.html" title="interface in com.microblink.view.recognition">ScanResultListener</a>&nbsp;scanResultListener)</pre>
 <div class="block">Sets the listener that will obtain the results of the scanning. If you do not set this listener,
  scanner will not be able to work. This method must be called before calling create to have effect.</div>
 <dl>
@@ -983,8 +1003,9 @@ extends <a href="../../../../com/microblink/view/BaseCameraView.html" title="cla
 <ul class="blockList">
 <li class="blockList">
 <h4>setMetadataListener</h4>
-<pre>public&nbsp;void&nbsp;setMetadataListener(<a href="../../../../com/microblink/metadata/MetadataListener.html" title="interface in com.microblink.metadata">MetadataListener</a>&nbsp;metadataListener,
-                                <a href="../../../../com/microblink/metadata/MetadataSettings.html" title="class in com.microblink.metadata">MetadataSettings</a>&nbsp;metadataSettings)</pre>
+<pre>@UiThread
+public&nbsp;void&nbsp;setMetadataListener(<a href="../../../../com/microblink/metadata/MetadataListener.html" title="interface in com.microblink.metadata">MetadataListener</a>&nbsp;metadataListener,
+                                          <a href="../../../../com/microblink/metadata/MetadataSettings.html" title="class in com.microblink.metadata">MetadataSettings</a>&nbsp;metadataSettings)</pre>
 <div class="block">Sets the listener that will obtain metadata that is being processed.
  This method must be called before calling create to have effect.</div>
 <dl>
@@ -1013,7 +1034,8 @@ extends <a href="../../../../com/microblink/view/BaseCameraView.html" title="cla
 <ul class="blockListLast">
 <li class="blockList">
 <h4>setInitialScanningPaused</h4>
-<pre>public&nbsp;void&nbsp;setInitialScanningPaused(boolean&nbsp;initialScanningPaused)</pre>
+<pre>@UiThread
+public&nbsp;void&nbsp;setInitialScanningPaused(boolean&nbsp;initialScanningPaused)</pre>
 <div class="block">If you want to prevent automatic scan resuming immediately after camera starts, set this to true.
  An example use case is if you want to show some onboarding help in your scan activity as soon as camera
  starts, but you do not want to immediately start scanning. If setting this to true, after camera starts,

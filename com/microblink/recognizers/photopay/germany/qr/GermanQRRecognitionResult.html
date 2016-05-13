@@ -433,7 +433,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getPaymentDescription</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getPaymentDescription()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getPaymentDescription()</pre>
 <div class="block">Returns description of the payment; available if reference number is empty</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -447,7 +448,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getRecipientName</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getRecipientName()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getRecipientName()</pre>
 <div class="block">Returns the name of the receiving side</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -461,7 +463,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getPaymentReference</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getPaymentReference()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getPaymentReference()</pre>
 <div class="block">Returns the reference of the payment</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -475,7 +478,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getAccountNumber</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getAccountNumber()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getAccountNumber()</pre>
 <div class="block">Returns bank account number to which the payment goes</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -489,7 +493,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getBLZ</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getBLZ()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getBLZ()</pre>
 <div class="block">Returns bank code (BLZ) of the receiver bank (e.g. 0034000)</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -503,7 +508,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getBIC</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getBIC()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getBIC()</pre>
 <div class="block">Returns Bank Identifier Code of the bank to which the payment goes</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -517,7 +523,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getIBAN</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getIBAN()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getIBAN()</pre>
 <div class="block">Returns the international bank account number of the account to which the payment goes</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -531,7 +538,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getPurposeCode</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getPurposeCode()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getPurposeCode()</pre>
 <div class="block">Returns string that represents the purpose code</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -545,7 +553,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getRemittanceInformation</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getRemittanceInformation()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getRemittanceInformation()</pre>
 <div class="block">Returns the Remittance information, as agreed between the Originator and the Beneficiary</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -559,7 +568,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getIdentificationCode</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getIdentificationCode()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getIdentificationCode()</pre>
 <div class="block">Returns the QR identification code, if exists.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -573,7 +583,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getVersion</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getVersion()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getVersion()</pre>
 <div class="block">Returns the version of the SEPA QR code standard, if exists.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -587,7 +598,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getServiceTag</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getServiceTag()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getServiceTag()</pre>
 <div class="block">Returns the service tag of the SEPA QR code standard, if exists.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -601,7 +613,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getPostingKey</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getPostingKey()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getPostingKey()</pre>
 <div class="block">Returns the posting key (if exists).</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -615,7 +628,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getAuthority</h4>
-<pre>public&nbsp;<a href="../../../../../../com/microblink/recognizers/photopay/germany/qr/AuthorityType.html" title="enum in com.microblink.recognizers.photopay.germany.qr">AuthorityType</a>&nbsp;getAuthority()</pre>
+<pre>@Nullable
+public&nbsp;<a href="../../../../../../com/microblink/recognizers/photopay/germany/qr/AuthorityType.html" title="enum in com.microblink.recognizers.photopay.germany.qr">AuthorityType</a>&nbsp;getAuthority()</pre>
 <div class="block">Returns the authority type (see <a href="http://www.bezahlcode.de/wp-content/uploads/BezahlCode_TechDok.pdf">BezahlCode_TechDok</a> for more information)</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -629,7 +643,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getExecutionDate</h4>
-<pre>public&nbsp;java.util.Date&nbsp;getExecutionDate()</pre>
+<pre>@Nullable
+public&nbsp;java.util.Date&nbsp;getExecutionDate()</pre>
 <div class="block">Returns the date when payment should be executed.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -643,7 +658,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getCreditorId</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getCreditorId()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getCreditorId()</pre>
 <div class="block">Returns the ID of the creditor. Available only if authority type is SINGLE_DIRECT_DEBIT_SEPA.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -657,7 +673,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getMandateId</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getMandateId()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getMandateId()</pre>
 <div class="block">Returns the ID of the mandate. Available only if authority type is SINGLE_DIRECT_DEBIT_SEPA.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -671,7 +688,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getDateOfSignature</h4>
-<pre>public&nbsp;java.util.Date&nbsp;getDateOfSignature()</pre>
+<pre>@Nullable
+public&nbsp;java.util.Date&nbsp;getDateOfSignature()</pre>
 <div class="block">Returns the date of the direct debit signature. Available only if authority type is SINGLE_DIRECT_DEBIT_SEPA.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -685,7 +703,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getPeriodicTimeUnit</h4>
-<pre>public&nbsp;<a href="../../../../../../com/microblink/recognizers/photopay/germany/qr/PeriodicTimeUnit.html" title="enum in com.microblink.recognizers.photopay.germany.qr">PeriodicTimeUnit</a>&nbsp;getPeriodicTimeUnit()</pre>
+<pre>@Nullable
+public&nbsp;<a href="../../../../../../com/microblink/recognizers/photopay/germany/qr/PeriodicTimeUnit.html" title="enum in com.microblink.recognizers.photopay.germany.qr">PeriodicTimeUnit</a>&nbsp;getPeriodicTimeUnit()</pre>
 <div class="block">Returns the periodic time unit for periodic payments. Available only if authority type is PERIODIC_SINGLE_PAYMENT or PERIODIC_SINGLE_PAYMENT_SEPA.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -713,7 +732,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getPeriodicFirstExecutionDate</h4>
-<pre>public&nbsp;java.util.Date&nbsp;getPeriodicFirstExecutionDate()</pre>
+<pre>@Nullable
+public&nbsp;java.util.Date&nbsp;getPeriodicFirstExecutionDate()</pre>
 <div class="block">Returns the first execution date for periodic payments. Available only if authority type is PERIODIC_SINGLE_PAYMENT or PERIODIC_SINGLE_PAYMENT_SEPA.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -727,7 +747,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getPeriodicLastExecutionDate</h4>
-<pre>public&nbsp;java.util.Date&nbsp;getPeriodicLastExecutionDate()</pre>
+<pre>@Nullable
+public&nbsp;java.util.Date&nbsp;getPeriodicLastExecutionDate()</pre>
 <div class="block">Returns the last execution date for periodic payments. Available only if authority type is PERIODIC_SINGLE_PAYMENT or PERIODIC_SINGLE_PAYMENT_SEPA.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -741,7 +762,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockListLast">
 <li class="blockList">
 <h4>getRawQRData</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getRawQRData()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getRawQRData()</pre>
 <div class="block">Returns the raw, unparsed string embedded in QR code.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>

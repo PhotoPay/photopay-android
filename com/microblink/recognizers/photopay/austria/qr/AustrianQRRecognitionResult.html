@@ -123,7 +123,7 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">AustrianQRRecognitionResult</span>
 extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCurrencyResult.html" title="class in com.microblink.recognizers.photopay">AmountCurrencyResult</a></pre>
-<div class="block">Created by dodo on 11/11/14.</div>
+<div class="block">Result of scanning Austrian STUZZA payment QR code.</div>
 </li>
 </ul>
 </div>
@@ -337,7 +337,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getReferenceNumber</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getReferenceNumber()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getReferenceNumber()</pre>
 <div class="block">Returns the reference of the payment</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -351,7 +352,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getIBAN</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getIBAN()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getIBAN()</pre>
 <div class="block">Returns the international bank account number of the account to which the payment goes</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -365,7 +367,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getRecipientName</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getRecipientName()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getRecipientName()</pre>
 <div class="block">Returns the name of the receiving side</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -379,7 +382,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getPurposeCode</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getPurposeCode()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getPurposeCode()</pre>
 <div class="block">Returns string that represents the purpose code (Geschäftscode)</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -393,7 +397,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getDisplayData</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getDisplayData()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getDisplayData()</pre>
 <div class="block">Returns description of the payment as placed in last row of STUZZA QR code</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -407,7 +412,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getPaymentDescription</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getPaymentDescription()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getPaymentDescription()</pre>
 <div class="block">Returns description of the payment; available if reference number is empty</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -421,7 +427,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockListLast">
 <li class="blockList">
 <h4>getBIC</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getBIC()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getBIC()</pre>
 <div class="block">Returns Bank Identifier Code of the bank to which the payment goes</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>

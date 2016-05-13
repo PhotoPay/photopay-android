@@ -386,7 +386,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getBankCode</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getBankCode()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getBankCode()</pre>
 <div class="block">Returns bank code of the receiver bank (e.g. 2360000 for ZABA)</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -400,7 +401,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getPayerBankCode</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getPayerBankCode()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getPayerBankCode()</pre>
 <div class="block">Returns bank code of the payer bank (e.g. 2360000 for ZABA); available only if readPayerName enabled</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -414,7 +416,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getAccountNumber</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getAccountNumber()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getAccountNumber()</pre>
 <div class="block">Returns bank account number to which the payment goes</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -428,7 +431,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getPayerAccountNumber</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getPayerAccountNumber()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getPayerAccountNumber()</pre>
 <div class="block">Returns bank account number of the payer; available only if readPayerName enabled</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -442,7 +446,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getIBAN</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getIBAN()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getIBAN()</pre>
 <div class="block">Returns the international bank account number of the account to which the payment goes</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -456,7 +461,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getPayerIBAN</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getPayerIBAN()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getPayerIBAN()</pre>
 <div class="block">Returns the international bank account number of the account of the payer; available only if readPayerName enabled</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -470,7 +476,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getReferenceNumber</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getReferenceNumber()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getReferenceNumber()</pre>
 <div class="block">Returns the reference of the payment</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -484,7 +491,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getPayerReferenceNumber</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getPayerReferenceNumber()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getPayerReferenceNumber()</pre>
 <div class="block">Returns the reference of the payer; available only if readPayerName enabled</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -498,7 +506,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getReferenceModel</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getReferenceModel()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getReferenceModel()</pre>
 <div class="block">Returns the reference model of the payment</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -512,7 +521,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getPayerReferenceModel</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getPayerReferenceModel()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getPayerReferenceModel()</pre>
 <div class="block">Returns the reference model of the payer; available only if readPayerName enabled</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -526,7 +536,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getPaymentDescription</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getPaymentDescription()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getPaymentDescription()</pre>
 <div class="block">Returns description of the payment; available only for HUB3 slips if readPaymentDescription enabled</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -540,7 +551,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getPurposeCode</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getPurposeCode()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getPurposeCode()</pre>
 <div class="block">Returns string that represents the purpose code on HUB3</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -554,7 +566,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getPaymentDescriptionCode</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getPaymentDescriptionCode()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getPaymentDescriptionCode()</pre>
 <div class="block">Returns string that represents the payment description code on HUB1</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -568,7 +581,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockList">
 <li class="blockList">
 <h4>getPayerName</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getPayerName()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getPayerName()</pre>
 <div class="block">Returns name of the payer; available only if readPayerName enabled</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -582,7 +596,8 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <ul class="blockListLast">
 <li class="blockList">
 <h4>getSlipID</h4>
-<pre>public&nbsp;<a href="../../../../../../com/microblink/recognizers/photopay/croatia/CroatianSlipId.html" title="enum in com.microblink.recognizers.photopay.croatia">CroatianSlipId</a>&nbsp;getSlipID()</pre>
+<pre>@Nullable
+public&nbsp;<a href="../../../../../../com/microblink/recognizers/photopay/croatia/CroatianSlipId.html" title="enum in com.microblink.recognizers.photopay.croatia">CroatianSlipId</a>&nbsp;getSlipID()</pre>
 <div class="block">Returns slip ID (e.g HUB3_LEFT)</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>

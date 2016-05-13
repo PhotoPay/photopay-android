@@ -1,5 +1,27 @@
 # Release notes
 
+## 5.7.0
+- Added option to set the OCR document type in BlinkOCREngineOptions
+- Introduced new setting options for generic AmountParser:
+    - set parser to Arabic-Indic mode (amounts with Arabic-Indic digits)
+    - allow amounts with space separated digit groups (thousands)
+    - set ideal (expected) number of digits before decimal point
+- Added factory method `createFromPreset` to generic AmountParserSettings that creates the settings from one of the available presets (`GENERIC`, `LARGE_AMOUNT`) 
+- added support for DetectorRecognizer - a recognizer which can perform detection of various documents
+	- see `PhotoPayDetectorDemo` app for example on how detectors can be used
+- initial support for Slovak PAY by square QR codes
+- initial support for Czech payment QR codes
+- default scan activity for Dutch OCR line has been replaced with `ScanFovWithInfo` activity
+- Dutch payment slip recognizer now supports scanning of recipient name
+- updated `BlinkOCRActivity`, through `ScanConfiguration` it is now possible to make some scan field optional (user can skip it) and set the field size
+- fixed IBAN extraction on slovenian payslips containing barcode in IBAN field
+- added parser for Czech account number
+- added support for scanning front and back side of Croatian ID cards
+- added support for scanning Austrian payslips that do not have form ID printed (SEPA format is assumed)
+- austrian reference parser now supports alphanumeric payment references
+- IBAN parser now accepts whitelist of allowed countries
+- Date parser can now be configured with allowed date formats
+
 ## 5.6.0
 - FailedDetectionMetadata, PointsDetectionMetadata and QuadDetectionMetadata have been replaced with DetectionMetadata which now holds a DetectorResult
     - DetectorResult is more flexible as it allows more different detection types to be added in future

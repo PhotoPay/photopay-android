@@ -127,7 +127,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd>android.content.ComponentCallbacks, android.content.ComponentCallbacks2, android.view.KeyEvent.Callback, android.view.LayoutInflater.Factory, android.view.LayoutInflater.Factory2, android.view.View.OnCreateContextMenuListener, android.view.Window.Callback, <a href="../../../com/microblink/metadata/MetadataListener.html" title="interface in com.microblink.metadata">MetadataListener</a>, <a href="../../../com/microblink/view/CameraEventsListener.html" title="interface in com.microblink.view">CameraEventsListener</a>, <a href="../../../com/microblink/view/OnActivityFlipListener.html" title="interface in com.microblink.view">OnActivityFlipListener</a>, <a href="../../../com/microblink/view/OnSizeChangedListener.html" title="interface in com.microblink.view">OnSizeChangedListener</a>, <a href="../../../com/microblink/view/OrientationAllowedListener.html" title="interface in com.microblink.view">OrientationAllowedListener</a>, <a href="../../../com/microblink/view/recognition/ScanResultListener.html" title="interface in com.microblink.view.recognition">ScanResultListener</a></dd>
+<dd>android.content.ComponentCallbacks, android.content.ComponentCallbacks2, android.view.KeyEvent.Callback, android.view.LayoutInflater.Factory, android.view.LayoutInflater.Factory2, android.view.View.OnCreateContextMenuListener, android.view.Window.Callback, <a href="../../../com/microblink/hardware/camera/AutofocusListener.html" title="interface in com.microblink.hardware.camera">AutofocusListener</a>, <a href="../../../com/microblink/metadata/MetadataListener.html" title="interface in com.microblink.metadata">MetadataListener</a>, <a href="../../../com/microblink/view/CameraEventsListener.html" title="interface in com.microblink.view">CameraEventsListener</a>, <a href="../../../com/microblink/view/OnActivityFlipListener.html" title="interface in com.microblink.view">OnActivityFlipListener</a>, <a href="../../../com/microblink/view/OnSizeChangedListener.html" title="interface in com.microblink.view">OnSizeChangedListener</a>, <a href="../../../com/microblink/view/OrientationAllowedListener.html" title="interface in com.microblink.view">OrientationAllowedListener</a>, <a href="../../../com/microblink/view/recognition/ScanResultListener.html" title="interface in com.microblink.view.recognition">ScanResultListener</a></dd>
 </dl>
 <dl>
 <dt>Direct Known Subclasses:</dt>
@@ -463,15 +463,21 @@ implements <a href="../../../com/microblink/metadata/MetadataListener.html" titl
 </tr>
 <tr id="i14" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/activity/BaseScanActivity.html#onAutofocusFailed--">onAutofocusFailed</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/activity/BaseScanActivity.html#onAutofocusFailed--">onAutofocusFailed</a></span>()</code>
+<div class="block">This method will be called when camera focusing has failed.</div>
+</td>
 </tr>
 <tr id="i15" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/activity/BaseScanActivity.html#onAutofocusStarted-android.graphics.Rect:A-">onAutofocusStarted</a></span>(android.graphics.Rect[]&nbsp;areas)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/activity/BaseScanActivity.html#onAutofocusStarted-android.graphics.Rect:A-">onAutofocusStarted</a></span>(android.graphics.Rect[]&nbsp;areas)</code>
+<div class="block">This method will be called when camera focusing has started.</div>
+</td>
 </tr>
 <tr id="i16" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/activity/BaseScanActivity.html#onAutofocusStopped-android.graphics.Rect:A-">onAutofocusStopped</a></span>(android.graphics.Rect[]&nbsp;areas)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/activity/BaseScanActivity.html#onAutofocusStopped-android.graphics.Rect:A-">onAutofocusStopped</a></span>(android.graphics.Rect[]&nbsp;areas)</code>
+<div class="block">This method will be called when camera focusing has stopped.</div>
+</td>
 </tr>
 <tr id="i17" class="rowColor">
 <td class="colFirst"><code>void</code></td>
@@ -1343,6 +1349,16 @@ implements <a href="../../../com/microblink/metadata/MetadataListener.html" titl
 <li class="blockList">
 <h4>onAutofocusFailed</h4>
 <pre>public&nbsp;void&nbsp;onAutofocusFailed()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../com/microblink/hardware/camera/AutofocusListener.html#onAutofocusFailed--">AutofocusListener</a></code></span></div>
+<div class="block">This method will be called when camera focusing has failed.
+ Camera manager usually tries different focusing strategies
+ and this method is called when all those strategies fail to
+ indicate that either object on which camera is being focused
+ is too close or ambient light conditions are poor.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../com/microblink/hardware/camera/AutofocusListener.html#onAutofocusFailed--">onAutofocusFailed</a></code>&nbsp;in interface&nbsp;<code><a href="../../../com/microblink/hardware/camera/AutofocusListener.html" title="interface in com.microblink.hardware.camera">AutofocusListener</a></code></dd>
+</dl>
 </li>
 </ul>
 <a name="onAutofocusStopped-android.graphics.Rect:A-">
@@ -1352,6 +1368,15 @@ implements <a href="../../../com/microblink/metadata/MetadataListener.html" titl
 <li class="blockList">
 <h4>onAutofocusStopped</h4>
 <pre>public&nbsp;void&nbsp;onAutofocusStopped(android.graphics.Rect[]&nbsp;areas)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../com/microblink/hardware/camera/AutofocusListener.html#onAutofocusStopped-android.graphics.Rect:A-">AutofocusListener</a></code></span></div>
+<div class="block">This method will be called when camera focusing has stopped.
+ You can utilize this method to remove focusing animation from UI.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../com/microblink/hardware/camera/AutofocusListener.html#onAutofocusStopped-android.graphics.Rect:A-">onAutofocusStopped</a></code>&nbsp;in interface&nbsp;<code><a href="../../../com/microblink/hardware/camera/AutofocusListener.html" title="interface in com.microblink.hardware.camera">AutofocusListener</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>areas</code> - Areas where focus is being measured. Null on devices that do not support fine-grained camera control</dd>
+</dl>
 </li>
 </ul>
 <a name="onAutofocusStarted-android.graphics.Rect:A-">
@@ -1361,6 +1386,15 @@ implements <a href="../../../com/microblink/metadata/MetadataListener.html" titl
 <li class="blockList">
 <h4>onAutofocusStarted</h4>
 <pre>public&nbsp;void&nbsp;onAutofocusStarted(android.graphics.Rect[]&nbsp;areas)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../com/microblink/hardware/camera/AutofocusListener.html#onAutofocusStarted-android.graphics.Rect:A-">AutofocusListener</a></code></span></div>
+<div class="block">This method will be called when camera focusing has started.
+ You can utilize this method to draw focusing animation on UI.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../com/microblink/hardware/camera/AutofocusListener.html#onAutofocusStarted-android.graphics.Rect:A-">onAutofocusStarted</a></code>&nbsp;in interface&nbsp;<code><a href="../../../com/microblink/hardware/camera/AutofocusListener.html" title="interface in com.microblink.hardware.camera">AutofocusListener</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>areas</code> - Areas where focus is being measured. Null on devices that do not support fine-grained camera control</dd>
+</dl>
 </li>
 </ul>
 <a name="onCameraPermissionDenied--">

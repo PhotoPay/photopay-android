@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -47,7 +47,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li>Prev&nbsp;Class</li>
+<li><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDDocumentClassifier.html" title="interface in com.microblink.recognizers.blinkid.mrtd"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html" title="class in com.microblink.recognizers.blinkid.mrtd"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -101,7 +101,12 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../../com/microblink/recognizers/BaseRecognitionResult.html" title="class in com.microblink.recognizers">com.microblink.recognizers.BaseRecognitionResult</a></li>
 <li>
 <ul class="inheritance">
+<li><a href="../../../../../com/microblink/recognizers/templating/TemplatingRecognitionResult.html" title="class in com.microblink.recognizers.templating">com.microblink.recognizers.templating.TemplatingRecognitionResult</a></li>
+<li>
+<ul class="inheritance">
 <li>com.microblink.recognizers.blinkid.mrtd.MRTDRecognitionResult</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -114,10 +119,14 @@ var activeTableTab = "activeTableTab";
 <dt>All Implemented Interfaces:</dt>
 <dd>android.os.Parcelable</dd>
 </dl>
+<dl>
+<dt>Direct Known Subclasses:</dt>
+<dd><a href="../../../../../com/microblink/recognizers/blinkid/croatia/back/CroatianIDBackSideRecognitionResult.html" title="class in com.microblink.recognizers.blinkid.croatia.back">CroatianIDBackSideRecognitionResult</a></dd>
+</dl>
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">MRTDRecognitionResult</span>
-extends <a href="../../../../../com/microblink/recognizers/BaseRecognitionResult.html" title="class in com.microblink.recognizers">BaseRecognitionResult</a></pre>
+extends <a href="../../../../../com/microblink/recognizers/templating/TemplatingRecognitionResult.html" title="class in com.microblink.recognizers.templating">TemplatingRecognitionResult</a></pre>
 <div class="block">Created by igor on 12/19/14.</div>
 </li>
 </ul>
@@ -175,12 +184,18 @@ extends <a href="../../../../../com/microblink/recognizers/BaseRecognitionResult
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
 <caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colOne" scope="col">Constructor and Description</th>
+<th class="colFirst" scope="col">Modifier</th>
+<th class="colLast" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#MRTDRecognitionResult-long-boolean-boolean-">MRTDRecognitionResult</a></span>(long&nbsp;data,
+<td class="colFirst"><code>&nbsp;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#MRTDRecognitionResult-long-boolean-boolean-">MRTDRecognitionResult</a></span>(long&nbsp;data,
                      boolean&nbsp;empty,
                      boolean&nbsp;valid)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected </code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#MRTDRecognitionResult-android.os.Parcel-">MRTDRecognitionResult</a></span>(android.os.Parcel&nbsp;in)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -211,81 +226,95 @@ extends <a href="../../../../../com/microblink/recognizers/BaseRecognitionResult
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getDocumentClassificationResult--">getDocumentClassificationResult</a></span>()</code>
+<div class="block">Returns result of document classification, as calculated by <a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDDocumentClassifier.html" title="interface in com.microblink.recognizers.blinkid.mrtd"><code>MRTDDocumentClassifier</code></a> set
+ with <a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setDocumentClassifier-com.microblink.recognizers.blinkid.mrtd.MRTDDocumentClassifier-"><code>MRTDRecognizerSettings.setDocumentClassifier(MRTDDocumentClassifier)</code></a>.</div>
+</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getDocumentCode--">getDocumentCode</a></span>()</code>
 <div class="block">Returns document code.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getDocumentNumber--">getDocumentNumber</a></span>()</code>
 <div class="block">Returns document number.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getIssuer--">getIssuer</a></span>()</code>
 <div class="block">Returns three-letter or two-letter code which indicate the issuing State.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getMRZText--">getMRZText</a></span>()</code>
 <div class="block">Returns the entire Machine Readable Zone text from ID.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getNationality--">getNationality</a></span>()</code>
 <div class="block">Returns nationality of the holder represented by a three-letter or two-letter code.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../../../com/microblink/results/ocr/OcrResult.html" title="class in com.microblink.results.ocr">OcrResult</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getOcrResult--">getOcrResult</a></span>()</code>
 <div class="block">Returns the raw OCR result that was used for parsing data.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getOpt1--">getOpt1</a></span>()</code>
 <div class="block">Returns first optional data.</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getOpt2--">getOpt2</a></span>()</code>
 <div class="block">Returns second optional data.</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getPrimaryId--">getPrimaryId</a></span>()</code>
 <div class="block">Returns the primary indentifier.</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getSecondaryId--">getSecondaryId</a></span>()</code>
 <div class="block">Returns the secondary identifier.</div>
 </td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getSex--">getSex</a></span>()</code>
 <div class="block">Returns sex of the card holder.</div>
 </td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getTitle--">getTitle</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#isMRZParsed--">isMRZParsed</a></span>()</code>
 <div class="block">Returns true if Machine Readable Zone has been parsed, false otherwise.</div>
 </td>
 </tr>
 </table>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.com.microblink.recognizers.templating.TemplatingRecognitionResult">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;com.microblink.recognizers.templating.<a href="../../../../../com/microblink/recognizers/templating/TemplatingRecognitionResult.html" title="class in com.microblink.recognizers.templating">TemplatingRecognitionResult</a></h3>
+<code><a href="../../../../../com/microblink/recognizers/templating/TemplatingRecognitionResult.html#getOcrResult-java.lang.String-">getOcrResult</a>, <a href="../../../../../com/microblink/recognizers/templating/TemplatingRecognitionResult.html#getParsedResult-java.lang.String-">getParsedResult</a>, <a href="../../../../../com/microblink/recognizers/templating/TemplatingRecognitionResult.html#getParsedResult-java.lang.String-java.lang.String-">getParsedResult</a></code></li>
+</ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.com.microblink.recognizers.BaseRecognitionResult">
 <!--   -->
@@ -334,12 +363,21 @@ extends <a href="../../../../../com/microblink/recognizers/BaseRecognitionResult
 <a name="MRTDRecognitionResult-long-boolean-boolean-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>MRTDRecognitionResult</h4>
 <pre>public&nbsp;MRTDRecognitionResult(long&nbsp;data,
                              boolean&nbsp;empty,
                              boolean&nbsp;valid)</pre>
+</li>
+</ul>
+<a name="MRTDRecognitionResult-android.os.Parcel-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>MRTDRecognitionResult</h4>
+<pre>protected&nbsp;MRTDRecognitionResult(android.os.Parcel&nbsp;in)</pre>
 </li>
 </ul>
 </li>
@@ -356,7 +394,8 @@ extends <a href="../../../../../com/microblink/recognizers/BaseRecognitionResult
 <ul class="blockList">
 <li class="blockList">
 <h4>getPrimaryId</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getPrimaryId()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getPrimaryId()</pre>
 <div class="block">Returns the primary indentifier. If there is more than one component, they are separated with space.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -370,7 +409,8 @@ extends <a href="../../../../../com/microblink/recognizers/BaseRecognitionResult
 <ul class="blockList">
 <li class="blockList">
 <h4>getSecondaryId</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getSecondaryId()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getSecondaryId()</pre>
 <div class="block">Returns the secondary identifier. If there is more than one component, they are separated with space.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -384,7 +424,8 @@ extends <a href="../../../../../com/microblink/recognizers/BaseRecognitionResult
 <ul class="blockList">
 <li class="blockList">
 <h4>getIssuer</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getIssuer()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getIssuer()</pre>
 <div class="block">Returns three-letter or two-letter code which indicate the issuing State. Three-letter codes are based
  on Aplha-3 codes for entities specified in ISO 3166-1, with extensions for certain States. Two-letter
  codes are based on Aplha-2 codes for entities specified in ISO 3166-1, with extensions for certain States.</div>
@@ -400,7 +441,8 @@ extends <a href="../../../../../com/microblink/recognizers/BaseRecognitionResult
 <ul class="blockList">
 <li class="blockList">
 <h4>getDateOfBirth</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getDateOfBirth()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getDateOfBirth()</pre>
 <div class="block">Returns holder's date of birth in format <code>YYMMDD</code>.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -414,7 +456,8 @@ extends <a href="../../../../../com/microblink/recognizers/BaseRecognitionResult
 <ul class="blockList">
 <li class="blockList">
 <h4>getDocumentNumber</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getDocumentNumber()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getDocumentNumber()</pre>
 <div class="block">Returns document number. Document number contains up to 9 characters.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -428,7 +471,8 @@ extends <a href="../../../../../com/microblink/recognizers/BaseRecognitionResult
 <ul class="blockList">
 <li class="blockList">
 <h4>getNationality</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getNationality()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getNationality()</pre>
 <div class="block">Returns nationality of the holder represented by a three-letter or two-letter code. Three-letter
  codes are based on Alpha-3 codes for entities specified in ISO 3166-1, with extensions for certain
  States. Two-letter codes are based on Aplha-2 codes for entities specified in ISO 3166-1, with
@@ -445,7 +489,8 @@ extends <a href="../../../../../com/microblink/recognizers/BaseRecognitionResult
 <ul class="blockList">
 <li class="blockList">
 <h4>getSex</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getSex()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getSex()</pre>
 <div class="block">Returns sex of the card holder. Sex is specified by use of the single initial, capital letter F for female,
  M for male or <code>&lt;</code> for unspecified.</div>
 <dl>
@@ -460,7 +505,8 @@ extends <a href="../../../../../com/microblink/recognizers/BaseRecognitionResult
 <ul class="blockList">
 <li class="blockList">
 <h4>getDocumentCode</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getDocumentCode()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getDocumentCode()</pre>
 <div class="block">Returns document code. Document code contains two characters. For MRTD the first character shall
  be A, C or I. The second character shall be discretion of the issuing State or organization except
  that V shall not be used, and `C` shall not be used after `A` except in the crew member certificate.
@@ -480,7 +526,8 @@ extends <a href="../../../../../com/microblink/recognizers/BaseRecognitionResult
 <ul class="blockList">
 <li class="blockList">
 <h4>getDateOfExpiry</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getDateOfExpiry()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getDateOfExpiry()</pre>
 <div class="block">Returns date of expiry of the document in format <code>YYMMDD</code>.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -494,7 +541,8 @@ extends <a href="../../../../../com/microblink/recognizers/BaseRecognitionResult
 <ul class="blockList">
 <li class="blockList">
 <h4>getOpt1</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getOpt1()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getOpt1()</pre>
 <div class="block">Returns first optional data. Returns <code>null</code> or empty string if not available.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -508,7 +556,8 @@ extends <a href="../../../../../com/microblink/recognizers/BaseRecognitionResult
 <ul class="blockList">
 <li class="blockList">
 <h4>getOpt2</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getOpt2()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getOpt2()</pre>
 <div class="block">Returns second optional data. Returns <code>null</code> or empty string if not available.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -522,7 +571,8 @@ extends <a href="../../../../../com/microblink/recognizers/BaseRecognitionResult
 <ul class="blockList">
 <li class="blockList">
 <h4>getMRZText</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getMRZText()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getMRZText()</pre>
 <div class="block">Returns the entire Machine Readable Zone text from ID. This text is usually used for parsing
  other elements.
  NOTE: This string is available only if OCR result was parsed successfully. If you are just
@@ -540,10 +590,13 @@ extends <a href="../../../../../com/microblink/recognizers/BaseRecognitionResult
 <ul class="blockList">
 <li class="blockList">
 <h4>getOcrResult</h4>
-<pre>public&nbsp;<a href="../../../../../com/microblink/results/ocr/OcrResult.html" title="class in com.microblink.results.ocr">OcrResult</a>&nbsp;getOcrResult()</pre>
+<pre>@Nullable
+public&nbsp;<a href="../../../../../com/microblink/results/ocr/OcrResult.html" title="class in com.microblink.results.ocr">OcrResult</a>&nbsp;getOcrResult()</pre>
 <div class="block">Returns the raw OCR result that was used for parsing data. Depending on settings, this field
  might exist even if other fields are empty.</div>
 <dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../../com/microblink/recognizers/templating/TemplatingRecognitionResult.html#getOcrResult--">getOcrResult</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../com/microblink/recognizers/templating/TemplatingRecognitionResult.html" title="class in com.microblink.recognizers.templating">TemplatingRecognitionResult</a></code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the raw OCR result that was used for parsing data.</dd>
 </dl>
@@ -562,6 +615,25 @@ extends <a href="../../../../../com/microblink/recognizers/BaseRecognitionResult
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>true if Machine Readable Zone has been parsed, false otherwise.</dd>
+</dl>
+</li>
+</ul>
+<a name="getDocumentClassificationResult--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDocumentClassificationResult</h4>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getDocumentClassificationResult()</pre>
+<div class="block">Returns result of document classification, as calculated by <a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDDocumentClassifier.html" title="interface in com.microblink.recognizers.blinkid.mrtd"><code>MRTDDocumentClassifier</code></a> set
+ with <a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setDocumentClassifier-com.microblink.recognizers.blinkid.mrtd.MRTDDocumentClassifier-"><code>MRTDRecognizerSettings.setDocumentClassifier(MRTDDocumentClassifier)</code></a>. If no document
+ classifier was used, returns null.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../../com/microblink/recognizers/templating/TemplatingRecognitionResult.html#getDocumentClassificationResult--">getDocumentClassificationResult</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../com/microblink/recognizers/templating/TemplatingRecognitionResult.html" title="class in com.microblink.recognizers.templating">TemplatingRecognitionResult</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>result of document classification, or null</dd>
 </dl>
 </li>
 </ul>
@@ -605,7 +677,7 @@ extends <a href="../../../../../com/microblink/recognizers/BaseRecognitionResult
 </div>
 <div class="subNav">
 <ul class="navList">
-<li>Prev&nbsp;Class</li>
+<li><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDDocumentClassifier.html" title="interface in com.microblink.recognizers.blinkid.mrtd"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html" title="class in com.microblink.recognizers.blinkid.mrtd"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
