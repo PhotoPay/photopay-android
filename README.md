@@ -43,6 +43,8 @@
   * [Scanning one dimensional barcodes with _PhotoPay_'s implementation](#custom1DBarDecoder)
   * [Scanning barcodes with ZXing implementation](#zxing)
   * [Scanning machine-readable travel documents](#mrtd)
+  * [Scanning front side of Austrian ID documents](#ausID_front)
+  * [Scanning back side of Austrian ID documents](#ausID_back)
   * [Scanning front side of Croatian ID documents](#croID_front)
   * [Scanning back side of Croatian ID documents](#croID_back)
   * [Scanning segments with BlinkOCR recognizer](#blinkOCR)
@@ -1082,7 +1084,7 @@ This chapter will discuss various recognition settings used to configure differe
 Recognition settings define what will be scanned and how will the recognition process be performed. Here is the list of methods that are most relevant:
 
 ##### [`setAllowMultipleScanResultsOnSingleImage(boolean)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/settings/RecognitionSettings.html#setAllowMultipleScanResultsOnSingleImage-boolean-)
-Sets whether or not outputting of multiple scan results from same image is allowed. If that is `true`, it is possible to return multiple recognition results produced by different recognizers from same image. However, single recognizer can still produce only a single result from single image. By default, this option is `false`, i.e. the array of `BaseRecognitionResults` will contain at most 1 element. The upside of setting that option to `false` is the speed - if you enable lots of recognizers, as soon as the first recognizer succeeds in scanning, recognition chain will be terminated and other recognizers will not get a chance to analyze the image. The downside is that you are then unable to obtain multiple results from different recognizers from single image.
+Sets whether or not outputting of multiple scan results from same image is allowed. If that is `true`, it is possible to return multiple recognition results produced by different recognizers from same image. However, single recognizer can still produce only a single result from single image. If this option is `false`, the array of `BaseRecognitionResults` will contain at most 1 element. The upside of setting that option to `false` is the speed - if you enable lots of recognizers, as soon as the first recognizer succeeds in scanning, recognition chain will be terminated and other recognizers will not get a chance to analyze the image. The downside is that you are then unable to obtain multiple results from different recognizers from single image. By default, this option is `false`.
 
 ##### [`setNumMsBeforeTimeout(int)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/settings/RecognitionSettings.html#setNumMsBeforeTimeout-int-)
 Sets the number of miliseconds _PhotoPay_ will attempt to perform the scan it exits with timeout error. On timeout returned array of `BaseRecognitionResults` inside [RecognitionResults](https://photopay.github.io/photopay-android/com/microblink/recognizers/RecognitionResults.html) might be null, empty or may contain only elements that are not valid ([`isValid`](https://photopay.github.io/photopay-android/com/microblink/recognizers/BaseRecognitionResult.html#isValid--) returns `false`) or are empty ([`isEmpty`](https://photopay.github.io/photopay-android/com/microblink/recognizers/BaseRecognitionResult.html#isEmpty--) returns `true`).
@@ -1735,7 +1737,7 @@ This section discusses the setting up of Czech payslip recognizer and obtaining 
 
 ### Setting up Czech payslip recognizer
 
-To activate Czech payslip recognizer, you need to create [CzechSlipRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/czechia/slip/AustrianSlipRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+To activate Czech payslip recognizer, you need to create [CzechSlipRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/czechia/slip/CzechSlipRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
 
 ```java
 private RecognizerSettings[] setupSettingsArray() {
@@ -2989,7 +2991,7 @@ Set this to `true` if you use [MetadataListener](https://photopay.github.io/phot
 
 ### Extracting additional fields of interest from machine-readable travel documents (Templating API)
 
-If MRTD document contains additional fields of interest that should be extracted together with information from machine readable zone (MRZ), you can achieve this by specifying the locations of this fields relative to full document detection and choosing appropriate parsers that will be used to extract data from them. Additionally, it is possible to support multiple document types containing the MRZ zone (e.g. different versions of the ID card). To achieve this, document classifier, which classify the document based on the MRZ result, should be implemented and provided to the MRTD recognizer and locations of additional fields should be defined for each document type, as separate location sets.
+If MRTD document contains additional fields of interest that should be extracted together with information from machine readable zone (MRZ), you can achieve this by specifying the locations of this fields relative to full document detection and choosing appropriate parsers that will be used to extract data from them. Additionally, it is possible to support multiple document types containing the MRZ zone (e.g. different versions of the ID card). To achieve this, document classifier, which classify the document based on the MRZ result and fields set with [`void setParserDecodingInfos(DecodingInfo[])`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setParserDecodingInfos-com.microblink.detectors.DecodingInfo:A-), should be implemented and provided to the MRTD recognizer and locations of additional fields should be defined for each document type, as separate location sets.
 
 Following methods in [MRTDRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html) are available for tweaking the recognition of additional fields:
 
@@ -3001,10 +3003,10 @@ Adds parser with given name and parser settings to chosen parser group. Parser s
 
 ##### [`void setParserDecodingInfos(DecodingInfo[])`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setParserDecodingInfos-com.microblink.detectors.DecodingInfo:A-)
 Sets the decoding infos for desired additional document elements that should be recognized
-together with MRZ zone. Use this method if document contains additional information (elements) of interest that should be recognized together with MRZ and only one document type is expected.
+together with MRZ zone. Use this method if document contains additional information (elements) of interest that should be recognized together with MRZ and only one document type is expected or if later document classification depends on non-MRZ data.
 The position of each additional element is represented as [DecodingInfo](https://photopay.github.io/photopay-android/com/microblink/detectors/DecodingInfo.html) object which holds the location for that element of interest (relative to full document detection) and the desired dewarp height (in number of pixels), for that location. **Name of the decoding info must be equal to the name of the parser group** that will be used for parsing that element.
 
-If you want to support multiple document types containing MRZ, and if they can be distinguished using MRZ result, use method [`setParserDecodingInfos(DecodingInfo[], String)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setParserDecodingInfos-com.microblink.detectors.DecodingInfo:A-java.lang.String-) for setting the decoding infos for each document type and method [`setDocumentClassifier(MRTDDocumentClassifier)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setDocumentClassifier-com.microblink.recognizers.blinkid.mrtd.MRTDDocumentClassifier-)
+If you want to support multiple document types containing MRZ, and if they can be distinguished using MRZ result and non-MRZ fields set with this method, use method [`setParserDecodingInfos(DecodingInfo[], String)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setParserDecodingInfos-com.microblink.detectors.DecodingInfo:A-java.lang.String-) for setting the decoding infos for each document type and method [`setDocumentClassifier(MRTDDocumentClassifier)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setDocumentClassifier-com.microblink.recognizers.blinkid.mrtd.MRTDDocumentClassifier-)
 for setting the document classifier.
 
 ##### [`void setParserDecodingInfos(DecodingInfo[], String)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setParserDecodingInfos-com.microblink.detectors.DecodingInfo:A-java.lang.String-)
@@ -3016,7 +3018,7 @@ the MRZ zone. Use this method if document contains additional information (eleme
 Sets the MRTD document classifier that can be used for classification of the documents based on the MRZ zone result. This method should be used if multiple MRTD document types are expected and additional information (elements) of interest should be recognized. In addition, decoding infos for each document type should be set with [`setParserDecodingInfos(DecodingInfo[], String)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setParserDecodingInfos-com.microblink.detectors.DecodingInfo:A-java.lang.String-) method. **For each document type, name of the decoding info set must be equal to the corresponding classifier result.**
 
 ### Implementing the MRTDDocumentClassifier
-[MRTDDocumentClassifier](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDDocumentClassifier.html) is interface that should be implemented to support the classification of MRTD documents based on data extracted from the MRZ zone. Classifier is used to determine which set of decoding infos will be used to extract non-MRZ data. This interface extends the [Parcelable](http://developer.android.com/reference/android/os/Parcelable.html) interface and the parcelization should be implemented. Besides that, following method has to be implemented:
+[MRTDDocumentClassifier](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDDocumentClassifier.html) is interface that should be implemented to support the classification of MRTD documents based on data extracted from the MRZ zone and non-MRZ fields defined with [`void setParserDecodingInfos(DecodingInfo[])`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setParserDecodingInfos-com.microblink.detectors.DecodingInfo:A-). Classifier is used to determine which set of decoding infos will be used to extract non-MRZ data. This interface extends the [Parcelable](http://developer.android.com/reference/android/os/Parcelable.html) interface and the parcelization should be implemented. Besides that, following method has to be implemented:
 
 ##### [`String classifyDocument(MRTDRecognitionResult)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDDocumentClassifier.html#classifyDocument-com.microblink.recognizers.blinkid.mrtd.MRTDRecognitionResult-)
 Based on [MRTDRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html) classifies the MRTD document. For each MRTD document type that you want to support, returned result string has to be equal to the name of the corresponding set of [DecodingInfo](https://photopay.github.io/photopay-android/com/microblink/detectors/DecodingInfo.html) objects which are defined for that document type. Named decoding info sets should be defined using [`setParserDecodingInfos(DecodingInfo[], String)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setParserDecodingInfos-com.microblink.detectors.DecodingInfo:A-java.lang.String-) method.
@@ -3133,6 +3135,109 @@ Returns the result of parser in given parser group, with the given parser name. 
 
 ##### `OcrResult getOcrResult(String)`
 Returns the OCR result for given parser group. If there is no OCR result for requested parser group, returns null.
+
+## <a name="ausID_front"></a> Scanning front side of Austrian ID documents
+
+This section will discuss the setting up of Austrian ID Front Side recognizer and obtaining results from it.
+
+### Setting up Austrian ID card front side recognizer
+
+To activate Austrian ID front side recognizer, you need to create [AustrianIDFrontSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/austria/front/AustrianIDFrontSideRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	AustrianIDFrontSideRecognizerSettings sett = new AustrianIDFrontSideRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [AustrianIDFrontSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/austria/front/AustrianIDFrontSideRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/austria/front/AustrianIDFrontSideRecognizerSettings.html) for more information.**
+
+### Obtaining results from Austrian ID card front side recognizer
+
+Austrian ID front side recognizer produces [AustrianIDFrontSideRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/austria/front/AustrianIDFrontSideRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `AustrianIDFrontSideRecognitionResult ` class. 
+
+**Note:** `AustrianIDFrontSideRecognitionResult ` extends [BlinkOCRRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof AustrianIDFrontSideRecognitionResult) {
+			AustrianIDFrontSideRecognitionResult result = (AustrianIDFrontSideRecognitionResult) baseResult;
+			
+	        // you can use getters of CroatianIDFrontSideRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String firstName = result.getFirstName();
+				String lastName = result.getLastName();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/austria/front/AustrianIDFrontSideRecognitionResult.html).**
+
+## <a name="ausID_back"></a> Scanning back side of Austrian ID documents
+
+This section will discuss the setting up of Austrian ID Back Side recognizer and obtaining results from it.
+
+### Setting up Austrian ID card back side recognizer
+
+To activate Austrian ID back side recognizer, you need to create [AustrianIDBackSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/austria/back/AustrianIDBackSideRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	AustrianIDBackSideRecognizerSettings sett = new AustrianIDBackSideRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [AustrianIDBackSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/austria/back/AustrianIDBackSideRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/austria/back/AustrianIDBackSideRecognizerSettings.html) for more information.**
+
+### Obtaining results from Austrian ID card back side recognizer
+
+Austrian ID back side recognizer produces [AustrianIDBackSideRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/austria/back/AustrianIDBackSideRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `AustrianIDBackSideRecognitionResult ` class. 
+
+**Note:** `AustrianIDBackSideRecognitionResult ` extends [MRTDRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof AustrianIDBackSideRecognitionResult) {
+			AustrianIDBackSideRecognitionResult result = (AustrianIDBackSideRecognitionResult) baseResult;
+			
+	        // you can use getters of AustrianIDBackSideRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String placeOfBirth = result.getPlaceOfBirth();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/austria/back/AustrianIDBackSideRecognitionResult.html).**
 
 ## <a name="croID_front"></a> Scanning front side of Croatian ID documents
 

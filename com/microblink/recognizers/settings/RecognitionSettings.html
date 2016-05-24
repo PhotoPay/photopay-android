@@ -440,7 +440,7 @@ implements android.os.Parcelable</pre>
 <pre>public&nbsp;void&nbsp;setAllowMultipleScanResultsOnSingleImage(boolean&nbsp;multiScan)</pre>
 <div class="block">Sets whether or not outputting of multiple scan results from same image
  is allowed. If that is true, it is possible to return multiple
- recognition results from same image. By default, this option is false, i.e. the array
+ recognition results from same image. If this option is false, the array
  of BaseRecognitionResults will contain at most 1 element. The upside of setting that option
  to false is the speed - if you enable lots of recognizers, as soon as the first recognizer
  succeeds in scanning, recognition chain will be terminated and other

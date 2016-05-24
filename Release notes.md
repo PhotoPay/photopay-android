@@ -1,5 +1,11 @@
 # Release notes
 
+## 5.8.0
+- added support for scanning front and back side of Austrian ID cards
+- improved swedish amount parser (used in swedish segment scan)
+    - now it is much more robust in cases when text comes into scanning area
+- improved support for Croatian ID card scanning
+
 ## 5.7.0
 - Added option to set the OCR document type in BlinkOCREngineOptions
 - Introduced new setting options for generic AmountParser:
