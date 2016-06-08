@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -47,7 +47,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDDocumentClassifier.html" title="interface in com.microblink.recognizers.blinkid.mrtd"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDDocumentType.html" title="enum in com.microblink.recognizers.blinkid.mrtd"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html" title="class in com.microblink.recognizers.blinkid.mrtd"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -214,94 +214,118 @@ extends <a href="../../../../../com/microblink/recognizers/templating/Templating
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getAlienNumber--">getAlienNumber</a></span>()</code>
+<div class="block">Returns alien number.</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getApplicationReceiptNumber--">getApplicationReceiptNumber</a></span>()</code>
+<div class="block">Returns application receipt number.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getDateOfBirth--">getDateOfBirth</a></span>()</code>
 <div class="block">Returns holder's date of birth in format <code>YYMMDD</code>.</div>
 </td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getDateOfExpiry--">getDateOfExpiry</a></span>()</code>
 <div class="block">Returns date of expiry of the document in format <code>YYMMDD</code>.</div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getDocumentClassificationResult--">getDocumentClassificationResult</a></span>()</code>
 <div class="block">Returns result of document classification, as calculated by <a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDDocumentClassifier.html" title="interface in com.microblink.recognizers.blinkid.mrtd"><code>MRTDDocumentClassifier</code></a> set
  with <a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setDocumentClassifier-com.microblink.recognizers.blinkid.mrtd.MRTDDocumentClassifier-"><code>MRTDRecognizerSettings.setDocumentClassifier(MRTDDocumentClassifier)</code></a>.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getDocumentCode--">getDocumentCode</a></span>()</code>
 <div class="block">Returns document code.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getDocumentNumber--">getDocumentNumber</a></span>()</code>
 <div class="block">Returns document number.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDDocumentType.html" title="enum in com.microblink.recognizers.blinkid.mrtd">MRTDDocumentType</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getDocumentType--">getDocumentType</a></span>()</code>
+<div class="block">Returns the MRTD document type of recognized document.</div>
+</td>
+</tr>
+<tr id="i8" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getImmigrantCaseNumber--">getImmigrantCaseNumber</a></span>()</code>
+<div class="block">Returns immigrant case number.</div>
+</td>
+</tr>
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getIssuer--">getIssuer</a></span>()</code>
 <div class="block">Returns three-letter or two-letter code which indicate the issuing State.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getMRZText--">getMRZText</a></span>()</code>
 <div class="block">Returns the entire Machine Readable Zone text from ID.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getNationality--">getNationality</a></span>()</code>
 <div class="block">Returns nationality of the holder represented by a three-letter or two-letter code.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code><a href="../../../../../com/microblink/results/ocr/OcrResult.html" title="class in com.microblink.results.ocr">OcrResult</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getOcrResult--">getOcrResult</a></span>()</code>
 <div class="block">Returns the raw OCR result that was used for parsing data.</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getOpt1--">getOpt1</a></span>()</code>
 <div class="block">Returns first optional data.</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getOpt2--">getOpt2</a></span>()</code>
 <div class="block">Returns second optional data.</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getPrimaryId--">getPrimaryId</a></span>()</code>
 <div class="block">Returns the primary indentifier.</div>
 </td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getSecondaryId--">getSecondaryId</a></span>()</code>
 <div class="block">Returns the secondary identifier.</div>
 </td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getSex--">getSex</a></span>()</code>
 <div class="block">Returns sex of the card holder.</div>
 </td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getTitle--">getTitle</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#isMRZParsed--">isMRZParsed</a></span>()</code>
 <div class="block">Returns true if Machine Readable Zone has been parsed, false otherwise.</div>
@@ -388,6 +412,21 @@ extends <a href="../../../../../com/microblink/recognizers/templating/Templating
 <!--   -->
 </a>
 <h3>Method Detail</h3>
+<a name="getDocumentType--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDocumentType</h4>
+<pre>@Nullable
+public&nbsp;<a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDDocumentType.html" title="enum in com.microblink.recognizers.blinkid.mrtd">MRTDDocumentType</a>&nbsp;getDocumentType()</pre>
+<div class="block">Returns the MRTD document type of recognized document.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Recognized MRTD document type.</dd>
+</dl>
+</li>
+</ul>
 <a name="getPrimaryId--">
 <!--   -->
 </a>
@@ -458,10 +497,11 @@ public&nbsp;java.lang.String&nbsp;getDateOfBirth()</pre>
 <h4>getDocumentNumber</h4>
 <pre>@Nullable
 public&nbsp;java.lang.String&nbsp;getDocumentNumber()</pre>
-<div class="block">Returns document number. Document number contains up to 9 characters.</div>
+<div class="block">Returns document number. Document number contains up to 9 characters.
+ Element does not exist on US Green Card. To see which document was scanned use <a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getDocumentType--"><code>getDocumentType()</code></a>.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>document number</dd>
+<dd>document number: <code>null</code> or empty string if not available</dd>
 </dl>
 </li>
 </ul>
@@ -543,7 +583,8 @@ public&nbsp;java.lang.String&nbsp;getDateOfExpiry()</pre>
 <h4>getOpt1</h4>
 <pre>@Nullable
 public&nbsp;java.lang.String&nbsp;getOpt1()</pre>
-<div class="block">Returns first optional data. Returns <code>null</code> or empty string if not available.</div>
+<div class="block">Returns first optional data. Returns <code>null</code> or empty string if not available.
+ Element does not exist on US Green Card. To see which document was scanned use <a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getDocumentType--"><code>getDocumentType()</code></a>.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>first optional data: <code>null</code> or empty string if not available</dd>
@@ -558,10 +599,59 @@ public&nbsp;java.lang.String&nbsp;getOpt1()</pre>
 <h4>getOpt2</h4>
 <pre>@Nullable
 public&nbsp;java.lang.String&nbsp;getOpt2()</pre>
-<div class="block">Returns second optional data. Returns <code>null</code> or empty string if not available.</div>
+<div class="block">Returns second optional data. Returns <code>null</code> or empty string if not available.
+ Element does not exist on Passports and Visas. To see which document was scanned use <a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getDocumentType--"><code>getDocumentType()</code></a>.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>second optional data; <code>null</code> or empty string if not available</dd>
+</dl>
+</li>
+</ul>
+<a name="getAlienNumber--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getAlienNumber</h4>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getAlienNumber()</pre>
+<div class="block">Returns alien number. Returns <code>null</code> or empty string if not available.
+ Exists only on US Green Cards. To see which document was scanned use <a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getDocumentType--"><code>getDocumentType()</code></a>.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>alien number: <code>null</code> or empty string if not available</dd>
+</dl>
+</li>
+</ul>
+<a name="getApplicationReceiptNumber--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getApplicationReceiptNumber</h4>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getApplicationReceiptNumber()</pre>
+<div class="block">Returns application receipt number. Returns <code>null</code> or empty string if not available.
+ Exists only on US Green Cards. To see which document was scanned use <a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getDocumentType--"><code>getDocumentType()</code></a>.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>application receipt number: <code>null</code> or empty string if not available.</dd>
+</dl>
+</li>
+</ul>
+<a name="getImmigrantCaseNumber--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getImmigrantCaseNumber</h4>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getImmigrantCaseNumber()</pre>
+<div class="block">Returns immigrant case number. Returns <code>null</code> or empty string if not available.
+ Exists only on US Green Cards. To see which document was scanned use <a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html#getDocumentType--"><code>getDocumentType()</code></a>.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>immigrant case number: <code>null</code> or empty string if not available.</dd>
 </dl>
 </li>
 </ul>
@@ -677,7 +767,7 @@ public&nbsp;java.lang.String&nbsp;getDocumentClassificationResult()</pre>
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDDocumentClassifier.html" title="interface in com.microblink.recognizers.blinkid.mrtd"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDDocumentType.html" title="enum in com.microblink.recognizers.blinkid.mrtd"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../../com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html" title="class in com.microblink.recognizers.blinkid.mrtd"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">

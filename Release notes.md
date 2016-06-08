@@ -1,5 +1,12 @@
 # Release notes
 
+## 5.9.0
+- fixed IBAN parser on some slovenian slips
+- in templating API recognition data does not need to be valid anymore in classification step
+- added support for scanning MRZ of green cards
+- support for parsing Vehicle Identification Numbers (VINs)
+- support for parsing vehicle licence plates
+
 ## 5.8.0
 - added support for scanning front and back side of Austrian ID cards
 - improved swedish amount parser (used in swedish segment scan)

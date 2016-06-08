@@ -3389,6 +3389,11 @@ The following is a list of available parsers:
 - Raw parser - represented by [RawParserSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/generic/RawParserSettings.html)
 	- used for obtaining raw OCR result
 
+- Vehicle Identification Number (VIN) parser - represented by [VinParserSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/vin/VinParserSettings.html)
+	- used for parsing vehicle identification number
+- License Plates parser - represented by [LicensePlatesParserSettings]({https://photopay.github.io/photopay-android}/com/microblink/recognizers/blinkocr/parser/licenseplates/LicensePlatesParserSettings.html)
+	- used for parsing license plates numbers
+
 - Regex parser - represented by [RegexParserSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/regex/RegexParserSettings.html)
 	- used for parsing arbitrary regular expressions
 	- please note that some features, like back references, match grouping and certain regex metacharacters are not supported. See javadoc for more info.
