@@ -7,10 +7,12 @@
   * [Eclipse integration instructions](#eclipseIntegration)
   * [Performing your first scan](#quickScan)
   * [Performing your first segment scan](#quickScan)
+  * [Performing your first random scan](#randomScan)
 * [Advanced _PhotoPay_ integration instructions](#advancedIntegration)
   * [Checking if _PhotoPay_ is supported](#supportCheck)
   * [Customization of `ScanActivity` activity](#scanActivityCustomization)
-  * [Customization of `BlinkOCRActivity` activity](#segmentScanActivityCustomization)
+  * [Customization of `SegmentScanActivity` activity](#segmentScanActivityCustomization)
+  * [Customization of `RandomScanActivity` activity](#randomScanActivityCustomization)
   * [Embedding `RecognizerView` into custom scan activity](#recognizerView)
   * [`RecognizerView` reference](#recognizerViewReference)
 * [Using direct API for recognition of Android Bitmaps](#directAPI)
@@ -47,6 +49,8 @@
   * [Scanning back side of Austrian ID documents](#ausID_back)
   * [Scanning front side of Croatian ID documents](#croID_front)
   * [Scanning back side of Croatian ID documents](#croID_back)
+  * [Scanning front side of Czech ID documents](#czID_front)
+  * [Scanning back side of Czech ID documents](#czID_back)
   * [Scanning segments with BlinkOCR recognizer](#blinkOCR)
   * [Scanning templated documents with BlinkOCR recognizer](#blinkOCR_templating)
   * [Performing detection of various documents](#detectorRecognizer)
@@ -88,7 +92,8 @@ The library contains several activities that are responsible for camera control 
 - `ScanFovWithInfo` activity is similar to ScanFOV activity. Additionally, it displays messages about detection status to user. This activity is by default used when scanning Dutch slips.
 - `Pdf417ScanActivity` is designed for scanning barcodes
 - `ScanCard` is designed for scanning ID documents and passports
-- `BlinkOCRActivity` is specifically designed for segment scanning. Unlike other activities, `BlinkOCRActivity` does not extend `BaseScanActivity`, so it requires a bit different initialization parameters. Please see _PhotopayDemo_ app for example and read [section about customizing `BlinkOCRActivity`](#segmentScanActivityCustomization).
+- `SegmentScanActivity` is specifically designed for segment scanning. Unlike other activities, `SegmentScanActivity` does not extend `BaseScanActivity`, so it requires a bit different initialization parameters. Please see _PhotopayDemo_ app for example and read [section about customizing `SegmentScanActivity`](#segmentScanActivityCustomization).
+- `RandomScanActivity` is similar to _SegmentScanActivity_ but it does not force the user to scan text segments in the predefined order.
 
 You can also create your own scanning UI - you just need to embed `RecognizerView` into your activity and pass activity's lifecycle events to it and it will control the camera and recognition process. For more information, see [Embedding `RecognizerView` into custom scan activity](#recognizerView).
 
@@ -210,36 +215,36 @@ You’ve already created the project that contains almost everything you need. N
 	For more information about defining recognition settings and obtaining scan results see [Recognition settings and results](#recognitionSettingsAndResults).
 
 ## <a name="quickScan"></a> Performing your first segment scan
-1. You can start recognition process by starting `BlinkOCRActivity` activity with Intent initialized in the following way:
+1. You can start recognition process by starting `SegmentScanActivity` activity with Intent initialized in the following way:
 	
 	```java
-	// Intent for BlinkOCRActivity Activity
-	Intent intent = new Intent(this, BlinkOCRActivity.class);
+	// Intent for SegmentScanActivity Activity
+	Intent intent = new Intent(this, SegmentScanActivity.class);
 	
 	// set your licence key
 	// obtain your licence key at http://microblink.com/login or
 	// contact us at http://help.microblink.com
-	intent.putExtra(BlinkOCRActivity.EXTRAS_LICENSE_KEY, "Add your licence key here");
+	intent.putExtra(SegmentScanActivity.EXTRAS_LICENSE_KEY, "Add your licence key here");
 
 	// setup array of scan configurations. Each scan configuration
 	// contains 4 elements: resource ID for title displayed
-	// in BlinkOCRActivity activity, resource ID for text
+	// in SegmentScanActivity activity, resource ID for text
 	// displayed in activity, name of the scan element (used
 	// for obtaining results) and parser setting defining
 	// how the data will be extracted.
 	// For more information about parser setting, check the
 	// chapter "Scanning segments with BlinkOCR recognizer"
 	ScanConfiguration[] confArray = new ScanConfiguration[] {
-                new ScanConfiguration(R.string.amount_title, R.string.amount_msg, "Amount", new AmountParserSettings()),
-                new ScanConfiguration(R.string.email_title, R.string.email_msg, "EMail", new EMailParserSettings()),
-                new ScanConfiguration(R.string.raw_title, R.string.raw_msg, "Raw", new RawParserSettings())
-        };
-	intent.putExtra(BlinkOCRActivity.EXTRAS_SCAN_CONFIGURATION, confArray);
+		new ScanConfiguration(R.string.amount_title, R.string.amount_msg, "Amount", new AmountParserSettings()),
+		new ScanConfiguration(R.string.email_title, R.string.email_msg, "EMail", new EMailParserSettings()),
+		new ScanConfiguration(R.string.raw_title, R.string.raw_msg, "Raw", new RawParserSettings())
+	};
+	intent.putExtra(SegmentScanActivity.EXTRAS_SCAN_CONFIGURATION, confArray);
 
 	// Starting Activity
 	startActivityForResult(intent, MY_REQUEST_CODE);
 	```
-2. After `BlinkOCRActivity` activity finishes the scan, it will return to the calling activity and will call method `onActivityResult`. You can obtain the scanning results in that method.
+2. After `SegmentScanActivity` activity finishes the scan, it will return to the calling activity and will call method `onActivityResult`. You can obtain the scanning results in that method.
 
 	```java
 	@Override
@@ -247,12 +252,12 @@ You’ve already created the project that contains almost everything you need. N
 		super.onActivityResult(requestCode, resultCode, data);
 		
 		if (requestCode == MY_REQUEST_CODE) {
-			if (resultCode == BlinkOCRActivity.RESULT_OK && data != null) {
+			if (resultCode == SegmentScanActivity.RESULT_OK && data != null) {
 				// perform processing of the data here
 				
 				// for example, obtain parcelable recognition result
 				Bundle extras = data.getExtras();
-				Bundle results = extras.getBundle(BlinkOCRActivity.EXTRAS_SCAN_RESULTS);
+				Bundle results = extras.getBundle(SegmentScanActivity.EXTRAS_SCAN_RESULTS);
 				
 				// results bundle contains result strings in keys defined
 				// by scan configuration name
@@ -263,6 +268,66 @@ You’ve already created the project that contains almost everything you need. N
 		}
 	}
 	```
+	
+## <a name="randomScan"></a> Performing your first random scan
+1. For random scan, use provided `RandomScanActivity` activity with Intent initialized in the following way:
+
+	```java
+	// Intent for RandomScanActivity Activity
+	Intent intent = new Intent(this, RandomScanActivity.class);
+	
+	// set your licence key
+	// obtain your licence key at http://microblink.com/login or
+	// contact us at http://help.microblink.com
+	intent.putExtra(RandomScanActivity.EXTRAS_LICENSE_KEY, "Add your licence key here");
+
+	// setup array of random scan elements. Each scan element
+	// holds following scan settings: resource ID (or string) for title displayed
+	// in RandomScanActivity activity, name of the scan element (used
+	// for obtaining results, must be unique) and parser setting defining
+	// how the data will be extracted. In random scan, all scan elements should have
+	// distinct parser types.
+	// For more information about parser setting, check the
+	// chapter "Scanning segments with BlinkOCR recognizer"
+	
+	RandomScanElement date = new RandomScanElement(R.string.date_title, "Date", new DateParserSettings());
+	// element can be optional, which means that result can be returned without scannig that element
+	date.setOptional(true);
+	RandomScanElement[] elemsArray = new RandomScanElement[] {
+		new RandomScanElement(R.string.iban_title, "IBAN", new IbanParserSettings()),
+		new RandomScanElement(R.string.amount_title, "Amount", new AmountParserSettings()),
+		date};
+	intent.putExtra(RandomScanActivity.EXTRAS_SCAN_CONFIGURATION, elemsArray);
+
+	// Starting Activity
+	startActivityForResult(intent, MY_REQUEST_CODE);
+	```
+	
+2. You can obtain the scanning results in the `onActivityResult` of the calling activity.
+
+	```java
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		if (requestCode == MY_REQUEST_CODE) {
+			if (resultCode == Activity.RESULT_OK && data != null) {
+				// perform processing of the data here
+				
+				// for example, obtain parcelable recognition result
+				Bundle extras = data.getExtras();
+				Bundle results = extras.getBundle(RandomScanActivity.EXTRAS_SCAN_RESULTS);
+				
+				// results bundle contains result strings in keys defined
+				// by scan element names
+				// for example, if set up as in step 1, then you can obtain
+				// IBAN with following line
+				String iban = results.getString("IBAN");
+			}
+		}
+	}
+	```
+
 
 # <a name="advancedIntegration"></a> Advanced _PhotoPay_ integration instructions
 This section will cover more advanced details in _PhotoPay_ integration. First part will discuss the methods for checking whether _PhotoPay_ is supported on current device. Second part will cover the possible customization of builtin `ScanActivity` activity, third part will describe how to embed `RecognizerView` into your activity and fourth part will describe how to use direct API to recognize directly android bitmaps without the need of camera.
@@ -425,37 +490,37 @@ Generally, you can also change other resources that `ScanActivity` uses, but you
 
 To change the colour of viewfinder in `ScanActivity`, change or override the colours defined in `res/values/colors.xml` (colours `default_frame` and `recognized_frame`).
 
-## <a name="segmentScanActivityCustomization"></a> Customization of `BlinkOCRActivity` activity
+## <a name="segmentScanActivityCustomization"></a> Customization of `SegmentScanActivity` activity
 
-### `BlinkOCRActivity` intent extras
+### `SegmentScanActivity` intent extras
 
-This section will discuss possible parameters that can be sent over `Intent` for `BlinkOCRActivity` activity that can customize default behaviour. There are several intent extras that can be sent to `BlinkOCRActivity` actitivy:
+This section will discuss possible parameters that can be sent over `Intent` for `SegmentScanActivity` activity that can customize default behaviour. There are several intent extras that can be sent to `SegmentScanActivity` actitivy:
 	
-* <a name="intent_EXTRAS_SCAN_CONFIGURATION" href="#intent_EXTRAS_SCAN_CONFIGURATION">#</a> **`BlinkOCRActivity.EXTRAS_SCAN_CONFIGURATION`** - with this extra you must set the array of [ScanConfiguration](https://photopay.github.io/photopay-android/com/microblink/ocr/ScanConfiguration.html) objects. Each `ScanConfiguration` object will define specific scan configuration that will be performed. `ScanConfiguration` defines two string resource ID's - title of the scanned item and text that will be displayed above field where scan is performed. Besides that it defines the name of scanned item and object defining the OCR parser settings. More information about parser settings can be found in chapter [Scanning segments with BlinkOCR recognizer](#blinkOCR). Here is only important that each scan configuration represents a single parser group and BlinkOCRActivity ensures that only one parser group is active at a time. After defining scan configuration array, you need to put it into intent extra with following code snippet:
+* <a name="intent_EXTRAS_SCAN_CONFIGURATION" href="#intent_EXTRAS_SCAN_CONFIGURATION">#</a> **`SegmentScanActivity.EXTRAS_SCAN_CONFIGURATION`** - with this extra you must set the array of [ScanConfiguration](https://photopay.github.io/photopay-android/com/microblink/ocr/ScanConfiguration.html) objects. Each `ScanConfiguration` object will define specific scan configuration that will be performed. `ScanConfiguration` defines two string resource ID's - title of the scanned item and text that will be displayed above field where scan is performed. Besides that it defines the name of scanned item and object defining the OCR parser settings. More information about parser settings can be found in chapter [Scanning segments with BlinkOCR recognizer](#blinkOCR). Here is only important that each scan configuration represents a single parser group and SegmentScanActivity ensures that only one parser group is active at a time. After defining scan configuration array, you need to put it into intent extra with following code snippet:
 	
 	```java
-	intent.putExtra(BlinkOCRActivity.EXTRAS_SCAN_CONFIGURATION, confArray);
+	intent.putExtra(SegmentScanActivity.EXTRAS_SCAN_CONFIGURATION, confArray);
 	```
 	
-* <a name="intent_EXTRAS_SCAN_RESULTS" href="#intent_EXTRAS_SCAN_RESULTS">#</a> **`BlinkOCRActivity.EXTRAS_SCAN_RESULTS`** - you can use this extra in `onActivityResult` method of calling activity to obtain bundle with recognition results. Bundle will contain only strings representing scanned data under keys defined with each scan configuration. If you also need to obtain OCR result structure, then you need to perform [advanced integration](#recognizerView). You can use the following snippet to obtain scan results:
+* <a name="intent_EXTRAS_SCAN_RESULTS" href="#intent_EXTRAS_SCAN_RESULTS">#</a> **`SegmentScanActivity.EXTRAS_SCAN_RESULTS`** - you can use this extra in `onActivityResult` method of calling activity to obtain bundle with recognition results. Bundle will contain only strings representing scanned data under keys defined with each scan configuration. If you also need to obtain OCR result structure, then you need to perform [advanced integration](#recognizerView). You can use the following snippet to obtain scan results:
 
 	```java
-	Bundle results = data.getBundle(BlinkOCRActivity.EXTRAS_SCAN_RESULTS);
+	Bundle results = data.getBundle(SegmentScanActivity.EXTRAS_SCAN_RESULTS);
 	```
 	
-* <a name="intent_BOCR_EXTRAS_HELP_INTENT" href="#intent_BOCR_EXTRAS_HELP_INTENT">#</a> **`BlinkOCRActivity.EXTRAS_HELP_INTENT`** - with this extra you can set fully initialized intent that will be sent when user clicks the help button. You can put any extras you want to your intent - all will be delivered to your activity when user clicks the help button. If you do not set help intent, help button will not be shown in camera interface. To set the intent for help activity, use the following code snippet:
+* <a name="intent_BOCR_EXTRAS_HELP_INTENT" href="#intent_BOCR_EXTRAS_HELP_INTENT">#</a> **`SegmentScanActivity.EXTRAS_HELP_INTENT`** - with this extra you can set fully initialized intent that will be sent when user clicks the help button. You can put any extras you want to your intent - all will be delivered to your activity when user clicks the help button. If you do not set help intent, help button will not be shown in camera interface. To set the intent for help activity, use the following code snippet:
 	
 	```java
 	/** Set the intent which will be sent when user taps help button. 
 	 *  If you don't set the intent, help button will not be shown.
 	 *  Note that this applies only to default PhotoPay camera UI.
 	 * */
-	intent.putExtra(BlinkOCRActivity.EXTRAS_HELP_INTENT, new Intent(this, HelpActivity.class));
+	intent.putExtra(SegmentScanActivity.EXTRAS_HELP_INTENT, new Intent(this, HelpActivity.class));
 	```
-* <a name="intent_BOCR_EXTRAS_CAMERA_VIDEO_PRESET" href="#intent_BOCR_EXTRAS_CAMERA_VIDEO_PRESET">#</a> **`BlinkOCRActivity.EXTRAS_CAMERA_VIDEO_PRESET`** - with this extra you can set the video resolution preset that will be used when choosing camera resolution for scanning. For more information, see [javadoc](https://photopay.github.io/photopay-android/com/microblink/hardware/camera/VideoResolutionPreset.html). For example, to use 720p video resolution preset, use the following code snippet:
+* <a name="intent_BOCR_EXTRAS_CAMERA_VIDEO_PRESET" href="#intent_BOCR_EXTRAS_CAMERA_VIDEO_PRESET">#</a> **`SegmentScanActivity.EXTRAS_CAMERA_VIDEO_PRESET`** - with this extra you can set the video resolution preset that will be used when choosing camera resolution for scanning. For more information, see [javadoc](https://photopay.github.io/photopay-android/com/microblink/hardware/camera/VideoResolutionPreset.html). For example, to use 720p video resolution preset, use the following code snippet:
 
 	```java
-	intent.putExtra(BlinkOCRActivity.EXTRAS_CAMERA_VIDEO_PRESET, (Parcelable)VideoResolutionPreset.VIDEO_RESOLUTION_720p);
+	intent.putExtra(SegmentScanActivity.EXTRAS_CAMERA_VIDEO_PRESET, (Parcelable)VideoResolutionPreset.VIDEO_RESOLUTION_720p);
 	```
 
 * <a name="intent_EXTRAS_LICENSE_KEY" href="#intent_EXTRAS_LICENSE_KEY">#</a> **`ScanActivity.EXTRAS_LICENSE_KEY`** - with this extra you can set the license key for _PhotoPay_. You can obtain your licence key from [PhotoPay website](https://photopay.net/) or you can contact us at [http://help.microblink.com](http://help.microblink.com). Once you obtain a license key, you can set it with following snippet:
@@ -490,6 +555,27 @@ This section will discuss possible parameters that can be sent over `Intent` for
 * <a name="intent_EXTRAS_IMAGE_LISTENER" href="#intent_EXTRAS_IMAGE_LISTENER">#</a> **`ScanActivity.EXTRAS_IMAGE_LISTENER`** - with this extra you can set your implementation of [ImageListener interface](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) that will obtain images that are being processed. Make sure that your [ImageListener](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) implementation correctly implements [Parcelable](https://developer.android.com/reference/android/os/Parcelable.html) interface with static [CREATOR](https://developer.android.com/reference/android/os/Parcelable.Creator.html) field. Without this, you might encounter a runtime error. For more information and example, see [Using ImageListener to obtain images that are being processed](#imageListener). By default, _ImageListener_ will receive all possible images that become available during recognition process. This will introduce performance penalty because most of those images will probably not be used so sending them will just waste time. To control which images should become available to _ImageListener_, you can also set [ImageMetadata settings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html) with `ScanActivity.EXTRAS_IMAGE_METADATA_SETTINGS`
 
 * <a name="intent_EXTRAS_IMAGE_METADATA_SETTINGS" href="#intent_EXTRAS_IMAGE_METADATA_SETTINGS">#</a> **`ScanActivity.EXTRAS_IMAGE_METADATA_SETTINGS`** - with this extra you can set [ImageMetadata settings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html) which will define which images will be sent to [ImageListener interface](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) given via `ScanActivity.EXTRAS_IMAGE_LISTENER` extra. If _ImageListener_ is not given via Intent, then this extra has no effect. You can see example usage of _ImageMetadata Settings_ in chapter [Obtaining various metadata with _MetadataListener_](#metadataListener) and in provided demo apps.
+
+## <a name="randomScanActivityCustomization"></a> Customization of `RandomScanActivity` activity
+
+`RandomScanActivity` accepts similar intent extras as `SegmentScanActivity` with few differences listed below.
+	
+* <a name="intent_EXTRAS_SCAN_CONFIGURATION_random" href="#intent_EXTRAS_SCAN_CONFIGURATION_random">#</a> **`RandomScanActivity.EXTRAS_SCAN_CONFIGURATION`** 
+With this extra you must set the array of [RandomScanElement](https://photopay.github.io/photopay-android/com/microblink/ocr/RandomScanElement.html) objects. Each `RandomScanElement` holds following information about scan element: title of the scanned item, name of scanned item and object defining the OCR parser settings. Additionally, it is possible to set parser group for a parser that is responsible for extracting the element data by using the `setParserGroup(String groupName)` method on `RandomScanElement` object. If all parsers are in the same parser group, recognition will be faster, but sometimes merged OCR engine options may cause that some parsers are unable to extract valid data from the scanned text. Putting each parser into its own group will give better accuracy, but will perform OCR of image for each parser which can consume a lot of processing time. By default, if parser groups are not defined, all parsers will be placed in the same parser group. More information about parser settings can be found in chapter [Scanning segments with BlinkOCR recognizer](#blinkOCR). 
+
+*  <a name="intent_EXTRAS_SCAN_MESSAGE" href="#intent_EXTRAS_SCAN_MESSAGE">#</a> **`RandomScanActivity.EXTRAS_SCAN_MESSAGE`** 
+With this extra, it is possible to change default scan message that is displayed above the scanning
+window. You can use the following code snippet to set scan message string:
+	
+	```java
+	intent.putExtra(RandomScanActivity.EXTRAS_SCAN_MESSAGE, message);
+	```
+*  <a name="intent_EXTRAS_BEEP_RESOURCE_random" href="#intent_EXTRAS_BEEP_RESOURCE_random">#</a> **`RandomScanActivity.EXTRAS_BEEP_RESOURCE`** 
+With this extra you can set the resource ID of the sound to be played when the scan element is recognized. You can use following snippet to set this extra
+	
+	```java
+	intent.putExtra(RandomScanActivity.EXTRAS_BEEP_RESOURCE, R.raw.beep);
+	```
 
 ## <a name="recognizerView"></a> Embedding `RecognizerView` into custom scan activity
 This section will discuss how to embed [RecognizerView](https://photopay.github.io/photopay-android/com/microblink/view/recognition/RecognizerView.html) into your scan activity and perform scan.
@@ -3341,6 +3427,109 @@ public void onScanningDone(RecognitionResults results) {
 ```
 
 **Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/croatia/back/CroatianIDBackSideRecognitionResult.html).**
+
+## <a name="czID_front"></a> Scanning front side of Czech ID documents
+
+This section will discuss the setting up of Czech ID Front Side recognizer and obtaining results from it.
+
+### Setting up Czech ID card front side recognizer
+
+To activate Czech ID front side recognizer, you need to create [CzechIDFrontSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/czechia/front/CzechIDFrontSideRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	CzechIDFrontSideRecognizerSettings sett = new CzechIDFrontSideRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [CzechIDFrontSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/czechia/front/CzechIDFrontSideRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/czechia/front/CzechIDFrontSideRecognizerSettings.html) for more information.**
+
+### Obtaining results from Czech ID card front side recognizer
+
+Czech ID front side recognizer produces [CzechIDFrontSideRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/czechia/front/CzechIDFrontSideRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `CzechIDFrontSideRecognitionResult ` class. 
+
+**Note:** `CzechIDFrontSideRecognitionResult ` extends [BlinkOCRRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof CzechIDFrontSideRecognitionResult) {
+			CzechIDFrontSideRecognitionResult result = (CzechIDFrontSideRecognitionResult) baseResult;
+			
+	        // you can use getters of CzechIDFrontSideRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String firstName = result.getFirstName();
+				String lastName = result.getLastName();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/czechia/front/CzechIDFrontSideRecognitionResult.html).**
+
+## <a name="czID_back"></a> Scanning back side of Czech ID documents
+
+This section will discuss the setting up of Czech ID Back Side recognizer and obtaining results from it.
+
+### Setting up Czech ID card back side recognizer
+
+To activate Czech ID back side recognizer, you need to create [CzechIDBackSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/czechia/back/CzechIDBackSideRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	CzechIDBackSideRecognizerSettings sett = new CzechIDBackSideRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [CzechIDBackSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/czechia/back/CzechIDBackSideRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/czechia/back/CzechIDBackSideRecognizerSettings.html) for more information.**
+
+### Obtaining results from Czech ID card back side recognizer
+
+Czech ID back side recognizer produces [CzechIDBackSideRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/czechia/back/CzechIDBackSideRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `CzechIDBackSideRecognitionResult ` class. 
+
+**Note:** `CzechIDBackSideRecognitionResult` extends [MRTDRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof CzechIDFrontSideRecognitionResult) {
+			CzechIDBackSideRecognitionResult result = (CzechIDBackSideRecognitionResult) baseResult;
+			
+	        // you can use getters of CzechIDBackSideRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String address = result.getAddress();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/czechia/back/CzechIDBackSideRecognitionResult.html).**
 
 ## <a name="blinkOCR"></a> Scanning segments with BlinkOCR recognizer
 

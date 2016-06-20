@@ -1,5 +1,13 @@
 # Release notes
 
+## 5.10.0
+- added support for scanning Czech IDs
+- renamed BlinkOCRActivity to SegmentScanActivity
+- added RandomScanActivity which is similar to SegmentScanActivity but it does not force the user to scan text segments in the predefined order
+- fixed CroAmountParser for amounts < 1,00
+- improved autofocus support on SGS6 and SGS7
+- improved swedish segment scan
+
 ## 5.9.0
 - fixed IBAN parser on some slovenian slips
 - in templating API recognition data does not need to be valid anymore in classification step
