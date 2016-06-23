@@ -802,6 +802,8 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/metadata/MetadataSettings.ImageMetadataSettings.DebugImageMetadataSettings.html#CREATOR">CREATOR</a></span> - Static variable in class com.microblink.metadata.<a href="com/microblink/metadata/MetadataSettings.ImageMetadataSettings.DebugImageMetadataSettings.html" title="class in com.microblink.metadata">MetadataSettings.ImageMetadataSettings.DebugImageMetadataSettings</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/microblink/ocr/RandomScanElement.html#CREATOR">CREATOR</a></span> - Static variable in class com.microblink.ocr.<a href="com/microblink/ocr/RandomScanElement.html" title="class in com.microblink.ocr">RandomScanElement</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/ocr/ScanConfiguration.html#CREATOR">CREATOR</a></span> - Static variable in class com.microblink.ocr.<a href="com/microblink/ocr/ScanConfiguration.html" title="class in com.microblink.ocr">ScanConfiguration</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/recognizers/blinkbarcode/bardecoder/BarDecoderRecognizerSettings.html#CREATOR">CREATOR</a></span> - Static variable in class com.microblink.recognizers.blinkbarcode.bardecoder.<a href="com/microblink/recognizers/blinkbarcode/bardecoder/BarDecoderRecognizerSettings.html" title="class in com.microblink.recognizers.blinkbarcode.bardecoder">BarDecoderRecognizerSettings</a></dt>
@@ -1265,6 +1267,8 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html#describeContents--">describeContents()</a></span> - Method in class com.microblink.metadata.<a href="com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html" title="class in com.microblink.metadata">MetadataSettings.ImageMetadataSettings</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/microblink/ocr/RandomScanElement.html#describeContents--">describeContents()</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/RandomScanElement.html" title="class in com.microblink.ocr">RandomScanElement</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/ocr/ScanConfiguration.html#describeContents--">describeContents()</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/ScanConfiguration.html" title="class in com.microblink.ocr">ScanConfiguration</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/recognizers/BaseRecognitionResult.html#describeContents--">describeContents()</a></span> - Method in class com.microblink.recognizers.<a href="com/microblink/recognizers/BaseRecognitionResult.html" title="class in com.microblink.recognizers">BaseRecognitionResult</a></dt>
@@ -1643,7 +1647,7 @@
 </dd>
 <dt><span class="memberNameLink"><a href="com/microblink/activity/RandomScanActivity.html#EXTRAS_SCAN_CONFIGURATION">EXTRAS_SCAN_CONFIGURATION</a></span> - Static variable in class com.microblink.activity.<a href="com/microblink/activity/RandomScanActivity.html" title="class in com.microblink.activity">RandomScanActivity</a></dt>
 <dd>
-<div class="block">Key for setting scan configuration, extra value is array of <code>RandomScanElement</code>s which
+<div class="block">Key for setting scan configuration, extra value is array of <a href="com/microblink/ocr/RandomScanElement.html" title="class in com.microblink.ocr"><code>RandomScanElement</code></a>s which
  is used to set the parsers that will recognize text fields.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/microblink/activity/SegmentScanActivity.html#EXTRAS_SCAN_CONFIGURATION">EXTRAS_SCAN_CONFIGURATION</a></span> - Static variable in class com.microblink.activity.<a href="com/microblink/activity/SegmentScanActivity.html" title="class in com.microblink.activity">SegmentScanActivity</a></dt>
@@ -2693,9 +2697,19 @@
 <dd>
 <div class="block">Get the result of parser in given parser group.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/microblink/ocr/RandomScanElement.html#getParserGroup--">getParserGroup()</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/RandomScanElement.html" title="class in com.microblink.ocr">RandomScanElement</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/microblink/ocr/RandomScanElement.html#getParserName--">getParserName()</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/RandomScanElement.html" title="class in com.microblink.ocr">RandomScanElement</a></dt>
+<dd>
+<div class="block">Returns the name of the parser.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/ocr/ScanConfiguration.html#getParserName--">getParserName()</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/ScanConfiguration.html" title="class in com.microblink.ocr">ScanConfiguration</a></dt>
 <dd>
 <div class="block">Returns the name of the parser.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/microblink/ocr/RandomScanElement.html#getParserSettings--">getParserSettings()</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/RandomScanElement.html" title="class in com.microblink.ocr">RandomScanElement</a></dt>
+<dd>
+<div class="block">Returns the parser settings that will be used to instantiate parser.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/microblink/ocr/ScanConfiguration.html#getParserSettings--">getParserSettings()</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/ScanConfiguration.html" title="class in com.microblink.ocr">ScanConfiguration</a></dt>
 <dd>
@@ -3236,6 +3250,10 @@
 <dd>
 <div class="block">Returns the resource ID representing text that will be displayed when parser is active.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/microblink/ocr/RandomScanElement.html#getTitle-android.content.Context-">getTitle(Context)</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/RandomScanElement.html" title="class in com.microblink.ocr">RandomScanElement</a></dt>
+<dd>
+<div class="block">Returns title that will be displayed.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/ocr/ScanConfiguration.html#getTitle-android.content.Context-">getTitle(Context)</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/ScanConfiguration.html" title="class in com.microblink.ocr">ScanConfiguration</a></dt>
 <dd>
 <div class="block">Returns title that will be displayed.</div>
@@ -3264,6 +3282,10 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/recognizers/LibraryInfoResult.html#getTitle--">getTitle()</a></span> - Method in class com.microblink.recognizers.<a href="com/microblink/recognizers/LibraryInfoResult.html" title="class in com.microblink.recognizers">LibraryInfoResult</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/microblink/ocr/RandomScanElement.html#getTitleResource--">getTitleResource()</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/RandomScanElement.html" title="class in com.microblink.ocr">RandomScanElement</a></dt>
+<dd>
+<div class="block">Returns the resource ID representing title that will be displayed or 0 if resource ID is not available.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/ocr/ScanConfiguration.html#getTitleResource--">getTitleResource()</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/ScanConfiguration.html" title="class in com.microblink.ocr">ScanConfiguration</a></dt>
 <dd>
 <div class="block">Returns the resource ID representing title that will be displayed or 0 if resource ID is not available.</div>
@@ -3681,6 +3703,10 @@
 <dt><span class="memberNameLink"><a href="com/microblink/metadata/MetadataSettings.html#isOcrMetadataAllowed--">isOcrMetadataAllowed()</a></span> - Method in class com.microblink.metadata.<a href="com/microblink/metadata/MetadataSettings.html" title="class in com.microblink.metadata">MetadataSettings</a></dt>
 <dd>
 <div class="block">Returns true if OCR metadata will be available in MetadataListener.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/microblink/ocr/RandomScanElement.html#isOptional--">isOptional()</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/RandomScanElement.html" title="class in com.microblink.ocr">RandomScanElement</a></dt>
+<dd>
+<div class="block">Returns whether scan field with this configuration is optional.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/microblink/ocr/ScanConfiguration.html#isOptional--">isOptional()</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/ScanConfiguration.html" title="class in com.microblink.ocr">ScanConfiguration</a></dt>
 <dd>
@@ -4832,6 +4858,19 @@
 </dd>
 <dt><span class="memberNameLink"><a href="com/microblink/activity/RandomScanActivity.html#RandomScanActivity--">RandomScanActivity()</a></span> - Constructor for class com.microblink.activity.<a href="com/microblink/activity/RandomScanActivity.html" title="class in com.microblink.activity">RandomScanActivity</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="com/microblink/ocr/RandomScanElement.html" title="class in com.microblink.ocr"><span class="typeNameLink">RandomScanElement</span></a> - Class in <a href="com/microblink/ocr/package-summary.html">com.microblink.ocr</a></dt>
+<dd>
+<div class="block">This class holds a combination of parser settings, parser name (which is important for obtaining
+ scan result), parser group and parser title (shown in UI).</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/microblink/ocr/RandomScanElement.html#RandomScanElement-int-java.lang.String-com.microblink.recognizers.blinkocr.parser.OcrParserSettings-">RandomScanElement(int, String, OcrParserSettings)</a></span> - Constructor for class com.microblink.ocr.<a href="com/microblink/ocr/RandomScanElement.html" title="class in com.microblink.ocr">RandomScanElement</a></dt>
+<dd>
+<div class="block">Constructor which takes string resource ID for string that will appear in UI.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/microblink/ocr/RandomScanElement.html#RandomScanElement-java.lang.String-java.lang.String-com.microblink.recognizers.blinkocr.parser.OcrParserSettings-">RandomScanElement(String, String, OcrParserSettings)</a></span> - Constructor for class com.microblink.ocr.<a href="com/microblink/ocr/RandomScanElement.html" title="class in com.microblink.ocr">RandomScanElement</a></dt>
+<dd>
+<div class="block">Constructor which takes normal string for text that appears in UI.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/recognizers/RecognitionResultConstants.html#RAW_BARCODE_DATA">RAW_BARCODE_DATA</a></span> - Static variable in interface com.microblink.recognizers.<a href="com/microblink/recognizers/RecognitionResultConstants.html" title="interface in com.microblink.recognizers">RecognitionResultConstants</a></dt>
 <dd>
 <div class="block">Key for accessing raw barcode data.</div>
@@ -5601,6 +5640,11 @@
 </dd>
 <dt><span class="memberNameLink"><a href="com/microblink/view/BaseCameraView.html#setOptimizeCameraForNearScan-boolean-">setOptimizeCameraForNearScan(boolean)</a></span> - Method in class com.microblink.view.<a href="com/microblink/view/BaseCameraView.html" title="class in com.microblink.view">BaseCameraView</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/microblink/ocr/RandomScanElement.html#setOptional-boolean-">setOptional(boolean)</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/RandomScanElement.html" title="class in com.microblink.ocr">RandomScanElement</a></dt>
+<dd>
+<div class="block">Sets the flag that indicates whether this scan element is optional, which means
+ that the result can be returned without scanning this element.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/ocr/ScanConfiguration.html#setOptional-boolean-">setOptional(boolean)</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/ScanConfiguration.html" title="class in com.microblink.ocr">ScanConfiguration</a></dt>
 <dd>
 <div class="block">Sets the flag that indicates whether this scan configuration is optional, which means
@@ -5647,9 +5691,21 @@
  information about additional document elements that should be recognized together with
  specific field type of concrete recognizer.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/microblink/ocr/RandomScanElement.html#setParserGroup-java.lang.String-">setParserGroup(String)</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/RandomScanElement.html" title="class in com.microblink.ocr">RandomScanElement</a></dt>
+<dd>
+<div class="block">Sets the parser group for parser that is responsible for this scan element.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/microblink/ocr/RandomScanElement.html#setParserName-java.lang.String-">setParserName(String)</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/RandomScanElement.html" title="class in com.microblink.ocr">RandomScanElement</a></dt>
+<dd>
+<div class="block">Sets the name of the parser.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/ocr/ScanConfiguration.html#setParserName-java.lang.String-">setParserName(String)</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/ScanConfiguration.html" title="class in com.microblink.ocr">ScanConfiguration</a></dt>
 <dd>
 <div class="block">Sets the name of the parser.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/microblink/ocr/RandomScanElement.html#setParserSettings-com.microblink.recognizers.blinkocr.parser.OcrParserSettings-">setParserSettings(OcrParserSettings)</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/RandomScanElement.html" title="class in com.microblink.ocr">RandomScanElement</a></dt>
+<dd>
+<div class="block">Sets the parser settings that will be used to instantiate parser.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/microblink/ocr/ScanConfiguration.html#setParserSettings-com.microblink.recognizers.blinkocr.parser.OcrParserSettings-">setParserSettings(OcrParserSettings)</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/ScanConfiguration.html" title="class in com.microblink.ocr">ScanConfiguration</a></dt>
 <dd>
@@ -5829,9 +5885,17 @@
 <dd>
 <div class="block">Sets the resource ID representing text that will be displayed when parser is active.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/microblink/ocr/RandomScanElement.html#setTitle-java.lang.String-">setTitle(String)</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/RandomScanElement.html" title="class in com.microblink.ocr">RandomScanElement</a></dt>
+<dd>
+<div class="block">Sets the title that will be displayed.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/ocr/ScanConfiguration.html#setTitle-java.lang.String-">setTitle(String)</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/ScanConfiguration.html" title="class in com.microblink.ocr">ScanConfiguration</a></dt>
 <dd>
 <div class="block">Sets the title that will be displayed.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/microblink/ocr/RandomScanElement.html#setTitleResource-int-">setTitleResource(int)</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/RandomScanElement.html" title="class in com.microblink.ocr">RandomScanElement</a></dt>
+<dd>
+<div class="block">Sets the resource ID representing title that will be displayed.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/microblink/ocr/ScanConfiguration.html#setTitleResource-int-">setTitleResource(int)</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/ScanConfiguration.html" title="class in com.microblink.ocr">ScanConfiguration</a></dt>
 <dd>
@@ -6230,6 +6294,8 @@
 <dt><span class="memberNameLink"><a href="com/microblink/geometry/Rectangle.html#toString--">toString()</a></span> - Method in class com.microblink.geometry.<a href="com/microblink/geometry/Rectangle.html" title="class in com.microblink.geometry">Rectangle</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/hardware/orientation/Orientation.html#toString--">toString()</a></span> - Method in enum com.microblink.hardware.orientation.<a href="com/microblink/hardware/orientation/Orientation.html" title="enum in com.microblink.hardware.orientation">Orientation</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/microblink/ocr/RandomScanElement.html#toString--">toString()</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/RandomScanElement.html" title="class in com.microblink.ocr">RandomScanElement</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/ocr/ScanConfiguration.html#toString--">toString()</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/ScanConfiguration.html" title="class in com.microblink.ocr">ScanConfiguration</a></dt>
 <dd>&nbsp;</dd>
@@ -6645,6 +6711,8 @@ the order they are declared.</div>
 <dt><span class="memberNameLink"><a href="com/microblink/metadata/MetadataSettings.ImageMetadataSettings.DebugImageMetadataSettings.html#writeToParcel-android.os.Parcel-int-">writeToParcel(Parcel, int)</a></span> - Method in class com.microblink.metadata.<a href="com/microblink/metadata/MetadataSettings.ImageMetadataSettings.DebugImageMetadataSettings.html" title="class in com.microblink.metadata">MetadataSettings.ImageMetadataSettings.DebugImageMetadataSettings</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html#writeToParcel-android.os.Parcel-int-">writeToParcel(Parcel, int)</a></span> - Method in class com.microblink.metadata.<a href="com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html" title="class in com.microblink.metadata">MetadataSettings.ImageMetadataSettings</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/microblink/ocr/RandomScanElement.html#writeToParcel-android.os.Parcel-int-">writeToParcel(Parcel, int)</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/RandomScanElement.html" title="class in com.microblink.ocr">RandomScanElement</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microblink/ocr/ScanConfiguration.html#writeToParcel-android.os.Parcel-int-">writeToParcel(Parcel, int)</a></span> - Method in class com.microblink.ocr.<a href="com/microblink/ocr/ScanConfiguration.html" title="class in com.microblink.ocr">ScanConfiguration</a></dt>
 <dd>&nbsp;</dd>
