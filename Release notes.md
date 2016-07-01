@@ -1,5 +1,8 @@
 # Release notes
 
+## 5.10.1
+- improved CroReferenceParser, reference can be parsed when it is followed by dot character
+
 ## 5.10.0
 - added support for scanning Czech IDs
 - renamed BlinkOCRActivity to SegmentScanActivity
