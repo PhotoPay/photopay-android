@@ -1,5 +1,13 @@
 # Release notes
 
+## 5.11.0
+- added support for Alberta (Canada) DL
+- enabled reading of longer ITF barcodes
+- added support for Malaysian visa
+- added support for Malaysian work permits
+- improved Sweden parsers: SweGiroParser and SweReferenceParser
+- improved Macedonian parsers: MkdAccountParser and MkdReferenceParser
+
 ## 5.10.1
 - improved CroReferenceParser, reference can be parsed when it is followed by dot character
 
