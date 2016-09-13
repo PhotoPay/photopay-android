@@ -241,7 +241,7 @@
 
 <pre><code>dependencies {
     compile project(':LibRecognizer')
-    compile "com.android.support:appcompat-v7:24.0.0"
+    compile "com.android.support:appcompat-v7:24.2.0"
 }
 </code></pre>
 </li>
@@ -327,7 +327,7 @@ startActivityForResult(intent, <span class="pl-c1">MY_REQUEST_CODE</span>);</pre
 <li>
 <p>After <code>ScanActivity</code> activity finishes the scan, it will return to the calling activity and will call method <code>onActivityResult</code>. You can obtain the scanning results in that method.</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">protected</span> <span class="pl-k">void</span> onActivityResult(<span class="pl-k">int</span> requestCode, <span class="pl-k">int</span> resultCode, <span class="pl-smi">Intent</span> data) {
     <span class="pl-v">super</span><span class="pl-k">.</span>onActivityResult(requestCode, resultCode, data);
 
@@ -393,7 +393,7 @@ startActivityForResult(intent, <span class="pl-c1">MY_REQUEST_CODE</span>);</pre
 <li>
 <p>After <code>SegmentScanActivity</code> activity finishes the scan, it will return to the calling activity and will call method <code>onActivityResult</code>. You can obtain the scanning results in that method.</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">protected</span> <span class="pl-k">void</span> onActivityResult(<span class="pl-k">int</span> requestCode, <span class="pl-k">int</span> resultCode, <span class="pl-smi">Intent</span> data) {
     <span class="pl-v">super</span><span class="pl-k">.</span>onActivityResult(requestCode, resultCode, data);
 
@@ -455,7 +455,7 @@ startActivityForResult(intent, <span class="pl-c1">MY_REQUEST_CODE</span>);</pre
 <li>
 <p>You can obtain the scanning results in the <code>onActivityResult</code> of the calling activity.</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">protected</span> <span class="pl-k">void</span> onActivityResult(<span class="pl-k">int</span> requestCode, <span class="pl-k">int</span> resultCode, <span class="pl-smi">Intent</span> data) {
     <span class="pl-v">super</span><span class="pl-k">.</span>onActivityResult(requestCode, resultCode, data);
 
@@ -1470,7 +1470,7 @@ mRecognizerView<span class="pl-k">.</span>setMetadataListener(myMetadataListener
 
 <p>Austrian payslip recognizer produces <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/austria/slip/AustrianSlipRecognitionResult.html">AustrianSlipRecognitionResult</a>. You can use <code>instanceof</code> operator to check if element in results array is instance of <code>AustrianSlipRecognitionResult</code> class. See the following snippet for an example:</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
     <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
     <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
@@ -1604,7 +1604,7 @@ mRecognizerView<span class="pl-k">.</span>setMetadataListener(myMetadataListener
 
 <p>Austrian STUZZA QR code recognizer produces <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/austria/qr/AustrianQRRecognitionResult.html">AustrianQRRecognitionResult</a>. You can use <code>instanceof</code> operator to check if element in results array is instance of <code>AustrianQRRecognitionResult</code> class. See the following snippet for an example:</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
     <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
     <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
@@ -1704,7 +1704,7 @@ mRecognizerView<span class="pl-k">.</span>setMetadataListener(myMetadataListener
 
 <p>Belgian payslip recognizer produces <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/belgium/slip/BelgianSlipRecognitionResult.html">BelgianSlipRecognitionResult</a>. You can use <code>instanceof</code> operator to check if element in results array is instance of <code>BelgianSlipRecognitionResult</code> class. See the following snippet for an example:</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
     <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
     <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
@@ -1803,7 +1803,7 @@ mRecognizerView<span class="pl-k">.</span>setMetadataListener(myMetadataListener
 
 <p>Croatian payslip recognizer produces <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/croatia/slip/CroatianSlipRecognitionResult.html">CroatianSlipRecognitionResult</a>. You can use <code>instanceof</code> operator to check if element in results array is instance of <code>CroatianSlipRecognitionResult</code> class. See the following snippet for an example:</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
     <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
     <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
@@ -1983,7 +1983,7 @@ mRecognizerView<span class="pl-k">.</span>setMetadataListener(myMetadataListener
 
 <p>Croatian Pdf417 barcode payslip recognizer produces <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/croatia/pdf417/CroatianPdf417RecognitionResult.html">CroatianPdf417RecognitionResult</a>. You can use <code>instanceof</code> operator to check if element in results array is instance of <code>CroatianPdf417RecognitionResult</code> class. See the following snippet for an example:</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
     <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
     <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
@@ -2198,7 +2198,7 @@ mRecognizerView<span class="pl-k">.</span>setMetadataListener(myMetadataListener
 
 <p>Croatian payslip recognizer produces <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/croatia/qr/CroatianQRCodeRecognitionResult.html">CroatianQRCodeRecognitionResult</a>. You can use <code>instanceof</code> operator to check if element in results array is instance of <code>CroatianQRCodeRecognitionResult</code> class. See the following snippet for an example:</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
     <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
     <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
@@ -2410,7 +2410,7 @@ mRecognizerView<span class="pl-k">.</span>setMetadataListener(myMetadataListener
 
 <p>Czech payslip recognizer produces <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/czechia/slip/CzechSlipRecognitionResult.html">CzechSlipRecognitionResult</a>. You can use <code>instanceof</code> operator to check if element in results array is instance of <code>CzechSlipRecognitionResult</code> class. See the following snippet for an example:</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
     <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
     <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
@@ -2517,7 +2517,7 @@ mRecognizerView<span class="pl-k">.</span>setMetadataListener(myMetadataListener
 
 <p>Czech payment QR recognizer produces <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/czechia/qr/CzechQRCodeRecognitionResult.html">CzechQRCodeRecognitionResult</a>. You can use <code>instanceof</code> operator to check if element in results array is instance of <code>CzechQRCodeRecognitionResult</code> class. See the following snippet for an example:</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
     <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
     <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
@@ -2572,7 +2572,7 @@ mRecognizerView<span class="pl-k">.</span>setMetadataListener(myMetadataListener
 
 <p>Dutch payslip recognizer produces <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/netherlands/slip/DutchSlipRecognitionResult.html">DutchSlipRecognitionResult</a>. You can use <code>instanceof</code> operator to check if element in results array is instance of <code>DutchSlipRecognitionResult</code> class. See the following snippet for an example:</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
     <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
     <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
@@ -2675,7 +2675,7 @@ mRecognizerView<span class="pl-k">.</span>setMetadataListener(myMetadataListener
 
 <p>German payslip recognizer produces <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/germany/slip/GermanSlipRecognitionResult.html">GermanSlipRecognitionResult</a>. You can use <code>instanceof</code> operator to check if element in results array is instance of <code>GermanSlipRecognitionResult</code> class. See the following snippet for an example:</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
     <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
     <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
@@ -2801,7 +2801,7 @@ mRecognizerView<span class="pl-k">.</span>setMetadataListener(myMetadataListener
 
 <p>German QR code recognizer produces <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/germany/qr/GermanQRRecognitionResult.html">GermanQRRecognitionResult</a>. You can use <code>instanceof</code> operator to check if element in results array is instance of <code>GermanQRRecognitionResult</code> class. See the following snippet for an example:</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
     <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
     <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
@@ -3005,7 +3005,7 @@ mRecognizerView<span class="pl-k">.</span>setMetadataListener(myMetadataListener
 
 <p>Hungarian payslip recognizer produces <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/hungary/slip/HungarianSlipRecognitionResult.html">HungarianSlipRecognitionResult</a>. You can use <code>instanceof</code> operator to check if element in results array is instance of <code>HungarianSlipRecognitionResult</code> class. See the following snippet for an example:</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
     <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
     <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
@@ -3110,7 +3110,7 @@ mRecognizerView<span class="pl-k">.</span>setMetadataListener(myMetadataListener
 
 <p>Kosovo payslip recognizer produces <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/kosovo/slip/KosovoSlipRecognitionResult.html">KosovoSlipRecognitionResult</a>. You can use <code>instanceof</code> operator to check if element in results array is instance of <code>KosovoSlipRecognitionResult</code> class. See the following snippet for an example:</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
     <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
     <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
@@ -3203,7 +3203,7 @@ mRecognizerView<span class="pl-k">.</span>setMetadataListener(myMetadataListener
 
 <p>Kosovo barcode recognizer produces <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/kosovo/code128/KosovoCode128RecognitionResult.html">KosovoCode128RecognitionResult</a>. You can use <code>instanceof</code> operator to check if element in results array is instance of <code>KosovoCode128RecognitionResult</code> class. See the following snippet for an example:</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
     <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
     <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
@@ -3298,7 +3298,7 @@ mRecognizerView<span class="pl-k">.</span>setMetadataListener(myMetadataListener
 
 <p>Slovak payBySquare QR recognizer produces <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovakia/qr/SlovakQRCodeRecognitionResult.html">SlovakQRCodeRecognitionResult</a>. You can use <code>instanceof</code> operator to check if element in results array is instance of <code>SlovakQRCodeRecognitionResult</code> class. See the following snippet for an example:</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
     <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
     <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
@@ -3343,7 +3343,7 @@ mRecognizerView<span class="pl-k">.</span>setMetadataListener(myMetadataListener
 
 <p>Slovenian payslip recognizer produces <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovenia/slip/SlovenianSlipRecognitionResult.html">SlovenianSlipRecognitionResult</a>. You can use <code>instanceof</code> operator to check if element in results array is instance of <code>SlovenianSlipRecognitionResult</code> class. See the following snippet for an example:</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
     <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
     <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
@@ -3449,7 +3449,7 @@ mRecognizerView<span class="pl-k">.</span>setMetadataListener(myMetadataListener
 
 <p>Swiss payslip recognizer produces <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/switzerland/slip/SwissSlipRecognitionResult.html">SwissSlipRecognitionResult</a>. You can use <code>instanceof</code> operator to check if element in results array is instance of <code>SwissSlipRecognitionResult</code> class. See the following snippet for an example:</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
     <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
     <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
@@ -3536,7 +3536,7 @@ mRecognizerView<span class="pl-k">.</span>setMetadataListener(myMetadataListener
 
 <p>UK Giro slip OCR line recognizer produces <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/uk/slip/UnitedKingdomSlipRecognitionResult.html">UnitedKingdomSlipRecognitionResult</a>. You can use <code>instanceof</code> operator to check if element in results array is instance of <code>UnitedKingdomSlipRecognitionResult</code> class. See the following snippet for an example:</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
     <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
     <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
@@ -3635,7 +3635,7 @@ mRecognizerView<span class="pl-k">.</span>setMetadataListener(myMetadataListener
 
 <p>UK payment QR code recognizer produces <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/uk/qr/UnitedKingdomQRCodeRecognitionResult.html">UnitedKingdomQRCodeRecognitionResult</a>. You can use <code>instanceof</code> operator to check if element in results array is instance of <code>UnitedKingdomQRCodeRecognitionResult</code> class. See the following snippet for an example:</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
     <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
     <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
@@ -3761,7 +3761,7 @@ mRecognizerView<span class="pl-k">.</span>setMetadataListener(myMetadataListener
 
 <p>PDF417 recognizer produces <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/pdf417/Pdf417ScanResult.html">Pdf417ScanResult</a>. You can use <code>instanceof</code> operator to check if element in results array is instance of <code>Pdf417ScanResult</code> class. See the following snippet for an example:</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
     <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
     <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
@@ -3864,7 +3864,7 @@ mRecognizerView<span class="pl-k">.</span>setMetadataListener(myMetadataListener
 
 <p>Bardecoder recognizer produces <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/barcode/blinkbardecoder/BarDecoderScanResult.html">BarDecoderScanResult</a>. You can use <code>instanceof</code> operator to check if element in results array is instance of <code>BarDecoderScanResult</code> class. See the following snippet for example:</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
     <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
     <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
@@ -4018,7 +4018,7 @@ mRecognizerView<span class="pl-k">.</span>setMetadataListener(myMetadataListener
 
 <p>ZXing recognizer produces <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/zxing/ZXingScanResult.html">ZXingScanResult</a>. You can use <code>instanceof</code> operator to check if element in results array is instance of <code>ZXingScanResult</code> class. See the following snippet for example:</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
     <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
     <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
@@ -4146,7 +4146,7 @@ the MRZ zone. Use this method if document contains additional information (eleme
 
 <p>MRTD recognizer produces <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html">MRTDRecognitionResult</a>. You can use <code>instanceof</code> operator to check if element in results array is instance of <code>MRTDRecognitionResult</code> class. See the following snippet for an example:</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
     <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
     <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
@@ -4225,10 +4225,16 @@ the MRZ zone. Use this method if document contains additional information (eleme
 <p>Returns three-letter or two-letter code which indicate the issuing State. Three-letter codes are based on <code>Alpha-3</code> codes for entities specified in <code>ISO 3166-1</code>, with extensions for certain States. Two-letter codes are based on <code>Alpha-2</code> codes for entities specified in <code>ISO 3166-1</code>, with extensions for certain States.</p>
 
 <h5>
-<a id="user-content-string-getdateofbirth" class="anchor" href="#string-getdateofbirth" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>String getDateOfBirth()</code>
+<a id="user-content-date-getdateofbirth" class="anchor" href="#date-getdateofbirth" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>Date getDateOfBirth()</code>
 </h5>
 
-<p>Returns holder's date of birth in format <code>YYMMDD</code>.</p>
+<p>Returns holder's date of birth if it is successfully converted to <code>Date</code> from MRZ date format: <code>YYMMDD</code> or null if date is unknown or can not be converted to <code>Date</code>.</p>
+
+<h5>
+<a id="user-content-string-getrawdateofbirth" class="anchor" href="#string-getrawdateofbirth" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>String getRawDateOfBirth()</code>
+</h5>
+
+<p>Returns holder's date of birth as raw string from MRZ zone in format <code>YYMMDD</code>.</p>
 
 <h5>
 <a id="user-content-string-getdocumentnumber" class="anchor" href="#string-getdocumentnumber" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>String getDocumentNumber()</code>
@@ -4255,10 +4261,16 @@ the MRZ zone. Use this method if document contains additional information (eleme
 <p>Returns document code. Document code contains two characters. For <code>MRTD</code> the first character shall be <code>A</code>, <code>C</code> or <code>I</code>. The second character shall be discretion of the issuing State or organization except that V shall not be used, and <code>C</code> shall not be used after <code>A</code> except in the crew member certificate. On machine-readable passports <code>(MRP)</code> first character shall be <code>P</code> to designate an <code>MRP</code>. One additional letter may be used, at the discretion of the issuing State or organization, to designate a particular <code>MRP</code>. If the second character position is not used for this purpose, it shall be filled by the filter character <code>&lt;</code>.</p>
 
 <h5>
-<a id="user-content-string-getdateofexpiry" class="anchor" href="#string-getdateofexpiry" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>String getDateOfExpiry()</code>
+<a id="user-content-date-getdateofexpiry" class="anchor" href="#date-getdateofexpiry" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>Date getDateOfExpiry()</code>
 </h5>
 
-<p>Returns date of expiry of the document in format <code>YYMMDD</code>.</p>
+<p>Returns date of expiry if it is successfully converted to <code>Date</code> from MRZ date format: <code>YYMMDD</code> or null if date is unknown or can not be converted to <code>Date</code>.</p>
+
+<h5>
+<a id="user-content-string-getrawdateofexpiry" class="anchor" href="#string-getrawdateofexpiry" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>String getRawDateOfExpiry()</code>
+</h5>
+
+<p>Returns date of expiry as raw string from MRZ zone in format <code>YYMMDD</code>.</p>
 
 <h5>
 <a id="user-content-string-getopt1" class="anchor" href="#string-getopt1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>String getOpt1()</code>
@@ -4340,7 +4352,7 @@ the MRZ zone. Use this method if document contains additional information (eleme
 
 <p>See the following snippet for an example:</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
     <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
     <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
@@ -4391,7 +4403,7 @@ the MRZ zone. Use this method if document contains additional information (eleme
 
 <p>See the following snippet for an example:</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
     <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
     <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
@@ -4441,7 +4453,7 @@ the MRZ zone. Use this method if document contains additional information (eleme
 
 <p>See the following snippet for an example:</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
     <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
     <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
@@ -4492,7 +4504,7 @@ the MRZ zone. Use this method if document contains additional information (eleme
 
 <p>See the following snippet for an example:</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
     <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
     <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
@@ -4542,7 +4554,7 @@ the MRZ zone. Use this method if document contains additional information (eleme
 
 <p>See the following snippet for an example:</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
     <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
     <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
@@ -4593,7 +4605,7 @@ the MRZ zone. Use this method if document contains additional information (eleme
 
 <p>See the following snippet for an example:</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
     <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
     <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
@@ -4701,6 +4713,13 @@ the MRZ zone. Use this method if document contains additional information (eleme
 <ul>
 <li>used for parsing arbitrary regular expressions</li>
 <li>please note that some features, like back references, match grouping and certain regex metacharacters are not supported. See javadoc for more info.</li>
+</ul>
+</li>
+<li>
+<p>Mobile coupons parser - represented by <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/mobilecoupons/MobileCouponsParserSettings.html">MobileCouponsParserSettings</a></p>
+
+<ul>
+<li>used for parsing prepaid codes from mobile phone coupons (Croatia)</li>
 </ul>
 </li>
 <li>
@@ -4820,7 +4839,7 @@ the MRZ zone. Use this method if document contains additional information (eleme
 
 <p>BlinkOCR recognizer produces <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognitionResult.html">BlinkOCRRecognitionResult</a>. You can use <code>instanceof</code> operator to check if element in results array is instance of <code>BlinkOCRRecognitionResult</code> class. See the following snippet for an example:</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
     <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
     <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
@@ -4875,6 +4894,18 @@ the MRZ zone. Use this method if document contains additional information (eleme
 </h5>
 
 <p>Returns the parsed result provided by parser with name <code>parserName</code> added to parser group named <code>parserGroupName</code>. If parser with name <code>parserName</code> does not exists in parser group with name <code>parserGroupName</code> or if parser group does not exists, returns <code>null</code>. If parser exists, but has failed to parse any data, returns empty string.</p>
+
+<h5>
+<a id="user-content-object-getspecificparsedresultstring-parsername" class="anchor" href="#object-getspecificparsedresultstring-parsername" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>Object getSpecificParsedResult(String parserName)</code>
+</h5>
+
+<p>Returns specific parser result for concrete parser with the given parser name in default parser group. For example, date parser which is represented with <code>DateParserSettings</code> can return parsed date as <code>Date</code> object. It is always possible to obtain parsed result as raw string by using <em>getParsedResult(String)</em> or <em>getParsedResult(String, String)</em> method. If parser with name <code>parserName</code> does not exists in default parser group, returns <code>null</code>. If parser exists, but has failed to parse any data, returns null or empty string.</p>
+
+<h5>
+<a id="user-content-object-getspecificparsedresultstring-parsergroupname-string-parsername" class="anchor" href="#object-getspecificparsedresultstring-parsergroupname-string-parsername" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>Object getSpecificParsedResult(String parserGroupName, String parserName)</code>
+</h5>
+
+<p>Returns specific parser result for concrete parser with the given parser name in the given parser group. For example, date parser which is represented with <code>DateParserSettings</code> can return parsed date as <code>Date</code> object. It is always possible to obtain parsed result as raw string by using <em>getParsedResult(String)</em> or <em>getParsedResult(String, String)</em> method. If parser with name <code>parserName</code> does not exists in parser group with name <code>parserGroupName</code> or if parser group does not exists, returns <code>null</code>. If parser exists, but has failed to parse any data, returns null or empty string.</p>
 
 <h5>
 <a id="user-content-ocrresult-getocrresult-1" class="anchor" href="#ocrresult-getocrresult-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>OcrResult getOcrResult()</code>
@@ -4975,7 +5006,7 @@ the MRZ zone. Use this method if document contains additional information (eleme
 
 <p>Detector Recognizer produces <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DetectorRecognitionResult.html">DetectorRecognitionResult</a>. You can use <code>instanceof</code> operator to check if element in results array is instance of <code>DetectorRecognitionResult</code> class. See the following snippet for an example:</p>
 
-<div class="highlight highlight-source-java"><pre>@<span class="pl-smi">Override</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
     <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
     <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {

@@ -116,7 +116,7 @@ You can also create your own scanning UI - you just need to embed `RecognizerVie
 	```
 	dependencies {
    		compile project(':LibRecognizer')
- 		compile "com.android.support:appcompat-v7:24.0.0"
+ 		compile "com.android.support:appcompat-v7:24.2.0"
 	}
 	```
 5. If you plan to use ProGuard, add following lines to your `proguard-rules.pro`:
@@ -3178,8 +3178,11 @@ Returns the secondary identifier. If there is more than one component, they are 
 ##### `String getIssuer()`
 Returns three-letter or two-letter code which indicate the issuing State. Three-letter codes are based on `Alpha-3` codes for entities specified in `ISO 3166-1`, with extensions for certain States. Two-letter codes are based on `Alpha-2` codes for entities specified in `ISO 3166-1`, with extensions for certain States.
 
-##### `String getDateOfBirth()`
-Returns holder's date of birth in format `YYMMDD`.
+##### `Date getDateOfBirth()`
+Returns holder's date of birth if it is successfully converted to `Date` from MRZ date format: `YYMMDD` or null if date is unknown or can not be converted to `Date`.
+
+##### `String getRawDateOfBirth()`
+Returns holder's date of birth as raw string from MRZ zone in format `YYMMDD`.
 
 ##### `String getDocumentNumber()`
 Returns document number. Document number contains up to 9 characters.
@@ -3193,8 +3196,11 @@ Returns sex of the card holder. Sex is specified by use of the single initial, c
 ##### `String getDocumentCode()`
 Returns document code. Document code contains two characters. For `MRTD` the first character shall be `A`, `C` or `I`. The second character shall be discretion of the issuing State or organization except that V shall not be used, and `C` shall not be used after `A` except in the crew member certificate. On machine-readable passports `(MRP)` first character shall be `P` to designate an `MRP`. One additional letter may be used, at the discretion of the issuing State or organization, to designate a particular `MRP`. If the second character position is not used for this purpose, it shall be filled by the filter character `<`.
 
-##### `String getDateOfExpiry()`
-Returns date of expiry of the document in format `YYMMDD`.
+##### `Date getDateOfExpiry()`
+Returns date of expiry if it is successfully converted to `Date` from MRZ date format: `YYMMDD` or null if date is unknown or can not be converted to `Date`.
+
+##### `String getRawDateOfExpiry()`
+Returns date of expiry as raw string from MRZ zone in format `YYMMDD`.
 
 ##### `String getOpt1()`
 Returns first optional data. Returns `null` or empty string if not available.
@@ -3587,6 +3593,9 @@ The following is a list of available parsers:
 	- used for parsing arbitrary regular expressions
 	- please note that some features, like back references, match grouping and certain regex metacharacters are not supported. See javadoc for more info.
 
+- Mobile coupons parser - represented by [MobileCouponsParserSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/mobilecoupons/MobileCouponsParserSettings.html)
+	- used for parsing prepaid codes from mobile phone coupons (Croatia)
+
 - Croatian reference parser - represented by [CroReferenceParserSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/croatia/CroReferenceParserSettings.html)
 	- used for parsing croatian payment reference numbers from OCR result
 
@@ -3680,6 +3689,12 @@ Returns the parsed result provided by parser with name `parserName` added to def
 
 ##### `String getParsedResult(String parserGroupName, String parserName)`
 Returns the parsed result provided by parser with name `parserName` added to parser group named `parserGroupName`. If parser with name `parserName` does not exists in parser group with name `parserGroupName` or if parser group does not exists, returns `null`. If parser exists, but has failed to parse any data, returns empty string.
+
+##### `Object getSpecificParsedResult(String parserName)`
+Returns specific parser result for concrete parser with the given parser name in default parser group. For example, date parser which is represented with `DateParserSettings` can return parsed date as `Date` object. It is always possible to obtain parsed result as raw string by using *getParsedResult(String)* or *getParsedResult(String, String)* method. If parser with name `parserName` does not exists in default parser group, returns `null`. If parser exists, but has failed to parse any data, returns null or empty string.
+
+##### `Object getSpecificParsedResult(String parserGroupName, String parserName)`
+Returns specific parser result for concrete parser with the given parser name in the given parser group. For example, date parser which is represented with `DateParserSettings` can return parsed date as `Date` object. It is always possible to obtain parsed result as raw string by using *getParsedResult(String)* or *getParsedResult(String, String)* method. If parser with name `parserName` does not exists in parser group with name `parserGroupName` or if parser group does not exists, returns `null`. If parser exists, but has failed to parse any data, returns null or empty string.
 
 ##### `OcrResult getOcrResult()`
 Returns the [OCR result](https://photopay.github.io/photopay-android/com/microblink/results/ocr/OcrResult.html) structure for default parser group.

@@ -1,5 +1,19 @@
 # Release notes
 
+##5.12.0
+- added `MobileCouponsParser` for reading prepaid codes from mobile phone coupons (Croatia)
+- `DateParser` returns result as java `Date` object and as original date `String`
+- added method `getSpecificParsedResult` to `TemplatingRecognitionResult` (`BlinkOCRRecognitionResult`) which returns specific parser results, e.g. java `Date` for `DateParser`
+- improved `MRTDRecognizer`:
+    - Dates from MRZ are parsed to java `Date`
+    - `MRTDRecognitionResult` can return dates as java `Date` and as original date `String`
+    - more accurate and faster detection of MRZ zone
+- fixed crashes on  LG F6 and HTC One SV
+- added support for scanning front and back side of Slovak ID cards
+- added support for scanning front and back side of German ID cards
+- improved support for scanning Croatian ID cards
+- fixed crashes on Nexus 6 (Android 7.0)
+
 ## 5.11.0
 - added support for Alberta (Canada) DL
 - enabled reading of longer ITF barcodes
