@@ -43,12 +43,14 @@ com.microblink.recognizers.blinkocr.parser.croatia
 com.microblink.recognizers.blinkocr.parser.czechia
 com.microblink.recognizers.blinkocr.parser.generic
 com.microblink.recognizers.blinkocr.parser.germany
+com.microblink.recognizers.blinkocr.parser.hungary
 com.microblink.recognizers.blinkocr.parser.licenseplates
 com.microblink.recognizers.blinkocr.parser.macedonia
 com.microblink.recognizers.blinkocr.parser.mobilecoupons
 com.microblink.recognizers.blinkocr.parser.montenegro
 com.microblink.recognizers.blinkocr.parser.regex
 com.microblink.recognizers.blinkocr.parser.serbia
+com.microblink.recognizers.blinkocr.parser.slovenia
 com.microblink.recognizers.blinkocr.parser.sweden
 com.microblink.recognizers.blinkocr.parser.vin
 com.microblink.recognizers.detector

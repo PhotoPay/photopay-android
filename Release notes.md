@@ -1,5 +1,20 @@
 # Release notes
 
+##6.0.0
+- improved `MobileCouponsParser`, added more options to customise parser settings
+- added support for scanning front and back side of Serbian ID cards
+- added option to request setting of `FLAG_SECURE` on activity window, using intent extras, for all built-in scan activities 
+    - this flag can be used to prevent users from taking screenshots of the activity window content and to prevent content from being viewed on non-secure displays
+- improved support for Czech segment scan:
+    - added parser for Czech variabilni symbol
+- added support for Hungarian segment scan:
+    - Hungarian account number parser
+    - Hungarian payer ID parser
+- added support for Slovenian segment scan:
+    - Slovenian reference parser
+- migrated to libc++ native runtime and used clang from NDKr12b for building the native code
+    - this enabled c++14 features which will help us yield much better performance in the future
+
 ##5.12.0
 - added `MobileCouponsParser` for reading prepaid codes from mobile phone coupons (Croatia)
 - `DateParser` returns result as java `Date` object and as original date `String`

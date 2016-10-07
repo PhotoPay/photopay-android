@@ -131,6 +131,8 @@
 <li><a href="#czID_back">Scanning back side of Czech ID documents</a></li>
 <li><a href="#germanID_front">Scanning front side of German ID documents</a></li>
 <li><a href="#germanID_MRZ">Scanning MRZ side of German ID documents</a></li>
+<li><a href="#serbianID_front">Scanning front side of Serbian ID documents</a></li>
+<li><a href="#serbianID_back">Scanning back side of Serbian ID documents</a></li>
 <li><a href="#slovakID_front">Scanning front side of Slovak ID documents</a></li>
 <li><a href="#slovakID_back">Scanning back side of Slovak ID documents</a></li>
 <li><a href="#blinkOCR">Scanning segments with BlinkOCR recognizer</a></li>
@@ -245,7 +247,7 @@
 
 <pre><code>dependencies {
     compile project(':LibRecognizer')
-    compile "com.android.support:appcompat-v7:24.2.0"
+    compile "com.android.support:appcompat-v7:24.2.1"
 }
 </code></pre>
 </li>
@@ -586,6 +588,11 @@ intent<span class="pl-k">.</span>putExtra(<span class="pl-smi">ScanActivity</spa
 <div class="highlight highlight-source-java"><pre>intent<span class="pl-k">.</span>putExtra(<span class="pl-smi">ScanActivity</span><span class="pl-c1"><span class="pl-k">.</span>EXTRAS_CAMERA_VIDEO_PRESET</span>, (<span class="pl-smi">Parcelable</span>)<span class="pl-smi">VideoResolutionPreset</span><span class="pl-k">.</span><span class="pl-smi">VIDEO_RESOLUTION_720p</span>);</pre></div>
 </li>
 <li>
+<p><a name="user-content-intent_EXTRAS_SET_FLAG_SECURE" href="#intent_EXTRAS_SET_FLAG_SECURE">#</a> <strong><code>ScanActivity.EXTRAS_SET_FLAG_SECURE</code></strong> - with this extra you can request setting of <code>FLAG_SECURE</code> on activity window which indicates that the display has a secure video output and supports compositing secure surfaces. Use this to prevent taking screenshots of the activity window content and to prevent content from being viewed on non-secure displays. To set <code>FLAG_SECURE</code> on camera activity, use the following code snippet:</p>
+
+<div class="highlight highlight-source-java"><pre>intent<span class="pl-k">.</span>putExtra(<span class="pl-smi">ScanActivity</span><span class="pl-c1"><span class="pl-k">.</span>EXTRAS_SET_FLAG_SECURE</span>, <span class="pl-c1">true</span>);</pre></div>
+</li>
+<li>
 <p><a name="user-content-intent_EXTRAS_LICENSE_KEY" href="#intent_EXTRAS_LICENSE_KEY">#</a> <strong><code>ScanActivity.EXTRAS_LICENSE_KEY</code></strong> - with this extra you can set the license key for <em>PhotoPay</em>. You can obtain your licence key from <a href="https://photopay.net/">PhotoPay website</a> or you can contact us at <a href="http://help.microblink.com">http://help.microblink.com</a>. Once you obtain a license key, you can set it with following snippet:</p>
 
 <div class="highlight highlight-source-java"><pre><span class="pl-c">// set the license key</span>
@@ -671,9 +678,15 @@ intent<span class="pl-k">.</span>putExtra(<span class="pl-smi">SegmentScanActivi
 <div class="highlight highlight-source-java"><pre>intent<span class="pl-k">.</span>putExtra(<span class="pl-smi">SegmentScanActivity</span><span class="pl-c1"><span class="pl-k">.</span>EXTRAS_CAMERA_VIDEO_PRESET</span>, (<span class="pl-smi">Parcelable</span>)<span class="pl-smi">VideoResolutionPreset</span><span class="pl-k">.</span><span class="pl-smi">VIDEO_RESOLUTION_720p</span>);</pre></div>
 </li>
 <li>
-<p><a name="user-content-intent_EXTRAS_LICENSE_KEY" href="#intent_EXTRAS_LICENSE_KEY">#</a> <strong><code>ScanActivity.EXTRAS_LICENSE_KEY</code></strong> - with this extra you can set the license key for <em>PhotoPay</em>. You can obtain your licence key from <a href="https://photopay.net/">PhotoPay website</a> or you can contact us at <a href="http://help.microblink.com">http://help.microblink.com</a>. Once you obtain a license key, you can set it with following snippet:</p>
+<p><a name="user-content-intent_EXTRAS_SET_FLAG_SECURE" href="#intent_EXTRAS_SET_FLAG_SECURE">#</a> <strong><code>SegmentScanActivity.EXTRAS_SET_FLAG_SECURE</code></strong> - with this extra you can request setting of <code>FLAG_SECURE</code> on activity window which indicates that the display has a secure video output and supports compositing secure surfaces. Use this to prevent taking screenshots of the activity window content and to prevent content from being viewed on non-secure displays. To set <code>FLAG_SECURE</code> on camera activity, use the following code snippet:</p>
 
-<div class="highlight highlight-source-java"><pre><span class="pl-c">// set the license key</span>
+<div class="highlight highlight-source-java"><pre>intent<span class="pl-k">.</span>putExtra(<span class="pl-smi">SegmentScanActivity</span><span class="pl-c1"><span class="pl-k">.</span>EXTRAS_SET_FLAG_SECURE</span>, <span class="pl-c1">true</span>);
+
+
+<span class="pl-k">*</span> <span class="pl-k">&lt;</span>a name<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>intent_EXTRAS_LICENSE_KEY<span class="pl-pds">"</span></span> href<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>#intent_EXTRAS_LICENSE_KEY<span class="pl-pds">"</span></span><span class="pl-k">&gt;</span>#<span class="pl-k">&lt;</span><span class="pl-k">/</span>a<span class="pl-k">&gt;</span> <span class="pl-k">**</span>`<span class="pl-smi">ScanActivity</span><span class="pl-c1"><span class="pl-k">.</span>EXTRAS_LICENSE_KEY</span>`<span class="pl-k">**</span> <span class="pl-k">-</span> with <span class="pl-v">this</span> extra you can set the license key <span class="pl-k">for</span> _PhotoPay_. <span class="pl-smi">You</span> can obtain your licence key from [<span class="pl-smi">PhotoPay</span> website](https<span class="pl-k">:</span><span class="pl-c">//photopay.net/) or you can contact us at [http://help.microblink.com](http://help.microblink.com). Once you obtain a license key, you can set it with following snippet:</span>
+
+```java
+<span class="pl-c">// set the license key</span>
 intent<span class="pl-k">.</span>putExtra(<span class="pl-smi">ScanActivity</span><span class="pl-c1"><span class="pl-k">.</span>EXTRAS_LICENSE_KEY</span>, <span class="pl-s"><span class="pl-pds">"</span>Enter_License_Key_Here<span class="pl-pds">"</span></span>);</pre></div>
 
 <p>Licence key is bound to package name of your application. For example, if you have licence key that is bound to <code>my.namespace</code> app package, you cannot use the same key in other applications. However, if you purchase Premium licence, you will get licence key that can be used in multiple applications. This licence key will then not be bound to package name of the app. Instead, it will be bound to the licencee string that needs to be provided to the library together with the licence key. To provide licencee string, use the <code>EXTRAS_LICENSEE</code> intent extra like this:</p>
@@ -681,19 +694,24 @@ intent<span class="pl-k">.</span>putExtra(<span class="pl-smi">ScanActivity</spa
 <div class="highlight highlight-source-java"><pre><span class="pl-c">// set the license key</span>
 intent<span class="pl-k">.</span>putExtra(<span class="pl-smi">ScanActivity</span><span class="pl-c1"><span class="pl-k">.</span>EXTRAS_LICENSE_KEY</span>, <span class="pl-s"><span class="pl-pds">"</span>Enter_License_Key_Here<span class="pl-pds">"</span></span>);
 intent<span class="pl-k">.</span>putExtra(<span class="pl-smi">ScanActivity</span><span class="pl-c1"><span class="pl-k">.</span>EXTRAS_LICENSEE</span>, <span class="pl-s"><span class="pl-pds">"</span>Enter_Licensee_Here<span class="pl-pds">"</span></span>);</pre></div>
-</li>
+
+<ul>
 <li>
-<p><a name="user-content-intent_EXTRAS_SHOW_OCR_RESULT" href="#intent_EXTRAS_SHOW_OCR_RESULT">#</a> <strong><code>ScanActivity.EXTRAS_SHOW_OCR_RESULT</code></strong> - with this extra you can define whether OCR result should be drawn on camera preview as it arrives. This is enabled by default, to disable it, use the following snippet:</p>
+<a name="user-content-intent_EXTRAS_SHOW_OCR_RESULT" href="#intent_EXTRAS_SHOW_OCR_RESULT">#</a> <strong><code>ScanActivity.EXTRAS_SHOW_OCR_RESULT</code></strong> - with this extra you can define whether OCR result should be drawn on camera preview as it arrives. This is enabled by default, to disable it, use the following snippet:</li>
+</ul>
 
 <div class="highlight highlight-source-java"><pre><span class="pl-c">// enable showing of OCR result</span>
 intent<span class="pl-k">.</span>putExtra(<span class="pl-smi">ScanActivity</span><span class="pl-c1"><span class="pl-k">.</span>EXTRAS_SHOW_OCR_RESULT</span>, <span class="pl-c1">false</span>);</pre></div>
-</li>
+
+<ul>
 <li>
-<p><a name="user-content-intent_EXTRAS_SHOW_OCR_RESULT_MODE" href="#intent_EXTRAS_SHOW_OCR_RESULT_MODE">#</a> <strong><code>ScanActivity.EXTRAS_SHOW_OCR_RESULT_MODE</code></strong> - if OCR result should be drawn on camera preview, this extra defines how it will be drawn. Here you need to pass instance of <a href="https://photopay.github.io/photopay-android/com/microblink/activity/ShowOcrResultMode.html">ShowOcrResultMode</a>. By default, <code>ShowOcrResultMode.ANIMATED_DOTS</code> is used. You can also enable <code>ShowOcrResultMode.STATIC_CHARS</code> to draw recognized chars instead of dots. To set this extra, use the following snippet:</p>
+<a name="user-content-intent_EXTRAS_SHOW_OCR_RESULT_MODE" href="#intent_EXTRAS_SHOW_OCR_RESULT_MODE">#</a> <strong><code>ScanActivity.EXTRAS_SHOW_OCR_RESULT_MODE</code></strong> - if OCR result should be drawn on camera preview, this extra defines how it will be drawn. Here you need to pass instance of <a href="https://photopay.github.io/photopay-android/com/microblink/activity/ShowOcrResultMode.html">ShowOcrResultMode</a>. By default, <code>ShowOcrResultMode.ANIMATED_DOTS</code> is used. You can also enable <code>ShowOcrResultMode.STATIC_CHARS</code> to draw recognized chars instead of dots. To set this extra, use the following snippet:</li>
+</ul>
 
 <div class="highlight highlight-source-java"><pre><span class="pl-c">// display colored static chars instead of animated dots</span>
 intent<span class="pl-k">.</span>putExtra(<span class="pl-smi">ScanActivity</span><span class="pl-c1"><span class="pl-k">.</span>EXTRAS_SHOW_OCR_RESULT_MODE</span>, (<span class="pl-smi">Parcelable</span>) <span class="pl-smi">ShowOcrResultMode</span><span class="pl-c1"><span class="pl-k">.</span>STATIC_CHARS</span>);</pre></div>
-</li>
+
+<ul>
 <li><p><a name="user-content-intent_EXTRAS_IMAGE_LISTENER" href="#intent_EXTRAS_IMAGE_LISTENER">#</a> <strong><code>ScanActivity.EXTRAS_IMAGE_LISTENER</code></strong> - with this extra you can set your implementation of <a href="https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html">ImageListener interface</a> that will obtain images that are being processed. Make sure that your <a href="https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html">ImageListener</a> implementation correctly implements <a href="https://developer.android.com/reference/android/os/Parcelable.html">Parcelable</a> interface with static <a href="https://developer.android.com/reference/android/os/Parcelable.Creator.html">CREATOR</a> field. Without this, you might encounter a runtime error. For more information and example, see <a href="#imageListener">Using ImageListener to obtain images that are being processed</a>. By default, <em>ImageListener</em> will receive all possible images that become available during recognition process. This will introduce performance penalty because most of those images will probably not be used so sending them will just waste time. To control which images should become available to <em>ImageListener</em>, you can also set <a href="https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html">ImageMetadata settings</a> with <code>ScanActivity.EXTRAS_IMAGE_METADATA_SETTINGS</code></p></li>
 <li><p><a name="user-content-intent_EXTRAS_IMAGE_METADATA_SETTINGS" href="#intent_EXTRAS_IMAGE_METADATA_SETTINGS">#</a> <strong><code>ScanActivity.EXTRAS_IMAGE_METADATA_SETTINGS</code></strong> - with this extra you can set <a href="https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html">ImageMetadata settings</a> which will define which images will be sent to <a href="https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html">ImageListener interface</a> given via <code>ScanActivity.EXTRAS_IMAGE_LISTENER</code> extra. If <em>ImageListener</em> is not given via Intent, then this extra has no effect. You can see example usage of <em>ImageMetadata Settings</em> in chapter <a href="#metadataListener">Obtaining various metadata with <em>MetadataListener</em></a> and in provided demo apps.</p></li>
 </ul>
@@ -706,20 +724,19 @@ intent<span class="pl-k">.</span>putExtra(<span class="pl-smi">ScanActivity</spa
 <ul>
 <li><p><a name="user-content-intent_EXTRAS_SCAN_CONFIGURATION_random" href="#intent_EXTRAS_SCAN_CONFIGURATION_random">#</a> <strong><code>RandomScanActivity.EXTRAS_SCAN_CONFIGURATION</code></strong> 
 With this extra you must set the array of <a href="https://photopay.github.io/photopay-android/com/microblink/ocr/RandomScanElement.html">RandomScanElement</a> objects. Each <code>RandomScanElement</code> holds following information about scan element: title of the scanned item, name of scanned item and object defining the OCR parser settings. Additionally, it is possible to set parser group for a parser that is responsible for extracting the element data by using the <code>setParserGroup(String groupName)</code> method on <code>RandomScanElement</code> object. If all parsers are in the same parser group, recognition will be faster, but sometimes merged OCR engine options may cause that some parsers are unable to extract valid data from the scanned text. Putting each parser into its own group will give better accuracy, but will perform OCR of image for each parser which can consume a lot of processing time. By default, if parser groups are not defined, all parsers will be placed in the same parser group. More information about parser settings can be found in chapter <a href="#blinkOCR">Scanning segments with BlinkOCR recognizer</a>. </p></li>
-<li>
-<p><a name="user-content-intent_EXTRAS_SCAN_MESSAGE" href="#intent_EXTRAS_SCAN_MESSAGE">#</a> <strong><code>RandomScanActivity.EXTRAS_SCAN_MESSAGE</code></strong> 
+<li><p><a name="user-content-intent_EXTRAS_SCAN_MESSAGE" href="#intent_EXTRAS_SCAN_MESSAGE">#</a> <strong><code>RandomScanActivity.EXTRAS_SCAN_MESSAGE</code></strong> 
 With this extra, it is possible to change default scan message that is displayed above the scanning
-window. You can use the following code snippet to set scan message string:</p>
+window. You can use the following code snippet to set scan message string:</p></li>
+</ul>
 
 <div class="highlight highlight-source-java"><pre>intent<span class="pl-k">.</span>putExtra(<span class="pl-smi">RandomScanActivity</span><span class="pl-c1"><span class="pl-k">.</span>EXTRAS_SCAN_MESSAGE</span>, message);</pre></div>
-</li>
-<li>
-<p><a name="user-content-intent_EXTRAS_BEEP_RESOURCE_random" href="#intent_EXTRAS_BEEP_RESOURCE_random">#</a> <strong><code>RandomScanActivity.EXTRAS_BEEP_RESOURCE</code></strong> 
-With this extra you can set the resource ID of the sound to be played when the scan element is recognized. You can use following snippet to set this extra</p>
+
+<ul>
+<li> <a name="user-content-intent_EXTRAS_BEEP_RESOURCE_random" href="#intent_EXTRAS_BEEP_RESOURCE_random">#</a> <strong><code>RandomScanActivity.EXTRAS_BEEP_RESOURCE</code></strong> 
+With this extra you can set the resource ID of the sound to be played when the scan element is recognized. You can use following snippet to set this extra</li>
+</ul>
 
 <div class="highlight highlight-source-java"><pre>intent<span class="pl-k">.</span>putExtra(<span class="pl-smi">RandomScanActivity</span><span class="pl-c1"><span class="pl-k">.</span>EXTRAS_BEEP_RESOURCE</span>, <span class="pl-smi">R</span><span class="pl-k">.</span>raw<span class="pl-k">.</span>beep);</pre></div>
-</li>
-</ul>
 
 <h2>
 <a id="user-content--embedding-recognizerview-into-custom-scan-activity" class="anchor" href="#-embedding-recognizerview-into-custom-scan-activity" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-recognizerView"></a> Embedding <code>RecognizerView</code> into custom scan activity</h2>
@@ -734,6 +751,8 @@ With this extra you can set the resource ID of the sound to be played when the s
 </ol>
 
 <p>Here is the minimum example of integration of <code>RecognizerView</code> as the only view in your activity:</p>
+</li>
+</ul>
 
 <div class="highlight highlight-source-java"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">MyScanActivity</span> <span class="pl-k">extends</span> <span class="pl-e">Activity</span> <span class="pl-k">implements</span> <span class="pl-e">ScanResultListener</span>, <span class="pl-e">CameraEventsListener</span> {
     <span class="pl-k">private</span> <span class="pl-k">static</span> <span class="pl-k">final</span> <span class="pl-k">int</span> <span class="pl-c1">PERMISSION_CAMERA_REQUEST_CODE</span> <span class="pl-k">=</span> <span class="pl-c1">69</span>;
@@ -4732,6 +4751,107 @@ the MRZ zone. Use this method if document contains additional information (eleme
 <p><strong>Available getters are documented in <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/germany/mrz/GermanIDMRZSideRecognitionResult.html">Javadoc</a>.</strong></p>
 
 <h2>
+<a id="user-content--scanning-front-side-of-serbian-id-documents" class="anchor" href="#-scanning-front-side-of-serbian-id-documents" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-serbianID_front"></a> Scanning front side of Serbian ID documents</h2>
+
+<p>This section will discuss the setting up of Serbian ID Front Side recognizer and obtaining results from it.</p>
+
+<h3>
+<a id="user-content-setting-up-serbian-id-card-front-side-recognizer" class="anchor" href="#setting-up-serbian-id-card-front-side-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Setting up Serbian ID card front side recognizer</h3>
+
+<p>To activate Serbian ID front side recognizer, you need to create <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/serbia/front/SerbianIDFrontSideRecognizerSettings.html">SerbianIDFrontSideRecognizerSettings</a> and add it to <code>RecognizerSettings</code> array. You can use the following code snippet to perform that:</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">private</span> <span class="pl-k">RecognizerSettings</span>[] setupSettingsArray() {
+    <span class="pl-smi">SerbianIDFrontSideRecognizerSettings</span> sett <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">SerbianIDFrontSideRecognizerSettings</span>();
+
+    <span class="pl-c">// now add sett to recognizer settings array that is used to configure</span>
+    <span class="pl-c">// recognition</span>
+    <span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-smi">RecognizerSettings</span>[] { sett };
+}</pre></div>
+
+<p><strong>You can also tweak recognition parameters with methods of <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/serbia/front/SerbianIDFrontSideRecognizerSettings.html">SerbianIDFrontSideRecognizerSettings</a>. Check <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/serbia/front/SerbianIDFrontSideRecognizerSettings.html">Javadoc</a> for more information.</strong></p>
+
+<h3>
+<a id="user-content-obtaining-results-from-serbian-id-card-front-side-recognizer" class="anchor" href="#obtaining-results-from-serbian-id-card-front-side-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Obtaining results from Serbian ID card front side recognizer</h3>
+
+<p>Serbian ID front side recognizer produces <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/serbia/front/SerbianIDFrontSideRecognitionResult.html">SerbianIDFrontSideRecognitionResult</a>. You can use <code>instanceof</code> operator to check if element in results array is instance of <code>SerbianIDFrontSideRecognitionResult</code> class. </p>
+
+<p><strong>Note:</strong> <code>SerbianIDFrontSideRecognitionResult</code> extends <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognitionResult.html">BlinkOCRRecognitionResult</a> so make sure you take that into account when using <code>instanceof</code> operator.</p>
+
+<p>See the following snippet for an example:</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
+<span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
+    <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
+    <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
+        <span class="pl-k">if</span>(baseResult <span class="pl-k">instanceof</span> <span class="pl-smi">SerbianIDFrontSideRecognitionResult</span>) {
+            <span class="pl-smi">SerbianIDFrontSideRecognitionResult</span> result <span class="pl-k">=</span> (<span class="pl-smi">SerbianIDFrontSideRecognitionResult</span>) baseResult;
+
+            <span class="pl-c">// you can use getters of SerbianIDFrontSideRecognitionResult class to </span>
+            <span class="pl-c">// obtain scanned information</span>
+            <span class="pl-k">if</span>(result<span class="pl-k">.</span>isValid() <span class="pl-k">&amp;&amp;</span> <span class="pl-k">!</span>result<span class="pl-k">.</span>isEmpty()) {
+                <span class="pl-smi">String</span> documentNumber <span class="pl-k">=</span> result<span class="pl-k">.</span>getDocumentNumber();
+                <span class="pl-smi">Date</span> issuingDate <span class="pl-k">=</span> result<span class="pl-k">.</span>getIssuingDate();
+            } <span class="pl-k">else</span> {
+                <span class="pl-c">// not all relevant data was scanned, ask user</span>
+                <span class="pl-c">// to try again</span>
+            }
+        }
+    }
+}</pre></div>
+
+<p><strong>Available getters are documented in <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/serbia/front/SerbianIDFrontSideRecognitionResult.html">Javadoc</a>.</strong></p>
+
+<h2>
+<a id="user-content--scanning-back-side-of-serbian-id-documents" class="anchor" href="#-scanning-back-side-of-serbian-id-documents" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-serbianID_back"></a> Scanning back side of Serbian ID documents</h2>
+
+<p>This section will discuss the setting up of Serbian ID Back Side recognizer and obtaining results from it.</p>
+
+<h3>
+<a id="user-content-setting-up-serbian-id-card-back-side-recognizer" class="anchor" href="#setting-up-serbian-id-card-back-side-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Setting up Serbian ID card back side recognizer</h3>
+
+<p>To activate Serbian ID back side recognizer, you need to create <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/serbia/back/SerbianIDBackSideRecognizerSettings.html">SerbianIDBackSideRecognizerSettings</a> and add it to <code>RecognizerSettings</code> array. You can use the following code snippet to perform that:</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">private</span> <span class="pl-k">RecognizerSettings</span>[] setupSettingsArray() {
+    <span class="pl-smi">SerbianIDBackSideRecognizerSettings</span> sett <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">SerbianIDBackSideRecognizerSettings</span>();
+
+    <span class="pl-c">// now add sett to recognizer settings array that is used to configure</span>
+    <span class="pl-c">// recognition</span>
+    <span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-smi">RecognizerSettings</span>[] { sett };
+}</pre></div>
+
+<p><strong>You can also tweak recognition parameters with methods of <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/serbia/back/SerbianIDBackSideRecognizerSettings.html">SerbianIDBackSideRecognizerSettings</a>. Check <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/serbia/back/SerbianIDBackSideRecognizerSettings.html">Javadoc</a> for more information.</strong></p>
+
+<h3>
+<a id="user-content-obtaining-results-from-serbian-id-card-back-side-recognizer" class="anchor" href="#obtaining-results-from-serbian-id-card-back-side-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Obtaining results from Serbian ID card back side recognizer</h3>
+
+<p>Serbian ID back side recognizer produces <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/serbia/back/SerbianIDBackSideRecognitionResult.html">SerbianIDBackSideRecognitionResult</a>. You can use <code>instanceof</code> operator to check if element in results array is instance of <code>SerbianIDBackSideRecognitionResult</code> class. </p>
+
+<p><strong>Note:</strong> <code>SerbianIDBackSideRecognitionResult</code> extends <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html">MRTDRecognitionResult</a> so make sure you take that into account when using <code>instanceof</code> operator.</p>
+
+<p>See the following snippet for an example:</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
+<span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
+    <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
+    <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
+        <span class="pl-k">if</span>(baseResult <span class="pl-k">instanceof</span> <span class="pl-smi">SerbianIDBackSideRecognitionResult</span>) {
+            <span class="pl-smi">SerbianIDBackSideRecognitionResult</span> result <span class="pl-k">=</span> (<span class="pl-smi">SerbianIDBackSideRecognitionResult</span>) baseResult;
+
+            <span class="pl-c">// you can use getters of SerbianIDBackSideRecognitionResult class to </span>
+            <span class="pl-c">// obtain scanned information</span>
+            <span class="pl-k">if</span>(result<span class="pl-k">.</span>isValid() <span class="pl-k">&amp;&amp;</span> <span class="pl-k">!</span>result<span class="pl-k">.</span>isEmpty()) {
+                <span class="pl-smi">Date</span> birthDate <span class="pl-k">=</span> result<span class="pl-k">.</span>getDateOfBirth()
+            } <span class="pl-k">else</span> {
+                <span class="pl-c">// not all relevant data was scanned, ask user</span>
+                <span class="pl-c">// to try again</span>
+            }
+        }
+    }
+}</pre></div>
+
+<p><strong>Available getters are documented in <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/serbia/back/SerbianIDBackSideRecognitionResult.html">Javadoc</a>.</strong></p>
+
+<h2>
 <a id="user-content--scanning-front-side-of-slovak-id-documents" class="anchor" href="#-scanning-front-side-of-slovak-id-documents" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-slovakID_front"></a> Scanning front side of Slovak ID documents</h2>
 
 <p>This section will discuss the setting up of Slovak ID Front Side recognizer and obtaining results from it.</p>
@@ -4925,7 +5045,7 @@ the MRZ zone. Use this method if document contains additional information (eleme
 <p>Mobile coupons parser - represented by <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/mobilecoupons/MobileCouponsParserSettings.html">MobileCouponsParserSettings</a></p>
 
 <ul>
-<li>used for parsing prepaid codes from mobile phone coupons (Croatia)</li>
+<li>used for parsing prepaid codes from mobile phone coupons</li>
 </ul>
 </li>
 <li>
@@ -4940,6 +5060,13 @@ the MRZ zone. Use this method if document contains additional information (eleme
 
 <ul>
 <li>used for parsing czech account number in domestic format (národní formát)</li>
+</ul>
+</li>
+<li>
+<p>Czech variabilni symbol parser - represented by <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/czechia/CzVariabilniSymbolParserSettings.html">CzVariabilniSymbolParserSettings</a></p>
+
+<ul>
+<li>used for parsing czech variable symbol identifier</li>
 </ul>
 </li>
 <li>
@@ -5032,10 +5159,32 @@ the MRZ zone. Use this method if document contains additional information (eleme
 <li>used for parsing bank account numbers from payment slips issued in Montenegro</li>
 </ul>
 </li>
-<li>Montenegro payment reference number parser - represented by <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/montenegro/MeReferenceParserSettings.html">MeReferenceParserSettings</a>
+<li>
+<p>Montenegro payment reference number parser - represented by <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/montenegro/MeReferenceParserSettings.html">MeReferenceParserSettings</a></p>
 
 <ul>
 <li>used for parsing payment reference numbers from payment slips issued in Montenegro</li>
+</ul>
+</li>
+<li>
+<p>Slovenian reference parser - represented by <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/slovenia/SloReferenceParserSettings.html">SloReferenceParserSettings</a></p>
+
+<ul>
+<li>used for parsing slovenian payment reference numbers from OCR result</li>
+</ul>
+</li>
+<li>
+<p>Hungarian account number parser - represented by <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/hungary/HuAccountParserSettings.html">HuAccountParserSettings</a></p>
+
+<ul>
+<li>used for parsing hungarian payment account numbers from OCR result</li>
+</ul>
+</li>
+<li>
+<p>Hungarian payer Id parser - represented by <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/hungary/HuPayerIDParserSettings.html">HuPayerIDParserSettings</a></p>
+
+<ul>
+<li>used for parsing hungarian payment payer Id from OCR result</li>
 </ul>
 </li>
 </ul>

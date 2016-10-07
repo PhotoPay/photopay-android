@@ -53,6 +53,8 @@
   * [Scanning back side of Czech ID documents](#czID_back)
   * [Scanning front side of German ID documents](#germanID_front)
   * [Scanning MRZ side of German ID documents](#germanID_MRZ)
+  * [Scanning front side of Serbian ID documents](#serbianID_front)
+  * [Scanning back side of Serbian ID documents](#serbianID_back)
   * [Scanning front side of Slovak ID documents](#slovakID_front)
   * [Scanning back side of Slovak ID documents](#slovakID_back)
   * [Scanning segments with BlinkOCR recognizer](#blinkOCR)
@@ -120,7 +122,7 @@ You can also create your own scanning UI - you just need to embed `RecognizerVie
 	```
 	dependencies {
    		compile project(':LibRecognizer')
- 		compile "com.android.support:appcompat-v7:24.2.0"
+ 		compile "com.android.support:appcompat-v7:24.2.1"
 	}
 	```
 5. If you plan to use ProGuard, add following lines to your `proguard-rules.pro`:
@@ -438,6 +440,11 @@ This section will discuss possible parameters that can be sent over `Intent` for
 	```java
 	intent.putExtra(ScanActivity.EXTRAS_CAMERA_VIDEO_PRESET, (Parcelable)VideoResolutionPreset.VIDEO_RESOLUTION_720p);
 	```
+* <a name="intent_EXTRAS_SET_FLAG_SECURE" href="#intent_EXTRAS_SET_FLAG_SECURE">#</a> **`ScanActivity.EXTRAS_SET_FLAG_SECURE`** - with this extra you can request setting of `FLAG_SECURE` on activity window which indicates that the display has a secure video output and supports compositing secure surfaces. Use this to prevent taking screenshots of the activity window content and to prevent content from being viewed on non-secure displays. To set `FLAG_SECURE` on camera activity, use the following code snippet:
+
+	```java
+	intent.putExtra(ScanActivity.EXTRAS_SET_FLAG_SECURE, true);
+	```
 
 * <a name="intent_EXTRAS_LICENSE_KEY" href="#intent_EXTRAS_LICENSE_KEY">#</a> **`ScanActivity.EXTRAS_LICENSE_KEY`** - with this extra you can set the license key for _PhotoPay_. You can obtain your licence key from [PhotoPay website](https://photopay.net/) or you can contact us at [http://help.microblink.com](http://help.microblink.com). Once you obtain a license key, you can set it with following snippet:
 
@@ -526,6 +533,12 @@ This section will discuss possible parameters that can be sent over `Intent` for
 	```java
 	intent.putExtra(SegmentScanActivity.EXTRAS_CAMERA_VIDEO_PRESET, (Parcelable)VideoResolutionPreset.VIDEO_RESOLUTION_720p);
 	```
+	
+* <a name="intent_EXTRAS_SET_FLAG_SECURE" href="#intent_EXTRAS_SET_FLAG_SECURE">#</a> **`SegmentScanActivity.EXTRAS_SET_FLAG_SECURE`** - with this extra you can request setting of `FLAG_SECURE` on activity window which indicates that the display has a secure video output and supports compositing secure surfaces. Use this to prevent taking screenshots of the activity window content and to prevent content from being viewed on non-secure displays. To set `FLAG_SECURE` on camera activity, use the following code snippet:
+
+	```java
+	intent.putExtra(SegmentScanActivity.EXTRAS_SET_FLAG_SECURE, true);
+	
 
 * <a name="intent_EXTRAS_LICENSE_KEY" href="#intent_EXTRAS_LICENSE_KEY">#</a> **`ScanActivity.EXTRAS_LICENSE_KEY`** - with this extra you can set the license key for _PhotoPay_. You can obtain your licence key from [PhotoPay website](https://photopay.net/) or you can contact us at [http://help.microblink.com](http://help.microblink.com). Once you obtain a license key, you can set it with following snippet:
 
@@ -3644,6 +3657,109 @@ public void onScanningDone(RecognitionResults results) {
 
 **Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/germany/mrz/GermanIDMRZSideRecognitionResult.html).**
 
+## <a name="serbianID_front"></a> Scanning front side of Serbian ID documents
+
+This section will discuss the setting up of Serbian ID Front Side recognizer and obtaining results from it.
+
+### Setting up Serbian ID card front side recognizer
+
+To activate Serbian ID front side recognizer, you need to create [SerbianIDFrontSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/serbia/front/SerbianIDFrontSideRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	SerbianIDFrontSideRecognizerSettings sett = new SerbianIDFrontSideRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [SerbianIDFrontSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/serbia/front/SerbianIDFrontSideRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/serbia/front/SerbianIDFrontSideRecognizerSettings.html) for more information.**
+
+### Obtaining results from Serbian ID card front side recognizer
+
+Serbian ID front side recognizer produces [SerbianIDFrontSideRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/serbia/front/SerbianIDFrontSideRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `SerbianIDFrontSideRecognitionResult` class. 
+
+**Note:** `SerbianIDFrontSideRecognitionResult` extends [BlinkOCRRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof SerbianIDFrontSideRecognitionResult) {
+			SerbianIDFrontSideRecognitionResult result = (SerbianIDFrontSideRecognitionResult) baseResult;
+			
+	        // you can use getters of SerbianIDFrontSideRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String documentNumber = result.getDocumentNumber();
+				Date issuingDate = result.getIssuingDate();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/serbia/front/SerbianIDFrontSideRecognitionResult.html).**
+
+## <a name="serbianID_back"></a> Scanning back side of Serbian ID documents
+
+This section will discuss the setting up of Serbian ID Back Side recognizer and obtaining results from it.
+
+### Setting up Serbian ID card back side recognizer
+
+To activate Serbian ID back side recognizer, you need to create [SerbianIDBackSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/serbia/back/SerbianIDBackSideRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	SerbianIDBackSideRecognizerSettings sett = new SerbianIDBackSideRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [SerbianIDBackSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/serbia/back/SerbianIDBackSideRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/serbia/back/SerbianIDBackSideRecognizerSettings.html) for more information.**
+
+### Obtaining results from Serbian ID card back side recognizer
+
+Serbian ID back side recognizer produces [SerbianIDBackSideRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/serbia/back/SerbianIDBackSideRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `SerbianIDBackSideRecognitionResult` class. 
+
+**Note:** `SerbianIDBackSideRecognitionResult` extends [MRTDRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof SerbianIDBackSideRecognitionResult) {
+			SerbianIDBackSideRecognitionResult result = (SerbianIDBackSideRecognitionResult) baseResult;
+			
+	        // you can use getters of SerbianIDBackSideRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				Date birthDate = result.getDateOfBirth()
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/serbia/back/SerbianIDBackSideRecognitionResult.html).**
+
 ## <a name="slovakID_front"></a> Scanning front side of Slovak ID documents
 
 This section will discuss the setting up of Slovak ID Front Side recognizer and obtaining results from it.
@@ -3804,13 +3920,15 @@ The following is a list of available parsers:
 	- please note that some features, like back references, match grouping and certain regex metacharacters are not supported. See javadoc for more info.
 
 - Mobile coupons parser - represented by [MobileCouponsParserSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/mobilecoupons/MobileCouponsParserSettings.html)
-	- used for parsing prepaid codes from mobile phone coupons (Croatia)
+	- used for parsing prepaid codes from mobile phone coupons
 
 - Croatian reference parser - represented by [CroReferenceParserSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/croatia/CroReferenceParserSettings.html)
 	- used for parsing croatian payment reference numbers from OCR result
 
 - Czech account number parser - represented by [CzAccountParserSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/czechia/CzAccountParserSettings.html)
 	- used for parsing czech account number in domestic format (národní formát)
+- Czech variabilni symbol parser - represented by [CzVariabilniSymbolParserSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/czechia/CzVariabilniSymbolParserSettings.html)
+	- used for parsing czech variable symbol identifier
 
 - Austrian reference parser - represented by [AusReferenceParserSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/austria/AusReferenceParserSettings.html)
 	- used for parsing austrian payment reference (Kundendaten) numbers from OCR result
@@ -3849,6 +3967,16 @@ The following is a list of available parsers:
 	- used for parsing bank account numbers from payment slips issued in Montenegro
 - Montenegro payment reference number parser - represented by [MeReferenceParserSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/montenegro/MeReferenceParserSettings.html)
 	- used for parsing payment reference numbers from payment slips issued in Montenegro
+
+- Slovenian reference parser - represented by [SloReferenceParserSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/slovenia/SloReferenceParserSettings.html)
+	- used for parsing slovenian payment reference numbers from OCR result
+
+
+- Hungarian account number parser - represented by [HuAccountParserSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/hungary/HuAccountParserSettings.html)
+	- used for parsing hungarian payment account numbers from OCR result
+
+- Hungarian payer Id parser - represented by [HuPayerIDParserSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/hungary/HuPayerIDParserSettings.html)
+	- used for parsing hungarian payment payer Id from OCR result
 
 ### <a name="blinkOCR_results"></a> Obtaining results from BlinkOCR recognizer
 
