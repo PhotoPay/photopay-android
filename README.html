@@ -114,6 +114,7 @@
 <li><a href="#hungarianPayslip">Scanning Hungarian payslips</a></li>
 <li><a href="#kosovoOcrLine">Scanning Kosovo payslips (OCR line)</a></li>
 <li><a href="#kosovoCode128">Scanning Kosovo payslips (Code128 barcode)</a></li>
+<li><a href="#sepaQRCode">Scanning SEPA QR codes</a></li>
 <li><a href="#slovakQRCode">Scanning Slovak payBySquare QR codes</a></li>
 <li><a href="#slovenianPayslip">Scanning Slovenian payslips</a></li>
 <li><a href="#swissPayslip">Scanning Swiss payslips</a></li>
@@ -247,7 +248,7 @@
 
 <pre><code>dependencies {
     compile project(':LibRecognizer')
-    compile "com.android.support:appcompat-v7:24.2.1"
+    compile "com.android.support:appcompat-v7:25.0.0"
 }
 </code></pre>
 </li>
@@ -3297,6 +3298,53 @@ mRecognizerView<span class="pl-k">.</span>setMetadataListener(myMetadataListener
 <p>Returns the scanned utility ID, if it exists.</p>
 
 <h2>
+<a id="user-content--scanning-sepa-qr-codes" class="anchor" href="#-scanning-sepa-qr-codes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-sepaQRCode"></a> Scanning SEPA QR codes</h2>
+
+<p>This section discusses the setting up of SEPA QR code recognizer and obtaining results from it.</p>
+
+<h3>
+<a id="user-content-setting-up-sepa-qr-code-recognizer" class="anchor" href="#setting-up-sepa-qr-code-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Setting up SEPA QR code recognizer</h3>
+
+<p>To activate SEPA QR code recognizer, you need to create <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/sepa/qr/SepaQRRecognizerSettings.html">SepaQRRecognizerSettings</a> and add it to <code>RecognizerSettings</code> array. You can use the following code snippet to perform that:</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">private</span> <span class="pl-k">RecognizerSettings</span>[] setupSettingsArray() {
+    <span class="pl-smi">SepaQRRecognizerSettings</span> sett <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">SepaQRRecognizerSettings</span>();
+
+    <span class="pl-c">// now add sett to recognizer settings array that is used to configure</span>
+    <span class="pl-c">// recognition</span>
+    <span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-smi">RecognizerSettings</span>[] { sett };
+}</pre></div>
+
+<p><strong>You can also tweak recognition parameters with methods of <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/sepa/qr/SepaQRRecognizerSettings.html">SepaQRRecognizerSettings</a>. Check <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/sepa/qr/SepaQRRecognizerSettings.html">Javadoc</a> for more information.</strong></p>
+
+<h3>
+<a id="user-content-obtaining-results-from-sepa-qr-code-recognizer" class="anchor" href="#obtaining-results-from-sepa-qr-code-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Obtaining results from SEPA QR code recognizer</h3>
+
+<p>SEPA QR recognizer produces <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/sepa/qr/SepaQRRecognitionResult.html">SepaQRRecognitionResult</a>. You can use <code>instanceof</code> operator to check if element in results array is instance of <code>SepaQRRecognitionResult</code> class. See the following snippet for an example:</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
+<span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
+    <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
+    <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
+        <span class="pl-k">if</span>(baseResult <span class="pl-k">instanceof</span> <span class="pl-smi">SepaQRRecognitionResult</span>) {
+            <span class="pl-smi">SepaQRRecognitionResult</span> result <span class="pl-k">=</span> (<span class="pl-smi">SepaQRRecognitionResult</span>) baseResult;
+
+            <span class="pl-c">// you can use getters of SepaQRRecognitionResult class to </span>
+            <span class="pl-c">// obtain scanned information</span>
+            <span class="pl-k">if</span>(result<span class="pl-k">.</span>isValid() <span class="pl-k">&amp;&amp;</span> <span class="pl-k">!</span>result<span class="pl-k">.</span>isEmpty()) {
+                <span class="pl-k">int</span> amount <span class="pl-k">=</span> result<span class="pl-k">.</span>getAmount();
+                <span class="pl-smi">String</span> account <span class="pl-k">=</span> result<span class="pl-k">.</span>getIBAN();
+            } <span class="pl-k">else</span> {
+                <span class="pl-c">// not all relevant data was scanned, ask user</span>
+                <span class="pl-c">// to try again</span>
+            }
+        }
+    }
+}</pre></div>
+
+<p><strong>Available getters are documented in <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/sepa/qr/SepaQRRecognitionResult.html">Javadoc</a>.</strong></p>
+
+<h2>
 <a id="user-content--scanning-slovak-paybysquare-qr-codes" class="anchor" href="#-scanning-slovak-paybysquare-qr-codes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-slovakQRCode"></a> Scanning Slovak payBySquare QR codes</h2>
 
 <p>This section discusses the setting up of Slovak payBySquare QR code recognizer and obtaining results from it. Recognizer supports scanning of PAY by square QR codes (usually printed inside blue frame). Current version does not support scanning of INVOICE by square QR codes (usually printed inside orange frame).</p>
@@ -3361,6 +3409,8 @@ mRecognizerView<span class="pl-k">.</span>setMetadataListener(myMetadataListener
     <span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-smi">RecognizerSettings</span>[] { sett };
 }</pre></div>
 
+<p><strong>You can also tweak recognition parameters with methods of <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovenia/slip/SlovenianSlipRecognizerSettings.html">SlovenianSlipRecognizerSettings</a>. Check <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovenia/slip/SlovenianSlipRecognizerSettings.html">Javadoc</a> for more information.</strong></p>
+
 <h3>
 <a id="user-content-obtaining-results-from-slovenian-payslip-recognizer" class="anchor" href="#obtaining-results-from-slovenian-payslip-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Obtaining results from Slovenian payslip recognizer</h3>
 
@@ -3387,67 +3437,7 @@ mRecognizerView<span class="pl-k">.</span>setMetadataListener(myMetadataListener
     }
 }</pre></div>
 
-<p>Available getters are:</p>
-
-<h5>
-<a id="user-content-boolean-isvalid-11" class="anchor" href="#boolean-isvalid-11" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>boolean isValid()</code>
-</h5>
-
-<p>Returns <code>true</code> if scan result is valid, i.e. if all required elements were scanned with good confidence and can be used. If <code>false</code> is returned that indicates that some crucial data fields are missing. You should ask user to try scanning again. If you keep getting <code>false</code> (i.e. invalid data) for certain payslip, please report that as a bug to <a href="http://help.microblink.com">help.microblink.com</a>. Please include problematic payslips.</p>
-
-<h5>
-<a id="user-content-boolean-isempty-11" class="anchor" href="#boolean-isempty-11" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>boolean isEmpty()</code>
-</h5>
-
-<p>Returns <code>true</code> if scan result is empty, i.e. nothing was scanned. All getters should return <code>null</code> for empty result.</p>
-
-<h5>
-<a id="user-content-string-getcurrency-13" class="anchor" href="#string-getcurrency-13" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>String getCurrency()</code>
-</h5>
-
-<p>Returns the currency in which payment should be performed. This is always "EUR".</p>
-
-<h5>
-<a id="user-content-int-getamount-13" class="anchor" href="#int-getamount-13" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>int getAmount()</code>
-</h5>
-
-<p>Returns the amount in cents. For example, <code>53,42 EUR</code> will be returned as <code>5342</code>.</p>
-
-<h5>
-<a id="user-content-bigdecimal-getparsedamount-12" class="anchor" href="#bigdecimal-getparsedamount-12" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>BigDecimal getParsedAmount()</code>
-</h5>
-
-<p>Returns the parsed amount in euros. Unlike <code>getAmount</code>, this method returns the <code>BigDecimal</code> type, which can hold decimal numbers without having floating point precision errors as floats and doubles have.</p>
-
-<h5>
-<a id="user-content-string-getreferencenumber-9" class="anchor" href="#string-getreferencenumber-9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>String getReferenceNumber()</code>
-</h5>
-
-<p>Returns the scanned payment reference number.</p>
-
-<h5>
-<a id="user-content-string-getreferencemodel-3" class="anchor" href="#string-getreferencemodel-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>String getReferenceModel()</code>
-</h5>
-
-<p>Returns the scanned payment reference model.</p>
-
-<h5>
-<a id="user-content-string-getiban-9" class="anchor" href="#string-getiban-9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>String getIBAN()</code>
-</h5>
-
-<p>Returns the scanned IBAN.</p>
-
-<h5>
-<a id="user-content-string-getbic-2" class="anchor" href="#string-getbic-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>String getBIC()</code>
-</h5>
-
-<p>Returns the BIC of the payee's bank.</p>
-
-<h5>
-<a id="user-content-string-getpaymentdescription-6" class="anchor" href="#string-getpaymentdescription-6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>String getPaymentDescription()</code>
-</h5>
-
-<p>Returns the scanned payment description, if it exists.</p>
+<p><strong>Available getters are documented in <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovenia/slip/SlovenianSlipRecognitionResult.html">Javadoc</a>.</strong></p>
 
 <h2>
 <a id="user-content--scanning-swiss-payslips" class="anchor" href="#-scanning-swiss-payslips" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-swissPayslip"></a> Scanning Swiss payslips</h2>
@@ -3495,37 +3485,37 @@ mRecognizerView<span class="pl-k">.</span>setMetadataListener(myMetadataListener
 <p>Available getters are:</p>
 
 <h5>
-<a id="user-content-boolean-isvalid-12" class="anchor" href="#boolean-isvalid-12" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>boolean isValid()</code>
+<a id="user-content-boolean-isvalid-11" class="anchor" href="#boolean-isvalid-11" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>boolean isValid()</code>
 </h5>
 
 <p>Returns <code>true</code> if scan result is valid, i.e. if all required elements were scanned with good confidence and can be used. If <code>false</code> is returned that indicates that some crucial data fields are missing. You should ask user to try scanning again. If you keep getting <code>false</code> (i.e. invalid data) for certain payslip, please report that as a bug to <a href="http://help.microblink.com">help.microblink.com</a>. Please include problematic payslips.</p>
 
 <h5>
-<a id="user-content-boolean-isempty-12" class="anchor" href="#boolean-isempty-12" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>boolean isEmpty()</code>
+<a id="user-content-boolean-isempty-11" class="anchor" href="#boolean-isempty-11" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>boolean isEmpty()</code>
 </h5>
 
 <p>Returns <code>true</code> if scan result is empty, i.e. nothing was scanned. All getters should return <code>null</code> for empty result.</p>
 
 <h5>
-<a id="user-content-string-getcurrency-14" class="anchor" href="#string-getcurrency-14" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>String getCurrency()</code>
+<a id="user-content-string-getcurrency-13" class="anchor" href="#string-getcurrency-13" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>String getCurrency()</code>
 </h5>
 
 <p>Returns the currency in which payment should be performed. This is always "CHF".</p>
 
 <h5>
-<a id="user-content-int-getamount-14" class="anchor" href="#int-getamount-14" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>int getAmount()</code>
+<a id="user-content-int-getamount-13" class="anchor" href="#int-getamount-13" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>int getAmount()</code>
 </h5>
 
 <p>Returns the amount in cents. For example, <code>53,42 CHF</code> will be returned as <code>5342</code>.</p>
 
 <h5>
-<a id="user-content-bigdecimal-getparsedamount-13" class="anchor" href="#bigdecimal-getparsedamount-13" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>BigDecimal getParsedAmount()</code>
+<a id="user-content-bigdecimal-getparsedamount-12" class="anchor" href="#bigdecimal-getparsedamount-12" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>BigDecimal getParsedAmount()</code>
 </h5>
 
 <p>Returns the parsed amount in swiss francs. Unlike <code>getAmount</code>, this method returns the <code>BigDecimal</code> type, which can hold decimal numbers without having floating point precision errors as floats and doubles have.</p>
 
 <h5>
-<a id="user-content-string-getreferencenumber-10" class="anchor" href="#string-getreferencenumber-10" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>String getReferenceNumber()</code>
+<a id="user-content-string-getreferencenumber-9" class="anchor" href="#string-getreferencenumber-9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>String getReferenceNumber()</code>
 </h5>
 
 <p>Returns the scanned payment reference number.</p>
@@ -3582,31 +3572,31 @@ mRecognizerView<span class="pl-k">.</span>setMetadataListener(myMetadataListener
 <p>Available getters are:</p>
 
 <h5>
-<a id="user-content-boolean-isvalid-13" class="anchor" href="#boolean-isvalid-13" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>boolean isValid()</code>
+<a id="user-content-boolean-isvalid-12" class="anchor" href="#boolean-isvalid-12" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>boolean isValid()</code>
 </h5>
 
 <p>Returns <code>true</code> if scan result is valid, i.e. if all required elements were scanned with good confidence and can be used. If <code>false</code> is returned that indicates that some crucial data fields are missing. You should ask user to try scanning again. If you keep getting <code>false</code> (i.e. invalid data) for certain payslip, please report that as a bug to <a href="http://help.microblink.com">help.microblink.com</a>. Please include problematic payslips.</p>
 
 <h5>
-<a id="user-content-boolean-isempty-13" class="anchor" href="#boolean-isempty-13" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>boolean isEmpty()</code>
+<a id="user-content-boolean-isempty-12" class="anchor" href="#boolean-isempty-12" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>boolean isEmpty()</code>
 </h5>
 
 <p>Returns <code>true</code> if scan result is empty, i.e. nothing was scanned. All getters should return <code>null</code> for empty result.</p>
 
 <h5>
-<a id="user-content-string-getcurrency-15" class="anchor" href="#string-getcurrency-15" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>String getCurrency()</code>
+<a id="user-content-string-getcurrency-14" class="anchor" href="#string-getcurrency-14" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>String getCurrency()</code>
 </h5>
 
 <p>Returns the currency in which payment should be performed. This is always "GBP".</p>
 
 <h5>
-<a id="user-content-int-getamount-15" class="anchor" href="#int-getamount-15" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>int getAmount()</code>
+<a id="user-content-int-getamount-14" class="anchor" href="#int-getamount-14" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>int getAmount()</code>
 </h5>
 
 <p>Returns the amount in pennies. For example, <code>53,42 GBP</code> will be returned as <code>5342</code>.</p>
 
 <h5>
-<a id="user-content-bigdecimal-getparsedamount-14" class="anchor" href="#bigdecimal-getparsedamount-14" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>BigDecimal getParsedAmount()</code>
+<a id="user-content-bigdecimal-getparsedamount-13" class="anchor" href="#bigdecimal-getparsedamount-13" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>BigDecimal getParsedAmount()</code>
 </h5>
 
 <p>Returns the parsed amount in pounds. Unlike <code>getAmount</code>, this method returns the <code>BigDecimal</code> type, which can hold decimal numbers without having floating point precision errors as floats and doubles have.</p>
@@ -3624,7 +3614,7 @@ mRecognizerView<span class="pl-k">.</span>setMetadataListener(myMetadataListener
 <p>Returns the scanned account number, if it exists.</p>
 
 <h5>
-<a id="user-content-string-getreferencenumber-11" class="anchor" href="#string-getreferencenumber-11" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>String getReferenceNumber()</code>
+<a id="user-content-string-getreferencenumber-10" class="anchor" href="#string-getreferencenumber-10" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>String getReferenceNumber()</code>
 </h5>
 
 <p>Returns the scanned payment reference number, if it exists.</p>
@@ -3681,31 +3671,31 @@ mRecognizerView<span class="pl-k">.</span>setMetadataListener(myMetadataListener
 <p>Available getters are:</p>
 
 <h5>
-<a id="user-content-boolean-isvalid-14" class="anchor" href="#boolean-isvalid-14" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>boolean isValid()</code>
+<a id="user-content-boolean-isvalid-13" class="anchor" href="#boolean-isvalid-13" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>boolean isValid()</code>
 </h5>
 
 <p>Returns <code>true</code> if scan result is valid, i.e. if all required elements were scanned with good confidence and can be used. If <code>false</code> is returned that indicates that some crucial data fields are missing. You should ask user to try scanning again. If you keep getting <code>false</code> (i.e. invalid data) for certain payslip, please report that as a bug to <a href="http://help.microblink.com">help.microblink.com</a>. Please include problematic payslips.</p>
 
 <h5>
-<a id="user-content-boolean-isempty-14" class="anchor" href="#boolean-isempty-14" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>boolean isEmpty()</code>
+<a id="user-content-boolean-isempty-13" class="anchor" href="#boolean-isempty-13" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>boolean isEmpty()</code>
 </h5>
 
 <p>Returns <code>true</code> if scan result is empty, i.e. nothing was scanned. All getters should return <code>null</code> for empty result.</p>
 
 <h5>
-<a id="user-content-string-getcurrency-16" class="anchor" href="#string-getcurrency-16" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>String getCurrency()</code>
+<a id="user-content-string-getcurrency-15" class="anchor" href="#string-getcurrency-15" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>String getCurrency()</code>
 </h5>
 
 <p>Returns the currency in which payment should be performed. This is always "GBP".</p>
 
 <h5>
-<a id="user-content-int-getamount-16" class="anchor" href="#int-getamount-16" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>int getAmount()</code>
+<a id="user-content-int-getamount-15" class="anchor" href="#int-getamount-15" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>int getAmount()</code>
 </h5>
 
 <p>Returns the amount in pennies. For example, <code>53,42 GBP</code> will be returned as <code>5342</code>.</p>
 
 <h5>
-<a id="user-content-bigdecimal-getparsedamount-15" class="anchor" href="#bigdecimal-getparsedamount-15" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>BigDecimal getParsedAmount()</code>
+<a id="user-content-bigdecimal-getparsedamount-14" class="anchor" href="#bigdecimal-getparsedamount-14" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>BigDecimal getParsedAmount()</code>
 </h5>
 
 <p>Returns the parsed amount in pounds. Unlike <code>getAmount</code>, this method returns the <code>BigDecimal</code> type, which can hold decimal numbers without having floating point precision errors as floats and doubles have.</p>
@@ -3723,7 +3713,7 @@ mRecognizerView<span class="pl-k">.</span>setMetadataListener(myMetadataListener
 <p>Returns the account number, if it exists.</p>
 
 <h5>
-<a id="user-content-string-getreferencenumber-12" class="anchor" href="#string-getreferencenumber-12" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>String getReferenceNumber()</code>
+<a id="user-content-string-getreferencenumber-11" class="anchor" href="#string-getreferencenumber-11" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>String getReferenceNumber()</code>
 </h5>
 
 <p>Returns the payment reference number, if it exists.</p>
@@ -4218,13 +4208,13 @@ the MRZ zone. Use this method if document contains additional information (eleme
 <p>Available getters are:</p>
 
 <h5>
-<a id="user-content-boolean-isvalid-15" class="anchor" href="#boolean-isvalid-15" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>boolean isValid()</code>
+<a id="user-content-boolean-isvalid-14" class="anchor" href="#boolean-isvalid-14" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>boolean isValid()</code>
 </h5>
 
 <p>Returns <code>true</code> if scan result is valid, i.e. if all required elements were scanned with good confidence and can be used. If <code>false</code> is returned that indicates that some crucial data fields are missing. You should ask user to try scanning again. If you keep getting <code>false</code> (i.e. invalid data) for certain document, please report that as a bug to <a href="http://help.microblink.com">help.microblink.com</a>. Please include high resolution photographs of problematic documents.</p>
 
 <h5>
-<a id="user-content-boolean-isempty-15" class="anchor" href="#boolean-isempty-15" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>boolean isEmpty()</code>
+<a id="user-content-boolean-isempty-14" class="anchor" href="#boolean-isempty-14" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>boolean isEmpty()</code>
 </h5>
 
 <p>Returns <code>true</code> if scan result is empty, i.e. nothing was scanned. All getters should return <code>null</code> for empty result.</p>
@@ -5227,13 +5217,13 @@ the MRZ zone. Use this method if document contains additional information (eleme
 <p>Available getters are:</p>
 
 <h5>
-<a id="user-content-boolean-isvalid-16" class="anchor" href="#boolean-isvalid-16" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>boolean isValid()</code>
+<a id="user-content-boolean-isvalid-15" class="anchor" href="#boolean-isvalid-15" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>boolean isValid()</code>
 </h5>
 
 <p>Returns <code>true</code> if scan result contains at least one OCR result in one parsing group.</p>
 
 <h5>
-<a id="user-content-boolean-isempty-16" class="anchor" href="#boolean-isempty-16" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>boolean isEmpty()</code>
+<a id="user-content-boolean-isempty-15" class="anchor" href="#boolean-isempty-15" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>boolean isEmpty()</code>
 </h5>
 
 <p>Returns <code>true</code> if scan result is empty, i.e. nothing was scanned. All getters should return <code>null</code> for empty result.</p>
@@ -5385,13 +5375,13 @@ the MRZ zone. Use this method if document contains additional information (eleme
 <p>Available getters are:</p>
 
 <h5>
-<a id="user-content-boolean-isvalid-17" class="anchor" href="#boolean-isvalid-17" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>boolean isValid()</code>
+<a id="user-content-boolean-isvalid-16" class="anchor" href="#boolean-isvalid-16" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>boolean isValid()</code>
 </h5>
 
 <p>Returns <code>true</code> if detection result is valid, i.e. if all required elements were detected with good confidence and can be used. If <code>false</code> is returned that indicates that some crucial data is missing. You should ask user to try scanning again. If you keep getting <code>false</code> (i.e. invalid data) for certain document, please report that as a bug to <a href="http://help.microblink.com">help.microblink.com</a>. Please include high resolution photographs of problematic documents.</p>
 
 <h5>
-<a id="user-content-boolean-isempty-17" class="anchor" href="#boolean-isempty-17" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>boolean isEmpty()</code>
+<a id="user-content-boolean-isempty-16" class="anchor" href="#boolean-isempty-16" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>boolean isEmpty()</code>
 </h5>
 
 <p>Returns <code>true</code> if scan result is empty, i.e. nothing was scanned. All getters should return <code>null</code> for empty result.</p>

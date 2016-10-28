@@ -2,6 +2,7 @@ com.microblink.activity
 com.microblink.detectors
 com.microblink.detectors.document
 com.microblink.detectors.face
+com.microblink.detectors.mrz
 com.microblink.detectors.multi
 com.microblink.detectors.points
 com.microblink.detectors.quad
@@ -32,11 +33,16 @@ com.microblink.recognizers.blinkid.czechia.front
 com.microblink.recognizers.blinkid.germany.front
 com.microblink.recognizers.blinkid.germany.mrz
 com.microblink.recognizers.blinkid.mrtd
+com.microblink.recognizers.blinkid.serbia.back
+com.microblink.recognizers.blinkid.serbia.front
 com.microblink.recognizers.blinkid.slovakia.back
 com.microblink.recognizers.blinkid.slovakia.front
 com.microblink.recognizers.blinkocr
 com.microblink.recognizers.blinkocr.engine
 com.microblink.recognizers.blinkocr.parser
+com.microblink.recognizers.blinkocr.parser.australia
+com.microblink.recognizers.blinkocr.parser.australia.bankdetails
+com.microblink.recognizers.blinkocr.parser.australia.bpay
 com.microblink.recognizers.blinkocr.parser.austria
 com.microblink.recognizers.blinkocr.parser.bih
 com.microblink.recognizers.blinkocr.parser.croatia
@@ -70,6 +76,7 @@ com.microblink.recognizers.photopay.hungary.slip
 com.microblink.recognizers.photopay.kosovo.code128
 com.microblink.recognizers.photopay.kosovo.slip
 com.microblink.recognizers.photopay.netherlands.slip
+com.microblink.recognizers.photopay.sepa.qr
 com.microblink.recognizers.photopay.slovakia.qr
 com.microblink.recognizers.photopay.slovenia.slip
 com.microblink.recognizers.photopay.switzerland.slip

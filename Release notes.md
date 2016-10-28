@@ -1,5 +1,13 @@
 # Release notes
 
+##6.1.0
+- added support for scanning Beneficiary name in slovenian payslips
+- added support for scanning PayerID from slip (if missing in OCR line) in hungarian payslips
+- added support for scanning SEPA QR codes
+- improved czech code and symbol parsing
+- fixed rare NPE in SegmentScanActivity
+- fixed problematic camera management on One Plus 3
+
 ##6.0.0
 - improved `MobileCouponsParser`, added more options to customise parser settings
 - added support for scanning front and back side of Serbian ID cards

@@ -36,6 +36,7 @@
   * [Scanning Hungarian payslips](#hungarianPayslip)
   * [Scanning Kosovo payslips (OCR line)](#kosovoOcrLine)
   * [Scanning Kosovo payslips (Code128 barcode)](#kosovoCode128)
+  * [Scanning SEPA QR codes](#sepaQRCode)
   * [Scanning Slovak payBySquare QR codes](#slovakQRCode)
   * [Scanning Slovenian payslips](#slovenianPayslip)
   * [Scanning Swiss payslips](#swissPayslip)
@@ -122,7 +123,7 @@ You can also create your own scanning UI - you just need to embed `RecognizerVie
 	```
 	dependencies {
    		compile project(':LibRecognizer')
- 		compile "com.android.support:appcompat-v7:24.2.1"
+ 		compile "com.android.support:appcompat-v7:25.0.0"
 	}
 	```
 5. If you plan to use ProGuard, add following lines to your `proguard-rules.pro`:
@@ -2476,6 +2477,54 @@ Returns the scanned payer account number, if it exists.
 ##### `String getUtilityID()`
 Returns the scanned utility ID, if it exists.
 
+## <a name="sepaQRCode"></a> Scanning SEPA QR codes
+
+This section discusses the setting up of SEPA QR code recognizer and obtaining results from it.
+
+### Setting up SEPA QR code recognizer
+
+To activate SEPA QR code recognizer, you need to create [SepaQRRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/sepa/qr/SepaQRRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	SepaQRRecognizerSettings sett = new SepaQRRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [SepaQRRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/sepa/qr/SepaQRRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/sepa/qr/SepaQRRecognizerSettings.html) for more information.**
+
+### Obtaining results from SEPA QR code recognizer
+
+SEPA QR recognizer produces [SepaQRRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/sepa/qr/SepaQRRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `SepaQRRecognitionResult` class. See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof SepaQRRecognitionResult) {
+			SepaQRRecognitionResult result = (SepaQRRecognitionResult) baseResult;
+			
+	        // you can use getters of SepaQRRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+	        	int amount = result.getAmount();
+        		String account = result.getIBAN();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/sepa/qr/SepaQRRecognitionResult.html).**
+
 ## <a name="slovakQRCode"></a> Scanning Slovak payBySquare QR codes
 
 This section discusses the setting up of Slovak payBySquare QR code recognizer and obtaining results from it. Recognizer supports scanning of PAY by square QR codes (usually printed inside blue frame). Current version does not support scanning of INVOICE by square QR codes (usually printed inside orange frame).
@@ -2542,6 +2591,8 @@ private RecognizerSettings[] setupSettingsArray() {
 }
 ```
 
+**You can also tweak recognition parameters with methods of [SlovenianSlipRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovenia/slip/SlovenianSlipRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovenia/slip/SlovenianSlipRecognizerSettings.html) for more information.**
+
 ### Obtaining results from Slovenian payslip recognizer
 
 Slovenian payslip recognizer produces [SlovenianSlipRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovenia/slip/SlovenianSlipRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `SlovenianSlipRecognitionResult` class. See the following snippet for an example:
@@ -2569,37 +2620,7 @@ public void onScanningDone(RecognitionResults results) {
 }
 ```
 
-Available getters are:
-
-##### `boolean isValid()`
-Returns `true` if scan result is valid, i.e. if all required elements were scanned with good confidence and can be used. If `false` is returned that indicates that some crucial data fields are missing. You should ask user to try scanning again. If you keep getting `false` (i.e. invalid data) for certain payslip, please report that as a bug to [help.microblink.com](http://help.microblink.com). Please include problematic payslips.
-
-##### `boolean isEmpty()`
-Returns `true` if scan result is empty, i.e. nothing was scanned. All getters should return `null` for empty result.
-
-##### `String getCurrency()`
-Returns the currency in which payment should be performed. This is always "EUR".
-
-##### `int getAmount()`
-Returns the amount in cents. For example, `53,42 EUR` will be returned as `5342`.
-
-##### `BigDecimal getParsedAmount()`
-Returns the parsed amount in euros. Unlike `getAmount`, this method returns the `BigDecimal` type, which can hold decimal numbers without having floating point precision errors as floats and doubles have.
-
-##### `String getReferenceNumber()`
-Returns the scanned payment reference number.
-
-##### `String getReferenceModel()`
-Returns the scanned payment reference model.
-
-##### `String getIBAN()`
-Returns the scanned IBAN.
-
-##### `String getBIC()`
-Returns the BIC of the payee's bank.
-
-##### `String getPaymentDescription()`
-Returns the scanned payment description, if it exists.
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovenia/slip/SlovenianSlipRecognitionResult.html).**
 
 ## <a name="swissPayslip"></a> Scanning Swiss payslips
 
