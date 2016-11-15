@@ -242,7 +242,7 @@
 <ol>
 <li>In Android Studio menu, click <em>File</em>, select <em>New</em> and then select <em>Module</em>.</li>
 <li>In new window, select <em>Import .JAR or .AAR Package</em>, and click <em>Next</em>.</li>
-<li>In <em>File name</em> field, enter the path to <em>LibRecognizer.aar</em> and click <em>Finish</em>.</li>
+<li>In <em>File name</em> field, enter the path to <em>LibPhotoPay.aar</em> and click <em>Finish</em>.</li>
 <li>
 <p>In your app's <code>build.gradle</code>, add dependency to <code>LibRecognizer</code> and appcompat-v7:</p>
 
@@ -290,18 +290,18 @@
 <ol>
 <li>In Eclipse, create a new <em>Android library project</em> in your workspace.</li>
 <li>Clear the <code>src</code> and <code>res</code> folders.</li>
-<li>Unzip the <code>LibRecognizer.aar</code> file. You can rename it to zip and then unzip it using any tool.</li>
+<li>Unzip the <code>LibPhotoPay.aar</code> file. You can rename it to zip and then unzip it using any tool.</li>
 <li>Copy the <code>classes.jar</code> to <code>libs</code> folder of your Eclipse library project. If <code>libs</code> folder does not exist, create it.</li>
 <li>Copy the contents of <code>jni</code> folder to <code>libs</code> folder of your Eclipse library project.</li>
-<li>Replace the <code>res</code> folder on library project with the <code>res</code> folder of the <code>LibRecognizer.aar</code> file.</li>
+<li>Replace the <code>res</code> folder on library project with the <code>res</code> folder of the <code>LibPhotoPay.aar</code> file.</li>
 </ol>
 
 <p>You’ve already created the project that contains almost everything you need. Now let’s see how to configure your project to reference this library project.</p>
 
 <ol>
 <li>In the project you want to use the library (henceforth, "target project") add the library project as a dependency</li>
-<li>Open the <code>AndroidManifest.xml</code> file inside <code>LibRecognizer.aar</code> file and make sure to copy all permissions, features and activities to the <code>AndroidManifest.xml</code> file of the target project.</li>
-<li>Copy the contents of <code>assets</code> folder from <code>LibRecognizer.aar</code> into <code>assets</code> folder of target project. If <code>assets</code> folder in target project does not exist, create it.</li>
+<li>Open the <code>AndroidManifest.xml</code> file inside <code>LibPhotoPay.aar</code> file and make sure to copy all permissions, features and activities to the <code>AndroidManifest.xml</code> file of the target project.</li>
+<li>Copy the contents of <code>assets</code> folder from <code>LibPhotoPay.aar</code> into <code>assets</code> folder of target project. If <code>assets</code> folder in target project does not exist, create it.</li>
 <li>Clean and Rebuild your target project</li>
 <li>If you plan to use ProGuard, add same statements as in <a href="#quickIntegration">Android studio guide</a> to your ProGuard configuration file.</li>
 <li>Add appcompat-v7 library to your workspace and reference it by target project (modern ADT plugin for Eclipse does this automatically for all new android projects).</li>
@@ -5678,7 +5678,7 @@ the MRZ zone. Use this method if document contains additional information (eleme
 <h3>
 <a id="user-content--adding-new-language" class="anchor" href="#-adding-new-language" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-addLanguage"></a> Adding new language</h3>
 
-<p><em>PhotoPay</em> can easily be translated to other languages. The <code>res</code> folder in <code>LibRecognizer.aar</code> archive has folder <code>values</code> which contains <code>strings.xml</code> - this file contains english strings. In order to make e.g. croatian translation, create a folder <code>values-hr</code> in your project and put the copy of <code>strings.xml</code> inside it (you might need to extract <code>LibRecognizer.aar</code> archive to get access to those files). Then, open that file and change the english version strings into croatian version. </p>
+<p><em>PhotoPay</em> can easily be translated to other languages. The <code>res</code> folder in <code>LibPhotoPay.aar</code> archive has folder <code>values</code> which contains <code>strings.xml</code> - this file contains english strings. In order to make e.g. croatian translation, create a folder <code>values-hr</code> in your project and put the copy of <code>strings.xml</code> inside it (you might need to extract <code>LibPhotoPay.aar</code> archive to get access to those files). Then, open that file and change the english version strings into croatian version. </p>
 
 <h3>
 <a id="user-content--changing-strings-in-the-existing-language" class="anchor" href="#-changing-strings-in-the-existing-language" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-stringChanging"></a> Changing strings in the existing language</h3>
@@ -5687,7 +5687,7 @@ the MRZ zone. Use this method if document contains additional information (eleme
 
 <ol>
 <li>choose a language which you want to modify. For example Croatia ('hr').</li>
-<li>find strings.xml in <code>LibRecognizer.aar</code> archive folder <code>res/values-hr</code>
+<li>find strings.xml in <code>LibPhotoPay.aar</code> archive folder <code>res/values-hr</code>
 </li>
 <li>choose a string key which you want to change. For example, <code>&lt;string name="PhotoPayHelp"&gt;Help&lt;/string&gt;</code>
 </li>
@@ -5752,7 +5752,7 @@ intent<span class="pl-k">.</span>putExtra(<span class="pl-smi">ScanActivity</spa
 
 <ul>
 <li>you can ask your clients to reference <em>PhotoPay</em> in their app when integrating your SDK</li>
-<li>since the problem lies in resource merging part you can try avoiding this step by ensuring your library will not use any component from <em>PhotoPay</em> that uses resources (i.e. <em>ScanActivity</em>). You can perform <a href="#recognizerView">custom UI integration</a> while taking care that all resources (strings, layouts, images, ...) used are solely from your AAR, not from <em>PhotoPay</em>. Then, in your AAR you should not reference <code>LibRecognizer.aar</code> as gradle dependency, instead you should unzip it and copy its assets to your AAR’s assets folder, its classes.jar to your AAR’s lib folder (which should be referenced by gradle as jar dependency) and contents of its jni folder to your AAR’s src/main/jniLibs folder.</li>
+<li>since the problem lies in resource merging part you can try avoiding this step by ensuring your library will not use any component from <em>PhotoPay</em> that uses resources (i.e. <em>ScanActivity</em>). You can perform <a href="#recognizerView">custom UI integration</a> while taking care that all resources (strings, layouts, images, ...) used are solely from your AAR, not from <em>PhotoPay</em>. Then, in your AAR you should not reference <code>LibPhotoPay.aar</code> as gradle dependency, instead you should unzip it and copy its assets to your AAR’s assets folder, its classes.jar to your AAR’s lib folder (which should be referenced by gradle as jar dependency) and contents of its jni folder to your AAR’s src/main/jniLibs folder.</li>
 <li>Another approach is to use <a href="https://github.com/adwiv/android-fat-aar">3rd party unofficial gradle script</a> that aim to combine multiple AARs into single fat AAR. Use this script at your own risk.</li>
 </ul>
 
@@ -5782,7 +5782,7 @@ intent<span class="pl-k">.</span>putExtra(<span class="pl-smi">ScanActivity</spa
 <li>if x86_64 processor executes x86 code, it does not take advantage of 64-bit registers and use two instructions instead of one for 64-bit operations</li>
 </ul>
 
-<p><code>LibRecognizer.aar</code> archive contains ARMv7, ARM64, x86 and x86_64 builds of native library. By default, when you integrate <em>PhotoPay</em> into your app, your app will contain native builds for all processor architectures. Thus, <em>PhotoPay</em> will work on ARMv7, ARM64, x86 and x86_64 devices and will use ARMv7 features on ARMv7 devices and ARM64 features on ARM64 devices. However, the size of your application will be rather large.</p>
+<p><code>LibPhotoPay.aar</code> archive contains ARMv7, ARM64, x86 and x86_64 builds of native library. By default, when you integrate <em>PhotoPay</em> into your app, your app will contain native builds for all processor architectures. Thus, <em>PhotoPay</em> will work on ARMv7, ARM64, x86 and x86_64 devices and will use ARMv7 features on ARMv7 devices and ARM64 features on ARM64 devices. However, the size of your application will be rather large.</p>
 
 <h2>
 <a id="user-content--reducing-the-final-size-of-your-app" class="anchor" href="#-reducing-the-final-size-of-your-app" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-reduceSize"></a> Reducing the final size of your app</h2>
@@ -5857,9 +5857,9 @@ android.applicationVariants.all { variant -&gt;
 <h3>
 <a id="user-content-removing-processor-architecture-support-in-eclipse" class="anchor" href="#removing-processor-architecture-support-in-eclipse" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Removing processor architecture support in Eclipse</h3>
 
-<p>This section assumes that you have set up and prepared your Eclipse project from <code>LibRecognizer.aar</code> as described in chapter <a href="#eclipseIntegration">Eclipse integration instructions</a>.</p>
+<p>This section assumes that you have set up and prepared your Eclipse project from <code>LibPhotoPay.aar</code> as described in chapter <a href="#eclipseIntegration">Eclipse integration instructions</a>.</p>
 
-<p>If you are using Eclipse, removing processor architecture support gets really complicated. Eclipse does not support build flavors and you will either need to remove support for some processors or create several different library projects from <code>LibRecognizer.aar</code> - each one for specific processor architecture. </p>
+<p>If you are using Eclipse, removing processor architecture support gets really complicated. Eclipse does not support build flavors and you will either need to remove support for some processors or create several different library projects from <code>LibPhotoPay.aar</code> - each one for specific processor architecture. </p>
 
 <p>Native libraryies in eclipse library project are located in subfolder <code>libs</code>:</p>
 

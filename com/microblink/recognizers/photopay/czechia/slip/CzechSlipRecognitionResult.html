@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -216,23 +216,29 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/czechia/slip/CzechSlipRecognitionResult.html#getAccountPrefix--">getAccountPrefix</a></span>()</code>
+<div class="block">Returns the bank account prefix.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/czechia/slip/CzechSlipRecognitionResult.html#getBankCode--">getBankCode</a></span>()</code>
 <div class="block">Returns the bank code.</div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/czechia/slip/CzechSlipRecognitionResult.html#getConstantSymbol--">getConstantSymbol</a></span>()</code>
 <div class="block">Returns the constant symbol.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/czechia/slip/CzechSlipRecognitionResult.html#getSpecificSymbol--">getSpecificSymbol</a></span>()</code>
 <div class="block">Returns the specific symbol.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/czechia/slip/CzechSlipRecognitionResult.html#getVariableSymbol--">getVariableSymbol</a></span>()</code>
 <div class="block">Returns the variable symbol.</div>
@@ -331,6 +337,20 @@ public&nbsp;java.lang.String&nbsp;getAccountNumber()</pre>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the bank account number</dd>
+</dl>
+</li>
+</ul>
+<a name="getAccountPrefix--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getAccountPrefix</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getAccountPrefix()</pre>
+<div class="block">Returns the bank account prefix. Account prefix is not mandatory on payslips.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the bank account prefix</dd>
 </dl>
 </li>
 </ul>

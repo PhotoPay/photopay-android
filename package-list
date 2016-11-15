@@ -37,6 +37,8 @@ com.microblink.recognizers.blinkid.serbia.back
 com.microblink.recognizers.blinkid.serbia.front
 com.microblink.recognizers.blinkid.slovakia.back
 com.microblink.recognizers.blinkid.slovakia.front
+com.microblink.recognizers.blinkid.slovenia.back
+com.microblink.recognizers.blinkid.slovenia.front
 com.microblink.recognizers.blinkocr
 com.microblink.recognizers.blinkocr.engine
 com.microblink.recognizers.blinkocr.parser
@@ -84,6 +86,7 @@ com.microblink.recognizers.photopay.uk.qr
 com.microblink.recognizers.photopay.uk.slip
 com.microblink.recognizers.settings
 com.microblink.recognizers.templating
+com.microblink.results
 com.microblink.results.barcode
 com.microblink.results.date
 com.microblink.results.ocr

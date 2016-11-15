@@ -1,5 +1,15 @@
 # Release notes
 
+##6.2.0
+- fixed camera management on LG X Cam
+- added support for scanning Slovenian IDs
+- improved IBAN parser
+- improved amount parser
+- added support for returning optional data beyond the end of SEPA payment QR code
+- added support for drawing MRZ detection result
+- _LibRecognizer.aar_ renamed to _LibPhotoPay.aar_
+- Czech account number is now separated into first (prefix) and second part. First part is not mandatory on czech payslips.
+
 ##6.1.0
 - added support for scanning Beneficiary name in slovenian payslips
 - added support for scanning PayerID from slip (if missing in OCR line) in hungarian payslips
