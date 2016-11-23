@@ -1,6 +1,10 @@
 # Release notes
 
-##6.2.0
+## 6.2.1
+- added support for scanning IBANs that contain spaces and dashes
+- support for scanning Croatian slips that have no amount, but have currency in amount field
+
+## 6.2.0
 - fixed camera management on LG X Cam
 - added support for scanning Slovenian IDs
 - improved IBAN parser
@@ -10,7 +14,7 @@
 - _LibRecognizer.aar_ renamed to _LibPhotoPay.aar_
 - Czech account number is now separated into first (prefix) and second part. First part is not mandatory on czech payslips.
 
-##6.1.0
+## 6.1.0
 - added support for scanning Beneficiary name in slovenian payslips
 - added support for scanning PayerID from slip (if missing in OCR line) in hungarian payslips
 - added support for scanning SEPA QR codes
@@ -18,7 +22,7 @@
 - fixed rare NPE in SegmentScanActivity
 - fixed problematic camera management on One Plus 3
 
-##6.0.0
+## 6.0.0
 - improved `MobileCouponsParser`, added more options to customise parser settings
 - added support for scanning front and back side of Serbian ID cards
 - added option to request setting of `FLAG_SECURE` on activity window, using intent extras, for all built-in scan activities 
@@ -33,7 +37,7 @@
 - migrated to libc++ native runtime and used clang from NDKr12b for building the native code
     - this enabled c++14 features which will help us yield much better performance in the future
 
-##5.12.0
+## 5.12.0
 - added `MobileCouponsParser` for reading prepaid codes from mobile phone coupons (Croatia)
 - `DateParser` returns result as java `Date` object and as original date `String`
 - added method `getSpecificParsedResult` to `TemplatingRecognitionResult` (`BlinkOCRRecognitionResult`) which returns specific parser results, e.g. java `Date` for `DateParser`

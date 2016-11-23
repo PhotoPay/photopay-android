@@ -123,7 +123,7 @@ You can also create your own scanning UI - you just need to embed `RecognizerVie
 	```
 	dependencies {
    		compile project(':LibRecognizer')
- 		compile "com.android.support:appcompat-v7:25.0.0"
+ 		compile "com.android.support:appcompat-v7:25.0.1"
 	}
 	```
 5. If you plan to use ProGuard, add following lines to your `proguard-rules.pro`:
