@@ -1,5 +1,12 @@
 # Release notes
 
+## 6.3.0
+
+- removed `RecognizerView` method `setInitialScanningPaused`. For achieving the same functionality, method `pauseScanning` should be used.
+- updated `SepaQRRecognizer` to process image frames in the same way as `ZXingRecognizer`. Now, `slowThoroughScan` is enabled by default.
+- improved quality of german ID address recognition
+- added support for extracting place of birth on old German IDs
+
 ## 6.2.1
 - added support for scanning IBANs that contain spaces and dashes
 - support for scanning Croatian slips that have no amount, but have currency in amount field

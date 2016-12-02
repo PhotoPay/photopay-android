@@ -846,10 +846,6 @@ This method pauses the scanning loop, but keeps both camera and native library i
 ##### <a name="recognizerView_resumeScanning"></a> [`resumeScanning(boolean)`](https://photopay.github.io/photopay-android/com/microblink/view/recognition/RecognizerView.html#resumeScanning-boolean-)
 With this method you can resume the paused scanning loop. If called with `true` parameter, implicitly calls `resetRecognitionState()`. If called with `false`, old recognition state will not be reset, so it could be reused for boosting recognition result. This may not be always a desired behaviour.  Pause and resume scanning methods count the number of calls, so if you called `pauseScanning()` twice, you will have to call `resumeScanning` twice to actually resume scanning loop.
 
-
-##### <a name="recognizerView_setInitialScanningPaused"></a> [`setInitialScanningPaused()`](https://photopay.github.io/photopay-android/com/microblink/view/recognition/RecognizerView.html#setInitialScanningPaused-boolean-)
-This method lets you set up RecognizerView to not automatically resume scanning first time [resume](#recognizerView_resume) is called. An example use case of when you might want this is if you want to display onboarding help when opening camera first time and want to prevent scanning in background while onboarding is displayed over camera preview.
-
 ##### <a name="recognizerView_resetRecognitionState"></a> [`resetRecognitionState()`](https://photopay.github.io/photopay-android/com/microblink/view/recognition/RecognizerView.html#resetRecognitionState--)
 With this method you can reset internal recognition state. State is usually kept to improve recognition quality over time, but without resetting recognition state sometimes you might get poorer results (for example if you scan one object and then another without resetting state you might end up with result that contains properties from both scanned objects).
 
