@@ -37,7 +37,9 @@
   * [Scanning Kosovo payslips (OCR line)](#kosovoOcrLine)
   * [Scanning Kosovo payslips (Code128 barcode)](#kosovoCode128)
   * [Scanning SEPA QR codes](#sepaQRCode)
+  * [Scanning Slovak payslips](#slovakPayslip)
   * [Scanning Slovak payBySquare QR codes](#slovakQRCode)
+  * [Scanning Slovak Data Matrix codes](#slovakDataMatrix)
   * [Scanning Slovenian payslips](#slovenianPayslip)
   * [Scanning Swiss payslips](#swissPayslip)
   * [Scanning UK Giro slip OCR line](#ukGiroOcrLine)
@@ -50,6 +52,7 @@
   * [Scanning back side of Austrian ID documents](#ausID_back)
   * [Scanning front side of Croatian ID documents](#croID_front)
   * [Scanning back side of Croatian ID documents](#croID_back)
+  * [Scanning and combining results from front and back side of Croatian ID documents](#croIDCombined)
   * [Scanning front side of Czech ID documents](#czID_front)
   * [Scanning back side of Czech ID documents](#czID_back)
   * [Scanning front side of German ID documents](#germanID_front)
@@ -2521,6 +2524,52 @@ public void onScanningDone(RecognitionResults results) {
 
 **Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/sepa/qr/SepaQRRecognitionResult.html).**
 
+## <a name="slovakPayslip"></a> Scanning Slovak payslips
+
+This section discusses the setting up of Slovak payslip recognizer and obtaining results from it.
+
+### Setting up Slovak payslip recognizer
+
+To activate Slovak payslip recognizer, you need to create [SlovakSlipRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovakia/slip/SlovakSlipRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	SlovakSlipRecognizerSettings sett = new SlovakSlipRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+### Obtaining results from Slovak payslip recognizer
+
+Slovak payslip recognizer produces [SlovakSlipRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovakia/slip/SlovakSlipRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `SlovakSlipRecognitionResult` class. See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof SlovakSlipRecognitionResult) {
+			SlovakSlipRecognitionResult result = (SlovakSlipRecognitionResult) baseResult;
+			
+	        // you can use getters of SlovakSlipRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+	        	int amount = result.getAmount();
+        		String account = result.getAccountNumber();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovakia/slip/SlovakSlipRecognitionResult.html).**
+
 ## <a name="slovakQRCode"></a> Scanning Slovak payBySquare QR codes
 
 This section discusses the setting up of Slovak payBySquare QR code recognizer and obtaining results from it. Recognizer supports scanning of PAY by square QR codes (usually printed inside blue frame). Current version does not support scanning of INVOICE by square QR codes (usually printed inside orange frame).
@@ -2568,6 +2617,54 @@ public void onScanningDone(RecognitionResults results) {
 ```
 
 **Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovakia/qr/SlovakQRCodeRecognitionResult.html).**
+
+## <a name="slovakDataMatrix"></a> Scanning Slovak Data Matrix codes
+
+This section discusses the setting up of Slovak Data Matrix code recognizer and obtaining results from it.
+
+### Setting up Slovak Data Matrix code recognizer
+
+To activate Slovak Data Matrix recognizer, you need to create [SlovakDataMatrixRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovakia/dataMatrix/SlovakDataMatrixRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	SlovakDataMatrixRecognizerSettings sett = new SlovakDataMatrixRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [SlovakDataMatrixRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovakia/dataMatrix/SlovakDataMatrixRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovakia/dataMatrix/SlovakDataMatrixRecognizerSettings.html) for more information.**
+
+### Obtaining results from Slovak Data Matrix code recognizer
+
+Slovak Data Matrix recognizer produces [SlovakDataMatrixRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovakia/dataMatrix/SlovakDataMatrixRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `SlovakDataMatrixRecognitionResult` class. See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof SlovakDataMatrixRecognitionResult) {
+			SlovakDataMatrixRecognitionResult result = (SlovakDataMatrixRecognitionResult) baseResult;
+			
+	        // you can use getters of SlovakDataMatrixRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+	        	int amount = result.getAmount();
+        		String account = result.getIBAN();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovakia/dataMatrix/SlovakDataMatrixRecognitionResult.html).**
 
 ## <a name="slovenianPayslip"></a> Scanning Slovenian payslips
 
@@ -3103,6 +3200,11 @@ private RecognizerSettings[] setupSettingsArray() {
 ##### [`setAllowUnparsedResults(boolean)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setAllowUnparsedResults-boolean-)
 Set this to `true` to allow obtaining results that have not been parsed by SDK. By default this is off. The reason for this is that we want to ensure best possible data quality when returning results. For that matter we internally parse the MRZ and extract all data, taking all possible OCR mistakes into account. However, if you happen to have a document with MRZ that has format our internal parser still does not support, you need to allow returning of unparsed results. Unparsed results will not contain parsed data, but will contain OCR result received from OCR engine, so you can parse data yourself.
 
+##### [`setAllowUnverifiedResults(boolean)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setAllowUnverifiedResults-boolean-)
+Set this to `true` to allow obtaining of results with incorrect check digits. This flag will be taken
+into account only if Machine Readable Zone has been successfully parsed because only in that
+case check digits can be examined.
+
 ##### [`setShowMRZ(boolean)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setShowMRZ-boolean-)
 Set this to `true` if you use [MetadataListener](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataListener.html) and you want to obtain image containing only Machine Readable Zone. The reported ImageType will be [DEWARPED](https://photopay.github.io/photopay-android/com/microblink/image/ImageType.html#DEWARPED) and image name will be `"MRZ"`. You will also need to enable [obtaining of dewarped images](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html#setDewarpedImageEnabled-boolean-) in [MetadataSettings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html). By default, this is turned off.
 
@@ -3247,6 +3349,9 @@ Returns the entire Machine Readable Zone text from ID. This text is usually used
 
 ##### `boolean isMRZParsed()`
 Returns `true` if Machine Readable Zone has been parsed, `false` otherwise. `false` can only be returned if in settings object you called `setAllowUnparsedResults(true)`. If Machine Readable Zone has not been parsed, you can still obtain OCR result with `getOcrResult()` and attempt to parse it yourself.
+
+##### `boolean isMRZVerified()`
+Returns `true` if all check digits inside MRZ are correct, `false` otherwise.
 
 ##### `OcrResult getOcrResult()`
 Returns the raw [OCR result](https://photopay.github.io/photopay-android/com/microblink/results/ocr/OcrResult.html) that was used for parsing data. If `isMRZParsed()` returns `false`, you can use OCR result to parse data by yourself.
@@ -3467,6 +3572,76 @@ public void onScanningDone(RecognitionResults results) {
 ```
 
 **Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/croatia/back/CroatianIDBackSideRecognitionResult.html).**
+
+## <a name="croIDCombined"></a> Scanning and combining results from front and back side of Croatian ID documents
+
+This section will discuss the setting up of Croatian ID Combined recognizer and obtaining results from it. This recognizer combines results from front and back side of the Croatian ID card to boost result accuracy. Also it checks whether front and back sides are from the same ID card.
+
+### Setting up Croatian ID card combined recognizer
+
+To activate Croatian ID combined recognizer, you need to create [CroatianIDCombinedRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/croatia/combined/CroatianIDCombinedRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+    CroatianIDCombinedRecognizerSettings sett = new CroatianIDCombinedRecognizerSettings();
+    
+    // now add sett to recognizer settings array that is used to configure
+    // recognition
+    return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [CroatianIDCombinedRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/croatia/combined/CroatianIDCombinedRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/croatia/combined/CroatianIDCombinedRecognizerSettings.html) for more information.**
+
+**Note:** In your [custom UI integration](#recognizerView), you have to enable [obtaining of partial result metadata](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html#setPartialResultMetadataAllowed-boolean-) in [MetadataSettings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html) if you want to be informed when recognition of the front side is done and receive [RecognitionResultMetadata](https://photopay.github.io/photopay-android/com/microblink/metadata/RecognitionResultMetadata.html) in [onMetadataAvailable](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataListener.html) callback. When callback with [RecognitionResultMetadata](https://photopay.github.io/photopay-android/com/microblink/metadata/RecognitionResultMetadata.html) is called you can make appropriate changes in the UI to notify the user to flip document and scan back side. See the following snippet for an example:
+
+```java
+@Override
+public void onMetadataAvailable(Metadata metadata) {
+    if (metadata instanceof RecognitionResultMetadata) {
+        BaseRecognitionResult result = ((RecognitionResultMetadata) metadata).getScannedResult();
+        if (result != null && result instanceof CroatianIDFrontSideRecognitionResult) {
+            // notify user to scan the back side  
+        }
+    }
+}
+```
+
+### Obtaining results from Croatian ID card combined recognizer
+
+Croatian ID combined recognizer produces [CroatianIDCombinedRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/croatia/combined/CroatianIDCombinedRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `CroatianIDCombinedRecognitionResult` class. 
+
+**Note:** `CroatianIDCombinedRecognitionResult` extends [BlinkOCRRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+    BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+    for(BaseRecognitionResult baseResult : dataArray) {
+        if(baseResult instanceof CroatianIDCombinedRecognitionResult) {
+            CroatianIDCombinedRecognitionResult result = (CroatianIDCombinedRecognitionResult) baseResult;
+            
+            // you can use getters of CroatianIDCombinedRecognitionResult class to 
+            // obtain scanned information
+            if(result.isValid() && !result.isEmpty()) {
+                if (!result.getDocumentBothSidesMatch()) {
+                   // front and back sides are not from the same ID card
+                } else {
+                    String firstName = result.getFirstName();
+                    String lastName = result.getLastName();
+                }
+            } else {
+                // not all relevant data was scanned, ask user
+                // to try again
+            }
+        }
+    }
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/croatia/combined/CroatianIDCombinedRecognitionResult.html).**
 
 ## <a name="czID_front"></a> Scanning front side of Czech ID documents
 

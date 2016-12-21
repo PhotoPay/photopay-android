@@ -1,5 +1,14 @@
 # Release notes
 
+## 6.4.0
+
+- added support for scanning IBAN from Georgia in Segment Scan
+- added support for cancelling ongoing DirectAPI recognition call
+- added option to allow unverified results for `MRTDRecognizer`:
+    - by using method `setAllowUnverifiedResults` in `MRTDRecognizerSettings`,  it is possible to allow obtaining of results with incorrect check digits
+- added Belgian account number check to IBAN parser
+- added PhotoPay support for scanning Slovak payslips and Slovak Data Matrix codes
+
 ## 6.3.0
 
 - removed `RecognizerView` method `setInitialScanningPaused`. For achieving the same functionality, method `pauseScanning` should be used.

@@ -27,6 +27,7 @@ com.microblink.recognizers.blinkbarcode.zxing
 com.microblink.recognizers.blinkid.austria.back
 com.microblink.recognizers.blinkid.austria.front
 com.microblink.recognizers.blinkid.croatia.back
+com.microblink.recognizers.blinkid.croatia.combined
 com.microblink.recognizers.blinkid.croatia.front
 com.microblink.recognizers.blinkid.czechia.back
 com.microblink.recognizers.blinkid.czechia.front
@@ -79,7 +80,9 @@ com.microblink.recognizers.photopay.kosovo.code128
 com.microblink.recognizers.photopay.kosovo.slip
 com.microblink.recognizers.photopay.netherlands.slip
 com.microblink.recognizers.photopay.sepa.qr
+com.microblink.recognizers.photopay.slovakia.dataMatrix
 com.microblink.recognizers.photopay.slovakia.qr
+com.microblink.recognizers.photopay.slovakia.slip
 com.microblink.recognizers.photopay.slovenia.slip
 com.microblink.recognizers.photopay.switzerland.slip
 com.microblink.recognizers.photopay.uk.qr
