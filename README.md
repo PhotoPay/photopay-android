@@ -121,11 +121,11 @@ You can also create your own scanning UI - you just need to embed `RecognizerVie
 1. In Android Studio menu, click _File_, select _New_ and then select _Module_.
 2. In new window, select _Import .JAR or .AAR Package_, and click _Next_.
 3. In _File name_ field, enter the path to _LibPhotoPay.aar_ and click _Finish_.
-4. In your app's `build.gradle`, add dependency to `LibRecognizer` and appcompat-v7:
+4. In your app's `build.gradle`, add dependency to `LibPhotoPay` and appcompat-v7:
 
 	```
 	dependencies {
-   		compile project(':LibRecognizer')
+   		compile project(':LibPhotoPay')
  		compile "com.android.support:appcompat-v7:25.0.1"
 	}
 	```
@@ -142,11 +142,11 @@ You can also create your own scanning UI - you just need to embed `RecognizerVie
 
 1. In Android Studio project sidebar, ensure [project view is enabled](https://developer.android.com/sdk/installing/studio-androidview.html)
 2. Expand `External Libraries` entry (usually this is the last entry in project view)
-3. Locate `LibRecognizer-unspecified` entry, right click on it and select `Library Properties...`
+3. Locate `LibPhotoPay-unspecified` entry, right click on it and select `Library Properties...`
 4. A `Library Properties` pop-up window will appear
 5. Click the `+` button in bottom left corner of the window
 6. Window for choosing JAR file will appear
-7. Find and select `LibRecognizer-javadoc.jar` file which is located in root folder of the SDK distribution
+7. Find and select `LibPhotoPay-javadoc.jar` file which is located in root folder of the SDK distribution
 8. Click `OK`
 	
 ## <a name="eclipseIntegration"></a> Eclipse integration instructions
