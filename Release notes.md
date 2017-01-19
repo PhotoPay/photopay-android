@@ -1,5 +1,15 @@
 # Release notes
 
+## 6.5.0
+
+- added support for Android 7 multi-window mode
+- added support for Slovenian UPN QR code
+- workaround for camera bug on OnePlus 3T
+- fixed autofocus bug on Huawei Honor 8
+- fixed black camera on Motorola Moto Z
+- made camera focusing more stable on some devices
+    - _stable_ means less "jumpy" when searching for focused image
+
 ## 6.4.0
 
 - added support for scanning IBAN from Georgia in Segment Scan

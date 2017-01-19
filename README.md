@@ -41,6 +41,7 @@
   * [Scanning Slovak payBySquare QR codes](#slovakQRCode)
   * [Scanning Slovak Data Matrix codes](#slovakDataMatrix)
   * [Scanning Slovenian payslips](#slovenianPayslip)
+  * [Scanning Slovenian payment QR codes](#sloQRCode)
   * [Scanning Swiss payslips](#swissPayslip)
   * [Scanning UK Giro slip OCR line](#ukGiroOcrLine)
   * [Scanning UK payment QR code](#ukQRCodeLine)
@@ -79,6 +80,7 @@
 * [Troubleshooting](#troubleshoot)
   * [Integration problems](#integrationTroubleshoot)
   * [SDK problems](#sdkTroubleshoot)
+  * [Frequently asked questions and known problems](#faq)
 * [Additional info](#info)
 
 # <a name="intro"></a> Android _PhotoPay_ integration instructions
@@ -126,7 +128,7 @@ You can also create your own scanning UI - you just need to embed `RecognizerVie
 	```
 	dependencies {
    		compile project(':LibPhotoPay')
- 		compile "com.android.support:appcompat-v7:25.0.1"
+ 		compile "com.android.support:appcompat-v7:25.1.0"
 	}
 	```
 5. If you plan to use ProGuard, add following lines to your `proguard-rules.pro`:
@@ -2592,14 +2594,14 @@ private RecognizerSettings[] setupSettingsArray() {
 
 ### Obtaining results from Slovak payBySquare QR code recognizer
 
-Slovak payBySquare QR recognizer produces [SlovakQRCodeRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovakia/qr/SlovakQRCodeRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `SlovakQRCodeRecognitionResult ` class. See the following snippet for an example:
+Slovak payBySquare QR recognizer produces [SlovakQRCodeRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovakia/qr/SlovakQRCodeRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `SlovakQRCodeRecognitionResult` class. See the following snippet for an example:
 
 ```java
 @Override
 public void onScanningDone(RecognitionResults results) {
 	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
 	for(BaseRecognitionResult baseResult : dataArray) {
-		if(baseResult instanceof CzechQRCodeRecognitionResult) {
+		if(baseResult instanceof SlovakQRCodeRecognitionResult) {
 			SlovakQRCodeRecognitionResult result = (SlovakQRCodeRecognitionResult) baseResult;
 			
 	        // you can use getters of SlovakQRCodeRecognitionResult class to 
@@ -2714,6 +2716,54 @@ public void onScanningDone(RecognitionResults results) {
 ```
 
 **Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovenia/slip/SlovenianSlipRecognitionResult.html).**
+
+## <a name="sloQRCode"></a> Scanning Slovenian payment QR codes
+
+This section discusses the setting up of Slovenian payment QR code recognizer and obtaining results from it. Recognizer supports scanning of payment QR codes that are placed inside new slovenian UPN payment slips.
+
+### Setting up Slovenian payment QR code recognizer
+
+To activate Slovenian payment QR code recognizer, you need to create [SlovenianQRCodeRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovenia/qr/SlovenianQRCodeRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	SlovenianQRCodeRecognizerSettings sett = new SlovenianQRCodeRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [SlovenianQRCodeRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovenia/qr/SlovenianQRCodeRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovenia/qr/SlovenianQRCodeRecognizerSettings.html) for more information.**
+
+### Obtaining results from Slovenian payment QR code recognizer
+
+Slovenian payment QR recognizer produces [SlovenianQRCodeRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovenia/qr/SlovenianQRCodeRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `SlovenianQRCodeRecognitionResult` class. See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof SlovenianQRCodeRecognitionResult) {
+			SlovenianQRCodeRecognitionResult result = (SlovenianQRCodeRecognitionResult) baseResult;
+			
+	        // you can use getters of SlovenianQRCodeRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+	        	int amount = result.getAmount();
+        		String account = result.getIBAN();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovenia/qr/SlovenianQRCodeRecognitionResult.html).**
 
 ## <a name="swissPayslip"></a> Scanning Swiss payslips
 
@@ -4811,6 +4861,24 @@ If you are having problems with scanning certain items, undesired behaviour on s
 	* high resolution scan/photo of the item that you are trying to scan
 	* information about device that you are using - we need exact model name of the device. You can obtain that information with [this app](https://play.google.com/store/apps/details?id=com.jphilli85.deviceinfo&hl=en)
 	* please stress out that you are reporting problem related to Android version of _PhotoPay_ SDK
+
+## <a name="faq"></a> Frequently asked questions and known problems
+Here is a list of frequently asked questions and solutions for them and also a list of known problems in the SDK and how to work around them.
+
+### <a name="android7MultiWindowButtons"></a> When automatic rotation is enabled, buttons are mislayouted on default scan activity after orientation change in Android 7.0 multi-window mode
+This is a known issue which can only be worked around by disabling multi window support in your entire activity stack which, as described in [Android documentation](https://developer.android.com/guide/topics/ui/multi-window.html#configuring) or by using [custom UI integration approach](#recognizerView). We are aware of the issue and will fix it in a future release.
+
+### <a name="featureNotSupportedByLicenseKey"></a> Sometimes scanning works, sometimes it says that feature is not supported by license key
+
+Each license key contains information about which features are allowed to use and which are not. This error can usually happens with production licence keys when you attempt to use recognizer which was not included in licence key. You should contact [support](http://help.microblink.com) to check if provided licence key is OK and that it really contains all features that you have purchased.
+
+### <a name="missingResources"></a> When my app starts, I get exception telling me that some resource/class cannot be found or I get `ClassNotFoundException`
+
+This usually happens when you perform integration into [Eclipse project](#eclipseIntegration) and you forget to add resources or native libraries into the project. You must alway take care that same versions of both resources, assets, java library and native libraries are used in combination. Combining different versions of resources, assets, java and native libraries will trigger crash in SDK. This problem can also occur when you have performed improper integration of _PhotoPay_ SDK into your SDK. Please read how to [embed _PhotoPay_ inside another SDK](#embedAAR).
+
+### <a name="unsatisfiedLinkError"></a> When my app starts, I get `UnsatisfiedLinkError`
+
+This error happens when JVM fails to load some native method from native library. If performing integration into [Eclipse project](#eclipseIntegration) make sure you have the same version of all native libraries and java wrapper. If performing integration [into Android studio](quickIntegration) and this error happens, make sure that you have correctly combined _PhotoPay_ SDK with [third party SDKs that contain native code](#combineNativeLibraries). If this error also happens in our integration demo apps, then it may indicate a bug in the SDK that is manifested on specific device. Please report that to our [support team](http://help.microblink.com).
 
 
 # <a name="info"></a> Additional info
