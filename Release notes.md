@@ -1,5 +1,11 @@
 # Release notes
 
+## 6.5.1
+
+- improved multi-window camera support
+- fix layouting of default activities in multi-window mode
+- improved recognition of issuing authority on Croatian ID cards
+
 ## 6.5.0
 
 - added support for Android 7 multi-window mode
