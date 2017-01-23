@@ -4865,9 +4865,6 @@ If you are having problems with scanning certain items, undesired behaviour on s
 ## <a name="faq"></a> Frequently asked questions and known problems
 Here is a list of frequently asked questions and solutions for them and also a list of known problems in the SDK and how to work around them.
 
-### <a name="android7MultiWindowButtons"></a> When automatic rotation is enabled, buttons are mislayouted on default scan activity after orientation change in Android 7.0 multi-window mode
-This is a known issue which can only be worked around by disabling multi window support in your entire activity stack which, as described in [Android documentation](https://developer.android.com/guide/topics/ui/multi-window.html#configuring) or by using [custom UI integration approach](#recognizerView). We are aware of the issue and will fix it in a future release.
-
 ### <a name="featureNotSupportedByLicenseKey"></a> Sometimes scanning works, sometimes it says that feature is not supported by license key
 
 Each license key contains information about which features are allowed to use and which are not. This error can usually happens with production licence keys when you attempt to use recognizer which was not included in licence key. You should contact [support](http://help.microblink.com) to check if provided licence key is OK and that it really contains all features that you have purchased.
