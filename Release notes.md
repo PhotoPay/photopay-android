@@ -1,5 +1,15 @@
 # Release notes
 
+## 6.6.0
+
+- added PhotoPay support for Slovak code 128 barcode
+- added PhotoPay support for Slovenian UPN QR payslips
+- added support for extraction of beneficiary name and address on Slovak payslips
+- improved PhotoPay support for Slovak Data Matrix codes
+- fixed layouting of provided `SegmentScanActivity` and `RandomScanActivity` in multi-window mode
+- `MobileCouponsParser` is renamed to `TopUpParser`
+- added `SimNumberRecognizer` which scans SIM numbers from barcodes
+
 ## 6.5.1
 
 - improved multi-window camera support

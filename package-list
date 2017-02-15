@@ -22,6 +22,7 @@ com.microblink.recognizers
 com.microblink.recognizers.blinkbarcode
 com.microblink.recognizers.blinkbarcode.bardecoder
 com.microblink.recognizers.blinkbarcode.pdf417
+com.microblink.recognizers.blinkbarcode.simnumber
 com.microblink.recognizers.blinkbarcode.zxing
 com.microblink.recognizers.blinkid.austria.back
 com.microblink.recognizers.blinkid.austria.front
@@ -38,6 +39,7 @@ com.microblink.recognizers.blinkid.serbia.front
 com.microblink.recognizers.blinkid.slovakia.back
 com.microblink.recognizers.blinkid.slovakia.front
 com.microblink.recognizers.blinkid.slovenia.back
+com.microblink.recognizers.blinkid.slovenia.combined
 com.microblink.recognizers.blinkid.slovenia.front
 com.microblink.recognizers.blinkocr
 com.microblink.recognizers.blinkocr.engine
@@ -54,12 +56,12 @@ com.microblink.recognizers.blinkocr.parser.germany
 com.microblink.recognizers.blinkocr.parser.hungary
 com.microblink.recognizers.blinkocr.parser.licenseplates
 com.microblink.recognizers.blinkocr.parser.macedonia
-com.microblink.recognizers.blinkocr.parser.mobilecoupons
 com.microblink.recognizers.blinkocr.parser.montenegro
 com.microblink.recognizers.blinkocr.parser.regex
 com.microblink.recognizers.blinkocr.parser.serbia
 com.microblink.recognizers.blinkocr.parser.slovenia
 com.microblink.recognizers.blinkocr.parser.sweden
+com.microblink.recognizers.blinkocr.parser.topup
 com.microblink.recognizers.blinkocr.parser.vin
 com.microblink.recognizers.detector
 com.microblink.recognizers.photopay
@@ -79,6 +81,7 @@ com.microblink.recognizers.photopay.kosovo.code128
 com.microblink.recognizers.photopay.kosovo.slip
 com.microblink.recognizers.photopay.netherlands.slip
 com.microblink.recognizers.photopay.sepa.qr
+com.microblink.recognizers.photopay.slovakia.code128
 com.microblink.recognizers.photopay.slovakia.dataMatrix
 com.microblink.recognizers.photopay.slovakia.qr
 com.microblink.recognizers.photopay.slovakia.slip
