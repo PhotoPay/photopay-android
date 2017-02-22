@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -234,20 +234,20 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/slovenia/qr/SlovenianQRCodeRecognitionResult.html#getPayerAddress--">getPayerAddress</a></span>()</code>
-<div class="block">Returns the address of the payer, if it exists</div>
-</td>
-</tr>
-<tr id="i5" class="rowColor">
-<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/slovenia/qr/SlovenianQRCodeRecognitionResult.html#getPayerIBAN--">getPayerIBAN</a></span>()</code>
 <div class="block">Returns the international bank account number of the account from where the payment goes</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/slovenia/qr/SlovenianQRCodeRecognitionResult.html#getPayerName--">getPayerName</a></span>()</code>
 <div class="block">Returns the name of the payer, if it exists</div>
+</td>
+</tr>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/slovenia/qr/SlovenianQRCodeRecognitionResult.html#getPayerPlace--">getPayerPlace</a></span>()</code>
+<div class="block">Returns the place of the payer, if it exists</div>
 </td>
 </tr>
 <tr id="i7" class="rowColor">
@@ -258,32 +258,32 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/slovenia/qr/SlovenianQRCodeRecognitionResult.html#getPayerStreet--">getPayerStreet</a></span>()</code>
+<div class="block">Returns the street of the payer, if it exists</div>
+</td>
+</tr>
+<tr id="i9" class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/slovenia/qr/SlovenianQRCodeRecognitionResult.html#getPaymentDescription--">getPaymentDescription</a></span>()</code>
 <div class="block">Returns description of the payment</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/slovenia/qr/SlovenianQRCodeRecognitionResult.html#getPaymentReference--">getPaymentReference</a></span>()</code>
 <div class="block">Returns the reference of the payment</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/slovenia/qr/SlovenianQRCodeRecognitionResult.html#getPurposeCode--">getPurposeCode</a></span>()</code>
 <div class="block">Returns the purpose code of the payment</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/slovenia/qr/SlovenianQRCodeRecognitionResult.html#getRawResult--">getRawResult</a></span>()</code>
 <div class="block">Returns raw result</div>
-</td>
-</tr>
-<tr id="i12" class="altColor">
-<td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/slovenia/qr/SlovenianQRCodeRecognitionResult.html#getRecipientAddress--">getRecipientAddress</a></span>()</code>
-<div class="block">Returns the address of the recipient</div>
 </td>
 </tr>
 <tr id="i13" class="rowColor">
@@ -293,6 +293,18 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 </td>
 </tr>
 <tr id="i14" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/slovenia/qr/SlovenianQRCodeRecognitionResult.html#getRecipientPlace--">getRecipientPlace</a></span>()</code>
+<div class="block">Returns the place of the recipient</div>
+</td>
+</tr>
+<tr id="i15" class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/slovenia/qr/SlovenianQRCodeRecognitionResult.html#getRecipientStreet--">getRecipientStreet</a></span>()</code>
+<div class="block">Returns the street of the recipient</div>
+</td>
+</tr>
+<tr id="i16" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/slovenia/qr/SlovenianQRCodeRecognitionResult.html#getWithdraw--">getWithdraw</a></span>()</code>
 <div class="block">Returns whether withdraw option is included in payment</div>
@@ -499,18 +511,33 @@ public&nbsp;java.lang.String&nbsp;getPayerName()</pre>
 </dl>
 </li>
 </ul>
-<a name="getPayerAddress--">
+<a name="getPayerPlace--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>getPayerAddress</h4>
+<h4>getPayerPlace</h4>
 <pre>@Nullable
-public&nbsp;java.lang.String&nbsp;getPayerAddress()</pre>
-<div class="block">Returns the address of the payer, if it exists</div>
+public&nbsp;java.lang.String&nbsp;getPayerPlace()</pre>
+<div class="block">Returns the place of the payer, if it exists</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>Returns the address of the payer, if it exists</dd>
+<dd>Returns the place of the payer, if it exists</dd>
+</dl>
+</li>
+</ul>
+<a name="getPayerStreet--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getPayerStreet</h4>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getPayerStreet()</pre>
+<div class="block">Returns the street of the payer, if it exists</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Returns the street of the payer, if it exists</dd>
 </dl>
 </li>
 </ul>
@@ -559,18 +586,33 @@ public&nbsp;java.lang.String&nbsp;getRecipientName()</pre>
 </dl>
 </li>
 </ul>
-<a name="getRecipientAddress--">
+<a name="getRecipientPlace--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>getRecipientAddress</h4>
+<h4>getRecipientPlace</h4>
 <pre>@Nullable
-public&nbsp;java.lang.String&nbsp;getRecipientAddress()</pre>
-<div class="block">Returns the address of the recipient</div>
+public&nbsp;java.lang.String&nbsp;getRecipientPlace()</pre>
+<div class="block">Returns the place of the recipient</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The address of the recipient</dd>
+<dd>The place of the recipient</dd>
+</dl>
+</li>
+</ul>
+<a name="getRecipientStreet--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getRecipientStreet</h4>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getRecipientStreet()</pre>
+<div class="block">Returns the street of the recipient</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The street of the recipient</dd>
 </dl>
 </li>
 </ul>

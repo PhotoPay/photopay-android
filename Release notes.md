@@ -1,5 +1,14 @@
 # Release notes
 
+## 6.6.1
+
+- updated `SlovenianQRCodeRecognitionResult`:
+    - addresses are divided to street and place, now payer address and recipient address can be obtained as four fields:  payer place, payer street, recipient place and recipient street
+    - fixed obtaining of raw results - method getRawResult()
+- improved CroReferenceParser
+    - references in form HRXX-XXXX... are not returned if model is not valid, for example HR22-2360 is not a valid reference because model 22 does not exist
+    - trailing whitespace is removed from result
+
 ## 6.6.0
 
 - added PhotoPay support for Slovak code 128 barcode

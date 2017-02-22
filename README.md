@@ -52,6 +52,7 @@
   * [Scanning machine-readable travel documents](#mrtd)
   * [Scanning front side of Austrian ID documents](#ausID_front)
   * [Scanning back side of Austrian ID documents](#ausID_back)
+  * [Scanning and combining results from front and back side of Austrian ID documents](#austrianIDCombined)
   * [Scanning front side of Croatian ID documents](#croID_front)
   * [Scanning back side of Croatian ID documents](#croID_back)
   * [Scanning and combining results from front and back side of Croatian ID documents](#croIDCombined)
@@ -3565,6 +3566,74 @@ public void onScanningDone(RecognitionResults results) {
 
 **Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/austria/back/AustrianIDBackSideRecognitionResult.html).**
 
+## <a name="austrianIDCombined"></a> Scanning and combining results from front and back side of Austrian ID documents
+
+This section will discuss the setting up of Austrian ID Combined recognizer and obtaining results from it. This recognizer combines results from front and back side of the Austrian ID card to boost result accuracy. Also it checks whether front and back sides are from the same ID card.
+
+### Setting up Austrian ID card combined recognizer
+
+To activate Austrian ID combined recognizer, you need to create [AustrianIDCombinedRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/austria/combined/AustrianIDCombinedRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+    AustrianIDCombinedRecognizerSettings sett = new AustrianIDCombinedRecognizerSettings();
+    
+    // now add sett to recognizer settings array that is used to configure
+    // recognition
+    return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [AustrianIDCombinedRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/austria/combined/AustrianIDCombinedRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/austria/combined/AustrianIDCombinedRecognizerSettings.html) for more information.**
+
+**Note:** In your [custom UI integration](#recognizerView), you have to enable [obtaining of partial result metadata](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html#setPartialResultMetadataAllowed-boolean-) in [MetadataSettings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html) if you want to be informed when recognition of the front side is done and receive [RecognitionResultMetadata](https://photopay.github.io/photopay-android/com/microblink/metadata/RecognitionResultMetadata.html) in [onMetadataAvailable](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataListener.html) callback. When callback with [RecognitionResultMetadata](https://photopay.github.io/photopay-android/com/microblink/metadata/RecognitionResultMetadata.html) is called you can make appropriate changes in the UI to notify the user to flip document and scan back side. See the following snippet for an example:
+
+```java
+@Override
+public void onMetadataAvailable(Metadata metadata) {
+    if (metadata instanceof RecognitionResultMetadata) {
+        BaseRecognitionResult result = ((RecognitionResultMetadata) metadata).getScannedResult();
+        if (result != null && result instanceof AustrianIDFrontSideRecognitionResult) {
+            // notify user to scan the back side  
+        }
+    }
+}
+```
+
+### Obtaining results from Austrian ID card combined recognizer
+
+Austrian ID combined recognizer produces [AustrianIDCombinedRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/austria/combined/AustrianIDCombinedRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `AustrianIDCombinedRecognitionResult` class. 
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+    BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+    for(BaseRecognitionResult baseResult : dataArray) {
+        if(baseResult instanceof AustrianIDCombinedRecognitionResult) {
+            AustrianIDCombinedRecognitionResult result = (AustrianIDCombinedRecognitionResult) baseResult;
+            
+            // you can use getters of AustrianIDCombinedRecognitionResult class to 
+            // obtain scanned information
+            if(result.isValid() && !result.isEmpty()) {
+                if (!result.getDocumentBothSidesMatch()) {
+                   // front and back sides are not from the same ID card
+                } else {
+                    String firstName = result.getFirstName();
+                    String lastName = result.getLastName();
+                }
+            } else {
+                // not all relevant data was scanned, ask user
+                // to try again
+            }
+        }
+    }
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/austria/combined/AustrianIDCombinedRecognitionResult.html).**
+
 ## <a name="croID_front"></a> Scanning front side of Croatian ID documents
 
 This section will discuss the setting up of Croatian ID Front Side recognizer and obtaining results from it.
@@ -4280,7 +4349,7 @@ private RecognizerSettings[] setupSettingsArray() {
 public void onMetadataAvailable(Metadata metadata) {
     if (metadata instanceof RecognitionResultMetadata) {
         BaseRecognitionResult result = ((RecognitionResultMetadata) metadata).getScannedResult();
-        if (result != null && result instanceof SlovenianIDCombinedRecognitionResult) {
+        if (result != null && result instanceof SlovenianIDFrontSideRecognitionResult) {
             // notify user to scan the back side  
         }
     }
