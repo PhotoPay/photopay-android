@@ -1,5 +1,17 @@
 # Release notes
 
+## 6.6.2
+
+- fixed crash when multiple QR code-based recognizers were used together
+- improved `TopUpParser`:
+    - added option to enable all prefixes at the same time (generic prefix)
+- fixed crash in SlovenianQRCodeRecognizer
+- improved `MRTDRecognizer`:
+    - better support for arab MRZ
+- updated `CroatianIDFrontSideRecognizer`:
+    - returning sex as written on front side of a document
+- added support for scanning front side of Romanian ID cards
+
 ## 6.6.1
 
 - updated `SlovenianQRCodeRecognitionResult`:

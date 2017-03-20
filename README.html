@@ -136,15 +136,18 @@
 <li><a href="#croIDCombined">Scanning and combining results from front and back side of Croatian ID documents</a></li>
 <li><a href="#czID_front">Scanning front side of Czech ID documents</a></li>
 <li><a href="#czID_back">Scanning back side of Czech ID documents</a></li>
+<li><a href="#czechIDCombined">Scanning and combining results from front and back side of Czech ID documents</a></li>
 <li><a href="#germanID_front">Scanning front side of German ID documents</a></li>
 <li><a href="#germanID_MRZ">Scanning MRZ side of German ID documents</a></li>
 <li><a href="#serbianID_front">Scanning front side of Serbian ID documents</a></li>
 <li><a href="#serbianID_back">Scanning back side of Serbian ID documents</a></li>
 <li><a href="#slovakID_front">Scanning front side of Slovak ID documents</a></li>
 <li><a href="#slovakID_back">Scanning back side of Slovak ID documents</a></li>
+<li><a href="#svkIDCombined">Scanning and combining results from front and back side of Slovak ID documents</a></li>
 <li><a href="#slovenianID_front">Scanning front side of Slovenian ID documents</a></li>
 <li><a href="#slovenianID_back">Scanning back side of Slovenian ID documents</a></li>
 <li><a href="#slovenianIDCombined">Scanning and combining results from front and back side of Slovenian ID documents</a></li>
+<li><a href="#romanianID_front">Scanning front side of Romanian ID documents</a></li>
 <li><a href="#blinkOCR">Scanning segments with BlinkOCR recognizer</a></li>
 <li><a href="#blinkOCR_templating">Scanning templated documents with BlinkOCR recognizer</a></li>
 <li><a href="#detectorRecognizer">Performing detection of various documents</a></li>
@@ -258,7 +261,7 @@
 
 <pre><code>dependencies {
     compile project(':LibPhotoPay')
-    compile "com.android.support:appcompat-v7:25.1.1"
+    compile "com.android.support:appcompat-v7:25.2.0"
 }
 </code></pre>
 </li>
@@ -4970,6 +4973,73 @@ the MRZ zone. Use this method if document contains additional information (eleme
 <p><strong>Available getters are documented in <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/czechia/back/CzechIDBackSideRecognitionResult.html">Javadoc</a>.</strong></p>
 
 <h2>
+<a id="user-content--scanning-and-combining-results-from-front-and-back-side-of-czech-id-documents" class="anchor" href="#-scanning-and-combining-results-from-front-and-back-side-of-czech-id-documents" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-czechIDCombined"></a> Scanning and combining results from front and back side of Czech ID documents</h2>
+
+<p>This section will discuss the setting up of Czech ID Combined recognizer and obtaining results from it. This recognizer combines results from front and back side of the Czech ID card to boost result accuracy. Also it checks whether front and back sides are from the same ID card.</p>
+
+<h3>
+<a id="user-content-setting-up-czech-id-card-combined-recognizer" class="anchor" href="#setting-up-czech-id-card-combined-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Setting up Czech ID card combined recognizer</h3>
+
+<p>To activate Czech ID combined recognizer, you need to create <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/czechia/combined/CzechIDCombinedRecognizerSettings.html">CzechIDCombinedRecognizerSettings</a> and add it to <code>RecognizerSettings</code> array. You can use the following code snippet:</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">private</span> <span class="pl-k">RecognizerSettings</span>[] setupSettingsArray() {
+    <span class="pl-smi">CzechIDCombinedRecognizerSettings</span> sett <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">CzechIDCombinedRecognizerSettings</span>();
+
+    <span class="pl-c"><span class="pl-c">//</span> now add sett to recognizer settings array that is used to configure</span>
+    <span class="pl-c"><span class="pl-c">//</span> recognition</span>
+    <span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-smi">RecognizerSettings</span>[] { sett };
+}</pre></div>
+
+<p><strong>You can also tweak recognition parameters with methods of <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/czechia/combined/CzechIDCombinedRecognizerSettings.html">CzechIDCombinedRecognizerSettings</a>. Check <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/czechia/combined/CzechIDCombinedRecognizerSettings.html">Javadoc</a> for more information.</strong></p>
+
+<p><strong>Note:</strong> In your <a href="#recognizerView">custom UI integration</a>, you have to enable <a href="https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html#setPartialResultMetadataAllowed-boolean-">obtaining of partial result metadata</a> in <a href="https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html">MetadataSettings</a> if you want to be informed when recognition of the front side is done and receive <a href="https://photopay.github.io/photopay-android/com/microblink/metadata/RecognitionResultMetadata.html">RecognitionResultMetadata</a> in <a href="https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataListener.html">onMetadataAvailable</a> callback. When callback with <a href="https://photopay.github.io/photopay-android/com/microblink/metadata/RecognitionResultMetadata.html">RecognitionResultMetadata</a> is called you can make appropriate changes in the UI to notify the user to flip document and scan back side. See the following snippet for an example:</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
+<span class="pl-k">public</span> <span class="pl-k">void</span> onMetadataAvailable(<span class="pl-smi">Metadata</span> metadata) {
+    <span class="pl-k">if</span> (metadata <span class="pl-k">instanceof</span> <span class="pl-smi">RecognitionResultMetadata</span>) {
+        <span class="pl-smi">BaseRecognitionResult</span> result <span class="pl-k">=</span> ((<span class="pl-smi">RecognitionResultMetadata</span>) metadata)<span class="pl-k">.</span>getScannedResult();
+        <span class="pl-k">if</span> (result <span class="pl-k">!=</span> <span class="pl-c1">null</span> <span class="pl-k">&amp;&amp;</span> result <span class="pl-k">instanceof</span> <span class="pl-smi">CzechIDFrontSideRecognitionResult</span>) {
+            <span class="pl-c"><span class="pl-c">//</span> notify user to scan the back side  </span>
+        }
+    }
+}</pre></div>
+
+<h3>
+<a id="user-content-obtaining-results-from-czech-id-card-combined-recognizer" class="anchor" href="#obtaining-results-from-czech-id-card-combined-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Obtaining results from Czech ID card combined recognizer</h3>
+
+<p>Czech ID combined recognizer produces <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/czechia/combined/CzechIDCombinedRecognitionResult.html">CzechIDCombinedRecognitionResult</a>. You can use <code>instanceof</code> operator to check if element in results array is instance of <code>CzechIDCombinedRecognitionResult</code> class. </p>
+
+<p><strong>Note:</strong> <code>CzechIDCombinedRecognitionResult</code> extends <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognitionResult.html">BlinkOCRRecognitionResult</a> so make sure you take that into account when using <code>instanceof</code> operator.</p>
+
+<p>See the following snippet for an example:</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
+<span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
+    <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
+    <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
+        <span class="pl-k">if</span>(baseResult <span class="pl-k">instanceof</span> <span class="pl-smi">CzechIDCombinedRecognitionResult</span>) {
+            <span class="pl-smi">CzechIDCombinedRecognitionResult</span> result <span class="pl-k">=</span> (<span class="pl-smi">CzechIDCombinedRecognitionResult</span>) baseResult;
+
+            <span class="pl-c"><span class="pl-c">//</span> you can use getters of CzechIDCombinedRecognitionResult class to </span>
+            <span class="pl-c"><span class="pl-c">//</span> obtain scanned information</span>
+            <span class="pl-k">if</span>(result<span class="pl-k">.</span>isValid() <span class="pl-k">&amp;&amp;</span> <span class="pl-k">!</span>result<span class="pl-k">.</span>isEmpty()) {
+                <span class="pl-k">if</span> (<span class="pl-k">!</span>result<span class="pl-k">.</span>getDocumentBothSidesMatch()) {
+                   <span class="pl-c"><span class="pl-c">//</span> front and back sides are not from the same ID card</span>
+                } <span class="pl-k">else</span> {
+                    <span class="pl-smi">String</span> firstName <span class="pl-k">=</span> result<span class="pl-k">.</span>getFirstName();
+                    <span class="pl-smi">String</span> lastName <span class="pl-k">=</span> result<span class="pl-k">.</span>getLastName();
+                }
+            } <span class="pl-k">else</span> {
+                <span class="pl-c"><span class="pl-c">//</span> not all relevant data was scanned, ask user</span>
+                <span class="pl-c"><span class="pl-c">//</span> to try again</span>
+            }
+        }
+    }
+}</pre></div>
+
+<p><strong>Available getters are documented in <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/czechia/combined/CzechIDCombinedRecognitionResult.html">Javadoc</a>.</strong></p>
+
+<h2>
 <a id="user-content--scanning-front-side-of-german-id-documents" class="anchor" href="#-scanning-front-side-of-german-id-documents" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-germanID_front"></a> Scanning front side of German ID documents</h2>
 
 <p>This section will discuss the setting up of German ID Front Side recognizer and obtaining results from it.</p>
@@ -5273,6 +5343,73 @@ the MRZ zone. Use this method if document contains additional information (eleme
 <p><strong>Available getters are documented in <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/slovakia/back/SlovakIDBackSideRecognitionResult.html">Javadoc</a>.</strong></p>
 
 <h2>
+<a id="user-content--scanning-and-combining-results-from-front-and-back-side-of-slovak-id-documents" class="anchor" href="#-scanning-and-combining-results-from-front-and-back-side-of-slovak-id-documents" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-svkIDCombined"></a> Scanning and combining results from front and back side of Slovak ID documents</h2>
+
+<p>This section will discuss the setting up of Slovak ID Combined recognizer and obtaining results from it. This recognizer combines results from front and back side of the Slovak ID card to boost result accuracy. Also it checks whether front and back sides are from the same ID card.</p>
+
+<h3>
+<a id="user-content-setting-up-slovak-id-card-combined-recognizer" class="anchor" href="#setting-up-slovak-id-card-combined-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Setting up Slovak ID card combined recognizer</h3>
+
+<p>To activate Slovak ID combined recognizer, you need to create <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/slovakia/combined/SlovakIDCombinedRecognizerSettings.html">SlovakIDCombinedRecognizerSettings</a> and add it to <code>RecognizerSettings</code> array. You can use the following code snippet:</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">private</span> <span class="pl-k">RecognizerSettings</span>[] setupSettingsArray() {
+    <span class="pl-smi">SlovakIDCombinedRecognizerSettings</span> sett <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">SlovakIDCombinedRecognizerSettings</span>();
+
+    <span class="pl-c"><span class="pl-c">//</span> now add sett to recognizer settings array that is used to configure</span>
+    <span class="pl-c"><span class="pl-c">//</span> recognition</span>
+    <span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-smi">RecognizerSettings</span>[] { sett };
+}</pre></div>
+
+<p><strong>You can also tweak recognition parameters with methods of <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/slovakia/combined/SlovakIDCombinedRecognizerSettings.html">SlovakIDCombinedRecognizerSettings</a>. Check <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/slovakia/combined/SlovakIDCombinedRecognizerSettings.html">Javadoc</a> for more information.</strong></p>
+
+<p><strong>Note:</strong> In your <a href="#recognizerView">custom UI integration</a>, you have to enable <a href="https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html#setPartialResultMetadataAllowed-boolean-">obtaining of partial result metadata</a> in <a href="https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html">MetadataSettings</a> if you want to be informed when recognition of the front side is done and receive <a href="https://photopay.github.io/photopay-android/com/microblink/metadata/RecognitionResultMetadata.html">RecognitionResultMetadata</a> in <a href="https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataListener.html">onMetadataAvailable</a> callback. When callback with <a href="https://photopay.github.io/photopay-android/com/microblink/metadata/RecognitionResultMetadata.html">RecognitionResultMetadata</a> is called you can make appropriate changes in the UI to notify the user to flip document and scan back side. See the following snippet for an example:</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
+<span class="pl-k">public</span> <span class="pl-k">void</span> onMetadataAvailable(<span class="pl-smi">Metadata</span> metadata) {
+    <span class="pl-k">if</span> (metadata <span class="pl-k">instanceof</span> <span class="pl-smi">RecognitionResultMetadata</span>) {
+        <span class="pl-smi">BaseRecognitionResult</span> result <span class="pl-k">=</span> ((<span class="pl-smi">RecognitionResultMetadata</span>) metadata)<span class="pl-k">.</span>getScannedResult();
+        <span class="pl-k">if</span> (result <span class="pl-k">!=</span> <span class="pl-c1">null</span> <span class="pl-k">&amp;&amp;</span> result <span class="pl-k">instanceof</span> <span class="pl-smi">SlovakIDFrontSideRecognitionResult</span>) {
+            <span class="pl-c"><span class="pl-c">//</span> notify user to scan the back side  </span>
+        }
+    }
+}</pre></div>
+
+<h3>
+<a id="user-content-obtaining-results-from-slovak-id-card-combined-recognizer" class="anchor" href="#obtaining-results-from-slovak-id-card-combined-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Obtaining results from Slovak ID card combined recognizer</h3>
+
+<p>Slovak ID combined recognizer produces <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/slovakia/combined/SlovakIDCombinedRecognitionResult.html">SlovakIDCombinedRecognitionResult</a>. You can use <code>instanceof</code> operator to check if element in results array is instance of <code>SlovakIDCombinedRecognitionResult</code> class. </p>
+
+<p><strong>Note:</strong> <code>SlovakIDCombinedRecognitionResult</code> extends <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognitionResult.html">BlinkOCRRecognitionResult</a> so make sure you take that into account when using <code>instanceof</code> operator.</p>
+
+<p>See the following snippet for an example:</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
+<span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
+    <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
+    <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
+        <span class="pl-k">if</span>(baseResult <span class="pl-k">instanceof</span> <span class="pl-smi">SlovakIDCombinedRecognitionResult</span>) {
+            <span class="pl-smi">SlovakIDCombinedRecognitionResult</span> result <span class="pl-k">=</span> (<span class="pl-smi">SlovakIDCombinedRecognitionResult</span>) baseResult;
+
+            <span class="pl-c"><span class="pl-c">//</span> you can use getters of SlovakIDCombinedRecognitionResult class to </span>
+            <span class="pl-c"><span class="pl-c">//</span> obtain scanned information</span>
+            <span class="pl-k">if</span>(result<span class="pl-k">.</span>isValid() <span class="pl-k">&amp;&amp;</span> <span class="pl-k">!</span>result<span class="pl-k">.</span>isEmpty()) {
+                <span class="pl-k">if</span> (<span class="pl-k">!</span>result<span class="pl-k">.</span>getDocumentBothSidesMatch()) {
+                   <span class="pl-c"><span class="pl-c">//</span> front and back sides are not from the same ID card</span>
+                } <span class="pl-k">else</span> {
+                    <span class="pl-smi">String</span> firstName <span class="pl-k">=</span> result<span class="pl-k">.</span>getFirstName();
+                    <span class="pl-smi">String</span> lastName <span class="pl-k">=</span> result<span class="pl-k">.</span>getLastName();
+                }
+            } <span class="pl-k">else</span> {
+                <span class="pl-c"><span class="pl-c">//</span> not all relevant data was scanned, ask user</span>
+                <span class="pl-c"><span class="pl-c">//</span> to try again</span>
+            }
+        }
+    }
+}</pre></div>
+
+<p><strong>Available getters are documented in <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/slovakia/combined/SlovakIDCombinedRecognitionResult.html">Javadoc</a>.</strong></p>
+
+<h2>
 <a id="user-content--scanning-front-side-of-slovenian-id-documents" class="anchor" href="#-scanning-front-side-of-slovenian-id-documents" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-slovenianID_front"></a> Scanning front side of Slovenian ID documents</h2>
 
 <p>This section will discuss the setting up of Slovenian ID Front Side recognizer and obtaining results from it.</p>
@@ -5439,6 +5576,57 @@ the MRZ zone. Use this method if document contains additional information (eleme
 }</pre></div>
 
 <p><strong>Available getters are documented in <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/slovenia/combined/SlovenianIDCombinedRecognitionResult.html">Javadoc</a>.</strong></p>
+
+<h2>
+<a id="user-content--scanning-front-side-of-romanian-id-documents" class="anchor" href="#-scanning-front-side-of-romanian-id-documents" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-romanianID_front"></a> Scanning front side of Romanian ID documents</h2>
+
+<p>This section will discuss the setting up of Romanian ID Front Side recognizer and obtaining results from it.</p>
+
+<h3>
+<a id="user-content-setting-up-romanian-id-card-front-side-recognizer" class="anchor" href="#setting-up-romanian-id-card-front-side-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Setting up Romanian ID card front side recognizer</h3>
+
+<p>To activate Romanian ID front side recognizer, you need to create <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/romania/front/RomanianIDFrontSideRecognizerSettings.html">RomanianIDFrontSideRecognizerSettings</a> and add it to <code>RecognizerSettings</code> array. You can use the following code snippet to perform that:</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">private</span> <span class="pl-k">RecognizerSettings</span>[] setupSettingsArray() {
+    <span class="pl-smi">RomanianIDFrontSideRecognizerSettings</span> sett <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">RomanianIDFrontSideRecognizerSettings</span>();
+
+    <span class="pl-c"><span class="pl-c">//</span> now add sett to recognizer settings array that is used to configure</span>
+    <span class="pl-c"><span class="pl-c">//</span> recognition</span>
+    <span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-smi">RecognizerSettings</span>[] { sett };
+}</pre></div>
+
+<p><strong>You can also tweak recognition parameters with methods of <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/romania/front/RomanianIDFrontSideRecognizerSettings.html">RomanianIDFrontSideRecognizerSettings</a>. Check <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/romania/front/RomanianIDFrontSideRecognizerSettings.html">Javadoc</a> for more information.</strong></p>
+
+<h3>
+<a id="user-content-obtaining-results-from-romanian-id-card-front-side-recognizer" class="anchor" href="#obtaining-results-from-romanian-id-card-front-side-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Obtaining results from Romanian ID card front side recognizer</h3>
+
+<p>Romanian ID front side recognizer produces <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/romania/front/RomanianIDFrontSideRecognitionResult.html">RomanianIDFrontSideRecognitionResult</a>. You can use <code>instanceof</code> operator to check if element in results array is instance of <code>RomanianIDFrontSideRecognitionResult</code> class. </p>
+
+<p><strong>Note:</strong> <code>RomanianIDFrontSideRecognitionResult</code> extends <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html">MRTDRecognitionResult</a> so make sure you take that into account when using <code>instanceof</code> operator.</p>
+
+<p>See the following snippet for an example:</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
+<span class="pl-k">public</span> <span class="pl-k">void</span> onScanningDone(<span class="pl-smi">RecognitionResults</span> results) {
+    <span class="pl-k">BaseRecognitionResult</span>[] dataArray <span class="pl-k">=</span> results<span class="pl-k">.</span>getRecognitionResults();
+    <span class="pl-k">for</span>(<span class="pl-smi">BaseRecognitionResult</span> baseResult <span class="pl-k">:</span> dataArray) {
+        <span class="pl-k">if</span>(baseResult <span class="pl-k">instanceof</span> <span class="pl-smi">RomanianIDFrontSideRecognitionResult</span>) {
+            <span class="pl-smi">RomanianIDFrontSideRecognitionResult</span> result <span class="pl-k">=</span> (<span class="pl-smi">RomanianIDFrontSideRecognitionResult</span>) baseResult;
+
+            <span class="pl-c"><span class="pl-c">//</span> you can use getters of RomanianIDFrontSideRecognitionResult class to </span>
+            <span class="pl-c"><span class="pl-c">//</span> obtain scanned information</span>
+            <span class="pl-k">if</span>(result<span class="pl-k">.</span>isValid() <span class="pl-k">&amp;&amp;</span> <span class="pl-k">!</span>result<span class="pl-k">.</span>isEmpty()) {
+                <span class="pl-smi">String</span> firstName <span class="pl-k">=</span> result<span class="pl-k">.</span>getFirstName();
+                <span class="pl-smi">String</span> lastName <span class="pl-k">=</span> result<span class="pl-k">.</span>getLastName();
+            } <span class="pl-k">else</span> {
+                <span class="pl-c"><span class="pl-c">//</span> not all relevant data was scanned, ask user</span>
+                <span class="pl-c"><span class="pl-c">//</span> to try again</span>
+            }
+        }
+    }
+}</pre></div>
+
+<p><strong>Available getters are documented in <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/romania/front/RomanianIDFrontSideRecognitionResult.html">Javadoc</a>.</strong></p>
 
 <h2>
 <a id="user-content--scanning-segments-with-blinkocr-recognizer" class="anchor" href="#-scanning-segments-with-blinkocr-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-blinkOCR"></a> Scanning segments with BlinkOCR recognizer</h2>
