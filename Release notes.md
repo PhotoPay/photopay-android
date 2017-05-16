@@ -1,5 +1,42 @@
 # Release notes
 
+## 6.7.0
+- added USDL, MyKad, iKad, EUDL and Singapore ID recognizers
+- although new recognizers have been added, we managed to reduce final binary size a bit
+- introduced ability to create minimum-size AAR
+	- a separate static library distribution now exists which contains a script that you can configure with features you need and it creates a AAR file which only contains features you need - this includes minimum-size native binary and only required assets. The rest (resources and java classes) can be thrown-away by ProGuard.
+- `LibPhotoPay` is now fully ProGuard-compatible, i.e. you no longer need to exclude `com.microblink.**` classes in your ProGuard configuration
+- removed support for Android 2.3 and Android 4.0 - minimum required Android version is now Android 4.1 (API level 16)
+	- devices with Android 4.0 and earlier take [less than 2% of market share](https://developer.android.com/about/dashboards/index.html#Platform) and is very costly to support them
+- prefixed custom attributes to avoid name collisions with attributes from other libraries:
+    - `CameraViewGroup`: renamed animateRotation to `mb_animateRotation`, animationDuration to `mb_animationDuration`, rotatable to `mb_rotatable`
+    - `BaseCameraView`:  renamed initialOrientation to `mb_initialOrientation`, aspectMode to `mb_aspectMode`
+- improved `MRTDRecognizer`:
+    - WSA (World Goverment of World Citizens) added as valid country code when parsing MRZ
+- added `USDLCombinedRecognizer`: scans face image and USDL barcode
+- updated German ID recognizers:
+    - instead of `GermanIDMRZSideRecognizer`, which was used for scanning front side of the older ID cards and back side of the new ID cards, there are two specialised recognizers:  `GermanIDBackSideRecognizer`  and `GermanOldIDRecognizer`
+    - improved scanning accuracy of the `GermanIDFrontSideRecognizer` (name and surname)
+    - splitting address from back side of the new German ID (GermanIDBackSideRecognizer) to ZIP code, city, street and house number
+    
+- improved Croatian ID recognizers:
+    - multiple scans are used for better confidence
+- `TopUpParser` improvements
+- `DateParser` can parse dates with month names in English (either full or abbreviated), if this option is enabled
+- added support for polish IBAN without PL prefix to `IBANParser`
+- fixed returning of images inside TemplatingAPI for frames when document was not correctly detected
+- introduced combined recognizers:
+    - `AustrianIDCombinedRecognizer`: scans front and back side of the Austrian ID
+    - `CroatianIDCombinedRecognizer`: scans front and back side of the Croatian ID
+    - `CzechIDCombinedRecognizer`: scans front and back side of the Czech ID
+    - `MRTDCombinedRecognizer`: scans face image from any type of the document and Machine Readable Zone
+    - `SerbianIDCombinedRecognizer`: scans front and back side of the Serbian ID
+    - `SingaporeIDCombinedRecognizer`: scans front and back side of the Singapore ID
+    - `SlovakIDCombinedRecognizer`: scans front and back side of the Slovak ID
+    - `SlovenianIDCombinedRecognizer`: scans front and back side of the Slovenian ID
+    Combined recognizers can be used for scanning multiple parts/sides of the document in predefined order. They combine results from individual scans to boost accuracy and merge them into the final result.
+- added `VerificationFlowActivity` which is designed for scanning multiple parts/sides of the document by using provided combined recognizers
+
 ## 6.6.2
 
 - fixed crash when multiple QR code-based recognizers were used together

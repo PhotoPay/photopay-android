@@ -13,6 +13,7 @@
   * [Customization of `ScanActivity` activity](#scanActivityCustomization)
   * [Customization of `SegmentScanActivity` activity](#segmentScanActivityCustomization)
   * [Customization of `RandomScanActivity` activity](#randomScanActivityCustomization)
+  * [Using `VerificationFlowActivity` and combined recognizers for scanning multiple parts/sides of the document](#verifiactionFlowActivity)
   * [Embedding `RecognizerView` into custom scan activity](#recognizerView)
   * [`RecognizerView` reference](#recognizerViewReference)
 * [Using direct API for recognition of Android Bitmaps](#directAPI)
@@ -21,7 +22,7 @@
   * [Obtaining various metadata with _MetadataListener_](#metadataListener)
   * [Using ImageListener to obtain images that are being processed](#imageListener)
 * [Recognition settings and results](#recognitionSettingsAndResults)
-  * [[Recognition settings](https://photopay.github.io/photopay-android/com/microblink/recognizers/settings/RecognitionSettings.html)](#recognitionSettings)
+  * [Recognition settings](#recognitionSettings)
   * [Scanning Austrian payslips](#austrianPayslip)
   * [Scanning Austrian STUZZA QR code](#austrianQR)
   * [Scanning Belgian payslips](#belgiumPayslip)
@@ -49,7 +50,9 @@
   * [Scanning one dimensional barcodes with _PhotoPay_'s implementation](#custom1DBarDecoder)
   * [Scanning barcodes with ZXing implementation](#zxing)
   * [Scanning SIM number barcodes](#simNumberRecognizer)
+  * [Scanning aztec barcodes](#aztecRecognizer)
   * [Scanning machine-readable travel documents](#mrtd)
+  * [Scanning and combining face image and MRZ results from MRTD documents](#mrtdCombined)
   * [Scanning front side of Austrian ID documents](#ausID_front)
   * [Scanning back side of Austrian ID documents](#ausID_back)
   * [Scanning and combining results from front and back side of Austrian ID documents](#austrianIDCombined)
@@ -60,9 +63,12 @@
   * [Scanning back side of Czech ID documents](#czID_back)
   * [Scanning and combining results from front and back side of Czech ID documents](#czechIDCombined)
   * [Scanning front side of German ID documents](#germanID_front)
-  * [Scanning MRZ side of German ID documents](#germanID_MRZ)
+  * [Scanning back side of German ID documents](#germanID_back)
+  * [Scanning front side of the older German ID documents](#germanID_oldFront)
+  * [Scanning German passports](#germanPassport)
   * [Scanning front side of Serbian ID documents](#serbianID_front)
   * [Scanning back side of Serbian ID documents](#serbianID_back)
+  * [Scanning and combining results from front and back side of Serbian ID documents](#serbianIDCombined)
   * [Scanning front side of Slovak ID documents](#slovakID_front)
   * [Scanning back side of Slovak ID documents](#slovakID_back)
   * [Scanning and combining results from front and back side of Slovak ID documents](#svkIDCombined)
@@ -70,6 +76,13 @@
   * [Scanning back side of Slovenian ID documents](#slovenianID_back)
   * [Scanning and combining results from front and back side of Slovenian ID documents](#slovenianIDCombined)
   * [Scanning front side of Romanian ID documents](#romanianID_front)
+  * [Scanning US Driver's licence barcodes](#usdl)
+  * [Scanning EU driver's licences](#eudl)
+  * [Scanning Malaysian MyKad ID documents](#myKad)
+  * [Scanning Malaysian iKad documents](#iKad)
+  * [Scanning front side of Singapore ID documents](#singaporeID_front)
+  * [Scanning back side of Singapore ID documents](#singaporeID_back)
+  * [Scanning and combining results from front and back side of Singapore ID documents](#singaporeIDCombined)
   * [Scanning segments with BlinkOCR recognizer](#blinkOCR)
   * [Scanning templated documents with BlinkOCR recognizer](#blinkOCR_templating)
   * [Performing detection of various documents](#detectorRecognizer)
@@ -84,6 +97,7 @@
   * [Ensuring the final app gets all resources required by _PhotoPay_](#sdkIntegrationIntoApp)
 * [Processor architecture considerations](#archConsider)
   * [Reducing the final size of your app](#reduceSize)
+  * [Creating customized build of _PhotoPay_](#staticDistrib)
   * [Combining _PhotoPay_ with other native libraries](#combineNativeLibraries)
 * [Troubleshooting](#troubleshoot)
   * [Integration problems](#integrationTroubleshoot)
@@ -97,7 +111,10 @@ The package contains Android Archive (AAR) that contains everything you need to 
 
  - _PhotopayDemo_ module demonstrates quick and simple integration of _PhotoPay_ library
  - _PhotoPayDemoCustomUI_ demonstrates advanced integration within custom scan activity
+- _PhotoPayDemoCustomUICombined_ demonstrates advanced custom UI integration and usage of the combined recognizers within a custom scan activity.
+- _PhotoPayDetectorDemo_ demonstrates how to perform document detection and obtain dewarped image of detected document
  - _PhotoPayDemoCustomSegmentScan_ demonstrates advanced integration of SegmentScan feature within custom scan activity
+ - _PhotoPayDemoRandomScan_ demonstrates how to use `RandomScanActivity` to perform scanning of text segments in any order
  - _PhotoPayDirectAPIDemo_ demonstrates how to perform scanning of [Android Bitmaps](https://developer.android.com/reference/android/graphics/Bitmap.html)
  
 Source code of all demo apps is given to you to show you how to perform integration of _PhotoPay_ SDK into your app. You can use this source code and all resources as you wish. You can use demo apps as basis for creating your own app, or you can copy/paste code and/or resources from demo apps into your app and use them as you wish without even asking us for permission.
@@ -114,6 +131,7 @@ The library contains several activities that are responsible for camera control 
 - `ScanCard` is designed for scanning ID documents and passports
 - `SegmentScanActivity` is specifically designed for segment scanning. Unlike other activities, `SegmentScanActivity` does not extend `BaseScanActivity`, so it requires a bit different initialization parameters. Please see _PhotopayDemo_ app for example and read [section about customizing `SegmentScanActivity`](#segmentScanActivityCustomization).
 - `RandomScanActivity` is similar to _SegmentScanActivity_ but it does not force the user to scan text segments in the predefined order.
+- `VerificationFlowActivity` is designed for scanning multiple parts/sides of the document by using provided combined recognizers.
 
 You can also create your own scanning UI - you just need to embed `RecognizerView` into your activity and pass activity's lifecycle events to it and it will control the camera and recognition process. For more information, see [Embedding `RecognizerView` into custom scan activity](#recognizerView).
 
@@ -136,16 +154,8 @@ You can also create your own scanning UI - you just need to embed `RecognizerVie
 	```
 	dependencies {
    		compile project(':LibPhotoPay')
- 		compile "com.android.support:appcompat-v7:25.2.0"
+ 		compile "com.android.support:appcompat-v7:25.3.1"
 	}
-	```
-5. If you plan to use ProGuard, add following lines to your `proguard-rules.pro`:
-	
-	```
-	-keep class com.microblink.** { *; }
-	-keepclassmembers class com.microblink.** { *; }
-	-dontwarn android.hardware.**
-	-dontwarn android.support.v4.**
 	```
 	
 ### <a name="androidStudio_importAAR_javadoc"></a> Import Javadoc to Android Studio
@@ -178,8 +188,7 @@ You’ve already created the project that contains almost everything you need. N
 2. Open the `AndroidManifest.xml` file inside `LibPhotoPay.aar` file and make sure to copy all permissions, features and activities to the `AndroidManifest.xml` file of the target project.
 3. Copy the contents of `assets` folder from `LibPhotoPay.aar` into `assets` folder of target project. If `assets` folder in target project does not exist, create it.
 4. Clean and Rebuild your target project
-5. If you plan to use ProGuard, add same statements as in [Android studio guide](#quickIntegration) to your ProGuard configuration file.
-6. Add appcompat-v7 library to your workspace and reference it by target project (modern ADT plugin for Eclipse does this automatically for all new android projects).
+5. Add appcompat-v7 library to your workspace and reference it by target project (modern ADT plugin for Eclipse does this automatically for all new android projects).
 
 ## <a name="quickScan"></a> Performing your first scan
 1. You can start recognition process by starting `ScanActivity` activity with Intent initialized in the following way:
@@ -360,7 +369,7 @@ Even before starting the scan activity, you should check if _PhotoPay_ is suppor
 
 OpenGL ES 2.0 can be used to accelerate _PhotoPay's_ processing but is not mandatory. However, it should be noted that if OpenGL ES 2.0 is not available processing time will be significantly large, especially on low end devices. 
 
-Android 2.3 is the minimum android version on which _PhotoPay_ is supported. For best performance and compatibility, we recommend Android 5.0 or newer.
+Android 4.1 is the minimum android version on which _PhotoPay_ is supported. For best performance and compatibility, we recommend Android 5.0 or newer.
 
 Camera video preview resolution also matters. In order to perform successful scans, camera preview resolution cannot be too low. _PhotoPay_ requires minimum 480p camera preview resolution in order to perform scan. It must be noted that camera preview resolution is not the same as the video record resolution, although on most devices those are the same. However, there are some devices that allow recording of HD video (720p resolution), but do not allow high enough camera preview resolution (for example, [Sony Xperia Go](http://www.gsmarena.com/sony_xperia_go-4782.php) supports video record resolution at 720p, but camera preview resolution is only 320p - _PhotoPay_ does not work on that device).
 
@@ -607,6 +616,115 @@ With this extra you can set the resource ID of the sound to be played when the s
 	```java
 	intent.putExtra(RandomScanActivity.EXTRAS_BEEP_RESOURCE, R.raw.beep);
 	```
+
+## <a name="verifiactionFlowActivity"></a> Using `VerificationFlowActivity` and combined recognizers for scanning multiple parts/sides of the document
+
+`VerificationFlowActivity` is designed for scanning multiple parts/sides of the document by using provided combined recognizers, which are subclasses of the [CombinedRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/CombinedRecognizerSettings.html).
+
+Combined recognizers are special types of recognizers that are implemented for scanning multiple parts/sides of the document in predefined order. They combine results from individual scans to boost accuracy and merge them into the final result. For example, if front and back side of the ID card is scanned and the same information can be read from the front and back side, its scanned values will be compared and combined in order to return the final value with higher confidence.
+
+Document scan is performed in multiple steps with predefined order. When some step is completed `VerificationFlowActivity` will make appropriate UI changes to inform the user to scan next part/side of the document. You can start recognition process by starting `VerificationFlowActivity` activity with Intent initialized in the following way:
+
+```java
+// Intent for VerificationFlowActivity Activity
+Intent intent = new Intent(this, VerificationFlowActivity.class);
+
+// set your license key
+// obtain your license key at http://microblink.com/login or
+// contact us at http://help.microblink.com
+intent.putExtra(VerificationFlowActivity.EXTRAS_LICENSE_KEY, Config.getLicenseKey());
+
+// create appropriate combined recognizer settings for your type of the document
+CombinedRecognizerSettings recognizerSettings = createCombinedRecognizerSettings();
+// pass recognizer settings through intent extras
+intent.putExtra(VerificationFlowActivity.EXTRAS_COMBINED_RECOGNIZER_SETTINGS, recognizerSettings);
+// Starting Activity
+startActivityForResult(intent, MY_REQUEST_CODE);
+```
+
+After `VerificationFlowActivity` activity finishes the scan, it will return to the calling activity and will call method `onActivityResult`. You can obtain the scanning results in that method.
+
+```java
+@Override
+protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	super.onActivityResult(requestCode, resultCode, data);
+		
+	if (requestCode == MY_REQUEST_CODE) {
+		if (resultCode == VerificationFlowActivity.RESULT_OK && data != null) {
+			// perform processing of the data here
+				
+			// for example, obtain parcelable recognition result
+			Bundle extras = data.getExtras();
+			// All combined recognizers produce results of type CombinedRecognitionResult.
+			// Instead of casting to CombinedRecognitionResult, you should cast the combined
+			// recognition result to the exact result type that is expected for used
+			// combined recognizer.
+			CombinedRecognitionResult combinedResult = (CombinedRecognitionResult) extras.getParcelable(
+			    VerificationFlowActivity.EXTRAS_COMBINED_RECOGNITION_RESULT
+			);
+			    
+			// do something with the result
+		}
+	}
+}
+```
+
+### `VerificationFlowActivity` intent extras
+
+This section will discuss possible parameters that can be sent over `Intent` for `VerificationFlowActivity` activity that can customize default behaviour. There are several intent extras that can be sent to `VerificationFlowActivity` actitivy:
+
+* <a name="intent_EXTRAS_COMBINED_RECOGNIZER_SETTINGS" href="#intent_EXTRAS_COMBINED_RECOGNIZER_SETTINGS">#</a> **`VerificationFlowActivity.EXTRAS_COMBINED_RECOGNIZER_SETTINGS`** - Settings for the combined recognizer that will be used. Must be instance of the [CombinedRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/CombinedRecognizerSettings.html).
+
+* <a name="intent_EXTRAS_COMBINED_RECOGNITION_RESULT" href="#intent_EXTRAS_COMBINED_RECOGNITION_RESULT">#</a> **`VerificationFlowActivity.EXTRAS_COMBINED_RECOGNITION_RESULT`** - you can use this extra in `onActivityResult` method of calling activity to obtain combined recognition result.
+
+* <a name="intent_EXTRAS_COMBINED_CAMERA_TYPE" href="#intent_EXTRAS_COMBINED_CAMERA_TYPE">#</a> **`VerificationFlowActivity.EXTRAS_COMBINED_CAMERA_TYPE`** - with this extra you can define which camera on device will be used. By default back facing camera is used. To set the extra to intent, use the following code snippet:
+	
+	```java
+	intent.putExtra(VerificationFlowActivity.EXTRAS_COMBINED_CAMERA_TYPE, (Parcelable)CameraType.CAMERA_BACKFACE);
+	```
+	
+* <a name="intent_EXTRAS_WARNING_DIALOG_NOT_MATCH" href="#intent_EXTRAS_WARNING_DIALOG_NOT_MATCH">#</a> **`VerificationFlowActivity.EXTRAS_WARNING_DIALOG_NOT_MATCH_TITLE_RES`**, **`VerificationFlowActivity.EXTRAS_WARNING_DIALOG_NOT_MATCH_MESSAGE_RES`**, **`VerificationFlowActivity.EXTRAS_WARNING_DIALOG_NOT_MATCH_BUTTON_TEXT_RES`** - with these intent extras you can define String resource IDs for the title, message and button texts of the warning dialog that is shown when combined recognizer data does not pass validation (e.g. document sides don't match).
+
+* <a name="intent_EXTRAS_SPLASH_MSG" href="#intent_EXTRAS_SPLASH_MSG">#</a> **`VerificationFlowActivity.EXTRAS_SPLASH_MSG_RES_DOCUMENT_FIRST_SIDE`**, **`VerificationFlowActivity.EXTRAS_SPLASH_MSG_RES_DOCUMENT_SECOND_SIDE`** - with these intent extras you can define String resource IDs for the splash screen messages that will be shown above document scan viewfinder when scanning of the first/second side of the document is starting.
+
+* <a name="intent_EXTRAS_SPLASH_ICON" href="#intent_EXTRAS_SPLASH_ICON">#</a> **`VerificationFlowActivity.EXTRAS_SPLASH_ICON_RES_DOCUMENT_FIRST_SIDE`**, **`VerificationFlowActivity.EXTRAS_SPLASH_ICON_RES_DOCUMENT_SECOND_SIDE`** - with these intent extras you can define Drawable resource IDs of the splash screen images that will be shown above document scan viewfinder when scanning of the first/second side of the document is starting.
+
+* <a name="intent_EXTRAS_SIDE_INSTRUCTIONS" href="#intent_EXTRAS_SIDE_INSTRUCTIONS">#</a> **`VerificationFlowActivity.EXTRAS_INSTRUCTIONS_DOCUMENT_FIRST_SIDE`**, **`VerificationFlowActivity.EXTRAS_INSTRUCTIONS_DOCUMENT_SECOND_SIDE`** - with these intent extras you can define String resource IDs of the scan instructions that will be shown to the user as camera overlay during recognition of the first/second side of the document.
+	
+* <a name="intent_EXTRAS_BEEP_RESOURCE_combined" href="#intent_EXTRAS_BEEP_RESOURCE_combined">#</a> **`VerificationFlowActivity.EXTRAS_BEEP_RESOURCE`** - with this extra you can set the resource ID of the sound to be played when scan completes. You can use following snippet to set this extra:
+
+	```java
+	intent.putExtra(VerificationFlowActivity.EXTRAS_BEEP_RESOURCE, R.raw.beep);
+    ```
+    
+* <a name="intent_EXTRAS_SCAN_RESULT_LISTENER_combined" href="#intent_EXTRAS_SCAN_RESULT_LISTENER_combined">#</a> **`VerificationFlowActivity.EXTRAS_SCAN_RESULT_LISTENER`** - with this extra you can set a [ParcelableScanResultListener](https://photopay.github.io/photopay-android/com/microblink/view/recognition/ParcelableScanResultListener.html) with callback that will be called when valid recognition result is available (for each result that is produced by activated recognizer). When scan result listener is passed to the activity, **recognition results will not be returned to the caller activity through result intent**. Scan result listener must be used in cases when size of the recognition results exceeds the allowed Android intent size limit.	
+
+* <a name="intent_EXTRAS_USE_LEGACY_CAMERA_API_combined" href="#intent_EXTRAS_USE_LEGACY_CAMERA_API_combined">#</a> **`VerificationFlowActivity.EXTRAS_USE_LEGACY_CAMERA_API`** - with this boolean flag you can enforce using legacy Camera API even on Lollipop devices that support new Camera2 API. Use this only if you have problems with camera management on Lollipop devices.
+
+* <a name="intent_EXTRAS_SET_FLAG_SECURE_combined" href="#intent_EXTRAS_SET_FLAG_SECURE_combined">#</a> **`VerificationFlowActivity.EXTRAS_SET_FLAG_SECURE`** - with this extra you can request setting of `FLAG_SECURE` on activity window which indicates that the display has a secure video output and supports compositing secure surfaces. Use this to prevent taking screenshots of the activity window content and to prevent content from being viewed on non-secure displays. To set `FLAG_SECURE` on camera activity, use the following code snippet:
+
+	```java
+	intent.putExtra(VerificationFlowActivity.EXTRAS_SET_FLAG_SECURE, true);
+	```
+	
+* <a name="intent_EXTRAS_LICENSE_KEY_combined" href="#intent_EXTRAS_LICENSE_KEY_combined">#</a> **`VerificationFlowActivity.EXTRAS_LICENSE_KEY`** - with this extra you can set the license key for _PhotoPay_. You can obtain your licence key from [PhotoPay website](https://photopay.net/) or you can contact us at [http://help.microblink.com](http://help.microblink.com). Once you obtain a license key, you can set it with following snippet:
+
+	```java
+	// set the license key
+	intent.putExtra(VerificationFlowActivity.EXTRAS_LICENSE_KEY, "Enter_License_Key_Here");
+	```
+	
+	Licence key is bound to package name of your application. For example, if you have licence key that is bound to `my.namespace` app package, you cannot use the same key in other applications. However, if you purchase Premium licence, you will get licence key that can be used in multiple applications. This licence key will then not be bound to package name of the app. Instead, it will be bound to the licencee string that needs to be provided to the library together with the licence key. To provide licencee string, use the `EXTRAS_LICENSEE` intent extra like this:
+
+	```java
+	// set the license key
+	intent.putExtra(VerificationFlowActivity.EXTRAS_LICENSE_KEY, "Enter_License_Key_Here");
+	intent.putExtra(VerificationFlowActivity.EXTRAS_LICENSEE, "Enter_Licensee_Here");
+	```
+
+* <a name="intent_EXTRAS_IMAGE_LISTENER_combined" href="#intent_EXTRAS_IMAGE_LISTENER_combined">#</a> **`VerificationFlowActivity.EXTRAS_IMAGE_LISTENER`** - with this extra you can set your implementation of [ImageListener interface](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) that will obtain images that are being processed. Make sure that your [ImageListener](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) implementation correctly implements [Parcelable](https://developer.android.com/reference/android/os/Parcelable.html) interface with static [CREATOR](https://developer.android.com/reference/android/os/Parcelable.Creator.html) field. Without this, you might encounter a runtime error. For more information and example, see [Using ImageListener to obtain images that are being processed](#imageListener). By default, _ImageListener_ will receive all possible images that become available during recognition process. This will introduce performance penalty because most of those images will probably not be used so sending them will just waste time. To control which images should become available to _ImageListener_, you can also set [ImageMetadata settings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html) with `VerificationFlowActivity.EXTRAS_IMAGE_METADATA_SETTINGS`
+
+* <a name="intent_EXTRAS_IMAGE_METADATA_SETTINGS_combined" href="#intent_EXTRAS_IMAGE_METADATA_SETTINGS_combined">#</a> **`VerificationFlowActivity.EXTRAS_IMAGE_METADATA_SETTINGS`** - with this extra you can set [ImageMetadata settings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html) which will define which images will be sent to [ImageListener interface](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) given via `VerificationFlowActivity.EXTRAS_IMAGE_LISTENER` extra. If _ImageListener_ is not given via Intent, then this extra has no effect. You can see example usage of _ImageMetadata Settings_ in chapter [Obtaining various metadata with _MetadataListener_](#metadataListener) and in provided demo apps.
 
 ## <a name="recognizerView"></a> Embedding `RecognizerView` into custom scan activity
 This section will discuss how to embed [RecognizerView](https://photopay.github.io/photopay-android/com/microblink/view/recognition/RecognizerView.html) into your scan activity and perform scan.
@@ -1192,9 +1310,9 @@ Note that [ImageListener](https://photopay.github.io/photopay-android/com/microb
 
 This chapter will discuss various recognition settings used to configure different recognizers and scan results generated by them.
 
-## <a name="recognitionSettings"></a> [Recognition settings](https://photopay.github.io/photopay-android/com/microblink/recognizers/settings/RecognitionSettings.html)
+## <a name="recognitionSettings"></a> Recognition settings
 
-Recognition settings define what will be scanned and how will the recognition process be performed. Here is the list of methods that are most relevant:
+[Recognition settings](https://photopay.github.io/photopay-android/com/microblink/recognizers/settings/RecognitionSettings.html) define what will be scanned and how will the recognition process be performed. Here is the list of methods that are most relevant:
 
 ##### [`setAllowMultipleScanResultsOnSingleImage(boolean)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/settings/RecognitionSettings.html#setAllowMultipleScanResultsOnSingleImage-boolean-)
 Sets whether or not outputting of multiple scan results from same image is allowed. If that is `true`, it is possible to return multiple recognition results produced by different recognizers from same image. However, single recognizer can still produce only a single result from single image. If this option is `false`, the array of `BaseRecognitionResults` will contain at most 1 element. The upside of setting that option to `false` is the speed - if you enable lots of recognizers, as soon as the first recognizer succeeds in scanning, recognition chain will be terminated and other recognizers will not get a chance to analyze the image. The downside is that you are then unable to obtain multiple results from different recognizers from single image. By default, this option is `false`.
@@ -3275,7 +3393,46 @@ public void onScanningDone(RecognitionResults results) {
 ```
 
 **Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/simnumber/SimNumberScanResult.html).**
+## <a name="aztecRecognizer"></a> Scanning aztec barcodes
 
+This section discusses the settings for setting up aztec recognizer and explains how to obtain its results.
+
+### Setting up aztec recognizer
+
+To activate aztec recognizer, you need to create a [AztecRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/aztec/AztecRecognizerSettings.html) and add it to `RecognizerSettings` array. You can do this using following code snippet:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+    // please contact us to obtain valid license key for the aztec recognizer
+    // https://microblink.com/en/contact-us
+    String aztecLicenseKey = getAztecLicenseKey();
+    AztecRecognizerSettings sett = new AztecRecognizerSettings(aztecLicenseKey);
+    // now add sett to recognizer settings array that is used to configure
+    // recognition
+    return new RecognizerSettings[] { sett };
+}
+```
+
+**Javadoc documentation for AztecRecognizerSettings can be found [here](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/aztec/AztecRecognizerSettings.html).**
+
+### Obtaining results from aztec recognizer
+Aztec recognizer produces [AztecScanResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/aztec/AztecScanResult.html). You can use `instanceof` operator to check if element in results array is instance of `AztecScanResult` class. See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+    BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+    for(BaseRecognitionResult baseResult : dataArray) {
+        if(baseResult instanceof AztecScanResult) {
+            AztecScanResult result = (AztecScanResult) baseResult;
+            // getStringData getter will return the string version of barcode contents
+            String barcodeData = result.getStringData();
+        }
+    }
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/aztec/AztecScanResult.html).**
 ## <a name="mrtd"></a> Scanning machine-readable travel documents
 
 This section discusses the setting up of machine-readable travel documents(MRTD) recognizer and obtaining results from it.
@@ -3466,6 +3623,76 @@ Returns the result of parser in given parser group, with the given parser name. 
 ##### `OcrResult getOcrResult(String)`
 Returns the OCR result for given parser group. If there is no OCR result for requested parser group, returns null.
 
+## <a name="mrtdCombined"></a> Scanning and combining face image and MRZ results from MRTD documents
+
+This section will discuss the setting up of MRTD Combined Recognizer and obtaining results from it. This recognizer can be used for obtaining face image from the document and MRZ scan result in two steps. First, face image should be scanned and then recognizer initializes itself for scanning the machine readable zone (MRZ).
+
+### Setting up MRTD combined recognizer
+
+To activate MRTD combined recognizer, you need to create [MRTDCombinedRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/combined/MRTDCombinedRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+    MRTDCombinedRecognizerSettings sett = new MRTDCombinedRecognizerSettings();
+    
+    // now add sett to recognizer settings array that is used to configure
+    // recognition
+    return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [MRTDCombinedRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/combined/MRTDCombinedRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/combined/MRTDCombinedRecognizerSettings.html) for more information.**
+
+**Note:** In your [custom UI integration](#recognizerView), you have to enable [obtaining of partial result metadata](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html#setPartialResultMetadataAllowed-boolean-) in [MetadataSettings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html) if you want to be informed when recognition of the face image is done and receive [RecognitionResultMetadata](https://photopay.github.io/photopay-android/com/microblink/metadata/RecognitionResultMetadata.html) in [onMetadataAvailable](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataListener.html) callback. When callback with [RecognitionResultMetadata](https://photopay.github.io/photopay-android/com/microblink/metadata/RecognitionResultMetadata.html) is called you can make appropriate changes in the UI to notify the user to scan the machine readable zone (MRZ). See the following snippet for an example:
+
+```java
+@Override
+public void onMetadataAvailable(Metadata metadata) {
+    if (metadata instanceof RecognitionResultMetadata) {
+        BaseRecognitionResult result = ((RecognitionResultMetadata) metadata).getScannedResult();
+        if (result != null && result instanceof DocumentFaceRecognitionResult) {
+            // notify user to scan the MRZ  
+        }
+    }
+}
+```
+
+### Obtaining results from MRTD combined recognizer
+
+MRTD combined recognizer produces [MRTDCombinedRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/combined/MRTDCombinedRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `MRTDCombinedRecognitionResult` class. 
+
+**Note:** `MRTDCombinedRecognitionResult` extends [MRTDRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+    BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+    for(BaseRecognitionResult baseResult : dataArray) {
+        if(baseResult instanceof MRTDCombinedRecognitionResult) {
+            MRTDCombinedRecognitionResult result = (MRTDCombinedRecognitionResult) baseResult;
+            
+            // you can use getters of MRTDCombinedRecognitionResult class to 
+            // obtain scanned information
+            if(result.isValid() && !result.isEmpty()) {
+                if (!result.isDocumentDataMatch()) {
+                   // face and MRZ are not from the same document
+                } else {
+                    String issuer = result.getIssuer();
+                    String documentNumber = result.getDocumentNumber();
+                }
+            } else {
+                // not all relevant data was scanned, ask user
+                // to try again
+            }
+        }
+    }
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/combined/MRTDCombinedRecognitionResult.html).**
+
 ## <a name="ausID_front"></a> Scanning front side of Austrian ID documents
 
 This section will discuss the setting up of Austrian ID Front Side recognizer and obtaining results from it.
@@ -3620,7 +3847,7 @@ public void onScanningDone(RecognitionResults results) {
             // you can use getters of AustrianIDCombinedRecognitionResult class to 
             // obtain scanned information
             if(result.isValid() && !result.isEmpty()) {
-                if (!result.getDocumentBothSidesMatch()) {
+                if (!result.isDocumentDataMatch()) {
                    // front and back sides are not from the same ID card
                 } else {
                     String firstName = result.getFirstName();
@@ -3778,8 +4005,6 @@ public void onMetadataAvailable(Metadata metadata) {
 
 Croatian ID combined recognizer produces [CroatianIDCombinedRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/croatia/combined/CroatianIDCombinedRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `CroatianIDCombinedRecognitionResult` class. 
 
-**Note:** `CroatianIDCombinedRecognitionResult` extends [BlinkOCRRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
-
 See the following snippet for an example:
 
 ```java
@@ -3793,7 +4018,7 @@ public void onScanningDone(RecognitionResults results) {
             // you can use getters of CroatianIDCombinedRecognitionResult class to 
             // obtain scanned information
             if(result.isValid() && !result.isEmpty()) {
-                if (!result.getDocumentBothSidesMatch()) {
+                if (!result.isDocumentDataMatch()) {
                    // front and back sides are not from the same ID card
                 } else {
                     String firstName = result.getFirstName();
@@ -3951,8 +4176,6 @@ public void onMetadataAvailable(Metadata metadata) {
 
 Czech ID combined recognizer produces [CzechIDCombinedRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/czechia/combined/CzechIDCombinedRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `CzechIDCombinedRecognitionResult` class. 
 
-**Note:** `CzechIDCombinedRecognitionResult` extends [BlinkOCRRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
-
 See the following snippet for an example:
 
 ```java
@@ -3966,7 +4189,7 @@ public void onScanningDone(RecognitionResults results) {
             // you can use getters of CzechIDCombinedRecognitionResult class to 
             // obtain scanned information
             if(result.isValid() && !result.isEmpty()) {
-                if (!result.getDocumentBothSidesMatch()) {
+                if (!result.isDocumentDataMatch()) {
                    // front and back sides are not from the same ID card
                 } else {
                     String firstName = result.getFirstName();
@@ -4035,17 +4258,17 @@ public void onScanningDone(RecognitionResults results) {
 
 **Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/germany/front/GermanIDFrontSideRecognitionResult.html).**
 
-## <a name="germanID_MRZ"></a> Scanning MRZ side of German ID documents
+## <a name="germanID_back"></a> Scanning back side of German ID documents
 
-This section will discuss the setting up of German ID MRZ Side recognizer and obtaining results from it.
+This section will discuss the setting up of German ID Back Side recognizer and obtaining results from it.
 
-### Setting up German ID card MRZ side recognizer
+### Setting up German ID card back side recognizer
 
-To activate German ID MRZ side recognizer, you need to create [GermanIDMRZSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/germany/mrz/GermanIDMRZSideRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+To activate German ID back side recognizer, you need to create [GermanIDBackSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/germany/back/GermanIDBackSideRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
 
 ```java
 private RecognizerSettings[] setupSettingsArray() {
-	GermanIDMRZSideRecognizerSettings sett = new GermanIDMRZSideRecognizerSettings();
+	GermanIDBackSideRecognizerSettings sett = new GermanIDBackSideRecognizerSettings();
 	
 	// now add sett to recognizer settings array that is used to configure
 	// recognition
@@ -4053,13 +4276,13 @@ private RecognizerSettings[] setupSettingsArray() {
 }
 ```
 
-**You can also tweak recognition parameters with methods of [GermanIDMRZSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/germany/mrz/GermanIDMRZSideRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/germany/mrz/GermanIDMRZSideRecognizerSettings.html) for more information.**
+**You can also tweak recognition parameters with methods of [GermanIDBackSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/germany/back/GermanIDBackSideRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/germany/back/GermanIDBackSideRecognizerSettings.html) for more information.**
 
-### Obtaining results from German ID card MRZ side recognizer
+### Obtaining results from German ID card back side recognizer
 
-German ID MRZ side recognizer produces [GermanIDMRZSideRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/germany/mrz/GermanIDMRZSideRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `GermanIDMRZSideRecognitionResult` class. 
+German ID back side recognizer produces [GermanIDBackSideRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/germany/back/GermanIDBackSideRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `GermanIDBackSideRecognitionResult` class. 
 
-**Note:** `GermanIDMRZSideRecognitionResult` extends [MRTDRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+**Note:** `GermanIDBackSideRecognitionResult` extends [MRTDRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
 
 See the following snippet for an example:
 
@@ -4068,10 +4291,10 @@ See the following snippet for an example:
 public void onScanningDone(RecognitionResults results) {
 	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
 	for(BaseRecognitionResult baseResult : dataArray) {
-		if(baseResult instanceof GermanIDMRZSideRecognitionResult) {
-			GermanIDMRZSideRecognitionResult result = (GermanIDMRZSideRecognitionResult) baseResult;
+		if(baseResult instanceof GermanIDBackSideRecognitionResult) {
+			GermanIDBackSideRecognitionResult result = (GermanIDBackSideRecognitionResult) baseResult;
 			
-	        // you can use getters of GermanIDMRZSideRecognitionResult class to 
+	        // you can use getters of GermanIDBackSideRecognitionResult class to 
 	        // obtain scanned information
 	        if(result.isValid() && !result.isEmpty()) {
 				String address = result.getAddress();
@@ -4084,7 +4307,110 @@ public void onScanningDone(RecognitionResults results) {
 }
 ```
 
-**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/germany/mrz/GermanIDMRZSideRecognitionResult.html).**
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/germany/back/GermanIDBackSideRecognitionResult.html).**
+
+## <a name="germanID_oldFront"></a> Scanning front side of the older German ID documents
+
+This section will discuss the setting up of German ID recognizer for older cards (issued between 1 April 1987 and 31 October 2010) and obtaining results from it.
+
+### Setting up German ID card recognizer for the front side of the older card
+
+To activate German old ID card recognizer, you need to create [GermanOldIDRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/germany/old/front/GermanOldIDRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	GermanOldIDRecognizerSettings sett = new GermanOldIDRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [GermanOldIDRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/germany/old/front/GermanOldIDRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/germany/old/front/GermanOldIDRecognizerSettings.html) for more information.**
+
+### Obtaining results from German old ID card recognizer
+
+German old ID recognizer produces [GermanOldIDRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/germany/old/front/GermanOldIDRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `GermanOldIDRecognitionResult` class. 
+
+**Note:** `GermanOldIDRecognitionResult` extends [MRTDRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof GermanOldIDRecognitionResult) {
+			GermanOldIDRecognitionResult result = (GermanOldIDRecognitionResult) baseResult;
+			
+	        // you can use getters of GermanOldIDRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String placeOfBirth = result.getPlaceOfBirth();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/germany/old/front/GermanOldIDRecognitionResult.html).**
+
+## <a name="germanPassport"></a> Scanning German passports
+
+This section will discuss the setting up of German passport recognizer and obtaining results from it.
+
+### Setting up German passport recognizer
+
+To activate German passport recognizer, you need to create [GermanPassportRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/germany/passport/GermanPassportRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	GermanPassportRecognizerSettings sett = new GermanPassportRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [GermanPassportRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/germany/passport/GermanPassportRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/germany/passport/GermanPassportRecognizerSettings.html) for more information.**
+
+### Obtaining results from German passport recognizer
+
+German passport recognizer produces [GermanPassportRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/germany/passport/GermanPassportRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `GermanPassportRecognitionResult` class. 
+
+**Note:** `GermanPassportRecognitionResult` extends [MRTDRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof GermanPassportRecognitionResult) {
+			GermanPassportRecognitionResult result = (GermanPassportRecognitionResult) baseResult;
+			
+	        // you can use getters of GermanPassportRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String name = result.getName();
+				String surname = result.getSurname();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/germany/passport/GermanPassportRecognitionResult.html).**
 
 ## <a name="serbianID_front"></a> Scanning front side of Serbian ID documents
 
@@ -4188,6 +4514,74 @@ public void onScanningDone(RecognitionResults results) {
 ```
 
 **Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/serbia/back/SerbianIDBackSideRecognitionResult.html).**
+
+## <a name="serbianIDCombined"></a> Scanning and combining results from front and back side of Serbian ID documents
+
+This section will discuss the setting up of Serbian ID Combined recognizer and obtaining results from it. This recognizer combines results from front and back side of the Serbian ID card to boost result accuracy. Also it checks whether front and back sides are from the same ID card.
+
+### Setting up Serbian ID card combined recognizer
+
+To activate Serbian ID combined recognizer, you need to create [SerbianIDCombinedRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/serbia/combined/SerbianIDCombinedRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+    SerbianIDCombinedRecognizerSettings sett = new SerbianIDCombinedRecognizerSettings();
+    
+    // now add sett to recognizer settings array that is used to configure
+    // recognition
+    return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [SerbianIDCombinedRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/serbia/combined/SerbianIDCombinedRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/serbia/combined/SerbianIDCombinedRecognizerSettings.html) for more information.**
+
+**Note:** In your [custom UI integration](#recognizerView), you have to enable [obtaining of partial result metadata](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html#setPartialResultMetadataAllowed-boolean-) in [MetadataSettings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html) if you want to be informed when recognition of the front side is done and receive [RecognitionResultMetadata](https://photopay.github.io/photopay-android/com/microblink/metadata/RecognitionResultMetadata.html) in [onMetadataAvailable](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataListener.html) callback. When callback with [RecognitionResultMetadata](https://photopay.github.io/photopay-android/com/microblink/metadata/RecognitionResultMetadata.html) is called you can make appropriate changes in the UI to notify the user to flip document and scan back side. See the following snippet for an example:
+
+```java
+@Override
+public void onMetadataAvailable(Metadata metadata) {
+    if (metadata instanceof RecognitionResultMetadata) {
+        BaseRecognitionResult result = ((RecognitionResultMetadata) metadata).getScannedResult();
+        if (result != null && result instanceof SerbianIDFrontSideRecognitionResult) {
+            // notify user to scan the back side  
+        }
+    }
+}
+```
+
+### Obtaining results from Serbian ID card combined recognizer
+
+Serbian ID combined recognizer produces [SerbianIDCombinedRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/serbia/combined/SerbianIDCombinedRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `SerbianIDCombinedRecognitionResult` class. 
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+    BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+    for(BaseRecognitionResult baseResult : dataArray) {
+        if(baseResult instanceof SerbianIDCombinedRecognitionResult) {
+            SerbianIDCombinedRecognitionResult result = (SerbianIDCombinedRecognitionResult) baseResult;
+            
+            // you can use getters of SerbianIDCombinedRecognitionResult class to 
+            // obtain scanned information
+            if(result.isValid() && !result.isEmpty()) {
+                if (!result.isDocumentDataMatch()) {
+                   // front and back sides are not from the same ID card
+                } else {
+                    String firstName = result.getFirstName();
+                    String lastName = result.getLastName();
+                }
+            } else {
+                // not all relevant data was scanned, ask user
+                // to try again
+            }
+        }
+    }
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/serbia/combined/SerbianIDCombinedRecognitionResult.html).**
 
 ## <a name="slovakID_front"></a> Scanning front side of Slovak ID documents
 
@@ -4330,8 +4724,6 @@ public void onMetadataAvailable(Metadata metadata) {
 
 Slovak ID combined recognizer produces [SlovakIDCombinedRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/slovakia/combined/SlovakIDCombinedRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `SlovakIDCombinedRecognitionResult` class. 
 
-**Note:** `SlovakIDCombinedRecognitionResult` extends [BlinkOCRRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
-
 See the following snippet for an example:
 
 ```java
@@ -4345,7 +4737,7 @@ public void onScanningDone(RecognitionResults results) {
             // you can use getters of SlovakIDCombinedRecognitionResult class to 
             // obtain scanned information
             if(result.isValid() && !result.isEmpty()) {
-                if (!result.getDocumentBothSidesMatch()) {
+                if (!result.isDocumentDataMatch()) {
                    // front and back sides are not from the same ID card
                 } else {
                     String firstName = result.getFirstName();
@@ -4503,8 +4895,6 @@ public void onMetadataAvailable(Metadata metadata) {
 
 Slovenian ID combined recognizer produces [SlovenianIDCombinedRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/slovenia/combined/SlovenianIDCombinedRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `SlovenianIDCombinedRecognitionResult` class. 
 
-**Note:** `SlovenianIDCombinedRecognitionResult` extends [BlinkOCRRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
-
 See the following snippet for an example:
 
 ```java
@@ -4518,7 +4908,7 @@ public void onScanningDone(RecognitionResults results) {
             // you can use getters of SlovenianIDCombinedRecognitionResult class to 
             // obtain scanned information
             if(result.isValid() && !result.isEmpty()) {
-                if (!result.getDocumentBothSidesMatch()) {
+                if (!result.isDocumentDataMatch()) {
                    // front and back sides are not from the same ID card
                 } else {
                     String firstName = result.getFirstName();
@@ -4586,6 +4976,499 @@ public void onScanningDone(RecognitionResults results) {
 ```
 
 **Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/romania/front/RomanianIDFrontSideRecognitionResult.html).**
+
+## <a name="usdl"></a> Scanning US Driver's licence barcodes
+
+This section discusses the settings for setting up USDL recognizer and explains how to obtain results from it.
+
+### Setting up USDL recognizer
+To activate USDL recognizer, you need to create [USDLRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/usdl/USDLRecognizerSettings.html) and add it to `RecognizerSettings` array. You can do this using following code snippet:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	USDLRecognizerSettings sett = new USDLRecognizerSettings();
+	// disallow scanning of barcodes that have invalid checksum
+	sett.setUncertainScanning(false);
+	// disable scanning of barcodes that do not have quiet zone
+	// as defined by the standard
+	sett.setNullQuietZoneAllowed(false);
+       
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+As can be seen from example, you can tweak USDL recognition parameters with methods of `USDLRecognizerSettings`.
+
+##### `setUncertainScanning(boolean)`
+By setting this to `true`, you will enable scanning of non-standard elements, but there is no guarantee that all data will be read. This option is used when multiple rows are missing (e.g. not whole barcode is printed). Default is `false`.
+
+##### `setNullQuietZoneAllowed(boolean)`
+By setting this to `true`, you will allow scanning barcodes which don't have quiet zone surrounding it (e.g. text concatenated with barcode). This option can significantly increase recognition time. Default is `true`.
+
+##### `setScan1DBarcodes(boolean)`
+Some driver's licenses contain 1D Code39 and Code128 barcodes alongside PDF417 barcode. These barcodes usually contain only reduntant information and are therefore not read by default. However, if you feel that some information is missing, you can enable scanning of those barcodes by setting this to `true`.
+
+### Obtaining results from USDL recognizer
+
+USDL recognizer produces [USDLScanResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/usdl/USDLScanResult.html). You can use `instanceof` operator to check if element in results array is instance of `USDLScanResult`. See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof USDLScanResult) {
+			USDLScanResult result = (USDLScanResult) baseResult;
+			
+	        // getStringData getter will return the string version of barcode contents (not parsed)
+			String barcodeData = result.getStringData();
+			// isUncertain getter will tell you if scanned barcode is uncertain
+			boolean uncertainData = result.isUncertain();
+			// getRawData getter will return the raw data information object of barcode contents
+			BarcodeDetailedData rawData = result.getRawData();
+			// BarcodeDetailedData contains information about barcode's binary layout, if you
+			// are only interested in raw bytes, you can obtain them with getAllData getter
+			byte[] rawDataBuffer = rawData.getAllData();
+			
+			// if you need specific parsed driver's licence element, you can
+			// use getField method
+			// for example, to obtain AAMVA version, you should use:
+			String aamvaVersion = result.getField(USDLScanResult.kAamvaVersionNumber);
+		}
+	}
+}
+```
+
+##### `String getStringData()`
+This method will return the string representation of barcode contents (not parsed). Note that PDF417 barcode can contain binary data so sometimes it makes little sense to obtain only string representation of barcode data.
+
+##### `boolean isUncertain()`
+This method will return the boolean indicating if scanned barcode is uncertain. This can return `true` only if scanning of uncertain barcodes is allowed, as explained earlier.
+
+##### `BarcodeDetailedData getRawData()`
+This method will return the object that contains information about barcode's binary layout. You can see information about that object in [javadoc](https://photopay.github.io/photopay-android/com/microblink/results/barcode/BarcodeDetailedData.html). However, if you only need to access byte array containing, you can call method `getAllData` of `BarcodeDetailedData` object.
+
+##### `getField(String)`
+This method will return a parsed US Driver's licence element. The method requires a key that defines which element should be returned and returns either a string representation of that element or `null` if that element does not exist in barcode. To see a list of available keys, refer to [Keys for obtaining US Driver's license data](DriversLicenseKeys.md)
+
+## <a name="eudl"></a> Scanning EU driver's licences
+
+This section discusses the setting up of EU Driver's Licence recognizer and obtaining results from it. United Kingdom's and German's driver's licenses are supported.
+
+### Setting up EU Driver's Licence recognizer
+
+To activate EUDL recognizer, you need to create [EUDLRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/eudl/EUDLRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	// pass country to EUDLRecognizerSettings constructor, supported countries are:
+	// - UK (EUDLCountry.EUDL_COUNTRY_UK)
+	// - Germany (EUDLCountry.EUDL_COUNTRY_GERMANY)
+	// - Austria (EUDLCountry.EUDL_COUNTRY_AUSTRIA)
+	EUDLRecognizerSettings sett = new EUDLRecognizerSettings(EUDLCountry.EUDL_COUNTRY_UK)
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+You can also tweak EUDL recognition parameters with methods of [EUDLRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/eudl/EUDLRecognizerSettings.html).
+
+##### `setCountry(EUDLCountry country)`
+Method activates scanning settings for given country. United Kingdom's and German's driver's licenses are supported.
+
+##### `setExtractIssueDate(boolean)`
+Defines if issue date should be extracted. Default is `true`.
+
+##### `setExtractExpiryDate(boolean)`
+Defines if expiry date should be extracted. Default is `true`.
+
+##### `setExtractAddress(boolean)`
+Defines if address should be extracted. Default is `true`.
+
+##### `setShowFullDocument(boolean)`
+Set this to `true` if you use [MetadataListener](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataListener.html) and you want to obtain image containing scanned document. The document image's orientation will be corrected. The reported ImageType will be [DEWARPED](https://photopay.github.io/photopay-android/com/microblink/image/ImageType.html#DEWARPED) and image name will be `"EUDL"`.  You will also need to enable [obtaining of dewarped images](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html#setDewarpedImageEnabled-boolean-) in [MetadataSettings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html). By default, this is turned off.
+
+### Obtaining results from EU Driver's Licence recognizer
+
+EUDL recognizer produces [EUDLRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/eudl/EUDLRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `EUDLRecognitionResult` class. See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof EUDLRecognitionResult) {
+			EUDLRecognitionResult result = (EUDLRecognitionResult) baseResult;
+			
+	        // you can use getters of EUDLRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+	           String firstName = result.getFirstName();
+	           String secondName = result.getSecondName();
+	           String driverNumber = result.getDriverNumber();          		 
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+Available getters are:
+
+##### `boolean isValid()`
+Returns `true` if scan result is valid, i.e. if all required elements were scanned with good confidence and can be used. If `false` is returned that indicates that some crucial data fields are missing. You should ask user to try scanning again. If you keep getting `false` (i.e. invalid data) for certain document, please report that as a bug to [help.microblink.com](http://help.microblink.com). Please include high resolution photographs of problematic documents.
+
+##### `boolean isEmpty()`
+Returns `true` if scan result is empty, i.e. nothing was scanned. All getters should return `null` for empty result.
+
+##### `String getFirstName()`
+Returns the first name of the Driver's Licence owner.
+
+##### `String getLastName()`
+Returns the last name of the Driver's Licence owner.
+
+##### `String getDriverNumber()`
+Returns the driver number.
+
+##### `String getAddress()`
+Returns the address of the Driver's Licence owner, if it exists.
+
+##### `Date getDateOfBirth()`
+Returns date of birth of the Driver's Licence owner.
+
+##### `Date getDocumentIssueDate()`
+Returns the issue date of the Driver's Licence.
+
+##### `Date getDocumentExpiryDate()`
+Returns the expiry date of the Driver's Licence.
+
+##### `String getPlaceOfBirth()`
+Returns the place of birth of Driver's Licence owner.
+
+##### `String getDocumentIssuingAuthority()`
+Returns document issuing authority.
+
+##### `String getCountry()`
+Returns the country where the Driver's License has been issued or null if country is unknown.
+
+## <a name="myKad"></a> Scanning Malaysian MyKad ID documents
+
+This section will discuss the setting up of Malaysian ID documents (MyKad) recognizer and obtaining results from it.
+
+### Setting up MyKad recognizer
+
+To activate MyKad recognizer, you need to create [MyKadRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/MyKadRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	MyKadRecognizerSettings sett = new MyKadRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+You can also tweak MyKad recognition parameters with methods of [MyKadRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/MyKadRecognizerSettings.html).
+
+##### `setShowFullDocument(boolean)`
+Set this to `true` if you use [MetadataListener](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataListener.html) and you want to obtain image containing scanned document. The document image's orientation will be corrected. The reported ImageType will be [`DEWARPED`](https://photopay.github.io/photopay-android/com/microblink/image/ImageType.html#DEWARPED) and image name will be equal to [`MyKadRecognizerSettings.FULL_DOCUMENT_IMAGE`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/MyKadRecognizerSettings.html#FULL_DOCUMENT_IMAGE).  You will also need to enable [obtaining of dewarped images](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html#setDewarpedImageEnabled-boolean-) in [MetadataSettings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html). By default, this is turned off.
+
+##### `setShowFaceImage(boolean)`
+Sets whether face image from ID card should be sent to [MetadataListener](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataListener.html). If enabled, image will be of type [`DEWARPED`](https://photopay.github.io/photopay-android/com/microblink/image/ImageType.html#DEWARPED), and the name of the image will be equal to [`MyKadRecognizerSettings.FACE_IMAGE_NAME`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/MyKadRecognizerSettings.html#FACE_IMAGE_NAME), so make sure you are subscribed to receiving of [`DEWARPED`](https://photopay.github.io/photopay-android/com/microblink/image/ImageType.html#DEWARPED) images with [setDewarpedImageEnabled(true)](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html#setDewarpedImageEnabled-boolean-). By default, this is turned off.
+
+### Obtaining results from MyKad recognizer
+
+MyKad recognizer produces [MyKadRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/MyKadRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `MyKadRecognitionResult ` class. See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof MyKadRecognitionResult) {
+			MyKadRecognitionResult result = (MyKadRecognitionResult) baseResult;
+			
+	        // you can use getters of MyKadRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String ownerFullName = result.getOwnerFullName();
+				String nricNumber = result.getNRICNumber();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+Available getters are:
+
+##### `boolean isValid()`
+Returns `true` if scan result is valid, i.e. if all required elements were scanned with good confidence and can be used. If `false` is returned that indicates that some crucial data fields are missing. You should ask user to try scanning again. If you keep getting `false` (i.e. invalid data) for certain document, please report that as a bug to [help.microblink.com](http://help.microblink.com). Please include high resolution photographs of problematic documents.
+
+##### `boolean isEmpty()`
+Returns `true` if scan result is empty, i.e. nothing was scanned. All getters should return `null` for empty result.
+
+##### `String getNRICNumber()`
+Returns the National Registration Identity Card Number.
+
+##### `String getOwnerSex()`
+Returns the sex of the card holder. Possible values are:
+
+- `M` for male holder
+- `F` for female holder
+
+##### `Date getOwnerBirthDate()`
+Returns the date of birth of card holder as java `Date` if it is successfully converted from date format: `YYMMDD`. Raw date string can be obtained by using **getRawBirthDate()** method. Returns `null` if date is unknown or can not be converted to java `Date`.
+
+##### `String getRawBirthDate()`
+Returns owner's date of birth as raw string in format `YYMMDD`, or `null` if date is unknown.
+
+##### `String getOwnerFullName()`
+Returns the full name of the card holder.
+
+##### `String getOwnerAddress()`
+Returns the full address of the card holder.
+
+##### `String getOwnerAddressZipCode()`
+Returns extracted ZIP code from the address of the card holder.
+
+##### `String getOwnerAddressStreet()`
+Returns extracted street name from the address of the card holder.
+
+##### `String getOwnerAddressCity()`
+Returns extracted city name from the address of the card holder.
+
+##### `String getOwnerAddressState()`
+Returns extracted state from the address of the card holder.
+
+##### `String getOwnerReligion()`
+Returns the religion of the card holder. Possible values are `ISLAM` and `null`.
+
+## <a name="iKad"></a> Scanning Malaysian iKad documents
+
+This section will discuss the setting up of Malaysian iKad documents recognizer and obtaining results from it.
+
+### Setting up iKad recognizer
+
+To activate iKad recognizer, you need to create [IKadRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/IKadRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	IKadRecognizerSettings sett = new IKadRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [IKadRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/IKadRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/IKadRecognizerSettings.html) for more information.**
+
+### Obtaining results from iKad recognizer
+
+iKad recognizer produces [IKadRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/IKadRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `IKadRecognitionResult` class. See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof IKadRecognitionResult) {
+			IKadRecognitionResult result = (IKadRecognitionResult) baseResult;
+			
+	        // you can use getters of IKadRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String passportNumber = result.getPassportNumber();
+				String fullName = result.getFullName();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/IKadRecognitionResult.html).**
+
+## <a name="singaporeID_front"></a> Scanning front side of Singapore ID documents
+
+This section will discuss the setting up of Singapore ID Front Side recognizer and obtaining results from it.
+
+### Setting up Singapore ID card front side recognizer
+
+To activate Singapore ID front side recognizer, you need to create [SingaporeIDFrontRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/singapore/front/SingaporeIDFrontRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	SingaporeIDFrontRecognizerSettings sett = new SingaporeIDFrontRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [SingaporeIDFrontRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/singapore/front/SingaporeIDFrontRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/singapore/front/SingaporeIDFrontRecognizerSettings.html) for more information.**
+
+### Obtaining results from Singapore ID card front side recognizer
+
+Singapore ID front side recognizer produces [SingaporeIDFrontRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/singapore/front/SingaporeIDFrontRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `SingaporeIDFrontRecognitionResult` class. 
+
+**Note:** `SingaporeIDFrontRecognitionResult` extends [BlinkOCRRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof SingaporeIDFrontRecognitionResult) {
+			SingaporeIDFrontRecognitionResult result = (SingaporeIDFrontRecognitionResult) baseResult;
+			
+	        // you can use getters of SingaporeIDFrontRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String name = result.getName();
+				String cardNumber = result.getCardNumber();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/singapore/front/SingaporeIDFrontRecognitionResult.html).**
+
+## <a name="singaporeID_back"></a> Scanning back side of Singapore ID documents
+
+This section will discuss the setting up of Singapore ID Back Side recognizer and obtaining results from it.
+
+### Setting up Singapore ID card back side recognizer
+
+To activate Singapore ID back side recognizer, you need to create [SingaporeIDBackRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/singapore/back/SingaporeIDBackRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	SingaporeIDBackRecognizerSettings sett = new SingaporeIDBackRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [SingaporeIDBackRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/singapore/back/SingaporeIDBackRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/singapore/back/SingaporeIDBackRecognizerSettings.html) for more information.**
+
+### Obtaining results from Singapore ID card back side recognizer
+
+Singapore ID back side recognizer produces [SingaporeIDBackRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/singapore/back/SingaporeIDBackRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `SingaporeIDBackRecognitionResult` class. 
+
+**Note:** `SingaporeIDBackRecognitionResult` extends [BlinkOCRRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof SingaporeIDBackRecognitionResult) {
+			SingaporeIDBackRecognitionResult result = (SingaporeIDBackRecognitionResult) baseResult;
+			
+	        // you can use getters of SingaporeIDBackRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String address = result.getAddress();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/singapore/back/SingaporeIDBackRecognitionResult.html).**
+## <a name="singaporeIDCombined"></a> Scanning and combining results from front and back side of Singapore ID documents
+
+This section will discuss the setting up of Singapore ID Combined recognizer and obtaining results from it. This recognizer combines results from front and back side of the Singapore ID card to boost result accuracy. Also it checks whether front and back sides are from the same ID card.
+
+### Setting up Singapore ID card combined recognizer
+
+To activate Singapore ID combined recognizer, you need to create [SingaporeIDCombinedRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/singapore/combined/SingaporeIDCombinedRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+    SingaporeIDCombinedRecognizerSettings sett = new SingaporeIDCombinedRecognizerSettings();
+    
+    // now add sett to recognizer settings array that is used to configure
+    // recognition
+    return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [SingaporeIDCombinedRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/singapore/combined/SingaporeIDCombinedRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/singapore/combined/SingaporeIDCombinedRecognizerSettings.html) for more information.**
+
+**Note:** In your [custom UI integration](#recognizerView), you have to enable [obtaining of partial result metadata](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html#setPartialResultMetadataAllowed-boolean-) in [MetadataSettings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html) if you want to be informed when recognition of the front side is done and receive [RecognitionResultMetadata](https://photopay.github.io/photopay-android/com/microblink/metadata/RecognitionResultMetadata.html) in [onMetadataAvailable](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataListener.html) callback. When callback with [RecognitionResultMetadata](https://photopay.github.io/photopay-android/com/microblink/metadata/RecognitionResultMetadata.html) is called you can make appropriate changes in the UI to notify the user to flip document and scan back side. See the following snippet for an example:
+
+```java
+@Override
+public void onMetadataAvailable(Metadata metadata) {
+    if (metadata instanceof RecognitionResultMetadata) {
+        BaseRecognitionResult result = ((RecognitionResultMetadata) metadata).getScannedResult();
+        if (result != null && result instanceof SingaporeIDFrontRecognitionResult) {
+            // notify user to scan the back side  
+        }
+    }
+}
+```
+
+### Obtaining results from Singapore ID card combined recognizer
+
+Singapore ID combined recognizer produces [SingaporeIDCombinedRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/singapore/combined/SingaporeIDCombinedRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `SingaporeIDCombinedRecognitionResult` class. 
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+    BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+    for(BaseRecognitionResult baseResult : dataArray) {
+        if(baseResult instanceof SingaporeIDCombinedRecognitionResult) {
+            SingaporeIDCombinedRecognitionResult result = (SingaporeIDCombinedRecognitionResult) baseResult;
+            
+            // you can use getters of SingaporeIDCombinedRecognitionResult class to 
+            // obtain scanned information
+            if(result.isValid() && !result.isEmpty()) {
+                if (!result.isDocumentDataMatch()) {
+                   // front and back sides are not from the same ID card
+                } else {
+                    String name = result.getName();
+                }
+            } else {
+                // not all relevant data was scanned, ask user
+                // to try again
+            }
+        }
+    }
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/singapore/combined/SingaporeIDCombinedRecognitionResult.html).**
 
 ## <a name="blinkOCR"></a> Scanning segments with BlinkOCR recognizer
 
@@ -5184,9 +6067,9 @@ _PhotoPay_ is distributed with both ARMv7, ARM64, x86 and x86_64 native library 
 
 ARMv7 architecture gives the ability to take advantage of hardware accelerated floating point operations and SIMD processing with [NEON](http://www.arm.com/products/processors/technologies/neon.php). This gives _PhotoPay_ a huge performance boost on devices that have ARMv7 processors. Most new devices (all since 2012.) have ARMv7 processor so it makes little sense not to take advantage of performance boosts that those processors can give. Also note that some devices with ARMv7 processors do not support NEON instruction sets. Most popular are those based on [NVIDIA Tegra 2](https://en.wikipedia.org/wiki/Tegra#Tegra_2) fall into this category. Since these devices are old by today's standard, _PhotoPay_ does not support them.
 
-ARM64 is the new processor architecture that some new high end devices use. ARM64 processors are very powerful and also have the possibility to take advantage of new NEON64 SIMD instruction set to quickly process multiple pixels with single instruction.
+ARM64 is the new processor architecture that most new devices use. ARM64 processors are very powerful and also have the possibility to take advantage of new NEON64 SIMD instruction set to quickly process multiple pixels with single instruction.
 
-x86 architecture gives the ability to obtain native speed on x86 android devices, like [Prestigio 5430](http://www.gsmarena.com/prestigio_multiphone_5430_duo-5721.php). Without that, _PhotoPay_ will not work on such devices, or it will be run on top of ARM emulator that is shipped with device - this will give a huge performance penalty.
+x86 architecture gives the ability to obtain native speed on x86 android devices, like [Asus Zenfone 4](http://www.gsmarena.com/asus_zenfone_4-5951.php). Without that, _PhotoPay_ will not work on such devices, or it will be run on top of ARM emulator that is shipped with device - this will give a huge performance penalty.
 
 x86_64 architecture gives better performance than x86 on devices that use 64-bit Intel Atom processor.
 
@@ -5299,10 +6182,71 @@ However, removing a processor architecture has some consequences:
 
 Our recommendation is to include all architectures into your app - it will work on all devices and will provide best user experience. However, if you really need to reduce the size of your app, we recommend releasing separate version of your app for each processor architecture. It is easiest to do that with [APK splits](#reduceSize).
 
+
+## <a name="staticDistrib"></a> Creating customized build of _PhotoPay_
+
+If techniques explained in paragraph [Reducing the final size of your app](#reduceSize) did not reduce the size enough for your convenience, you have the ability to create customised build of _PhotoPay_ which will contain only features that you plan to use. Using customised build of _PhotoPay_ can reduce your app size by more than 60% with respect to app size when using the generic build.
+
+In order to create customised build of _PhotoPay_, you first need to download the _static distribution of PhotoPay_. A valid production licence key is required in order to gain access to the download link of _PhotoPay static distribution_. Once you have a valid production licence key, please contact our [support team](http://help.microblink.com) and ask them to provide you with the download link. After they give you access to the _static distribution of PhotoPay_, you will be able to download it from you account at [MicroBlink Developer Dashboard](https://www.microblink.com/login).
+
+The _static distribution of PhotoPay_ is a large zip file (several hundred megabytes) which contains static libraries of PhotoPay's native code, all assets and a script which will build the customised build for you.
+
+### Prerequisites for creating customised build
+
+In order to create customised build of _PhotoPay_, you will need following tools:
+
+- [Android development tools and SDK](https://developer.android.com/studio/index.html)
+- [Android NDK](https://developer.android.com/ndk/index.html) - best if installed from Android Studio's package manager
+- NDK CMake toolchain - you have to install that from Android Studio's package manager
+- Java - for running both Android Studio and provided gradle script which will create customised build
+
+#### Important notes:
+
+- you must use the exact same version of NDK that we used to build the static libraries. Using different NDK version will either result with linker errors or will create non-working binary. Our script will check your NDK version and will fail if there is a version mismatch.
+- due to a known [NDK bug](https://github.com/android-ndk/ndk/issues/313), the script for creating customised build will fail on Windows. Until this is fixed, you need to run the script on Mac or Linux machine.
+
+### Steps for creating customised build
+
+1. Obtain the _static distribution of PhotoPay_ by [contacting us](http://help.microblink.com)
+2. Download the zip from link that you will be provided
+3. Unzip the file into an empty folder
+4. Edit the file `static-distrib/enabled-features.cmake`
+	- you should enable only features that you need to use by setting appropriate variables to `ON`. 
+	- the list of all possible feature variables can be found in `static-distrib/features.cmake` 
+		- for each `feature_option` command, first parameter defines the feature variable, and the second is the description of the feature, i.e. what it provides. Other parameters are information for script to work correctly.
+	- you should not edit any file except `enabled-features.cmake` (except if instructed so by our support team) to ensure creation of customised build works well
+5. In folder _LibPhotoPay_, create file `local.properties` with following entries:
+
+	```
+	sdk.dir=/path/to/your/android-sdk-folder 
+	ndk.dir=/path/to/your/android-sdk-folder/ndk-bundle
+	```
+	
+	- importing the project into android studio should do that automatically for you
+6. Open terminal and navigate to _LibPhotoPay_ folder.
+7. Execute command ```./gradlew clean assembleRelease```
+8. After several minutes (depedending of CPU speed of your computer), customised build will appear as `LibPhotoPay/build/outputs/aar/LibPhotoPay-release.aar`. Use that AAR in your app instead of the default one.
+
+#### Warning:
+
+Attempt to use feature within your app which was not enabled in customised build will result with your app crashing at the moment it tries to use that feature.
+
+### Troubleshooting:
+
+#### Getting `UnsatisfiedLinkError` when using customised build, while everything works OK with generic build
+
+This happens when your app is trying to use feature which was not enabled in customised build. Please make sure that you enable features that you need and not use unnecessary features within your app.
+
+#### App crashing when scanning starts with log message _Failed to load resource XX. The program will now crash._
+
+This means that a required resource was not packaged into final app. This usually indicates a bug in our gradle script that makes the customised build. Please [contact us](http://help.microblink.com) and send your version of `enabled-features.cmake` and crash log.
+
+#### CMake error while running gradle script.
+
+You probably have a typo in `enabled-features.cmake`. CMake is very sensitive language and will throw an non-understandable error if you have a typo or invoke any of its commands with wrong number of parameters.
 ## <a name="combineNativeLibraries"></a> Combining _PhotoPay_ with other native libraries
 
 If you are combining _PhotoPay_ library with some other libraries that contain native code into your application, make sure you match the architectures of all native libraries. For example, if third party library has got only ARMv7 and x86 versions, you must use exactly ARMv7 and x86 versions of _PhotoPay_ with that library, but not ARM64. Using these architectures will crash your app in initialization step because JVM will try to load all its native dependencies in same preferred architecture and will fail with `UnsatisfiedLinkError`.
-
 # <a name="troubleshoot"></a> Troubleshooting
 
 ## <a name="integrationTroubleshoot"></a> Integration problems
