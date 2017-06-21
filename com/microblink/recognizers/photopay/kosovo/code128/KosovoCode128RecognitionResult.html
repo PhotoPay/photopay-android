@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -123,7 +123,7 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">KosovoCode128RecognitionResult</span>
 extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCurrencyResult.html" title="class in com.microblink.recognizers.photopay">AmountCurrencyResult</a></pre>
-<div class="block">Created by dodo on 26/05/15.</div>
+<div class="block">Recognition result of scanning Kosovan code128 payment slips.</div>
 </li>
 </ul>
 </div>
@@ -211,23 +211,53 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/kosovo/code128/KosovoCode128RecognitionResult.html#getPayerAccount--">getPayerAccount</a></span>()</code>
-<div class="block">Returns the payer account number</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/kosovo/code128/KosovoCode128RecognitionResult.html#getCustomerID--">getCustomerID</a></span>()</code>
+<div class="block">Returns the customer ID.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/kosovo/code128/KosovoCode128RecognitionResult.html#getReferenceNumber--">getReferenceNumber</a></span>()</code>
-<div class="block">Returns the reference of the payment</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/kosovo/code128/KosovoCode128RecognitionResult.html#getDistrict--">getDistrict</a></span>()</code>
+<div class="block">Returns the district code.</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/kosovo/code128/KosovoCode128RecognitionResult.html#getUtilityID--">getUtilityID</a></span>()</code>
-<div class="block">Returns the utility ID of the payment</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/kosovo/code128/KosovoCode128RecognitionResult.html#getDueDate--">getDueDate</a></span>()</code>
+<div class="block">Returns due date as string in format YYMM.</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/kosovo/code128/KosovoCode128RecognitionResult.html#getPayerAccount--">getPayerAccount</a></span>()</code>
+<div class="block">Returns the payer account number.</div>
+</td>
+</tr>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/kosovo/code128/KosovoCode128RecognitionResult.html#getReferenceNumber--">getReferenceNumber</a></span>()</code>
+<div class="block">Returns the reference of the payment.</div>
+</td>
+</tr>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/kosovo/code128/KosovoCode128RecognitionResult.html#getService--">getService</a></span>()</code>
+<div class="block">Returns the service code.</div>
+</td>
+</tr>
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code><a href="../../../../../../com/microblink/recognizers/photopay/kosovo/code128/KosovoCode128SlipId.html" title="enum in com.microblink.recognizers.photopay.kosovo.code128">KosovoCode128SlipId</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/kosovo/code128/KosovoCode128RecognitionResult.html#getSlipID--">getSlipID</a></span>()</code>
+<div class="block">Returns the slip ID</div>
+</td>
+</tr>
+<tr id="i8" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/kosovo/code128/KosovoCode128RecognitionResult.html#getUtilityID--">getUtilityID</a></span>()</code>
+<div class="block">Returns the utility ID of the payment.</div>
+</td>
+</tr>
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/kosovo/code128/KosovoCode128RecognitionResult.html#writeToParcel-android.os.Parcel-int-">writeToParcel</a></span>(android.os.Parcel&nbsp;dest,
              int&nbsp;flags)</code>
@@ -314,10 +344,11 @@ extends <a href="../../../../../../com/microblink/recognizers/photopay/AmountCur
 <h4>getReferenceNumber</h4>
 <pre>@Nullable
 public&nbsp;java.lang.String&nbsp;getReferenceNumber()</pre>
-<div class="block">Returns the reference of the payment</div>
+<div class="block">Returns the reference of the payment.
+ Exists only if <a href="../../../../../../com/microblink/recognizers/photopay/kosovo/code128/KosovoCode128RecognitionResult.html#getSlipID--"><code>getSlipID()</code></a> == <a href="../../../../../../com/microblink/recognizers/photopay/kosovo/code128/KosovoCode128SlipId.html#KOS_CODE128_SLIPID_TYPE_OLD"><code>KosovoCode128SlipId.KOS_CODE128_SLIPID_TYPE_OLD</code></a></div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>the reference of the payment</dd>
+<dd>the reference of the payment or <code>null</code> if it is unknown</dd>
 </dl>
 </li>
 </ul>
@@ -329,10 +360,11 @@ public&nbsp;java.lang.String&nbsp;getReferenceNumber()</pre>
 <h4>getUtilityID</h4>
 <pre>@Nullable
 public&nbsp;java.lang.String&nbsp;getUtilityID()</pre>
-<div class="block">Returns the utility ID of the payment</div>
+<div class="block">Returns the utility ID of the payment.
+ Exists only if <a href="../../../../../../com/microblink/recognizers/photopay/kosovo/code128/KosovoCode128RecognitionResult.html#getSlipID--"><code>getSlipID()</code></a> == <a href="../../../../../../com/microblink/recognizers/photopay/kosovo/code128/KosovoCode128SlipId.html#KOS_CODE128_SLIPID_TYPE_OLD"><code>KosovoCode128SlipId.KOS_CODE128_SLIPID_TYPE_OLD</code></a></div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>the utility ID of the payment</dd>
+<dd>the utility ID of the payment or <code>null</code> if it is unknown</dd>
 </dl>
 </li>
 </ul>
@@ -344,10 +376,90 @@ public&nbsp;java.lang.String&nbsp;getUtilityID()</pre>
 <h4>getPayerAccount</h4>
 <pre>@Nullable
 public&nbsp;java.lang.String&nbsp;getPayerAccount()</pre>
-<div class="block">Returns the payer account number</div>
+<div class="block">Returns the payer account number.
+ Exists only if <a href="../../../../../../com/microblink/recognizers/photopay/kosovo/code128/KosovoCode128RecognitionResult.html#getSlipID--"><code>getSlipID()</code></a> == <a href="../../../../../../com/microblink/recognizers/photopay/kosovo/code128/KosovoCode128SlipId.html#KOS_CODE128_SLIPID_TYPE_OLD"><code>KosovoCode128SlipId.KOS_CODE128_SLIPID_TYPE_OLD</code></a></div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>the payer account number</dd>
+<dd>the payer account number or <code>null</code> if it is unknown</dd>
+</dl>
+</li>
+</ul>
+<a name="getSlipID--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getSlipID</h4>
+<pre>@Nullable
+public&nbsp;<a href="../../../../../../com/microblink/recognizers/photopay/kosovo/code128/KosovoCode128SlipId.html" title="enum in com.microblink.recognizers.photopay.kosovo.code128">KosovoCode128SlipId</a>&nbsp;getSlipID()</pre>
+<div class="block">Returns the slip ID</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the slip ID, otherwise null if slip id is unknown</dd>
+</dl>
+</li>
+</ul>
+<a name="getDistrict--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDistrict</h4>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getDistrict()</pre>
+<div class="block">Returns the district code.
+ Exists only if <a href="../../../../../../com/microblink/recognizers/photopay/kosovo/code128/KosovoCode128RecognitionResult.html#getSlipID--"><code>getSlipID()</code></a> == <a href="../../../../../../com/microblink/recognizers/photopay/kosovo/code128/KosovoCode128SlipId.html#KOS_CODE128_SLIPID_TYPE_NEW"><code>KosovoCode128SlipId.KOS_CODE128_SLIPID_TYPE_NEW</code></a></div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the district code or <code>null</code> if it is unknown</dd>
+</dl>
+</li>
+</ul>
+<a name="getCustomerID--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getCustomerID</h4>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getCustomerID()</pre>
+<div class="block">Returns the customer ID.
+ Exists only if <a href="../../../../../../com/microblink/recognizers/photopay/kosovo/code128/KosovoCode128RecognitionResult.html#getSlipID--"><code>getSlipID()</code></a> == <a href="../../../../../../com/microblink/recognizers/photopay/kosovo/code128/KosovoCode128SlipId.html#KOS_CODE128_SLIPID_TYPE_NEW"><code>KosovoCode128SlipId.KOS_CODE128_SLIPID_TYPE_NEW</code></a></div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the customer ID or <code>null</code> if it is unknown</dd>
+</dl>
+</li>
+</ul>
+<a name="getDueDate--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDueDate</h4>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getDueDate()</pre>
+<div class="block">Returns due date as string in format YYMM.
+ Exists only if <a href="../../../../../../com/microblink/recognizers/photopay/kosovo/code128/KosovoCode128RecognitionResult.html#getSlipID--"><code>getSlipID()</code></a> == <a href="../../../../../../com/microblink/recognizers/photopay/kosovo/code128/KosovoCode128SlipId.html#KOS_CODE128_SLIPID_TYPE_NEW"><code>KosovoCode128SlipId.KOS_CODE128_SLIPID_TYPE_NEW</code></a></div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>due date as string in format YYMM or <code>null</code> if it is unknown</dd>
+</dl>
+</li>
+</ul>
+<a name="getService--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getService</h4>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getService()</pre>
+<div class="block">Returns the service code.
+ Exists only if <a href="../../../../../../com/microblink/recognizers/photopay/kosovo/code128/KosovoCode128RecognitionResult.html#getSlipID--"><code>getSlipID()</code></a> == <a href="../../../../../../com/microblink/recognizers/photopay/kosovo/code128/KosovoCode128SlipId.html#KOS_CODE128_SLIPID_TYPE_NEW"><code>KosovoCode128SlipId.KOS_CODE128_SLIPID_TYPE_NEW</code></a></div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the service code or <code>null</code> if it is unknown</dd>
 </dl>
 </li>
 </ul>

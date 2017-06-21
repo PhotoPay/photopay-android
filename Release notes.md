@@ -1,5 +1,33 @@
 # Release notes
 
+## 6.8.0
+
+- removed `isItalic` and `isBold` getters from `OcrChar` class
+    - they always returned `false`, since OCR engine cannot accurately detect that
+- removed `setLineGroupingEnabled` and `isLineGroupingEnabled` from `BlinkOCREngineOptions` because disabling line grouping completely destroyed the OCR accuracy
+- fixed crash in TemplatingAPI where classifier interfaces were accidentally removed by ProGuard
+- improved `CombinedRecognizers`:
+    - better handling of names containing dashes and extra long names
+- improved `TopUpParser`:
+    - added option to return USSD code without prefix
+- by default `MRTDRecognizer` does not return results with incorrect check digits
+- bugfix in Croatian ID scanning:
+    - ensured that OIB number is not returned for old ID cards, where it does not exist
+- added Czech and Slovak translations
+- Date fields in recognition results are returned as `com.microblink.results.date.Date` class which represents immutable dates that are consisted of day, month and year
+- added `SerbianPdf417Recognizer` which supports scanning Pdf417 barcodes on Serbian payslips
+- improved `IbanParser`:
+    - improved extraction of IBANs without prefix and introduced `setAlwaysReturnPrefix` option to always return prefix (country code)
+    - added support for french IBANs
+- added support for new Kosovo code128 payment slips to `KosovoCode128Recognizer`
+- enabled reading of Pdf417 barcodes having width/height bar aspect ratio less than 2:1
+- Added `VinRecognizer` for scanning VIN (*Vehicle Identification Number*) barcodes
+- Added unified `BarcodeRecognizer` for scanning various tipes of barcodes
+    - `ZXingRecognizer`, `BarDecoderRecognizer` and `AztecRecognizer` are **deprecated**, `BarcodeRecognizer` should be used for all barcode types that are supported by these recognizers
+- `OcrLine.getChars()` method returns `CharWithVariants` array. OCR char is defined by all its parameters (value, font, position, quality, etc.) and for each resulting char it is possible to have multiple variants. For example it is possible to have same char value with different font.
+- Fixed bug in SegmentScanActivity:
+    - scan results are no longer hidden on shake event
+
 ## 6.7.0
 - added USDL, MyKad, iKad, EUDL and Singapore ID recognizers
 - although new recognizers have been added, we managed to reduce final binary size a bit

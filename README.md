@@ -41,16 +41,19 @@
   * [Scanning Slovak payslips](#slovakPayslip)
   * [Scanning Slovak payBySquare QR codes](#slovakQRCode)
   * [Scanning Slovak Data Matrix codes](#slovakDataMatrix)
+  * [Scanning Serbian Pdf417 barcode payslips](#srbPdf417)
   * [Scanning Slovenian payslips](#slovenianPayslip)
   * [Scanning Slovenian payment QR codes](#sloQRCode)
   * [Scanning Swiss payslips](#swissPayslip)
   * [Scanning UK Giro slip OCR line](#ukGiroOcrLine)
   * [Scanning UK payment QR code](#ukQRCodeLine)
   * [Scanning PDF417 barcodes](#pdf417Recognizer)
+  * [Scanning barcodes with BarcodeRecognizer](#barcodeRecognizer)
   * [Scanning one dimensional barcodes with _PhotoPay_'s implementation](#custom1DBarDecoder)
   * [Scanning barcodes with ZXing implementation](#zxing)
   * [Scanning SIM number barcodes](#simNumberRecognizer)
-  * [Scanning aztec barcodes](#aztecRecognizer)
+  * [Scanning VIN barcodes](#vinRecognizer)
+  * [Scanning aztec barcodes](#aztecBarcodes)
   * [Scanning machine-readable travel documents](#mrtd)
   * [Scanning and combining face image and MRZ results from MRTD documents](#mrtdCombined)
   * [Scanning front side of Austrian ID documents](#ausID_front)
@@ -119,7 +122,7 @@ The package contains Android Archive (AAR) that contains everything you need to 
  
 Source code of all demo apps is given to you to show you how to perform integration of _PhotoPay_ SDK into your app. You can use this source code and all resources as you wish. You can use demo apps as basis for creating your own app, or you can copy/paste code and/or resources from demo apps into your app and use them as you wish without even asking us for permission.
 
-_PhotoPay_ is supported on Android SDK version 10 (Android 2.3.3) or later.
+_PhotoPay_ is supported on Android SDK version 16 (Android 4.1) or later.
 
 The library contains several activities that are responsible for camera control and recognition:
 
@@ -1013,7 +1016,7 @@ View width and height are defined in current context, i.e. they depend on curren
 
 Second boolean parameter indicates whether or not metering areas should be automatically updated when device orientation changes.
 
-##### <a name="recognizerView_setMetadataListener"></a> [`setMetadadaListener(MetadataListener, MetadataSettings)`](https://photopay.github.io/photopay-android/com/microblink/view/recognition/RecognizerView.html#setMetadataListener-com.microblink.metadata.MetadataListener-com.microblink.metadata.MetadataSettings-)
+##### <a name="recognizerView_setMetadataListener"></a> [`setMetadataListener(MetadataListener, MetadataSettings)`](https://photopay.github.io/photopay-android/com/microblink/view/recognition/RecognizerView.html#setMetadataListener-com.microblink.metadata.MetadataListener-com.microblink.metadata.MetadataSettings-)
 You can use this method to define [metadata listener](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataListener.html) that will obtain various metadata
 from the current recognition process. Which metadata will be available depends on [metadata settings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html). For more information and examples, check demo applications and section [Obtaining various metadata with _MetadataListener_](#metadataListener).
 
@@ -2578,32 +2581,7 @@ public void onScanningDone(RecognitionResults results) {
 }
 ```
 
-Available getters are:
-
-##### `boolean isValid()`
-Returns `true` if scan result is valid, i.e. if all required elements were scanned with good confidence and can be used. If `false` is returned that indicates that some crucial data fields are missing. You should ask user to try scanning again. If you keep getting `false` (i.e. invalid data) for certain payslip, please report that as a bug to [help.microblink.com](http://help.microblink.com). Please include problematic payslips.
-
-##### `boolean isEmpty()`
-Returns `true` if scan result is empty, i.e. nothing was scanned. All getters should return `null` for empty result.
-
-##### `String getCurrency()`
-Returns the currency in which payment should be performed. This is always "EUR".
-
-##### `int getAmount()`
-Returns the amount in cents. For example, `53,42 EUR` will be returned as `5342`.
-
-##### `BigDecimal getParsedAmount()`
-Returns the parsed amount in euros. Unlike `getAmount`, this method returns the `BigDecimal` type, which can hold decimal numbers without having floating point precision errors as floats and doubles have.
-
-##### `String getReferenceNumber()`
-Returns the scanned payment reference number.
-
-##### `String getPayerAccount()`
-Returns the scanned payer account number, if it exists.
-
-##### `String getUtilityID()`
-Returns the scanned utility ID, if it exists.
-
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/kosovo/code128/KosovoCode128RecognitionResult.html).**
 ## <a name="sepaQRCode"></a> Scanning SEPA QR codes
 
 This section discusses the setting up of SEPA QR code recognizer and obtaining results from it.
@@ -2793,6 +2771,60 @@ public void onScanningDone(RecognitionResults results) {
 ```
 
 **Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovakia/dataMatrix/SlovakDataMatrixRecognitionResult.html).**
+
+## <a name="srbPdf417"></a> Scanning Serbian Pdf417 barcode payslips
+
+This section discusses the setting up of Serbian payslip Pdf417 barcode recognizer and obtaining results from it.
+
+### Setting up Serbian Pdf417 barcode payslip recognizer
+
+To activate Serbian Pdf417 barcode payslip recognizer, you need to create [SerbianPdf417RecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/serbia/pdf417/SerbianPdf417RecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	SerbianPdf417RecognizerSettings sett = new SerbianPdf417RecognizerSettings();
+		
+    /*
+     * Enable scanning of non-standard elements, but there is no
+     * guarantee that all data will be read. For Pdf417 barcode to be
+     * used when multiple rows are missing (e.g. not whole barcode is
+     * printed)
+    */
+    sett.setUncertainScanning(true);
+    
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+### Obtaining results from Serbian PDF417 barcode payslip recognizer
+
+Serbian Pdf417 barcode payslip recognizer produces [SerbianPdf417RecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/serbia/pdf417/SerbianPdf417RecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `SerbianPdf417RecognitionResult` class. See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof SerbianPdf417RecognitionResult) {
+			SerbianPdf417RecognitionResult result = (SerbianPdf417RecognitionResult) baseResult;
+			
+	        // you can use getters of SerbianPdf417RecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+		        int amount = result.getAmount();
+		        String accountNumber = result.getAccountNumber();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/serbia/pdf417/SerbianPdf417RecognitionResult.html).**
 
 ## <a name="slovenianPayslip"></a> Scanning Slovenian payslips
 
@@ -3179,7 +3211,97 @@ This method will return the object that contains information about barcode's bin
 ##### `Quadrilateral getPositionOnImage()`
 Returns the position of barcode on image. Note that returned coordinates are in image's coordinate system which is not related to view coordinate system used for UI.
 
+## <a name="barcodeRecognizer"></a> Scanning barcodes with BarcodeRecognizer
+
+This section discusses the settings for setting up barcode recognizer and explains how to obtain results from it.
+
+### Setting up Barcode recognizer
+
+To activate Barcode recognizer, you need to create [BarcodeRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/barcode/BarcodeRecognizerSettings.html) and add it to `RecognizerSettings` array. You can do this using the following code snippet:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	BarcodeRecognizerSettings sett = new BarcodeRecognizerSettings();
+	// disable scanning of white barcodes on black background
+	sett.setInverseScanning(false);
+	// activate scanning of QR codes
+	sett.setScanQRCode(true);
+
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+As can be seen from example, you can tweak barcode recognition parameters with methods of `BarcodeRecognizerSettings`.
+
+##### `setScanAztecCode(boolean)`
+Method activates or deactivates the scanning of Aztec 2D barcodes. Default (initial) value is `false`. For better Aztec scanning, you should set the license key by using the `setLicenseKey(String)` method. Please contact us to obtain valid license key.
+
+##### `setScanCode128(boolean)`
+Method activates or deactivates the scanning of Code128 1D barcodes. Default (initial) value is `false`.
+
+##### `setScanCode39(boolean)`
+Method activates or deactivates the scanning of Code39 1D barcodes. Default (initial) value is `false`.
+
+##### `setScanDataMatrixCode(boolean)`
+Method activates or deactivates the scanning of Data Matrix 2D barcodes. Default (initial) value is `false`.
+
+##### `setScanEAN13Code(boolean)`
+Method activates or deactivates the scanning of EAN 13 1D barcodes. Default (initial) value is `false`.
+
+##### `setScanEAN8Code(boolean)`
+Method activates or deactivates the scanning of EAN 8 1D barcodes. Default (initial) value is `false`.
+
+##### `shouldScanITFCode(boolean)`
+Method activates or deactivates the scanning of ITF 1D barcodes. Default (initial) value is `false`.
+
+##### `setScanQRCode(boolean)`
+Method activates or deactivates the scanning of QR 2D barcodes. Default (initial) value is `false`.
+
+##### `setScanUPCACode(boolean)`
+Method activates or deactivates the scanning of UPC A 1D barcodes. Default (initial) value is `false`.
+
+##### `setScanUPCECode(boolean)`
+Method activates or deactivates the scanning of UPC E 1D barcodes. Default (initial) value is `false`.
+
+##### `setInverseScanning(boolean)`
+By setting this to `true`, you will enable scanning of barcodes with inverse intensity values (i.e. white barcodes on dark background). This option can significantly increase recognition time. Default is `false`.
+
+##### `setSlowThoroughScan(boolean)`
+Use this method to enable slower, but more thorough scan procedure when scanning barcodes. By default, this option is turned on.
+
+##### `setLicenseKey(String)`
+Use this method to set the license key and unlock better support for Aztec scanning. Please contact us to obtain valid license key for the Aztec scanning.
+
+### Obtaining results from Barcode recognizer
+
+Barcode recognizer produces [BarcodeScanResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/barcode/BarcodeScanResult.html). You can use `instanceof` operator to check if element in results array is instance of `BarcodeScanResult` class. See the following snippet for example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof BarcodeScanResult) {
+			BarcodeScanResult result = (BarcodeScanResult) baseResult;
+			
+			// getBarcodeType getter will return a BarcodeType enum that will define
+			// the type of the barcode scanned
+			BarcodeType barType = result.getBarcodeType();
+	        // getStringData getter will return the string version of barcode contents
+			String barcodeData = result.getStringData();
+		}
+	}
+}
+```
+
+As you can see from the example, obtaining data is rather simple. You just need to call several methods of the `BarcodeScanResult` object.
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/barcode/BarcodeScanResult.html).**
 ## <a name="custom1DBarDecoder"></a> Scanning one dimensional barcodes with _PhotoPay_'s implementation
+
+**Note: [BarDecoderRecognizer](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/bardecoder/BarDecoderRecognizerSettings.html) is deprecated, you should use [BarcodeRecognizer](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/barcode/BarcodeRecognizerSettings.html) instead.** 
 
 This section discusses the settings for setting up 1D barcode recognizer that uses _PhotoPay_'s implementation of scanning algorithms and explains how to obtain results from that recognizer. Henceforth, the 1D barcode recognizer that uses _PhotoPay_'s implementation of scanning algorithms will be refered as "Bardecoder recognizer".
 
@@ -3264,6 +3386,8 @@ This method will return the object that contains information about barcode's bin
 This method will return a [BarcodeType](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/BarcodeType.html) enum that defines the type of barcode scanned.
 
 ## <a name="zxing"></a> Scanning barcodes with ZXing implementation
+
+**Note: [ZXingRecognizer](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/zxing/ZXingRecognizerSettings.html) is deprecated, you should use [BarcodeRecognizer](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/barcode/BarcodeRecognizerSettings.html) instead.** 
 
 This section discusses the settings for setting up barcode recognizer that use ZXing's implementation of scanning algorithms and explains how to obtain results from it. _PhotoPay_ uses ZXing's [c++ port](https://github.com/zxing/zxing/tree/00f634024ceeee591f54e6984ea7dd666fab22ae/cpp) to support barcodes for which we still do not have our own scanning algorithms. Also, since ZXing's c++ port is not maintained anymore, we also provide updates and bugfixes to it inside our codebase.
 
@@ -3393,46 +3517,94 @@ public void onScanningDone(RecognitionResults results) {
 ```
 
 **Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/simnumber/SimNumberScanResult.html).**
-## <a name="aztecRecognizer"></a> Scanning aztec barcodes
+## <a name="vinRecognizer"></a> Scanning VIN barcodes
 
-This section discusses the settings for setting up aztec recognizer and explains how to obtain its results.
+This section discusses the settings for setting up VIN (*Vehicle Identification Number*) number recognizer and explains how to obtain its results.
 
-### Setting up aztec recognizer
+### Setting up VIN recognizer
 
-To activate aztec recognizer, you need to create a [AztecRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/aztec/AztecRecognizerSettings.html) and add it to `RecognizerSettings` array. You can do this using following code snippet:
+To activate VIN recognizer, you need to create a [VinRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/vin/VinRecognizerSettings.html) and add it to `RecognizerSettings` array. You can do this using following code snippet:
 
 ```java
 private RecognizerSettings[] setupSettingsArray() {
-    // please contact us to obtain valid license key for the aztec recognizer
+	VinRecognizerSettings sett = new VinRecognizerSettings();
+	// now add sett to recognizer settings array that is used to configure
+    // recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**Javadoc documentation for VinRecognizerSettings can be found [here](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/vin/VinRecognizerSettings.html).**
+
+### Obtaining results from VIN recognizer
+
+VIN recognizer produces [VinScanResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/vin/VinScanResult.html). You can use `instanceof` operator to check if element in results array is instance of `VinScanResult` class. See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof VinScanResult) {
+			VinScanResult result = (VinScanResult) baseResult;
+	       // get scanned VIN
+			String vin = result.getVin();
+			if (vin != null) {
+				// do something
+			}
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/vin/VinScanResult.html).**
+## <a name="aztecBarcodes"></a> Scanning aztec barcodes
+
+**Note: [AztecRecognizer](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/aztec/AztecRecognizerSettings.html) is deprecated, you should use [BarcodeRecognizer](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/barcode/BarcodeRecognizerSettings.html) instead.**
+
+This section discusses the settings for setting up `BarcodeRecognizer` for scanning the Aztec barcodes and explains how to obtain its results.
+
+### Setting up Barcode recognizer for scanning Aztec barcodes
+
+To activate barcode recognizer for scanning Aztec barcodes, you need to create a [BarcodeRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/barcode/BarcodeRecognizerSettings.html) and set the license key to unlock the Aztec feature. Then you should add prepared `BarcodeRecognizerSettings` to `RecognizerSettings` array. You can do this by using the following code snippet:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+    BarcodeRecognizerSettings sett = new BarcodeRecognizerSettings();
+    // please contact us to obtain valid license key to unlock the aztec feature
     // https://microblink.com/en/contact-us
     String aztecLicenseKey = getAztecLicenseKey();
-    AztecRecognizerSettings sett = new AztecRecognizerSettings(aztecLicenseKey);
+    // set license key and unlock the aztec scanning feature.
+    sett.setLicenseKey(aztecLicenseKey);
     // now add sett to recognizer settings array that is used to configure
     // recognition
     return new RecognizerSettings[] { sett };
 }
 ```
 
-**Javadoc documentation for AztecRecognizerSettings can be found [here](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/aztec/AztecRecognizerSettings.html).**
+**Javadoc documentation for BarcodeRecognizerSettings can be found [here](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/barcode/BarcodeRecognizerSettings.html).**
 
-### Obtaining results from aztec recognizer
-Aztec recognizer produces [AztecScanResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/aztec/AztecScanResult.html). You can use `instanceof` operator to check if element in results array is instance of `AztecScanResult` class. See the following snippet for an example:
+### Obtaining Aztec results
+Barcode recognizer produces [BarcodeScanResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/barcode/BarcodeScanResult.html). You can use `instanceof` operator to check if element in results array is instance of `BarcodeScanResult` class and `getBarcodeType()` method to check whether the scanned barcode is Aztec. See the following snippet for example:
 
 ```java
 @Override
 public void onScanningDone(RecognitionResults results) {
-    BaseRecognitionResult[] dataArray = results.getRecognitionResults();
-    for(BaseRecognitionResult baseResult : dataArray) {
-        if(baseResult instanceof AztecScanResult) {
-            AztecScanResult result = (AztecScanResult) baseResult;
-            // getStringData getter will return the string version of barcode contents
-            String barcodeData = result.getStringData();
-        }
-    }
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof BarcodeScanResult) {
+			BarcodeScanResult result = (BarcodeScanResult) baseResult;
+			// getBarcodeType getter will return a BarcodeType enum that will define
+			// the type of the barcode scanned
+			BarcodeType barType = result.getBarcodeType();
+			if (barType == BarcodeType.AZTEC) {
+				// we have Aztec result
+				String aztecData = result.getStringData();
+			}
+		}
+	}
 }
 ```
-
-**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/aztec/AztecScanResult.html).**
 ## <a name="mrtd"></a> Scanning machine-readable travel documents
 
 This section discusses the setting up of machine-readable travel documents(MRTD) recognizer and obtaining results from it.
@@ -3571,7 +3743,7 @@ Returns the secondary identifier. If there is more than one component, they are 
 Returns three-letter or two-letter code which indicate the issuing State. Three-letter codes are based on `Alpha-3` codes for entities specified in `ISO 3166-1`, with extensions for certain States. Two-letter codes are based on `Alpha-2` codes for entities specified in `ISO 3166-1`, with extensions for certain States.
 
 ##### `Date getDateOfBirth()`
-Returns holder's date of birth if it is successfully converted to `Date` from MRZ date format: `YYMMDD` or null if date is unknown or can not be converted to `Date`.
+Returns holder's date of birth if it is successfully converted to [Date](https://photopay.github.io/photopay-android/com/microblink/results/date/Date.html) from MRZ date format: `YYMMDD` or null if date is unknown or can not be converted to [Date](https://photopay.github.io/photopay-android/com/microblink/results/date/Date.html).
 
 ##### `String getRawDateOfBirth()`
 Returns holder's date of birth as raw string from MRZ zone in format `YYMMDD`.
@@ -3589,7 +3761,7 @@ Returns sex of the card holder. Sex is specified by use of the single initial, c
 Returns document code. Document code contains two characters. For `MRTD` the first character shall be `A`, `C` or `I`. The second character shall be discretion of the issuing State or organization except that V shall not be used, and `C` shall not be used after `A` except in the crew member certificate. On machine-readable passports `(MRP)` first character shall be `P` to designate an `MRP`. One additional letter may be used, at the discretion of the issuing State or organization, to designate a particular `MRP`. If the second character position is not used for this purpose, it shall be filled by the filter character `<`.
 
 ##### `Date getDateOfExpiry()`
-Returns date of expiry if it is successfully converted to `Date` from MRZ date format: `YYMMDD` or null if date is unknown or can not be converted to `Date`.
+Returns date of expiry if it is successfully converted to [Date](https://photopay.github.io/photopay-android/com/microblink/results/date/Date.html) from MRZ date format: `YYMMDD` or null if date is unknown or can not be converted to [Date](https://photopay.github.io/photopay-android/com/microblink/results/date/Date.html).
 
 ##### `String getRawDateOfExpiry()`
 Returns date of expiry as raw string from MRZ zone in format `YYMMDD`.
@@ -5227,7 +5399,7 @@ Returns the sex of the card holder. Possible values are:
 - `F` for female holder
 
 ##### `Date getOwnerBirthDate()`
-Returns the date of birth of card holder as java `Date` if it is successfully converted from date format: `YYMMDD`. Raw date string can be obtained by using **getRawBirthDate()** method. Returns `null` if date is unknown or can not be converted to java `Date`.
+Returns the date of birth of card holder as [Date](https://photopay.github.io/photopay-android/com/microblink/results/date/Date.html) if it is successfully converted from date format: `YYMMDD`. Raw date string can be obtained by using **getRawBirthDate()** method. Returns `null` if date is unknown or can not be converted to [Date](https://photopay.github.io/photopay-android/com/microblink/results/date/Date.html).
 
 ##### `String getRawBirthDate()`
 Returns owner's date of birth as raw string in format `YYMMDD`, or `null` if date is unknown.
@@ -5636,10 +5808,10 @@ Returns the parsed result provided by parser with name `parserName` added to def
 Returns the parsed result provided by parser with name `parserName` added to parser group named `parserGroupName`. If parser with name `parserName` does not exists in parser group with name `parserGroupName` or if parser group does not exists, returns `null`. If parser exists, but has failed to parse any data, returns empty string.
 
 ##### `Object getSpecificParsedResult(String parserName)`
-Returns specific parser result for concrete parser with the given parser name in default parser group. For example, date parser which is represented with `DateParserSettings` can return parsed date as `Date` object. It is always possible to obtain parsed result as raw string by using *getParsedResult(String)* or *getParsedResult(String, String)* method. If parser with name `parserName` does not exists in default parser group, returns `null`. If parser exists, but has failed to parse any data, returns null or empty string.
+Returns specific parser result for concrete parser with the given parser name in default parser group. For example, date parser which is represented with `DateParserSettings` can return parsed date as [Date](https://photopay.github.io/photopay-android/com/microblink/results/date/Date.html) object. It is always possible to obtain parsed result as raw string by using *getParsedResult(String)* or *getParsedResult(String, String)* method. If parser with name `parserName` does not exists in default parser group, returns `null`. If parser exists, but has failed to parse any data, returns null or empty string.
 
 ##### `Object getSpecificParsedResult(String parserGroupName, String parserName)`
-Returns specific parser result for concrete parser with the given parser name in the given parser group. For example, date parser which is represented with `DateParserSettings` can return parsed date as `Date` object. It is always possible to obtain parsed result as raw string by using *getParsedResult(String)* or *getParsedResult(String, String)* method. If parser with name `parserName` does not exists in parser group with name `parserGroupName` or if parser group does not exists, returns `null`. If parser exists, but has failed to parse any data, returns null or empty string.
+Returns specific parser result for concrete parser with the given parser name in the given parser group. For example, date parser which is represented with `DateParserSettings` can return parsed date as [Date](https://photopay.github.io/photopay-android/com/microblink/results/date/Date.html) object. It is always possible to obtain parsed result as raw string by using *getParsedResult(String)* or *getParsedResult(String, String)* method. If parser with name `parserName` does not exists in parser group with name `parserGroupName` or if parser group does not exists, returns `null`. If parser exists, but has failed to parse any data, returns null or empty string.
 
 ##### `OcrResult getOcrResult()`
 Returns the [OCR result](https://photopay.github.io/photopay-android/com/microblink/results/ocr/OcrResult.html) structure for default parser group.
@@ -6205,7 +6377,7 @@ In order to create customised build of _PhotoPay_, you will need following tools
 - you must use the exact same version of NDK that we used to build the static libraries. Using different NDK version will either result with linker errors or will create non-working binary. Our script will check your NDK version and will fail if there is a version mismatch.
 - due to a known [NDK bug](https://github.com/android-ndk/ndk/issues/313), the script for creating customised build will fail on Windows. Until this is fixed, you need to run the script on Mac or Linux machine.
 
-### Steps for creating customised build
+### Steps for creating customised build (command line)
 
 1. Obtain the _static distribution of PhotoPay_ by [contacting us](http://help.microblink.com)
 2. Download the zip from link that you will be provided
@@ -6227,6 +6399,16 @@ In order to create customised build of _PhotoPay_, you will need following tools
 7. Execute command ```./gradlew clean assembleRelease```
 8. After several minutes (depedending of CPU speed of your computer), customised build will appear as `LibPhotoPay/build/outputs/aar/LibPhotoPay-release.aar`. Use that AAR in your app instead of the default one.
 
+### Steps for creating customised build (Android Studio)
+
+1. Follow the steps 1.-4. as in command line version (see above)
+2. Import the `static-distrib/LibPhotoPay` project into Android Studio
+3. Under `cpp` section of imported module, make sure that all required JNI static libraries are correctly referenced
+	- if they are not, edit the `enabled-features.cmake` to correct which features need to be included in build and then select `Build -> Refresh Linked C++ Projects` in Android Studio menu
+4. Open `Build Variants` pane and make sure `release` is selected for module `LibPhotoPay`
+5. In Android Studio menu, select `Build -> Build APK`
+6. After several minutes (depedending of CPU speed of your computer), customised build will appear as `LibPhotoPay/build/outputs/aar/LibPhotoPay-release.aar`. Use that AAR in your app instead of the default one.
+
 #### Warning:
 
 Attempt to use feature within your app which was not enabled in customised build will result with your app crashing at the moment it tries to use that feature.
@@ -6244,6 +6426,31 @@ This means that a required resource was not packaged into final app. This usuall
 #### CMake error while running gradle script.
 
 You probably have a typo in `enabled-features.cmake`. CMake is very sensitive language and will throw an non-understandable error if you have a typo or invoke any of its commands with wrong number of parameters.
+
+#### Keeping only `FEATURE_MRTD` creates rather large AAR
+
+`FEATURE_MRTD` marks the _MRTD recognizer_. However, _MRTD recognizer_ can also be used in _Templating API_ mode where non-MRZ data can be scanned. To perform OCR of non-MRZ data, a rather large OCR model must be used, which supports all fonts. If you only plan to scan MRZ part of the document, you can edit the `features.cmake` in following way:
+
+- find the following line:
+
+```
+feature_resources( FEATURE_MRTD model_mrtd model_general_blink_ocr model_micr model_arabic )
+```
+
+- keep only `model_mrtd` in the list, i.e. modify the line so that it will be like this:
+
+```
+feature_resources( FEATURE_MRTD model_mrtd )
+```
+
+This will keep only support for reading MRZ zone in OCR - you will not be able to scan non-MRZ data with such configuration using _MRTD recognizer_, however you will reduce final app size by almost 5MB.
+
+##### More information about OCR models in `FEATURE_MRTD`
+
+- `model_mrtd` is OCR model for performing OCR of MRZ zone
+- `model_arabic` is OCR model for performing OCR of digits used in arabic languages - text scanning is not supported
+- `model_micr` is OCR model for performing OCR of [Magnetic Ink Characters](https://en.wikipedia.org/wiki/Magnetic_ink_character_recognition)
+- `model_general_blink_ocr` is OCR model for performing general-purpose OCR. This model is usually required for performing OCR of non-MRZ text on documents.
 ## <a name="combineNativeLibraries"></a> Combining _PhotoPay_ with other native libraries
 
 If you are combining _PhotoPay_ library with some other libraries that contain native code into your application, make sure you match the architectures of all native libraries. For example, if third party library has got only ARMv7 and x86 versions, you must use exactly ARMv7 and x86 versions of _PhotoPay_ with that library, but not ARM64. Using these architectures will crash your app in initialization step because JVM will try to load all its native dependencies in same preferred architecture and will fail with `UnsatisfiedLinkError`.

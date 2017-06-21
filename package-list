@@ -22,10 +22,12 @@ com.microblink.recognition
 com.microblink.recognizers
 com.microblink.recognizers.blinkbarcode
 com.microblink.recognizers.blinkbarcode.aztec
+com.microblink.recognizers.blinkbarcode.barcode
 com.microblink.recognizers.blinkbarcode.bardecoder
 com.microblink.recognizers.blinkbarcode.pdf417
 com.microblink.recognizers.blinkbarcode.simnumber
 com.microblink.recognizers.blinkbarcode.usdl
+com.microblink.recognizers.blinkbarcode.vin
 com.microblink.recognizers.blinkbarcode.zxing
 com.microblink.recognizers.blinkid
 com.microblink.recognizers.blinkid.austria.back
@@ -40,6 +42,7 @@ com.microblink.recognizers.blinkid.czechia.front
 com.microblink.recognizers.blinkid.documentface
 com.microblink.recognizers.blinkid.eudl
 com.microblink.recognizers.blinkid.germany.back
+com.microblink.recognizers.blinkid.germany.combined
 com.microblink.recognizers.blinkid.germany.front
 com.microblink.recognizers.blinkid.germany.old.front
 com.microblink.recognizers.blinkid.germany.passport
@@ -100,6 +103,7 @@ com.microblink.recognizers.photopay.kosovo.code128
 com.microblink.recognizers.photopay.kosovo.slip
 com.microblink.recognizers.photopay.netherlands.slip
 com.microblink.recognizers.photopay.sepa.qr
+com.microblink.recognizers.photopay.serbia.pdf417
 com.microblink.recognizers.photopay.slovakia.code128
 com.microblink.recognizers.photopay.slovakia.dataMatrix
 com.microblink.recognizers.photopay.slovakia.qr
