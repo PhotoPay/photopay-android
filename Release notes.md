@@ -1,5 +1,11 @@
 # Release notes
 
+## 6.8.1
+
+- added support for slovenian references without prefix
+- Czech payment QR code - improved parsing of amounts with less than 2 decimals
+- `IKadRecognizer`: fixed returning of full document images as metadata
+
 ## 6.8.0
 
 - removed `isItalic` and `isBold` getters from `OcrChar` class
