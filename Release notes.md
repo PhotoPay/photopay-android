@@ -1,5 +1,59 @@
 # Release notes
 
+## 6.9.0
+
+### New features:
+
+- added support for scanning Austrian passports - use `AustrianPassportRecognizerSettings` ​
+- added support for scanning Swiss passports - use `SwissPassportRecognizerSettings `​
+- added support for scanning Mexican Voting cards - use `MRTDRecognizerSettings` ​
+- added support for scanning Serbian payment QR codes - use `SerbianPdf417RecognizerSettings` ​
+- added support for scanning back side of Swiss ID - use `SwissIDBackSideRecognizerSettings` ​
+
+### Minor API changes:
+
+- `RegexParserSettings` and `RawParserSettings` now work with `AbstractOCREngineOptions`, which is a base class of `BlinkOCREngineOptions`
+	- default engine options returned by method `getOcrEngineOptions` for both parser settings return instance of `BlinkOCREngineOptions`
+- `BlinkOCRRecognizerSettings` is now deprecated and will be removed in `v7.0.0`
+	- use `DetectorRecognizerSettings` to perform scanning of templated documents 
+	- use `BlinkInputRecognizerSettings` for segment scan or for full-screen OCR 
+	- until `v7.0.0`, `BlinkOCRRecognizerSettings` will behave as before, however you are encouraged to update your code not to use it anymore
+- `DocumentClassifier` interface is moved from `com.microblink.recognizers.blinkocr` to `com.microblink.recognizers.detector` package and `DocumentClassifier.classifyDocument()` now accepts `DetectorRecognitionResult` as parameter for document classification
+- `Slovak ID Recognizers`:
+	- result getters `getPersonalIdentificationNumber()` and `getIssuingAuthority()` are renamed to `getPersonalNumber()` and `getIssuedBy()`
+- Renamed `RomanianIDFrontSideRecognitionResult` element getters for Sex and Nationality outside of the MRZ to `getNonMRZNationality()` and `getNonMRZSex()`
+
+### Improvements for existing features
+
+- improved address parsing on Malaysian iKad documents
+	- affects only iKad recognizer (represented by `IKadRecognizerSettings`)
+- added support for scanning non-expiring Croatian ID documents
+	- affects:
+		- Croatian ID front recognizer (represented by `CroatianIDFrontSideRecognizerSettings`) - date of expiry is keyword **TRAJNO**
+		- Croatian ID back recognizer (represented by `CroatianIDBackSideRecognizerSettings`) - date of expiry inside MRZ is `991231`
+		- Croatian ID combined recognizer (represented by `CroatianIDCombinedRecognizerSettings`)
+- improved date parsing:
+	- affects date parser and all recognizers which perform date parsing
+- added support for reading mirrored QR codes:
+	- affects all recognizers that perform QR code scanning
+- improved `IKadRecognizer`:
+	- added support for long addresses and employer names
+- improved `Singapore ID Recognizers`:
+	- tuned reading positions
+	- more accurate reading of name and blood type fields
+- improved `Slovak ID Recognizers`:
+	- tuned reading positions of ID elements
+	- improved reading precision of address, place of birth, last name and issuing authority
+	- added options to disable/enable extraction of certain fields in recognizer settings
+- for `Austrian ID Recognizers` added options to disable/enable extraction of certain fields in recognizer settings
+
+### Bug fixes:
+
+- fixed occassional crash in MRTD detection algorithm
+	- this affects both _MRTD Recognizer_ (represented by `MRTDRecognizerSettings`) and _MRTD Detector_ (represented by `MRTDDetectorSettings`)
+- fixed `SlovakQRCodeRecognizer` (Slovak pay by square):
+	- parsing of amounts with less than 2 decimals
+
 ## 6.8.1
 
 - added support for slovenian references without prefix

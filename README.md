@@ -41,7 +41,7 @@
   * [Scanning Slovak payslips](#slovakPayslip)
   * [Scanning Slovak payBySquare QR codes](#slovakQRCode)
   * [Scanning Slovak Data Matrix codes](#slovakDataMatrix)
-  * [Scanning Serbian Pdf417 barcode payslips](#srbPdf417)
+  * [Scanning Serbian Pdf417 barcode and QR code payslips](#srbPdf417)
   * [Scanning Slovenian payslips](#slovenianPayslip)
   * [Scanning Slovenian payment QR codes](#sloQRCode)
   * [Scanning Swiss payslips](#swissPayslip)
@@ -59,6 +59,7 @@
   * [Scanning front side of Austrian ID documents](#ausID_front)
   * [Scanning back side of Austrian ID documents](#ausID_back)
   * [Scanning and combining results from front and back side of Austrian ID documents](#austrianIDCombined)
+  * [Scanning Austrian passports](#aus_passport)
   * [Scanning front side of Croatian ID documents](#croID_front)
   * [Scanning back side of Croatian ID documents](#croID_back)
   * [Scanning and combining results from front and back side of Croatian ID documents](#croIDCombined)
@@ -78,6 +79,8 @@
   * [Scanning front side of Slovenian ID documents](#slovenianID_front)
   * [Scanning back side of Slovenian ID documents](#slovenianID_back)
   * [Scanning and combining results from front and back side of Slovenian ID documents](#slovenianIDCombined)
+  * [Scanning back side of Swiss ID documents](#swissID_back)
+  * [Scanning Swiss passports](#swiss_passport)
   * [Scanning front side of Romanian ID documents](#romanianID_front)
   * [Scanning US Driver's licence barcodes](#usdl)
   * [Scanning EU driver's licences](#eudl)
@@ -86,8 +89,8 @@
   * [Scanning front side of Singapore ID documents](#singaporeID_front)
   * [Scanning back side of Singapore ID documents](#singaporeID_back)
   * [Scanning and combining results from front and back side of Singapore ID documents](#singaporeIDCombined)
-  * [Scanning segments with BlinkOCR recognizer](#blinkOCR)
-  * [Scanning templated documents with BlinkOCR recognizer](#blinkOCR_templating)
+  * [Scanning segments with BlinkInput recognizer](#blinkInput)
+  * [Scanning templated documents with DetectorRecognizer](#detectorRecognizer_templating)
   * [Performing detection of various documents](#detectorRecognizer)
 * [Detection settings and results](#detectionSettingsAndResults)
   * [Detection of documents with Machine Readable Zone](#mrtdDetector)
@@ -265,7 +268,7 @@ You’ve already created the project that contains almost everything you need. N
 	// for obtaining results) and parser setting defining
 	// how the data will be extracted.
 	// For more information about parser setting, check the
-	// chapter "Scanning segments with BlinkOCR recognizer"
+	// chapter "Scanning segments with BlinkInput recognizer"
 	ScanConfiguration[] confArray = new ScanConfiguration[] {
 		new ScanConfiguration(R.string.amount_title, R.string.amount_msg, "Amount", new AmountParserSettings()),
 		new ScanConfiguration(R.string.email_title, R.string.email_msg, "EMail", new EMailParserSettings()),
@@ -320,7 +323,7 @@ You’ve already created the project that contains almost everything you need. N
 	// how the data will be extracted. In random scan, all scan elements should have
 	// distinct parser types.
 	// For more information about parser setting, check the
-	// chapter "Scanning segments with BlinkOCR recognizer"
+	// chapter "Scanning segments with BlinkInput recognizer"
 	
 	RandomScanElement date = new RandomScanElement(R.string.date_title, "Date", new DateParserSettings());
 	// element can be optional, which means that result can be returned without scannig that element
@@ -533,7 +536,7 @@ To change the colour of viewfinder in `ScanActivity`, change or override the col
 
 This section will discuss possible parameters that can be sent over `Intent` for `SegmentScanActivity` activity that can customize default behaviour. There are several intent extras that can be sent to `SegmentScanActivity` actitivy:
 	
-* <a name="intent_EXTRAS_SCAN_CONFIGURATION" href="#intent_EXTRAS_SCAN_CONFIGURATION">#</a> **`SegmentScanActivity.EXTRAS_SCAN_CONFIGURATION`** - with this extra you must set the array of [ScanConfiguration](https://photopay.github.io/photopay-android/com/microblink/ocr/ScanConfiguration.html) objects. Each `ScanConfiguration` object will define specific scan configuration that will be performed. `ScanConfiguration` defines two string resource ID's - title of the scanned item and text that will be displayed above field where scan is performed. Besides that it defines the name of scanned item and object defining the OCR parser settings. More information about parser settings can be found in chapter [Scanning segments with BlinkOCR recognizer](#blinkOCR). Here is only important that each scan configuration represents a single parser group and SegmentScanActivity ensures that only one parser group is active at a time. After defining scan configuration array, you need to put it into intent extra with following code snippet:
+* <a name="intent_EXTRAS_SCAN_CONFIGURATION" href="#intent_EXTRAS_SCAN_CONFIGURATION">#</a> **`SegmentScanActivity.EXTRAS_SCAN_CONFIGURATION`** - with this extra you must set the array of [ScanConfiguration](https://photopay.github.io/photopay-android/com/microblink/ocr/ScanConfiguration.html) objects. Each `ScanConfiguration` object will define specific scan configuration that will be performed. `ScanConfiguration` defines two string resource ID's - title of the scanned item and text that will be displayed above field where scan is performed. Besides that it defines the name of scanned item and object defining the OCR parser settings. More information about parser settings can be found in chapter [Scanning segments with BlinkInput recognizer](#blinkInput). Here is only important that each scan configuration represents a single parser group and SegmentScanActivity ensures that only one parser group is active at a time. After defining scan configuration array, you need to put it into intent extra with following code snippet:
 	
 	```java
 	intent.putExtra(SegmentScanActivity.EXTRAS_SCAN_CONFIGURATION, confArray);
@@ -604,7 +607,7 @@ This section will discuss possible parameters that can be sent over `Intent` for
 `RandomScanActivity` accepts similar intent extras as `SegmentScanActivity` with few differences listed below.
 	
 * <a name="intent_EXTRAS_SCAN_CONFIGURATION_random" href="#intent_EXTRAS_SCAN_CONFIGURATION_random">#</a> **`RandomScanActivity.EXTRAS_SCAN_CONFIGURATION`** 
-With this extra you must set the array of [RandomScanElement](https://photopay.github.io/photopay-android/com/microblink/ocr/RandomScanElement.html) objects. Each `RandomScanElement` holds following information about scan element: title of the scanned item, name of scanned item and object defining the OCR parser settings. Additionally, it is possible to set parser group for a parser that is responsible for extracting the element data by using the `setParserGroup(String groupName)` method on `RandomScanElement` object. If all parsers are in the same parser group, recognition will be faster, but sometimes merged OCR engine options may cause that some parsers are unable to extract valid data from the scanned text. Putting each parser into its own group will give better accuracy, but will perform OCR of image for each parser which can consume a lot of processing time. By default, if parser groups are not defined, all parsers will be placed in the same parser group. More information about parser settings can be found in chapter [Scanning segments with BlinkOCR recognizer](#blinkOCR). 
+With this extra you must set the array of [RandomScanElement](https://photopay.github.io/photopay-android/com/microblink/ocr/RandomScanElement.html) objects. Each `RandomScanElement` holds following information about scan element: title of the scanned item, name of scanned item and object defining the OCR parser settings. Additionally, it is possible to set parser group for a parser that is responsible for extracting the element data by using the `setParserGroup(String groupName)` method on `RandomScanElement` object. If all parsers are in the same parser group, recognition will be faster, but sometimes merged OCR engine options may cause that some parsers are unable to extract valid data from the scanned text. Putting each parser into its own group will give better accuracy, but will perform OCR of image for each parser which can consume a lot of processing time. By default, if parser groups are not defined, all parsers will be placed in the same parser group. More information about parser settings can be found in chapter [Scanning segments with BlinkInput recognizer](#blinkInput). 
 
 *  <a name="intent_EXTRAS_SCAN_MESSAGE" href="#intent_EXTRAS_SCAN_MESSAGE">#</a> **`RandomScanActivity.EXTRAS_SCAN_MESSAGE`** 
 With this extra, it is possible to change default scan message that is displayed above the scanning
@@ -2772,7 +2775,7 @@ public void onScanningDone(RecognitionResults results) {
 
 **Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/slovakia/dataMatrix/SlovakDataMatrixRecognitionResult.html).**
 
-## <a name="srbPdf417"></a> Scanning Serbian Pdf417 barcode payslips
+## <a name="srbPdf417"></a> Scanning Serbian Pdf417 barcode and QR code payslips
 
 This section discusses the setting up of Serbian payslip Pdf417 barcode recognizer and obtaining results from it.
 
@@ -3889,7 +3892,7 @@ private RecognizerSettings[] setupSettingsArray() {
 
 Austrian ID front side recognizer produces [AustrianIDFrontSideRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/austria/front/AustrianIDFrontSideRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `AustrianIDFrontSideRecognitionResult ` class. 
 
-**Note:** `AustrianIDFrontSideRecognitionResult ` extends [BlinkOCRRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+**Note:** `AustrianIDFrontSideRecognitionResult ` extends [DetectorRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DetectorRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
 
 See the following snippet for an example:
 
@@ -4036,6 +4039,57 @@ public void onScanningDone(RecognitionResults results) {
 
 **Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/austria/combined/AustrianIDCombinedRecognitionResult.html).**
 
+## <a name="aus_passport"></a> Scanning Austrian passports
+
+This section will discuss the setting up of Austrian passport recognizer and obtaining results from it.
+
+### Setting up Austrian passport recognizer
+
+To activate Austrian passport recognizer, you need to create [AustrianPassportRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/austria/passport/AustrianPassportRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	AustrianPassportRecognizerSettings sett = new AustrianPassportRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [AustrianPassportRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/austria/passport/AustrianPassportRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/austria/passport/AustrianPassportRecognizerSettings.html) for more information.**
+
+### Obtaining results from Austrian passport recognizer
+
+Austrian passport recognizer produces [AustrianPassportRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/austria/passport/AustrianPassportRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `AustrianPassportRecognitionResult` class. 
+
+**Note:** `AustrianPassportRecognitionResult` extends [MRTDRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof AustrianPassportRecognitionResult) {
+			AustrianPassportRecognitionResult result = (AustrianPassportRecognitionResult) baseResult;
+			
+	        // you can use getters of AustrianPassportRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String placeOfBirth = result.getPlaceOfBirth();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/austria/passport/AustrianPassportRecognitionResult.html).**
+
 ## <a name="croID_front"></a> Scanning front side of Croatian ID documents
 
 This section will discuss the setting up of Croatian ID Front Side recognizer and obtaining results from it.
@@ -4060,7 +4114,7 @@ private RecognizerSettings[] setupSettingsArray() {
 
 Croatian ID front side recognizer produces [CroatianIDFrontSideRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/croatia/front/CroatianIDFrontSideRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `CroatianIDFrontSideRecognitionResult ` class. 
 
-**Note:** `CroatianIDFrontSideRecognitionResult ` extends [BlinkOCRRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+**Note:** `CroatianIDFrontSideRecognitionResult ` extends [DetectorRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DetectorRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
 
 See the following snippet for an example:
 
@@ -4231,7 +4285,7 @@ private RecognizerSettings[] setupSettingsArray() {
 
 Czech ID front side recognizer produces [CzechIDFrontSideRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/czechia/front/CzechIDFrontSideRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `CzechIDFrontSideRecognitionResult ` class. 
 
-**Note:** `CzechIDFrontSideRecognitionResult ` extends [BlinkOCRRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+**Note:** `CzechIDFrontSideRecognitionResult ` extends [DetectorRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DetectorRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
 
 See the following snippet for an example:
 
@@ -4402,7 +4456,7 @@ private RecognizerSettings[] setupSettingsArray() {
 
 German ID front side recognizer produces [GermanIDFrontSideRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/germany/front/GermanIDFrontSideRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `GermanIDFrontSideRecognitionResult` class. 
 
-**Note:** `GermanIDFrontSideRecognitionResult` extends [BlinkOCRRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+**Note:** `GermanIDFrontSideRecognitionResult` extends [DetectorRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DetectorRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
 
 See the following snippet for an example:
 
@@ -4608,7 +4662,7 @@ private RecognizerSettings[] setupSettingsArray() {
 
 Serbian ID front side recognizer produces [SerbianIDFrontSideRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/serbia/front/SerbianIDFrontSideRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `SerbianIDFrontSideRecognitionResult` class. 
 
-**Note:** `SerbianIDFrontSideRecognitionResult` extends [BlinkOCRRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+**Note:** `SerbianIDFrontSideRecognitionResult` extends [DetectorRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DetectorRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
 
 See the following snippet for an example:
 
@@ -4779,7 +4833,7 @@ private RecognizerSettings[] setupSettingsArray() {
 
 Slovak ID front side recognizer produces [SlovakIDFrontSideRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/slovakia/front/SlovakIDFrontSideRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `SlovakIDFrontSideRecognitionResult ` class. 
 
-**Note:** `SlovakIDFrontSideRecognitionResult ` extends [BlinkOCRRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+**Note:** `SlovakIDFrontSideRecognitionResult` extends [DetectorRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DetectorRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
 
 See the following snippet for an example:
 
@@ -4950,7 +5004,7 @@ private RecognizerSettings[] setupSettingsArray() {
 
 Slovenian ID front side recognizer produces [SlovenianIDFrontSideRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/slovenia/front/SlovenianIDFrontSideRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `SlovenianIDFrontSideRecognitionResult` class. 
 
-**Note:** `SlovenianIDFrontSideRecognitionResult` extends [BlinkOCRRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+**Note:** `SlovenianIDFrontSideRecognitionResult` extends [DetectorRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DetectorRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
 
 See the following snippet for an example:
 
@@ -5096,6 +5150,108 @@ public void onScanningDone(RecognitionResults results) {
 ```
 
 **Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/slovenia/combined/SlovenianIDCombinedRecognitionResult.html).**
+
+## <a name="swissID_back"></a> Scanning back side of Swiss ID documents
+
+This section will discuss the setting up of Swiss ID Back Side recognizer and obtaining results from it.
+
+### Setting up Swiss ID card back side recognizer
+
+To activate Swiss ID card back side recognizer, you need to create [SwissIDBackSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/switzerland/back/SwissIDBackSideRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	SwissIDBackSideRecognizerSettings sett = new SwissIDBackSideRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [SwissIDBackSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/switzerland/back/SwissIDBackSideRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/switzerland/back/SwissIDBackSideRecognizerSettings.html) for more information.**
+
+### Obtaining results from Swiss ID card back side recognizer
+
+Swiss ID back side recognizer produces [SwissIDBackSideRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/switzerland/back/SwissIDBackSideRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `SwissIDBackSideRecognitionResult` class. 
+
+**Note:** `SwissIDBackSideRecognitionResult` extends [MRTDRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof SwissIDBackSideRecognitionResult) {
+			SwissIDBackSideRecognitionResult result = (SwissIDBackSideRecognitionResult) baseResult;
+			
+	        // you can use getters of SwissIDBackSideRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String placeOfOrigin = result.getPlaceOfOrigin();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/switzerland/back/SwissIDBackSideRecognitionResult.html).**
+
+## <a name="swiss_passport"></a> Scanning Swiss passports
+
+This section will discuss the setting up of Swiss passport recognizer and obtaining results from it.
+
+### Setting up Swiss passport recognizer
+
+To activate Swiss passport recognizer, you need to create [SwissPassportRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/switzerland/passport/SwissPassportRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	SwissPassportRecognizerSettings sett = new SwissPassportRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [SwissPassportRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/switzerland/passport/SwissPassportRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/switzerland/passport/SwissPassportRecognizerSettings.html) for more information.**
+
+### Obtaining results from Swiss passport recognizer
+
+Swiss passport recognizer produces [SwissPassportRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/switzerland/passport/SwissPassportRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `SwissPassportRecognitionResult` class. 
+
+**Note:** `SwissPassportRecognitionResult` extends [MRTDRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof SwissPassportRecognitionResult) {
+			SwissPassportRecognitionResult result = (SwissPassportRecognitionResult) baseResult;
+			
+	        // you can use getters of AustrianPassportRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String placeOfOrigin = result.getPlaceOfOrigin();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/switzerland/passport/SwissPassportRecognitionResult.html).**
 
 ## <a name="romanianID_front"></a> Scanning front side of Romanian ID documents
 
@@ -5497,7 +5653,7 @@ private RecognizerSettings[] setupSettingsArray() {
 
 Singapore ID front side recognizer produces [SingaporeIDFrontRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/singapore/front/SingaporeIDFrontRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `SingaporeIDFrontRecognitionResult` class. 
 
-**Note:** `SingaporeIDFrontRecognitionResult` extends [BlinkOCRRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+**Note:** `SingaporeIDFrontRecognitionResult` extends [DetectorRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DetectorRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
 
 See the following snippet for an example:
 
@@ -5549,7 +5705,7 @@ private RecognizerSettings[] setupSettingsArray() {
 
 Singapore ID back side recognizer produces [SingaporeIDBackRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/singapore/back/SingaporeIDBackRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `SingaporeIDBackRecognitionResult` class. 
 
-**Note:** `SingaporeIDBackRecognitionResult` extends [BlinkOCRRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+**Note:** `SingaporeIDBackRecognitionResult` extends [DetectorRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DetectorRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
 
 See the following snippet for an example:
 
@@ -5642,13 +5798,13 @@ public void onScanningDone(RecognitionResults results) {
 
 **Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/singapore/combined/SingaporeIDCombinedRecognitionResult.html).**
 
-## <a name="blinkOCR"></a> Scanning segments with BlinkOCR recognizer
+## <a name="blinkInput"></a> Scanning segments with BlinkInput recognizer
 
-This section discusses the setting up of BlinkOCR recognizer and obtaining results from it. You should also check the demo for example.
+This section discusses the setting up of BlinkInput recognizer and obtaining results from it. You should also check the demo for example.
 
-### Setting up BlinkOCR recognizer
+### Setting up BlinkInput recognizer
 
-BlinkOCR recognizer is consisted of one or more parsers that are grouped in parser groups. Each parser knows how to extract certain element from OCR result and also knows what are the best OCR engine options required to perform OCR on image. Parsers can be grouped in parser groups. Parser groups contain one or more parsers and are responsible for merging required OCR engine options of each parser in group and performing OCR only once and then letting each parser in group parse the data. Thus, you can make for own best tradeoff between speed and accuracy - putting each parser into its own group will give best accuracy, but will perform OCR of image for each parser which can consume a lot of processing time. On the other hand, putting all parsers into same group will perform only one OCR but with settings that are combined for all parsers in group, thus possibly reducing parsing quality.
+BlinkInput recognizer is consisted of one or more parsers that are grouped in parser groups. Each parser knows how to extract certain element from OCR result and also knows what are the best OCR engine options required to perform OCR on image. Parsers can be grouped in parser groups. Parser groups contain one or more parsers and are responsible for merging required OCR engine options of each parser in group and performing OCR only once and then letting each parser in group parse the data. Thus, you can make for own best tradeoff between speed and accuracy - putting each parser into its own group will give best accuracy, but will perform OCR of image for each parser which can consume a lot of processing time. On the other hand, putting all parsers into same group will perform only one OCR but with settings that are combined for all parsers in group, thus possibly reducing parsing quality.
 
 Let's see this on example: assume we have two parsers at our disposal: `AmountParser` and `EMailParser`. `AmountParser` knows how to extract amount's from OCR result and requires from OCR only to recognise digits, periods and commas and ignore letters. On the other hand, `EMailParser` knows how to extract e-mails from OCR result and requires from OCR to recognise letters, digits, '@' characters and periods, but not commas. 
 
@@ -5656,15 +5812,15 @@ If we put both `AmountParser` and `EMailParser` into same parser group, the merg
 
 If we put `AmountParser` in one parser group and `EMailParser` in another parser group, OCR will be performed for each parser group independently, thus preventing the `AmountParser` confusion, but two OCR passes of image will be performed, which can have a performance impact.
 
-So to sum it up, BlinkOCR recognizer performs OCR of image for each available parser group and then runs all parsers in that group on obtained OCR result and saves parsed data. 
+So to sum it up, BlinkInput recognizer performs OCR of image for each available parser group and then runs all parsers in that group on obtained OCR result and saves parsed data. 
 
-By definition, each parser results with string that represents a parsed data. The parsed string is stored under parser's name which has to be unique within parser group. So, when defining settings for BlinkOCR recognizer, when adding parsers, you need to provide a name for the parser (you will use that name for obtaining result later) and optionally provide a name for the parser group in which parser will be put into.
+By definition, each parser results with string that represents a parsed data. The parsed string is stored under parser's name which has to be unique within parser group. So, when defining settings for BlinkInput recognizer, when adding parsers, you need to provide a name for the parser (you will use that name for obtaining result later) and optionally provide a name for the parser group in which parser will be put into.
 
-To activate BlinkOCR recognizer, you need to create [BlinkOCRRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognizerSettings.html), add some parsers to it and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+To activate BlinkInput recognizer, you need to create [BlinkInputRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkinput/BlinkInputRecognizerSettings.html), add some parsers to it and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
 
 ```java
 private RecognizerSettings[] setupSettingsArray() {
-	BlinkOCRRecognizerSettings sett = new BlinkOCRRecognizerSettings();
+	BlinkInputRecognizerSettings sett = new BlinkInputRecognizerSettings();
 	
 	// add amount parser to default parser group
 	sett.addParser("myAmountParser", new AmountParserSettings());
@@ -5757,22 +5913,22 @@ The following is a list of available parsers:
 - Hungarian payer Id parser - represented by [HuPayerIDParserSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/hungary/HuPayerIDParserSettings.html)
 	- used for parsing hungarian payment payer Id from OCR result
 
-### <a name="blinkOCR_results"></a> Obtaining results from BlinkOCR recognizer
+### <a name="blinkInput_results"></a> Obtaining results from BlinkInput recognizer
 
-BlinkOCR recognizer produces [BlinkOCRRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `BlinkOCRRecognitionResult` class. See the following snippet for an example:
+BlinkInput recognizer produces [BlinkInputRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkinput/BlinkInputRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `BlinkInputRecognitionResult` class. See the following snippet for an example:
 
 ```java
 @Override
 public void onScanningDone(RecognitionResults results) {
 	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
 	for(BaseRecognitionResult baseResult : dataArray) {
-		if(baseResult instanceof BlinkOCRRecognitionResult) {
-			BlinkOCRRecognitionResult result = (BlinkOCRRecognitionResult) baseResult;
+		if(baseResult instanceof BlinkInputRecognitionResult) {
+			BlinkInputRecognitionResult result = (BlinkInputRecognitionResult) baseResult;
 			
-	        // you can use getters of BlinkOCRRecognitionResult class to 
+	        // you can use getters of BlinkInputRecognitionResult class to 
 	        // obtain scanned information
 	        if(result.isValid() && !result.isEmpty()) {
-	        	 // use the parser name provided to BlinkOCRRecognizerSettings to
+	        	 // use the parser name provided to BlinkInputRecognizerSettings to
 	        	 // obtain parsed result provided by given parser
 	        	 // obtain result of "myAmountParser" in default parsing group
 		        String parsedAmount = result.getParsedResult("myAmountParser");
@@ -5819,17 +5975,17 @@ Returns the [OCR result](https://photopay.github.io/photopay-android/com/microbl
 ##### `OcrResult getOcrResult(String parserGroupName)`
 Returns the [OCR result](https://photopay.github.io/photopay-android/com/microblink/results/ocr/OcrResult.html) structure for parser group named `parserGroupName`.
 
-## <a name="blinkOCR_templating"></a> Scanning templated documents with BlinkOCR recognizer
+## <a name="detectorRecognizer_templating"></a> Scanning templated documents with DetectorRecognizer
 
-This section discusses the setting up of BlinkOCR recognizer for scanning templated documents. Please check demo app for examples.
+This section discusses the setting up of DetectorRecognizer for scanning templated documents. Please check demo app for examples.
 
 Templated document is any document which is defined by its template. Template contains the information about how the document should be detected, i.e. found on the camera scene and information about which part of document contains which useful information.
 
 ### Defining how document should be detected
 
-Before performing OCR of the document, _PhotoPay_ first needs to find its location on camera scene. In order to perform detection, you need to define [DetectorSettings](https://photopay.github.io/photopay-android/com/microblink/detectors/DetectorSettings.html) which will be used to instantiate detector which perform document detection. You can set detector settings with method [`setDetectorSettings(DetectorSettings)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognizerSettings.html#setDetectorSettings-com.microblink.detectors.DetectorSettings-). If you do not set detector settings, BlinkOCR recognizer will work in [Segment scan mode](#blinkOCR).
+Before performing OCR of the document, _PhotoPay_ first needs to find its location on camera scene. In order to perform detection, you need to define [DetectorSettings](https://photopay.github.io/photopay-android/com/microblink/detectors/DetectorSettings.html) which will be used to instantiate detector which perform document detection. You have to set detector settings when instantiating the `DetectorRecognizer` as parameter to its constructor. It is possible to update detector settings with method [`setDetectorSettings(DetectorSettings)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DetectorRecognizerSettings.html#setDetectorSettings-com.microblink.detectors.DetectorSettings-).
 
-You can find out more information about about detectors that can be used in section [Detection settings and results](#detectionSettingsAndResults).
+You can find out more information about detectors that can be used in section [Detection settings and results](#detectionSettingsAndResults).
 
 ### Defining how document should be recognized
 
@@ -5842,30 +5998,30 @@ After document has been detected, it will be recognized. This is done in followi
 	- using optimal OCR settings OCR of the dewarped image is performed
 	- finally, OCR result is parsed with each parser from that parser group
 	- if parser group with the same name as current `DecodingInfo` cannot be found, no OCR will be performed, however image will be reported via [MetadataListener](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataListener.html) if receiving of [DEWARPED images](https://photopay.github.io/photopay-android/com/microblink/image/ImageType.html#DEWARPED) has [been enabled](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html#setDewarpedImageEnabled-boolean-)
-3. if no [DocumentClassifier](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/DocumentClassifier.html) has been given with [`setDocumentClassifier(DocumentClassifier)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognizerSettings.html#setDocumentClassifier-com.microblink.recognizers.blinkocr.DocumentClassifier-), recognition is done. If `DocumentClassifier` exists, its method [`classify(BlinkOCRRecognitionResult)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/DocumentClassifier.html#classifyDocument-com.microblink.recognizers.blinkocr.BlinkOCRRecognitionResult-) is called to determine which type document has been detected
-4. If classifier returned string which is same as one used previously to [setup parser decoding infos](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognizerSettings.html#setParserDecodingInfos-com.microblink.detectors.DecodingInfo:A-java.lang.String-), then this array of `DecodingInfos` is obtained and step 2. is performed again with obtained array of `DecodingInfos`.
+3. if no [DocumentClassifier](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DocumentClassifier.html) has been given with [`setDocumentClassifier(DocumentClassifier)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DetectorRecognizerSettings.html#setDocumentClassifier-com.microblink.recognizers.detector.DocumentClassifier-), recognition is done. If `DocumentClassifier` exists, its method [`classify(DetectorRecognitionResult)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DocumentClassifier.html#classifyDocument-com.microblink.recognizers.detector.DetectorRecognitionResult-) is called to determine which type of the document has been detected
+4. If classifier returned string which is same as one used previously to [setup parser decoding infos](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DetectorRecognizerSettings.html#setParserDecodingInfos-com.microblink.detectors.DecodingInfo:A-java.lang.String-), then this array of `DecodingInfos` is obtained and step 2. is performed again with obtained array of `DecodingInfos`.
 
-### When to use [DocumentClassifier](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/DocumentClassifier.html)?
+### When to use [DocumentClassifier](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DocumentClassifier.html)?
 
 If you plan scanning several different documents of same size, for example different ID cards, which are all 85x54 mm (credit card) size, then you need to use `DocumentClassifer` to classify the type of document so correct [DecodingInfo](https://photopay.github.io/photopay-android/com/microblink/detectors/DecodingInfo.html) array can be used for obtaining relevant information. An example would be the case where you need to scan both front sides of croatian and german ID cards - the location of first and last names are not same on both documents. Therefore, you first need to classify the document based on some discriminative features.
 
 If you plan supporting only single document type, then you do not need to use `DocumentClassifier`.
 
-### How to implement [DocumentClassifier](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/DocumentClassifier.html)?
+### How to implement [DocumentClassifier](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DocumentClassifier.html)?
 
-[DocumentClassifier](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/DocumentClassifier.html) is interface that should be implemented to support classification of documents that cannot be differentiated by detector. Classification result is used to determine which set of decoding infos will be used to extract classification-specific data. This interface extends the [Parcelable](http://developer.android.com/reference/android/os/Parcelable.html) interface and the parcelization should be implemented. Besides that, following method has to be implemented:
+[DocumentClassifier](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DocumentClassifier.html) is interface that should be implemented to support classification of documents that cannot be differentiated by detector. Classification result is used to determine which set of decoding infos will be used to extract classification-specific data. This interface extends the [Parcelable](http://developer.android.com/reference/android/os/Parcelable.html) interface and the parcelization should be implemented. Besides that, following method has to be implemented:
 
-##### [`String classifyDocument(BlinkOCRRecognitionResult extractionResult)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/DocumentClassifier.html#classifyDocument-com.microblink.recognizers.blinkocr.BlinkOCRRecognitionResult-)
+##### [`String classifyDocument(DetectorRecognitionResult extractionResult)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DocumentClassifier.html#classifyDocument-com.microblink.recognizers.detector.DetectorRecognitionResult-)
 
-Based on [BlinkOCRRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognitionResult.html) which contains data extracted from decoding infos inherent to detector, classifies the document. For each document type that you want to support, returned result string has to be equal to the name of the corresponding set of [DecodingInfo](https://photopay.github.io/photopay-android/com/microblink/detectors/DecodingInfo.html) objects which are defined for that document type. Named decoding info sets should be defined using [`setParserDecodingInfos(DecodingInfo[], String)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/BlinkOCRRecognizerSettings.html#setParserDecodingInfos-com.microblink.detectors.DecodingInfo:A-java.lang.String-) method.
+Based on [DetectorRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DetectorRecognitionResult.html) which contains data extracted from decoding infos inherent to detector, classifies the document. For each document type that you want to support, returned result string has to be equal to the name of the corresponding set of [DecodingInfo](https://photopay.github.io/photopay-android/com/microblink/detectors/DecodingInfo.html) objects which are defined for that document type. Named decoding info sets should be defined using [`setParserDecodingInfos(DecodingInfo[], String)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DetectorRecognizerSettings.html#setParserDecodingInfos-com.microblink.detectors.DecodingInfo:A-java.lang.String-) method.
 
 ### How to obtain recognition results?
 
-Just like when using BlinkOCR recognizer in [segment scan mode](#blinkOCR), same principles apply here. You use the same approach as discussed in [Obtaining results from BlinkOCR recognizer](#blinkOCR_results). Just keep in mind to use parser group names that are equal to decoding info names. Check demo app that is delivered with SDK for detailed example.
+Just like when [using BlinkInput recognizer](#blinkInput), same principles apply here. You use the same approach as discussed in [Obtaining results from BlinkInput recognizer](#blinkInput_results). Just keep in mind to use parser group names that are equal to decoding info names. Check demo app that is delivered with SDK for detailed example.
 
 ## <a name="detectorRecognizer"></a> Performing detection of various documents
 
-This section will discuss how to set up a special kind of recognizer called `DetectorRecognizer` whose only purpose is to perform a detection of a document and return position of the detected document on the image or video frame.
+This section will discuss how to set up a special kind of recognizer called `DetectorRecognizer` which can be used to perform a detection of a document and return position of the detected document on the image or video frame.
 
 ### Setting up Detector Recognizer
 
@@ -6495,6 +6651,7 @@ If you are having problems with scanning certain items, undesired behaviour on s
 	* information about device that you are using - we need exact model name of the device. You can obtain that information with [this app](https://play.google.com/store/apps/details?id=com.jphilli85.deviceinfo&hl=en)
 	* please stress out that you are reporting problem related to Android version of _PhotoPay_ SDK
 
+
 ## <a name="faq"></a> Frequently asked questions and known problems
 Here is a list of frequently asked questions and solutions for them and also a list of known problems in the SDK and how to work around them.
 
@@ -6510,7 +6667,24 @@ This usually happens when you perform integration into [Eclipse project](#eclips
 
 This error happens when JVM fails to load some native method from native library. If performing integration into [Eclipse project](#eclipseIntegration) make sure you have the same version of all native libraries and java wrapper. If performing integration [into Android studio](quickIntegration) and this error happens, make sure that you have correctly combined _PhotoPay_ SDK with [third party SDKs that contain native code](#combineNativeLibraries). If this error also happens in our integration demo apps, then it may indicate a bug in the SDK that is manifested on specific device. Please report that to our [support team](http://help.microblink.com).
 
+### <a name="requiredParserDidntProduceResult"></a> While scanning, I get `Required parser 'X' from parser group 'Y' did not produce result!` in my app logs
 
+This is not an error - this is merely a debug message informing you, as the developer, that parser `X` didn’t succeed while processing the current camera frame. This can happen due to:
+
+* poor camera frame (out of focus, poor light, glare)
+    * message appears occasionally while moving the camera frame
+    * this is common behavior given the camera frame quality, focus the camera and scan in better light conditions
+* incorrect regex
+    * message appears constantly, even with a high-quality camera frame
+    * check and fix your parser regex and keep in mind that some features, like back references, match grouping and certain regex metacharacters are not supported. See [javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/regex/RegexParserSettings.html#setRegex-java.lang.String-) for more info.
+* incorrect OCR engine settings
+    * message appears often, even with a high-quality camera frame
+    * check that all letters that are referenced in your regular expression are added to [whitelist](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/engine/BlinkOCREngineOptions.html#addCharToWhitelist-com.microblink.recognizers.blinkocr.engine.BlinkOCRCharKey-)
+* if using [Templating API](#blinkOCR_templating): 
+	* if message appears often:
+		* check relative positions of your [DecodingInfos](https://photopay.github.io/photopay-android/com/microblink/detectors/DecodingInfo.html) as they might not be correctly set up
+	* if message appears occasionally:
+		* document detection has failed for the current video frame due to a poor camera frame, or document part that needs to be extracted is covered with glare
 # <a name="info"></a> Additional info
 Complete API reference can be found in [Javadoc](https://photopay.github.io/photopay-android/index.html). 
 
