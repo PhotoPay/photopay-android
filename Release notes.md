@@ -1,5 +1,24 @@
 # Release notes
 
+## 6.9.1
+
+### Minor API changes
+
+- `USDLRecognizerSettings`:
+    - removed option to scan 1D Code39 and Code128 barcodes on driver's licenses that contain those barcodes alongside PDF417 barcode
+
+### Improvements for existing features
+
+- improved `CroatianIDBackSideRecognizer`:
+    - better extraction of fields on back side of the Croatian ID card
+- improved `USDLRecognizer`:
+    - added support for new USDL standard
+- `KosovoCode128Recognizer` returns reference number for new barcode type
+
+### Bug fixes
+
+- fixed bug in QR code reading
+
 ## 6.9.0
 
 ### New features:

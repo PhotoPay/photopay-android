@@ -4954,10 +4954,6 @@ the MRZ zone. Use this method if document contains additional information (eleme
 <a id="user-content-setnullquietzoneallowedboolean-1" class="anchor" href="#setnullquietzoneallowedboolean-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>setNullQuietZoneAllowed(boolean)</code>
 </h5>
 <p>By setting this to <code>true</code>, you will allow scanning barcodes which don't have quiet zone surrounding it (e.g. text concatenated with barcode). This option can significantly increase recognition time. Default is <code>true</code>.</p>
-<h5>
-<a id="user-content-setscan1dbarcodesboolean" class="anchor" href="#setscan1dbarcodesboolean" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>setScan1DBarcodes(boolean)</code>
-</h5>
-<p>Some driver's licenses contain 1D Code39 and Code128 barcodes alongside PDF417 barcode. These barcodes usually contain only reduntant information and are therefore not read by default. However, if you feel that some information is missing, you can enable scanning of those barcodes by setting this to <code>true</code>.</p>
 <h3>
 <a id="user-content-obtaining-results-from-usdl-recognizer" class="anchor" href="#obtaining-results-from-usdl-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Obtaining results from USDL recognizer</h3>
 <p>USDL recognizer produces <a href="https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/usdl/USDLScanResult.html">USDLScanResult</a>. You can use <code>instanceof</code> operator to check if element in results array is instance of <code>USDLScanResult</code>. See the following snippet for an example:</p>

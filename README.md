@@ -5335,9 +5335,6 @@ By setting this to `true`, you will enable scanning of non-standard elements, bu
 ##### `setNullQuietZoneAllowed(boolean)`
 By setting this to `true`, you will allow scanning barcodes which don't have quiet zone surrounding it (e.g. text concatenated with barcode). This option can significantly increase recognition time. Default is `true`.
 
-##### `setScan1DBarcodes(boolean)`
-Some driver's licenses contain 1D Code39 and Code128 barcodes alongside PDF417 barcode. These barcodes usually contain only reduntant information and are therefore not read by default. However, if you feel that some information is missing, you can enable scanning of those barcodes by setting this to `true`.
-
 ### Obtaining results from USDL recognizer
 
 USDL recognizer produces [USDLScanResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/usdl/USDLScanResult.html). You can use `instanceof` operator to check if element in results array is instance of `USDLScanResult`. See the following snippet for an example:
