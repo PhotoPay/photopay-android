@@ -1,5 +1,12 @@
 # Release notes
 
+## 6.9.2
+
+### Bug fixes
+
+- fixed amount parsing from German BezahlCode
+    - 0.8 is now parsed as 80 cents, not as 8 cents anymore
+
 ## 6.9.1
 
 ### Minor API changes
