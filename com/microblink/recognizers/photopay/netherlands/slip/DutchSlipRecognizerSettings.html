@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -208,9 +208,21 @@ extends <a href="../../../../../../com/microblink/recognizers/settings/Recognize
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/netherlands/slip/DutchSlipRecognizerSettings.html#setOcrLineDetectionStartPercentage-float-">setOcrLineDetectionStartPercentage</a></span>(float&nbsp;ocrLineDetectionStartPercentage)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/netherlands/slip/DutchSlipRecognizerSettings.html#setExtractRecipientName-boolean-">setExtractRecipientName</a></span>(boolean&nbsp;extractRecipientName)</code>
+<div class="block">Defines whether recipient name should be extracted from the payslip.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/netherlands/slip/DutchSlipRecognizerSettings.html#setOcrLineDetectionStartPercentage-float-">setOcrLineDetectionStartPercentage</a></span>(float&nbsp;ocrLineDetectionStartPercentage)</code>&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/netherlands/slip/DutchSlipRecognizerSettings.html#shouldExtractRecipientName--">shouldExtractRecipientName</a></span>()</code>
+<div class="block">Returns true if recipient name is being extracted from the payslip.</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/recognizers/photopay/netherlands/slip/DutchSlipRecognizerSettings.html#writeToParcel-android.os.Parcel-int-">writeToParcel</a></span>(android.os.Parcel&nbsp;dest,
              int&nbsp;flags)</code>&nbsp;</td>
@@ -309,6 +321,35 @@ extends <a href="../../../../../../com/microblink/recognizers/settings/Recognize
             of the screen - 5% of image height is margin). The size of the
             OCR line box is always 20% of the image height and currently
             cannot be changed.</dd>
+</dl>
+</li>
+</ul>
+<a name="shouldExtractRecipientName--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>shouldExtractRecipientName</h4>
+<pre>public&nbsp;boolean&nbsp;shouldExtractRecipientName()</pre>
+<div class="block">Returns true if recipient name is being extracted from the payslip.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>true if recipient name is being extracted from the payslip.</dd>
+</dl>
+</li>
+</ul>
+<a name="setExtractRecipientName-boolean-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setExtractRecipientName</h4>
+<pre>public&nbsp;void&nbsp;setExtractRecipientName(boolean&nbsp;extractRecipientName)</pre>
+<div class="block">Defines whether recipient name should be extracted from the payslip. By default, this is turned off and
+ recipient name will not be returned.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>extractRecipientName</code> - defines whether recipient name should be extracted from the payslip.</dd>
 </dl>
 </li>
 </ul>

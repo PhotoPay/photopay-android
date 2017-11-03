@@ -1,5 +1,51 @@
 # Release notes
 
+## 6.10.0
+
+### New features:
+- added support for scanning front side of Swiss ID - use `SwissIDFrontSideRecognizerSettings`
+- added support for scanning front and back side of Polish ID - use `PolishIDFrontSideRecognizerSettings`, `PolishIDBackSideRecognizerSettings` and `PolishIDCombinedRecognizerSettings`
+- added support for reading front side of new Australian Driver's licence for state Victoria - use `AustralianDLFrontSideRecognizerSettings`
+- added support for Swiss payment QR - use `SwissQRCodeRecognizerSettings`
+- introduced `MRZFilter`:
+    - use  `MRTDRecognizerSettings` to enable it on  `MRTDRecognizer`
+    - determines whether document should be processed or it is filtered out, based on its MRZ (Machine Readable Zone)
+ - added `QuadWithSizeDetectorResult` which inherits existing `QuadDetectorResult`:
+    - it's subclasses are `DocumentDetectorResult` and `MRTDDetectorResult`
+    - returns information about physical size (height) in inches of the detected location when physical size is known
+- introduced `GlareDetector` which is by default used in all recognizers whose settings implement `GlareDetectorOptions`:
+    - when glare is detected, OCR will not be performed on the affected document position to prevent errors in the extracted data
+    - if the glare detector is used and obtaining of glare metadata is enabled in `MetadataSettings`, glare status will be reported to `MetadataListener`
+    - glare detector can be disabled by using `setDetectGlare(boolean)` method on the recognizer settings
+- introduced `MRTDSpecification` and method `setMRTDSpecifications` on `MRTDRecognizerSettings` and `MRTDDetectorSettings`:
+    - detection is limited only to document type specified with `MRTDSpecification`
+    - when `MRTDSpecifications` are set, results will be returned only for specified MRTD documents
+    - `MRTDSpecification` can be created by using `MRTDSpecification.createFromPreset`, available presets are: `MRTD_SPECIFICATION_TD1`, `MRTD_SPECIFICATION_TD2` and `MRTD_SPECIFICATION_TD3`
+- new document specification presets in `DocumentSpecificationPreset` enum:  `DOCUMENT_SPECIFICATION_PRESET_ID1_VERTICAL_CARD` and  `DOCUMENT_SPECIFICATION_PRESET_ID2_VERTICAL_CARD` - use `DocumentSpecification.createFromPreset` method to create document specification for detector
+- `EUDLRecognizer` can return face image from the driver's license
+- warning for time limited license keys when using provided activities, custom UI integration or Direct API:
+    - the goal is to prevent unintentional publishing of application to production with the demo license key that will expire
+    - warning toast can be disabled by using `EXTRAS_SHOW_TIME_LIMITED_LICENSE_KEY_WARNING` intent extra, `RecognizerView.setLicenseKeyTimeLimitedWarningEnabled` method when custom UI integration is used and `Recognizer.setLicenseKeyTimeLimitedWarningEnabled` method when Direct API is used
+  
+### Minor API changes:
+- `DocumentSpecification` does not have method `setPhysicalSizeInInches` any more
+- `DocumentDetectorResult` does not contain information about screen orientation any more
+
+### Improvements for existing features:
+- improved face detection in `DocumentFaceRecognizer`: stable detection is required to prevent returning of blurred images
+- improved reading of Malaysian `MyKad` documents:
+    - improved reading and parsing of address fields: previously recognizer was unable to read some documents because of the expected address format
+- improved reading of Malaysian visas and work permits
+- improved reading of issuing authority on Croatian ID back side
+- improved parsing of variable symbol on Czech payment slips
+- allowed scanning of Czech QR codes which have colon (:) in payment description field
+- Italian IBAN parsing now validates the BBAN check digit
+- `DutchSlipRecognizerSettings` - added option to enable or disable reading of recipient name. By default, this is turned off and recipient name will not be returned.
+
+### Bug fixes:
+- fixed returning valid data for MRZ based recognizers when not all fields outside of the MRZ have been scanned
+- fixed crash in `GermanIDBackSideRecognitionResult` caused by ProGuard obfuscation, when it is not declared in ProGuard rules to keep the result constructor
+
 ## 6.9.2
 
 ### Bug fixes

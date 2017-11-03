@@ -30,6 +30,7 @@ com.microblink.recognizers.blinkbarcode.usdl
 com.microblink.recognizers.blinkbarcode.vin
 com.microblink.recognizers.blinkbarcode.zxing
 com.microblink.recognizers.blinkid
+com.microblink.recognizers.blinkid.australia.driversLicense.front
 com.microblink.recognizers.blinkid.austria.back
 com.microblink.recognizers.blinkid.austria.combined
 com.microblink.recognizers.blinkid.austria.front
@@ -50,6 +51,9 @@ com.microblink.recognizers.blinkid.germany.passport
 com.microblink.recognizers.blinkid.malaysia
 com.microblink.recognizers.blinkid.mrtd
 com.microblink.recognizers.blinkid.mrtd.combined
+com.microblink.recognizers.blinkid.poland.back
+com.microblink.recognizers.blinkid.poland.combined
+com.microblink.recognizers.blinkid.poland.front
 com.microblink.recognizers.blinkid.romania.front
 com.microblink.recognizers.blinkid.serbia.back
 com.microblink.recognizers.blinkid.serbia.combined
@@ -64,6 +68,7 @@ com.microblink.recognizers.blinkid.slovenia.back
 com.microblink.recognizers.blinkid.slovenia.combined
 com.microblink.recognizers.blinkid.slovenia.front
 com.microblink.recognizers.blinkid.switzerland.back
+com.microblink.recognizers.blinkid.switzerland.front
 com.microblink.recognizers.blinkid.switzerland.passport
 com.microblink.recognizers.blinkid.usdl.combined
 com.microblink.recognizers.blinkinput
@@ -114,6 +119,7 @@ com.microblink.recognizers.photopay.slovakia.qr
 com.microblink.recognizers.photopay.slovakia.slip
 com.microblink.recognizers.photopay.slovenia.qr
 com.microblink.recognizers.photopay.slovenia.slip
+com.microblink.recognizers.photopay.switzerland.qr
 com.microblink.recognizers.photopay.switzerland.slip
 com.microblink.recognizers.photopay.uk.qr
 com.microblink.recognizers.photopay.uk.slip

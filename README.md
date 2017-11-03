@@ -45,6 +45,7 @@
   * [Scanning Slovenian payslips](#slovenianPayslip)
   * [Scanning Slovenian payment QR codes](#sloQRCode)
   * [Scanning Swiss payslips](#swissPayslip)
+  * [Scanning Swiss payment QR codes](#swissQRCode)
   * [Scanning UK Giro slip OCR line](#ukGiroOcrLine)
   * [Scanning UK payment QR code](#ukQRCodeLine)
   * [Scanning PDF417 barcodes](#pdf417Recognizer)
@@ -70,6 +71,9 @@
   * [Scanning back side of German ID documents](#germanID_back)
   * [Scanning front side of the older German ID documents](#germanID_oldFront)
   * [Scanning German passports](#germanPassport)
+  * [Scanning front side of Polish ID documents](#polishID_front)
+  * [Scanning back side of Polish ID documents](#polishID_back)
+  * [Scanning and combining results from front and back side of Polish ID documents](#polishIDCombined)
   * [Scanning front side of Serbian ID documents](#serbianID_front)
   * [Scanning back side of Serbian ID documents](#serbianID_back)
   * [Scanning and combining results from front and back side of Serbian ID documents](#serbianIDCombined)
@@ -79,11 +83,14 @@
   * [Scanning front side of Slovenian ID documents](#slovenianID_front)
   * [Scanning back side of Slovenian ID documents](#slovenianID_back)
   * [Scanning and combining results from front and back side of Slovenian ID documents](#slovenianIDCombined)
+  * [Scanning front side of Swiss ID documents](#swissID_front)
   * [Scanning back side of Swiss ID documents](#swissID_back)
   * [Scanning Swiss passports](#swiss_passport)
   * [Scanning front side of Romanian ID documents](#romanianID_front)
   * [Scanning US Driver's licence barcodes](#usdl)
+  * [Scanning and combining results from front and back side of US Driver's licence](#usdlCombined)
   * [Scanning EU driver's licences](#eudl)
+  * [Scanning Australian driver's licences](#australianDL)
   * [Scanning Malaysian MyKad ID documents](#myKad)
   * [Scanning Malaysian iKad documents](#iKad)
   * [Scanning front side of Singapore ID documents](#singaporeID_front)
@@ -474,6 +481,12 @@ This section will discuss possible parameters that can be sent over `Intent` for
 	```java
 	intent.putExtra(ScanActivity.EXTRAS_SET_FLAG_SECURE, true);
 	```
+	
+* <a name="intent_EXTRAS_SHOW_TIME_LIMITED_LICENSE_KEY_WARNING" href="#intent_EXTRAS_SHOW_TIME_LIMITED_LICENSE_KEY_WARNING">#</a> **`ScanActivity.EXTRAS_SHOW_TIME_LIMITED_LICENSE_KEY_WARNING`** - with this extra you can disable warning toast for time limited license key which is enabled by default. This warning is shown to prevent unintentional publishing of application to production with the demo license key that will expire. To disable `TIME_LIMITED_LICENSE_KEY_WARNING` on camera activity, use the following code snippet:
+
+	```java
+	intent.putExtra(ScanActivity.EXTRAS_SHOW_TIME_LIMITED_LICENSE_KEY_WARNING, false);
+	```
 
 * <a name="intent_EXTRAS_LICENSE_KEY" href="#intent_EXTRAS_LICENSE_KEY">#</a> **`ScanActivity.EXTRAS_LICENSE_KEY`** - with this extra you can set the license key for _PhotoPay_. You can obtain your licence key from [PhotoPay website](https://photopay.net/) or you can contact us at [http://help.microblink.com](http://help.microblink.com). Once you obtain a license key, you can set it with following snippet:
 
@@ -567,8 +580,13 @@ This section will discuss possible parameters that can be sent over `Intent` for
 
 	```java
 	intent.putExtra(SegmentScanActivity.EXTRAS_SET_FLAG_SECURE, true);
+	```
 	
+* <a name="intent_EXTRAS_SHOW_TIME_LIMITED_LICENSE_KEY_WARNING" href="#intent_EXTRAS_SHOW_TIME_LIMITED_LICENSE_KEY_WARNING">#</a> **`SegmentScanActivity.EXTRAS_SHOW_TIME_LIMITED_LICENSE_KEY_WARNING`** - with this extra you can disable warning toast for time limited license key which is enabled by default. This warning is shown to prevent unintentional publishing of application to production with the demo license key that will expire. To disable `TIME_LIMITED_LICENSE_KEY_WARNING` on camera activity, use the following code snippet:
 
+	```java
+	intent.putExtra(SegmentScanActivity.EXTRAS_SHOW_TIME_LIMITED_LICENSE_KEY_WARNING, false);
+	```
 * <a name="intent_EXTRAS_LICENSE_KEY" href="#intent_EXTRAS_LICENSE_KEY">#</a> **`ScanActivity.EXTRAS_LICENSE_KEY`** - with this extra you can set the license key for _PhotoPay_. You can obtain your licence key from [PhotoPay website](https://photopay.net/) or you can contact us at [http://help.microblink.com](http://help.microblink.com). Once you obtain a license key, you can set it with following snippet:
 
 	```java
@@ -731,6 +749,12 @@ This section will discuss possible parameters that can be sent over `Intent` for
 * <a name="intent_EXTRAS_IMAGE_LISTENER_combined" href="#intent_EXTRAS_IMAGE_LISTENER_combined">#</a> **`VerificationFlowActivity.EXTRAS_IMAGE_LISTENER`** - with this extra you can set your implementation of [ImageListener interface](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) that will obtain images that are being processed. Make sure that your [ImageListener](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) implementation correctly implements [Parcelable](https://developer.android.com/reference/android/os/Parcelable.html) interface with static [CREATOR](https://developer.android.com/reference/android/os/Parcelable.Creator.html) field. Without this, you might encounter a runtime error. For more information and example, see [Using ImageListener to obtain images that are being processed](#imageListener). By default, _ImageListener_ will receive all possible images that become available during recognition process. This will introduce performance penalty because most of those images will probably not be used so sending them will just waste time. To control which images should become available to _ImageListener_, you can also set [ImageMetadata settings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html) with `VerificationFlowActivity.EXTRAS_IMAGE_METADATA_SETTINGS`
 
 * <a name="intent_EXTRAS_IMAGE_METADATA_SETTINGS_combined" href="#intent_EXTRAS_IMAGE_METADATA_SETTINGS_combined">#</a> **`VerificationFlowActivity.EXTRAS_IMAGE_METADATA_SETTINGS`** - with this extra you can set [ImageMetadata settings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html) which will define which images will be sent to [ImageListener interface](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) given via `VerificationFlowActivity.EXTRAS_IMAGE_LISTENER` extra. If _ImageListener_ is not given via Intent, then this extra has no effect. You can see example usage of _ImageMetadata Settings_ in chapter [Obtaining various metadata with _MetadataListener_](#metadataListener) and in provided demo apps.
+
+* <a name="intent_EXTRAS_SHOW_TIME_LIMITED_LICENSE_KEY_WARNING_combined" href="#intent_EXTRAS_SHOW_TIME_LIMITED_LICENSE_KEY_WARNING_combined">#</a> **`VerificationFlowActivity.EXTRAS_SHOW_TIME_LIMITED_LICENSE_KEY_WARNING`** - with this extra you can disable warning toast for time limited license key which is enabled by default. This warning is shown to prevent unintentional publishing of application to production with the demo license key that will expire. To disable `TIME_LIMITED_LICENSE_KEY_WARNING` on camera activity, use the following code snippet:
+
+	```java
+	intent.putExtra(VerificationFlowActivity.EXTRAS_SHOW_TIME_LIMITED_LICENSE_KEY_WARNING, false);
+	```
 
 ## <a name="recognizerView"></a> Embedding `RecognizerView` into custom scan activity
 This section will discuss how to embed [RecognizerView](https://photopay.github.io/photopay-android/com/microblink/view/recognition/RecognizerView.html) into your scan activity and perform scan.
@@ -1023,6 +1047,8 @@ Second boolean parameter indicates whether or not metering areas should be autom
 You can use this method to define [metadata listener](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataListener.html) that will obtain various metadata
 from the current recognition process. Which metadata will be available depends on [metadata settings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html). For more information and examples, check demo applications and section [Obtaining various metadata with _MetadataListener_](#metadataListener).
 
+##### <a name="recognizerView_setLicenseKeyTimeLimitedWarningEnabled"></a> [`setLicenseKeyTimeLimitedWarningEnabled(boolean)`](https://photopay.github.io/photopay-android/com/microblink/view/recognition/RecognizerView.html#setLicenseKeyTimeLimitedWarningEnabled-boolean-)
+Defines whether warning toast for time limited license key will be displayed. The goal is to prevent unintentional publishing of application to production with the license key that will expire. To take effect, this method should be called before setting the license key. By default, warning is enabled. **Be careful, disable this warning only if necessary**.
 ##### <a name="recognizerView_setLicenseKey1"></a> [`setLicenseKey(String licenseKey)`](https://photopay.github.io/photopay-android/com/microblink/view/recognition/RecognizerView.html#setLicenseKey-java.lang.String-)
 This method sets the license key that will unlock all features of the native library. You can obtain your license key from [PhotoPay website](https://photopay.net/).
 
@@ -2117,6 +2143,10 @@ private RecognizerSettings[] setupSettingsArray() {
 ##### `setOcrLineDetectionStartPercentage(float)`
 With this method you can define the start location on the image where OCR line will be searched. Start location is defined as percentage of the image height. Minimum allowed value is 0.05f (almost at the top of the screen - 5% of image height is margin). Maximum allowed value is 0.75f (almost at the bottom of the screen - 5% of image height is margin). The size of the OCR line box is always 20% of the image height and currently cannot be changed. If invalid value is set, it will be automatically corrected to nearest valid value.
 
+##### `setExtractRecipientName(boolean)`
+Defines whether recipient name should be extracted from the payslip. By default, this is turned off and
+recipient name will not be returned.
+
 ### Obtaining results from Dutch payslip recognizer
 
 Dutch payslip recognizer produces [DutchSlipRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/netherlands/slip/DutchSlipRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `DutchSlipRecognitionResult` class. See the following snippet for an example:
@@ -2993,6 +3023,54 @@ Returns the scanned payment reference number.
 ##### `String getSubscriberNumber()`
 Returns the scanned payment subscriber number.
 
+## <a name="swissQRCode"></a> Scanning Swiss payment QR codes
+
+This section discusses the setting up of Swiss payment QR code recognizer and obtaining results from it.
+
+### Setting up Swiss payment QR code recognizer
+
+To activate Swiss payment QR code recognizer, you need to create [SwissQRCodeRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/switzerland/qr/SwissQRCodeRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+    SwissQRCodeRecognizerSettings sett = new SwissQRCodeRecognizerSettings();
+    
+    // now add sett to recognizer settings array that is used to configure
+    // recognition
+    return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [SwissQRCodeRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/switzerland/qr/SwissQRCodeRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/switzerland/qr/SwissQRCodeRecognizerSettings.html) for more information.**
+
+### Obtaining results from Swiss payment QR code recognizer
+
+Swiss payment QR recognizer produces [SwissQRCodeRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/switzerland/qr/SwissQRCodeRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `SwissQRCodeRecognitionResult` class. See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+    BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+    for(BaseRecognitionResult baseResult : dataArray) {
+        if(baseResult instanceof SwissQRCodeRecognitionResult) {
+            SwissQRCodeRecognitionResult result = (SwissQRCodeRecognitionResult) baseResult;
+            
+            // you can use getters of SwissQRCodeRecognitionResult class to 
+            // obtain scanned information
+            if(result.isValid() && !result.isEmpty()) {
+                int amount = result.getAmount();
+                String account = result.getIBAN();
+            } else {
+                // not all relevant data was scanned, ask user
+                // to try again
+            }
+        }
+    }
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/photopay/switzerland/qr/SwissQRCodeRecognitionResult.html).**
+
 ## <a name="ukGiroOcrLine"></a> Scanning UK Giro slip OCR line
 
 This section discusses the setting up of UK Giro slip OCR line recognizer and obtaining results from it.
@@ -3641,6 +3719,12 @@ Set this to `true` if you use [MetadataListener](https://photopay.github.io/phot
 
 ##### [`setShowFullDocument(boolean)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setShowFullDocument-boolean-)
 Set this to `true` if you use [MetadataListener](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataListener.html) and you want to obtain image containing full document containing Machine Readable Zone. The document image's orientation will be corrected. The reported ImageType will be [DEWARPED](https://photopay.github.io/photopay-android/com/microblink/image/ImageType.html#DEWARPED) and image name will be `"MRTD"`.  You will also need to enable [obtaining of dewarped images](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html#setDewarpedImageEnabled-boolean-) in [MetadataSettings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html). By default, this is turned off.
+
+##### [`setMRZFilter(MRZFilter)`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setMRZFilter-com.microblink.recognizers.blinkid.mrtd.MRZFilter-)
+Sets the [MRZFilter](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRZFilter.html) that will be used for filtering MRTD documents based on the MRZ zone result. MRZ filter should be used if only specific MRTD documents should be processed. Only recognition results from documents that are allowed by this filter can be returned.
+
+##### [`void setMRTDSpecifications(MRTDSpecification[])`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognizerSettings.html#setMRTDSpecifications-com.microblink.detectors.quad.mrtd.MRTDSpecification:A-)
+Sets array of specifications for MRTD documents that can be detected. Array must contain at least one element and at most three elements. Detection is limited only to document type specified with `MRTDSpecification`. When `MRTDSpecifications` are set, results will be returned only for specified MRTD documents. `MRTDSpecification` can be created by using `MRTDSpecification.createFromPreset` method.
 
 ### Extracting additional fields of interest from machine-readable travel documents (Templating API)
 
@@ -4638,6 +4722,177 @@ public void onScanningDone(RecognitionResults results) {
 
 **Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/germany/passport/GermanPassportRecognitionResult.html).**
 
+## <a name="polishID_front"></a> Scanning front side of Polish ID documents
+
+This section will discuss the setting up of Polish ID Front Side recognizer and obtaining results from it.
+
+### Setting up Polish ID card front side recognizer
+
+To activate Polish ID front side recognizer, you need to create [PolishIDFrontSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/poland/front/PolishIDFrontSideRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	PolishIDFrontSideRecognizerSettings sett = new PolishIDFrontSideRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [PolishIDFrontSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/poland/front/PolishIDFrontSideRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/poland/front/PolishIDFrontSideRecognizerSettings.html) for more information.**
+
+### Obtaining results from Polish ID card front side recognizer
+
+Polish ID front side recognizer produces [PolishIDFrontSideRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/poland/front/PolishIDFrontSideRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `PolishIDFrontSideRecognitionResult` class. 
+
+**Note:** `PolishIDFrontSideRecognitionResult` extends [DetectorRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DetectorRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof PolishIDFrontSideRecognitionResult) {
+			PolishIDFrontSideRecognitionResult result = (PolishIDFrontSideRecognitionResult) baseResult;
+			
+	        // you can use getters of PolishIDFrontSideRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String givenNames = result.getGivenNames();
+				String surname = result.getSurname();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/poland/front/PolishIDFrontSideRecognitionResult.html).**
+
+## <a name="polishID_back"></a> Scanning back side of Polish ID documents
+
+This section will discuss the setting up of Polish ID Back Side recognizer and obtaining results from it.
+
+### Setting up Polish ID card back side recognizer
+
+To activate Polish ID back side recognizer, you need to create [PolishIDBackSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/poland/back/PolishIDBackSideRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	PolishIDBackSideRecognizerSettings sett = new PolishIDBackSideRecognizerSettings();
+
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [PolishIDBackSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/poland/back/PolishIDBackSideRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/poland/back/PolishIDBackSideRecognizerSettings.html) for more information.**
+
+### Obtaining results from Polish ID card back side recognizer
+
+Polish ID back side recognizer produces [PolishIDBackSideRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/poland/back/PolishIDBackSideRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `PolishIDBackSideRecognitionResult` class. 
+
+**Note:** `PolishIDBackSideRecognitionResult` extends [MRTDRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof PolishIDBackSideRecognitionResult) {
+			PolishIDBackSideRecognitionResult result = (PolishIDBackSideRecognitionResult) baseResult;
+
+	        // you can use getters of PolishIDBackSideRecognitionResult class to
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String documentNumber = result.getDocumentNumber();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/poland/back/PolishIDBackSideRecognitionResult.html).**
+
+## <a name="polishIDCombined"></a> Scanning and combining results from front and back side of Polish ID documents
+
+This section will discuss the setting up of Polish ID Combined recognizer and obtaining results from it. This recognizer combines results from front and back side of the Polish ID card to boost result accuracy. Also it checks whether front and back sides are from the same ID card.
+
+### Setting up Polish ID card combined recognizer
+
+To activate Polish ID combined recognizer, you need to create [PolishIDCombinedRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/poland/combined/PolishIDCombinedRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+    PolishIDCombinedRecognizerSettings sett = new PolishIDCombinedRecognizerSettings();
+    
+    // now add sett to recognizer settings array that is used to configure
+    // recognition
+    return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [PolishIDCombinedRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/poland/combined/PolishIDCombinedRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/poland/combined/PolishIDCombinedRecognizerSettings.html) for more information.**
+
+**Note:** In your [custom UI integration](#recognizerView), you have to enable [obtaining of partial result metadata](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html#setPartialResultMetadataAllowed-boolean-) in [MetadataSettings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html) if you want to be informed when recognition of the front side is done and receive [RecognitionResultMetadata](https://photopay.github.io/photopay-android/com/microblink/metadata/RecognitionResultMetadata.html) in [onMetadataAvailable](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataListener.html) callback. When callback with [RecognitionResultMetadata](https://photopay.github.io/photopay-android/com/microblink/metadata/RecognitionResultMetadata.html) is called you can make appropriate changes in the UI to notify the user to flip document and scan back side. See the following snippet for an example:
+
+```java
+@Override
+public void onMetadataAvailable(Metadata metadata) {
+    if (metadata instanceof RecognitionResultMetadata) {
+        BaseRecognitionResult result = ((RecognitionResultMetadata) metadata).getScannedResult();
+        if (result != null && result instanceof PolishIDFrontSideRecognitionResult) {
+            // notify user to scan the back side  
+        }
+    }
+}
+```
+
+### Obtaining results from Polish ID card combined recognizer
+
+Polish ID combined recognizer produces [PolishIDCombinedRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/poland/combined/PolishIDCombinedRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `PolishIDCombinedRecognitionResult` class. 
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+    BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+    for(BaseRecognitionResult baseResult : dataArray) {
+        if(baseResult instanceof PolishIDCombinedRecognitionResult) {
+            PolishIDCombinedRecognitionResult result = (PolishIDCombinedRecognitionResult) baseResult;
+            
+            // you can use getters of PolishIDCombinedRecognitionResult class to 
+            // obtain scanned information
+            if(result.isValid() && !result.isEmpty()) {
+                if (!result.isDocumentDataMatch()) {
+                   // front and back sides are not from the same ID card
+                } else {
+                    String givenNames = result.getGivenNames();
+                    String surname = result.getSurname();
+                }
+            } else {
+                // not all relevant data was scanned, ask user
+                // to try again
+            }
+        }
+    }
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/poland/combined/PolishIDCombinedRecognitionResult.html).**
+
 ## <a name="serbianID_front"></a> Scanning front side of Serbian ID documents
 
 This section will discuss the setting up of Serbian ID Front Side recognizer and obtaining results from it.
@@ -5151,6 +5406,58 @@ public void onScanningDone(RecognitionResults results) {
 
 **Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/slovenia/combined/SlovenianIDCombinedRecognitionResult.html).**
 
+## <a name="swissID_front"></a> Scanning front side of Swiss ID documents
+
+This section will discuss the setting up of Swiss ID Front Side recognizer and obtaining results from it.
+
+### Setting up Swiss ID card front side recognizer
+
+To activate Swiss ID front side recognizer, you need to create [SwissIDFrontSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/switzerland/front/SwissIDFrontSideRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	SwissIDFrontSideRecognizerSettings sett = new SwissIDFrontSideRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [SwissIDFrontSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/switzerland/front/SwissIDFrontSideRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/switzerland/front/SwissIDFrontSideRecognizerSettings.html) for more information.**
+
+### Obtaining results from Swiss ID card front side recognizer
+
+Swiss ID front side recognizer produces [SwissIDFrontSideRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/switzerland/front/SwissIDFrontSideRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `SwissIDFrontSideRecognitionResult` class. 
+
+**Note:** `SwissIDFrontSideRecognitionResult` extends [DetectorRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DetectorRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof SwissIDFrontSideRecognitionResult) {
+			SwissIDFrontSideRecognitionResult result = (SwissIDFrontSideRecognitionResult) baseResult;
+			
+	        // you can use getters of SwissIDFrontSideRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String firstName = result.getFirstName();
+				Date dateOfBirth = result.getDateOfBirth();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/switzerland/front/SwissIDFrontSideRecognitionResult.html).**
+
 ## <a name="swissID_back"></a> Scanning back side of Swiss ID documents
 
 This section will discuss the setting up of Swiss ID Back Side recognizer and obtaining results from it.
@@ -5378,6 +5685,76 @@ This method will return the object that contains information about barcode's bin
 ##### `getField(String)`
 This method will return a parsed US Driver's licence element. The method requires a key that defines which element should be returned and returns either a string representation of that element or `null` if that element does not exist in barcode. To see a list of available keys, refer to [Keys for obtaining US Driver's license data](DriversLicenseKeys.md)
 
+## <a name="usdlCombined"></a> Scanning and combining results from front and back side of US Driver's licence
+
+This section will discuss the setting up of USDL Combined Recognizer and obtaining results from it. This recognizer can be used for obtaining face image from the document and USDL barcode scan result in two steps. First, face image should be scanned (from the front side) and then recognizer initializes itself for scanning the USDL barcode.
+
+### Setting up USDL combined recognizer
+
+To activate USDL combined recognizer, you need to create [USDLCombinedRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/usdl/combined/USDLCombinedRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+    USDLCombinedRecognizerSettings sett = new USDLCombinedRecognizerSettings();
+    
+    // now add sett to recognizer settings array that is used to configure
+    // recognition
+    return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [USDLCombinedRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/usdl/combined/USDLCombinedRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/usdl/combined/USDLCombinedRecognizerSettings.html) for more information.**
+
+**Note:** In your [custom UI integration](#recognizerView), you have to enable [obtaining of partial result metadata](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html#setPartialResultMetadataAllowed-boolean-) in [MetadataSettings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html) if you want to be informed when recognition of the face image is done and receive [RecognitionResultMetadata](https://photopay.github.io/photopay-android/com/microblink/metadata/RecognitionResultMetadata.html) in [onMetadataAvailable](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataListener.html) callback. When callback with [RecognitionResultMetadata](https://photopay.github.io/photopay-android/com/microblink/metadata/RecognitionResultMetadata.html) is called you can make appropriate changes in the UI to notify the user to scan the USDL barcode (back side of the document). See the following snippet for an example:
+
+```java
+@Override
+public void onMetadataAvailable(Metadata metadata) {
+    if (metadata instanceof RecognitionResultMetadata) {
+        BaseRecognitionResult result = ((RecognitionResultMetadata) metadata).getScannedResult();
+        if (result != null && result instanceof DocumentFaceRecognitionResult) {
+            // notify user to scan the USDL barcode
+        }
+    }
+}
+```
+
+### Obtaining results from USDL combined recognizer
+
+USDL combined recognizer produces [USDLCombinedRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/usdl/combined/USDLCombinedRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `USDLCombinedRecognitionResult` class. 
+
+**Note:** `USDLCombinedRecognitionResult` extends [USDLScanResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkbarcode/usdl/USDLScanResult.html) so make sure you take that into account when using `instanceof` operator.
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+    BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+    for(BaseRecognitionResult baseResult : dataArray) {
+        if(baseResult instanceof USDLCombinedRecognitionResult) {
+            USDLCombinedRecognitionResult result = (USDLCombinedRecognitionResult) baseResult;
+            
+            // you can use getters of USDLCombinedRecognitionResult class to 
+            // obtain scanned information
+            if(result.isValid() && !result.isEmpty()) {
+                if (!result.isDocumentDataMatch()) {
+                   // face and USDL are not from the same document
+                } else {
+                    String firstName = result.getField(USDLScanResult.kCustomerFirstName);
+                    String familyName = result.getField(USDLScanResult.kCustomerFamilyName);
+                }
+            } else {
+                // not all relevant data was scanned, ask user
+                // to try again
+            }
+        }
+    }
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/usdl/combined/USDLCombinedRecognitionResult.html).**
+
 ## <a name="eudl"></a> Scanning EU driver's licences
 
 This section discusses the setting up of EU Driver's Licence recognizer and obtaining results from it. United Kingdom's and German's driver's licenses are supported.
@@ -5415,7 +5792,10 @@ Defines if expiry date should be extracted. Default is `true`.
 Defines if address should be extracted. Default is `true`.
 
 ##### `setShowFullDocument(boolean)`
-Set this to `true` if you use [MetadataListener](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataListener.html) and you want to obtain image containing scanned document. The document image's orientation will be corrected. The reported ImageType will be [DEWARPED](https://photopay.github.io/photopay-android/com/microblink/image/ImageType.html#DEWARPED) and image name will be `"EUDL"`.  You will also need to enable [obtaining of dewarped images](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html#setDewarpedImageEnabled-boolean-) in [MetadataSettings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html). By default, this is turned off.
+Set this to `true` if you use [MetadataListener](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataListener.html) and you want to obtain image containing scanned document. The document image's orientation will be corrected. The reported ImageType will be [DEWARPED](https://photopay.github.io/photopay-android/com/microblink/image/ImageType.html#DEWARPED) and image name will be `EUDLRecognizerSettings.FULL_DOCUMENT_IMAGE`. You will also need to enable [obtaining of dewarped images](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html#setDewarpedImageEnabled-boolean-) in [MetadataSettings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html). By default, this is turned off.
+
+##### `setShowFaceImage(boolean)`
+Set this to `true` if you use [MetadataListener](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataListener.html) and you want to obtain face image from the driver's license. The face image's orientation will be corrected. The reported ImageType will be [DEWARPED](https://photopay.github.io/photopay-android/com/microblink/image/ImageType.html#DEWARPED) and image name will be `EUDLRecognizerSettings.FACE_IMAGE_NAME`. You will also need to enable [obtaining of dewarped images](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html#setDewarpedImageEnabled-boolean-) in [MetadataSettings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html). By default, this is turned off.
 
 ### Obtaining results from EU Driver's Licence recognizer
 
@@ -5481,6 +5861,58 @@ Returns document issuing authority.
 
 ##### `String getCountry()`
 Returns the country where the Driver's License has been issued or null if country is unknown.
+
+## <a name="australianDL"></a> Scanning Australian driver's licences
+
+This section will discuss the setting up of Australian Driver's Licence recognizer and obtaining results from it.
+
+### Setting up Australian Driver's Licence recognizer
+
+To activate Australian Driver's Licence recognizer, you need to create [AustralianDLFrontSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/australia/driversLicense/front/AustralianDLFrontSideRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	AustralianDLFrontSideRecognizerSettings sett = new AustralianDLFrontSideRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [AustralianDLFrontSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/australia/driversLicense/front/AustralianDLFrontSideRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/australia/driversLicense/front/AustralianDLFrontSideRecognizerSettings.html) for more information.**
+
+### Obtaining results from Australian Driver's Licence recognizer
+
+Australian Driver's Licence produces [AustralianDLFrontSideRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/australia/driversLicense/front/AustralianDLFrontSideRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `AustralianDLFrontSideRecognitionResult` class. 
+
+**Note:** `AustralianDLFrontSideRecognitionResult` extends [DetectorRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DetectorRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof AustralianDLFrontSideRecognitionResult) {
+			AustralianDLFrontSideRecognitionResult result = (AustralianDLFrontSideRecognitionResult) baseResult;
+			
+	        // you can use getters of AustralianDLFrontSideRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String fullName = result.getName();
+				String licenceNumber = result.getLicenceNumber();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/australia/driversLicense/front/AustralianDLFrontSideRecognitionResult.html).**
 
 ## <a name="myKad"></a> Scanning Malaysian MyKad ID documents
 
@@ -6207,10 +6639,6 @@ Returns the [Quadrilateral](https://photopay.github.io/photopay-android/com/micr
 ##### `double getAspectRatio()`
 
 Returns the aspect ratio of detected document. This will be equal to aspect ratio of one of `DocumentSpecification` objects given to `DocumentDetectorSettings`.
-
-##### `ScreenOrientation getScreenOrientation()`
-
-Returns the orientation of the screen that was active at the moment document was detected.
 
 ## <a name="faceDetector"></a> Detection of faces with Face Detector
 
