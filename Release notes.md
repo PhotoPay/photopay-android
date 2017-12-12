@@ -1,5 +1,21 @@
 # Release notes
 
+## 6.11.0
+
+### New features:
+
+- added support for reading back side of new Australian Driver's licence for state Victoria - use `AustralianDLBackSideRecognizerSettings`
+- added support for reading front side of Indonesian ID - use `IndonesianIDFrontRecognizerSettings`
+- added support for Malaysian visa with document code TS - use `MRTDRecognizerSettings`
+- added support for setting DPI for full document images returned by `MRTDRecognizer`, `AustralianDLFrontSideRecognizer`, `AustralianDLBackSideRecognizer` and `EUDLRecognizer`:
+    - use `setFullDocumentImageDPI` on the corresponding recognizer settings
+
+### Improvements for existing features:
+
+- `CroatianSlipRecognizer`: added support for Croatian references with models 64, 26, 35, 40, 69
+- improved parsing of payment QR codes
+- improved reading of Malaysian MyKad address
+
 ## 6.10.0
 
 ### New features:
