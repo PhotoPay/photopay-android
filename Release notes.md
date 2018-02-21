@@ -1,5 +1,13 @@
 # Release notes
 
+## 6.11.1
+
+### Bug fixes:
+
+- fixed reading of Czech QR codes which contain encoded URLs
+- fixed reading of Croatian HUB3 payment PDF417 barcodes:
+    - added support for reading barcodes whose encoding is not explicitly defined and encoding is cp1250
+
 ## 6.11.0
 
 ### New features:

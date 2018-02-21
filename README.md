@@ -197,7 +197,7 @@ However, if you still want to use Eclipse, you will need to convert AAR archive 
 5. Copy the contents of `jni` folder to `libs` folder of your Eclipse library project.
 6. Replace the `res` folder on library project with the `res` folder of the `LibPhotoPay.aar` file.
 
-You’ve already created the project that contains almost everything you need. Now let’s see how to configure your project to reference this library project.
+You?ve already created the project that contains almost everything you need. Now let?s see how to configure your project to reference this library project.
 
 1. In the project you want to use the library (henceforth, "target project") add the library project as a dependency
 2. Open the `AndroidManifest.xml` file inside `LibPhotoPay.aar` file and make sure to copy all permissions, features and activities to the `AndroidManifest.xml` file of the target project.
@@ -1530,7 +1530,7 @@ Returns the BIC of the payee's bank.
 Returns description of the payment as placed in last row of STUZZA QR code.
 
 ##### `String getPurposeCode()`
-Returns string that represents the purpose code (Geschäftscode).
+Returns string that represents the purpose code (Gesch?ftscode).
 
 ## <a name="belgiumPayslip"></a> Scanning Belgian payslips
 
@@ -6402,7 +6402,7 @@ The following is a list of available parsers:
 	- used for parsing croatian payment reference numbers from OCR result
 
 - Czech account number parser - represented by [CzAccountParserSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/czechia/CzAccountParserSettings.html)
-	- used for parsing czech account number in domestic format (národní formát)
+	- used for parsing czech account number in domestic format (n?rodn? form?t)
 - Czech variabilni symbol parser - represented by [CzVariabilniSymbolParserSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/czechia/CzVariabilniSymbolParserSettings.html)
 	- used for parsing czech variable symbol identifier
 
@@ -6877,7 +6877,7 @@ To modify an existing string, the best approach would be to:
 2. find strings.xml in `LibPhotoPay.aar` archive folder `res/values-hr`
 3. choose a string key which you want to change. For example, ```<string name="PhotoPayHelp">Help</string>```
 4. in your project create a file `strings.xml` in the folder `res/values-hr`, if it doesn't already exist
-5. create an entry in the file with the value for the string which you want. For example ```<string name="PhotoPayHelp">Pomoć</string>```
+5. create an entry in the file with the value for the string which you want. For example ```<string name="PhotoPayHelp">Pomo?</string>```
 6. repeat for all the string you wish to change
 
 # <a name="embedAAR"></a> Embedding _PhotoPay_ inside another SDK
@@ -6923,7 +6923,7 @@ At the time of writing this documentation, [Android does not have support for co
 This problem is usually solved with transitive Maven dependencies, i.e. when publishing your AAR to Maven you specify dependencies of your AAR so they are automatically referenced by app using your AAR. Besides this, there are also several other approaches you can try:
 
 - you can ask your clients to reference _PhotoPay_ in their app when integrating your SDK
-- since the problem lies in resource merging part you can try avoiding this step by ensuring your library will not use any component from _PhotoPay_ that uses resources (i.e. _ScanActivity_). You can perform [custom UI integration](#recognizerView) while taking care that all resources (strings, layouts, images, ...) used are solely from your AAR, not from _PhotoPay_. Then, in your AAR you should not reference `LibPhotoPay.aar` as gradle dependency, instead you should unzip it and copy its assets to your AAR’s assets folder, its classes.jar to your AAR’s lib folder (which should be referenced by gradle as jar dependency) and contents of its jni folder to your AAR’s src/main/jniLibs folder.
+- since the problem lies in resource merging part you can try avoiding this step by ensuring your library will not use any component from _PhotoPay_ that uses resources (i.e. _ScanActivity_). You can perform [custom UI integration](#recognizerView) while taking care that all resources (strings, layouts, images, ...) used are solely from your AAR, not from _PhotoPay_. Then, in your AAR you should not reference `LibPhotoPay.aar` as gradle dependency, instead you should unzip it and copy its assets to your AAR?s assets folder, its classes.jar to your AAR?s lib folder (which should be referenced by gradle as jar dependency) and contents of its jni folder to your AAR?s src/main/jniLibs folder.
 - Another approach is to use [3rd party unofficial gradle script](https://github.com/adwiv/android-fat-aar) that aim to combine multiple AARs into single fat AAR. Use this script at your own risk.
 
 # <a name="archConsider"></a> Processor architecture considerations
@@ -7206,7 +7206,7 @@ This error happens when JVM fails to load some native method from native library
 
 ### <a name="requiredParserDidntProduceResult"></a> While scanning, I get `Required parser 'X' from parser group 'Y' did not produce result!` in my app logs
 
-This is not an error - this is merely a debug message informing you, as the developer, that parser `X` didn’t succeed while processing the current camera frame. This can happen due to:
+This is not an error - this is merely a debug message informing you, as the developer, that parser `X` didn?t succeed while processing the current camera frame. This can happen due to:
 
 * poor camera frame (out of focus, poor light, glare)
     * message appears occasionally while moving the camera frame
