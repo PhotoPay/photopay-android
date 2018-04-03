@@ -2,7 +2,7 @@
 
 * [Android _PhotoPay_ integration instructions](#intro)
 * [Quick Start](#quickStart)
-  * [Quick start with demo app](#quickDemo)
+  * [Quick start with sample app](#quickDemo)
   * [Android studio integration instructions](#quickIntegration)
   * [Eclipse integration instructions](#eclipseIntegration)
   * [Performing your first scan](#quickScan)
@@ -61,17 +61,24 @@
   * [Scanning back side of Austrian ID documents](#ausID_back)
   * [Scanning and combining results from front and back side of Austrian ID documents](#austrianIDCombined)
   * [Scanning Austrian passports](#aus_passport)
+  * [Scanning front side of Colombian ID documents](#colombiaID_front)
+  * [Scanning back side of Colombian ID documents](#colombiaID_back)
   * [Scanning front side of Croatian ID documents](#croID_front)
   * [Scanning back side of Croatian ID documents](#croID_back)
   * [Scanning and combining results from front and back side of Croatian ID documents](#croIDCombined)
   * [Scanning front side of Czech ID documents](#czID_front)
   * [Scanning back side of Czech ID documents](#czID_back)
   * [Scanning and combining results from front and back side of Czech ID documents](#czechIDCombined)
+  * [Scanning front side of Egypt ID documents](#egyptID_front)
   * [Scanning front side of German ID documents](#germanID_front)
   * [Scanning back side of German ID documents](#germanID_back)
   * [Scanning front side of the older German ID documents](#germanID_oldFront)
   * [Scanning German passports](#germanPassport)
+  * [Scanning front side of Hong Kong ID documents](#hongKongID_front)
   * [Scanning front side of Indonesian ID documents](#indonesianID_front)
+  * [Scanning front side of Jordan ID documents](#jordanID_front)
+  * [Scanning back side of Jordan ID documents](#jordanID_back)
+  * [Scanning and combining results from front and back side of Jordan ID documents](#jordanIDCombined)
   * [Scanning front side of Polish ID documents](#polishID_front)
   * [Scanning back side of Polish ID documents](#polishID_back)
   * [Scanning and combining results from front and back side of Polish ID documents](#polishIDCombined)
@@ -93,11 +100,17 @@
   * [Scanning EU driver's licences](#eudl)
   * [Scanning front side of Australian driver's licences](#australianDL_front)
   * [Scanning back side of Australian driver's licences](#australianDL_back)
-  * [Scanning Malaysian MyKad ID documents](#myKad)
+  * [Scanning front side of New Zealand driver's licences](#newZealandDL_front)
+  * [Scanning front side of Malaysian driver's licences](#malaysiaDL_front)
+  * [Scanning front side of Malaysian MyKad ID documents](#myKad_front)
+  * [Scanning back side of Malaysian MyKad ID documents](#myKad_back)
+  * [Scanning front side of Malaysian MyTentera documents](#myTentera)
   * [Scanning Malaysian iKad documents](#iKad)
   * [Scanning front side of Singapore ID documents](#singaporeID_front)
   * [Scanning back side of Singapore ID documents](#singaporeID_back)
   * [Scanning and combining results from front and back side of Singapore ID documents](#singaporeIDCombined)
+  * [Scanning front side of United Arab Emirates ID documents](#uaeID_front)
+  * [Scanning back side of United Arab Emirates ID documents](#uaeID_back)
   * [Scanning segments with BlinkInput recognizer](#blinkInput)
   * [Scanning templated documents with DetectorRecognizer](#detectorRecognizer_templating)
   * [Performing detection of various documents](#detectorRecognizer)
@@ -152,7 +165,7 @@ You can also create your own scanning UI - you just need to embed `RecognizerVie
 
 # <a name="quickStart"></a> Quick Start
 
-## <a name="quickDemo"></a> Quick start with demo app
+## <a name="quickDemo"></a> Quick start with sample app
 
 1. Open Android Studio.
 2. In Quick Start dialog choose _Import project (Eclipse ADT, Gradle, etc.)_.
@@ -169,7 +182,7 @@ You can also create your own scanning UI - you just need to embed `RecognizerVie
 	```
 	dependencies {
 		implementation project(':LibPhotoPay')
-		implementation "com.android.support:appcompat-v7:27.0.0"
+		implementation "com.android.support:appcompat-v7:27.1.0"
 	}
 	```
 	
@@ -197,7 +210,7 @@ However, if you still want to use Eclipse, you will need to convert AAR archive 
 5. Copy the contents of `jni` folder to `libs` folder of your Eclipse library project.
 6. Replace the `res` folder on library project with the `res` folder of the `LibPhotoPay.aar` file.
 
-You?ve already created the project that contains almost everything you need. Now let?s see how to configure your project to reference this library project.
+You’ve already created the project that contains almost everything you need. Now let’s see how to configure your project to reference this library project.
 
 1. In the project you want to use the library (henceforth, "target project") add the library project as a dependency
 2. Open the `AndroidManifest.xml` file inside `LibPhotoPay.aar` file and make sure to copy all permissions, features and activities to the `AndroidManifest.xml` file of the target project.
@@ -1530,7 +1543,7 @@ Returns the BIC of the payee's bank.
 Returns description of the payment as placed in last row of STUZZA QR code.
 
 ##### `String getPurposeCode()`
-Returns string that represents the purpose code (Gesch?ftscode).
+Returns string that represents the purpose code (Geschäftscode).
 
 ## <a name="belgiumPayslip"></a> Scanning Belgian payslips
 
@@ -4179,6 +4192,107 @@ public void onScanningDone(RecognitionResults results) {
 
 **Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/austria/passport/AustrianPassportRecognitionResult.html).**
 
+## <a name="colombiaID_front"></a> Scanning front side of Colombian ID documents
+
+This section will discuss the setting up of Colombian ID Front Side recognizer and obtaining results from it.
+
+### Setting up Colombian ID card front side recognizer
+
+To activate Colombian ID front side recognizer, you need to create [ColombiaIDFrontRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/colombia/front/ColombiaIDFrontRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	ColombiaIDFrontRecognizerSettings sett = new ColombiaIDFrontRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [ColombiaIDFrontRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/colombia/front/ColombiaIDFrontRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/colombia/front/ColombiaIDFrontRecognizerSettings.html) for more information.**
+
+### Obtaining results from Colombian ID card front side recognizer
+
+Colombian ID front side recognizer produces [ColombiaIDFrontRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/colombia/front/ColombiaIDFrontRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `ColombiaIDFrontRecognitionResult` class. 
+
+**Note:** `ColombiaIDFrontRecognitionResult` extends [DetectorRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DetectorRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof ColombiaIDFrontRecognitionResult) {
+			ColombiaIDFrontRecognitionResult result = (ColombiaIDFrontRecognitionResult) baseResult;
+			
+	        // you can use getters of ColombiaIDFrontRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String firstName = result.getOwnerFirsName();
+				String lastName = result.getOwnerLastName();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/colombia/front/ColombiaIDFrontRecognitionResult.html).**
+
+## <a name="colombiaID_back"></a> Scanning back side of Colombian ID documents
+
+This section will discuss the setting up of Colombian ID Back Side recognizer and obtaining results from it.
+
+### Setting up Colombian ID card back side recognizer
+
+To activate Colombian ID back side recognizer, you need to create [ColombiaIDBackRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/colombia/back/ColombiaIDBackRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	ColombiaIDBackRecognizerSettings sett = new ColombiaIDBackRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [ColombiaIDBackRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/colombia/back/ColombiaIDBackRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/colombia/back/ColombiaIDBackRecognizerSettings.html) for more information.**
+
+### Obtaining results from Colombian ID card back side recognizer
+
+Colombian ID back side recognizer produces [ColombiaIDBackRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/colombia/back/ColombiaIDBackRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `ColombiaIDBackRecognitionResult` class. 
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof ColombiaIDBackRecognitionResult) {
+			ColombiaIDBackRecognitionResult result = (ColombiaIDBackRecognitionResult) baseResult;
+			
+	        // you can use getters of ColombiaIDBackRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String documentNumber = result.getDocumentNumber();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/colombia/back/ColombiaIDBackRecognitionResult.html).**
+
 ## <a name="croID_front"></a> Scanning front side of Croatian ID documents
 
 This section will discuss the setting up of Croatian ID Front Side recognizer and obtaining results from it.
@@ -4521,6 +4635,58 @@ public void onScanningDone(RecognitionResults results) {
 
 **Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/czechia/combined/CzechIDCombinedRecognitionResult.html).**
 
+## <a name="egyptID_front"></a> Scanning front side of Egypt ID documents
+
+This section will discuss the setting up of Egypt ID Front Side recognizer and obtaining results from it.
+
+### Setting up Egypt ID card front side recognizer
+
+To activate Egypt ID front side recognizer, you need to create [EgyptIDFrontRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/egypt/front/EgyptIDFrontRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	EgyptIDFrontRecognizerSettings sett = new EgyptIDFrontRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [EgyptIDFrontRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/egypt/front/EgyptIDFrontRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/egypt/front/EgyptIDFrontRecognizerSettings.html) for more information.**
+
+### Obtaining results from Egypt ID card front side recognizer
+
+Egypt ID front side recognizer produces [EgyptIDFrontRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/egypt/front/EgyptIDFrontRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `EgyptIDFrontRecognitionResult` class. 
+
+**Note:** `EgyptIDFrontRecognitionResult` extends [DetectorRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DetectorRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof EgyptIDFrontRecognitionResult) {
+			EgyptIDFrontRecognitionResult result = (EgyptIDFrontRecognitionResult) baseResult;
+			
+	        // you can use getters of EgyptIDFrontRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String documentNumber = result.getDocumentNumber();
+				String nationalNumber = result.getNatianalNumber();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/egypt/front/EgyptIDFrontRecognitionResult.html).**
+
 ## <a name="germanID_front"></a> Scanning front side of German ID documents
 
 This section will discuss the setting up of German ID Front Side recognizer and obtaining results from it.
@@ -4727,6 +4893,58 @@ public void onScanningDone(RecognitionResults results) {
 
 **Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/germany/passport/GermanPassportRecognitionResult.html).**
 
+## <a name="hongKongID_front"></a> Scanning front side of Hong Kong ID documents
+
+This section will discuss the setting up of Hong Kong ID Front Side recognizer and obtaining results from it.
+
+### Setting up Hong Kong ID card front side recognizer
+
+To activate Hong Kong ID front side recognizer, you need to create [HongKongIDFrontRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/hongkong/front/HongKongIDFrontRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	HongKongIDFrontRecognizerSettings sett = new HongKongIDFrontRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [HongKongIDFrontRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/hongkong/front/HongKongIDFrontRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/hongkong/front/HongKongIDFrontRecognizerSettings.html) for more information.**
+
+### Obtaining results from Hong Kong ID card front side recognizer
+
+Hong Kong ID front side recognizer produces [HongKongIDFrontRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/hongkong/front/HongKongIDFrontRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `HongKongIDFrontRecognitionResult` class. 
+
+**Note:** `HongKongIDFrontRecognitionResult` extends [DetectorRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DetectorRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof HongKongIDFrontRecognitionResult) {
+			HongKongIDFrontRecognitionResult result = (HongKongIDFrontRecognitionResult) baseResult;
+			
+	        // you can use getters of HongKongIDFrontRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String fullName = result.getOwnerFullName();
+				String sex = result.getOwnerSex();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/hongkong/front/HongKongIDFrontRecognitionResult.html).**
+
 ## <a name="indonesianID_front"></a> Scanning front side of Indonesian ID documents
 
 This section will discuss the setting up of Indonesian ID Front Side recognizer and obtaining results from it.
@@ -4778,6 +4996,177 @@ public void onScanningDone(RecognitionResults results) {
 ```
 
 **Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/indonesia/front/IndonesianIDFrontRecognitionResult.html).**
+
+## <a name="jordanID_front"></a> Scanning front side of Jordan ID documents
+
+This section will discuss the setting up of Jordan ID Front Side recognizer and obtaining results from it.
+
+### Setting up Jordan ID card front side recognizer
+
+To activate Jordan ID front side recognizer, you need to create [JordanIDFrontRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/jordan/front/JordanIDFrontRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	JordanIDFrontRecognizerSettings sett = new JordanIDFrontRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [JordanIDFrontRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/jordan/front/JordanIDFrontRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/jordan/front/JordanIDFrontRecognizerSettings.html) for more information.**
+
+### Obtaining results from Jordan ID card front side recognizer
+
+Jordan ID front side recognizer produces [JordanIDFrontRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/jordan/front/JordanIDFrontRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `JordanIDFrontRecognitionResult` class. 
+
+**Note:** `JordanIDFrontRecognitionResult` extends [DetectorRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DetectorRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof JordanIDFrontRecognitionResult) {
+			JordanIDFrontRecognitionResult result = (JordanIDFrontRecognitionResult) baseResult;
+			
+	        // you can use getters of JordanIDFrontRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String name = result.getName();
+				String nationalNumber = result.getNatianalNumber();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/jordan/front/JordanIDFrontRecognitionResult.html).**
+
+## <a name="jordanID_back"></a> Scanning back side of Jordan ID documents
+
+This section will discuss the setting up of Jordan ID Back Side recognizer and obtaining results from it.
+
+### Setting up Jordan ID card back side recognizer
+
+To activate Jordan ID back side recognizer, you need to create [JordanIDBackRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/jordan/back/JordanIDBackRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	JordanIDBackRecognizerSettings sett = new JordanIDBackRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [JordanIDBackRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/jordan/back/JordanIDBackRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/jordan/back/JordanIDBackRecognizerSettings.html) for more information.**
+
+### Obtaining results from Jordan ID card back side recognizer
+
+Jordan ID back side recognizer produces [JordanIDBackRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/jordan/back/JordanIDBackRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `JordanIDBackRecognitionResult` class. 
+
+**Note:** `JordanIDBackRecognitionResult` extends [MRTDRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof JordanIDBackRecognitionResult) {
+			JordanIDBackRecognitionResult result = (JordanIDBackRecognitionResult) baseResult;
+			
+	        // you can use getters of JordanIDBackRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String documentNumber = result.getDocumentNumber();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/jordan/back/JordanIDBackRecognitionResult.html).**
+
+## <a name="jordanIDCombined"></a> Scanning and combining results from front and back side of Jordan ID documents
+
+This section will discuss the setting up of Jordan ID Combined recognizer and obtaining results from it. This recognizer combines results from front and back side of the Jordan ID card to boost result accuracy. Also it checks whether front and back sides are from the same ID card.
+
+### Setting up Jordan ID card combined recognizer
+
+To activate Jordan ID combined recognizer, you need to create [JordanIDCombinedRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/jordan/combined/JordanIDCombinedRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+    JordanIDCombinedRecognizerSettings sett = new JordanIDCombinedRecognizerSettings();
+    
+    // now add sett to recognizer settings array that is used to configure
+    // recognition
+    return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [JordanIDCombinedRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/jordan/combined/JordanIDCombinedRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/jordan/combined/JordanIDCombinedRecognizerSettings.html) for more information.**
+
+**Note:** In your [custom UI integration](#recognizerView), you have to enable [obtaining of partial result metadata](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html#setPartialResultMetadataAllowed-boolean-) in [MetadataSettings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html) if you want to be informed when recognition of the front side is done and receive [RecognitionResultMetadata](https://photopay.github.io/photopay-android/com/microblink/metadata/RecognitionResultMetadata.html) in [onMetadataAvailable](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataListener.html) callback. When callback with [RecognitionResultMetadata](https://photopay.github.io/photopay-android/com/microblink/metadata/RecognitionResultMetadata.html) is called you can make appropriate changes in the UI to notify the user to flip document and scan back side. See the following snippet for an example:
+
+```java
+@Override
+public void onMetadataAvailable(Metadata metadata) {
+    if (metadata instanceof RecognitionResultMetadata) {
+        BaseRecognitionResult result = ((RecognitionResultMetadata) metadata).getScannedResult();
+        if (result != null && result instanceof JordanIDCombinedRecognizerSettings) {
+            // notify user to scan the back side  
+        }
+    }
+}
+```
+
+### Obtaining results from Jordan ID card combined recognizer
+
+Jordan ID combined recognizer produces [JordanIDCombinedRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/jordan/combined/JordanIDCombinedRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `JordanIDCombinedRecognitionResult` class. 
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+    BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+    for(BaseRecognitionResult baseResult : dataArray) {
+        if(baseResult instanceof JordanIDCombinedRecognitionResult) {
+            JordanIDCombinedRecognitionResult result = (JordanIDCombinedRecognitionResult) baseResult;
+            
+            // you can use getters of JordanIDCombinedRecognitionResult class to 
+            // obtain scanned information
+            if(result.isValid() && !result.isEmpty()) {
+                if (!result.isDocumentDataMatch()) {
+                   // front and back sides are not from the same ID card
+                } else {
+                    String nationalNumber = result.getNatianalNumber();
+                    String name = result.getName();
+                }
+            } else {
+                // not all relevant data was scanned, ask user
+                // to try again
+            }
+        }
+    }
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/jordan/combined/JordanIDCombinedRecognitionResult.html).**
 
 ## <a name="polishID_front"></a> Scanning front side of Polish ID documents
 
@@ -6026,17 +6415,17 @@ public void onScanningDone(RecognitionResults results) {
 
 **Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/australia/driversLicense/back/AustralianDLBackSideRecognitionResult.html).**
 
-## <a name="myKad"></a> Scanning Malaysian MyKad ID documents
+## <a name="newZealandDL_front"></a> Scanning front side of New Zealand driver's licences
 
-This section will discuss the setting up of Malaysian ID documents (MyKad) recognizer and obtaining results from it.
+This section will discuss the setting up of New Zealand Driver's Licence front side recognizer and obtaining results from it.
 
-### Setting up MyKad recognizer
+### Setting up New Zealand Driver's Licence front side recognizer
 
-To activate MyKad recognizer, you need to create [MyKadRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/MyKadRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+To activate New Zealand Driver's Licence front side recognizer, you need to create [NewZealandDLFrontRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/newzealand/driversLicense/front/NewZealandDLFrontRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
 
 ```java
 private RecognizerSettings[] setupSettingsArray() {
-	MyKadRecognizerSettings sett = new MyKadRecognizerSettings();
+	NewZealandDLFrontRecognizerSettings sett = new NewZealandDLFrontRecognizerSettings();
 	
 	// now add sett to recognizer settings array that is used to configure
 	// recognition
@@ -6044,27 +6433,125 @@ private RecognizerSettings[] setupSettingsArray() {
 }
 ```
 
-You can also tweak MyKad recognition parameters with methods of [MyKadRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/MyKadRecognizerSettings.html).
+**You can also tweak recognition parameters with methods of [NewZealandDLFrontRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/newzealand/driversLicense/front/NewZealandDLFrontRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/newzealand/driversLicense/front/NewZealandDLFrontRecognizerSettings.html) for more information.**
 
-##### `setShowFullDocument(boolean)`
-Set this to `true` if you use [MetadataListener](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataListener.html) and you want to obtain image containing scanned document. The document image's orientation will be corrected. The reported ImageType will be [`DEWARPED`](https://photopay.github.io/photopay-android/com/microblink/image/ImageType.html#DEWARPED) and image name will be equal to [`MyKadRecognizerSettings.FULL_DOCUMENT_IMAGE`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/MyKadRecognizerSettings.html#FULL_DOCUMENT_IMAGE).  You will also need to enable [obtaining of dewarped images](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html#setDewarpedImageEnabled-boolean-) in [MetadataSettings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html). By default, this is turned off.
+### Obtaining results from New Zealand Driver's Licence front side recognizer
 
-##### `setShowFaceImage(boolean)`
-Sets whether face image from ID card should be sent to [MetadataListener](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataListener.html). If enabled, image will be of type [`DEWARPED`](https://photopay.github.io/photopay-android/com/microblink/image/ImageType.html#DEWARPED), and the name of the image will be equal to [`MyKadRecognizerSettings.FACE_IMAGE_NAME`](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/MyKadRecognizerSettings.html#FACE_IMAGE_NAME), so make sure you are subscribed to receiving of [`DEWARPED`](https://photopay.github.io/photopay-android/com/microblink/image/ImageType.html#DEWARPED) images with [setDewarpedImageEnabled(true)](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html#setDewarpedImageEnabled-boolean-). By default, this is turned off.
+New Zealand Driver's Licence front side recognizer produces [NewZealandDLFrontRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/newzealand/driversLicense/front/NewZealandDLFrontRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `NewZealandDLFrontRecognitionResult ` class. 
 
-### Obtaining results from MyKad recognizer
+**Note:** `NewZealandDLFrontRecognitionResult` extends [DetectorRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DetectorRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
 
-MyKad recognizer produces [MyKadRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/MyKadRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `MyKadRecognitionResult ` class. See the following snippet for an example:
+See the following snippet for an example:
 
 ```java
 @Override
 public void onScanningDone(RecognitionResults results) {
 	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
 	for(BaseRecognitionResult baseResult : dataArray) {
-		if(baseResult instanceof MyKadRecognitionResult) {
-			MyKadRecognitionResult result = (MyKadRecognitionResult) baseResult;
+		if(baseResult instanceof NewZealandDLFrontRecognitionResult) {
+			NewZealandDLFrontRecognitionResult result = (NewZealandDLFrontRecognitionResult) baseResult;
 			
-	        // you can use getters of MyKadRecognitionResult class to 
+	        // you can use getters of NewZealandDLFrontRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String surname = result.getSurname();
+				String licenseNumber = result.getLicenseNumber();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/newzealand/driversLicense/front/NewZealandDLFrontRecognitionResult.html).**
+
+## <a name="malaysiaDL_front"></a> Scanning front side of Malaysian driver's licences
+
+This section will discuss the setting up of Malaysian Driver's Licence front side recognizer and obtaining results from it.
+
+### Setting up Malaysian Driver's Licence front side recognizer
+
+To activate Malaysian Driver's Licence front side recognizer, you need to create [MalaysianDLFrontRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/dl/front/MalaysianDLFrontRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	MalaysianDLFrontRecognizerSettings sett = new MalaysianDLFrontRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [MalaysianDLFrontRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/dl/front/MalaysianDLFrontRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/dl/front/MalaysianDLFrontRecognizerSettings.html) for more information.**
+
+### Obtaining results from Malaysian Driver's Licence front side recognizer
+
+Malaysian Driver's Licence front side recognizer produces [MalaysianDLFrontRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/dl/front/MalaysianDLFrontRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `MalaysianDLFrontRecognitionResult` class. 
+
+**Note:** `MalaysianDLFrontRecognitionResult` extends [DetectorRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DetectorRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof MalaysianDLFrontRecognitionResult) {
+			MalaysianDLFrontRecognitionResult result = (MalaysianDLFrontRecognitionResult) baseResult;
+			
+	        // you can use getters of MalaysianDLFrontRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String name = result.getName();
+				String nationality = result.getNationality();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/dl/front/MalaysianDLFrontRecognitionResult.html).**
+
+## <a name="myKad_front"></a> Scanning front side of Malaysian MyKad ID documents
+
+This section will discuss the setting up of Malaysian ID (MyKad) front side recognizer and obtaining results from it. MyKad front side recognizer can also be used for scanning front side of Malaysian MyTentera documents.
+
+### Setting up MyKad front side recognizer
+
+To activate MyKad front side recognizer, you need to create [MyKadFrontSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/mykad/front/MyKadFrontSideRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	MyKadFrontSideRecognizerSettings sett = new MyKadFrontSideRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak MyKad recognition parameters with methods of [MyKadFrontSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/mykad/front/MyKadFrontSideRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/mykad/front/MyKadFrontSideRecognizerSettings.html) for more information**.
+
+### Obtaining results from MyKad front side recognizer
+
+MyKad front side recognizer produces [MyKadFrontSideRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/mykad/front/MyKadFrontSideRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `MyKadFrontSideRecognitionResult` class. See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof MyKadFrontSideRecognitionResult) {
+			MyKadFrontSideRecognitionResult result = (MyKadFrontSideRecognitionResult) baseResult;
+			
+	        // you can use getters of MyKadFrontSideRecognitionResult class to 
 	        // obtain scanned information
 	        if(result.isValid() && !result.isEmpty()) {
 				String ownerFullName = result.getOwnerFullName();
@@ -6078,49 +6565,103 @@ public void onScanningDone(RecognitionResults results) {
 }
 ```
 
-Available getters are:
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/mykad/front/MyKadFrontSideRecognitionResult.html)**.
 
-##### `boolean isValid()`
-Returns `true` if scan result is valid, i.e. if all required elements were scanned with good confidence and can be used. If `false` is returned that indicates that some crucial data fields are missing. You should ask user to try scanning again. If you keep getting `false` (i.e. invalid data) for certain document, please report that as a bug to [help.microblink.com](http://help.microblink.com). Please include high resolution photographs of problematic documents.
+## <a name="myKad_back"></a> Scanning back side of Malaysian MyKad ID documents
 
-##### `boolean isEmpty()`
-Returns `true` if scan result is empty, i.e. nothing was scanned. All getters should return `null` for empty result.
+This section will discuss the setting up of Malaysian ID (MyKad) back side recognizer and obtaining results from it.
 
-##### `String getNRICNumber()`
-Returns the National Registration Identity Card Number.
+### Setting up MyKad back side recognizer
 
-##### `String getOwnerSex()`
-Returns the sex of the card holder. Possible values are:
+To activate MyKad back side recognizer, you need to create [MyKadBackSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/mykad/back/MyKadBackSideRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
 
-- `M` for male holder
-- `F` for female holder
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	MyKadBackSideRecognizerSettings sett = new MyKadBackSideRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
 
-##### `Date getOwnerBirthDate()`
-Returns the date of birth of card holder as [Date](https://photopay.github.io/photopay-android/com/microblink/results/date/Date.html) if it is successfully converted from date format: `YYMMDD`. Raw date string can be obtained by using **getRawBirthDate()** method. Returns `null` if date is unknown or can not be converted to [Date](https://photopay.github.io/photopay-android/com/microblink/results/date/Date.html).
+**You can also tweak MyKad recognition parameters with methods of [MyKadBackSideRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/mykad/back/MyKadBackSideRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/mykad/back/MyKadBackSideRecognizerSettings.html) for more information**.
 
-##### `String getRawBirthDate()`
-Returns owner's date of birth as raw string in format `YYMMDD`, or `null` if date is unknown.
+### Obtaining results from MyKad back side recognizer
 
-##### `String getOwnerFullName()`
-Returns the full name of the card holder.
+MyKad back side recognizer produces [MyKadBackSideRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/mykad/back/MyKadBackSideRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `MyKadBackSideRecognitionResult` class. See the following snippet for an example:
 
-##### `String getOwnerAddress()`
-Returns the full address of the card holder.
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof MyKadBackSideRecognitionResult) {
+			MyKadBackSideRecognitionResult result = (MyKadBackSideRecognitionResult) baseResult;
+			
+	        // you can use getters of MyKadBackSideRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String ownerSex = result.getSex();
+				String nricNumber = result.getNRIC();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
 
-##### `String getOwnerAddressZipCode()`
-Returns extracted ZIP code from the address of the card holder.
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/mykad/back/MyKadBackSideRecognitionResult.html)**.
 
-##### `String getOwnerAddressStreet()`
-Returns extracted street name from the address of the card holder.
+## <a name="myTentera"></a> Scanning front side of Malaysian MyTentera documents
 
-##### `String getOwnerAddressCity()`
-Returns extracted city name from the address of the card holder.
+This section will discuss the setting up of Malaysian MyTentera recognizer and obtaining results from it. MyTentera documents can also be scanned by using [MyKad front side recognizer](#myKad_front). When using MyKad front side recognizer, enable returning of army number in its recognition settings, which disabled by default.
 
-##### `String getOwnerAddressState()`
-Returns extracted state from the address of the card holder.
+### Setting up MyTentera recognizer
 
-##### `String getOwnerReligion()`
-Returns the religion of the card holder. Possible values are `ISLAM` and `null`.
+To activate MyTentera recognizer, you need to create [MyTenteraRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/tentera/MyTenteraRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	MyTenteraRecognizerSettings sett = new MyTenteraRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak MyTentera recognition parameters with methods of [MyTenteraRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/tentera/MyTenteraRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/tentera/MyTenteraRecognizerSettings.html) for more information**.
+
+### Obtaining results from MyTentera recognizer
+
+MyTentera recognizer produces [MyTenteraRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/tentera/MyTenteraRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `MyTenteraRecognitionResult` class. See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof MyTenteraRecognitionResult) {
+			MyTenteraRecognitionResult result = (MyTenteraRecognitionResult) baseResult;
+			
+	        // you can use getters of MyTenteraRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String ownerFullName = result.getOwnerFullName();
+				String nricNumber = result.getNRICNumber();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/tentera/MyTenteraRecognitionResult.html)**.
 
 ## <a name="iKad"></a> Scanning Malaysian iKad documents
 
@@ -6128,7 +6669,7 @@ This section will discuss the setting up of Malaysian iKad documents recognizer 
 
 ### Setting up iKad recognizer
 
-To activate iKad recognizer, you need to create [IKadRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/IKadRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+To activate iKad recognizer, you need to create [IKadRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/ikad/IKadRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
 
 ```java
 private RecognizerSettings[] setupSettingsArray() {
@@ -6140,11 +6681,11 @@ private RecognizerSettings[] setupSettingsArray() {
 }
 ```
 
-**You can also tweak recognition parameters with methods of [IKadRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/IKadRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/IKadRecognizerSettings.html) for more information.**
+**You can also tweak recognition parameters with methods of [IKadRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/ikad/IKadRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/ikad/IKadRecognizerSettings.html) for more information.**
 
 ### Obtaining results from iKad recognizer
 
-iKad recognizer produces [IKadRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/IKadRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `IKadRecognitionResult` class. See the following snippet for an example:
+iKad recognizer produces [IKadRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/ikad/IKadRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `IKadRecognitionResult` class. See the following snippet for an example:
 
 ```java
 @Override
@@ -6168,7 +6709,7 @@ public void onScanningDone(RecognitionResults results) {
 }
 ```
 
-**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/IKadRecognitionResult.html).**
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/malaysia/ikad/IKadRecognitionResult.html).**
 
 ## <a name="singaporeID_front"></a> Scanning front side of Singapore ID documents
 
@@ -6339,6 +6880,109 @@ public void onScanningDone(RecognitionResults results) {
 
 **Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/singapore/combined/SingaporeIDCombinedRecognitionResult.html).**
 
+## <a name="uaeID_front"></a> Scanning front side of United Arab Emirates ID documents
+
+This section will discuss the setting up of United Arab Emirates ID Front Side recognizer and obtaining results from it.
+
+### Setting up United Arab Emirates ID card front side recognizer
+
+To activate United Arab Emirates ID front side recognizer, you need to create [UnitedArabEmiratesIDFrontRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/unitedArabEmirates/front/UnitedArabEmiratesIDFrontRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	UnitedArabEmiratesIDFrontRecognizerSettings sett = new UnitedArabEmiratesIDFrontRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [UnitedArabEmiratesIDFrontRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/unitedArabEmirates/front/UnitedArabEmiratesIDFrontRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/unitedArabEmirates/front/UnitedArabEmiratesIDFrontRecognizerSettings.html) for more information.**
+
+### Obtaining results from United Arab Emirates ID card front side recognizer
+
+United Arab Emirates ID front side recognizer produces [UnitedArabEmiratesIDFrontRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/unitedArabEmirates/front/UnitedArabEmiratesIDFrontRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `UnitedArabEmiratesIDFrontRecognitionResult` class. 
+
+**Note:** `UnitedArabEmiratesIDFrontRecognitionResult` extends [DetectorRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DetectorRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof UnitedArabEmiratesIDFrontRecognitionResult) {
+			UnitedArabEmiratesIDFrontRecognitionResult result = (UnitedArabEmiratesIDFrontRecognitionResult) baseResult;
+			
+	        // you can use getters of UnitedArabEmiratesIDFrontRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String name = result.getName();
+				String nationality = result.getNationality();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/unitedArabEmirates/front/UnitedArabEmiratesIDFrontRecognitionResult.html).**
+
+## <a name="uaeID_back"></a> Scanning back side of United Arab Emirates ID documents
+
+This section will discuss the setting up of United Arab Emirates ID Back Side recognizer and obtaining results from it.
+
+### Setting up United Arab Emirates ID card back side recognizer
+
+To activate United Arab Emirates ID back side recognizer, you need to create [UnitedArabEmiratesIDBackRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/unitedArabEmirates/back/UnitedArabEmiratesIDBackRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	UnitedArabEmiratesIDBackRecognizerSettings sett = new UnitedArabEmiratesIDBackRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [UnitedArabEmiratesIDBackRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/unitedArabEmirates/back/UnitedArabEmiratesIDBackRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/unitedArabEmirates/back/UnitedArabEmiratesIDBackRecognizerSettings.html) for more information.**
+
+### Obtaining results from United Arab Emirates ID card back side recognizer
+
+United Arab Emirates ID back side recognizer produces [UnitedArabEmiratesIDBackRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/unitedArabEmirates/back/UnitedArabEmiratesIDBackRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `UnitedArabEmiratesIDBackRecognitionResult` class. 
+
+**Note:** `UnitedArabEmiratesIDBackRecognitionResult` extends [MRTDRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/mrtd/MRTDRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof UnitedArabEmiratesIDBackRecognitionResult) {
+			UnitedArabEmiratesIDBackRecognitionResult result = (UnitedArabEmiratesIDBackRecognitionResult) baseResult;
+			
+	        // you can use getters of UnitedArabEmiratesIDBackRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String firstName = result.getSecondaryId();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/unitedArabEmirates/back/UnitedArabEmiratesIDBackRecognitionResult.html).**
+
 ## <a name="blinkInput"></a> Scanning segments with BlinkInput recognizer
 
 This section discusses the setting up of BlinkInput recognizer and obtaining results from it. You should also check the demo for example.
@@ -6402,7 +7046,7 @@ The following is a list of available parsers:
 	- used for parsing croatian payment reference numbers from OCR result
 
 - Czech account number parser - represented by [CzAccountParserSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/czechia/CzAccountParserSettings.html)
-	- used for parsing czech account number in domestic format (n?rodn? form?t)
+	- used for parsing czech account number in domestic format (národní formát)
 - Czech variabilni symbol parser - represented by [CzVariabilniSymbolParserSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkocr/parser/czechia/CzVariabilniSymbolParserSettings.html)
 	- used for parsing czech variable symbol identifier
 
@@ -6877,7 +7521,7 @@ To modify an existing string, the best approach would be to:
 2. find strings.xml in `LibPhotoPay.aar` archive folder `res/values-hr`
 3. choose a string key which you want to change. For example, ```<string name="PhotoPayHelp">Help</string>```
 4. in your project create a file `strings.xml` in the folder `res/values-hr`, if it doesn't already exist
-5. create an entry in the file with the value for the string which you want. For example ```<string name="PhotoPayHelp">Pomo?</string>```
+5. create an entry in the file with the value for the string which you want. For example ```<string name="PhotoPayHelp">Pomoć</string>```
 6. repeat for all the string you wish to change
 
 # <a name="embedAAR"></a> Embedding _PhotoPay_ inside another SDK
@@ -6923,7 +7567,7 @@ At the time of writing this documentation, [Android does not have support for co
 This problem is usually solved with transitive Maven dependencies, i.e. when publishing your AAR to Maven you specify dependencies of your AAR so they are automatically referenced by app using your AAR. Besides this, there are also several other approaches you can try:
 
 - you can ask your clients to reference _PhotoPay_ in their app when integrating your SDK
-- since the problem lies in resource merging part you can try avoiding this step by ensuring your library will not use any component from _PhotoPay_ that uses resources (i.e. _ScanActivity_). You can perform [custom UI integration](#recognizerView) while taking care that all resources (strings, layouts, images, ...) used are solely from your AAR, not from _PhotoPay_. Then, in your AAR you should not reference `LibPhotoPay.aar` as gradle dependency, instead you should unzip it and copy its assets to your AAR?s assets folder, its classes.jar to your AAR?s lib folder (which should be referenced by gradle as jar dependency) and contents of its jni folder to your AAR?s src/main/jniLibs folder.
+- since the problem lies in resource merging part you can try avoiding this step by ensuring your library will not use any component from _PhotoPay_ that uses resources (i.e. _ScanActivity_). You can perform [custom UI integration](#recognizerView) while taking care that all resources (strings, layouts, images, ...) used are solely from your AAR, not from _PhotoPay_. Then, in your AAR you should not reference `LibPhotoPay.aar` as gradle dependency, instead you should unzip it and copy its assets to your AAR’s assets folder, its classes.jar to your AAR’s lib folder (which should be referenced by gradle as jar dependency) and contents of its jni folder to your AAR’s src/main/jniLibs folder.
 - Another approach is to use [3rd party unofficial gradle script](https://github.com/adwiv/android-fat-aar) that aim to combine multiple AARs into single fat AAR. Use this script at your own risk.
 
 # <a name="archConsider"></a> Processor architecture considerations
@@ -7206,7 +7850,7 @@ This error happens when JVM fails to load some native method from native library
 
 ### <a name="requiredParserDidntProduceResult"></a> While scanning, I get `Required parser 'X' from parser group 'Y' did not produce result!` in my app logs
 
-This is not an error - this is merely a debug message informing you, as the developer, that parser `X` didn?t succeed while processing the current camera frame. This can happen due to:
+This is not an error - this is merely a debug message informing you, as the developer, that parser `X` didn’t succeed while processing the current camera frame. This can happen due to:
 
 * poor camera frame (out of focus, poor light, glare)
     * message appears occasionally while moving the camera frame

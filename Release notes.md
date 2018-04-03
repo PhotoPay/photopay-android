@@ -1,5 +1,61 @@
 # Release notes
 
+## 6.12.0
+
+### New features:
+
+- added support for reading front side of Egypt ID - use `EgyptIDFrontRecognizerSettings` 
+- added support for reading front and back side of Jordan ID - use `JordanIDFrontRecognizerSettings`,  `JordanIDBackRecognizerSettings` and `JordanIDCombinedRecognizerSettings`
+- added support for reading front side of Hong Kong ID - use `HongKongIDFrontRecognizerSettings` 
+- added support for reading front side of Malaysian drivers license - use `MalaysianDLFrontRecognizerSettings`
+- added support for reading front and back side of Colombian ID - use `ColombiaIDFrontRecognizerSettings` and `ColombiaIDBackRecognizerSettings`
+- added support for reading front and back side of United Arab Emirates ID - use `UnitedArabEmiratesIDFrontRecognizerSettings` and `UnitedArabEmiratesIDBackRecognizerSettings` 
+- added support for reading front side of New Zealand drivers license - use `NewZealandDLFrontRecognizerSettings`
+- added support for reading back side of Malaysian MyKad - use `MyKadBackSideRecognizerSettings` 
+- added support for reading Malaysian MyTentera documents - use `MyTenteraRecognizerSettings`
+- added support for reading Malaysian MyTentera documents with MyKad recognizer - use `MyKadFrontSideRecognizerSettings` and enable reading of army number 
+- added support for setting DPI for full document images returned by `MyKadFrontSideRecognizer`, `MyKadBackSideRecognizer`, `MyTenteraRecognizer` and `IKadRecognizer`:
+    - use `setFullDocumentImageDPI` on the corresponding recognizer settings
+  
+### Minor API changes:
+
+- renamed `MyKadRecognizerSettings` and `MyKadRecognitionResult` to `MyKadFrontSideRecognizerSettings` and `MyKadFrontSideRecognitionResult` and moved them to `com.microblink.recognizers.blinkid.malaysia.mykad.front` package
+- moved `IKadRecognizerSettings` and `IKadRecognitionResult` to `com.microblink.recognizers.blinkid.malaysia.ikad` package
+
+### Improvements for existing features:
+
+- improved `USDLRecognizer`:
+    - better parsing of the USDL barcode content
+    - fixed extraction of expiry date from magnetic stripe USDL subtype
+- improved `VinParser`:
+    - better extraction of specific VIN numbers
+- improved `SlovakSlipRecognizer`:
+    - better reading of payer name and address
+- improved `SlovenianSlipRecognizer`:
+    - better reading of amount, reference and BIC from Slovenian payment slip
+- improved `MRTDRecognizer`:
+    - added support for parsing Malaysian Passport IMM13P MRZ type, reading of special characters must be enabled by using `MRTDRecognizerSettings.setAllowSpecialCharacters`
+    - enabled reading of MRZ with '-' characters (non-default setting), to enable this use method `MRTDRecognizerSettings.setAllowSpecialCharacters`
+    - improved reading of Belgium ID MRZ OPT2 field
+    - added support for reading Belgium MRZ with partial date of birth - `MRTDRecognizerSettings.setAllowUnverifiedResults()` must be set to `true` 
+    - added support for reading Kenya MRZ - `MRTDRecognizerSettings.setAllowUnverifiedResults()` must be set to `true` 
+- improved `MyKadFrontSideRecognizer` and `MyTenteraRecognizer`:
+    - better reading of name field
+    - better reading of address field
+- when setting DPI for full document image in concrete recognizer settings that has method `setFullDocumentImageDPI`, exception is thrown if DPI value is not in the expected range `[100, 400]`
+- improved `AustralianDLFrontSideRecognizer`:
+    - improved reading of names and addresses
+    - added support for reading first names with more words
+- improved `SingaporeIDFrontRecognizer`:
+    - tuned ID card data extraction positions
+- improved Malaysian `IKadRecognizer`:
+    - better reading of date of expiry and employer fields
+
+### Bug fixes:
+
+- fixed a crash in Templating API caused by using a `MultiDetector` with `DetectorRecognizer`
+- fixed rare crash in `MRTDRecognizer`
+
 ## 6.11.1
 
 ### Bug fixes:
