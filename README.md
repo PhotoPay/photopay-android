@@ -74,6 +74,7 @@
   * [Scanning back side of German ID documents](#germanID_back)
   * [Scanning front side of the older German ID documents](#germanID_oldFront)
   * [Scanning German passports](#germanPassport)
+  * [Scanning and combining results from front and back side of German ID documents](#germanIDCombined)
   * [Scanning front side of Hong Kong ID documents](#hongKongID_front)
   * [Scanning front side of Indonesian ID documents](#indonesianID_front)
   * [Scanning front side of Jordan ID documents](#jordanID_front)
@@ -101,6 +102,7 @@
   * [Scanning front side of Australian driver's licences](#australianDL_front)
   * [Scanning back side of Australian driver's licences](#australianDL_back)
   * [Scanning front side of New Zealand driver's licences](#newZealandDL_front)
+  * [Scanning front side of Sweden driver's licences](#swedenDL_front)
   * [Scanning front side of Malaysian driver's licences](#malaysiaDL_front)
   * [Scanning front side of Malaysian MyKad ID documents](#myKad_front)
   * [Scanning back side of Malaysian MyKad ID documents](#myKad_back)
@@ -182,7 +184,7 @@ You can also create your own scanning UI - you just need to embed `RecognizerVie
 	```
 	dependencies {
 		implementation project(':LibPhotoPay')
-		implementation "com.android.support:appcompat-v7:27.1.0"
+		implementation "com.android.support:appcompat-v7:27.1.1"
 	}
 	```
 	
@@ -510,14 +512,7 @@ This section will discuss possible parameters that can be sent over `Intent` for
 	intent.putExtra(ScanActivity.EXTRAS_LICENSE_KEY, "Enter_License_Key_Here");
 	```
 	
-	Licence key is bound to package name of your application. For example, if you have licence key that is bound to `my.namespace` app package, you cannot use the same key in other applications. However, if you purchase Premium licence, you will get licence key that can be used in multiple applications. This licence key will then not be bound to package name of the app. Instead, it will be bound to the licencee string that needs to be provided to the library together with the licence key. To provide licencee string, use the `EXTRAS_LICENSEE` intent extra like this:
-
-	```java
-	// set the license key
-	intent.putExtra(ScanActivity.EXTRAS_LICENSE_KEY, "Enter_License_Key_Here");
-	intent.putExtra(ScanActivity.EXTRAS_LICENSEE, "Enter_Licensee_Here");
-	```
-
+	Licence key is bound to package name of your application. For example, if you have licence key that is bound to `my.namespace` app package, you cannot use the same key in other applications.
 * <a name="intent_EXTRAS_SHOW_OCR_RESULT" href="#intent_EXTRAS_SHOW_OCR_RESULT">#</a> **`ScanActivity.EXTRAS_SHOW_OCR_RESULT`** - with this extra you can define whether OCR result should be drawn on camera preview as it arrives. This is enabled by default, to disable it, use the following snippet:
 
 	```java
@@ -609,14 +604,7 @@ This section will discuss possible parameters that can be sent over `Intent` for
 	intent.putExtra(ScanActivity.EXTRAS_LICENSE_KEY, "Enter_License_Key_Here");
 	```
 	
-	Licence key is bound to package name of your application. For example, if you have licence key that is bound to `my.namespace` app package, you cannot use the same key in other applications. However, if you purchase Premium licence, you will get licence key that can be used in multiple applications. This licence key will then not be bound to package name of the app. Instead, it will be bound to the licencee string that needs to be provided to the library together with the licence key. To provide licencee string, use the `EXTRAS_LICENSEE` intent extra like this:
-
-	```java
-	// set the license key
-	intent.putExtra(ScanActivity.EXTRAS_LICENSE_KEY, "Enter_License_Key_Here");
-	intent.putExtra(ScanActivity.EXTRAS_LICENSEE, "Enter_Licensee_Here");
-	```
-
+	Licence key is bound to package name of your application. For example, if you have licence key that is bound to `my.namespace` app package, you cannot use the same key in other applications.
 * <a name="intent_EXTRAS_SHOW_OCR_RESULT" href="#intent_EXTRAS_SHOW_OCR_RESULT">#</a> **`ScanActivity.EXTRAS_SHOW_OCR_RESULT`** - with this extra you can define whether OCR result should be drawn on camera preview as it arrives. This is enabled by default, to disable it, use the following snippet:
 
 	```java
@@ -753,13 +741,7 @@ This section will discuss possible parameters that can be sent over `Intent` for
 	intent.putExtra(VerificationFlowActivity.EXTRAS_LICENSE_KEY, "Enter_License_Key_Here");
 	```
 	
-	Licence key is bound to package name of your application. For example, if you have licence key that is bound to `my.namespace` app package, you cannot use the same key in other applications. However, if you purchase Premium licence, you will get licence key that can be used in multiple applications. This licence key will then not be bound to package name of the app. Instead, it will be bound to the licencee string that needs to be provided to the library together with the licence key. To provide licencee string, use the `EXTRAS_LICENSEE` intent extra like this:
-
-	```java
-	// set the license key
-	intent.putExtra(VerificationFlowActivity.EXTRAS_LICENSE_KEY, "Enter_License_Key_Here");
-	intent.putExtra(VerificationFlowActivity.EXTRAS_LICENSEE, "Enter_Licensee_Here");
-	```
+	Licence key is bound to package name of your application. For example, if you have licence key that is bound to `my.namespace` app package, you cannot use the same key in other applications.
 
 * <a name="intent_EXTRAS_IMAGE_LISTENER_combined" href="#intent_EXTRAS_IMAGE_LISTENER_combined">#</a> **`VerificationFlowActivity.EXTRAS_IMAGE_LISTENER`** - with this extra you can set your implementation of [ImageListener interface](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) that will obtain images that are being processed. Make sure that your [ImageListener](https://photopay.github.io/photopay-android/com/microblink/image/ImageListener.html) implementation correctly implements [Parcelable](https://developer.android.com/reference/android/os/Parcelable.html) interface with static [CREATOR](https://developer.android.com/reference/android/os/Parcelable.Creator.html) field. Without this, you might encounter a runtime error. For more information and example, see [Using ImageListener to obtain images that are being processed](#imageListener). By default, _ImageListener_ will receive all possible images that become available during recognition process. This will introduce performance penalty because most of those images will probably not be used so sending them will just waste time. To control which images should become available to _ImageListener_, you can also set [ImageMetadata settings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.ImageMetadataSettings.html) with `VerificationFlowActivity.EXTRAS_IMAGE_METADATA_SETTINGS`
 
@@ -1066,9 +1048,6 @@ from the current recognition process. Which metadata will be available depends o
 Defines whether warning toast for time limited license key will be displayed. The goal is to prevent unintentional publishing of application to production with the license key that will expire. To take effect, this method should be called before setting the license key. By default, warning is enabled. **Be careful, disable this warning only if necessary**.
 ##### <a name="recognizerView_setLicenseKey1"></a> [`setLicenseKey(String licenseKey)`](https://photopay.github.io/photopay-android/com/microblink/view/recognition/RecognizerView.html#setLicenseKey-java.lang.String-)
 This method sets the license key that will unlock all features of the native library. You can obtain your license key from [PhotoPay website](https://photopay.net/).
-
-##### <a name="recognizerView_setLicenseKey2"></a> [`setLicenseKey(String licenseKey, String licensee)`](https://photopay.github.io/photopay-android/com/microblink/view/recognition/RecognizerView.html#setLicenseKey-java.lang.String-java.lang.String-)
-Use this method to set a license key that is bound to a licensee, not the application package name. You will use this method when you obtain a license key that allows you to use _PhotoPay_ SDK in multiple applications. You can obtain your license key from [PhotoPay website](https://photopay.net/).
 
 # <a name="directAPI"></a> Using direct API for recognition of Android Bitmaps
 
@@ -4893,6 +4872,73 @@ public void onScanningDone(RecognitionResults results) {
 
 **Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/germany/passport/GermanPassportRecognitionResult.html).**
 
+## <a name="germanIDCombined"></a> Scanning and combining results from front and back side of German ID documents
+
+This section will discuss the setting up of German ID Combined recognizer and obtaining results from it. This recognizer combines results from front and back side of the German ID card to boost result accuracy. Also it checks whether front and back sides are from the same ID card.
+
+### Setting up German ID card combined recognizer
+
+To activate German ID combined recognizer, you need to create [GermanIDCombinedRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/germany/combined/GermanIDCombinedRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+    GermanIDCombinedRecognizerSettings sett = new GermanIDCombinedRecognizerSettings();
+    
+    // now add sett to recognizer settings array that is used to configure
+    // recognition
+    return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [GermanIDCombinedRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/germany/combined/GermanIDCombinedRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/germany/combined/GermanIDCombinedRecognizerSettings.html) for more information.**
+
+**Note:** In your [custom UI integration](#recognizerView), you have to enable [obtaining of partial result metadata](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html#setPartialResultMetadataAllowed-boolean-) in [MetadataSettings](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataSettings.html) if you want to be informed when recognition of the front side is done and receive [RecognitionResultMetadata](https://photopay.github.io/photopay-android/com/microblink/metadata/RecognitionResultMetadata.html) in [onMetadataAvailable](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataListener.html) callback. When callback with [RecognitionResultMetadata](https://photopay.github.io/photopay-android/com/microblink/metadata/RecognitionResultMetadata.html) is called you can make appropriate changes in the UI to notify the user to flip document and scan back side. See the following snippet for an example:
+
+```java
+@Override
+public void onMetadataAvailable(Metadata metadata) {
+    if (metadata instanceof RecognitionResultMetadata) {
+        BaseRecognitionResult result = ((RecognitionResultMetadata) metadata).getScannedResult();
+        // do something with the result
+        // notify user to scan the back side 
+    }
+}
+```
+
+### Obtaining results from German ID card combined recognizer
+
+German ID combined recognizer produces [GermanIDCombinedRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/germany/combined/GermanIDCombinedRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `GermanIDCombinedRecognitionResult` class. 
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+    BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+    for(BaseRecognitionResult baseResult : dataArray) {
+        if(baseResult instanceof GermanIDCombinedRecognitionResult) {
+            GermanIDCombinedRecognitionResult result = (GermanIDCombinedRecognitionResult) baseResult;
+            
+            // you can use getters of GermanIDCombinedRecognitionResult class to 
+            // obtain scanned information
+            if(result.isValid() && !result.isEmpty()) {
+                if (!result.isDocumentDataMatch()) {
+                   // front and back sides are not from the same ID card
+                } else {
+                    String firstName = result.getFirstName();
+                    String lastName = result.getLastName();
+                }
+            } else {
+                // not all relevant data was scanned, ask user
+                // to try again
+            }
+        }
+    }
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/germany/combined/GermanIDCombinedRecognitionResult.html).**
+
 ## <a name="hongKongID_front"></a> Scanning front side of Hong Kong ID documents
 
 This section will discuss the setting up of Hong Kong ID Front Side recognizer and obtaining results from it.
@@ -6467,6 +6513,58 @@ public void onScanningDone(RecognitionResults results) {
 
 **Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/newzealand/driversLicense/front/NewZealandDLFrontRecognitionResult.html).**
 
+## <a name="swedenDL_front"></a> Scanning front side of Sweden driver's licences
+
+This section will discuss the setting up of Sweden Driver's Licence front side recognizer and obtaining results from it.
+
+### Setting up Sweden Driver's Licence front side recognizer
+
+To activate Sweden Driver's Licence front side recognizer, you need to create [SwedenDLFrontRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/sweden/dl/SwedenDLFrontRecognizerSettings.html) and add it to `RecognizerSettings` array. You can use the following code snippet to perform that:
+
+```java
+private RecognizerSettings[] setupSettingsArray() {
+	SwedenDLFrontRecognizerSettings sett = new SwedenDLFrontRecognizerSettings();
+	
+	// now add sett to recognizer settings array that is used to configure
+	// recognition
+	return new RecognizerSettings[] { sett };
+}
+```
+
+**You can also tweak recognition parameters with methods of [SwedenDLFrontRecognizerSettings](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/sweden/dl/SwedenDLFrontRecognizerSettings.html). Check [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/sweden/dl/SwedenDLFrontRecognizerSettings.html) for more information.**
+
+### Obtaining results from Sweden Driver's Licence front side recognizer
+
+Sweden Driver's Licence front side recognizer produces [SwedenDLFrontRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/sweden/dl/SwedenDLFrontRecognitionResult.html). You can use `instanceof` operator to check if element in results array is instance of `SwedenDLFrontRecognitionResult` class. 
+
+**Note:** `SwedenDLFrontRecognitionResult` extends [DetectorRecognitionResult](https://photopay.github.io/photopay-android/com/microblink/recognizers/detector/DetectorRecognitionResult.html) so make sure you take that into account when using `instanceof` operator.
+
+See the following snippet for an example:
+
+```java
+@Override
+public void onScanningDone(RecognitionResults results) {
+	BaseRecognitionResult[] dataArray = results.getRecognitionResults();
+	for(BaseRecognitionResult baseResult : dataArray) {
+		if(baseResult instanceof SwedenDLFrontRecognitionResult) {
+			SwedenDLFrontRecognitionResult result = (SwedenDLFrontRecognitionResult) baseResult;
+			
+	        // you can use getters of SwedenDLFrontRecognitionResult class to 
+	        // obtain scanned information
+	        if(result.isValid() && !result.isEmpty()) {
+				String surname = result.getSurname();
+				String licenceNumber = result.getLicenceNumber();
+	        } else {
+	        	// not all relevant data was scanned, ask user
+	        	// to try again
+	        }
+		}
+	}
+}
+```
+
+**Available getters are documented in [Javadoc](https://photopay.github.io/photopay-android/com/microblink/recognizers/blinkid/sweden/dl/SwedenDLFrontRecognitionResult.html).**
+
 ## <a name="malaysiaDL_front"></a> Scanning front side of Malaysian driver's licences
 
 This section will discuss the setting up of Malaysian Driver's Licence front side recognizer and obtaining results from it.
@@ -7533,33 +7631,10 @@ When creating your own SDK which depends on _PhotoPay_, you should consider foll
 
 ## <a name="licensingModel"></a> _PhotoPay_ licensing model
 
-_PhotoPay_ supports two types of licenses: 
-
-- application licenses
-- library licenses.
-
 ### <a name="appLicence"></a> Application licenses
 
-Application license keys are bound to application's [package name](http://tools.android.com/tech-docs/new-build-system/applicationid-vs-packagename). This means that each app must have its own license key in order to be able to use _PhotoPay_. This model is appropriate when integrating _PhotoPay_ directly into app, however if you are creating SDK that depends on _PhotoPay_, you would need separate _PhotoPay_ license key for each of your clients using your SDK. This is not practical, so you should contact us at [help.microblink.com](http://help.microblink.com) and we can provide you a library license key.
+Application license keys are bound to application's [package name](http://tools.android.com/tech-docs/new-build-system/applicationid-vs-packagename). This means that each app must have its own license key in order to be able to use _PhotoPay_. This model is appropriate when integrating _PhotoPay_ directly into app, however if you are creating SDK that depends on _PhotoPay_, you would need separate _PhotoPay_ license key for each of your clients using your SDK.
 
-### <a name="libLicence"></a> Library licenses
-
-Library license keys are bound to licensee name. You will provide your licensee name with your inquiry for library license key. Unlike application license keys, library license keys must be set together with licensee name:
-
-- when using _ScanActivity_, you should provide licensee name with extra `ScanActivity.EXTRAS_LICENSEE`, for example:
-
-	```java
-	// set the license key
-	intent.putExtra(ScanActivity.EXTRAS_LICENSE_KEY, "Enter_License_Key_Here");
-	intent.putExtra(ScanActivity.EXTRAS_LICENSEE, "Enter_Licensee_Here");
-	```
-	
-- when using [RecognizerView](#recognizerView), you should use [method that accepts both license key and licensee](#recognizerView_setLicenseKey2), for example:
-
-	```java
-	mRecognizerView.setLicenseKey("Enter_License_Key_Here", "Enter_Licensee_Here");
-	```
-	
 ## <a name="sdkIntegrationIntoApp"></a> Ensuring the final app gets all resources required by _PhotoPay_
 
 At the time of writing this documentation, [Android does not have support for combining multiple AAR libraries into single fat AAR](https://stackoverflow.com/questions/20700581/android-studio-how-to-package-single-aar-from-multiple-library-projects/20715155#20715155). The problem is that resource merging is done while building application, not while building AAR, so application must be aware of all its dependencies. **There is no official Android way of "hiding" third party AAR within your AAR.**
