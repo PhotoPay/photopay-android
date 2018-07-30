@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":9,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10};
+var methods = {"i0":9,"i1":9,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -132,7 +132,7 @@ implements android.os.Parcelable, <a href="../../../../com/microblink/results/Re
 <!--   -->
 </a>
 <h3>Nested classes/interfaces inherited from interface&nbsp;android.os.Parcelable</h3>
-<code>android.os.Parcelable.ClassLoaderCreator&lt;T&gt;, android.os.Parcelable.Creator&lt;T&gt;</code></li>
+<code>android.os.Parcelable.ClassLoaderCreator, android.os.Parcelable.Creator</code></li>
 </ul>
 </li>
 </ul>
@@ -149,7 +149,7 @@ implements android.os.Parcelable, <a href="../../../../com/microblink/results/Re
 <th class="colLast" scope="col">Field and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>static android.os.Parcelable.Creator&lt;<a href="../../../../com/microblink/results/date/DateResult.html" title="class in com.microblink.results.date">DateResult</a>&gt;</code></td>
+<td class="colFirst"><code>static android.os.Parcelable.Creator</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/microblink/results/date/DateResult.html#CREATOR">CREATOR</a></span></code>&nbsp;</td>
 </tr>
 </table>
@@ -220,6 +220,10 @@ implements android.os.Parcelable, <a href="../../../../com/microblink/results/Re
 </td>
 </tr>
 <tr id="i7" class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/microblink/results/date/DateResult.html#toString--">toString</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/microblink/results/date/DateResult.html#writeToParcel-android.os.Parcel-int-">writeToParcel</a></span>(android.os.Parcel&nbsp;parcel,
              int&nbsp;i)</code>&nbsp;</td>
@@ -230,7 +234,7 @@ implements android.os.Parcelable, <a href="../../../../com/microblink/results/Re
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
-<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, wait, wait, wait</code></li>
 </ul>
 </li>
 </ul>
@@ -252,7 +256,7 @@ implements android.os.Parcelable, <a href="../../../../com/microblink/results/Re
 <ul class="blockListLast">
 <li class="blockList">
 <h4>CREATOR</h4>
-<pre>public static final&nbsp;android.os.Parcelable.Creator&lt;<a href="../../../../com/microblink/results/date/DateResult.html" title="class in com.microblink.results.date">DateResult</a>&gt; CREATOR</pre>
+<pre>public static final&nbsp;android.os.Parcelable.Creator CREATOR</pre>
 </li>
 </ul>
 </li>
@@ -272,7 +276,7 @@ implements android.os.Parcelable, <a href="../../../../com/microblink/results/Re
 <pre>@NonNull
 public&nbsp;java.lang.String&nbsp;getOriginalDateString()</pre>
 <div class="block">Returns original string representation of the date which has been extracted from the OCR result.
- If it is successfully parsed to <a href="../../../../com/microblink/results/date/Date.html" title="class in com.microblink.results.date"><code>Date</code></a> object, it can be obtained by using <a href="../../../../com/microblink/results/date/DateResult.html#getDate--"><code>getDate()</code></a> method.</div>
+ If it is successfully parsed to <a href="../../../../com/microblink/results/date/Date.html" title="class in com.microblink.results.date"><code>Date</code></a> object, it can be obtained by using <a href="../../../../com/microblink/results/date/DateResult.html#getDate--"><code>DateResult.getDate()</code></a> method.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>original string representation of the date which has been extracted from the OCR result</dd>
@@ -288,7 +292,7 @@ public&nbsp;java.lang.String&nbsp;getOriginalDateString()</pre>
 <pre>@Nullable
 public&nbsp;<a href="../../../../com/microblink/results/date/Date.html" title="class in com.microblink.results.date">Date</a>&nbsp;getDate()</pre>
 <div class="block">Date getter, if <a href="../../../../com/microblink/results/date/Date.html" title="class in com.microblink.results.date"><code>Date</code></a> representation of date result exists returns it,
- otherwise returns null. To obtain original date string use <a href="../../../../com/microblink/results/date/DateResult.html#getOriginalDateString--"><code>getOriginalDateString()</code></a>
+ otherwise returns null. To obtain original date string use <a href="../../../../com/microblink/results/date/DateResult.html#getOriginalDateString--"><code>DateResult.getOriginalDateString()</code></a>
  method.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -388,19 +392,32 @@ public&nbsp;java.lang.Object&nbsp;getNativeResult()</pre>
 <a name="getStringResult--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>getStringResult</h4>
 <pre>@Nullable
 public&nbsp;java.lang.String&nbsp;getStringResult()</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../com/microblink/results/Result.html#getStringResult--">Result</a></code></span></div>
 <div class="block">Returns the string version of the result. For example, for <a href="../../../../com/microblink/results/date/DateResult.html" title="class in com.microblink.results.date"><code>DateResult</code></a>, this method
- will return original string from which date was parsed (same as <a href="../../../../com/microblink/results/date/DateResult.html#getOriginalDateString--"><code>getOriginalDateString()</code></a>.</div>
+ will return original string from which date was parsed (same as <a href="../../../../com/microblink/results/date/DateResult.html#getOriginalDateString--"><code>DateResult.getOriginalDateString()</code></a>.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../com/microblink/results/Result.html#getStringResult--">getStringResult</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../com/microblink/results/Result.html" title="interface in com.microblink.results">Result</a></code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>string version of the result</dd>
+</dl>
+</li>
+</ul>
+<a name="toString--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>toString</h4>
+<pre>public&nbsp;java.lang.String&nbsp;toString()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code>toString</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
 </dl>
 </li>
 </ul>

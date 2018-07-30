@@ -1,5 +1,39 @@
 # Release notes
 
+## 7.0.0
+
+### New API and license format
+
+- new API, which is not backward compatible. Please check [README](README.md) and updated demo applications for more information, but the gist of it is:
+    - `RecognizerView` has been renamed to `RecognizerRunnerView` and `Recognizer` singleton to `RecognizerRunner`
+    - `SegmentScanActivity` has been renamed to `FieldByFieldScanActivity`
+    - `RandomScanActivity` does not exist anymore
+    - previously internal `Recognizer` objects are not internal anymore - instead of having opaque `RecognizerSettings` and `RecognizerResult` objects, you now have stateful `Recognizer` object that contains its `Result` within and mutates it while performing recognition. 
+        - similarly we now have stateful `Parser` and `Detector` objects
+        - introduced new `Processor` object type
+        - For more information, see [README](README.md) and updated demo applications
+    - added `RecognizerRunnerFragment` with support for various scanning overlays in a manner similar to iOS API. This now allows you to use built-in UI, which was previously strictly available for built-in activities, in form of fragment anywhere within your activity. Full details are given in [README](README.md) and in updated demo applications.
+- new licence format, which is not backward compatible. Full details are given in [README](README.md) and in updated applications, but the gist of it is:
+    - licence can now be provided with either file, byte array or base64-encoded bytes
+
+### New features:
+
+- Added support for reading front side of Morocco identity documents
+- Added support for reading front side of Singapore driver's licences
+- Added support for reading front side of Swiss driver's licenses
+
+
+### Improvements for existing features:
+
+- Slovak payBySquare QR code recognizer now supports returning multiple payment informations with multiple account numbers. This feature was not possible to achieve with the 6.x API.
+- Czech payment QR code recognizer now supports returning multiple account numbers, if available within the QR code. This feature was not possible to achieve with the 6.x API.
+- improved scanning of United Arab Emirates ID documents
+- improved scanning of back side of Colombia ID
+
+### Bug fixes:
+
+- improved recognition of czech and german payment QR codes in case they contained non-ascii characters
+
 ## 6.13.0
 
 ### New features:
