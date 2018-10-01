@@ -1,5 +1,70 @@
 # Release notes
 
+## 7.1.0
+
+### New features:
+
+- added support for reading partial dates on all MRTD documents:
+    - affects all recognizers which extract data from Machine Readable Zone
+- added support for reading front side of Singapore Changi employee ID - use `SingaporeChangiEmployeeIdRecognizer`
+- added support for reading back side of Morocco ID - use  `MoroccoIdBackRecognizer`
+- added support for reading front side of United Arab Emirates Driver's License - use `UnitedArabEmiratesDlFrontRecognizer`
+- added support for reading front side of Spain Driver's License - use `SpainDlFrontRecognizer`
+- added support for reading front and back side of Cyprus ID - use `CyprusIdFrontRecognizer` and `CyprusIdBackRecognizer`
+- added support for reading front and back side of Kuwait ID - use `KuwaitIdFrontRecognizer` and `KuwaitIdBackRecognizer`
+- added support for reading front and back side of Payment / Debit cards - use `PaymentCardFrontRecognizer`, `PaymentCardBackRecognizer` and `PaymentCardCombinedRecognizer`
+- added support for reading front side of Ireland Driver's License  - use `IrelandDlFrontRecognizer`
+- added support for reading front side of Colombia Driver's License - use `ColombiaDlFrontRecognizer`
+
+### Improvements for existing features:
+- improved reading of Croatia Pdf417 payment barcode - `CroatiaPdf417Recognizer`
+- improved `SwitzerlandSlipRecognizer`:
+    - added getter for `currencyCode` to its Result
+- improved `HongKongIdFrontRecognizer`:
+    - added support for reading residential status field
+- improved `UnitedArabEmiratesIdFrontRecognizer`:
+    - better name and nationality extraction
+- improved `SingaporeIdBackRecognizer`:
+    - added support for reading sticker with new address
+- improved `NewZealandDlFrontRecognizer`:
+    - better reading of all fields
+- improved `SingaporeCombinedRecognizer`:
+    - added support for reading sticker with new address from the back side
+- `BarcodeScanActivity` by default does not show result dialog after scan
+- improved `MrtdCombinedRecognizer`:
+    - added option to allow unparsed and unverified MRZ results - use `MrtdCombinedRecognizer.setAllowUnparsedResults` and `MrtdCombinedRecognizer.setAllowUnverifiedResults`
+- improved reading of Malaysian Driver's License
+
+### Minor API changes:
+- in `CroatiaIdFrontRecognizer` `identityCardNumber` is renamed to `documentNumber`
+- `HongKongIdFrontRecognizer.Result.getDateOfBirth()` and `HongKongIdFrontRecognizer.Result.getDateOfIssue()` return `com.microblink.results.date.DateResult` instead of `com.microblink.results.date.Date`
+- in `SingaporeIdBackRecognizer.Result` getter `getBloodGroup()` is renamed to `getBloodType()`
+- renamed getters in `NewZealandDlFrontRecognizer.Result` renamed getters:
+    - `getIssueDate()` to `getDateOfIssue()`
+    - `getExpiryDate()` to `getDateOfExpiry()`
+    - `getDonorIndicator()` to `isDonorIndicator()`
+- renamed methods in `CroatiaIdBackRecognizer` and its `Result`:
+    - `address` to `residence`
+    - `documentForNonResident` to `isDocumentForNonResident`
+    - `issuingAuthority` to `issuedBy`
+    - `getDateOfExpiryPermanent` to `isDateOfExpiryPermanent`
+    - MRZ fields are available through `MrzResult` which can be obtained by using getter `CroatiaIdBackRecognizer.Result.getMrzResult()`
+- renamed method in `SingaporeIdFrontRecognizer` and its `Result`:
+    - `cardNumber` to `identityCardNumber`
+- renamed method in `SingaporeCombinedRecognizer` and its `Result`:
+    - `cardNumber` to `identityCardNumber`
+    - `bloodGroup` to `bloodType`
+- renamed methos in `MalaysiaDlFrontRecognizer` and its `Result`:
+    - `state` to `ownerState`
+    - `zipCode` to `zipcode`
+- renamed methos in `IndonesiaIdFrontRecognizer` and its `Result`:
+    - `validUntil` to `dateOfExpiry`
+    - `validUntilPermanent` to `dateOfExpiryPermanent`
+
+### Bug fixes:
+- fixed bug which caused that results from the previous scan are cleared when the scan activity is run again and entities which have produced results are not used in the new scan
+- various other bug fixes and improvements
+
 ## 7.0.0
 
 ### New API and license format

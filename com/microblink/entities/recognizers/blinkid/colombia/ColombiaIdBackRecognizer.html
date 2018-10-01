@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -47,7 +47,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li>Prev&nbsp;Class</li>
+<li><a href="../../../../../../com/microblink/entities/recognizers/blinkid/colombia/ColombiaDlFrontRecognizer.Result.html" title="class in com.microblink.entities.recognizers.blinkid.colombia"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../../../com/microblink/entities/recognizers/blinkid/colombia/ColombiaIdBackRecognizer.Result.html" title="class in com.microblink.entities.recognizers.blinkid.colombia"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -175,13 +175,6 @@ implements <a href="../../../../../../com/microblink/entities/settings/GlareDete
 </tr>
 </table>
 <ul class="blockList">
-<li class="blockList"><a name="fields.inherited.from.class.com.microblink.entities.recognizers.Recognizer">
-<!--   -->
-</a>
-<h3>Fields inherited from class&nbsp;com.microblink.entities.recognizers.<a href="../../../../../../com/microblink/entities/recognizers/Recognizer.html" title="class in com.microblink.entities.recognizers">Recognizer</a></h3>
-<code><a href="../../../../../../com/microblink/entities/recognizers/Recognizer.html#CLASS_NAME">CLASS_NAME</a></code></li>
-</ul>
-<ul class="blockList">
 <li class="blockList"><a name="fields.inherited.from.class.com.microblink.entities.settings.GlareDetectorOptions">
 <!--   -->
 </a>
@@ -263,53 +256,81 @@ implements <a href="../../../../../../com/microblink/entities/settings/GlareDete
 </td>
 </tr>
 <tr id="i4" class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/colombia/ColombiaIdBackRecognizer.html#isNullQuietZoneAllowed--">isNullQuietZoneAllowed</a></span>()</code>
+<div class="block">Allow scanning PDF417 barcodes which don't have quiet zone
+  surrounding it (e.g.</div>
+</td>
+</tr>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/colombia/ColombiaIdBackRecognizer.html#isScanUncertain--">isScanUncertain</a></span>()</code>
+<div class="block">Enable decoding of non-standard PDF417 barcodes, but without
+  guarantee that all data will be read.</div>
+</td>
+</tr>
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>protected byte[]</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/colombia/ColombiaIdBackRecognizer.html#serializeNativeSettings--">serializeNativeSettings</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/colombia/ColombiaIdBackRecognizer.html#setDetectGlare-boolean-">setDetectGlare</a></span>(boolean&nbsp;detectGlare)</code>
 <div class="block">Defines whether glare detector will be used during recognition process.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/colombia/ColombiaIdBackRecognizer.html#setEncodeFullDocumentImage-boolean-">setEncodeFullDocumentImage</a></span>(boolean&nbsp;encodeFullDocumentImage)</code>
 <div class="block">Sets whether full document image should be encoded in JPEG format and written into the corresponding
  recognition result.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/colombia/ColombiaIdBackRecognizer.html#setFullDocumentImageDpi-int-">setFullDocumentImageDpi</a></span>(int&nbsp;desiredDPI)</code>
 <div class="block">Sets desired DPI (Dots Per Inch) for full document image that should be returned.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i10" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/colombia/ColombiaIdBackRecognizer.html#setNullQuietZoneAllowed-boolean-">setNullQuietZoneAllowed</a></span>(boolean&nbsp;nullQuietZoneAllowed)</code>
+<div class="block">Allow scanning PDF417 barcodes which don't have quiet zone
+  surrounding it (e.g.</div>
+</td>
+</tr>
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/colombia/ColombiaIdBackRecognizer.html#setReturnFullDocumentImage-boolean-">setReturnFullDocumentImage</a></span>(boolean&nbsp;returnFullDocumentImage)</code>
 <div class="block">Sets whether full document image should be available in <a href="../../../../../../com/microblink/entities/recognizers/blinkid/imageresult/FullDocumentImageResult.html" title="interface in com.microblink.entities.recognizers.blinkid.imageresult"><code>FullDocumentImageResult</code></a>.</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i12" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/colombia/ColombiaIdBackRecognizer.html#setScanUncertain-boolean-">setScanUncertain</a></span>(boolean&nbsp;scanUncertain)</code>
+<div class="block">Enable decoding of non-standard PDF417 barcodes, but without
+  guarantee that all data will be read.</div>
+</td>
+</tr>
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/colombia/ColombiaIdBackRecognizer.html#shouldDetectGlare--">shouldDetectGlare</a></span>()</code>
 <div class="block">Returns whether glare detector is enabled.</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/colombia/ColombiaIdBackRecognizer.html#shouldEncodeFullDocumentImage--">shouldEncodeFullDocumentImage</a></span>()</code>
 <div class="block">Returns whether encoding of full document images and writing them into the recognition result is enabled.</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/colombia/ColombiaIdBackRecognizer.html#shouldReturnFullDocumentImage--">shouldReturnFullDocumentImage</a></span>()</code>
 <div class="block">Returns whether full document image will be available in <a href="../../../../../../com/microblink/entities/recognizers/blinkid/imageresult/FullDocumentImageResult.html" title="interface in com.microblink.entities.recognizers.blinkid.imageresult"><code>FullDocumentImageResult</code></a>.</div>
 </td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code>protected void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/colombia/ColombiaIdBackRecognizer.html#terminateNative-long-">terminateNative</a></span>(long&nbsp;nativeContext)</code>&nbsp;</td>
 </tr>
@@ -423,6 +444,34 @@ implements <a href="../../../../../../com/microblink/entities/settings/GlareDete
 </dl>
 </li>
 </ul>
+<a name="setScanUncertain-boolean-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setScanUncertain</h4>
+<pre>public&nbsp;void&nbsp;setScanUncertain(boolean&nbsp;scanUncertain)</pre>
+<div class="block">Enable decoding of non-standard PDF417 barcodes, but without
+  guarantee that all data will be read. This option should be enabled
+  for PDF417 barcode that has missing rows (i.e. not whole barcode is
+  printed)
+  By default, this is set to 'true'</div>
+</li>
+</ul>
+<a name="isScanUncertain--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isScanUncertain</h4>
+<pre>public&nbsp;boolean&nbsp;isScanUncertain()</pre>
+<div class="block">Enable decoding of non-standard PDF417 barcodes, but without
+  guarantee that all data will be read. This option should be enabled
+  for PDF417 barcode that has missing rows (i.e. not whole barcode is
+  printed)
+  By default, this is set to 'true'</div>
+</li>
+</ul>
 <a name="setReturnFullDocumentImage-boolean-">
 <!--   -->
 </a>
@@ -512,6 +561,30 @@ implements <a href="../../../../../../com/microblink/entities/settings/GlareDete
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>whether encoding of full document images and writing them into the recognition result is enabled.</dd>
 </dl>
+</li>
+</ul>
+<a name="setNullQuietZoneAllowed-boolean-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setNullQuietZoneAllowed</h4>
+<pre>public&nbsp;void&nbsp;setNullQuietZoneAllowed(boolean&nbsp;nullQuietZoneAllowed)</pre>
+<div class="block">Allow scanning PDF417 barcodes which don't have quiet zone
+  surrounding it (e.g. text concatenated with barcode).
+  By default, this is set to 'true'</div>
+</li>
+</ul>
+<a name="isNullQuietZoneAllowed--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isNullQuietZoneAllowed</h4>
+<pre>public&nbsp;boolean&nbsp;isNullQuietZoneAllowed()</pre>
+<div class="block">Allow scanning PDF417 barcodes which don't have quiet zone
+  surrounding it (e.g. text concatenated with barcode).
+  By default, this is set to 'true'</div>
 </li>
 </ul>
 <a name="getFullDocumentImageDpi--">
@@ -656,7 +729,7 @@ protected&nbsp;byte[]&nbsp;serializeNativeSettings()</pre>
 </div>
 <div class="subNav">
 <ul class="navList">
-<li>Prev&nbsp;Class</li>
+<li><a href="../../../../../../com/microblink/entities/recognizers/blinkid/colombia/ColombiaDlFrontRecognizer.Result.html" title="class in com.microblink.entities.recognizers.blinkid.colombia"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../../../com/microblink/entities/recognizers/blinkid/colombia/ColombiaIdBackRecognizer.Result.html" title="class in com.microblink.entities.recognizers.blinkid.colombia"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">

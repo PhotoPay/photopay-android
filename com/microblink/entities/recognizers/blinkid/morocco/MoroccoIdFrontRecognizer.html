@@ -47,7 +47,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li>Prev&nbsp;Class</li>
+<li><a href="../../../../../../com/microblink/entities/recognizers/blinkid/morocco/MoroccoIdBackRecognizer.Result.html" title="class in com.microblink.entities.recognizers.blinkid.morocco"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../../../com/microblink/entities/recognizers/blinkid/morocco/MoroccoIdFrontRecognizer.Result.html" title="class in com.microblink.entities.recognizers.blinkid.morocco"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -124,7 +124,7 @@ var activeTableTab = "activeTableTab";
 <pre>public final class <span class="typeNameLabel">MoroccoIdFrontRecognizer</span>
 extends <a href="../../../../../../com/microblink/entities/recognizers/Recognizer.html" title="class in com.microblink.entities.recognizers">Recognizer</a>
 implements <a href="../../../../../../com/microblink/entities/settings/GlareDetectorOptions.html" title="interface in com.microblink.entities.settings">GlareDetectorOptions</a>, <a href="../../../../../../com/microblink/entities/recognizers/blinkid/imageoptions/FaceImageOptions.html" title="interface in com.microblink.entities.recognizers.blinkid.imageoptions">FaceImageOptions</a>, <a href="../../../../../../com/microblink/entities/recognizers/blinkid/imageoptions/EncodeFaceImageOptions.html" title="interface in com.microblink.entities.recognizers.blinkid.imageoptions">EncodeFaceImageOptions</a>, <a href="../../../../../../com/microblink/entities/recognizers/blinkid/imageoptions/FullDocumentImageOptions.html" title="interface in com.microblink.entities.recognizers.blinkid.imageoptions">FullDocumentImageOptions</a>, <a href="../../../../../../com/microblink/entities/recognizers/blinkid/imageoptions/EncodeFullDocumentImagesOptions.html" title="interface in com.microblink.entities.recognizers.blinkid.imageoptions">EncodeFullDocumentImagesOptions</a>, <a href="../../../../../../com/microblink/entities/recognizers/blinkid/imageoptions/SignatureImageOptions.html" title="interface in com.microblink.entities.recognizers.blinkid.imageoptions">SignatureImageOptions</a>, <a href="../../../../../../com/microblink/entities/recognizers/blinkid/imageoptions/EncodeSignatureImageOptions.html" title="interface in com.microblink.entities.recognizers.blinkid.imageoptions">EncodeSignatureImageOptions</a></pre>
-<div class="block">The Morocco ID Front Recognizer is used for scanning front side of the Morocco ID.</div>
+<div class="block">Recognizer which can scan front side of Moroccan national ID cards.</div>
 </li>
 </ul>
 </div>
@@ -174,13 +174,6 @@ implements <a href="../../../../../../com/microblink/entities/settings/GlareDete
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/morocco/MoroccoIdFrontRecognizer.html#CREATOR">CREATOR</a></span></code>&nbsp;</td>
 </tr>
 </table>
-<ul class="blockList">
-<li class="blockList"><a name="fields.inherited.from.class.com.microblink.entities.recognizers.Recognizer">
-<!--   -->
-</a>
-<h3>Fields inherited from class&nbsp;com.microblink.entities.recognizers.<a href="../../../../../../com/microblink/entities/recognizers/Recognizer.html" title="class in com.microblink.entities.recognizers">Recognizer</a></h3>
-<code><a href="../../../../../../com/microblink/entities/recognizers/Recognizer.html#CLASS_NAME">CLASS_NAME</a></code></li>
-</ul>
 <ul class="blockList">
 <li class="blockList"><a name="fields.inherited.from.class.com.microblink.entities.settings.GlareDetectorOptions">
 <!--   -->
@@ -336,42 +329,42 @@ implements <a href="../../../../../../com/microblink/entities/settings/GlareDete
 <tr id="i11" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/morocco/MoroccoIdFrontRecognizer.html#setExtractDateOfBirth-boolean-">setExtractDateOfBirth</a></span>(boolean&nbsp;extractDateOfBirth)</code>
-<div class="block">Defines whether date of birth should be extracted
+<div class="block">Defines if date of birth of the Moroccan ID owner should be extracted
   By default, this is set to 'true'</div>
 </td>
 </tr>
 <tr id="i12" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/morocco/MoroccoIdFrontRecognizer.html#setExtractDateOfExpiry-boolean-">setExtractDateOfExpiry</a></span>(boolean&nbsp;extractDateOfExpiry)</code>
-<div class="block">Defines whether date of expiry should be extracted
+<div class="block">Defines if date of expiry of the Moroccan ID should be extracted
   By default, this is set to 'true'</div>
 </td>
 </tr>
 <tr id="i13" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/morocco/MoroccoIdFrontRecognizer.html#setExtractName-boolean-">setExtractName</a></span>(boolean&nbsp;extractName)</code>
-<div class="block">Defines whether name should be extracted
+<div class="block">Defines if name of the Moroccan ID owner should be extracted
   By default, this is set to 'true'</div>
 </td>
 </tr>
 <tr id="i14" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/morocco/MoroccoIdFrontRecognizer.html#setExtractPlaceOfBirth-boolean-">setExtractPlaceOfBirth</a></span>(boolean&nbsp;extractPlaceOfBirth)</code>
-<div class="block">Defines whether place of birth should be extracted
+<div class="block">Defines if place of birth of the Moroccan ID owner should be extracted
   By default, this is set to 'true'</div>
 </td>
 </tr>
 <tr id="i15" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/morocco/MoroccoIdFrontRecognizer.html#setExtractSex-boolean-">setExtractSex</a></span>(boolean&nbsp;extractSex)</code>
-<div class="block">Defines whether sex should be extracted
+<div class="block">Defines if sex of the Moroccan ID owner should be extracted
   By default, this is set to 'true'</div>
 </td>
 </tr>
 <tr id="i16" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/morocco/MoroccoIdFrontRecognizer.html#setExtractSurname-boolean-">setExtractSurname</a></span>(boolean&nbsp;extractSurname)</code>
-<div class="block">Defines whether surname should be extracted
+<div class="block">Defines if surname of the Moroccan ID owner should be extracted
   By default, this is set to 'true'</div>
 </td>
 </tr>
@@ -438,42 +431,42 @@ implements <a href="../../../../../../com/microblink/entities/settings/GlareDete
 <tr id="i27" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/morocco/MoroccoIdFrontRecognizer.html#shouldExtractDateOfBirth--">shouldExtractDateOfBirth</a></span>()</code>
-<div class="block">Defines whether date of birth should be extracted
+<div class="block">Defines if date of birth of the Moroccan ID owner should be extracted
   By default, this is set to 'true'</div>
 </td>
 </tr>
 <tr id="i28" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/morocco/MoroccoIdFrontRecognizer.html#shouldExtractDateOfExpiry--">shouldExtractDateOfExpiry</a></span>()</code>
-<div class="block">Defines whether date of expiry should be extracted
+<div class="block">Defines if date of expiry of the Moroccan ID should be extracted
   By default, this is set to 'true'</div>
 </td>
 </tr>
 <tr id="i29" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/morocco/MoroccoIdFrontRecognizer.html#shouldExtractName--">shouldExtractName</a></span>()</code>
-<div class="block">Defines whether name should be extracted
+<div class="block">Defines if name of the Moroccan ID owner should be extracted
   By default, this is set to 'true'</div>
 </td>
 </tr>
 <tr id="i30" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/morocco/MoroccoIdFrontRecognizer.html#shouldExtractPlaceOfBirth--">shouldExtractPlaceOfBirth</a></span>()</code>
-<div class="block">Defines whether place of birth should be extracted
+<div class="block">Defines if place of birth of the Moroccan ID owner should be extracted
   By default, this is set to 'true'</div>
 </td>
 </tr>
 <tr id="i31" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/morocco/MoroccoIdFrontRecognizer.html#shouldExtractSex--">shouldExtractSex</a></span>()</code>
-<div class="block">Defines whether sex should be extracted
+<div class="block">Defines if sex of the Moroccan ID owner should be extracted
   By default, this is set to 'true'</div>
 </td>
 </tr>
 <tr id="i32" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/morocco/MoroccoIdFrontRecognizer.html#shouldExtractSurname--">shouldExtractSurname</a></span>()</code>
-<div class="block">Defines whether surname should be extracted
+<div class="block">Defines if surname of the Moroccan ID owner should be extracted
   By default, this is set to 'true'</div>
 </td>
 </tr>
@@ -620,7 +613,7 @@ implements <a href="../../../../../../com/microblink/entities/settings/GlareDete
 <li class="blockList">
 <h4>setExtractSurname</h4>
 <pre>public&nbsp;void&nbsp;setExtractSurname(boolean&nbsp;extractSurname)</pre>
-<div class="block">Defines whether surname should be extracted
+<div class="block">Defines if surname of the Moroccan ID owner should be extracted
   By default, this is set to 'true'</div>
 </li>
 </ul>
@@ -631,7 +624,7 @@ implements <a href="../../../../../../com/microblink/entities/settings/GlareDete
 <li class="blockList">
 <h4>shouldExtractSurname</h4>
 <pre>public&nbsp;boolean&nbsp;shouldExtractSurname()</pre>
-<div class="block">Defines whether surname should be extracted
+<div class="block">Defines if surname of the Moroccan ID owner should be extracted
   By default, this is set to 'true'</div>
 </li>
 </ul>
@@ -772,7 +765,7 @@ implements <a href="../../../../../../com/microblink/entities/settings/GlareDete
 <li class="blockList">
 <h4>setExtractDateOfExpiry</h4>
 <pre>public&nbsp;void&nbsp;setExtractDateOfExpiry(boolean&nbsp;extractDateOfExpiry)</pre>
-<div class="block">Defines whether date of expiry should be extracted
+<div class="block">Defines if date of expiry of the Moroccan ID should be extracted
   By default, this is set to 'true'</div>
 </li>
 </ul>
@@ -783,7 +776,7 @@ implements <a href="../../../../../../com/microblink/entities/settings/GlareDete
 <li class="blockList">
 <h4>shouldExtractDateOfExpiry</h4>
 <pre>public&nbsp;boolean&nbsp;shouldExtractDateOfExpiry()</pre>
-<div class="block">Defines whether date of expiry should be extracted
+<div class="block">Defines if date of expiry of the Moroccan ID should be extracted
   By default, this is set to 'true'</div>
 </li>
 </ul>
@@ -794,7 +787,7 @@ implements <a href="../../../../../../com/microblink/entities/settings/GlareDete
 <li class="blockList">
 <h4>setExtractSex</h4>
 <pre>public&nbsp;void&nbsp;setExtractSex(boolean&nbsp;extractSex)</pre>
-<div class="block">Defines whether sex should be extracted
+<div class="block">Defines if sex of the Moroccan ID owner should be extracted
   By default, this is set to 'true'</div>
 </li>
 </ul>
@@ -805,7 +798,7 @@ implements <a href="../../../../../../com/microblink/entities/settings/GlareDete
 <li class="blockList">
 <h4>shouldExtractSex</h4>
 <pre>public&nbsp;boolean&nbsp;shouldExtractSex()</pre>
-<div class="block">Defines whether sex should be extracted
+<div class="block">Defines if sex of the Moroccan ID owner should be extracted
   By default, this is set to 'true'</div>
 </li>
 </ul>
@@ -816,7 +809,7 @@ implements <a href="../../../../../../com/microblink/entities/settings/GlareDete
 <li class="blockList">
 <h4>setExtractName</h4>
 <pre>public&nbsp;void&nbsp;setExtractName(boolean&nbsp;extractName)</pre>
-<div class="block">Defines whether name should be extracted
+<div class="block">Defines if name of the Moroccan ID owner should be extracted
   By default, this is set to 'true'</div>
 </li>
 </ul>
@@ -827,7 +820,7 @@ implements <a href="../../../../../../com/microblink/entities/settings/GlareDete
 <li class="blockList">
 <h4>shouldExtractName</h4>
 <pre>public&nbsp;boolean&nbsp;shouldExtractName()</pre>
-<div class="block">Defines whether name should be extracted
+<div class="block">Defines if name of the Moroccan ID owner should be extracted
   By default, this is set to 'true'</div>
 </li>
 </ul>
@@ -921,7 +914,7 @@ implements <a href="../../../../../../com/microblink/entities/settings/GlareDete
 <li class="blockList">
 <h4>setExtractDateOfBirth</h4>
 <pre>public&nbsp;void&nbsp;setExtractDateOfBirth(boolean&nbsp;extractDateOfBirth)</pre>
-<div class="block">Defines whether date of birth should be extracted
+<div class="block">Defines if date of birth of the Moroccan ID owner should be extracted
   By default, this is set to 'true'</div>
 </li>
 </ul>
@@ -932,7 +925,7 @@ implements <a href="../../../../../../com/microblink/entities/settings/GlareDete
 <li class="blockList">
 <h4>shouldExtractDateOfBirth</h4>
 <pre>public&nbsp;boolean&nbsp;shouldExtractDateOfBirth()</pre>
-<div class="block">Defines whether date of birth should be extracted
+<div class="block">Defines if date of birth of the Moroccan ID owner should be extracted
   By default, this is set to 'true'</div>
 </li>
 </ul>
@@ -991,7 +984,7 @@ implements <a href="../../../../../../com/microblink/entities/settings/GlareDete
 <li class="blockList">
 <h4>setExtractPlaceOfBirth</h4>
 <pre>public&nbsp;void&nbsp;setExtractPlaceOfBirth(boolean&nbsp;extractPlaceOfBirth)</pre>
-<div class="block">Defines whether place of birth should be extracted
+<div class="block">Defines if place of birth of the Moroccan ID owner should be extracted
   By default, this is set to 'true'</div>
 </li>
 </ul>
@@ -1002,7 +995,7 @@ implements <a href="../../../../../../com/microblink/entities/settings/GlareDete
 <li class="blockList">
 <h4>shouldExtractPlaceOfBirth</h4>
 <pre>public&nbsp;boolean&nbsp;shouldExtractPlaceOfBirth()</pre>
-<div class="block">Defines whether place of birth should be extracted
+<div class="block">Defines if place of birth of the Moroccan ID owner should be extracted
   By default, this is set to 'true'</div>
 </li>
 </ul>
@@ -1208,7 +1201,7 @@ protected&nbsp;byte[]&nbsp;serializeNativeSettings()</pre>
 </div>
 <div class="subNav">
 <ul class="navList">
-<li>Prev&nbsp;Class</li>
+<li><a href="../../../../../../com/microblink/entities/recognizers/blinkid/morocco/MoroccoIdBackRecognizer.Result.html" title="class in com.microblink.entities.recognizers.blinkid.morocco"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../../../com/microblink/entities/recognizers/blinkid/morocco/MoroccoIdFrontRecognizer.Result.html" title="class in com.microblink.entities.recognizers.blinkid.morocco"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">

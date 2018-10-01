@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -265,87 +265,115 @@ implements <a href="../../../../../../com/microblink/entities/recognizers/blinki
 </td>
 </tr>
 <tr id="i2" class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/mrtd/MrtdCombinedRecognizer.html#isAllowUnparsedResults--">isAllowUnparsedResults</a></span>()</code>
+<div class="block">Whether returning of unparsed MRZ results is allowed
+  By default, this is set to 'false'</div>
+</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/mrtd/MrtdCombinedRecognizer.html#isAllowUnverifiedResults--">isAllowUnverifiedResults</a></span>()</code>
+<div class="block">Whether returning of unverified MRZ results is allowed
+  Unverified result is result that is parsed, but check digits are incorrect.</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/mrtd/MrtdCombinedRecognizer.html#setAllowUnparsedResults-boolean-">setAllowUnparsedResults</a></span>(boolean&nbsp;allowUnparsedResults)</code>
+<div class="block">Whether returning of unparsed MRZ results is allowed
+  By default, this is set to 'false'</div>
+</td>
+</tr>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/mrtd/MrtdCombinedRecognizer.html#setAllowUnverifiedResults-boolean-">setAllowUnverifiedResults</a></span>(boolean&nbsp;allowUnverifiedResults)</code>
+<div class="block">Whether returning of unverified MRZ results is allowed
+  Unverified result is result that is parsed, but check digits are incorrect.</div>
+</td>
+</tr>
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/mrtd/MrtdCombinedRecognizer.html#setEncodeFaceImage-boolean-">setEncodeFaceImage</a></span>(boolean&nbsp;encodeFaceImage)</code>
 <div class="block">Sets whether face image from document should be encoded in JPEG format and written into the corresponding
  recognition result.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/mrtd/MrtdCombinedRecognizer.html#setEncodeFullDocumentImage-boolean-">setEncodeFullDocumentImage</a></span>(boolean&nbsp;encodeFullDocumentImage)</code>
 <div class="block">Sets whether full document image should be encoded in JPEG format and written into the corresponding
  recognition result.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/mrtd/MrtdCombinedRecognizer.html#setEncodeMrzImage-boolean-">setEncodeMrzImage</a></span>(boolean&nbsp;encodeMRZImage)</code>
 <div class="block">Sets whether MRZ image from document should be encoded in JPEG format and written into the corresponding
  recognition result.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/mrtd/MrtdCombinedRecognizer.html#setReturnFaceImage-boolean-">setReturnFaceImage</a></span>(boolean&nbsp;returnFaceImage)</code>
 <div class="block">Sets whether face image from document should be available in <a href="../../../../../../com/microblink/entities/recognizers/blinkid/imageresult/FaceImageResult.html" title="interface in com.microblink.entities.recognizers.blinkid.imageresult"><code>FaceImageResult</code></a>.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/mrtd/MrtdCombinedRecognizer.html#setReturnFullDocumentImage-boolean-">setReturnFullDocumentImage</a></span>(boolean&nbsp;returnFullDocumentImage)</code>
 <div class="block">Sets whether full document image should be available in <a href="../../../../../../com/microblink/entities/recognizers/blinkid/imageresult/FullDocumentImageResult.html" title="interface in com.microblink.entities.recognizers.blinkid.imageresult"><code>FullDocumentImageResult</code></a>.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/mrtd/MrtdCombinedRecognizer.html#setReturnMrzImage-boolean-">setReturnMrzImage</a></span>(boolean&nbsp;returnMrzImage)</code>
 <div class="block">Sets whether MRZ image should be available in <a href="../../../../../../com/microblink/entities/recognizers/blinkid/imageresult/MrzImageResult.html" title="interface in com.microblink.entities.recognizers.blinkid.imageresult"><code>MrzImageResult</code></a>.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/mrtd/MrtdCombinedRecognizer.html#setSignResult-boolean-">setSignResult</a></span>(boolean&nbsp;signResult)</code>
 <div class="block">Whether or not recognition result should be signed.</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/mrtd/MrtdCombinedRecognizer.html#shouldEncodeFaceImage--">shouldEncodeFaceImage</a></span>()</code>
 <div class="block">Returns whether encoding of face image from document and writing it into the recognition result is enabled.</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/mrtd/MrtdCombinedRecognizer.html#shouldEncodeFullDocumentImage--">shouldEncodeFullDocumentImage</a></span>()</code>
 <div class="block">Returns whether encoding of full document images and writing them into the recognition result is enabled.</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/mrtd/MrtdCombinedRecognizer.html#shouldEncodeMrzImage--">shouldEncodeMrzImage</a></span>()</code>
 <div class="block">Returns whether encoding of MRZ image from document and writing it into the recognition result is enabled.</div>
 </td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/mrtd/MrtdCombinedRecognizer.html#shouldReturnFaceImage--">shouldReturnFaceImage</a></span>()</code>
 <div class="block">Returns whether face image will be available in <a href="../../../../../../com/microblink/entities/recognizers/blinkid/imageresult/FaceImageResult.html" title="interface in com.microblink.entities.recognizers.blinkid.imageresult"><code>FaceImageResult</code></a>.</div>
 </td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/mrtd/MrtdCombinedRecognizer.html#shouldReturnFullDocumentImage--">shouldReturnFullDocumentImage</a></span>()</code>
 <div class="block">Returns whether full document image will be available in <a href="../../../../../../com/microblink/entities/recognizers/blinkid/imageresult/FullDocumentImageResult.html" title="interface in com.microblink.entities.recognizers.blinkid.imageresult"><code>FullDocumentImageResult</code></a>.</div>
 </td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/mrtd/MrtdCombinedRecognizer.html#shouldReturnMrzImage--">shouldReturnMrzImage</a></span>()</code>
 <div class="block">Returns whether MRZ image will be available in <a href="../../../../../../com/microblink/entities/recognizers/blinkid/imageresult/MrzImageResult.html" title="interface in com.microblink.entities.recognizers.blinkid.imageresult"><code>MrzImageResult</code></a>.</div>
 </td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/entities/recognizers/blinkid/mrtd/MrtdCombinedRecognizer.html#shouldSignResult--">shouldSignResult</a></span>()</code>
 <div class="block">Returns whether or not recognition result should be signed.</div>
@@ -719,7 +747,7 @@ implements <a href="../../../../../../com/microblink/entities/recognizers/blinki
 <a name="shouldSignResult--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>shouldSignResult</h4>
 <pre>public&nbsp;boolean&nbsp;shouldSignResult()</pre>
@@ -732,6 +760,52 @@ implements <a href="../../../../../../com/microblink/entities/recognizers/blinki
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>true if recognition result should be signed, false otherwise</dd>
 </dl>
+</li>
+</ul>
+<a name="setAllowUnparsedResults-boolean-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setAllowUnparsedResults</h4>
+<pre>public&nbsp;void&nbsp;setAllowUnparsedResults(boolean&nbsp;allowUnparsedResults)</pre>
+<div class="block">Whether returning of unparsed MRZ results is allowed
+  By default, this is set to 'false'</div>
+</li>
+</ul>
+<a name="isAllowUnparsedResults--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isAllowUnparsedResults</h4>
+<pre>public&nbsp;boolean&nbsp;isAllowUnparsedResults()</pre>
+<div class="block">Whether returning of unparsed MRZ results is allowed
+  By default, this is set to 'false'</div>
+</li>
+</ul>
+<a name="setAllowUnverifiedResults-boolean-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setAllowUnverifiedResults</h4>
+<pre>public&nbsp;void&nbsp;setAllowUnverifiedResults(boolean&nbsp;allowUnverifiedResults)</pre>
+<div class="block">Whether returning of unverified MRZ results is allowed
+  Unverified result is result that is parsed, but check digits are incorrect.
+  By default, this is set to 'false'</div>
+</li>
+</ul>
+<a name="isAllowUnverifiedResults--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>isAllowUnverifiedResults</h4>
+<pre>public&nbsp;boolean&nbsp;isAllowUnverifiedResults()</pre>
+<div class="block">Whether returning of unverified MRZ results is allowed
+  Unverified result is result that is parsed, but check digits are incorrect.
+  By default, this is set to 'false'</div>
 </li>
 </ul>
 </li>
