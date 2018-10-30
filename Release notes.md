@@ -1,5 +1,12 @@
 # Release notes
 
+## 7.1.1
+
+### Bug fixes:
+
+- fixed camera autofocus problems on Samsung S9/S9+ when optimisation for near scanning is enabled
+- fixed autofocus problems in `Field by field` scanning on Huawei P20 pro, Huawei P20 and Huawei P20 lite 
+
 ## 7.1.0
 
 ### New features:
