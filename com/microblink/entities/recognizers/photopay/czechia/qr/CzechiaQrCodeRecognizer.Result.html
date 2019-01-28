@@ -506,6 +506,7 @@ public&nbsp;java.lang.String&nbsp;getRecipientName()</pre>
 <li class="blockList">
 <h4>getCurrency</h4>
 <pre>@NonNull
+ @Nullable
 public&nbsp;java.lang.String&nbsp;getCurrency()</pre>
 <div class="block">Returns the currency or null if nothing was scanned.</div>
 <dl>
@@ -565,7 +566,8 @@ public&nbsp;java.lang.String&nbsp;getPaymentDescription()</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>getParsedAmount</h4>
-<pre>public&nbsp;java.math.BigDecimal&nbsp;getParsedAmount()</pre>
+<pre>@NonNull
+public&nbsp;java.math.BigDecimal&nbsp;getParsedAmount()</pre>
 <div class="block">Returns the scanned amount as big decimal value in normal currency (e.g. euros).</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>

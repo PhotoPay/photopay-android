@@ -308,7 +308,8 @@ implements <a href="../../../com/microblink/fragment/RecognizerRunnerFragment.Sc
 <ul class="blockListLast">
 <li class="blockList">
 <h4>mRecognizerRunnerFragment</h4>
-<pre>protected&nbsp;<a href="../../../com/microblink/fragment/RecognizerRunnerFragment.html" title="class in com.microblink.fragment">RecognizerRunnerFragment</a> mRecognizerRunnerFragment</pre>
+<pre>@NonNull
+protected&nbsp;<a href="../../../com/microblink/fragment/RecognizerRunnerFragment.html" title="class in com.microblink.fragment">RecognizerRunnerFragment</a> mRecognizerRunnerFragment</pre>
 </li>
 </ul>
 </li>
@@ -342,7 +343,8 @@ implements <a href="../../../com/microblink/fragment/RecognizerRunnerFragment.Sc
 <ul class="blockList">
 <li class="blockList">
 <h4>onCreate</h4>
-<pre>protected final&nbsp;void&nbsp;onCreate(android.os.Bundle&nbsp;savedInstanceState)</pre>
+<pre>protected final&nbsp;void&nbsp;onCreate(@Nullable
+                              android.os.Bundle&nbsp;savedInstanceState)</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code>onCreate</code>&nbsp;in class&nbsp;<code>android.app.Activity</code></dd>
@@ -386,7 +388,9 @@ public&nbsp;<a href="../../../com/microblink/fragment/overlay/ScanningOverlay.ht
 <ul class="blockList">
 <li class="blockList">
 <h4>createScanningOverlayFromIntent</h4>
-<pre>protected abstract&nbsp;<a href="../../../com/microblink/fragment/overlay/BaseScanOverlayController.html" title="class in com.microblink.fragment.overlay">BaseScanOverlayController</a>&nbsp;createScanningOverlayFromIntent(android.content.Intent&nbsp;intent)</pre>
+<pre>@NonNull
+protected abstract&nbsp;<a href="../../../com/microblink/fragment/overlay/BaseScanOverlayController.html" title="class in com.microblink.fragment.overlay">BaseScanOverlayController</a>&nbsp;createScanningOverlayFromIntent(@NonNull
+                                                                                      android.content.Intent&nbsp;intent)</pre>
 </li>
 </ul>
 <a name="finishAndWaitForAnimation--">

@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10,"i27":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -230,104 +230,152 @@ extends <a href="../../../../../../../com/microblink/entities/recognizers/Recogn
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#deserializeFromByteArray-byte:A-">deserializeFromByteArray</a></span>(byte[]&nbsp;arr)</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getAccountNumber--">getAccountNumber</a></span>()</code>
-<div class="block">Returns bank account number to which the payment goes</div>
-</td>
-</tr>
-<tr id="i3" class="rowColor">
 <td class="colFirst"><code>int</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getAmount--">getAmount</a></span>()</code>
 <div class="block">Returns the scanned amount in smallest currency (e.g.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getCurrency--">getCurrency</a></span>()</code>
 <div class="block">Returns the currency or null if nothing was scanned.</div>
 </td>
 </tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getIdentificationCode--">getIdentificationCode</a></span>()</code>
+<div class="block">The identification code of the payment.</div>
+</td>
+</tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getOptionalData--">getOptionalData</a></span>()</code>
-<div class="block">Returns additional data available at the end of barcode</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getMerchantCodeCategory--">getMerchantCodeCategory</a></span>()</code>
+<div class="block">The merchant code category of the payment.</div>
 </td>
 </tr>
 <tr id="i6" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getMerchantReference--">getMerchantReference</a></span>()</code>
+<div class="block">The merchant reference of the payment.</div>
+</td>
+</tr>
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getOneTimePaymentCode--">getOneTimePaymentCode</a></span>()</code>
+<div class="block">The one time payment code of the payment.</div>
+</td>
+</tr>
+<tr id="i8" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getOptionalData--">getOptionalData</a></span>()</code>
+<div class="block">The additional data about the payment.</div>
+</td>
+</tr>
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>java.math.BigDecimal</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getParsedAmount--">getParsedAmount</a></span>()</code>
 <div class="block">Returns the scanned amount as big decimal value in normal currency (e.g.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
-<td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getPayerAddress--">getPayerAddress</a></span>()</code>
-<div class="block">Returns the address of the payer.</div>
-</td>
-</tr>
-<tr id="i8" class="altColor">
-<td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getPayerDetailedAddress--">getPayerDetailedAddress</a></span>()</code>
-<div class="block">Returns detailed address of the payer</div>
-</td>
-</tr>
-<tr id="i9" class="rowColor">
-<td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getPayerName--">getPayerName</a></span>()</code>
-<div class="block">Returns name of the payer</div>
-</td>
-</tr>
 <tr id="i10" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getPaymentDescription--">getPaymentDescription</a></span>()</code>
-<div class="block">Returns description of the payment</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getPayerAccountNumber--">getPayerAccountNumber</a></span>()</code>
+<div class="block">The account number of the payer.</div>
 </td>
 </tr>
 <tr id="i11" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getPurposeCode--">getPurposeCode</a></span>()</code>
-<div class="block">Returns string that represents the purpose code</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getPayerAddress--">getPayerAddress</a></span>()</code>
+<div class="block">The address of the payer.</div>
 </td>
 </tr>
 <tr id="i12" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getRecipientAddress--">getRecipientAddress</a></span>()</code>
-<div class="block">Returns address of the payment receiver</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getPayerDetailedAddress--">getPayerDetailedAddress</a></span>()</code>
+<div class="block">The detailed address of the payer.</div>
 </td>
 </tr>
 <tr id="i13" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getRecipientDetailedAddress--">getRecipientDetailedAddress</a></span>()</code>
-<div class="block">Returns detailed address of the payment receiver</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getPayerName--">getPayerName</a></span>()</code>
+<div class="block">The name of the payer.</div>
 </td>
 </tr>
 <tr id="i14" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getRecipientName--">getRecipientName</a></span>()</code>
-<div class="block">Returns the name of the receiving side</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getPaymentCode--">getPaymentCode</a></span>()</code>
+<div class="block">The payment code of the payment.</div>
 </td>
 </tr>
 <tr id="i15" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getReference--">getReference</a></span>()</code>
-<div class="block">Returns the reference of the payment</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getPaymentDescription--">getPaymentDescription</a></span>()</code>
+<div class="block">The description of the payment.</div>
 </td>
 </tr>
 <tr id="i16" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getReferenceModel--">getReferenceModel</a></span>()</code>
-<div class="block">Returns the reference model of the payment</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getPurposeCode--">getPurposeCode</a></span>()</code>
+<div class="block">The purpose code of the payment.</div>
 </td>
 </tr>
 <tr id="i17" class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getRawBarcodeData--">getRawBarcodeData</a></span>()</code>
+<div class="block">The raw barcode data string.</div>
+</td>
+</tr>
+<tr id="i18" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getRecipientAccountNumber--">getRecipientAccountNumber</a></span>()</code>
+<div class="block">The bank account number to which the payment goes.</div>
+</td>
+</tr>
+<tr id="i19" class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getRecipientAddress--">getRecipientAddress</a></span>()</code>
+<div class="block">The address of the payment receiver.</div>
+</td>
+</tr>
+<tr id="i20" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getRecipientDetailedAddress--">getRecipientDetailedAddress</a></span>()</code>
+<div class="block">The detailed address of the payment receiver.</div>
+</td>
+</tr>
+<tr id="i21" class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getRecipientName--">getRecipientName</a></span>()</code>
+<div class="block">The name of the receiving side.</div>
+</td>
+</tr>
+<tr id="i22" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getReference--">getReference</a></span>()</code>
+<div class="block">The reference of the payment.</div>
+</td>
+</tr>
+<tr id="i23" class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#getReferenceModel--">getReferenceModel</a></span>()</code>
+<div class="block">The reference model of the payment.</div>
+</td>
+</tr>
+<tr id="i24" class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#isUncertain--">isUncertain</a></span>()</code>
+<div class="block">The indication if the payment barcode data is uncertain.</div>
+</td>
+</tr>
+<tr id="i25" class="rowColor">
 <td class="colFirst"><code>protected byte[]</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#serializeToByteArray--">serializeToByteArray</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i18" class="altColor">
+<tr id="i26" class="altColor">
 <td class="colFirst"><code>protected void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#terminateNative-long-">terminateNative</a></span>(long&nbsp;nativeContext)</code>&nbsp;</td>
 </tr>
-<tr id="i19" class="rowColor">
+<tr id="i27" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.Result.html#toString--">toString</a></span>()</code>&nbsp;</td>
 </tr>
@@ -401,6 +449,17 @@ extends <a href="../../../../../../../com/microblink/entities/recognizers/Recogn
 <!--   -->
 </a>
 <h3>Method Detail</h3>
+<a name="getIdentificationCode--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getIdentificationCode</h4>
+<pre>@NonNull
+public&nbsp;java.lang.String&nbsp;getIdentificationCode()</pre>
+<div class="block">The identification code of the payment.</div>
+</li>
+</ul>
 <a name="getAmount--">
 <!--   -->
 </a>
@@ -415,19 +474,14 @@ extends <a href="../../../../../../../com/microblink/entities/recognizers/Recogn
 </dl>
 </li>
 </ul>
-<a name="getAccountNumber--">
+<a name="isUncertain--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>getAccountNumber</h4>
-<pre>@NonNull
-public&nbsp;java.lang.String&nbsp;getAccountNumber()</pre>
-<div class="block">Returns bank account number to which the payment goes</div>
-<dl>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>bank account number to which the payment goes</dd>
-</dl>
+<h4>isUncertain</h4>
+<pre>public&nbsp;boolean&nbsp;isUncertain()</pre>
+<div class="block">The indication if the payment barcode data is uncertain.</div>
 </li>
 </ul>
 <a name="getPaymentDescription--">
@@ -438,11 +492,7 @@ public&nbsp;java.lang.String&nbsp;getAccountNumber()</pre>
 <h4>getPaymentDescription</h4>
 <pre>@NonNull
 public&nbsp;java.lang.String&nbsp;getPaymentDescription()</pre>
-<div class="block">Returns description of the payment</div>
-<dl>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>description of the payment</dd>
-</dl>
+<div class="block">The description of the payment.</div>
 </li>
 </ul>
 <a name="getReference--">
@@ -453,11 +503,18 @@ public&nbsp;java.lang.String&nbsp;getPaymentDescription()</pre>
 <h4>getReference</h4>
 <pre>@NonNull
 public&nbsp;java.lang.String&nbsp;getReference()</pre>
-<div class="block">Returns the reference of the payment</div>
-<dl>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>the reference of the payment</dd>
-</dl>
+<div class="block">The reference of the payment.</div>
+</li>
+</ul>
+<a name="getPayerAccountNumber--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getPayerAccountNumber</h4>
+<pre>@NonNull
+public&nbsp;java.lang.String&nbsp;getPayerAccountNumber()</pre>
+<div class="block">The account number of the payer.</div>
 </li>
 </ul>
 <a name="getPayerAddress--">
@@ -468,11 +525,40 @@ public&nbsp;java.lang.String&nbsp;getReference()</pre>
 <h4>getPayerAddress</h4>
 <pre>@NonNull
 public&nbsp;java.lang.String&nbsp;getPayerAddress()</pre>
-<div class="block">Returns the address of the payer.</div>
-<dl>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>the address of the payer.</dd>
-</dl>
+<div class="block">The address of the payer.</div>
+</li>
+</ul>
+<a name="getOneTimePaymentCode--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getOneTimePaymentCode</h4>
+<pre>@NonNull
+public&nbsp;java.lang.String&nbsp;getOneTimePaymentCode()</pre>
+<div class="block">The one time payment code of the payment.</div>
+</li>
+</ul>
+<a name="getRecipientAccountNumber--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getRecipientAccountNumber</h4>
+<pre>@NonNull
+public&nbsp;java.lang.String&nbsp;getRecipientAccountNumber()</pre>
+<div class="block">The bank account number to which the payment goes.</div>
+</li>
+</ul>
+<a name="getPaymentCode--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getPaymentCode</h4>
+<pre>@NonNull
+public&nbsp;java.lang.String&nbsp;getPaymentCode()</pre>
+<div class="block">The payment code of the payment.</div>
 </li>
 </ul>
 <a name="getPurposeCode--">
@@ -483,11 +569,7 @@ public&nbsp;java.lang.String&nbsp;getPayerAddress()</pre>
 <h4>getPurposeCode</h4>
 <pre>@NonNull
 public&nbsp;java.lang.String&nbsp;getPurposeCode()</pre>
-<div class="block">Returns string that represents the purpose code</div>
-<dl>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>string that represents the purpose code</dd>
-</dl>
+<div class="block">The purpose code of the payment.</div>
 </li>
 </ul>
 <a name="getPayerName--">
@@ -498,11 +580,7 @@ public&nbsp;java.lang.String&nbsp;getPurposeCode()</pre>
 <h4>getPayerName</h4>
 <pre>@NonNull
 public&nbsp;java.lang.String&nbsp;getPayerName()</pre>
-<div class="block">Returns name of the payer</div>
-<dl>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>name of the payer</dd>
-</dl>
+<div class="block">The name of the payer.</div>
 </li>
 </ul>
 <a name="getRecipientName--">
@@ -513,11 +591,7 @@ public&nbsp;java.lang.String&nbsp;getPayerName()</pre>
 <h4>getRecipientName</h4>
 <pre>@NonNull
 public&nbsp;java.lang.String&nbsp;getRecipientName()</pre>
-<div class="block">Returns the name of the receiving side</div>
-<dl>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>the name of the receiving side</dd>
-</dl>
+<div class="block">The name of the receiving side.</div>
 </li>
 </ul>
 <a name="getCurrency--">
@@ -527,6 +601,7 @@ public&nbsp;java.lang.String&nbsp;getRecipientName()</pre>
 <li class="blockList">
 <h4>getCurrency</h4>
 <pre>@NonNull
+ @Nullable
 public&nbsp;java.lang.String&nbsp;getCurrency()</pre>
 <div class="block">Returns the currency or null if nothing was scanned.</div>
 <dl>
@@ -543,11 +618,7 @@ public&nbsp;java.lang.String&nbsp;getCurrency()</pre>
 <h4>getRecipientDetailedAddress</h4>
 <pre>@NonNull
 public&nbsp;java.lang.String&nbsp;getRecipientDetailedAddress()</pre>
-<div class="block">Returns detailed address of the payment receiver</div>
-<dl>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>detailed address of the payment receiver</dd>
-</dl>
+<div class="block">The detailed address of the payment receiver.</div>
 </li>
 </ul>
 <a name="getRecipientAddress--">
@@ -558,11 +629,29 @@ public&nbsp;java.lang.String&nbsp;getRecipientDetailedAddress()</pre>
 <h4>getRecipientAddress</h4>
 <pre>@NonNull
 public&nbsp;java.lang.String&nbsp;getRecipientAddress()</pre>
-<div class="block">Returns address of the payment receiver</div>
-<dl>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>address of the payment receiver</dd>
-</dl>
+<div class="block">The address of the payment receiver.</div>
+</li>
+</ul>
+<a name="getMerchantCodeCategory--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getMerchantCodeCategory</h4>
+<pre>@NonNull
+public&nbsp;java.lang.String&nbsp;getMerchantCodeCategory()</pre>
+<div class="block">The merchant code category of the payment.</div>
+</li>
+</ul>
+<a name="getMerchantReference--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getMerchantReference</h4>
+<pre>@NonNull
+public&nbsp;java.lang.String&nbsp;getMerchantReference()</pre>
+<div class="block">The merchant reference of the payment.</div>
 </li>
 </ul>
 <a name="getReferenceModel--">
@@ -573,11 +662,18 @@ public&nbsp;java.lang.String&nbsp;getRecipientAddress()</pre>
 <h4>getReferenceModel</h4>
 <pre>@NonNull
 public&nbsp;java.lang.String&nbsp;getReferenceModel()</pre>
-<div class="block">Returns the reference model of the payment</div>
-<dl>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>the reference model of the payment</dd>
-</dl>
+<div class="block">The reference model of the payment.</div>
+</li>
+</ul>
+<a name="getRawBarcodeData--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getRawBarcodeData</h4>
+<pre>@NonNull
+public&nbsp;java.lang.String&nbsp;getRawBarcodeData()</pre>
+<div class="block">The raw barcode data string.</div>
 </li>
 </ul>
 <a name="getPayerDetailedAddress--">
@@ -588,11 +684,7 @@ public&nbsp;java.lang.String&nbsp;getReferenceModel()</pre>
 <h4>getPayerDetailedAddress</h4>
 <pre>@NonNull
 public&nbsp;java.lang.String&nbsp;getPayerDetailedAddress()</pre>
-<div class="block">Returns detailed address of the payer</div>
-<dl>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>detailed address of the payer</dd>
-</dl>
+<div class="block">The detailed address of the payer.</div>
 </li>
 </ul>
 <a name="getOptionalData--">
@@ -603,11 +695,7 @@ public&nbsp;java.lang.String&nbsp;getPayerDetailedAddress()</pre>
 <h4>getOptionalData</h4>
 <pre>@NonNull
 public&nbsp;java.lang.String&nbsp;getOptionalData()</pre>
-<div class="block">Returns additional data available at the end of barcode</div>
-<dl>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>additional data available at the end of barcode</dd>
-</dl>
+<div class="block">The additional data about the payment.</div>
 </li>
 </ul>
 <a name="getParsedAmount--">
@@ -616,7 +704,8 @@ public&nbsp;java.lang.String&nbsp;getOptionalData()</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>getParsedAmount</h4>
-<pre>public&nbsp;java.math.BigDecimal&nbsp;getParsedAmount()</pre>
+<pre>@NonNull
+public&nbsp;java.math.BigDecimal&nbsp;getParsedAmount()</pre>
 <div class="block">Returns the scanned amount as big decimal value in normal currency (e.g. euros).</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>

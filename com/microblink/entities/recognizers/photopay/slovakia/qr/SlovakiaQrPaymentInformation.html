@@ -265,6 +265,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>SlovakiaQrPaymentInformation</h4>
 <pre>public&nbsp;SlovakiaQrPaymentInformation(long&nbsp;nativeContext,
+                                    @Nullable
                                     java.lang.Object&nbsp;keep)</pre>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -301,7 +302,8 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>getParsedAmount</h4>
-<pre>public&nbsp;java.math.BigDecimal&nbsp;getParsedAmount()</pre>
+<pre>@NonNull
+public&nbsp;java.math.BigDecimal&nbsp;getParsedAmount()</pre>
 <div class="block">Returns the scanned amount as big decimal value in normal currency (e.g. euros).</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -495,7 +497,8 @@ public&nbsp;<a href="../../../../../../../com/microblink/entities/recognizers/ph
 <ul class="blockListLast">
 <li class="blockList">
 <h4>getAvailableAccounts</h4>
-<pre>public&nbsp;java.util.List&nbsp;getAvailableAccounts()</pre>
+<pre>@NonNull
+public&nbsp;java.util.List&nbsp;getAvailableAccounts()</pre>
 <div class="block">Returns all available payment receiver accounts.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>

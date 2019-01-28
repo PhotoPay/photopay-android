@@ -162,6 +162,7 @@
 <ul>
 <li><a href="#blinkid_recognizers_australia">Australia</a></li>
 <li><a href="#blinkid_recognizers_austria">Austria</a></li>
+<li><a href="#blinkid_recognizers_brunei">Brunei</a></li>
 <li><a href="#blinkid_recognizers_colombia">Colombia</a></li>
 <li><a href="#blinkid_recognizers_croatia">Croatia</a></li>
 <li><a href="#blinkid_recognizers_cyprus">Cyprus</a></li>
@@ -171,11 +172,14 @@
 <li><a href="#blinkid_recognizers_hongkong">HongKong</a></li>
 <li><a href="#blinkid_recognizers_indonesia">Indonesia</a></li>
 <li><a href="#blinkid_recognizers_ireland">Ireland</a></li>
+<li><a href="#blinkid_recognizers_italy">Italy</a></li>
 <li><a href="#blinkid_recognizers_jordan">Jordan</a></li>
 <li><a href="#blinkid_recognizers_kuwait">Kuwait</a></li>
 <li><a href="#blinkid_recognizers_malaysia">Malaysia</a></li>
+<li><a href="#blinkid_recognizers_mexico">Mexico</a></li>
 <li><a href="#blinkid_recognizers_morocco">Morocco</a></li>
 <li><a href="#blinkid_recognizers_newzealand">New Zealand</a></li>
+<li><a href="#blinkid_recognizers_nigeria">Nigeria</a></li>
 <li><a href="#blinkid_recognizers_poland">Poland</a></li>
 <li><a href="#blinkid_recognizers_romania">Romania</a></li>
 <li><a href="#blinkid_recognizers_serbia">Serbia</a></li>
@@ -1205,9 +1209,15 @@
 <h4>
 <a id="user-content--payment--debit-card-combined-recognizer" class="anchor" href="#-payment--debit-card-combined-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-payment_card_combined"></a> Payment / Debit card combined recognizer</h4>
 <p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/paymentcard/PaymentCardCombinedRecognizer.html" rel="nofollow"><code>PaymentCardCombinedRecognizer</code></a> scans back side of Payment / Debit card after scanning the front side and combines data from both sides.</p>
+<h4>
+<a id="user-content--elite-payment--debit-card-front-and-back-side-recognizers" class="anchor" href="#-elite-payment--debit-card-front-and-back-side-recognizers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-elite_payment_card_single"></a> Elite Payment / Debit card front and back side recognizers</h4>
+<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/elitepaymentcard/ElitePaymentCardFrontRecognizer.html" rel="nofollow"><code>ElitePaymentCardFrontRecognizer</code></a> and <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/elitepaymentcard/ElitePaymentCardBackRecognizer.html" rel="nofollow"><code>ElitePaymentCardBackRecognizer</code></a> are used for scanning the front and back side of elite Payment / Debit card.</p>
+<h4>
+<a id="user-content--elite-payment--debit-card-combined-recognizer" class="anchor" href="#-elite-payment--debit-card-combined-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-elite_payment_card_combined"></a> Elite Payment / Debit card combined recognizer</h4>
+<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/elitepaymentcard/ElitePaymentCardCombinedRecognizer.html" rel="nofollow"><code>ElitePaymentCardCombinedRecognizer</code></a> scans back side of elite Payment / Debit card after scanning the front side and combines data from both sides.</p>
 <h3>
 <a id="user-content--document-face-recognizer" class="anchor" href="#-document-face-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-documentFaceRecognizer"></a> Document face recognizer</h3>
-<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/eudl/EudlRecognizer.html" rel="nofollow"><code>DocumentFaceRecognizer</code></a> is a special type of recognizer that only returns face image and full document image of the scanned document. It does not extract document fields like first name, last name, etc. This generic recognizer can be used to obtain document images in cases when specific support for some document type is not available.</p>
+<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/documentface/DocumentFaceRecognizer.html" rel="nofollow"><code>DocumentFaceRecognizer</code></a> is a special type of recognizer that only returns face image and full document image of the scanned document. It does not extract document fields like first name, last name, etc. This generic recognizer can be used to obtain document images in cases when specific support for some document type is not available.</p>
 <p>You can find information about usage context at the beginning of <a href="#blinkid_recognizers">this section</a>.</p>
 <h2>
 <a id="user-content--country-specific-blinkid-recognizers" class="anchor" href="#-country-specific-blinkid-recognizers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-blinkid_recognizers_countries"></a> Country-specific BlinkID recognizers</h2>
@@ -1234,8 +1244,18 @@
 <li>Austrian passport</li>
 </ul>
 <h4>
-<a id="user-content--scanning-austrian-drivers-license" class="anchor" href="#-scanning-austrian-drivers-license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-austria_dl"></a> Scanning Austrian driver's license</h4>
-<p>For scanning <a href="https://en.wikipedia.org/wiki/Driving_licence_in_Austria" rel="nofollow">the front side of Austrian driver's license</a>, <a href="#eudlRecognizer"><code>EudlRecognizer</code></a> is used.</p>
+<a id="user-content--austria-drivers-license-recognizer" class="anchor" href="#-austria-drivers-license-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-austria_dl"></a> Austria driver's license recognizer</h4>
+<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/austria/AustriaDlFrontRecognizer.html" rel="nofollow"><code>AustriaDlFrontRecognizer</code></a> is used for scanning <a href="https://en.wikipedia.org/wiki/Driving_licence_in_Austria" rel="nofollow">the front side of Austrian driver's license</a>.</p>
+<h3>
+<a id="user-content--brunei" class="anchor" href="#-brunei" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-blinkid_recognizers_brunei"></a> Brunei</h3>
+<h4>
+<a id="user-content--brunei-id-front-and-back-side-recognizer" class="anchor" href="#-brunei-id-front-and-back-side-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-brunei_id"></a> Brunei ID front and back side recognizer</h4>
+<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/brunei/BruneiIdFrontRecognizer.html" rel="nofollow"><code>BruneiIdFrontRecognizer</code></a> is used for scanning the front side of Bruneian identity card.
+The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/brunei/BruneiIdBackRecognizer.html" rel="nofollow"><code>BruneiIdBackRecognizer</code></a> is used for scanning the front side of Bruneian identity card.</p>
+<h4>
+<a id="user-content--brunei-residence-permit-front-and-back-side-recognizer" class="anchor" href="#-brunei-residence-permit-front-and-back-side-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-brunei_id"></a> Brunei residence permit front and back side recognizer</h4>
+<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/brunei/BruneiResidencePermitFrontRecognizer.html" rel="nofollow"><code>BruneiResidencePermitFrontRecognizer</code></a> is used for scanning the front side of Bruneian residence permit.
+The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/brunei/BruneiResidencePermitBackRecognizer.html" rel="nofollow"><code>BruneiResidencePermitBackRecognizer</code></a> is used for scanning the front side of Bruneian residence permit.</p>
 <h3>
 <a id="user-content--colombia" class="anchor" href="#-colombia" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-blinkid_recognizers_colombia"></a> Colombia</h3>
 <h4>
@@ -1257,7 +1277,10 @@
 <a id="user-content--cyprus" class="anchor" href="#-cyprus" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-blinkid_recognizers_cyprus"></a> Cyprus</h3>
 <h4>
 <a id="user-content--cyprus-id-front-and-back-side-recognizers" class="anchor" href="#-cyprus-id-front-and-back-side-recognizers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-cyprus_id"></a> Cyprus ID front and back side recognizers</h4>
-<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/cyprus/CyprusIdFrontRecognizer.html" rel="nofollow"><code>CyprusIdFrontRecognizer</code></a> and <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/cyprus/CyprusIdBackRecognizer.html" rel="nofollow"><code>CyprusIdBackRecognizer</code></a> are used for scanning the <a href="https://en.wikipedia.org/wiki/Cypriot_identity_card" rel="nofollow">front and back side of Cyprus identity card</a>.</p>
+<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/cyprus/CyprusIdFrontRecognizer.html" rel="nofollow"><code>CyprusIdFrontRecognizer</code></a> and <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/cyprus/CyprusIdBackRecognizer.html" rel="nofollow"><code>CyprusIdBackRecognizer</code></a> are used for scanning the <a href="https://en.wikipedia.org/wiki/Cypriot_identity_card" rel="nofollow">front and back side of Cyprus identity card, issued in 2015. or later</a>.</p>
+<h4>
+<a id="user-content--cyprus-old-id-front-and-back-side-recognizers" class="anchor" href="#-cyprus-old-id-front-and-back-side-recognizers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-cyprus_idOld"></a> Cyprus Old ID front and back side recognizers</h4>
+<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/cyprus/CyprusOldIdFrontRecognizer.html" rel="nofollow"><code>CyprusOldIdFrontRecognizer</code></a> and <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/cyprus/CyprusOldIdBackRecognizer.html" rel="nofollow"><code>CyprusOldIdBackRecognizer</code></a> are used for scanning the [front and back side of Cyprus Old identity card, issued before 2015] (<a href="https://en.wikipedia.org/wiki/Cypriot_identity_card" rel="nofollow">https://en.wikipedia.org/wiki/Cypriot_identity_card</a>).</p>
 <h3>
 <a id="user-content--czechia" class="anchor" href="#-czechia" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-blinkid_recognizers_czechia"></a> Czechia</h3>
 <p>For all recognizers, you can find information about usage context at the beginning of <a href="#blinkid_recognizers">this section</a>.</p>
@@ -1281,7 +1304,7 @@
 <p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/germany/GermanyIdFrontRecognizer.html" rel="nofollow"><code>GermanyIdFrontRecognizer</code></a> and <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/germany/GermanyIdBackRecognizer.html" rel="nofollow"><code>GermanyIdBackRecognizer</code></a> are used for scanning the <a href="https://en.wikipedia.org/wiki/German_identity_card" rel="nofollow">front and back side of German identity card</a> issued after 1 November 2010.</p>
 <h4>
 <a id="user-content--old-germany-id-front-side-recognizer" class="anchor" href="#-old-germany-id-front-side-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-germany_idOld"></a> Old Germany ID front side recognizer</h4>
-<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/germany/GermanyOldIdRecognizer.html" rel="nofollow"><code>GermanyOldIdRecognizer</code></a> is used for scanning <a href="https://en.wikipedia.org/wiki/German_identity_card" rel="nofollow">front side of German identity card</a> issued between 1 April 1987 and 31 October 2010.</p>
+<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/germany/GermanyIdOldRecognizer.html" rel="nofollow"><code>GermanyIdOldRecognizer</code></a> is used for scanning <a href="https://en.wikipedia.org/wiki/German_identity_card" rel="nofollow">front side of German identity card</a> issued between 1 April 1987 and 31 October 2010.</p>
 <h4>
 <a id="user-content--germany-passport-recognizer" class="anchor" href="#-germany-passport-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-germany_passport"></a> Germany passport recognizer</h4>
 <p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/germany/GermanyPassportRecognizer.html" rel="nofollow"><code>GermanyPassportRecognizer</code></a> is used for scanning the data page of <a href="https://en.wikipedia.org/wiki/German_passport" rel="nofollow">German passport</a>.</p>
@@ -1295,7 +1318,7 @@
 </ul>
 <h4>
 <a id="user-content--scanning-german-drivers-license" class="anchor" href="#-scanning-german-drivers-license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-germany_dl"></a> Scanning German driver's license</h4>
-<p>For scanning <a href="https://en.wikipedia.org/wiki/Driving_licence_in_Germany" rel="nofollow">the front side of German driver's license</a>, <a href="#eudlRecognizer"><code>EudlRecognizer</code></a> is used.</p>
+<p>For scanning <a href="https://en.wikipedia.org/wiki/Driving_licence_in_Germany" rel="nofollow">the front side of German driver's license</a>, <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/germany/GermanyDlFrontRecognizer.html" rel="nofollow"><code>GermanyDlFrontRecognizer </code></a> is used. For the back side, use <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/germany/GermanyDlBackRecognizer.html" rel="nofollow"><code>GermanyDlBackRecognizer</code></a>.</p>
 <h3>
 <a id="user-content--hongkong" class="anchor" href="#-hongkong" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-blinkid_recognizers_hongkong"></a> HongKong</h3>
 <h4>
@@ -1313,6 +1336,12 @@
 <h4>
 <a id="user-content--ireland-drivers-license-front-side-recognizer" class="anchor" href="#-ireland-drivers-license-front-side-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-ireland_dl"></a> Ireland driver's license front side recognizer</h4>
 <p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/ireland/IrelandDlFrontRecognizer.html" rel="nofollow"><code>IrelandDlFrontRecognizer</code></a> is used for scanning <a href="https://en.wikipedia.org/wiki/Driving_licence_in_the_Republic_of_Ireland" rel="nofollow">front side of Irish driver's license</a>.</p>
+<p>You can find information about usage context at the beginning of <a href="#blinkid_recognizers">this section</a>.</p>
+<h3>
+<a id="user-content--italy" class="anchor" href="#-italy" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-blinkid_recognizers_italy"></a> Italy</h3>
+<h4>
+<a id="user-content--italy-drivers-license-front-side-recognizer" class="anchor" href="#-italy-drivers-license-front-side-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-italy_dl"></a> Italy driver's license front side recognizer</h4>
+<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/italy/ItalyDlFrontRecognizer.html" rel="nofollow"><code>ItalyDlFrontRecognizer</code></a> is used for scanning <a href="https://en.wikipedia.org/wiki/Driving_licence_in_Italy" rel="nofollow">front side of Italian driver's license</a>.</p>
 <p>You can find information about usage context at the beginning of <a href="#blinkid_recognizers">this section</a>.</p>
 <h3>
 <a id="user-content--jordan" class="anchor" href="#-jordan" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-blinkid_recognizers_jordan"></a> Jordan</h3>
@@ -1333,16 +1362,28 @@
 <p>For all recognizers, you can find information about usage context at the beginning of <a href="#blinkid_recognizers">this section</a>.</p>
 <h4>
 <a id="user-content--malaysian-mykad-front-and-back-side-recognizers" class="anchor" href="#-malaysian-mykad-front-and-back-side-recognizers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-malaysia_mykad"></a> Malaysian MyKad front and back side recognizers</h4>
-<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/malaysia/MyKadFrontRecognizer.html" rel="nofollow"><code>MyKadFrontRecognizer</code></a> and <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/malaysia/MyKadBackRecognizer.html" rel="nofollow"><code>MyKadBackRecognizer</code></a> are used for scanning the <a href="https://en.wikipedia.org/wiki/Malaysian_identity_card" rel="nofollow">front and back side of Malaysian MyKad card</a>.</p>
+<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/malaysia/MalaysiaMyKadFrontRecognizer.html" rel="nofollow"><code>MalaysiaMyKadFrontRecognizer</code></a> and <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/malaysia/MalaysiaMyKadBackRecognizer.html" rel="nofollow"><code>MalaysiaMyKadBackRecognizer</code></a> are used for scanning the <a href="https://en.wikipedia.org/wiki/Malaysian_identity_card" rel="nofollow">front and back side of Malaysian MyKad card</a>.</p>
 <h4>
 <a id="user-content--malaysian-ikad-front-side-recognizer" class="anchor" href="#-malaysian-ikad-front-side-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-malaysia_ikad"></a> Malaysian iKad front side recognizer</h4>
-<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/malaysia/IkadRecognizer.html" rel="nofollow"><code>IkadRecognizer</code></a> is used for scanning front side of Malaysian iKad (immigrator) card.</p>
+<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/malaysia/MalaysiaIkadFrontRecognizer.html" rel="nofollow"><code>MalaysiaIkadFrontRecognizer</code></a> is used for scanning front side of Malaysian iKad (immigrator) card.</p>
+<h4>
+<a id="user-content--malaysian-mykas-front-side-recognizer" class="anchor" href="#-malaysian-mykas-front-side-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-malaysia_mykas"></a> Malaysian MyKAS front side recognizer</h4>
+<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/malaysia/MalaysiaMyKasFrontRecognizer.html" rel="nofollow"><code>MalaysiaMyKasFrontRecognizer</code></a> is used for scanning <a href="https://en.wikipedia.org/wiki/Malaysian_identity_card" rel="nofollow">front side of Malaysian MyKAS card</a>.</p>
+<h4>
+<a id="user-content--malaysian-mypr-front-side-recognizer" class="anchor" href="#-malaysian-mypr-front-side-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-malaysia_mypr"></a> Malaysian MyPR front side recognizer</h4>
+<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/malaysia/MalaysiaMyPrFrontRecognizer.html" rel="nofollow"><code>MalaysiaMyPrFrontRecognizer</code></a> is used for scanning <a href="https://en.wikipedia.org/wiki/Malaysian_identity_card" rel="nofollow">front side of Malaysian MyPR card</a>.</p>
 <h4>
 <a id="user-content--malaysian-mytentera-front-side-recognizer" class="anchor" href="#-malaysian-mytentera-front-side-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-malaysia_mytentera"></a> Malaysian MyTentera front side recognizer</h4>
-<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/malaysia/MyTenteraRecognizer.html" rel="nofollow"><code>MyTenteraRecognizer</code></a> is used for scanning <a href="https://en.wikipedia.org/wiki/Malaysian_identity_card" rel="nofollow">front side of Malaysian MyTentera card</a>.</p>
+<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/malaysia/MalaysiaMyTenteraFrontRecognizer.html" rel="nofollow"><code>MalaysiaMyTenteraFrontRecognizer</code></a> is used for scanning <a href="https://en.wikipedia.org/wiki/Malaysian_identity_card" rel="nofollow">front side of Malaysian MyTentera card</a>.</p>
 <h4>
 <a id="user-content--malaysian-drivers-license-front-side-recognizer" class="anchor" href="#-malaysian-drivers-license-front-side-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-malaysia_dl"></a> Malaysian driver's license front side recognizer</h4>
 <p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/malaysia/MalaysiaDlFrontRecognizer.html" rel="nofollow"><code>MalaysiaDlFrontRecognizer</code></a> is used for scanning <a href="https://en.wikipedia.org/wiki/Driving_licence_in_Malaysia" rel="nofollow">front side of Malaysian driver's license</a>.</p>
+<h3>
+<a id="user-content--mexico" class="anchor" href="#-mexico" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-blinkid_recognizers_mexico"></a> Mexico</h3>
+<h4>
+<a id="user-content--mexico-voter-id-front-side-recognizer" class="anchor" href="#-mexico-voter-id-front-side-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-mexico_voter_id"></a> Mexico Voter ID front side recognizer</h4>
+<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/mexico/MexicoVoterIdFrontRecognizer.html" rel="nofollow"><code>MexicoVoterIdFrontRecognizer</code></a> is used for scanning front side of the Mexico voter identity card.</p>
+<p>You can find information about usage context at the beginning of <a href="#blinkid_recognizers">this section</a>.</p>
 <h3>
 <a id="user-content--morocco" class="anchor" href="#-morocco" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-blinkid_recognizers_morocco"></a> Morocco</h3>
 <h4>
@@ -1355,6 +1396,12 @@
 <a id="user-content--new-zealand-drivers-license-front-side-recognizer" class="anchor" href="#-new-zealand-drivers-license-front-side-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-newzealand_dl"></a> New Zealand driver's license front side recognizer</h4>
 <p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/newzealand/NewZealandDlFrontRecognizer.html" rel="nofollow"><code>NewZealandDlFrontRecognizer</code></a> is used for scanning front side of New Zealand driver's license.</p>
 <p>You can find information about usage context at the beginning of <a href="#blinkid_recognizers">this section</a>.</p>
+<h3>
+<a id="user-content--nigeria" class="anchor" href="#-nigeria" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-blinkid_recognizers_nigeria"></a> Nigeria</h3>
+<h4>
+<a id="user-content--scanning-nigerian-drivers-license" class="anchor" href="#-scanning-nigerian-drivers-license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-nigeria_dl"></a> Scanning Nigerian driver's license</h4>
+<p>For scanning the PDF417 barcode from the Nigerian driver's license, <a href="#us_dl_recognizer"><code>UsdlRecognizer</code></a> is used.</p>
+<p>The <a href="#us_dl_combined_recognizer"><code>UsdlCombinedRecognizer</code></a> can also be used for scanning the PDF417 barcode from the back side of Nigerian driver's license after scanning the full document image and face image from the front side.</p>
 <h3>
 <a id="user-content--poland" class="anchor" href="#-poland" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-blinkid_recognizers_poland"></a> Poland</h3>
 <p>For all recognizers, you can find information about usage context at the beginning of <a href="#blinkid_recognizers">this section</a>.</p>
@@ -1451,7 +1498,7 @@
 <h3>
 <a id="user-content--us--canada" class="anchor" href="#-us--canada" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-blinkid_recognizers_us_canada"></a> US / Canada</h3>
 <h4>
-<a id="user-content--scanning-us--canada-drivers-license" class="anchor" href="#-scanning-us--canada-drivers-license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-austria_dl"></a> Scanning US / Canada driver's license</h4>
+<a id="user-content--scanning-us--canada-drivers-license" class="anchor" href="#-scanning-us--canada-drivers-license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-uscanada_dl"></a> Scanning US / Canada driver's license</h4>
 <p>For scanning the PDF417 barcode from the US / Canada driver's license, <a href="#us_dl_recognizer"><code>UsdlRecognizer</code></a> is used.</p>
 <p>The <a href="#us_dl_combined_recognizer"><code>UsdlCombinedRecognizer</code></a> can also be used for scanning the PDF417 barcode from the back side of US / Canada driver's license after scanning the full document image and face image from the front side.</p>
 <h2>
@@ -1526,7 +1573,7 @@
 <a id="user-content--serbian-payment-pdf417-2d-barcode-recognizer" class="anchor" href="#-serbian-payment-pdf417-2d-barcode-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-serbia_pdf417"></a> Serbian payment PDF417 2D barcode recognizer</h4>
 <p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.html" rel="nofollow"><code>SerbiaPdf417PaymentRecognizer</code></a> is used for scanning payment information from PDF417 2D barcode found on some serbian invoices. The Republic of Serbia does not have a national standard for payment slips nor payment barcodes. This recognizer supports scanning PDF417 2D barcodes that are modelled after Croatian HUB3 standard.</p>
 <h4>
-<a id="user-content--serbian-payment-pdf417-2d-barcode-recognizer-1" class="anchor" href="#-serbian-payment-pdf417-2d-barcode-recognizer-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-serbia_pdf417"></a> Serbian payment PDF417 2D barcode recognizer</h4>
+<a id="user-content--serbian-payment-qr-code-recognizer" class="anchor" href="#-serbian-payment-qr-code-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-serbia_qr"></a> Serbian payment QR code recognizer</h4>
 <p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/photopay/serbia/qr/SerbiaQrCodePaymentRecognizer" rel="nofollow"><code>SerbiaQrCodePaymentRecognizer</code></a> is used for scanning payment information from QR code found on some serbian invoices. The Republic of Serbia does not have a national standard for payment slips nor payment barcodes. This recognizer supports scanning QR codes that are modelled after Croatian HUB3 standard.</p>
 <h3>
 <a id="user-content--slovakia-1" class="anchor" href="#-slovakia-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-photopay_recognizers_slovakia"></a> Slovakia</h3>

@@ -382,7 +382,9 @@ implements <a href="../../../../com/microblink/view/ocrResult/IOcrResultView.htm
 <ul class="blockList">
 <li class="blockList">
 <h4>OcrResultHorizontalDotsView</h4>
-<pre>public&nbsp;OcrResultHorizontalDotsView(android.content.Context&nbsp;context,
+<pre>public&nbsp;OcrResultHorizontalDotsView(@NonNull
+                                   android.content.Context&nbsp;context,
+                                   @Nullable
                                    android.util.AttributeSet&nbsp;attrs,
                                    int&nbsp;hostActivityOrientation)</pre>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
@@ -394,7 +396,9 @@ implements <a href="../../../../com/microblink/view/ocrResult/IOcrResultView.htm
 <ul class="blockListLast">
 <li class="blockList">
 <h4>OcrResultHorizontalDotsView</h4>
-<pre>public&nbsp;OcrResultHorizontalDotsView(android.content.Context&nbsp;context,
+<pre>public&nbsp;OcrResultHorizontalDotsView(@NonNull
+                                   android.content.Context&nbsp;context,
+                                   @Nullable
                                    android.util.AttributeSet&nbsp;attrs,
                                    int&nbsp;hostActivityOrientation,
                                    int&nbsp;numberOfDots)</pre>
@@ -415,7 +419,8 @@ implements <a href="../../../../com/microblink/view/ocrResult/IOcrResultView.htm
 <ul class="blockList">
 <li class="blockList">
 <h4>addOcrResult</h4>
-<pre>public&nbsp;void&nbsp;addOcrResult(<a href="../../../../com/microblink/metadata/ocr/DisplayableOcrResult.html" title="class in com.microblink.metadata.ocr">DisplayableOcrResult</a>&nbsp;result)</pre>
+<pre>public&nbsp;void&nbsp;addOcrResult(@NonNull
+                         <a href="../../../../com/microblink/metadata/ocr/DisplayableOcrResult.html" title="class in com.microblink.metadata.ocr">DisplayableOcrResult</a>&nbsp;result)</pre>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../com/microblink/view/ocrResult/IOcrResultView.html#addOcrResult-com.microblink.metadata.ocr.DisplayableOcrResult-">IOcrResultView</a></code></span></div>
 <div class="block">Adds new OCR result that will be displayed.</div>
@@ -433,7 +438,8 @@ implements <a href="../../../../com/microblink/view/ocrResult/IOcrResultView.htm
 <ul class="blockList">
 <li class="blockList">
 <h4>setOcrResult</h4>
-<pre>public&nbsp;void&nbsp;setOcrResult(<a href="../../../../com/microblink/metadata/ocr/DisplayableOcrResult.html" title="class in com.microblink.metadata.ocr">DisplayableOcrResult</a>&nbsp;result)</pre>
+<pre>public&nbsp;void&nbsp;setOcrResult(@NonNull
+                         <a href="../../../../com/microblink/metadata/ocr/DisplayableOcrResult.html" title="class in com.microblink.metadata.ocr">DisplayableOcrResult</a>&nbsp;result)</pre>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
 <div class="block">Clears line animation queue and calls <code>addOcrResult</code> with given <code>result</code></div>
 <dl>
@@ -461,7 +467,8 @@ implements <a href="../../../../com/microblink/view/ocrResult/IOcrResultView.htm
 <ul class="blockList">
 <li class="blockList">
 <h4>getView</h4>
-<pre>public&nbsp;android.view.View&nbsp;getView()</pre>
+<pre>@NonNull
+public&nbsp;android.view.View&nbsp;getView()</pre>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
 </li>
 </ul>

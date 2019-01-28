@@ -1,5 +1,194 @@
 # Release notes
 
+## 7.2.0
+
+### New features:
+
+- added support for reading front side of Italy Driver's License - use `ItalyDlFrontRecognizer`
+- added standalone recognizer for reading front side of Austria Driver's License - use `AustriaDlFrontRecognizer`
+- added support for reading front and back side of elite Payment / Debit cards - use `ElitePaymentCardFrontRecognizer`, `ElitePaymentCardBackRecognizer` and `ElitePaymentCardCombinedRecognizer`
+- added standalone recognizer for reading front side of German Driver's License - use `GermanyDlFrontRecognizer`
+- added support for reading back side of Germany Driver's License (reading of single B10 field - date of issue for B category)  - use `GermanyDlBackRecognizer`
+- added support for reading front side of Mexico Voter ID  - use `MexicoVoterIdFrontRecognizer`
+- added support for reading front and back side of Brunei ID - use `BruneiIdFrontRecognizer` and `BruneiIdBackRecognizer`
+- added support for reading front and back side of Cyprus ID, issued after 2015.  - use `CyprusIdFrontRecognizer` and `CyprusIdBackRecognizer`
+- added support for reading front side of Malaysian MyKAS - use `MalaysiaMyKasFrontRecognizer`
+- added support for reading front side of Malaysian MyPR - use `MalaysiaMyPrFrontRecognizer`
+- added support for reading front and back side of Brunei Residence Permit - use `BruneiResidencePermitFrontRecognizer` and `BruneiResidencePermitBackRecognizer`
+- enabled capturing high resolution camera frames:
+    - when custom UI integration is performed, use `RecognizerRunnerView.setHighResFrameCaptureEnabled` and `RecognizerRunnerView.captureHighResImage`
+    - when using provided scan activities, high resolution full camera frames taken at the moment of successful scan are returned if this option is enabled through `UISettings`. Concrete `UISettings` which implement interface `HighResSuccessFrameCaptureUIOptions` support this feature.
+- updated default icons in scan activities/overlays
+
+### Improvements for existing features:
+- improved `CzechiaQrCodeRecognizer`:
+    - support for default currency
+- improved `SwitzerlandSlipRecognizer`
+- improved `SerbiaQrCodePaymentRecognizer` and `SerbiaPdf417PaymentRecognizer`:
+    - support for new Serbian QR code standard
+    - added result members: `identificationCode`, `payerAccountNumber`, `paymentCode`, `merchantCodeCategory`, `oneTimePaymentCode`, `merchantReference` and `rawBarcodeData`
+    - renamed result member: accountNumber to recipientAccountNumber
+- improved QR code scanning for images
+- improved `MalaysiaDlFrontRecognizer`:
+    - added support for reading Malaysia Dl for foreigners 
+- improved `UsdlRecognizer`:
+    - added support for reading dates on Nigerian Driver's licenses
+- added support for setting full document image extension factors for almost all ID document recognizers, they implement interface `FullDocumentImageExtensionOptions`
+- added support for setting the number of stable detections threshold on `DocumentFaceRecognizer` and recognizers which use it internally: `MrtdCombinedRecognizer` and `UsdlCombinedRecognizer` - use `setNumStableDetectionsThreshold(int)`. This can help to avoid returning of blurry images.
+- improved `EudlRecognizer`:
+    - better reading accuracy for UK Driver's license
+- improved reading accuracy for the following recognizers (**DeepOCR** support):
+    - `CroatiaIdFrontRecognizer`
+    - `CroatiaIdBackRecognizer`
+    - `HongKongIdFrontRecognizer`
+    - `IndonesiaIdFrontRecognizer`
+    - `MalaysiaMyKadFrontRecognizer`
+    - `MalaysiaMyKadBackRecognizer`
+    - `MalaysiaMyTenteraFrontRecognizer`
+    - `MalaysiaDlFrontRecognizer`
+    - `NewZealandDlFrontRecognizer`
+    - `SingaporeIdFrontRecognizer`
+    - `SingaporeIdBackRecognizer`
+    - `SingaporeDlFrontRecognizer`
+- improved DeepOCR accuracy
+- added support for hiding sensitive parts of images returned by payment card recognizers:
+    - `PaymentCardFrontRecognizer`: setAnonymizeOwner, setAnonymizeCardNumber
+    - `PaymentCardBackRecognizer`: setAnonymizeCvv
+    - `PaymentCardCombinedRecognizer`:  setAnonymizeOwner, setAnonymizeCardNumber, setAnonymizeCvv
+    - `ElitePaymentCardFrontRecognizer`: setAnonymizeOwner
+    - `ElitePaymentCardBackRecognizer`: setAnonymizeCardNumber, setAnonymizeCvv
+    - `ElitePaymentCardBackRecognizer`: setAnonymizeOwner,  setAnonymizeCardNumber, setAnonymizeCvv
+- `SlovakiaIdFrontRecognizer`: improved reading of `personalNumber` field
+- improved image return processor:
+    - the processor now estimates detected (dewarped) document image quality and returns the best quality dewarped image from the best quality detection
+- `DocumentVerificationActivity` does not extend `AppCompatActivity` any more
+- improved `PaymentCard` recognizers:
+    - better OCR and data extraction
+    - added support for reading payment card numbers in 4x6x4 and 4x6x5 format
+- improveed UAE recognizers:
+    - glare detection is enabled for all images returned from `UnitedArabEmiratesDlFrontRecognizer`, `UnitedArabEmiratesIdBackRecognizer` and `UnitedArabEmiratesIdFrontRecognizer` recognizers
+- improved `MrtdRecognizer`:
+    - added option to set extension factors for full document image: use method `setFullDocumentImageExtensionFactors`
+    - added option to encode `fullDocumentImage` and `mrzImage` to JPEG and save them to `MrtdRecognizer.Result`: use `setEncodeMrzImage` and `setEncodeFullDocumentImage` to enable encoding
+- `RecognizerRunnerView` is lifecycle-aware now, it implements `android.arch.lifecycle.LifecycleObserver` interface
+
+### Minor API changes:
+
+- renamed methods in `SingaporeIdFrontRecognizer` and its `Result`:
+    - `bloodType` to `bloodGroup`
+- renamed methods in `GermanyIdFrontRecognizer` and its `Result`:
+    - `lastName` to `surname`
+    - `firstName` to `givenNames`
+- renamed `MyTenteraRecognizer` to `MalaysiaMyTenteraFrontRecognizer` and  methods in recognizer and its `Result`:
+    - `ownerFullName` -> `fullName`
+    - `ownerAddress` -> `fullAddress`
+    - `ownerAddressStreet` -> `street`
+    - `ownerAddressZipCode` -> `zipcode`
+    - `ownerAddressCity` -> `city`
+    - `ownerAddressState` -> `ownerState`
+    - `ownerBirthDate` -> `birthDate`
+    - `ownerSex` -> `sex`
+    - `ownerReligion` -> `religion`
+    - `nricNumber` -> `nric`
+- renamded enum `com.microblink.uisettings.options.ShowOcrResultMode` to `com.microblink.uisettings.options.OcrResultDisplayMode`
+- for all `UISettings` classes which support setting of OCR result display mode, renamed method `setShowOcrResultMode` to `setOcrResultDisplayMode`
+- renamed `IkadRecognizer` to `MalaysiaIkadFrontRecognizer` and  methods in recognizer and its `Result`:
+    - `expiryDate` to `dateOfExpiry `
+    - `sex ` to `gender`
+- renamed `MyKadFrontRecogniezer ` to `MalaysiaMyKadFrontRecognizer ` and  methods in recognizer and its `Result`:
+    - `ownerFullName ` to `fullName `
+    - `ownerAddress ` to `fullAddress `
+    - `addressStreet ` to `street `
+    - `ownerAddressZipCode ` to `zipcode `
+    - `ownerAddressCity ` to `city `
+    - `ownerAddressState ` to `ownerState `
+    - `ownerBirthDate ` to `birthDate `
+    - `ownerSex ` to `sex `
+    - `ownerReligion ` to `religion `
+    - `nricNumber ` to `nric `
+- `MalaysiaMyKadFrontRecognizer` does not extract `armyNumber` anymore, use `MalaysiaMyTenteraFrontRecognizer` for scanning `MyTentera`
+- removed `sex` and `signatureImage` from `MalaysiaMyKadBackRecognizer `
+- `MrtdRecognizer`: 
+    - method `setSaveImageDPI` which has been used to set DPI for full document and MRZ image is replaced with methods `setFullDocumentImageDpi` and `setMrzImageDpi`
+- renamed methods in `SwitzerlandIdBackRecognizer` and its `Result`: 
+    - `nonMrzDateOfExpiry` to `dateOfExpiry`
+    - `nonMrzSex` to `sex`
+- renamed methods in `SwitzerlandPassportRecognizer` and its `Result`:
+    - `placeOfBirth` to `placeOfOrigin`
+    - `nonMrzDateOfBirth` to `dateOfBirth`
+    - `nonMrzDateOfExpiry` to `dateOfExpiry`
+    - `nonMrzSex` to `sex`
+- renamed `GermanyOldIdRecognizer` to `GermanyIdOldRecognizer`
+- renamed methods in `CroatiaCombinedRecognizer` and its result:
+    - `identityCardNumber` to `documentNumber`
+    - `address` to `residence`
+    - `issuingAuthority` to `issuedBy`
+    - `personalIdentificationNumber` to `oib`
+    - `nonResident` to `documentForNonResident`
+- removed `mrzImage` from `MrtdCombinedRecognizer` and its result
+- renamed methods in `AustraliaDlFrontRecognizer.Result`:
+    - `name` to `fullName`
+    - `dateOfExpiry` to `licenceExpiry`
+- renamed `eyeColour` to `colourOfEyes` in `GermanyIdBackRecognizer.Result`
+- deprecated the following recognizers:
+    - `SerbiaIdBackRecognizer`
+    - `SerbiaIdFrontRecognizer`
+    - `SerbiaCombinedRecognizer`
+- deprecated the following result fields:
+    - `HongKongIdFrontRecognizer.Result`:
+        - `commercialCode`
+    - `IndonesiaIdFrontRecognizer.Result`:
+        - `bloodType`
+        - `district`
+        - `kelDesa`
+        - `rt`
+        - `rw`
+    - `NewZealandDlFrontRecognizer.Result`:
+        - `donorIndicator`
+        - `cardVersion`
+    - `MalaysiaMyKadBackRecognizer.Result`:
+        - `extendedNric`
+    - `MexicoVoterIdFrontRecognizer.Result`:
+        - `electorKey`
+    - `IrelandDlFrontRecognizer.Result`:
+        - `driverNumber`
+    - `SwedenDlFrontRecognizer.Result`:
+        - `referenceNumber`
+    - `MalaysiaIkadFrontRecognizer.Result`:
+        - `passportNumber`    
+    - `AustriaIdBackRecognizer.Result`:
+        - `principalResidence`
+        - `height`
+        - `eyeColour`
+    - `AustriaPassportRecognizer.Result`:
+        - `height`
+     - `GermanyIdBackRecognizer.Result`:
+        - `colourOfEyes`
+        - `height`
+    - `SwitzerlandIdBackRecognizer.Result`:
+        - `height`
+    - `SwitzerlandPassportRecognizer.Result`:
+        - `height`
+     - `SingaporeIdBackRecognizer.Result`:
+        - `bloodGroup`
+    - `ColombiaIdBackRecognizer.Result`:
+        - `bloodGroup`
+    - `SwitzerlandPassportRecognizer.Result`:
+        - `height`
+    - `PolandIdFrontRecognizer.Result`:
+        - `familyName`
+        - `parentsGivenNames`
+    - `MoroccoIdBackRecognizer.Result`:
+        - `fathersName`
+        - `mothersName`
+    - `RomaniaIdFrontRecognizer.Result`:
+        - `parentNames`
+
+### Bug fixes:
+
+- `DocumentFaceRecognizer` now correctly applies DPI settings to returned face and full document images
+- various other bug fixes and improvements
+
 ## 7.1.1
 
 ### Bug fixes:

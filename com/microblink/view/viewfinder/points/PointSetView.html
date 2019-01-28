@@ -275,7 +275,9 @@ implements <a href="../../../../../com/microblink/view/viewfinder/points/IDispla
 <ul class="blockList">
 <li class="blockList">
 <h4>PointSetView</h4>
-<pre>public&nbsp;PointSetView(android.content.Context&nbsp;context,
+<pre>public&nbsp;PointSetView(@NonNull
+                    android.content.Context&nbsp;context,
+                    @Nullable
                     android.util.AttributeSet&nbsp;attrs,
                     int&nbsp;hostActivityOrientation,
                     int&nbsp;pointRadius,
@@ -289,7 +291,9 @@ implements <a href="../../../../../com/microblink/view/viewfinder/points/IDispla
 <ul class="blockListLast">
 <li class="blockList">
 <h4>PointSetView</h4>
-<pre>public&nbsp;PointSetView(android.content.Context&nbsp;context,
+<pre>public&nbsp;PointSetView(@NonNull
+                    android.content.Context&nbsp;context,
+                    @Nullable
                     android.util.AttributeSet&nbsp;attrs,
                     int&nbsp;hostActivityOrientation)</pre>
 </li>
@@ -308,7 +312,8 @@ implements <a href="../../../../../com/microblink/view/viewfinder/points/IDispla
 <ul class="blockList">
 <li class="blockList">
 <h4>getView</h4>
-<pre>public&nbsp;android.view.View&nbsp;getView()</pre>
+<pre>@NonNull
+public&nbsp;android.view.View&nbsp;getView()</pre>
 </li>
 </ul>
 <a name="setHostActivityOrientation-int-">
@@ -372,7 +377,8 @@ public&nbsp;void&nbsp;addDisplayablePointsDetection(@Nullable
 <ul class="blockList">
 <li class="blockList">
 <h4>onAnimationUpdate</h4>
-<pre>public&nbsp;void&nbsp;onAnimationUpdate(android.animation.ValueAnimator&nbsp;animation)</pre>
+<pre>public&nbsp;void&nbsp;onAnimationUpdate(@NonNull
+                              android.animation.ValueAnimator&nbsp;animation)</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code>onAnimationUpdate</code>&nbsp;in interface&nbsp;<code>android.animation.ValueAnimator.AnimatorUpdateListener</code></dd>
@@ -411,7 +417,8 @@ public&nbsp;void&nbsp;addDisplayablePointsDetection(@Nullable
 <ul class="blockListLast">
 <li class="blockList">
 <h4>onDraw</h4>
-<pre>protected&nbsp;void&nbsp;onDraw(android.graphics.Canvas&nbsp;canvas)</pre>
+<pre>protected&nbsp;void&nbsp;onDraw(@NonNull
+                      android.graphics.Canvas&nbsp;canvas)</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code>onDraw</code>&nbsp;in class&nbsp;<code>android.view.View</code></dd>

@@ -354,9 +354,10 @@ implements <a href="../../../../com/microblink/view/ocrResult/IOcrResultView.htm
 <ul class="blockList">
 <li class="blockList">
 <h4>OcrResultDotsView</h4>
-<pre>public&nbsp;OcrResultDotsView(android.content.Context&nbsp;context,
+<pre>public&nbsp;OcrResultDotsView(@NonNull
+                         android.content.Context&nbsp;context,
                          int&nbsp;hostActivityOrientation,
-                         @NonNull
+                         @Nullable
                          <a href="../../../../com/microblink/hardware/orientation/Orientation.html" title="class in com.microblink.hardware.orientation">Orientation</a>&nbsp;initialRecognizerOrientation)</pre>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -370,7 +371,9 @@ implements <a href="../../../../com/microblink/view/ocrResult/IOcrResultView.htm
                                 <code>ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE</code>.</dd>
 <dd><code>initialRecognizerOrientation</code> - initial orientation of <a href="../../../../com/microblink/view/recognition/RecognizerRunnerView.html" title="class in com.microblink.view.recognition"><code>RecognizerRunnerView</code></a>
                                      rotatable view. Can be obtained by using
-                                     <a href="../../../../com/microblink/view/BaseCameraView.html#getInitialOrientation--"><code>BaseCameraView.getInitialOrientation()</code></a>.</dd>
+                                     <a href="../../../../com/microblink/view/BaseCameraView.html#getInitialOrientation--"><code>BaseCameraView.getInitialOrientation()</code></a>.
+                                     If set to <code>null</code> or <a href="../../../../com/microblink/hardware/orientation/Orientation.html#ORIENTATION_UNKNOWN"><code>Orientation.ORIENTATION_UNKNOWN</code></a>
+                                     recognizer orientation will be set to <a href="../../../../com/microblink/hardware/orientation/Orientation.html#ORIENTATION_PORTRAIT"><code>Orientation.ORIENTATION_PORTRAIT</code></a>.</dd>
 </dl>
 </li>
 </ul>
@@ -380,9 +383,10 @@ implements <a href="../../../../com/microblink/view/ocrResult/IOcrResultView.htm
 <ul class="blockListLast">
 <li class="blockList">
 <h4>OcrResultDotsView</h4>
-<pre>public&nbsp;OcrResultDotsView(android.content.Context&nbsp;context,
+<pre>public&nbsp;OcrResultDotsView(@NonNull
+                         android.content.Context&nbsp;context,
                          int&nbsp;hostActivityOrientation,
-                         @NonNull
+                         @Nullable
                          <a href="../../../../com/microblink/hardware/orientation/Orientation.html" title="class in com.microblink.hardware.orientation">Orientation</a>&nbsp;initialRecognizerOrientation,
                          int&nbsp;numberOfDots)</pre>
 <dl>
@@ -397,7 +401,9 @@ implements <a href="../../../../com/microblink/view/ocrResult/IOcrResultView.htm
                                 <code>ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE</code>.</dd>
 <dd><code>initialRecognizerOrientation</code> - initial orientation of <a href="../../../../com/microblink/view/recognition/RecognizerRunnerView.html" title="class in com.microblink.view.recognition"><code>RecognizerRunnerView</code></a>
                                      rotatable view. Can be obtained by using
-                                     <a href="../../../../com/microblink/view/BaseCameraView.html#getInitialOrientation--"><code>BaseCameraView.getInitialOrientation()</code></a>.</dd>
+                                     <a href="../../../../com/microblink/view/BaseCameraView.html#getInitialOrientation--"><code>BaseCameraView.getInitialOrientation()</code></a>.
+                                     If set to <code>null</code> or <a href="../../../../com/microblink/hardware/orientation/Orientation.html#ORIENTATION_UNKNOWN"><code>Orientation.ORIENTATION_UNKNOWN</code></a>
+                                     recognizer orientation will be set to <a href="../../../../com/microblink/hardware/orientation/Orientation.html#ORIENTATION_PORTRAIT"><code>Orientation.ORIENTATION_PORTRAIT</code></a>.</dd>
 <dd><code>numberOfDots</code> - maximum number of dots being displayed.</dd>
 </dl>
 </li>
@@ -416,7 +422,8 @@ implements <a href="../../../../com/microblink/view/ocrResult/IOcrResultView.htm
 <ul class="blockList">
 <li class="blockList">
 <h4>getView</h4>
-<pre>public&nbsp;android.view.View&nbsp;getView()</pre>
+<pre>@NonNull
+public&nbsp;android.view.View&nbsp;getView()</pre>
 </li>
 </ul>
 <a name="setHostActivityOrientation-int-">
@@ -444,7 +451,8 @@ implements <a href="../../../../com/microblink/view/ocrResult/IOcrResultView.htm
 <ul class="blockList">
 <li class="blockList">
 <h4>addOcrResult</h4>
-<pre>public&nbsp;void&nbsp;addOcrResult(<a href="../../../../com/microblink/metadata/ocr/DisplayableOcrResult.html" title="class in com.microblink.metadata.ocr">DisplayableOcrResult</a>&nbsp;result)</pre>
+<pre>public&nbsp;void&nbsp;addOcrResult(@NonNull
+                         <a href="../../../../com/microblink/metadata/ocr/DisplayableOcrResult.html" title="class in com.microblink.metadata.ocr">DisplayableOcrResult</a>&nbsp;result)</pre>
 <div class="block">Method to add new <a href="../../../../com/microblink/metadata/ocr/DisplayableOcrResult.html" title="class in com.microblink.metadata.ocr"><code>DisplayableOcrResult</code></a>, preferably from
  <a href="../../../../com/microblink/metadata/ocr/OcrCallback.html#onOcrResult-com.microblink.metadata.ocr.DisplayableOcrResult-"><code>OcrCallback.onOcrResult(DisplayableOcrResult)</code></a> method.
  For each result it ads its lines in line animation queue. Lines with length less then 2 chars
@@ -463,7 +471,8 @@ implements <a href="../../../../com/microblink/view/ocrResult/IOcrResultView.htm
 <ul class="blockList">
 <li class="blockList">
 <h4>setOcrResult</h4>
-<pre>public&nbsp;void&nbsp;setOcrResult(<a href="../../../../com/microblink/metadata/ocr/DisplayableOcrResult.html" title="class in com.microblink.metadata.ocr">DisplayableOcrResult</a>&nbsp;result)</pre>
+<pre>public&nbsp;void&nbsp;setOcrResult(@NonNull
+                         <a href="../../../../com/microblink/metadata/ocr/DisplayableOcrResult.html" title="class in com.microblink.metadata.ocr">DisplayableOcrResult</a>&nbsp;result)</pre>
 <div class="block">Clears line animation queue and calls <a href="../../../../com/microblink/view/ocrResult/OcrResultDotsView.html#addOcrResult-com.microblink.metadata.ocr.DisplayableOcrResult-"><code>OcrResultDotsView.addOcrResult(DisplayableOcrResult)</code></a>
  with given <code>result</code>.</div>
 <dl>
@@ -534,7 +543,8 @@ implements <a href="../../../../com/microblink/view/ocrResult/IOcrResultView.htm
 <ul class="blockListLast">
 <li class="blockList">
 <h4>onOrientationChange</h4>
-<pre>public&nbsp;void&nbsp;onOrientationChange(<a href="../../../../com/microblink/hardware/orientation/Orientation.html" title="class in com.microblink.hardware.orientation">Orientation</a>&nbsp;orientation)</pre>
+<pre>public&nbsp;void&nbsp;onOrientationChange(@NonNull
+                                <a href="../../../../com/microblink/hardware/orientation/Orientation.html" title="class in com.microblink.hardware.orientation">Orientation</a>&nbsp;orientation)</pre>
 </li>
 </ul>
 </li>

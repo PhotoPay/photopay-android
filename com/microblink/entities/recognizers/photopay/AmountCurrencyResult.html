@@ -214,7 +214,8 @@ extends BaseRecognitionResult</pre>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>AmountCurrencyResult</h4>
-<pre>protected&nbsp;AmountCurrencyResult(android.os.Parcel&nbsp;in)</pre>
+<pre>protected&nbsp;AmountCurrencyResult(@NonNull
+                               android.os.Parcel&nbsp;in)</pre>
 </li>
 </ul>
 </li>
@@ -245,7 +246,8 @@ extends BaseRecognitionResult</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>getParsedAmount</h4>
-<pre>public&nbsp;java.math.BigDecimal&nbsp;getParsedAmount()</pre>
+<pre>@NonNull
+public&nbsp;java.math.BigDecimal&nbsp;getParsedAmount()</pre>
 <div class="block">Returns the scanned amount as big decimal value in normal currency (e.g. euros).</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
