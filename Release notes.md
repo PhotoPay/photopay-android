@@ -1,5 +1,160 @@
 # Release notes
 
+## 7.3.0
+
+**Important notice on MRTD recognizer in the latest PhotoPay SDK release (v7.3.0)**
+
+Please note that we have significantly improved accuracy for MRZ/MRTD scanning because now we switched to the newest OCR technology based on machine learning.
+To be more precise, we measured and compared existing vs. new MRTD scanning. The new OCR system based on machine learning achieves 99.9% accuracy on the character level, which results with a 50% reduction in the error rate in MRZ extraction.
+
+In order to use new *MrtdRecognizer* or *MrtdCombinedRecognizer* or to continue using any additional *Recognizer for scanning any ID with the MRZ (machine readable zone)* within the latest PhotoPay SDK update, you *must* have a new license key. Before updating to the SDK version 7.3.0, please contact your account manager or send an email to support@microblink.com to obtain the *new production license key*.
+
+**Important notes**:
+
+- The MRTD scanning with the older PhotoPay SDK versions (v7.2.0 and below) will continue to work without any problems - until you decide to update.
+- If you upgrade to the SDK version 7.3.0 without a new license key scanning of MRTD/MRZ documents will not work.
+- Contact us at support@microblink.com to obtain a new license key if you plan to update your app with the latest release.
+
+For any questions, you might have, we stand at your service.
+
+### New features:
+
+- added support for reading front and back side of Brunei Military ID - use `BruneiMilitaryIdFrontRecognizer` and `BruneiMilitaryIdBackRecognizer`
+- added support for reading front and back side of Brunei Temporary Residence Permit - use `BruneiTemporaryResidencePermitFrontRecognizer` and `BruneiTemporaryResidencePermitBackRecognizer`
+- added new scan activity and overlay: `BlinkCardActivity` and `BlinkCardOverlayController` which are best suited for scanning payment cards with `BlinkCardRecognizer`
+
+### Improvements for existing features:
+
+- improved reading accuracy for all MRZ recognizers
+- added option to force overlay orientation for `PhotopayOverlayController` (`PhotopayActivity`), `DocumentOverlayController` (`DocumentScanActivity`) and `BarcodeOverlayController` (`BarcodeScanActivity`) - use `PhotopayUISettings.setForcedOrientation(OverlayOrientation)`, `DocumentUISettings.setForcedOrientation(OverlayOrientation)` and `BarcodeUISettings.setForcedOrientation(OverlayOrientation)`
+- enabled reading year-only dates of birth on **Kuwait IDs**
+- improved `SingaporeIdBackRecognizer`:
+    - better reading of documents with sticker
+- improved `MrtdRecognizer`:
+    - added `allowSpecialCharacters` option which is required for parsing Malaysian Passport IMM13P MRZ type
+- all recognizers now reset their results on shake, except Combined recognizers
+- `BlinkCardRecognizer` returns card issuer
+
+### Minor API changes:
+
+- renamed `com.microblink.entities.recognizers.photopay.austria.qr.AustriaQrCodeRecognizer` to `com.microblink.entities.recognizers.photopay.austria.AustriaQrCodePaymentRecognizer` and fields in its `Result`:
+    - `IBAN` to `iban`
+    - `BIC` to `bic`
+    - `referenceNumber` to `reference`
+- renamed `com.microblink.entities.recognizers.photopay.germany.qr.GermanyQrCodeRecognizer` to `com.microblink.entities.recognizers.photopay.germany.GermanyQrCodePaymentRecognizer` and updated fields in its `Result`:
+    - `authority` is returned as `String`
+    - renamed fields:
+        - `IBAN` to `iban`
+        - `BIC` to `bic`
+        - `paymentReference` to `reference`
+        - `BLZ` to `bankCode`
+    - added fields:
+        - `creditorId`
+        - `dateOfSignature`
+        - `displayData`
+        - `formFunction`
+        - `formType`
+        - `formVersion`
+        - `mandateId`
+        - `periodicFirstExecutionDate`
+        - `periodicLastExecutionDate`
+        - `periodicTimeUnit`
+        - `periodicTimeUnitRotation`
+        - `postingKey`
+- renamed `com.microblink.entities.recognizers.photopay.kosovo.code128.KosovoCode128Recognizer` to `com.microblink.entities.recognizers.photopay.kosovo.KosovoCode128PaymentRecognizer` and updated fields in its `Result`:
+    - removed `currency` field
+    - renamed fields:
+        - `payerAccount` to `payerAccountNumber`
+        - `referenceNumber` to `reference`
+        - `slipID` to `slipId`
+- removed `SerbiaIdFrontRecognizer`, `SerbiaIdBackRecognizer` and `SerbiaCombinedRecognizer`
+- fields that are **not** deprecated anymore:
+    - Sweden DL - reference number
+    - Ireland DL - driver number
+    - Malaysia iKad - passport number
+    - Hong Kong ID - commercial code
+- deprecated the following methods in `UsdlRecognizer.Result` and `UsdlCombinedRecognizer.Result`: (they have been replaced with new getters):
+    - getField(UsdlKeys)
+    - getOptionalElements
+- added new getters to following results:
+    - `UsdlRecognizer.Result` and `UsdlCombinedRecognizer.Result`:
+        - `firstName`
+        - `lastName`
+        - `fullName`
+        - `address`
+        - `documentNumber`
+        - `sex`
+        - `restrictions`
+        - `endorsements`
+        - `vehicleClass`
+        - `dateOfBirth`
+        - `dateOfIssue`
+        - `dateOfExpiry`
+    - `MrzResult`:
+       - `sanitizedOpt1`
+       - `sanitizedOpt2`
+       - `sanitizedNationality`
+       - `sanitizedIssuer`
+- moved `SwedenDlFrontRecognizer` from package `com.microblink.entities.recognizers.blinkid.sweden.dl` to `com.microblink.entities.recognizers.blinkid.sweden`
+- renamed methods in the following recognizers and its results:
+    - `CzechiaCombinedRecognizer`:
+        - `lastName` to `surname`
+        - `firstName` to `givenNames`
+        - `identityCardNumber` to `documentNumber`
+        - `address` to `permanentStay`
+        - `issuingAuthority` to `authority`
+        - `personalIdentificationNumber` to `personalNumber`
+    - `GermanyCombinedRecognizer`:
+        - `lastName` to `surname`
+        - `firstName` to `givenNames`
+        - `identityCardNumber` to `documentNumber`
+        - `issuingAuthority` to `authority`
+        - `eyeColor` to `colourOfEyes`
+    - `JordanCombinedRecognizer`:
+        - `issuer` to `issuedBy`
+    - `PolandCombinedRecognizer`:
+        - `issuer` to `issuedBy`
+    - `RomaniaIdFrontRecognizer`:
+       - `lastName` to `surname`
+       - `cardNumber` to `documentNumber` from `MrzResult`
+       - `parentNames` to `parentName`
+       - `nonMRZNationality` to `nationality`
+       - `nonMRZSex` to `sex`
+       - `validFrom` to `dateOfIssue`
+       - `validUntil` to `dateOfExpiry`
+       - removed field `idSeries`
+       - removed field `cnp`
+       - MRZ fields are available through `MrzResult` which can be obtained by using getter `RomaniaIdFrontRecognizer.Result.getMrzResult()`
+    - `SlovakiaCombinedRecognizer`:
+       - `issuingAuthority` to `issuedBy`
+       - `personalIdentificationNumber` to `personalNumber`
+    - `SloveniaIdFrontRecognizer`:
+       - `lastName` to `surname`
+       - `firstName` to `givenNames`
+    - `SloveniaIdBackRecognizer`:
+       - `authority` to `administrativeUnit`
+       - MRZ fields are available through `MrzResult` which can be obtained by using getter `SloveniaIdBackRecognizer.Result.getMrzResult()`
+    - `SloveniaCombinedRecognizer`:
+       - `lastName` to `surname`
+       - `firstName` to `givenNames`
+       - `identityCardNumber` to `documentNumber`
+       - `citizenship` to `nationality`
+       - `issuingAuthority` to `administrativeUnit`
+       - `personalIdentificationNumber` to `pin`
+- `MrtdRecognizer` and `MrtdCombinedRecognizer` do not return MRZ image any more
+- `MrtdComginedRecognizer` does not have glare detection options (it does not detect glare anymore)
+- replaced `PaymentCardFrontRecognizer`, `PaymentCardBackRecognizer` and `PaymentCardCombinedRecognizer` with single recognizer - `BlinkCardRecognizer`
+- replaced `ElitePaymentCardFrontRecognizer`, `ElitePaymentCardBackRecognizer` and `ElitePaymentCardCombinedRecognizer` with single recognizer - `BlinkCardEliteRecognizer`
+- `PolandIdBackRecognizer.Result` does not extend `MRTDResult` any more, it has getter `getMrzResult` for obtaining MRZ results
+
+### Bug fixes:
+
+- fixed bug in `SlovakiaQrCodeRecognizer`
+- fixed bug in `IbanParser` for **Romanian IBANs**
+- removed incorrect autofocus check that was performed before concrete camera type is chosen
+- `MrtdRecognizer`:  result state is now properly invalidated after detection fails
+- various other bug fixes and improvements
+
 ## 7.2.0
 
 ### New features:

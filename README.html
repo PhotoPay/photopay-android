@@ -124,7 +124,7 @@
 </ul>
 </li>
 <li>
-<a href="#availableRecognizers"><code>Recogniezr</code> concept and <code>RecognizerBundle</code></a>
+<a href="#availableRecognizers"><code>Recognizer</code> concept and <code>RecognizerBundle</code></a>
 <ul>
 <li><a href="#recognizerConcept">The <code>Recognizer</code> concept</a></li>
 <li>
@@ -144,6 +144,13 @@
 <li><a href="#barcodeRecognizer">Barcode recognizer</a></li>
 <li><a href="#blinkInputRecognizer">BlinkInput recognizer</a></li>
 <li><a href="#detectorRecognizer">Detector recognizer</a></li>
+<li>
+<a href="#blinkcard_recognizers">BlinkCard recognizers</a>
+<ul>
+<li><a href="#blink_card_combined">BlinkCard recognizer</a></li>
+<li><a href="#elite_blink_card_combined">BlinkCardElite recognizer</a></li>
+</ul>
+</li>
 <li><a href="#simNumberRecognizer">SIM number recognizer</a></li>
 <li>
 <a href="#blinkid_recognizers">BlinkID recognizers</a>
@@ -153,7 +160,6 @@
 <li><a href="#us_dl_recognizer">US / Canada driver's license barcode recognizer</a></li>
 <li><a href="#us_dl_combined_recognizer">US / Canada driver's license combined recognizer</a></li>
 <li><a href="#eudlRecognizer">EU Driver's License recognizer</a></li>
-<li><a href="#payment_card_recognizers">Payment / Debit card recognizers </a></li>
 <li><a href="#documentFaceRecognizer">Document face recognizer</a></li>
 </ul>
 </li>
@@ -182,7 +188,6 @@
 <li><a href="#blinkid_recognizers_nigeria">Nigeria</a></li>
 <li><a href="#blinkid_recognizers_poland">Poland</a></li>
 <li><a href="#blinkid_recognizers_romania">Romania</a></li>
-<li><a href="#blinkid_recognizers_serbia">Serbia</a></li>
 <li><a href="#blinkid_recognizers_singapore">Singapore</a></li>
 <li><a href="#blinkid_recognizers_slovakia">Slovakia</a></li>
 <li><a href="#blinkid_recognizers_slovenia">Slovenia</a></li>
@@ -428,8 +433,9 @@
 <a id="user-content--performing-your-first-scan" class="anchor" href="#-performing-your-first-scan" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-quickScan"></a> Performing your first scan</h2>
 <ol>
 <li>
-<p>Before starting a recognition process, you need to obtain a license from <a href="https://microblink.com/login" rel="nofollow">Microblink dashboard</a>. After registering, you will be able to generate a trial license for your app. License is bound to <a href="http://tools.android.com/tech-docs/new-build-system/applicationid-vs-packagename" rel="nofollow">package name</a> of your app, so please make sure you enter the correct package name when asked.</p>
-<p>After creating a license, you will have the option to download the license as a file that you must place within your application's <em>assets</em> folder. You must ensure that license key is set before instantiating any other classes from the SDK, otherwise you will get an exception at runtime. Therefore, we recommend that you extend <a href="https://developer.android.com/reference/android/app/Application.html" rel="nofollow">Android Application class</a> and set the license in its <a href="https://developer.android.com/reference/android/app/Application.html#onCreate()" rel="nofollow">onCreate callback</a> in the following way:</p>
+<p>First you'll need to create an account at <a href="https://microblink.com/login" rel="nofollow">Microblink dashboard</a> where you can generate a demo license for your app. License is bound to <a href="http://tools.android.com/tech-docs/new-build-system/applicationid-vs-packagename" rel="nofollow">package name</a> of your app, so please make sure you enter the correct package name when asked.</p>
+<p>Download your licence file and put it in your application's <em>assets</em> folder. Make sure to set the license key before using any other classes from the SDK, otherwise you will get a runtime exception.</p>
+<p>We recommend that you extend <a href="https://developer.android.com/reference/android/app/Application.html" rel="nofollow">Android Application class</a> and set the license in <a href="https://developer.android.com/reference/android/app/Application.html#onCreate()" rel="nofollow">onCreate callback</a> like this:</p>
 <div class="highlight highlight-source-java"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">MyApplication</span> <span class="pl-k">extends</span> <span class="pl-e">Application</span> {
     <span class="pl-k">@Override</span>
     <span class="pl-k">public</span> <span class="pl-k">void</span> <span class="pl-en">onCreate</span>() {
@@ -438,7 +444,8 @@
 }</pre></div>
 </li>
 <li>
-<p>In your main activity, create recognizer objects that will perform image recognition, configure them and store them into <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/RecognizerBundle.html" rel="nofollow">RecognizerBundle object</a>. You can see more information about available recognizers and about <code>RecognizerBundle</code> in chapter <a href="#availableRecognizers">RecognizerBundle and available recognizers</a>. For example, to scan Croatian slip, you can configure your recognizer object in the following way:</p>
+<p>In your main activity, create recognizer objects that will perform image recognition, configure them and put them into <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/RecognizerBundle.html" rel="nofollow">RecognizerBundle object</a>. You can see more information about available recognizers and <code>RecognizerBundle</code> <a href="#availableRecognizers">here</a>.</p>
+<p>For example, to scan Croatian slip, configure your recognizer like this:</p>
 <div class="highlight highlight-source-java"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">MyActivity</span> <span class="pl-k">extends</span> <span class="pl-e">Activity</span> {
     <span class="pl-k">private</span> <span class="pl-smi">CroatiaSlipRecognizer</span> mRecognizer;
     <span class="pl-k">private</span> <span class="pl-smi">RecognizerBundle</span> mRecognizerBundle;
@@ -458,7 +465,7 @@
 }</pre></div>
 </li>
 <li>
-<p>You can start recognition process by starting <code>PhotopayActivity</code> activity by creating <code>PhotopayUISettings</code> and calling <a href="https://photopay.github.io/photopay-android/com/microblink/uisettings/ActivityRunner.html#startActivityForResult-android.app.Activity-int-com.microblink.uisettings.UISettings-" rel="nofollow"><code>ActivityRunner.startActivityForResult</code></a> method:</p>
+<p>Start recognition process by creating <code>PhotopayUISettings</code> and calling <a href="https://photopay.github.io/photopay-android/com/microblink/uisettings/ActivityRunner.html#startActivityForResult-android.app.Activity-int-com.microblink.uisettings.UISettings-" rel="nofollow"><code>ActivityRunner.startActivityForResult</code></a>:</p>
 <div class="highlight highlight-source-java"><pre><span class="pl-c"><span class="pl-c">//</span> method within MyActivity from previous step</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> startScanning() {
     <span class="pl-c"><span class="pl-c">//</span> Settings for PhotopayActivity Activity</span>
@@ -471,7 +478,7 @@
 }</pre></div>
 </li>
 <li>
-<p>After <code>PhotopayActivity</code> activity finishes the scan, it will return to the calling activity or fragment and will call its method <code>onActivityResult</code>. You can obtain the scanning results in that method.</p>
+<p><code>onActivityResult</code> will be called in your activity after scanning is finished, here you can get the scanning results.</p>
 <div class="highlight highlight-source-java"><pre><span class="pl-k">@Override</span>
 <span class="pl-k">protected</span> <span class="pl-k">void</span> onActivityResult(<span class="pl-k">int</span> requestCode, <span class="pl-k">int</span> resultCode, <span class="pl-smi">Intent</span> data) {
     <span class="pl-c1">super</span><span class="pl-k">.</span>onActivityResult(requestCode, resultCode, data);
@@ -479,7 +486,6 @@
     <span class="pl-k">if</span> (requestCode <span class="pl-k">==</span> <span class="pl-c1">MY_REQUEST_CODE</span>) {
         <span class="pl-k">if</span> (resultCode <span class="pl-k">==</span> <span class="pl-smi">PhotopayActivity</span><span class="pl-c1"><span class="pl-k">.</span>RESULT_OK</span> <span class="pl-k">&amp;&amp;</span> data <span class="pl-k">!=</span> <span class="pl-c1">null</span>) {
             <span class="pl-c"><span class="pl-c">//</span> load the data into all recognizers bundled within your RecognizerBundle</span>
-            
             mRecognizerBundle<span class="pl-k">.</span>loadFromIntent(data);
             
             <span class="pl-c"><span class="pl-c">//</span> now every recognizer object that was bundled within RecognizerBundle</span>
@@ -730,6 +736,11 @@
 </h4>
 <p><a href="https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/verification/DocumentVerificationOverlayController.html" rel="nofollow"><code>DocumentVerificationOverlayController </code></a> is overlay for <a href="https://photopay.github.io/photopay-android/com/microblink/fragment/RecognizerRunnerFragment.html" rel="nofollow"><code>RecognizerRunnerFragment</code></a> best suited for <strong>combined recognizers</strong> because it manages scanning of multiple document sides in the single camera opening and guides the user through the scanning process. It can also be used for single side scanning of ID cards, passports, driver's licenses, etc.</p>
 <p><a href="https://photopay.github.io/photopay-android/com/microblink/activity/DocumentVerificationActivity.html" rel="nofollow"><code>DocumentVerificationActivity</code></a> contains <code>RecognizerRunnerFragment</code> with <a href="https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/verification/DocumentVerificationOverlayController.html" rel="nofollow"><code>DocumentVerificationOverlayController </code></a>, which can be used out of the box to perform scanning using the default UI.</p>
+<h4>
+<a id="user-content--blinkcardactivity-and-blinkcardoverlaycontroller" class="anchor" href="#-blinkcardactivity-and-blinkcardoverlaycontroller" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-blinkcardUiComponent"></a> <code>BlinkCardActivity</code> and <code>BlinkCardOverlayController</code>
+</h4>
+<p><a href="https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/blinkcard/BlinkCardOverlayController.html" rel="nofollow"><code>BlinkCardOverlayController</code></a> is overlay for <a href="https://photopay.github.io/photopay-android/com/microblink/fragment/RecognizerRunnerFragment.html" rel="nofollow"><code>RecognizerRunnerFragment</code></a> best suited for scanning payment cards. It can be used for other card documents like ID cards, passports, driver's licenses, etc. This overlay also supports <strong>combined recognizers</strong>, because it manages scanning of multiple document sides in the single camera opening and guides the user through the scanning process.</p>
+<p><a href="https://photopay.github.io/photopay-android/com/microblink/activity/BlinkCardActivity.html" rel="nofollow"><code>BlinkCardActivity</code></a> contains <code>RecognizerRunnerFragment</code> with <a href="https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/blinkcard/BlinkCardOverlayController.html" rel="nofollow"><code>BlinkCardOverlayController</code></a>, which can be used out of the box to perform scanning, using the default UI.</p>
 <h4>
 <a id="user-content--fieldbyfieldscanactivity-and-fieldbyfieldoverlaycontroller" class="anchor" href="#-fieldbyfieldscanactivity-and-fieldbyfieldoverlaycontroller" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-fieldByFieldUiComponent"></a> <code>FieldByFieldScanActivity</code> and <code>FieldByFieldOverlayController</code>
 </h4>
@@ -1093,7 +1104,7 @@
 </ul>
 <p><strong>Remember</strong>, each time you make some changes to <code>MetadataCallbacks</code> object, you need to apply those changes to to your <code>RecognizerRunner</code> or <code>RecognizerRunnerView</code> by calling its <code>setMetadataCallbacks</code> method.</p>
 <h1>
-<a id="user-content--recogniezr-concept-and-recognizerbundle" class="anchor" href="#-recogniezr-concept-and-recognizerbundle" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-availableRecognizers"></a> <code>Recogniezr</code> concept and <code>RecognizerBundle</code>
+<a id="user-content--recognizer-concept-and-recognizerbundle" class="anchor" href="#-recognizer-concept-and-recognizerbundle" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-availableRecognizers"></a> <code>Recognizer</code> concept and <code>RecognizerBundle</code>
 </h1>
 <p>This section will first describe <a href="#recognizerConcept">what is a <code>Recognizer</code></a> and how it should be used to perform recognition of the images, videos and camera stream. Next, <a href="#recognizerBundle">we will describe how <code>RecognizerBundle</code></a> can be used to tweak the recognition procedure and to transfer <code>Recognizer</code> objects between activities.</p>
 <p><a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/RecognizerBundle.html" rel="nofollow">RecognizerBundle</a> is an object which wraps the <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/Recognizer.html" rel="nofollow">Recognizers</a> and defines settings about how recognition should be performed. Besides that, <code>RecognizerBundle</code> makes it possible to transfer <code>Recognizer</code> objects between different activities, which is required when using built-in activities to perform scanning, as described in <a href="#quickScan">first scan section</a>, but is also handy when you need to pass <code>Recognizer</code> objects between your activities.</p>
@@ -1167,6 +1178,15 @@
 <p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/detector/DetectorRecognizer.html" rel="nofollow"><code>DetectorRecognizer</code></a> is recognizer for scanning generic documents using custom <code>Detector</code>. You can find more about <code>Detector</code> in <a href="#detectorConcept">The Detector concept</a> section. <code>DetectorRecognizer</code> can be used simply for document detection and obtaining its image. The more interesting use case is data extraction from the custom document type. <code>DetectorRecognizer</code> performs document detection and can be configured to extract fields of interest from the scanned document by using <strong>Templating API</strong>. You can find more about Templating API in <a href="#detectorTemplating">this</a> section.</p>
 <p>This recognizer can be used in any context, but it works best with the activity which has UI suited for document scanning.</p>
 <h2>
+<a id="user-content--blinkcard-recognizers" class="anchor" href="#-blinkcard-recognizers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-blinkcard_recognizers"></a> BlinkCard recognizers</h2>
+<p>BlinkCard recognizers work best with the <a href="#blinkcardUiComponent"><code>BlinkCardActivity</code></a>, which has UI best suited for payment / debit card scanning.</p>
+<h3>
+<a id="user-content--blinkcard-recognizer" class="anchor" href="#-blinkcard-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-blink_card_combined"></a> BlinkCard recognizer</h3>
+<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkcard/BlinkCardRecognizer.html" rel="nofollow"><code>BlinkCardRecognizer</code></a> scans back side of Payment / Debit card after scanning the front side and combines data from both sides.</p>
+<h3>
+<a id="user-content--blinkcardelite-recognizer" class="anchor" href="#-blinkcardelite-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-elite_blink_card_combined"></a> BlinkCardElite recognizer</h3>
+<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkcard/BlinkCardEliteRecognizer.html" rel="nofollow"><code>BlinkCardEliteRecognizer</code></a> scans back side of elite Payment / Debit card after scanning the front side and combines data from both sides.</p>
+<h2>
 <a id="user-content--sim-number-recognizer" class="anchor" href="#-sim-number-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-simNumberRecognizer"></a> SIM number recognizer</h2>
 <p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkbarcode/simnumber/SimNumberRecognizer.html" rel="nofollow"><code>SimNumberRecognizer</code></a> is a special type of barcode recognizer specifically tailored for performing recognition of barcodes on packagings of <a href="https://en.wikipedia.org/wiki/Subscriber_identity_module" rel="nofollow">SIM cards</a>. This recognizer is useful in combination with some ID recognizers in use cases when application requires quick scanning of SIM number on the packaging of new mobile network subscriber after scanning the new subscriber's identity document.</p>
 <p>This recognizer can be used in any context. However, we recommend its usage in combination with any ID document recognizer within custom UI.</p>
@@ -1200,21 +1220,6 @@
 <li>United Kingdom</li>
 </ul>
 <p>You can find information about usage context at the beginning of <a href="#blinkid_recognizers">this section</a>.</p>
-<h3>
-<a id="user-content--payment--debit-card-recognizers" class="anchor" href="#-payment--debit-card-recognizers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-payment_card_recognizers"></a> Payment / Debit card recognizers</h3>
-<p>For all recognizers, you can find information about usage context at the beginning of <a href="#blinkid_recognizers">this section</a>.</p>
-<h4>
-<a id="user-content--payment--debit-card-front-and-back-side-recognizers" class="anchor" href="#-payment--debit-card-front-and-back-side-recognizers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-payment_card_single"></a> Payment / Debit card front and back side recognizers</h4>
-<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/paymentcard/PaymentCardFrontRecognizer.html" rel="nofollow"><code>PaymentCardFrontRecognizer</code></a> and <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/paymentcard/PaymentCardBackRecognizer.html" rel="nofollow"><code>PaymentCardBackRecognizer</code></a> are used for scanning the <a href="https://en.wikipedia.org/wiki/Payment_card" rel="nofollow">front and back side of Payment / Debit card</a>.</p>
-<h4>
-<a id="user-content--payment--debit-card-combined-recognizer" class="anchor" href="#-payment--debit-card-combined-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-payment_card_combined"></a> Payment / Debit card combined recognizer</h4>
-<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/paymentcard/PaymentCardCombinedRecognizer.html" rel="nofollow"><code>PaymentCardCombinedRecognizer</code></a> scans back side of Payment / Debit card after scanning the front side and combines data from both sides.</p>
-<h4>
-<a id="user-content--elite-payment--debit-card-front-and-back-side-recognizers" class="anchor" href="#-elite-payment--debit-card-front-and-back-side-recognizers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-elite_payment_card_single"></a> Elite Payment / Debit card front and back side recognizers</h4>
-<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/elitepaymentcard/ElitePaymentCardFrontRecognizer.html" rel="nofollow"><code>ElitePaymentCardFrontRecognizer</code></a> and <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/elitepaymentcard/ElitePaymentCardBackRecognizer.html" rel="nofollow"><code>ElitePaymentCardBackRecognizer</code></a> are used for scanning the front and back side of elite Payment / Debit card.</p>
-<h4>
-<a id="user-content--elite-payment--debit-card-combined-recognizer" class="anchor" href="#-elite-payment--debit-card-combined-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-elite_payment_card_combined"></a> Elite Payment / Debit card combined recognizer</h4>
-<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/elitepaymentcard/ElitePaymentCardCombinedRecognizer.html" rel="nofollow"><code>ElitePaymentCardCombinedRecognizer</code></a> scans back side of elite Payment / Debit card after scanning the front side and combines data from both sides.</p>
 <h3>
 <a id="user-content--document-face-recognizer" class="anchor" href="#-document-face-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-documentFaceRecognizer"></a> Document face recognizer</h3>
 <p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/documentface/DocumentFaceRecognizer.html" rel="nofollow"><code>DocumentFaceRecognizer</code></a> is a special type of recognizer that only returns face image and full document image of the scanned document. It does not extract document fields like first name, last name, etc. This generic recognizer can be used to obtain document images in cases when specific support for some document type is not available.</p>
@@ -1250,12 +1255,16 @@
 <a id="user-content--brunei" class="anchor" href="#-brunei" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-blinkid_recognizers_brunei"></a> Brunei</h3>
 <h4>
 <a id="user-content--brunei-id-front-and-back-side-recognizer" class="anchor" href="#-brunei-id-front-and-back-side-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-brunei_id"></a> Brunei ID front and back side recognizer</h4>
-<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/brunei/BruneiIdFrontRecognizer.html" rel="nofollow"><code>BruneiIdFrontRecognizer</code></a> is used for scanning the front side of Bruneian identity card.
-The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/brunei/BruneiIdBackRecognizer.html" rel="nofollow"><code>BruneiIdBackRecognizer</code></a> is used for scanning the front side of Bruneian identity card.</p>
+<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/brunei/BruneiIdFrontRecognizer.html" rel="nofollow"><code>BruneiIdFrontRecognizer</code></a> and <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/brunei/BruneiIdBackRecognizer.html" rel="nofollow"><code>BruneiIdBackRecognizer</code></a> are used for scanning the front and back side of Bruneian identity card.</p>
 <h4>
-<a id="user-content--brunei-residence-permit-front-and-back-side-recognizer" class="anchor" href="#-brunei-residence-permit-front-and-back-side-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-brunei_id"></a> Brunei residence permit front and back side recognizer</h4>
-<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/brunei/BruneiResidencePermitFrontRecognizer.html" rel="nofollow"><code>BruneiResidencePermitFrontRecognizer</code></a> is used for scanning the front side of Bruneian residence permit.
-The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/brunei/BruneiResidencePermitBackRecognizer.html" rel="nofollow"><code>BruneiResidencePermitBackRecognizer</code></a> is used for scanning the front side of Bruneian residence permit.</p>
+<a id="user-content--brunei-military-id-front-and-back-side-recognizer" class="anchor" href="#-brunei-military-id-front-and-back-side-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-brunei_military_id"></a> Brunei Military ID front and back side recognizer</h4>
+<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/brunei/BruneiMilitaryIdFrontRecognizer.html" rel="nofollow"><code>BruneiMilitaryIdFrontRecognizer</code></a> and <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/brunei/BruneiMilitaryIdBackRecognizer.html" rel="nofollow"><code>BruneiMilitaryIdBackRecognizer</code></a> are used for scanning the front and back side of Bruneian military identity card.</p>
+<h4>
+<a id="user-content--brunei-residence-permit-front-and-back-side-recognizer" class="anchor" href="#-brunei-residence-permit-front-and-back-side-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-brunei_residence_permit"></a> Brunei residence permit front and back side recognizer</h4>
+<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/brunei/BruneiResidencePermitFrontRecognizer.html" rel="nofollow"><code>BruneiResidencePermitFrontRecognizer</code></a> and <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/brunei/BruneiResidencePermitBackRecognizer.html" rel="nofollow"><code>BruneiResidencePermitBackRecognizer</code></a>  are used for scanning the front and back side of Bruneian residence permit.</p>
+<h4>
+<a id="user-content--brunei-temporary-residence-permit-front-and-back-side-recognizer" class="anchor" href="#-brunei-temporary-residence-permit-front-and-back-side-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-brunei_temp_residence_permit"></a> Brunei temporary residence permit front and back side recognizer</h4>
+<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/brunei/BruneiTemporaryResidencePermitFrontRecognizer.html" rel="nofollow"><code>BruneiTemporaryResidencePermitFrontRecognizer</code></a> and <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/brunei/BruneiTemporaryResidencePermitBackRecognizer.html" rel="nofollow"><code>BruneiTemporaryResidencePermitBackRecognizer</code></a> are used for scanning the front and back side of Bruneian residence permit.</p>
 <h3>
 <a id="user-content--colombia" class="anchor" href="#-colombia" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-blinkid_recognizers_colombia"></a> Colombia</h3>
 <h4>
@@ -1418,15 +1427,6 @@ The <a href="https://photopay.github.io/photopay-android/com/microblink/entities
 <p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/romania/RomaniaIdFrontRecognizer.html" rel="nofollow"><code>RomaniaIdFrontRecognizer</code></a> is used for scanning <a href="https://en.wikipedia.org/wiki/Romanian_identity_card" rel="nofollow">front side of Romanian identity card</a>.</p>
 <p>You can find information about usage context at the beginning of <a href="#blinkid_recognizers">this section</a>.</p>
 <h3>
-<a id="user-content--serbia" class="anchor" href="#-serbia" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-blinkid_recognizers_serbia"></a> Serbia</h3>
-<p>For all recognizers, you can find information about usage context at the beginning of <a href="#blinkid_recognizers">this section</a>.</p>
-<h4>
-<a id="user-content--serbia-id-front-and-back-side-recognizers" class="anchor" href="#-serbia-id-front-and-back-side-recognizers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-serbia_id"></a> Serbia ID front and back side recognizers</h4>
-<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/serbia/SerbiaIdFrontRecognizer.html" rel="nofollow"><code>SerbiaIdFrontRecognizer</code></a> and <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/serbia/SerbiaIdBackRecognizer.html" rel="nofollow"><code>SerbiaIdBackRecognizer</code></a> are used for scanning the <a href="https://en.wikipedia.org/wiki/Serbian_identity_card" rel="nofollow">front and back side of Serbian identity card</a>.</p>
-<h4>
-<a id="user-content--serbia-combined-recognizer" class="anchor" href="#-serbia-combined-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-serbia_combined"></a> Serbia combined recognizer</h4>
-<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/serbia/SerbiaCombinedRecognizer.html" rel="nofollow"><code>SerbiaCombinedRecognizer</code></a> scans back side of Serbian ID after scanning the front side and combines data from both sides.</p>
-<h3>
 <a id="user-content--singapore" class="anchor" href="#-singapore" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-blinkid_recognizers_singapore"></a> Singapore</h3>
 <p>For all recognizers, you can find information about usage context at the beginning of <a href="#blinkid_recognizers">this section</a>.</p>
 <h4>
@@ -1568,7 +1568,7 @@ The <a href="https://photopay.github.io/photopay-android/com/microblink/entities
 <a id="user-content--dutch-payslip-recognizer" class="anchor" href="#-dutch-payslip-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-netherlands_payslip"></a> Dutch payslip recognizer</h4>
 <p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/photopay/netherlands/slip/NetherlandsSlipRecognizer.html" rel="nofollow"><code>NetherlandsSlipRecognizer</code></a> is used for scanning payment information from payment slips in Netherlands. This recognizer works by scanning OCR line from the lower part of the payment slip, so we recommend using the <a href="#ocrLineUIComponent"><code>OcrLineScanActivity</code></a> with that recognizer, as it has UI best suited for scanning OCR lines.</p>
 <h3>
-<a id="user-content--serbia-1" class="anchor" href="#-serbia-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-photopay_recognizers_serbia"></a> Serbia</h3>
+<a id="user-content--serbia" class="anchor" href="#-serbia" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-photopay_recognizers_serbia"></a> Serbia</h3>
 <h4>
 <a id="user-content--serbian-payment-pdf417-2d-barcode-recognizer" class="anchor" href="#-serbian-payment-pdf417-2d-barcode-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-serbia_pdf417"></a> Serbian payment PDF417 2D barcode recognizer</h4>
 <p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/photopay/serbia/pdf417/SerbiaPdf417PaymentRecognizer.html" rel="nofollow"><code>SerbiaPdf417PaymentRecognizer</code></a> is used for scanning payment information from PDF417 2D barcode found on some serbian invoices. The Republic of Serbia does not have a national standard for payment slips nor payment barcodes. This recognizer supports scanning PDF417 2D barcodes that are modelled after Croatian HUB3 standard.</p>
@@ -1766,7 +1766,7 @@ The <a href="https://photopay.github.io/photopay-android/com/microblink/entities
 <a id="user-content--montenegro-payment-reference-number-parser" class="anchor" href="#-montenegro-payment-reference-number-parser" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-photopay_parsers_montenegro_reference"></a> Montenegro payment reference number parser</h4>
 <p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/parsers/photopay/montenegro/reference/MontenegroReferenceParser.html" rel="nofollow"><code>MontenegroReferenceParser</code></a> is used for scanning payment reference numbers in Montenegro.</p>
 <h3>
-<a id="user-content--serbia-2" class="anchor" href="#-serbia-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-photopay_parsers_serbia"></a> Serbia</h3>
+<a id="user-content--serbia-1" class="anchor" href="#-serbia-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-photopay_parsers_serbia"></a> Serbia</h3>
 <h4>
 <a id="user-content--serbian-account-number-parser" class="anchor" href="#-serbian-account-number-parser" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-photopay_parsers_serbia_account"></a> Serbian account number parser</h4>
 <p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/parsers/photopay/serbia/account/SerbiaAccountParser.html" rel="nofollow"><code>SerbiaAccountParser</code></a> is used for scanning serbian account numbers.</p>

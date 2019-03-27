@@ -145,7 +145,7 @@ extends <a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayCont
 <!--   -->
 </a>
 <h3>Fields inherited from class&nbsp;com.microblink.fragment.overlay.<a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html" title="class in com.microblink.fragment.overlay">PhotopayOverlayController</a></h3>
-<code><a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html#mStatusTextView">mStatusTextView</a></code></li>
+<code><a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html#mStatusTextManager">mStatusTextManager</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="fields.inherited.from.class.com.microblink.fragment.overlay.BaseOcrOverlayController">
@@ -199,7 +199,7 @@ extends <a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayCont
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>protected <a href="../../../../com/microblink/view/viewfinder/quadview/QuadViewManager.html" title="class in com.microblink.view.viewfinder.quadview">QuadViewManager</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/microblink/fragment/overlay/OcrLineOverlayController.html#createQuadView-com.microblink.view.recognition.RecognizerRunnerView-">createQuadView</a></span>(<a href="../../../../com/microblink/view/recognition/RecognizerRunnerView.html" title="class in com.microblink.view.recognition">RecognizerRunnerView</a>&nbsp;recognizerRunnerView)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/microblink/fragment/overlay/OcrLineOverlayController.html#createQuadViewManager-com.microblink.view.recognition.RecognizerRunnerView-">createQuadViewManager</a></span>(<a href="../../../../com/microblink/view/recognition/RecognizerRunnerView.html" title="class in com.microblink.view.recognition">RecognizerRunnerView</a>&nbsp;recognizerRunnerView)</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
@@ -213,7 +213,7 @@ extends <a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayCont
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;com.microblink.fragment.overlay.<a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html" title="class in com.microblink.fragment.overlay">PhotopayOverlayController</a></h3>
-<code><a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html#displayDetectionStatus-com.microblink.view.recognition.DetectionStatus-">displayDetectionStatus</a>, <a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html#displayMessageImmediately-java.lang.CharSequence-">displayMessageImmediately</a>, <a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html#handleRecognitionDone-RecognitionSuccessType-">handleRecognitionDone</a>, <a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html#onAutofocusFailed--">onAutofocusFailed</a>, <a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html#onDetectionFailed--">onDetectionFailed</a>, <a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html#onPointsDetection-com.microblink.metadata.detection.points.DisplayablePointsDetection-">onPointsDetection</a>, <a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html#onQuadDetection-com.microblink.metadata.detection.quad.DisplayableQuadDetection-">onQuadDetection</a>, <a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html#onResume--">onResume</a>, <a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html#postDisplayMessage-java.lang.CharSequence-">postDisplayMessage</a></code></li>
+<code><a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html#displayDetectionStatus-com.microblink.view.recognition.DetectionStatus-">displayDetectionStatus</a>, <a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html#handleRecognitionDone-RecognitionSuccessType-">handleRecognitionDone</a>, <a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html#onAutofocusFailed--">onAutofocusFailed</a>, <a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html#onDetectionFailed--">onDetectionFailed</a>, <a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html#onPointsDetection-com.microblink.metadata.detection.points.DisplayablePointsDetection-">onPointsDetection</a>, <a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html#onQuadDetection-com.microblink.metadata.detection.quad.DisplayableQuadDetection-">onQuadDetection</a>, <a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html#onResume--">onResume</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.com.microblink.fragment.overlay.BaseOcrOverlayController">
@@ -293,18 +293,18 @@ extends <a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayCont
 </dl>
 </li>
 </ul>
-<a name="createQuadView-com.microblink.view.recognition.RecognizerRunnerView-">
+<a name="createQuadViewManager-com.microblink.view.recognition.RecognizerRunnerView-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>createQuadView</h4>
+<h4>createQuadViewManager</h4>
 <pre>@Nullable
-protected&nbsp;<a href="../../../../com/microblink/view/viewfinder/quadview/QuadViewManager.html" title="class in com.microblink.view.viewfinder.quadview">QuadViewManager</a>&nbsp;createQuadView(@NonNull
-                                                   <a href="../../../../com/microblink/view/recognition/RecognizerRunnerView.html" title="class in com.microblink.view.recognition">RecognizerRunnerView</a>&nbsp;recognizerRunnerView)</pre>
+protected&nbsp;<a href="../../../../com/microblink/view/viewfinder/quadview/QuadViewManager.html" title="class in com.microblink.view.viewfinder.quadview">QuadViewManager</a>&nbsp;createQuadViewManager(@NonNull
+                                                          <a href="../../../../com/microblink/view/recognition/RecognizerRunnerView.html" title="class in com.microblink.view.recognition">RecognizerRunnerView</a>&nbsp;recognizerRunnerView)</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html#createQuadView-com.microblink.view.recognition.RecognizerRunnerView-">createQuadView</a></code>&nbsp;in class&nbsp;<code><a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html" title="class in com.microblink.fragment.overlay">PhotopayOverlayController</a></code></dd>
+<dd><code><a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html#createQuadViewManager-com.microblink.view.recognition.RecognizerRunnerView-">createQuadViewManager</a></code>&nbsp;in class&nbsp;<code><a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html" title="class in com.microblink.fragment.overlay">PhotopayOverlayController</a></code></dd>
 </dl>
 </li>
 </ul>

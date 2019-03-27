@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -146,8 +146,8 @@ extends <a href="../../../../com/microblink/fragment/overlay/BaseOcrOverlayContr
 <th class="colLast" scope="col">Field and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>protected android.widget.TextView</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html#mStatusTextView">mStatusTextView</a></span></code>&nbsp;</td>
+<td class="colFirst"><code>protected <a href="../../../../com/microblink/fragment/overlay/components/StatusTextManager.html" title="class in com.microblink.fragment.overlay.components">StatusTextManager</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html#mStatusTextManager">mStatusTextManager</a></span></code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -202,7 +202,7 @@ extends <a href="../../../../com/microblink/fragment/overlay/BaseOcrOverlayContr
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>protected <a href="../../../../com/microblink/view/viewfinder/quadview/QuadViewManager.html" title="class in com.microblink.view.viewfinder.quadview">QuadViewManager</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html#createQuadView-com.microblink.view.recognition.RecognizerRunnerView-">createQuadView</a></span>(<a href="../../../../com/microblink/view/recognition/RecognizerRunnerView.html" title="class in com.microblink.view.recognition">RecognizerRunnerView</a>&nbsp;recognizerRunnerView)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html#createQuadViewManager-com.microblink.view.recognition.RecognizerRunnerView-">createQuadViewManager</a></span>(<a href="../../../../com/microblink/view/recognition/RecognizerRunnerView.html" title="class in com.microblink.view.recognition">RecognizerRunnerView</a>&nbsp;recognizerRunnerView)</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>protected void</code></td>
@@ -210,46 +210,38 @@ extends <a href="../../../../com/microblink/fragment/overlay/BaseOcrOverlayContr
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>protected void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html#displayMessageImmediately-java.lang.CharSequence-">displayMessageImmediately</a></span>(java.lang.CharSequence&nbsp;text)</code>&nbsp;</td>
-</tr>
-<tr id="i4" class="altColor">
-<td class="colFirst"><code>protected void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html#handleRecognitionDone-RecognitionSuccessType-">handleRecognitionDone</a></span>(RecognitionSuccessType&nbsp;recognitionSuccessType)</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html#onAutofocusFailed--">onAutofocusFailed</a></span>()</code>
 <div class="block">This method will be called when camera focusing has failed.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html#onDetectionFailed--">onDetectionFailed</a></span>()</code>
 <div class="block">Invoked when all recognizers in active <a href="../../../../com/microblink/entities/recognizers/Recognizer.html" title="class in com.microblink.entities.recognizers"><code>Recognizer</code></a>
  chain have failed to detect anything on the image.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html#onPointsDetection-com.microblink.metadata.detection.points.DisplayablePointsDetection-">onPointsDetection</a></span>(<a href="../../../../com/microblink/metadata/detection/points/DisplayablePointsDetection.html" title="class in com.microblink.metadata.detection.points">DisplayablePointsDetection</a>&nbsp;pointsDetection)</code>
 <div class="block">Called when <a href="../../../../com/microblink/metadata/detection/points/DisplayablePointsDetection.html" title="class in com.microblink.metadata.detection.points"><code>DisplayablePointsDetection</code></a> gets available.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html#onQuadDetection-com.microblink.metadata.detection.quad.DisplayableQuadDetection-">onQuadDetection</a></span>(<a href="../../../../com/microblink/metadata/detection/quad/DisplayableQuadDetection.html" title="class in com.microblink.metadata.detection.quad">DisplayableQuadDetection</a>&nbsp;quadDetection)</code>
 <div class="block">Called when <a href="../../../../com/microblink/metadata/detection/quad/DisplayableQuadDetection.html" title="class in com.microblink.metadata.detection.quad"><code>DisplayableQuadDetection</code></a> gets available.</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html#onResume--">onResume</a></span>()</code>
 <div class="block">Called after <a href="../../../../com/microblink/fragment/RecognizerRunnerFragment.html#onResume--"><code>RecognizerRunnerFragment.onResume()</code></a>.</div>
 </td>
-</tr>
-<tr id="i10" class="altColor">
-<td class="colFirst"><code>protected void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/microblink/fragment/overlay/PhotopayOverlayController.html#postDisplayMessage-java.lang.CharSequence-">postDisplayMessage</a></span>(java.lang.CharSequence&nbsp;text)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -287,14 +279,14 @@ extends <a href="../../../../com/microblink/fragment/overlay/BaseOcrOverlayContr
 <!--   -->
 </a>
 <h3>Field Detail</h3>
-<a name="mStatusTextView">
+<a name="mStatusTextManager">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>mStatusTextView</h4>
+<h4>mStatusTextManager</h4>
 <pre>@Nullable
-protected&nbsp;android.widget.TextView mStatusTextView</pre>
+protected&nbsp;<a href="../../../../com/microblink/fragment/overlay/components/StatusTextManager.html" title="class in com.microblink.fragment.overlay.components">StatusTextManager</a> mStatusTextManager</pre>
 </li>
 </ul>
 </li>
@@ -325,41 +317,19 @@ protected&nbsp;android.widget.TextView mStatusTextView</pre>
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="createQuadView-com.microblink.view.recognition.RecognizerRunnerView-">
+<a name="createQuadViewManager-com.microblink.view.recognition.RecognizerRunnerView-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>createQuadView</h4>
+<h4>createQuadViewManager</h4>
 <pre>@Nullable
-protected&nbsp;<a href="../../../../com/microblink/view/viewfinder/quadview/QuadViewManager.html" title="class in com.microblink.view.viewfinder.quadview">QuadViewManager</a>&nbsp;createQuadView(@NonNull
-                                                   <a href="../../../../com/microblink/view/recognition/RecognizerRunnerView.html" title="class in com.microblink.view.recognition">RecognizerRunnerView</a>&nbsp;recognizerRunnerView)</pre>
+protected&nbsp;<a href="../../../../com/microblink/view/viewfinder/quadview/QuadViewManager.html" title="class in com.microblink.view.viewfinder.quadview">QuadViewManager</a>&nbsp;createQuadViewManager(@NonNull
+                                                          <a href="../../../../com/microblink/view/recognition/RecognizerRunnerView.html" title="class in com.microblink.view.recognition">RecognizerRunnerView</a>&nbsp;recognizerRunnerView)</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../com/microblink/fragment/overlay/BaseOcrOverlayController.html#createQuadView-com.microblink.view.recognition.RecognizerRunnerView-">createQuadView</a></code>&nbsp;in class&nbsp;<code><a href="../../../../com/microblink/fragment/overlay/BaseOcrOverlayController.html" title="class in com.microblink.fragment.overlay">BaseOcrOverlayController</a></code></dd>
+<dd><code><a href="../../../../com/microblink/fragment/overlay/BaseOcrOverlayController.html#createQuadViewManager-com.microblink.view.recognition.RecognizerRunnerView-">createQuadViewManager</a></code>&nbsp;in class&nbsp;<code><a href="../../../../com/microblink/fragment/overlay/BaseOcrOverlayController.html" title="class in com.microblink.fragment.overlay">BaseOcrOverlayController</a></code></dd>
 </dl>
-</li>
-</ul>
-<a name="postDisplayMessage-java.lang.CharSequence-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>postDisplayMessage</h4>
-<pre>@WorkerThread
-protected&nbsp;void&nbsp;postDisplayMessage(@Nullable
-                                                java.lang.CharSequence&nbsp;text)</pre>
-</li>
-</ul>
-<a name="displayMessageImmediately-java.lang.CharSequence-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>displayMessageImmediately</h4>
-<pre>@UiThread
-protected&nbsp;void&nbsp;displayMessageImmediately(@Nullable
-                                                   java.lang.CharSequence&nbsp;text)</pre>
 </li>
 </ul>
 <a name="displayDetectionStatus-com.microblink.view.recognition.DetectionStatus-">

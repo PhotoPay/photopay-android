@@ -56,6 +56,7 @@ com.microblink.entities.recognizers.blinkbarcode.pdf417
 com.microblink.entities.recognizers.blinkbarcode.simnumber
 com.microblink.entities.recognizers.blinkbarcode.usdl
 com.microblink.entities.recognizers.blinkbarcode.vin
+com.microblink.entities.recognizers.blinkcard
 com.microblink.entities.recognizers.blinkid
 com.microblink.entities.recognizers.blinkid.australia
 com.microblink.entities.recognizers.blinkid.austria
@@ -67,7 +68,6 @@ com.microblink.entities.recognizers.blinkid.czechia
 com.microblink.entities.recognizers.blinkid.digitalsignature
 com.microblink.entities.recognizers.blinkid.documentface
 com.microblink.entities.recognizers.blinkid.egypt
-com.microblink.entities.recognizers.blinkid.elitepaymentcard
 com.microblink.entities.recognizers.blinkid.eudl
 com.microblink.entities.recognizers.blinkid.germany
 com.microblink.entities.recognizers.blinkid.hongkong
@@ -86,15 +86,13 @@ com.microblink.entities.recognizers.blinkid.mexico
 com.microblink.entities.recognizers.blinkid.morocco
 com.microblink.entities.recognizers.blinkid.mrtd
 com.microblink.entities.recognizers.blinkid.newzealand
-com.microblink.entities.recognizers.blinkid.paymentcard
 com.microblink.entities.recognizers.blinkid.poland
 com.microblink.entities.recognizers.blinkid.romania
-com.microblink.entities.recognizers.blinkid.serbia
 com.microblink.entities.recognizers.blinkid.singapore
 com.microblink.entities.recognizers.blinkid.slovakia
 com.microblink.entities.recognizers.blinkid.slovenia
 com.microblink.entities.recognizers.blinkid.spain
-com.microblink.entities.recognizers.blinkid.sweden.dl
+com.microblink.entities.recognizers.blinkid.sweden
 com.microblink.entities.recognizers.blinkid.switzerland
 com.microblink.entities.recognizers.blinkid.unitedArabEmirates
 com.microblink.entities.recognizers.blinkid.usdl
@@ -102,7 +100,7 @@ com.microblink.entities.recognizers.blinkinput
 com.microblink.entities.recognizers.detector
 com.microblink.entities.recognizers.framegrabber
 com.microblink.entities.recognizers.photopay
-com.microblink.entities.recognizers.photopay.austria.qr
+com.microblink.entities.recognizers.photopay.austria
 com.microblink.entities.recognizers.photopay.austria.slip
 com.microblink.entities.recognizers.photopay.belgium.slip
 com.microblink.entities.recognizers.photopay.croatia.pdf417
@@ -110,10 +108,10 @@ com.microblink.entities.recognizers.photopay.croatia.qr
 com.microblink.entities.recognizers.photopay.croatia.slip
 com.microblink.entities.recognizers.photopay.czechia.qr
 com.microblink.entities.recognizers.photopay.czechia.slip
-com.microblink.entities.recognizers.photopay.germany.qr
+com.microblink.entities.recognizers.photopay.germany
 com.microblink.entities.recognizers.photopay.germany.slip
 com.microblink.entities.recognizers.photopay.hungary.slip
-com.microblink.entities.recognizers.photopay.kosovo.code128
+com.microblink.entities.recognizers.photopay.kosovo
 com.microblink.entities.recognizers.photopay.kosovo.slip
 com.microblink.entities.recognizers.photopay.netherlands.slip
 com.microblink.entities.recognizers.photopay.sepa.qr
@@ -137,6 +135,7 @@ com.microblink.entities.settings
 com.microblink.entities.util
 com.microblink.fragment
 com.microblink.fragment.overlay
+com.microblink.fragment.overlay.blinkcard
 com.microblink.fragment.overlay.components
 com.microblink.fragment.overlay.listener
 com.microblink.fragment.overlay.listener.verification
