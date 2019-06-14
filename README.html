@@ -157,6 +157,7 @@
 <ul>
 <li><a href="#mrtdRecognizer">Machine Readable Travel Document recognizer</a></li>
 <li><a href="#mrtd_combined_recognizer">Machine Readable Travel Document combined recognizer</a></li>
+<li><a href="#passportRecognizer">Passport recognizer</a></li>
 <li><a href="#us_dl_recognizer">US / Canada driver's license barcode recognizer</a></li>
 <li><a href="#us_dl_combined_recognizer">US / Canada driver's license combined recognizer</a></li>
 <li><a href="#eudlRecognizer">EU Driver's License recognizer</a></li>
@@ -734,7 +735,7 @@
 <h4>
 <a id="user-content--documentverificationactivity-and-documentverificationoverlaycontroller" class="anchor" href="#-documentverificationactivity-and-documentverificationoverlaycontroller" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-documentVerifyUiComponent"></a> <code>DocumentVerificationActivity</code> and <code>DocumentVerificationOverlayController</code>
 </h4>
-<p><a href="https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/verification/DocumentVerificationOverlayController.html" rel="nofollow"><code>DocumentVerificationOverlayController </code></a> is overlay for <a href="https://photopay.github.io/photopay-android/com/microblink/fragment/RecognizerRunnerFragment.html" rel="nofollow"><code>RecognizerRunnerFragment</code></a> best suited for <strong>combined recognizers</strong> because it manages scanning of multiple document sides in the single camera opening and guides the user through the scanning process. It can also be used for single side scanning of ID cards, passports, driver's licenses, etc.</p>
+<p><a href="https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/verification/DocumentVerificationOverlayController.html" rel="nofollow"><code>DocumentVerificationOverlayController</code></a> is overlay for <a href="https://photopay.github.io/photopay-android/com/microblink/fragment/RecognizerRunnerFragment.html" rel="nofollow"><code>RecognizerRunnerFragment</code></a> best suited for <strong>combined recognizers</strong> because it manages scanning of multiple document sides in the single camera opening and guides the user through the scanning process. It can also be used for single side scanning of ID cards, passports, driver's licenses, etc.</p>
 <p><a href="https://photopay.github.io/photopay-android/com/microblink/activity/DocumentVerificationActivity.html" rel="nofollow"><code>DocumentVerificationActivity</code></a> contains <code>RecognizerRunnerFragment</code> with <a href="https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/verification/DocumentVerificationOverlayController.html" rel="nofollow"><code>DocumentVerificationOverlayController </code></a>, which can be used out of the box to perform scanning using the default UI.</p>
 <h4>
 <a id="user-content--blinkcardactivity-and-blinkcardoverlaycontroller" class="anchor" href="#-blinkcardactivity-and-blinkcardoverlaycontroller" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-blinkcardUiComponent"></a> <code>BlinkCardActivity</code> and <code>BlinkCardOverlayController</code>
@@ -1202,6 +1203,10 @@
 <h3>
 <a id="user-content--machine-readable-travel-document-combined-recognizer" class="anchor" href="#-machine-readable-travel-document-combined-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-mrtd_combined_recognizer"></a> Machine Readable Travel Document combined recognizer</h3>
 <p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/mrtd/MrtdCombinedRecognizer.html" rel="nofollow"><code>MrtdCombinedRecognizer</code></a> scans Machine Readable Zone (MRZ) after scanning the full document image and face image (usually MRZ is on the back side and face image is on the front side of the document). Internally, it uses <a href="#documentFaceRecognizer">DocumentFaceRecognizer</a> for obtaining full document image and face image as the first step and then <a href="#mrtdRecognizer">MrtdRecognizer</a> for scanning the MRZ.</p>
+<p>You can find information about usage context at the beginning of <a href="#blinkid_recognizers">this section</a>.</p>
+<h3>
+<a id="user-content--passport-recognizer" class="anchor" href="#-passport-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-passportRecognizer"></a> Passport recognizer</h3>
+<p>The <a href="https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/passport/PassportRecognizer.html" rel="nofollow"><code>PassportRecognizer</code></a> is used for scanning and data extraction from the Machine Readable Zone (MRZ) of the various passport documents. This recognizer also returns face image from the passport.</p>
 <p>You can find information about usage context at the beginning of <a href="#blinkid_recognizers">this section</a>.</p>
 <h3>
 <a id="user-content--us--canada-drivers-license-barcode-recognizer" class="anchor" href="#-us--canada-drivers-license-barcode-recognizer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-us_dl_recognizer"></a> US / Canada driver's license barcode recognizer</h3>
@@ -2261,7 +2266,7 @@ ndk.dir=/path/to/your/android-sdk-folder/ndk-bundle
 <p>In order to be able to obtain raw OCR result, which contains locations of each character, its value and its alternatives, you need to have a license that allows that. By default, licenses do not allow exposing raw OCR results in public API. If you really need that, please <a href="https://help.microblink.com" rel="nofollow">contact us</a> and explain your use case.</p>
 <h1>
 <a id="user-content--additional-info" class="anchor" href="#-additional-info" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="user-content-info"></a> Additional info</h1>
-<p>Complete API reference can be found in <a href="https://photopay.github.io/photopay-android/index.html" rel="nofollow">Javadoc</a>.</p>
+<p>Complete API reference can be found in <a href="https://photopay.github.io/photopay-android" rel="nofollow">Javadoc</a>.</p>
 <p>For any other questions, feel free to contact us at <a href="http://help.microblink.com" rel="nofollow">help.microblink.com</a>.</p>
 
               </article>
