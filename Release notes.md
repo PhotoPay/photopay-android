@@ -1,5 +1,74 @@
 # Release notes
 
+## 7.5.0
+
+### New features:
+
+- added `BlinkIdRecognizer` for scanning front side of ID cards and `BlinkIdCombinedRecognizer` for combined scanning of front and back side of ID cards
+    - for now, these recognizers classify and extract data from **87** different classes of **United States driver's licenses and IDs** (front and back side)
+    - list of all supported document types can be found [here](https://github.com/PhotoPay/photopay-android/blob/master/BlinkIDRecognizer.md)
+    - in the upcoming releases, we are planning to add support for more document types from different countries
+- completely new UX for scanning ID cards with new scan activity and overlay: `BlinkIdActivity` and `BlinkIdOverlayController`:
+    -  best suited for scanning with `BlinkIdRecognizer` and `BlinkIdCombinedRecognizer`
+    - other single side and combined document recognizers are also supported
+- added support for reading back side of Nigerian Voter ID card - use `NigeriaVoterIdBackRecognizer`
+- added support for reading front and back side of Belgium ID - use `BelgiumIdFrontRecognizer`, `BelgiumIdBackRecognizer` and `BelgiumCombinedRecognizer`
+- added support for reading all visa documents containing Machine Readable Zone - use `VisaRecognizer`
+
+### Improvements for existing features:
+
+- improved `MrtdRecognizer`: 
+    - added support for documents with non-binary gender specification (symbol X)
+- improved `DocumentFaceRecognizer`:
+    - improved scanning time (faster scan)
+    - added support for vertical IDs
+    - removed the `tryBothOrientations` option (improved scan in all directions is enabled by default)
+- improved scanning time (faster scan) for `PassportRecognizer`
+- improved `RomaniaIdFrontRecognizer`
+    - now extracts `CNP` number
+- improved `SloveniaIdFrontRecognizer` and `SloveniaCombinedRecognizer`:
+    - return boolean flag which indicates whether **date of expiry** is permanent - use `SloveniaIdFrontRecognizer.Result.isDateOfExpiryPermanent()` and `SloveniaCombinedRecognizer.Result.isDateOfExpiryPermanent()`
+- improved `GermanyPassportRecognizer`:
+    - better passport classification
+- improved `ColombiaIdFrontRecognizer`:
+    - support for document number in format 1-3-3
+- improved `SlovakiaIdFrontRecognizer`:
+    - support for German letters
+- Malaysia:
+    - `MalaysiaMyTenteraFrontRecognizer` supports 6-digit army number
+    - `MalaysiaIkadFrontRecognizer` - better extraction of the following fields (**DeepOCR** support): date of birth, sector, employer, address and date of expiry
+- United Arab Emirates:
+    - glare detection is disabled by default for `UnitedArabEmiratesIdFrontRecognizer` and `UnitedArabEmiratesIdBackRecognizer` 
+    - `UnitedArabEmiratesIdBackRecognizer` - optimized detection for black backgrounds
+
+### Minor API changes:
+
+- renamed following recognizers:
+    - `CroatiaPdf417Recognizer` to `CroatiaPdf417PaymentRecognizer`
+    - `CroatiaQrCodeRecognizer` to `CroatiaQrCodePaymentRecognizer`
+    - `SepaQrCodeRecognizer` to `SepaQrCodePaymentRecognizer`
+    - `SlovakiaCode128Recognizer` to `SlovakiaCode128PaymentRecognizer`
+    - `SlovakiaDataMatrixRecognizer` to `SlovakiaDataMatrixPaymentRecognizer`
+    - `SlovakiaQrCodeRecognizer` to `SlovakiaQrCodePaymentRecognizer`
+    - `SloveniaQrCodeRecognizer` to `SloveniaQrCodePaymentRecognizer`
+    - `SwitzerlandQrCodeRecognizer` to `SwitzerlandQrCodePaymentRecognizer`
+    - `UnitedKingdomQrCodeRecognizer` to `UnitedKingdomQrCodePaymentRecognizer`
+- overlay controllers are no longer using UI settings, they're now using Overlay settings,  you can create Overlay controller from UI settings by calling method `uiSettings.createOverlayController` 
+- `PhotopayOverlayController`, `DocumentOverlayController` and `BarcodeOverlayController` are replaced with single overlay controller - `BasicOverlayController`
+- moved some classes to new packages
+
+### Removed features:
+
+- removed `WindowedOcrLineUISettings`
+- `BarcodeScanActivity` no longer supports results dialog
+- verification activities no longer support action bar built in obsolete activity themes
+
+### Bug fixes:
+
+- fixed bug in `SloveniaQrCodePaymentRecognizer` which caused invalid parsing
+- all default scan activities correctly set volume to media instead of ring
+- all default scan activities now apply secure flag if enabled in ui settings
+
 ## 7.4.0
 
 ### New features:
