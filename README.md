@@ -383,9 +383,9 @@ List of available built-in scan activities in _PhotoPay_ are listed in section [
 
 ### <a name="recognizerRunnerFragment"></a> Using `RecognizerRunnerFragment` within your activity
 
-If you want to integrate UI provided by our built-in activity somewhere within your activity, you can do so by using [`RecognizerRunnerFragment`](https://photopay.github.io/photopay-android/com/microblink/fragment/RecognizerRunnerFragment.html). Any activity that will host the `RecognizerRunnerFragment` must implement [`ScanningOverlayBinder`](https://photopay.github.io/photopay-android/com/microblink/fragment/RecognizerRunnerFragment.ScanningOverlayBinder.html) interface. Attempt of adding `RecognizerRunnerFragment` to activity that does not implement the aforementioned interface will result in a `ClassCastException`. This design is in accordance with the [recommendation for communication between fragments](https://developer.android.com/training/basics/fragments/communicating.html).
+If you want to reuse our built-in activity UX inside your own activity, use [`RecognizerRunnerFragment`](https://photopay.github.io/photopay-android/com/microblink/fragment/RecognizerRunnerFragment.html). Activity that will host `RecognizerRunnerFragment` must implement [`ScanningOverlayBinder`](https://photopay.github.io/photopay-android/com/microblink/fragment/RecognizerRunnerFragment.ScanningOverlayBinder.html) interface. Attempting to add `RecognizerRunnerFragment` to activity that does not implement that interface will result in `ClassCastException`.
 
-The `ScanningOverlayBinder` is responsible for returning `non-null` implementation of [`ScanningOverlay`](https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/ScanningOverlay.html) - class that will manage UI on top of `RecognizerRunnerFragment`. It is not recommended to create your own implementation of `ScanningOverlay` as effort to do so might be equal or even greater to creating your custom UI implementation [in the recommended way](#recognizerRunnerView). 
+The `ScanningOverlayBinder` is responsible for returning `non-null` implementation of [`ScanningOverlay`](https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/ScanningOverlay.html) - class that will manage UI on top of `RecognizerRunnerFragment`. It is not recommended to create your own `ScanningOverlay` implementation, use one of our implementations listed [here](#builtInUIComponents) instead.
 
 Here is the minimum example for activity that hosts the `RecognizerRunnerFragment`:
 
@@ -393,7 +393,7 @@ Here is the minimum example for activity that hosts the `RecognizerRunnerFragmen
 public class MyActivity extends Activity implements RecognizerRunnerFragment.ScanningOverlayBinder {
     private CroatiaSlipRecognizer mRecognizer;
     private RecognizerBundle mRecognizerBundle;
-    private PhotopayOverlayController mScanOverlay = createOverlay();
+    private BasicOverlayController mScanOverlay = createOverlay();
     private RecognizerRunnerFragment mRecognizerRunnerFragment;
 
     @Override
@@ -419,7 +419,7 @@ public class MyActivity extends Activity implements RecognizerRunnerFragment.Sca
         return mScanningOverlay;
     }
 
-    private PhotopayOverlayController createOverlay() {
+    private BasicOverlayController createOverlay() {
         // create CroatiaSlipRecognizer
         mRecognizer = new CroatiaSlipRecognizer();
 
@@ -428,7 +428,7 @@ public class MyActivity extends Activity implements RecognizerRunnerFragment.Sca
 
         PhotopayUISettings settings = new PhotopayUISettings(mRecognizerBundle);
 
-        return new PhotopayOverlayController(settings.toOverlaySettings(this), mScanResultListener);
+        return settings.createOverlayController(this, mScanResultListener);
     }
 
     private final ScanResultListener mScanResultListener = new ScanResultListener() {
@@ -451,7 +451,7 @@ public class MyActivity extends Activity implements RecognizerRunnerFragment.Sca
 }
 ```
 
-Also please refer to demo apps provided with the SDK for more detailed example and make sure your host activity's orientation is set to `nosensor` or has configuration changing enabled (i.e. is not restarted when configuration change happens). For more information, check [this section](#scanOrientation).
+Please refer to sample apps provided with the SDK for more detailed example and make sure your host activity's orientation is set to `nosensor` or has configuration changing enabled (i.e. is not restarted when configuration change happens). For more information, check [scan orientation section](#scanOrientation).
 
 ### <a name="builtInUIComponents"></a> Built-in activities and overlays
 
