@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":6,"i2":10,"i3":10,"i4":6,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10};
+var methods = {"i0":10,"i1":6,"i2":10,"i3":10,"i4":6,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -73,13 +73,13 @@ var activeTableTab = "activeTableTab";
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li>Field&nbsp;|&nbsp;</li>
+<li><a href="#field.summary">Field</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
-<li>Field&nbsp;|&nbsp;</li>
+<li><a href="#field.detail">Field</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
@@ -112,7 +112,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../com/microblink/uisettings/options/BeepSoundUIOptions.html" title="interface in com.microblink.uisettings.options">BeepSoundUIOptions</a>, <a href="../../../com/microblink/uisettings/options/CameraSettingsUIOptions.html" title="interface in com.microblink.uisettings.options">CameraSettingsUIOptions</a>, <a href="../../../com/microblink/uisettings/options/CurrentImageListenerUIOptions.html" title="interface in com.microblink.uisettings.options">CurrentImageListenerUIOptions</a>, <a href="../../../com/microblink/uisettings/options/DebugImageListenerUIOptions.html" title="interface in com.microblink.uisettings.options">DebugImageListenerUIOptions</a>, <a href="../../../com/microblink/uisettings/options/HighResSuccessFrameCaptureUIOptions.html" title="interface in com.microblink.uisettings.options">HighResSuccessFrameCaptureUIOptions</a>, <a href="../../../com/microblink/uisettings/options/OcrResultDisplayUIOptions.html" title="interface in com.microblink.uisettings.options">OcrResultDisplayUIOptions</a>, <a href="../../../com/microblink/uisettings/options/SplashScreenUIOptions.html" title="interface in com.microblink.uisettings.options">SplashScreenUIOptions</a></dd>
+<dd><a href="../../../com/microblink/uisettings/options/BeepSoundUIOptions.html" title="interface in com.microblink.uisettings.options">BeepSoundUIOptions</a>, <a href="../../../com/microblink/uisettings/options/CurrentImageListenerUIOptions.html" title="interface in com.microblink.uisettings.options">CurrentImageListenerUIOptions</a>, <a href="../../../com/microblink/uisettings/options/DebugImageListenerUIOptions.html" title="interface in com.microblink.uisettings.options">DebugImageListenerUIOptions</a>, <a href="../../../com/microblink/uisettings/options/HighResSuccessFrameCaptureUIOptions.html" title="interface in com.microblink.uisettings.options">HighResSuccessFrameCaptureUIOptions</a>, <a href="../../../com/microblink/uisettings/options/OcrResultDisplayUIOptions.html" title="interface in com.microblink.uisettings.options">OcrResultDisplayUIOptions</a>, <a href="../../../com/microblink/uisettings/options/SplashScreenUIOptions.html" title="interface in com.microblink.uisettings.options">SplashScreenUIOptions</a></dd>
 </dl>
 <dl>
 <dt>Direct Known Subclasses:</dt>
@@ -122,13 +122,32 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public abstract class <span class="typeNameLabel">BaseBlinkIdUiSettings</span>
 extends <a href="../../../com/microblink/uisettings/UISettings.html" title="class in com.microblink.uisettings">UISettings</a>
-implements <a href="../../../com/microblink/uisettings/options/CameraSettingsUIOptions.html" title="interface in com.microblink.uisettings.options">CameraSettingsUIOptions</a>, <a href="../../../com/microblink/uisettings/options/BeepSoundUIOptions.html" title="interface in com.microblink.uisettings.options">BeepSoundUIOptions</a>, <a href="../../../com/microblink/uisettings/options/DebugImageListenerUIOptions.html" title="interface in com.microblink.uisettings.options">DebugImageListenerUIOptions</a>, <a href="../../../com/microblink/uisettings/options/CurrentImageListenerUIOptions.html" title="interface in com.microblink.uisettings.options">CurrentImageListenerUIOptions</a>, <a href="../../../com/microblink/uisettings/options/HighResSuccessFrameCaptureUIOptions.html" title="interface in com.microblink.uisettings.options">HighResSuccessFrameCaptureUIOptions</a>, <a href="../../../com/microblink/uisettings/options/SplashScreenUIOptions.html" title="interface in com.microblink.uisettings.options">SplashScreenUIOptions</a>, <a href="../../../com/microblink/uisettings/options/OcrResultDisplayUIOptions.html" title="interface in com.microblink.uisettings.options">OcrResultDisplayUIOptions</a></pre>
+implements <a href="../../../com/microblink/uisettings/options/BeepSoundUIOptions.html" title="interface in com.microblink.uisettings.options">BeepSoundUIOptions</a>, <a href="../../../com/microblink/uisettings/options/DebugImageListenerUIOptions.html" title="interface in com.microblink.uisettings.options">DebugImageListenerUIOptions</a>, <a href="../../../com/microblink/uisettings/options/CurrentImageListenerUIOptions.html" title="interface in com.microblink.uisettings.options">CurrentImageListenerUIOptions</a>, <a href="../../../com/microblink/uisettings/options/HighResSuccessFrameCaptureUIOptions.html" title="interface in com.microblink.uisettings.options">HighResSuccessFrameCaptureUIOptions</a>, <a href="../../../com/microblink/uisettings/options/SplashScreenUIOptions.html" title="interface in com.microblink.uisettings.options">SplashScreenUIOptions</a>, <a href="../../../com/microblink/uisettings/options/OcrResultDisplayUIOptions.html" title="interface in com.microblink.uisettings.options">OcrResultDisplayUIOptions</a></pre>
 </li>
 </ul>
 </div>
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
+<!-- =========== FIELD SUMMARY =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="field.summary">
+<!--   -->
+</a>
+<h3>Field Summary</h3>
+<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Field Summary table, listing fields, and an explanation">
+<caption><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Field and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static int</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BaseBlinkIdUiSettings.html#TIMEOUT_INFINITY">TIMEOUT_INFINITY</a></span></code>&nbsp;</td>
+</tr>
+</table>
+</li>
+</ul>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 <ul class="blockList">
 <li class="blockList"><a name="constructor.summary">
@@ -200,55 +219,54 @@ implements <a href="../../../com/microblink/uisettings/options/CameraSettingsUIO
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BaseBlinkIdUiSettings.html#setBeepSoundResourceID-int-">setBeepSoundResourceID</a></span>(int&nbsp;beepSoundResourceID)</code>
-<div class="block">Defines the resource ID of the sound to be played when recognition is successful.</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BaseBlinkIdUiSettings.html#setBackSideScanningTimeoutMs-long-">setBackSideScanningTimeoutMs</a></span>(long&nbsp;backSideScanningTimeoutMs)</code>
+<div class="block">Set back side scanning timeout in milliseconds, default is 17 000 milliseconds.</div>
 </td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BaseBlinkIdUiSettings.html#setCameraType-com.microblink.hardware.camera.CameraType-">setCameraType</a></span>(<a href="../../../com/microblink/hardware/camera/CameraType.html" title="class in com.microblink.hardware.camera">CameraType</a>&nbsp;cameraType)</code>
-<div class="block">Sets type of camera that will be used.</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BaseBlinkIdUiSettings.html#setBeepSoundResourceID-int-">setBeepSoundResourceID</a></span>(int&nbsp;beepSoundResourceID)</code>
+<div class="block">Defines the resource ID of the sound to be played when recognition is successful.</div>
 </td>
 </tr>
 <tr id="i8" class="altColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BaseBlinkIdUiSettings.html#setCameraVideoPreset-com.microblink.hardware.camera.VideoResolutionPreset-">setCameraVideoPreset</a></span>(<a href="../../../com/microblink/hardware/camera/VideoResolutionPreset.html" title="class in com.microblink.hardware.camera">VideoResolutionPreset</a>&nbsp;cameraVideoPreset)</code>
-<div class="block">Sets the video resolution preset that will be used when choosing camera resolution
- for scanning.</div>
-</td>
-</tr>
-<tr id="i9" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BaseBlinkIdUiSettings.html#setCurrentImageListener-com.microblink.image.CurrentImageListener-">setCurrentImageListener</a></span>(<a href="../../../com/microblink/image/CurrentImageListener.html" title="interface in com.microblink.image">CurrentImageListener</a>&nbsp;currentImageListener)</code>
 <div class="block">Sets implementation of <a href="../../../com/microblink/image/CurrentImageListener.html" title="interface in com.microblink.image"><code>CurrentImageListener</code></a> interface that will obtain images that
  are currently being processed.</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BaseBlinkIdUiSettings.html#setDebugImageListener-com.microblink.image.DebugImageListener-">setDebugImageListener</a></span>(<a href="../../../com/microblink/image/DebugImageListener.html" title="interface in com.microblink.image">DebugImageListener</a>&nbsp;debugImageListener)</code>
 <div class="block">Sets implementation of <a href="../../../com/microblink/image/DebugImageListener.html" title="interface in com.microblink.image"><code>DebugImageListener</code></a> interface that will obtain images that are
  being processed.</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BaseBlinkIdUiSettings.html#setDocumentDataMatchRequired-boolean-">setDocumentDataMatchRequired</a></span>(boolean&nbsp;isRequired)</code>
 <div class="block">If set to true, user won't be able to finish the scanning process if data read from front and
  back sides doesn't match.</div>
 </td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BaseBlinkIdUiSettings.html#setOcrResultDisplayMode-com.microblink.uisettings.options.OcrResultDisplayMode-">setOcrResultDisplayMode</a></span>(<a href="../../../com/microblink/uisettings/options/OcrResultDisplayMode.html" title="class in com.microblink.uisettings.options">OcrResultDisplayMode</a>&nbsp;ocrResultDisplayMode)</code>
 <div class="block">Defines mode in which OCR result will be drawn on camera preview.</div>
 </td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BaseBlinkIdUiSettings.html#setShowMrzDetection-boolean-">setShowMrzDetection</a></span>(boolean&nbsp;showOcrResult)</code>
 <div class="block">Defines whether detection of MRZ(Machine Readable Zone) will be displayed in UI, default is
  <code>true</code>.</div>
+</td>
+</tr>
+<tr id="i13" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BaseBlinkIdUiSettings.html#setShowNotSupportedDialog-boolean-">setShowNotSupportedDialog</a></span>(boolean&nbsp;showNotSupportedDialog)</code>
+<div class="block">Defines whether Document Not Supported dialog will be displayed in UI, default is <code>true</code>.</div>
 </td>
 </tr>
 <tr id="i14" class="altColor">
@@ -258,20 +276,13 @@ implements <a href="../../../com/microblink/uisettings/options/CameraSettingsUIO
  while camera is being initialized.</div>
 </td>
 </tr>
-<tr id="i15" class="rowColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BaseBlinkIdUiSettings.html#setUsingLegacyCameraAPI-boolean-">setUsingLegacyCameraAPI</a></span>(boolean&nbsp;usingLegacyCameraAPI)</code>
-<div class="block">Sets whether legacy camera API should be used even on Lollipop devices that support
- newer Camera2 API.</div>
-</td>
-</tr>
 </table>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.com.microblink.uisettings.UISettings">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;com.microblink.uisettings.<a href="../../../com/microblink/uisettings/UISettings.html" title="class in com.microblink.uisettings">UISettings</a></h3>
-<code><a href="../../../com/microblink/uisettings/UISettings.html#getTargetActivity--">getTargetActivity</a>, <a href="../../../com/microblink/uisettings/UISettings.html#getUsingFlagSecure--">getUsingFlagSecure</a>, <a href="../../../com/microblink/uisettings/UISettings.html#setUsingFlagSecure-boolean-">setUsingFlagSecure</a></code></li>
+<code><a href="../../../com/microblink/uisettings/UISettings.html#getActivityTheme--">getActivityTheme</a>, <a href="../../../com/microblink/uisettings/UISettings.html#getTargetActivity--">getTargetActivity</a>, <a href="../../../com/microblink/uisettings/UISettings.html#getUsingFlagSecure--">getUsingFlagSecure</a>, <a href="../../../com/microblink/uisettings/UISettings.html#setActivityTheme-int-">setActivityTheme</a>, <a href="../../../com/microblink/uisettings/UISettings.html#setCameraSettings-com.microblink.uisettings.CameraSettings-">setCameraSettings</a>, <a href="../../../com/microblink/uisettings/UISettings.html#setUsingFlagSecure-boolean-">setUsingFlagSecure</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
@@ -288,6 +299,27 @@ implements <a href="../../../com/microblink/uisettings/options/CameraSettingsUIO
 <div class="details">
 <ul class="blockList">
 <li class="blockList">
+<!-- ============ FIELD DETAIL =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="field.detail">
+<!--   -->
+</a>
+<h3>Field Detail</h3>
+<a name="TIMEOUT_INFINITY">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>TIMEOUT_INFINITY</h4>
+<pre>public static final&nbsp;int TIMEOUT_INFINITY</pre>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../constant-values.html#com.microblink.uisettings.BaseBlinkIdUiSettings.TIMEOUT_INFINITY">Constant Field Values</a></dd>
+</dl>
+</li>
+</ul>
+</li>
+</ul>
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 <ul class="blockList">
 <li class="blockList"><a name="constructor.detail">
@@ -352,59 +384,6 @@ public&nbsp;<a href="../../../com/microblink/entities/recognizers/RecognizerBund
 <dd><code><a href="../../../com/microblink/uisettings/options/BeepSoundUIOptions.html#setBeepSoundResourceID-int-">setBeepSoundResourceID</a></code>&nbsp;in interface&nbsp;<code><a href="../../../com/microblink/uisettings/options/BeepSoundUIOptions.html" title="interface in com.microblink.uisettings.options">BeepSoundUIOptions</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>beepSoundResourceID</code> - resource ID of the sound to be played when recognition is successful.</dd>
-</dl>
-</li>
-</ul>
-<a name="setCameraVideoPreset-com.microblink.hardware.camera.VideoResolutionPreset-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>setCameraVideoPreset</h4>
-<pre>public&nbsp;void&nbsp;setCameraVideoPreset(@NonNull
-                                 <a href="../../../com/microblink/hardware/camera/VideoResolutionPreset.html" title="class in com.microblink.hardware.camera">VideoResolutionPreset</a>&nbsp;cameraVideoPreset)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../com/microblink/uisettings/options/CameraSettingsUIOptions.html#setCameraVideoPreset-com.microblink.hardware.camera.VideoResolutionPreset-">CameraSettingsUIOptions</a></code></span></div>
-<div class="block">Sets the video resolution preset that will be used when choosing camera resolution
- for scanning.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../com/microblink/uisettings/options/CameraSettingsUIOptions.html#setCameraVideoPreset-com.microblink.hardware.camera.VideoResolutionPreset-">setCameraVideoPreset</a></code>&nbsp;in interface&nbsp;<code><a href="../../../com/microblink/uisettings/options/CameraSettingsUIOptions.html" title="interface in com.microblink.uisettings.options">CameraSettingsUIOptions</a></code></dd>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>cameraVideoPreset</code> - video resolution preset that will be used
-                          when choosing camera resolution for scanning.</dd>
-</dl>
-</li>
-</ul>
-<a name="setUsingLegacyCameraAPI-boolean-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>setUsingLegacyCameraAPI</h4>
-<pre>public&nbsp;void&nbsp;setUsingLegacyCameraAPI(boolean&nbsp;usingLegacyCameraAPI)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../com/microblink/uisettings/options/CameraSettingsUIOptions.html#setUsingLegacyCameraAPI-boolean-">CameraSettingsUIOptions</a></code></span></div>
-<div class="block">Sets whether legacy camera API should be used even on Lollipop devices that support
- newer Camera2 API. Default is <code>false</code>;</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../com/microblink/uisettings/options/CameraSettingsUIOptions.html#setUsingLegacyCameraAPI-boolean-">setUsingLegacyCameraAPI</a></code>&nbsp;in interface&nbsp;<code><a href="../../../com/microblink/uisettings/options/CameraSettingsUIOptions.html" title="interface in com.microblink.uisettings.options">CameraSettingsUIOptions</a></code></dd>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>usingLegacyCameraAPI</code> - <code>true</code> to use legacy camera API, <code>false</code> otherwise.</dd>
-</dl>
-</li>
-</ul>
-<a name="setCameraType-com.microblink.hardware.camera.CameraType-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>setCameraType</h4>
-<pre>public&nbsp;void&nbsp;setCameraType(@NonNull
-                          <a href="../../../com/microblink/hardware/camera/CameraType.html" title="class in com.microblink.hardware.camera">CameraType</a>&nbsp;cameraType)</pre>
-<div class="block">Sets type of camera that will be used.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>cameraType</code> - type of camera that will be used.</dd>
 </dl>
 </li>
 </ul>
@@ -535,6 +514,35 @@ public&nbsp;<a href="../../../com/microblink/entities/recognizers/RecognizerBund
 </dl>
 </li>
 </ul>
+<a name="setShowNotSupportedDialog-boolean-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setShowNotSupportedDialog</h4>
+<pre>public&nbsp;void&nbsp;setShowNotSupportedDialog(boolean&nbsp;showNotSupportedDialog)</pre>
+<div class="block">Defines whether Document Not Supported dialog will be displayed in UI, default is <code>true</code>.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>showNotSupportedDialog</code> - whether Document Not Supported dialog will be displayed in UI.</dd>
+</dl>
+</li>
+</ul>
+<a name="setBackSideScanningTimeoutMs-long-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setBackSideScanningTimeoutMs</h4>
+<pre>public&nbsp;void&nbsp;setBackSideScanningTimeoutMs(long&nbsp;backSideScanningTimeoutMs)</pre>
+<div class="block">Set back side scanning timeout in milliseconds, default is 17 000 milliseconds.
+ If set to <a href="../../../com/microblink/uisettings/BaseBlinkIdUiSettings.html#TIMEOUT_INFINITY">0</a>, dialog will not be shown.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>backSideScanningTimeoutMs</code> - timeout in milliseconds.</dd>
+</dl>
+</li>
+</ul>
 <a name="isLockedToPortrait--">
 <!--   -->
 </a>
@@ -649,13 +657,13 @@ protected abstract&nbsp;<a href="../../../com/microblink/fragment/overlay/blinki
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li>Field&nbsp;|&nbsp;</li>
+<li><a href="#field.summary">Field</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
-<li>Field&nbsp;|&nbsp;</li>
+<li><a href="#field.detail">Field</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>

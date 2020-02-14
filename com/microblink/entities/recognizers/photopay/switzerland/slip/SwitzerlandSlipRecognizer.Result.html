@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -197,18 +197,24 @@ extends &lt;any&gt;</pre>
 </td>
 </tr>
 <tr id="i4" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/switzerland/slip/SwitzerlandSlipRecognizer.Result.html#getOcrLineResult--">getOcrLineResult</a></span>()</code>
+<div class="block">Returns raw ocr line result.</div>
+</td>
+</tr>
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.math.BigDecimal</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/switzerland/slip/SwitzerlandSlipRecognizer.Result.html#getParsedAmount--">getParsedAmount</a></span>()</code>
 <div class="block">Returns the scanned amount as big decimal value in normal currency (e.g.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/switzerland/slip/SwitzerlandSlipRecognizer.Result.html#getReferenceNumber--">getReferenceNumber</a></span>()</code>
 <div class="block">Returns the reference of the payment</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/switzerland/slip/SwitzerlandSlipRecognizer.Result.html#getSubscriberNumber--">getSubscriberNumber</a></span>()</code>
 <div class="block">Returns subscriber number.</div>
@@ -321,6 +327,20 @@ public&nbsp;java.lang.String&nbsp;getCurrencyCode()</pre>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the currency code or null if nothing was scanned.</dd>
+</dl>
+</li>
+</ul>
+<a name="getOcrLineResult--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getOcrLineResult</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getOcrLineResult()</pre>
+<div class="block">Returns raw ocr line result.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>raw ocr line result.</dd>
 </dl>
 </li>
 </ul>

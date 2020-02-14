@@ -3,26 +3,26 @@
 * [Android _PhotoPay_ integration instructions](#intro)
 * [Quick Start](#quickStart)
     * [Quick start with the sample app](#quickDemo)
-    * [Android Studio integration](#androidStudioIntegration)
-    * [Eclipse integration](#eclipseIntegration)
-    * [Performing your first scan](#quickScan)
-* [Advanced _PhotoPay_ integration instructions](#advancedIntegration)
-    * [Checking if _PhotoPay_ is supported](#supportCheck)
-    * [UI customizations of built-in activities and fragments](#uiCustomizations)
-        * [Using built-in scan activity for performing the scan](#runBuiltinActivity)
-        * [Using `RecognizerRunnerFragment` within your activity](#recognizerRunnerFragment)
-        * [Built-in activities and overlays](#builtInUIComponents)
-        * [Changing the appearance of built-in activities and scanning overlays](#changeBuiltInUIComponents)
-        * [Translation and localization](#translation)
-    * [Embedding `RecognizerRunnerView` into custom scan activity](#recognizerRunnerView)
-        * [Scan activity's orientation](#scanOrientation)
+    * [SDK integration](#androidStudioIntegration)
+* [Device requirements](#supportCheck)
+* [_PhotoPay_ SDK integration levels](#uiCustomizations)
+    * [Built-in activities (`UISettings`)](#runBuiltinActivity)
+    * [Built-in fragment (`RecognizerRunnerFragment`)](#recognizerRunnerFragment)
+    * [Custom UX with `RecognizerRunnerView`](#recognizerRunnerView)
     * [Direct API](#directAPI)
         * [Using Direct API for recognition of Android Bitmaps and custom camera frames](#directAPI_images)
         * [Using Direct API for `String` recognition (parsing)](#directAPI_strings)
         * [Understanding DirectAPI's state machine](#directAPIStateMachine)
         * [Using DirectAPI while RecognizerRunnerView is active](#directAPIWithRecognizer)
-    * [Handling processing events with `RecognizerRunner` and `RecognizerRunnerView`](#processingEvents)
-        * [Note about the `setMetadataCallbacks` method](#processingEventsImportantNote)
+* [Available activities and overlays](#builtInUIComponents)
+    * [New: `BlinkIdUISettings` and `BlinkIdOverlayController`](#blinkidUiComponent)
+    * [`DocumentUISettings`](#documentUiComponent)
+    * [`DocumentVerificationUISettings`](#documentVerifyUiComponent)
+    * [`BlinkCardUISettings` and `BlinkCardOverlayController`](#blinkcardUiComponent)
+    * [`DocumentCaptureUISettings` and `DocumentCaptureOverlayController`](#documentCaptureUiComponent)
+    * [`FieldByFieldUISettings` and `FieldByFieldOverlayController`](#fieldByFieldUiComponent)
+    * [Translation and localization](#translation)
+* [Handling processing events with `RecognizerRunner` and `RecognizerRunnerView`](#processingEvents)
 * [`Recognizer` concept and `RecognizerBundle`](#availableRecognizers)
     * [The `Recognizer` concept](#recognizerConcept)
     * [`RecognizerBundle`](#recognizerBundle)
@@ -30,25 +30,16 @@
 * [List of available recognizers](#recognizerList)
     * [Frame Grabber Recognizer](#frameGrabberRecognizer)
     * [Success Frame Grabber Recognizer](#successFrameGrabberRecognizer)
-    * [PDF417 recognizer](#pdf417Recognizer)
-    * [Barcode recognizer](#barcodeRecognizer)
-    * [BlinkInput recognizer](#blinkInputRecognizer)
-    * [Detector recognizer](#detectorRecognizer)
-    * [BlinkCard recognizers](#blinkcard_recognizers)
-        * [BlinkCard recognizer](#blink_card_combined)
-        * [BlinkCardElite recognizer](#elite_blink_card_combined)
-    * [SIM number recognizer](#simNumberRecognizer)
     * [BlinkID recognizers](#blinkid_recognizers)
-        * [BlinkID recognizer](#blinkidRecognizer)
         * [BlinkID combined recognizer](#blinkidCombinedRecognizer)
         * [Machine Readable Travel Document recognizer](#mrtdRecognizer)
         * [Machine Readable Travel Document combined recognizer](#mrtd_combined_recognizer)
         * [Passport recognizer](#passportRecognizer)
         * [Visa recognizer](#visaRecognizer)
-        * [US / Canada driver's license barcode recognizer](#us_dl_recognizer)
-        * [US / Canada driver's license combined recognizer](#us_dl_combined_recognizer)
-        * [EU Driver's License recognizer](#eudlRecognizer)
+        * [AAMVA standard barcode recognizer (USA, Canada, Nigeria)](#us_dl_recognizer)
+        * [AAMVA standard combined recognizer (USA, Canada, Nigeria)](#us_dl_combined_recognizer)
         * [Document face recognizer](#documentFaceRecognizer)
+        * [EU Driver's License recognizer](#eudlRecognizer)
     * [Country-specific BlinkID recognizers](#blinkid_recognizers_countries)
         * [Australia](#blinkid_recognizers_australia)
         * [Austria](#blinkid_recognizers_austria)
@@ -98,6 +89,15 @@
         * [Slovenia](#photopay_recognizers_slovenia)
         * [Switzerland](#photopay_recognizers_switzerland)
         * [United Kingdom](#photopay_recognizers_uk)
+    * [PDF417 recognizer](#pdf417Recognizer)
+    * [Barcode recognizer](#barcodeRecognizer)
+    * [SIM number recognizer](#simNumberRecognizer)
+    * [Document capture recognizer](#documentCaptureRecognizer)
+    * [BlinkInput recognizer](#blinkInputRecognizer)
+    * [Detector recognizer](#detectorRecognizer)
+    * [BlinkCard recognizers](#blinkcard_recognizers)
+        * [BlinkCard recognizer](#blink_card_combined)
+        * [BlinkCardElite recognizer](#elite_blink_card_combined)
 * [`Field by field` scanning feature](#fieldByFieldFeature)
     * [Performing your first `field by field` scan](#quickScan_field_by_field)
 * [`Processor` and `Parser`](#processorsAndParsers)
@@ -137,24 +137,19 @@
         * [The `TemplatingClass` component](#templatingClass)
         * [Implementing the `TemplatingClassifier`](#implementingTemplatingClassifier)
     * [Obtaining recognition results](#detectorTemplating_results)
-* [Extracting additional fields of interest from machine-readable travel documents by using Templating API](#mrtdTemplating)
+    * [Extracting additional fields of interest from machine-readable travel documents by using Templating API](#mrtdTemplating)
 * [The `Detector` concept](#detectorConcept)
     * [List of available detectors](#detectorList)
         * [Document Detector](#documentDetector)
         * [MRTD Detector](#mrtdDetector)
 * [Embedding _PhotoPay_ inside another SDK](#embedAAR)
-    * [_PhotoPay_ licensing model](#licensingModel)
-        * [Application licenses](#appLicence)
-    * [Ensuring the final app gets all resources required by _PhotoPay_](#sdkIntegrationIntoApp)
 * [Processor architecture considerations](#archConsider)
     * [Reducing the final size of your app](#reduceSize)
         * [Consequences of removing processor architecture](#archConsequences)
     * [Creating customized build of _PhotoPay_](#staticDistrib)
     * [Combining _PhotoPay_ with other native libraries](#combineNativeLibraries)
 * [Troubleshooting](#troubleshoot)
-    * [Integration problems](#integrationTroubleshoot)
-    * [SDK problems](#sdkTroubleshoot)
-    * [Frequently asked questions and known problems](#faq)
+* [FAQ and known issues](#faq)
 * [Additional info](#info)
 
 # <a name="intro"></a> Android _PhotoPay_ integration instructions
@@ -187,20 +182,19 @@ You can also create your own scanning UI - you just need to embed `RecognizerRun
 3. In File dialog select _PhotopaySample_ folder.
 4. Wait for the project to load. If Android studio asks you to reload project on startup, select `Yes`.
 
-## <a name="androidStudioIntegration"></a> Android Studio integration
 
-
-### Using AAR
+## <a name="androidStudioIntegration"></a> SDK integration
+#### Adding _PhotoPay_ dependency
 
 1. In Android Studio menu, click _File_, select _New_ and then select _Module_.
 2. In new window, select _Import .JAR or .AAR Package_, and click _Next_.
 3. In _File name_ field, enter the path to _LibPhotoPay.aar_ and click _Finish_.
-4. In your app's `build.gradle`, add dependency to `LibPhotoPay` and appcompat-v7:
+4. In your app's `build.gradle`, add dependency to `LibPhotoPay` and appcompat:
 
     ```
     dependencies {
         implementation project(':LibPhotoPay')
-        implementation "com.android.support:appcompat-v7:28.0.0"
+        implementation "androidx.appcompat:appcompat:1.1.0"
     }
     ```
     
@@ -215,28 +209,8 @@ You can also create your own scanning UI - you just need to embed `RecognizerRun
 7. Find and select `LibPhotoPay-javadoc.jar` file which is located in root folder of the SDK distribution
 8. Click `OK`
 
-## <a name="eclipseIntegration"></a> Eclipse integration
 
-We do not provide Eclipse integration demo apps. We encourage you to use Android Studio. We also do not test integrating _PhotoPay_ with Eclipse. If you are having problems with _PhotoPay_, make sure you have tried integrating it with Android Studio prior to contacting us.
-
-However, if you still want to use Eclipse, you will need to convert AAR archive to Eclipse library project format. You can do this by doing the following:
-
-1. In Eclipse, create a new _Android library project_ in your workspace.
-2. Clear the `src` and `res` folders.
-3. Unzip the `LibPhotoPay.aar` file. You can rename it to zip and then unzip it using any tool.
-4. Copy the `classes.jar` to `libs` folder of your Eclipse library project. If `libs` folder does not exist, create it.
-5. Copy the contents of `jni` folder to `libs` folder of your Eclipse library project.
-6. Replace the `res` folder on library project with the `res` folder of the `LibPhotoPay.aar` file.
-
-You’ve already created the project that contains almost everything you need. Now let’s see how to configure your project to reference this library project.
-
-1. In the project you want to use the library (henceforth, "target project") add the library project as a dependency
-2. Open the `AndroidManifest.xml` file inside `LibPhotoPay.aar` file and make sure to copy all permissions, features and activities to the `AndroidManifest.xml` file of the target project.
-3. Copy the contents of `assets` folder from `LibPhotoPay.aar` into `assets` folder of target project. If `assets` folder in target project does not exist, create it.
-4. Clean and Rebuild your target project
-5. Add appcompat-v7 library to your workspace and reference it by target project (modern ADT plugin for Eclipse does this automatically for all new android projects).
-
-## <a name="quickScan"></a> Performing your first scan
+#### Performing your first scan
 1. First you'll need to create an account at [Microblink dashboard](https://microblink.com/login) where you can generate a demo license for your app. License is bound to [package name](http://tools.android.com/tech-docs/new-build-system/applicationid-vs-packagename) of your app, so please make sure you enter the correct package name when asked. 
 
     Download your licence file and put it in your application's _assets_ folder. Make sure to set the license key before using any other classes from the SDK, otherwise you will get a runtime exception. 
@@ -281,7 +255,7 @@ You’ve already created the project that contains almost everything you need. N
 	```java
 	// method within MyActivity from previous step
 	public void startScanning() {
-        // Settings for PhotopayActivity Activity
+        // Settings for PhotopayActivity
         PhotopayUISettings settings = new PhotopayUISettings(mRecognizerBundle);
         
         // tweak settings as you wish
@@ -299,7 +273,7 @@ You’ve already created the project that contains almost everything you need. N
         super.onActivityResult(requestCode, resultCode, data);
         
         if (requestCode == MY_REQUEST_CODE) {
-            if (resultCode == PhotopayActivity.RESULT_OK && data != null) {
+            if (resultCode == Activity.RESULT_OK && data != null) {
                 // load the data into all recognizers bundled within your RecognizerBundle
                 mRecognizerBundle.loadFromIntent(data);
                 
@@ -318,34 +292,15 @@ You’ve already created the project that contains almost everything you need. N
 	
 	For more information about available recognizers and `RecognizerBundle`, see [RecognizerBundle and available recognizers](#availableRecognizers).
 
-# <a name="advancedIntegration"></a> Advanced _PhotoPay_ integration instructions
-This section covers more advanced details of _PhotoPay_ integration.
+# <a name="supportCheck"></a> Device requirements
 
-1. [First part](#supportCheck) will discuss the methods for checking whether _PhotoPay_ is supported on current device. 
-2. [Second part](#uiCustomizations) will cover the possible customizations when using UI provided by the SDK.
-3. [Third part](#recognizerRunnerView) will describe how to embed `RecognizerRunnerView` into your activity with the goal of creating a custom UI for scanning, while still using camera management capabilities of the SDK.
-4. [Fourth part](#directAPI) will describe how to use the `RecognizerRunner` singleton (Direct API) for recognition directly from android bitmaps without the need of camera or to recognize camera frames that are obtained by custom camera management.
-5. [Fifth part](#processingEvents) will describe how to subscribe to and handle processing events when using either `RecognizerRunnerView` or `RecognizerRunner`.
+_PhotoPay_ requires Android 4.1 or newer. For best performance and compatibility, we recommend at least Android 5.0.
 
+Camera video preview resolution also matters. In order to perform successful scans, camera preview resolution must be at least 480p. Note that camera preview resolution is not the same as video recording resolution. For example, [Sony Xperia Go](http://www.gsmarena.com/sony_xperia_go-4782.php) supports 720p video recording but preview resolution is only 320p - _PhotoPay_ won't work on that device.
 
-## <a name="supportCheck"></a> Checking if _PhotoPay_ is supported
+_PhotoPay_ is native library, written in C++ and available for multiple platforms. Because of this, _PhotoPay_ cannot work on devices with obscure hardware architectures. We have compiled _PhotoPay_ native code only for most popular Android [ABIs](https://en.wikipedia.org/wiki/Application_binary_interface). Even before setting the license key, you should check if _PhotoPay_ is supported on the current device. Attempting to call any method from the SDK that relies on native code, such as license check, on a device with unsupported CPU architecture will crash your app.
 
-### _PhotoPay_ requirements
-Even before settings the license key, you should check if _PhotoPay_ is supported on current device. This is required because the _PhotoPay_ is a native library that needs to be loaded by the JVM and it is possible that it doesn't support CPU architecture of the current device. Attempt of calling any methods from the SDK that rely on native code, such as license check, on a device with unsupported CPU architecture will cause a crash of your app.
-
-_PhotoPay_ requires Android 4.1 as the minimum android version. For best performance and compatibility, we recommend Android 5.0 or newer.
-
-
-OpenGL ES 2.0 can be used to accelerate _PhotoPay's_ processing but is not mandatory. However, it should be noted that if OpenGL ES 2.0 is not available processing time will be significantly large, especially on low end devices.
-
-Since we use OpenGL ES 2.0 for image processing on background thread, we entirely use off-screen rendering to achieve our goals. Unfortunately, some devices have bugs in their OpenGL drivers that cause a crash of the application when it attempts to perform off-screen OpenGL ES context initialization. We do our best to maintain a list of such devices and ensure that no OpenGL is used on those devices. Unfortunately again, the nature of that bug is such that it cannot be detected and worked around at runtime, so a blacklist is required. Fortunately however, most of the affected devices run Android 4.1 or Android 4.2, while most of devices running newer versions of Android are not affected. Also note that most of the devices out there that still run Android 4.1/4.2 are not affected by this bug. If you happen to find a crash of your app which may lead to the described problem, please [let us know](http://help.microblink.com) so we can blacklist the problematic device.
-
-Camera video preview resolution also matters. In order to perform successful scans, camera preview resolution cannot be too low. Minimum camera preview resolution in order to perform a scan is 480p. It must be noted that camera preview resolution is not the same as the video record resolution, although on most devices those are the same. However, there are some devices that allow recording of HD video (720p resolution), but do not allow high enough camera preview resolution (for example, [Sony Xperia Go](http://www.gsmarena.com/sony_xperia_go-4782.php) supports video record resolution at 720p, but camera preview resolution is only 320p - _PhotoPay_ does not work on that device).
-
-_PhotoPay_ is native application, written in C++ and available for multiple platforms. Because of this, _PhotoPay_ cannot work on devices that have obscure hardware architectures. We have compiled _PhotoPay_ native code only for most popular Android [ABIs](https://en.wikipedia.org/wiki/Application_binary_interface). See [Processor architecture considerations](#archConsider) for more information about native libraries in _PhotoPay_ and instructions how to disable certain architectures in order to reduce the size of final app.
-
-### Checking for _PhotoPay_ support in your app
-To check whether the _PhotoPay_ is supported on the device, you can do it in the following way:
+Here's how you can check whether the _PhotoPay_ is supported on the device
 	
 ```java
 // check if PhotoPay is supported on the device
@@ -359,9 +314,9 @@ if (status == RecognizerCompatibilityStatus.RECOGNIZER_SUPPORTED) {
 }
 ```
 
-However, some recognizers require camera with autofocus. If you try to start recognition with those recognizers on a device that does not have a camera with autofocus, you will get an error. To prevent that, you can check whether certain recognizer requires autofocus by calling its [requiresAutofocus](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/Recognizer.html#requiresAutofocus--) method.
+Some recognizers require camera with autofocus. If you try using them on a device that doesn't support autofocus, you will get an error. To prevent that, you can check whether a recognizer requires autofocus by calling its [requiresAutofocus](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/Recognizer.html#requiresAutofocus--) method.
 
-If you already have an array of recognizers, you can easily filter out all recognizers that require autofocus from array using the following code snippet:
+If you already have an array of recognizers, you can easily filter out recognizers that require autofocus from array using the following code snippet:
 
 ```java
 Recognizer[] recArray = ...;
@@ -369,19 +324,25 @@ if(!RecognizerCompatibility.cameraHasAutofocus(CameraType.CAMERA_BACKFACE, this)
 	recArray = RecognizerUtils.filterOutRecognizersThatRequireAutofocus(recArray);
 }
 ```
+# <a name="uiCustomizations"></a> _PhotoPay_ SDK integration levels
 
-This utility method basically iterates over the given array of recognizers and throws out each recognizer that returns `true` from its [requiresAutofocus](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/Recognizer.html#requiresAutofocus--) method.
-## <a name="uiCustomizations"></a> UI customizations of built-in activities and fragments
+You can integrate _PhotoPay_ into your app in four different ways, depending on your use case and customisation needs:
 
-This section will discuss supported appearance and behaviour customizations of built-in activities and will show how to use [`RecognizerRunnerFragment`](https://photopay.github.io/photopay-android/com/microblink/fragment/RecognizerRunnerFragment.html) with provided built-in [scanning overlays](https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/ScanningOverlay.html) to get the built-in UI experience within any part of your app.
+1. Built-in activities (`UISettings`) - SDK handles everything and you just need to start our built-in activity and handle result, customisation options are limited
+2. Built-in fragment (`RecognizerRunnerFragment`) - reuse scanning UX from our built-in activities in your own activity
+3. Custom UX (`RecognizerRunnerView`) - SDK handles camera management while you have to implement completely custom scanning UX
+4. DirectApi (`RecognizerRunner`) - SKD only handles recognition while you have to provide it with the images, either from camera or from a file
 
-### <a name="runBuiltinActivity"></a> Using built-in scan activity for performing the scan
+## <a name="runBuiltinActivity"></a> Built-in activities (`UISettings`)
 
-As shown in first scan example, you need to create a settings object that is associated with the activity you wish to use. Attempt to start built-in activity directly via custom-crafted `Intent` will result with either crashing the app or with undefined behaviour of the scanning procedure.
+`UISettings` is a class that contains all the necessary settings for SDK's built-in scan activities. It configures scanning activity behaviour, strings, icons and other UI elements. 
+As shown in the first scan example, you should use [`ActivityRunner `](https://photopay.github.io/photopay-android/com/microblink/uisettings/ActivityRunner.html) to start the scan activity configured by `UISettings`.
 
-List of available built-in scan activities in _PhotoPay_ are listed in section [Built-in activities and fragments](#builtInUIComponents).
+We provide multiple `UISettings` classes specialised for different scanning scenarios. Each `UISettings` object has properties which can be changed via appropriate setter methods. For example, you can customise camera settings with `setCameraSettings` metod. 
 
-### <a name="recognizerRunnerFragment"></a> Using `RecognizerRunnerFragment` within your activity
+All available `UISettings` classes are listed [here](#builtInUIComponents).
+
+## <a name="recognizerRunnerFragment"></a> Built-in fragment (`RecognizerRunnerFragment`)
 
 If you want to reuse our built-in activity UX inside your own activity, use [`RecognizerRunnerFragment`](https://photopay.github.io/photopay-android/com/microblink/fragment/RecognizerRunnerFragment.html). Activity that will host `RecognizerRunnerFragment` must implement [`ScanningOverlayBinder`](https://photopay.github.io/photopay-android/com/microblink/fragment/RecognizerRunnerFragment.ScanningOverlayBinder.html) interface. Attempting to add `RecognizerRunnerFragment` to activity that does not implement that interface will result in `ClassCastException`.
 
@@ -416,7 +377,7 @@ public class MyActivity extends Activity implements RecognizerRunnerFragment.Sca
     @Override
     @NonNull
     public ScanningOverlay getScanningOverlay() {
-        return mScanningOverlay;
+        return mScanOverlay;
     }
 
     private BasicOverlayController createOverlay() {
@@ -452,89 +413,7 @@ public class MyActivity extends Activity implements RecognizerRunnerFragment.Sca
 ```
 
 Please refer to sample apps provided with the SDK for more detailed example and make sure your host activity's orientation is set to `nosensor` or has configuration changing enabled (i.e. is not restarted when configuration change happens). For more information, check [scan orientation section](#scanOrientation).
-
-### <a name="builtInUIComponents"></a> Built-in activities and overlays
-
-Within _PhotoPay_ SDK there are several built-in activities and scanning overlays that you can use to perform scanning.
-#### <a name='photopayUIComponent'></a> `PhotopayActivity`
-
-[`PhotopayActivity `](https://photopay.github.io/photopay-android/com/microblink/activity/PhotopayActivity.html) is the activity containing `RecognizerRunnerFragment` with [`BasicOverlayController`](https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/basic/BasicOverlayController.html), which can be used out of the box to simply perform the scanning using the default UI. It is best suited for performing scanning of various payment slips.
-
-#### <a name='ocrLineUIComponent'></a> `OcrLineScanActivity`
-
-[`OcrLineScanActivity`](https://photopay.github.io/photopay-android/com/microblink/activity/OcrLineScanActivity.html) is the activity containing `RecognizerRunnerFragment` with [`BasicOverlayController`](https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/basic/BasicOverlayController.html), which can be used out of the box to simply perform the scanning using the default UI. It is best suited for performing scanning of payment slips that have entire payment information encoded in OCR line in lower part of the slip. For example, it is best for performing scanning of payment slips in Kosovo, Netherlands, Switzerland and United Kingdom.
-#### <a name="blinkcardUiComponent"></a> New: `BlinkIdActivity` and `BlinkIdOverlayController`
-
-[`BlinkIdOverlayController`](https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/blinkid/BlinkIdOverlayController.html) implements new UI for scanning identity documents, which is optimally designed to be used with new [`BlinkIdCombinedRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/generic/BlinkIdCombinedRecognizer.html) and [`BlinkIdRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/generic/BlinkIdRecognizer.html). The new overlay implements several new features:
-
-* clear indication for searching phase, when PhotoPay is searching for an ID document
-* clear progress indication, when PhotoPay is busy with OCR and data extraction
-* clear message when the document is not supported
-* visual indications when the user needs to place the document closer to the camera
-* When BlinkIdCombinedRecognizer is used, visual indication that the data from the front side of the document doesn't match the data on the back side of the document.
-
-The new UI allows the user to scan the document at an any angle, in any orientation. We recommend forcing landscape orientation if you scan barcodes on the back side, because in that orientation success rate will be higher. 
-
-[`BlinkIdActivity `](https://photopay.github.io/photopay-android/com/microblink/activity/BlinkIdActivity.html) contains `RecognizerRunnerFragment` with [`BlinkIdOverlayController`](https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/blinkid/BlinkIdOverlayController.html), which can be used out of the box to perform scanning, using the default UI.
-#### <a name="documentUiComponent"></a> `DocumentScanActivity`
-
-[`DocumentScanActivity`](https://photopay.github.io/photopay-android/com/microblink/activity/DocumentScanActivity.html) contains `RecognizerRunnerFragment` with [`BlinkIdOverlayController`](https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/blinkid/BlinkIdOverlayController.html), which can be used out of the box to perform scanning using the default UI. It is best suited for scanning of various card documents like ID cards, passports, driver's licenses, etc.
-
-#### <a name="documentVerifyUiComponent"></a> `DocumentVerificationActivity`
-
-[`DocumentVerificationOverlayController`](https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/verification/DocumentVerificationOverlayController.html) is overlay for [`RecognizerRunnerFragment`](https://photopay.github.io/photopay-android/com/microblink/fragment/RecognizerRunnerFragment.html) best suited for **combined recognizers** because it manages scanning of multiple document sides in the single camera opening and guides the user through the scanning process. It can also be used for single side scanning of ID cards, passports, driver's licenses, etc.
-
-[`DocumentVerificationActivity`](https://photopay.github.io/photopay-android/com/microblink/activity/DocumentVerificationActivity.html) contains `RecognizerRunnerFragment` with [`BlinkIdOverlayController`](https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/blinkid/BlinkIdOverlayController.html), which can be used out of the box to perform scanning using the default UI.
-
-#### <a name="blinkcardUiComponent"></a> `BlinkCardActivity` and `BlinkCardOverlayController`
-
-[`BlinkCardOverlayController`](https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/blinkcard/BlinkCardOverlayController.html) is overlay for [`RecognizerRunnerFragment`](https://photopay.github.io/photopay-android/com/microblink/fragment/RecognizerRunnerFragment.html) best suited for scanning payment cards. It can be used for other card documents like ID cards, passports, driver's licenses, etc. This overlay also supports **combined recognizers**, because it manages scanning of multiple document sides in the single camera opening and guides the user through the scanning process.
-
-[`BlinkCardActivity`](https://photopay.github.io/photopay-android/com/microblink/activity/BlinkCardActivity.html) contains `RecognizerRunnerFragment` with [`BlinkCardOverlayController`](https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/blinkcard/BlinkCardOverlayController.html), which can be used out of the box to perform scanning, using the default UI.
-#### <a name="fieldByFieldUiComponent"></a> `FieldByFieldScanActivity` and `FieldByFieldOverlayController`
-
-[`FieldByFieldOverlayController`](https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/fieldbyfield/FieldByFieldOverlayController.html) is overlay for [`RecognizerRunnerFragment`](https://photopay.github.io/photopay-android/com/microblink/fragment/RecognizerRunnerFragment.html) best suited for performing scanning of small text fields, which are scanned in the predefined order, one by one. 
-
-[`FieldByFieldScanActivity`](https://photopay.github.io/photopay-android/com/microblink/activity/FieldByFieldScanActivity.html) is the activity containing `RecognizerRunnerFragment` with [`FieldByFieldOverlayController`](https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/fieldbyfield/FieldByFieldOverlayController.html), which can be used out of the box to simply perform the scanning using the default UI.
-#### <a name='barcodeUIComponent'></a> `BarcodeScanActivity`
-
-[`BarcodeScanActivity`](https://photopay.github.io/photopay-android/com/microblink/activity/BarcodeScanActivity.html) contains `RecognizerRunnerFragment` with [`BasicOverlayController`](https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/basic/BasicOverlayController.html), which can be used out of the box to perform scanning using the default UI. It is best suited for performing scanning of various barcodes.
-
-### <a name="changeBuiltInUIComponents"></a> Changing the appearance of built-in activities and scanning overlays
-
-Built-in activities and overlays use resources from the `res` folder within `LibPhotoPay.aar` to display its contents. If you need a fully customised UI, we recommend creating completely custom scanning procedure (either activity or fragment), as described [here](#recognizerRunnerView). However, if you just want to slightly change the appearance of built-in activity or overlay, you can do that by overriding appropriate resource values, however this is **strictly not recommended**, as it can have unknown effects on the appearance of the UI component. If you think that some part of our built-in UI component should be configurable in a way that it currently is not, please [let us know](https://help.microblink.com) and we will consider adding that configurability into appropriate settings object.
-
-### <a name="translation"></a> Translation and localization
-
-Strings used within built-in activities and overlays can be localized to any language. If you are using `RecognizerRunnerView` ([see this chapter for more information](#recognizerRunnerView)) in your custom scan activity or fragment, you should handle localization as in any other Android app. `RecognizerRunnerView` does not use strings nor drawables, it only uses assets from `assets/microblink` folder. Those assets must not be touched as they are required for recognition to work correctly.
-
-However, if you use our built-in activities or overlays, they will use resources packed within `LibPhotoPay.aar` to display strings and images on top of the camera view. We have already prepared strings for several languages which you can use out of the box. You can also [modify those strings](#stringChanging), or you can [add your own language](#addLanguage).
-
-To use a language, you have to enable it from the code:
-		
-* To use a certain language, on application startup, before opening any UI component from the SDK, you should call method `LanguageUtils.setLanguageAndCountry(language, country, context)`. For example, you can set language to Croatian like this:
-	
-	```java
-	// define PhotoPay language
-	LanguageUtils.setLanguageAndCountry("hr", "", this);
-	```
-
-#### <a name="addLanguage"></a> Adding new language
-
-_PhotoPay_ can easily be translated to other languages. The `res` folder in `LibPhotoPay.aar` archive has folder `values` which contains `strings.xml` - this file contains english strings. In order to make e.g. croatian translation, create a folder `values-hr` in your project and put the copy of `strings.xml` inside it (you might need to extract `LibPhotoPay.aar` archive to access those files). Then, open that file and translate the strings from English into Croatian.
-
-#### <a name="stringChanging"></a> Changing strings in the existing language
-	
-To modify an existing string, the best approach would be to:
-
-1. Choose a language you want to modify. For example Croatian ('hr').
-2. Find `strings.xml` in folder `res/values-hr` of the `LibPhotoPay.aar` archive
-3. Choose a string key which you want to change. For example: ```<string name="MBBack">Back</string>```
-4. In your project create a file `strings.xml` in the folder `res/values-hr`, if it doesn't already exist
-5. Create an entry in the file with the value for the string which you want. For example: ```<string name="MBBack">Natrag</string>```
-6. Repeat for all the string you wish to change
-
-## <a name="recognizerRunnerView"></a> Embedding `RecognizerRunnerView` into custom scan activity
+## <a name="recognizerRunnerView"></a> Custom UX with `RecognizerRunnerView`
 This section discusses how to embed [RecognizerRunnerView](https://photopay.github.io/photopay-android/com/microblink/view/recognition/RecognizerRunnerView.html) into your scan activity and perform scan.
 
 1. First make sure that `RecognizerRunnerView` is a member field in your activity. This is required because you will need to pass all activity's lifecycle events to `RecognizerRunnerView`.
@@ -733,7 +612,7 @@ public class MyScanActivity extends Activity {
 }
 ```
 
-### <a name="scanOrientation"></a> Scan activity's orientation
+#### <a name="scanOrientation"></a> Scan activity's orientation
 
 If activity's `screenOrientation` property in `AndroidManifest.xml` is set to `sensor`, `fullSensor` or similar, activity will be restarted every time device changes orientation from portrait to landscape and vice versa. While restarting activity, its `onPause`, `onStop` and `onDestroy` methods will be called and then new activity will be created anew. This is a potential problem for scan activity because in its lifecycle it controls both camera and native library - restarting the activity will trigger both restart of the camera and native library. This is a problem because changing orientation from landscape to portrait and vice versa will be very slow, thus degrading a user experience. **We do not recommend such setting.**
 
@@ -850,15 +729,89 @@ DirectAPI's `RecognizerRunner` singleton is actually a state machine which can b
 Both [RecognizerRunnerView](#recognizerRunnerView) and `RecognizerRunner` use the same internal singleton that manages native code. This singleton handles initialization and termination of native library and propagating recognizers to native library. It is possible to use `RecognizerRunnerView` and `RecognizerRunner` together, as internal singleton will make sure correct synchronization and correct recognition settings are used. If you run into problems while using `RecognizerRunner` in combination with `RecognizerRunnerView`, [let us know](http://help.microblink.com)!
 
 
-## <a name="processingEvents"></a> Handling processing events with `RecognizerRunner` and `RecognizerRunnerView`
+# <a name="builtInUIComponents"></a> Available activities and overlays
+## <a name='photopayUIComponent'></a> `PhotopayUISettings`
 
-This section will describe how you can subscribe to and handle processing events when using [RecognizerRunner](https://photopay.github.io/photopay-android/com/microblink/directApi/RecognizerRunner.html) or [RecognizerRunnerView](https://photopay.github.io/photopay-android/com/microblink/view/recognition/RecognizerRunnerView.html). Processing events, also known as _Metadata callbacks_ are purely intended for giving processing feedback on UI or to capture some debug information during development of your app using _PhotoPay_ SDK. For that reason, built-in activities and fragments do not support subscribing and handling of those events from third parties - they handle those events internally. If you need to handle those events by yourself, you need to use either [RecognizerRunnerView](#recognizerRunnerView) or [RecognizerRunner](#directAPI).
+[`PhotopayUISettings `](https://photopay.github.io/photopay-android/com/microblink/uisettings/PhotopayUISettings.html) launches activity that uses [`BasicOverlayController`](https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/basic/BasicOverlayController.html) with UI best suited for scanning various payment slips.
 
-Callbacks for all events are bundled together into the [MetadataCallbacks](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataCallbacks.html) object. Both [RecognizerRunner](https://photopay.github.io/photopay-android/com/microblink/directApi/RecognizerRunner.html#setMetadataCallbacks-com.microblink.metadata.MetadataCallbacks-) and [RecognizerRunnerView](https://photopay.github.io/photopay-android/com/microblink/view/recognition/RecognizerRunnerView.html#setMetadataCallbacks-com.microblink.metadata.MetadataCallbacks-) have methods which allow you to set all your callbacks.
+## <a name='ocrLineUIComponent'></a> `OcrLineUISettings`
+
+[`OcrLineUISettings `](https://photopay.github.io/photopay-android/com/microblink/uisettings/OcrLineUISettings.html) launches activity that uses [`BasicOverlayController`](https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/basic/BasicOverlayController.html) with UI best suited for performing scanning of payment slips that have entire payment information encoded in OCR line in lower part of the slip. For example, payment slips in Kosovo, Netherlands, Switzerland and United Kingdom.
+## <a name="blinkidUiComponent"></a> New: `BlinkIdUISettings` and `BlinkIdOverlayController`
+
+[`BlinkIdOverlayController`](https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/blinkid/BlinkIdOverlayController.html) implements new UI for scanning identity documents, which is optimally designed to be used with new [`BlinkIdCombinedRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/generic/BlinkIdCombinedRecognizer.html) and [`BlinkIdRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/generic/BlinkIdRecognizer.html). It implements several new features:
+
+* clear indication for searching phase, when PhotoPay is searching for an ID document
+* clear progress indication, when PhotoPay is busy with OCR and data extraction
+* clear message when the document is not supported
+* visual indications when the user needs to place the document closer to the camera
+* when BlinkIdCombinedRecognizer is used, visual indication that the data from the front side of the document doesn't match the data on the back side of the document.
+
+The new UI allows the user to scan the document at an any angle, in any orientation. We recommend forcing landscape orientation if you scan barcodes on the back side, because in that orientation success rate will be higher. 
+
+To launch a built-in activity that uses `BlinkIdOverlayController` use [`BlinkIdUISettings`](https://photopay.github.io/photopay-android/com/microblink/uisettings/BlinkIdUISettings.html).
+
+## <a name="documentUiComponent"></a> `DocumentUISettings`
+
+[`DocumentUISettings `](https://photopay.github.io/photopay-android/com/microblink/uisettings/DocumentUISettings.html) launches activity that uses `BlinkIdOverlayController` with alternative UI. It is best suited for scanning single document side of various card documents and it shouldn't be used with combined recognizers as it provides no user instructions on when to switch to the back side.
+
+## <a name="documentVerifyUiComponent"></a> `DocumentVerificationUISettings`
+
+[`DocumentVerificationUISettings `](https://photopay.github.io/photopay-android/com/microblink/uisettings/DocumentVerificationUISettings.html) launches activity that uses `BlinkIdOverlayController` with alternative UI. It is best suited for **combined recognizers** because it manages scanning of multiple document sides in the single camera opening and guides the user through the scanning process. It can also be used for single side scanning of ID cards, passports, driver's licenses, etc.
+## <a name="blinkcardUiComponent"></a> `BlinkCardUISettings` and `BlinkCardOverlayController`
+
+[`BlinkCardOverlayController`](https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/blinkcard/BlinkCardOverlayController.html) is an overlay best suited for scanning payment cards. It can be used for other card documents like ID cards, passports, driver's licenses, etc. This overlay also supports **combined recognizers**, because it manages scanning of multiple document sides in the single camera opening and guides the user through the scanning process.
+
+To launch a built-in activity that uses `BlinkCardOverlayController` use [`BlinkCardUISettings`](https://photopay.github.io/photopay-android/com/microblink/uisettings/BlinkCardUISettings.html).
+## <a name="documentCaptureUiComponent"></a> `DocumentCaptureUISettings` and `DocumentCaptureOverlayController`
+
+[`DocumentCaptureUISettings`](https://photopay.github.io/photopay-android/com/microblink/uisettings/DocumentCaptureUISettings.html) launches activity that uses [`DocumentCaptureOverlayController`]((https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/documentcapture/DocumentCaptureOverlayController.html)), which is designed for taking **high resolution** document images and guides the user through the image capturing process. It can be used only with [DocumentCaptureRecognizer](#documentCaptureRecognizer).
+## <a name="fieldByFieldUiComponent"></a> `FieldByFieldUISettings` and `FieldByFieldOverlayController`
+
+[`FieldByFieldOverlayController`](https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/fieldbyfield/FieldByFieldOverlayController.html) is best suited for performing scanning of small text fields, which are scanned in the predefined order, one by one. 
+
+To launch a built-in activity that uses `FieldByFieldOverlayController ` use [`FieldByFieldUISettings `](https://photopay.github.io/photopay-android/com/microblink/uisettings/FieldByFieldUISettings.html).
+## <a name='barcodeUIComponent'></a> `BarcodeUISettings`
+
+[`BarcodeUISettings `](https://photopay.github.io/photopay-android/com/microblink/uisettings/BarcodeUISettings.html) launches activity that uses [`BasicOverlayController`](https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/basic/BasicOverlayController.html) with UI best suited for performing scanning of various barcodes.
+
+## <a name="translation"></a> Translation and localization
+
+Strings used within built-in activities and overlays can be localized to any language. If you are using `RecognizerRunnerView` ([see this chapter for more information](#recognizerRunnerView)) in your custom scan activity or fragment, you should handle localization as in any other Android app. `RecognizerRunnerView` does not use strings nor drawables, it only uses assets from `assets/microblink` folder. Those assets must not be touched as they are required for recognition to work correctly.
+
+However, if you use our built-in activities or overlays, they will use resources packed within `LibPhotoPay.aar` to display strings and images on top of the camera view. We have already prepared strings for several languages which you can use out of the box. You can also [modify those strings](#stringChanging), or you can [add your own language](#addLanguage).
+
+To use a language, you have to enable it from the code:
+		
+* To use a certain language, on application startup, before opening any UI component from the SDK, you should call method `LanguageUtils.setLanguageAndCountry(language, country, context)`. For example, you can set language to Croatian like this:
+	
+	```java
+	// define PhotoPay language
+	LanguageUtils.setLanguageAndCountry("hr", "", this);
+	```
+
+#### <a name="addLanguage"></a> Adding new language
+
+_PhotoPay_ can easily be translated to other languages. The `res` folder in `LibPhotoPay.aar` archive has folder `values` which contains `strings.xml` - this file contains english strings. In order to make e.g. croatian translation, create a folder `values-hr` in your project and put the copy of `strings.xml` inside it (you might need to extract `LibPhotoPay.aar` archive to access those files). Then, open that file and translate the strings from English into Croatian.
+
+#### <a name="stringChanging"></a> Changing strings in the existing language
+	
+To modify an existing string, the best approach would be to:
+
+1. Choose a language you want to modify. For example Croatian ('hr').
+2. Find `strings.xml` in folder `res/values-hr` of the `LibPhotoPay.aar` archive
+3. Choose a string key which you want to change. For example: ```<string name="MBBack">Back</string>```
+4. In your project create a file `strings.xml` in the folder `res/values-hr`, if it doesn't already exist
+5. Create an entry in the file with the value for the string which you want. For example: ```<string name="MBBack">Natrag</string>```
+6. Repeat for all the string you wish to change
+
+# <a name="processingEvents"></a> Handling processing events with `RecognizerRunner` and `RecognizerRunnerView`
+
+Processing events, also known as _Metadata callbacks_ are purely intended for giving processing feedback on UI or to capture some debug information during development of your app using _PhotoPay_ SDK. For that reason, built-in activities and fragments handle those events internally. If you need to handle those events yourself, you need to use either [RecognizerRunnerView](#recognizerRunnerView) or [RecognizerRunner](#directAPI).
+
+Callbacks for all events are bundled into the [MetadataCallbacks](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataCallbacks.html) object. Both [RecognizerRunner](https://photopay.github.io/photopay-android/com/microblink/directApi/RecognizerRunner.html#setMetadataCallbacks-com.microblink.metadata.MetadataCallbacks-) and [RecognizerRunnerView](https://photopay.github.io/photopay-android/com/microblink/view/recognition/RecognizerRunnerView.html#setMetadataCallbacks-com.microblink.metadata.MetadataCallbacks-) have methods which allow you to set all your callbacks.
 
 We suggest that you check for more information about available callbacks and events to which you can handle in the [javadoc for MetadataCallbacks class](https://photopay.github.io/photopay-android/com/microblink/metadata/MetadataCallbacks.html).
-
-### <a name="processingEventsImportantNote"></a> Note about the `setMetadataCallbacks` method
 
 Please note that both those methods need to pass information about available callbacks to the native code and for efficiency reasons this is done at the time `setMetadataCallbacks` method is called and **not every time** when change occurs within the `MetadataCallbacks` object. This means that if you, for example, set `QuadDetectionCallback` to `MetadataCallbacks` **after** you already called `setMetadataCallbacks` method, the `QuadDetectionCallback` will not be registered with the native code and you will not receive its events.
 
@@ -940,70 +893,22 @@ Since `SuccessFrameGrabberRecognizer` impersonates its slave `Recognizer` object
 
 This recognizer is best for use cases when you need to capture the exact image that was being processed by some other `Recognizer` object at the time its `Result` became `Valid`. When that happens, `SuccessFrameGrabber's` [`Result`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/successframe/SuccessFrameGrabberRecognizer.Result.html) will also become `Valid` and will contain described image. That image can then be retrieved with [`getSuccessFrame()`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/successframe/SuccessFrameGrabberRecognizer.Result.html#getSuccessFrame--) method.
 
-## <a name="pdf417Recognizer"></a> PDF417 recognizer
-
-The [`Pdf417Recognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkbarcode/pdf417/Pdf417Recognizer.html) is recognizer specialised for scanning [PDF417 2D barcodes](https://en.wikipedia.org/wiki/PDF417). This recognizer can recognize only PDF417 2D barcodes - for recognition of other barcodes, please refer to [BarcodeRecognizer](#barcodeRecognizer).
-
-This recognizer can be used in any context, but it works best with the [`BarcodeScanActivity`](https://photopay.github.io/photopay-android/com/microblink/activity/BarcodeScanActivity.html), which has UI best suited for barcode scanning.
-
-## <a name="barcodeRecognizer"></a> Barcode recognizer
-
-The [`BarcodeRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkbarcode/barcode/BarcodeRecognizer.html) is recognizer specialised for scanning various types of barcodes. This recognizer should be your first choice when scanning barcodes as it supports lots of barcode symbologies, including the [PDF417 2D barcodes](https://en.wikipedia.org/wiki/PDF417), thus making [PDF417 recognizer](#pdf417Recognizer) possibly redundant, which was kept only for its simplicity.
-
-As you can see from [javadoc](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkbarcode/barcode/BarcodeRecognizer.html), you can enable multiple barcode symbologies within this recognizer, however keep in mind that enabling more barcode symbologies affects scanning performance - the more barcode symbologies are enabled, the slower the overall recognition performance. Also, keep in mind that some simple barcode symbologies that lack proper redundancy, such as [Code 39](https://en.wikipedia.org/wiki/Code_39), can be recognized within more complex barcodes, especially 2D barcodes, like [PDF417](https://en.wikipedia.org/wiki/PDF417).
-
-This recognizer can be used in any context, but it works best with the [`BarcodeScanActivity`](https://photopay.github.io/photopay-android/com/microblink/activity/BarcodeScanActivity.html), which has UI best suited for barcode scanning.
-## <a name="blinkInputRecognizer"></a> BlinkInput recognizer
-
-The [`BlinkInputRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkinput/BlinkInputRecognizer.html) is generic OCR recognizer used for scanning segments which enables specifying `Processors` that will be used for scanning. Most commonly used `Processor` within this recognizer is [`ParserGroupProcessor`](https://photopay.github.io/photopay-android/com/microblink/entities/processors/parserGroup/ParserGroupProcessor.html) that activates all `Parsers` in the group to extract data of interest from the OCR result.
-
-This recognizer can be used in any context. It is used internally in the implementation of the provided [`FieldByFieldOverlayController`](https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/FieldByFieldOverlayController.html).
-
-`Processors` are explained in [The Processor concept](#processorConcept) section and you can find more about `Parsers` in [The Parser concept](#parserConcept) section.
-
-
-## <a name="detectorRecognizer"></a> Detector recognizer
-
-The [`DetectorRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/detector/DetectorRecognizer.html) is recognizer for scanning generic documents using custom `Detector`. You can find more about `Detector` in [The Detector concept](#detectorConcept) section. `DetectorRecognizer` can be used simply for document detection and obtaining its image. The more interesting use case is data extraction from the custom document type. `DetectorRecognizer` performs document detection and can be configured to extract fields of interest from the scanned document by using **Templating API**. You can find more about Templating API in [this](#detectorTemplating) section.  
-
-This recognizer can be used in any context, but it works best with the activity which has UI suited for document scanning.
-## <a name="blinkcard_recognizers"></a> BlinkCard recognizers
-
-BlinkCard recognizers work best with the [`BlinkCardActivity`](#blinkcardUiComponent), which has UI best suited for payment / debit card scanning. 
-
-### <a name="blink_card_combined"></a> BlinkCard recognizer
-The [`BlinkCardRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkcard/BlinkCardRecognizer.html) scans back side of Payment / Debit card after scanning the front side and combines data from both sides. 
-
-### <a name="elite_blink_card_combined"></a> BlinkCardElite recognizer
-The [`BlinkCardEliteRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkcard/BlinkCardEliteRecognizer.html) scans back side of elite Payment / Debit card after scanning the front side and combines data from both sides.
-## <a name="simNumberRecognizer"></a> SIM number recognizer
-
-The [`SimNumberRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkbarcode/simnumber/SimNumberRecognizer.html) is a special type of barcode recognizer specifically tailored for performing recognition of barcodes on packagings of [SIM cards](https://en.wikipedia.org/wiki/Subscriber_identity_module). This recognizer is useful in combination with some ID recognizers in use cases when application requires quick scanning of SIM number on the packaging of new mobile network subscriber after scanning the new subscriber's identity document.
-
-This recognizer can be used in any context. However, we recommend its usage in combination with any ID document recognizer within custom UI.
-
 ## <a name="blinkid_recognizers"></a> BlinkID recognizers
 
-Unless stated otherwise for concrete recognizer, **single side BlinkID recognizes** from this list can be used in any context, but they work best with the [`DocumentScanActivity`](#documentUiComponent) and [`BlinkIdActivity`](#blinkidUiComponent), with UIs best suited for document scanning. 
+Unless stated otherwise for concrete recognizer, **single side BlinkID recognizers** from this list can be used in any context, but they work best with [`BlinkIdUISettings`](#blinkidUiComponent) and [`DocumentScanUISettings`](#documentUiComponent), with UIs best suited for document scanning. 
 
-**Combined recognizers** should be used with [`DocumentVerificationActivity`](#documentVerifyUiComponent) or [`BlinkIdActivity`](#blinkidUiComponent). They manage scanning of multiple document sides in the single camera opening and guide the user through the scanning process. Some combined recognizers support scanning of multiple document types, but only one document type can be scanned at a time.
-
-### <a name="blinkidRecognizer"></a> BlinkID recognizer
-The [`BlinkIdRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/generic/BlinkIdRecognizer.html) scans and extracts data from the front side of the US driver license or ID. 
-You can find the list of the currently supported US documents [here](https://github.com/PhotoPay/photopay-android/blob/master/BlinkIDRecognizer.md).
-We will continue expanding this recognizer by adding support for new document types in the future. Star this repo to stay updated.
-
-The [`BlinkIdRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/generic/BlinkIdRecognizer.html) works best with the [`BlinkIdActivity` and `BlinkIdOverlayController`](#blinkidUiComponent). 
+**Combined recognizers** should be used with [`BlinkIdUISettings`](#blinkidUiComponent) or [`DocumentVerificationUISettings`](#documentVerifyUiComponent). They manage scanning of multiple document sides in the single camera opening and guide the user through the scanning process. Some combined recognizers support scanning of multiple document types, but only one document type can be scanned at a time.
 
 ### <a name="blinkidCombinedRecognizer"></a> BlinkID combined recognizer
-Use [`BlinkIdCombinedRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/generic/BlinkIdCombinedRecognizer.html) for scanning both sides of the US driver license and ID. First, it scans and extracts data from the front, then scans and extracts data from the barcode on the back, and finally, combines results from both sides. The [`BlinkIdCombinedRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/generic/BlinkIdCombinedRecognizer.html) also performs data matching and returns a flag if the extracted data captured from the front side matches the data from the barcode on the back.
-You can find the list of the currently supported US documents [here](https://github.com/PhotoPay/photopay-android/blob/master/BlinkIDRecognizer.md).
+Use [`BlinkIdCombinedRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/generic/BlinkIdCombinedRecognizer.html) for scanning both sides of the supported document. First, it scans and extracts data from the front, then scans and extracts data from the back, and finally, combines results from both sides. The [`BlinkIdCombinedRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/generic/BlinkIdCombinedRecognizer.html) also performs data matching and returns a flag if the extracted data captured from the front side matches the data from the back.
+You can find the list of the currently supported documents [here](documentation/BlinkIDRecognizer.md).
 We will continue expanding this recognizer by adding support for new document types in the future. Star this repo to stay updated.
 
-The [`BlinkIdCombinedRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/generic/BlinkIdCombinedRecognizer.html) works best with the [`BlinkIdActivity` and `BlinkIdOverlayController`](#blinkidUiComponent). 
+The [`BlinkIdCombinedRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/generic/BlinkIdCombinedRecognizer.html) works best with the [`BlinkIdUISettings` and `BlinkIdOverlayController`](#blinkidUiComponent). 
 
 ### <a name="mrtdRecognizer"></a> Machine Readable Travel Document recognizer
 The [`MrtdRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/mrtd/MrtdRecognizer.html) is used for scanning and data extraction from the Machine Readable Zone (MRZ) of the various Machine Readable Travel Documents (MRTDs) like ID cards and passports. This recognizer is not bound to the specific country, but it can be configured to only return data that match some criteria defined by the [`MrzFilter`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/mrtd/MrzFilter.html).
+
 
 The `MrtdRecognizer` can also be configured to extract additional fields of interest from the scanned document, which are not part of the Machine Readable Zone, by using **Templating API**. You can find more about Templating API in [this](#mrtdTemplating) section.
 
@@ -1024,27 +929,28 @@ The [`VisaRecognizer`](https://photopay.github.io/photopay-android/com/microblin
 
 You can find information about usage context at the beginning of [this section](#blinkid_recognizers).
 
-### <a name="us_dl_recognizer"></a> US / Canada driver's license barcode recognizer
-The [`UsdlRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkbarcode/usdl/UsdlRecognizer.html) is used for scanning PDF417 barcode from the US / Canada driver's license.
+### <a name="us_dl_recognizer"></a> AAMVA standard barcode recognizer (USA, Canada, Nigeria)
+The [`UsdlRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkbarcode/usdl/UsdlRecognizer.html) is used for scanning PDF417 barcode from USA ID cards and driver’s licence, Canadian ID cards and driving licence, and Nigerian driving licence.
 
 You can find information about usage context at the beginning of [this section](#blinkid_recognizers).
 
-### <a name="us_dl_combined_recognizer"></a> US / Canada driver's license combined recognizer
-The [`UsdlCombinedRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/usdl/UsdlCombinedRecognizer.html) scans PDF417 barcode from the back side of US / Canada driver's license after scanning the full document image and face image from the front side. Internally, it uses [DocumentFaceRecognizer](#documentFaceRecognizer) for obtaining full document image and face image as the first step and then [UsdlRecognizer](#us_dl_recognizer) for scanning the PDF417 barcode.
+### <a name="us_dl_combined_recognizer"></a> AAMVA standard combined recognizer (USA, Canada, Nigeria)
+The [`UsdlCombinedRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/usdl/UsdlCombinedRecognizer.html) first scans the front side of the document to obtain the full document image and face image. It then scans PDF417 barcode from the back side of AAMVA standard documents. This includes USA ID cards and driver’s licence, Canadian ID cards and driving licence, and Nigerian driving licence.
+
+Internally, it uses [DocumentFaceRecognizer](#documentFaceRecognizer) for obtaining full document image and face image as the first step and then [UsdlRecognizer](#us_dl_recognizer) for scanning the PDF417 barcode.
 
 You can find information about usage context at the beginning of [this section](#blinkid_recognizers).
 
+### <a name="documentFaceRecognizer"></a> Document face recognizer
+The [`DocumentFaceRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/documentface/DocumentFaceRecognizer.html) is a special type of recognizer that only returns face image and full document image of the scanned document. It does not extract document fields like first name, last name, etc. This generic recognizer can be used to obtain document images in cases when specific support for some document type is not available.
+
+You can find information about usage context at the beginning of [this section](#blinkid_recognizers).
 ### <a name="eudlRecognizer"></a> EU Driver's License recognizer
 The [`EudlRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/eudl/EudlRecognizer.html) is used for scanning front side of European Union driver's licenses. Currently, driver's licenses from these countries are supported:
 
 - Austria
 - Germany
 - United Kingdom
-
-You can find information about usage context at the beginning of [this section](#blinkid_recognizers).
-
-### <a name="documentFaceRecognizer"></a> Document face recognizer
-The [`DocumentFaceRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/documentface/DocumentFaceRecognizer.html) is a special type of recognizer that only returns face image and full document image of the scanned document. It does not extract document fields like first name, last name, etc. This generic recognizer can be used to obtain document images in cases when specific support for some document type is not available.
 
 You can find information about usage context at the beginning of [this section](#blinkid_recognizers).
 
@@ -1527,6 +1433,55 @@ The [`UnitedKingdomSlipRecognizer`](https://photopay.github.io/photopay-android/
 #### <a name="uk_qr"></a> UK payment QR code recognizer
 
 The [`UnitedKingdomQrCodePaymentRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/photopay/unitedkingdom/UnitedKingdomQrCodePaymentRecognizer.html) is used for scanning payment information from payment QR codes in United Kingdom. Please [contact us](help.microblink.com) for more information about supported QR code standards.
+## <a name="pdf417Recognizer"></a> PDF417 recognizer
+
+The [`Pdf417Recognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkbarcode/pdf417/Pdf417Recognizer.html) is recognizer specialised for scanning [PDF417 2D barcodes](https://en.wikipedia.org/wiki/PDF417). This recognizer can recognize only PDF417 2D barcodes - for recognition of other barcodes, please refer to [BarcodeRecognizer](#barcodeRecognizer).
+
+This recognizer can be used in any context, but it works best with the [`BarcodeScanActivity`](https://photopay.github.io/photopay-android/com/microblink/activity/BarcodeScanActivity.html), which has UI best suited for barcode scanning.
+
+## <a name="barcodeRecognizer"></a> Barcode recognizer
+
+The [`BarcodeRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkbarcode/barcode/BarcodeRecognizer.html) is recognizer specialised for scanning various types of barcodes. This recognizer should be your first choice when scanning barcodes as it supports lots of barcode symbologies, including the [PDF417 2D barcodes](https://en.wikipedia.org/wiki/PDF417), thus making [PDF417 recognizer](#pdf417Recognizer) possibly redundant, which was kept only for its simplicity.
+
+As you can see from [javadoc](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkbarcode/barcode/BarcodeRecognizer.html), you can enable multiple barcode symbologies within this recognizer, however keep in mind that enabling more barcode symbologies affects scanning performance - the more barcode symbologies are enabled, the slower the overall recognition performance. Also, keep in mind that some simple barcode symbologies that lack proper redundancy, such as [Code 39](https://en.wikipedia.org/wiki/Code_39), can be recognized within more complex barcodes, especially 2D barcodes, like [PDF417](https://en.wikipedia.org/wiki/PDF417).
+
+This recognizer can be used in any context, but it works best with the [`BarcodeScanActivity`](https://photopay.github.io/photopay-android/com/microblink/activity/BarcodeScanActivity.html), which has UI best suited for barcode scanning.
+## <a name="simNumberRecognizer"></a> SIM number recognizer
+
+The [`SimNumberRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkbarcode/simnumber/SimNumberRecognizer.html) is a special type of barcode recognizer specifically tailored for performing recognition of barcodes on packagings of [SIM cards](https://en.wikipedia.org/wiki/Subscriber_identity_module). This recognizer is useful in combination with some ID recognizers in use cases when application requires quick scanning of SIM number on the packaging of new mobile network subscriber after scanning the new subscriber's identity document.
+
+This recognizer can be used in any context. However, we recommend its usage in combination with any ID document recognizer within custom UI.
+
+## <a name="documentCaptureRecognizer"></a> Document capture recognizer
+
+The [`DocumentCaptureRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkinput/documentcapture/DocumentCaptureRecognizer.html) is used for taking cropped document images.
+
+This recognizer can be used in any context, but it works best with the [`document capture UI`](#documentCaptureUiComponent) which takes high resolution document images and guides the user through the image capturing process.
+
+
+## <a name="blinkInputRecognizer"></a> BlinkInput recognizer
+
+The [`BlinkInputRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkinput/BlinkInputRecognizer.html) is generic OCR recognizer used for scanning segments which enables specifying `Processors` that will be used for scanning. Most commonly used `Processor` within this recognizer is [`ParserGroupProcessor`](https://photopay.github.io/photopay-android/com/microblink/entities/processors/parserGroup/ParserGroupProcessor.html) that activates all `Parsers` in the group to extract data of interest from the OCR result.
+
+This recognizer can be used in any context. It is used internally in the implementation of the provided [`FieldByFieldOverlayController`](https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/FieldByFieldOverlayController.html).
+
+`Processors` are explained in [The Processor concept](#processorConcept) section and you can find more about `Parsers` in [The Parser concept](#parserConcept) section.
+
+
+## <a name="detectorRecognizer"></a> Detector recognizer
+
+The [`DetectorRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/detector/DetectorRecognizer.html) is recognizer for scanning generic documents using custom `Detector`. You can find more about `Detector` in [The Detector concept](#detectorConcept) section. `DetectorRecognizer` can be used simply for document detection and obtaining its image. The more interesting use case is data extraction from the custom document type. `DetectorRecognizer` performs document detection and can be configured to extract fields of interest from the scanned document by using **Templating API**. You can find more about Templating API in [this](#detectorTemplating) section.  
+
+This recognizer can be used in any context, but it works best with the activity which has UI suited for document scanning.
+## <a name="blinkcard_recognizers"></a> BlinkCard recognizers
+
+BlinkCard recognizers work best with the [`BlinkCardActivity`](#blinkcardUiComponent), which has UI best suited for payment / debit card scanning. 
+
+### <a name="blink_card_combined"></a> BlinkCard recognizer
+The [`BlinkCardRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkcard/BlinkCardRecognizer.html) scans back side of Payment / Debit card after scanning the front side and combines data from both sides. 
+
+### <a name="elite_blink_card_combined"></a> BlinkCardElite recognizer
+The [`BlinkCardEliteRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkcard/BlinkCardEliteRecognizer.html) scans back side of elite Payment / Debit card after scanning the front side and combines data from both sides.
 # <a name="fieldByFieldFeature"></a> `Field by field` scanning feature
 
 [`Field by field`](#fieldByFieldFeature) scanning feature is designed for scanning small text fields which are called scan elements. Elements are scanned in the predefined order. For each scan element, specific [`Parser`](#parserConcept) that will extract structured data of interest from the OCR result is defined. Focusing on the small text fields which are scanned one by one enables implementing support for the **free-form documents** because field detection is not required. The user is responsible for positioning the field of interest inside the scanning window and the scanning process guides him. When implementing support for the custom document, only fields of interest has to be defined.
@@ -1876,7 +1831,7 @@ The [`SwedenReferenceParser`](https://photopay.github.io/photopay-android/com/mi
 The [`SwedenSlipCodeParser`](https://photopay.github.io/photopay-android/com/microblink/entities/parsers/photopay/sweden/slipcode/SwedenSlipCodeParser.html) is used for scanning slip code number on swedish payment slip.
 # <a name="detectorTemplating"></a> Scanning generic documents with Templating API
 
-This section discusses the setting up of `DetectorRecognizer` for scanning templated documents. Please check [Templating API whitepaper](https://github.com/BlinkID/blinkid-android/blob/master/documentation/templatingAPI/templatingAPI.md) and `PhotoPay-TemplatingSample` sample app for source code examples.
+This section discusses the setting up of `DetectorRecognizer` for scanning templated documents. Please check [Templating API whitepaper](documentation/templatingAPI/templatingAPI.html) and `PhotoPay-TemplatingSample` sample app for source code examples.
 
 Templated document is any document which is defined by its template. Template contains the information about how the document should be detected, i.e. found on the camera scene and information about which part of the document contains which useful information.
 
@@ -1963,7 +1918,7 @@ When `classify` method is called, processing units that are needed for classific
 
 - [`ParserParcelization`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/templating/parcelization/ParserParcelization.html) is utility class which helps to obtain the reference to the captured `Parser` from the `TemplatingClass` instance, after the parcelization. For more information see [javadoc](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/templating/parcelization/ParserParcelization.html).
 
-For the complete source code sample, please check [Templating API whitepaper](https://github.com/BlinkID/blinkid-android/blob/master/documentation/templatingAPI/templatingAPI.md) and `PhotoPay-TemplatingSample`.
+For the complete source code sample, please check [Templating API whitepaper](documentation/templatingAPI/templatingAPI.html) and `PhotoPay-TemplatingSample`.
 
 ## <a name="detectorTemplating_results"></a> Obtaining recognition results
 
@@ -1972,9 +1927,9 @@ When recognition is done, results can be obtained through processing units insta
 In cases when `TemplatingRecognizer` needs to be serialized and deserialized when it is passed to scan activity, `TemplatingRecognizer` knows how to serialize and deserialize all contained components. When control is returned from the scan activity and [`RecognizerBundle.loadFromIntent`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/RecognizerBundle.html#loadFromIntent-android.content.Intent-) is called, all kept processing unit instances are updated with the scanning results.
 
 
-# <a name="mrtdTemplating"></a> Extracting additional fields of interest from machine-readable travel documents by using Templating API
+## <a name="mrtdTemplating"></a> Extracting additional fields of interest from machine-readable travel documents by using Templating API
 
-`MrtdRecognizer` is **Templating API** recognizer which means that it can be configured to extract additional fields of interest, which are outside of the Machine Readable Zone, from the scanned Machine Readable Travel Document. Please check [Templating API whitepaper](https://github.com/BlinkID/blinkid-android/blob/master/documentation/templatingAPI/templatingAPI.md) and `PhotoPay-TemplatingSample` sample app for source code examples.
+`MrtdRecognizer` is **Templating API** recognizer which means that it can be configured to extract additional fields of interest, which are outside of the Machine Readable Zone, from the scanned Machine Readable Travel Document. Please check [Templating API whitepaper](documentation/templatingAPI/templatingAPI.html) and `PhotoPay-TemplatingSample` sample app for source code examples.
 
 All stated in the [Scanning generic documents with Templating API](#detectorTemplating) section which explains Templating API for the `DetectorRecognizer` is also valid here. The only difference is document detection part which does not need to be configured. `MrtdRecognizer` internally uses [`MrtdDetector`](#mrtdDetector) which first detects Machine Readable Zone and then extends detection to the full document.
 
@@ -2026,20 +1981,9 @@ For the list of all available configuration methods see [`MRTDDetector`](https:/
 
 # <a name="embedAAR"></a> Embedding _PhotoPay_ inside another SDK
 
-When creating your own SDK which depends on _PhotoPay_, you should consider following cases:
-
-- [_PhotoPay_ licensing model](#licensingModel)
-- [ensuring final app gets all classes and resources that are required by _PhotoPay_](#sdkIntegrationIntoApp)
-
-## <a name="licensingModel"></a> _PhotoPay_ licensing model
-
-### <a name="appLicence"></a> Application licenses
-
-Application licenses are bound to application's [package name](http://tools.android.com/tech-docs/new-build-system/applicationid-vs-packagename). This means that each app must have its own license in order to be able to use _PhotoPay_. This model is appropriate when integrating _PhotoPay_ directly into app, however if you are creating SDK that depends on _PhotoPay_, you would need separate _PhotoPay_ license for each of your clients using your SDK. This is not practical, so you should contact us at [help.microblink.com](http://help.microblink.com) and we can provide you a library license.
+To integrate _PhotoPay_ inside your SDK, contact us at [help.microblink.com](http://help.microblink.com) to get a special licence that is not bound to package name and can be used in multiple different apps.
 	
-## <a name="sdkIntegrationIntoApp"></a> Ensuring the final app gets all resources required by _PhotoPay_
-
-At the time of writing this documentation, [Android does not have support for combining multiple AAR libraries into single fat AAR](https://stackoverflow.com/questions/20700581/android-studio-how-to-package-single-aar-from-multiple-library-projects/20715155#20715155). The problem is that resource merging is done while building application, not while building AAR, so application must be aware of all its dependencies. **There is no official Android way of "hiding" third party AAR within your AAR.**
+You'll also need to ensure that the final app gets all resources required by _PhotoPay_. At the time of writing this documentation, [Android does not have support for combining multiple AAR libraries into single fat AAR](https://stackoverflow.com/questions/20700581/android-studio-how-to-package-single-aar-from-multiple-library-projects/20715155#20715155). The problem is that resource merging is done while building application, not while building AAR, so application must be aware of all its dependencies. **There is no official Android way of "hiding" third party AAR within your AAR.**
 
 This problem is usually solved with transitive Maven dependencies, i.e. when publishing your AAR to Maven you specify dependencies of your AAR so they are automatically referenced by app using your AAR. Besides this, there are also several other approaches you can try:
 
@@ -2050,7 +1994,7 @@ This problem is usually solved with transitive Maven dependencies, i.e. when pub
 
 # <a name="archConsider"></a> Processor architecture considerations
 
-_PhotoPay_ is distributed with both ARMv7, ARM64, x86 and x86_64 native library binaries.
+_PhotoPay_ is distributed with ARMv7, ARM64, x86 and x86_64 native library binaries.
 
 ARMv7 architecture gives the ability to take advantage of hardware accelerated floating point operations and SIMD processing with [NEON](http://www.arm.com/products/processors/technologies/neon.php). This gives _PhotoPay_ a huge performance boost on devices that have ARMv7 processors. Most new devices (all since 2012.) have ARMv7 processor so it makes little sense not to take advantage of performance boosts that those processors can give. Also note that some devices with ARMv7 processors do not support NEON instruction sets, most popular being those based on [NVIDIA Tegra 2](https://en.wikipedia.org/wiki/Tegra#Tegra_2). Since these devices are old by today's standard, _PhotoPay_ does not support them. For the same reason, _PhotoPay_ does not support devices with ARMv5 (`armeabi`) architecture.
 
@@ -2060,12 +2004,12 @@ x86 architecture gives the ability to obtain native speed on x86 android devices
 
 x86_64 architecture gives better performance than x86 on devices that use 64-bit Intel Atom processor.
 
-However, there are some issues to be considered:
+There are some issues to be considered:
 
 - ARMv7 build of native library cannot be run on devices that do not have ARMv7 compatible processor
 - ARMv7 processors do not understand x86 instruction set
 - x86 processors understand neither ARM64 nor ARMv7 instruction sets
-- however, some x86 android devices ship with the builtin [ARM emulator](http://commonsware.com/blog/2013/11/21/libhoudini-what-it-means-for-developers.html) - such devices are able to run ARM binaries but with performance penalty. There is also a risk that builtin ARM emulator will not understand some specific ARM instruction and will crash.
+- some x86 android devices ship with the builtin [ARM emulator](http://commonsware.com/blog/2013/11/21/libhoudini-what-it-means-for-developers.html) - such devices are able to run ARM binaries but with performance penalty. There is also a risk that builtin ARM emulator will not understand some specific ARM instruction and will crash.
 - ARM64 processors understand ARMv7 instruction set, but ARMv7 processors do not understand ARM64 instructions. 
     - <a name="64bitNotice"></a> **NOTE:** as of year 2018, some android devices that ship with ARM64 processor do not have full compatibility with ARMv7. This is mostly due to incorrect configuration of Android's 32-bit subsystem by the vendor, however Google [has announced](https://android-developers.googleblog.com/2017/12/improving-app-security-and-performance.html) that as of August 2019 all apps on PlayStore that contain native code will need to have native support for 64-bit processors (this includes ARM64 and x86_64) - this is in anticipation of future Android devices that will support 64-bit code **only**, i.e. that will have ARM64 processors that do not understand ARMv7 instruction set.
 - if ARM64 processor executes ARMv7 code, it does not take advantage of modern NEON64 SIMD operations and does not take advantage of 64-bit registers it has - it runs in emulation mode
@@ -2076,7 +2020,11 @@ However, there are some issues to be considered:
 
 ## <a name="reduceSize"></a> Reducing the final size of your app
 
-If your final app is too large because of _PhotoPay_, you can decide to create multiple flavors of your app - one flavor for each architecture. With gradle and Android studio this is very easy - just add the following code to `build.gradle` file of your app:
+We recommend that you distribute your app using [App Bundle](https://developer.android.com/platform/technology/app-bundle). This will defer apk generation to Google Play, allowing it to generate minimal APK for each specific device that downloads your app, including only required processor architecture support.
+
+### Using APK splits
+
+If you are unable to use App Bundle, you can create multiple flavors of your app - one flavor for each architecture. With gradle and Android studio this is very easy - just add the following code to `build.gradle` file of your app:
 
 ```
 android {
@@ -2117,9 +2065,9 @@ After generating multiple APK's, you need to upload them to Google Play. For tut
 
 ### Removing processor architecture support in gradle without using APK splits
 
-If you will not be distributing your app via Google Play or for some other reasons you want to have single APK of smaller size, you can completely remove support for certain CPU architecture from your APK. **This is not recommended due to [consequences](#archConsequences)**.
+If you won't be distributing your app via Google Play or for some other reasons want to have single APK of smaller size, you can completely remove support for certain CPU architecture from your APK. **This is not recommended due to [consequences](#archConsequences)**.
 
-To remove certain CPU architecture, add following statement to your `android` block inside `build.gradle`:
+To remove a certain CPU architecture, add the following statement to your `android` block inside `build.gradle`:
 
 ```
 android {
@@ -2140,56 +2088,29 @@ where `<ABI>` represents the CPU architecture you want to remove:
 
 You can also remove multiple processor architectures by specifying `exclude` directive multiple times. Just bear in mind that removing processor architecture will have side effects on performance and stability of your app. Please read [this](#archConsequences) for more information.
 
-### Removing processor architecture support in Eclipse
-
-This section assumes that you have set up and prepared your Eclipse project from `LibPhotoPay.aar` as described in chapter [Eclipse integration instructions](#eclipseIntegration).
-
-If you are using Eclipse, removing processor architecture support gets really complicated. Eclipse does not support APK splits and you will either need to remove support for some processors or create several different library projects from `LibPhotoPay.aar` - each one for specific processor architecture. 
-
-Native libraries in eclipse library project are located in subfolder `libs`:
-
-- `libs/armeabi-v7a` contains native libraries for ARMv7 processor architecture
-- `libs/x86` contains native libraries for x86 processor architecture
-- `libs/arm64-v8a` contains native libraries for ARM64 processor architecture
-- `libs/x86_64` contains native libraries for x86_64 processor architecture
-
-To remove a support for processor architecture, you should simply delete appropriate folder inside Eclipse library project:
-
-- to remove ARMv7 support, delete folder `libs/armeabi-v7a`
-- to remove x86 support, delete folder `libs/x86`
-- to remove ARM64 support, delete folder `libs/arm64-v8a`
-    - **NOTE**: this is **not recommended**. See [this notice](#64bitNotice).
-- to remove x86_64 support, delete folder `libs/x86_64`
-
 ### <a name="archConsequences"></a> Consequences of removing processor architecture
 
-However, removing a processor architecture has some consequences:
-
-- by removing ARMv7 support _PhotoPay_ will not work on devices that have ARMv7 processors. 
+- by removing ARMv7 support, _PhotoPay_ will not work on devices that have ARMv7 processors. 
 - by removing ARM64 support, _PhotoPay_ will not use ARM64 features on ARM64 device
     - also, some future devices may ship with ARM64 processors that will not support ARMv7 instruction set. Please see [this note](#64bitNotice) for more information.
 - by removing x86 support, _PhotoPay_ will not work on devices that have x86 processor, except in situations when devices have ARM emulator - in that case, _PhotoPay_ will work, but will be slow and possibly unstable
 - by removing x86_64 support, _PhotoPay_ will not use 64-bit optimizations on x86_64 processor, but if x86 support is not removed, _PhotoPay_ should work
 
-Our recommendation is to include all architectures into your app - it will work on all devices and will provide best user experience. However, if you really need to reduce the size of your app, we recommend releasing separate version of your app for each processor architecture. It is easiest to do that with [APK splits](#reduceSize).
-
 
 ## <a name="staticDistrib"></a> Creating customized build of _PhotoPay_
 
-If techniques explained in paragraph [Reducing the final size of your app](#reduceSize) did not reduce the size enough for your convenience, you have the ability to create customised build of _PhotoPay_ which will contain only features that you plan to use. Using customised build of _PhotoPay_ can reduce your app size by more than 60% with respect to app size when using the generic build.
+If techniques explained in paragraph [Reducing the final size of your app](#reduceSize) did not reduce the size enough for your convenience, you have the ability to create customised build of _PhotoPay_ which will contain only features that you plan to use. By using customised build, you can reduce your app size by more than 60%.
 
-In order to create customised build of _PhotoPay_, you first need to download the _static distribution of PhotoPay_. A valid production licence is required in order to gain access to the download link of _PhotoPay static distribution_. Once you have a valid production licence, please contact our [support team](http://help.microblink.com) and ask them to provide you with the download link. After they give you access to the _static distribution of PhotoPay_, you will be able to download it from you account at [Microblink Developer Dashboard](https://www.microblink.com/login).
+In order to create a customised build of _PhotoPay_, you first need to download the _static distribution of PhotoPay_. A valid production licence is required in order to gain access to the download link. Once you have a valid production licence, please contact our [support team](http://help.microblink.com) and ask for the download link. After they give you access to the _static distribution of PhotoPay_, you will be able to download it from you account at [Microblink Developer Dashboard](https://www.microblink.com/login).
 
 The _static distribution of PhotoPay_ is a large zip file (several hundred megabytes) which contains static libraries of PhotoPay's native code, all assets and a script which will create the customised build for you.
 
 ### Prerequisites for creating customised build
 
-In order to create customised build of _PhotoPay_, you will need following tools:
-
 - [Android development tools and SDK](https://developer.android.com/studio/index.html)
 - [Android NDK](https://developer.android.com/ndk/index.html) - best if installed from Android Studio's package manager
-- NDK CMake toolchain - you have to install that from Android Studio's package manager
-- Java - for running both Android Studio and provided gradle script which will create customised build
+- NDK CMake toolchain - you have to install it from Android Studio's package manager
+- Java - for running Android Studio and provided gradle script which will create customised build
 
 #### Important notes:
 
@@ -2201,13 +2122,13 @@ In order to create customised build of _PhotoPay_, you will need following tools
 2. Download the zip from link that you will be provided
 3. Unzip the file into an empty folder
 4. Edit the file `static-distrib/enabled-features.cmake`
-	- you should enable only features that you need to use by setting appropriate variables to `ON`. 
+	- you should enable only features that you need to use by setting appropriate variables to `ON`
 	- the list of all possible feature variables can be found in `static-distrib/features.cmake` 
-		- for each `feature_option` command, first parameter defines the feature variable, and the second is the description of the feature, i.e. what it provides. Other parameters are information for script to work correctly.
-	- you should not edit any file except `enabled-features.cmake` (except if instructed so by our support team) to ensure creation of customised build works well
+		- for each `feature_option` command, first parameter defines the feature variable, and the second is the description of the feature, i.e. what it provides. Other parameters are information for script to work correctly
+	- you should not edit any file except `enabled-features.cmake` (unless instructed to do so by our support team) to ensure creation of customised build works well
 	
     **Important note**:
-    If you have previously run command for building the static distribution (7th step), because cmake caches previous configuration from the `enabled-features.cmake` inside `LibPhotoPay/.externalNativeBuild` folder, you should delete that folder in order for the changes to take effect.
+    If you have previously run command for building the static distribution (7th step), because cmake caches previous configuration from the `enabled-features.cmake` inside `LibPhotoPay/.cxx` folder, you should delete that folder in order for the changes to take effect.
 	
 5. In folder _LibPhotoPay_, create file `local.properties` with following entries:
 
@@ -2217,9 +2138,9 @@ In order to create customised build of _PhotoPay_, you will need following tools
 	```
 	
 	- importing the project into android studio should do that automatically for you
-6. Open terminal and navigate to _LibPhotoPay_ folder.
+6. Open terminal and navigate to _LibPhotoPay_ folder
 7. Execute command ```./gradlew clean assembleRelease```
-8. After several minutes (depedending of CPU speed of your computer), customised build will appear as `LibPhotoPay/build/outputs/aar/LibPhotoPay-release.aar`. Use that AAR in your app instead of the default one.
+8. After several minutes (depedending on your CPU speed), customised build will appear as `LibPhotoPay/build/outputs/aar/LibPhotoPay-release.aar`. Use that AAR in your app instead of the default one
 
 ### Steps for creating customised build (Android Studio)
 
@@ -2229,13 +2150,13 @@ In order to create customised build of _PhotoPay_, you will need following tools
 	- if they are not, edit the `enabled-features.cmake` to correct which features need to be included in build and then select `Build -> Refresh Linked C++ Projects` in Android Studio menu
 4. Open `Build Variants` pane and make sure `release` is selected for module `LibPhotoPay`
 5. In Android Studio menu, select `Build -> Build APK`
-6. After several minutes (depedending of CPU speed of your computer), customised build will appear as `LibPhotoPay/build/outputs/aar/LibPhotoPay-release.aar`. Use that AAR in your app instead of the default one.
+6. After several minutes (depedending on your CPU speed), customised build will appear as `LibPhotoPay/build/outputs/aar/LibPhotoPay-release.aar`. Use that AAR in your app instead of the default one.
 
 #### Warning:
 
 Attempt to use feature within your app which was not enabled in customised build will result with your app crashing at the moment it tries to use that feature.
 
-### Troubleshooting:
+### Common issues
 
 #### Getting `UnsatisfiedLinkError` when using customised build, while everything works OK with generic build
 
@@ -2251,20 +2172,14 @@ You probably have a typo in `enabled-features.cmake`. CMake is very sensitive la
 
 ## <a name="combineNativeLibraries"></a> Combining _PhotoPay_ with other native libraries
 
-If you are combining _PhotoPay_ library with some other libraries that contain native code into your application, make sure you match the architectures of all native libraries. For example, if third party library has got only ARMv7 and x86 versions, you must use exactly ARMv7 and x86 versions of _PhotoPay_ with that library, but not ARM64. Using these architectures will crash your app in initialization step because JVM will try to load all its native dependencies in same preferred architecture and will fail with `UnsatisfiedLinkError`.
+If you are combining _PhotoPay_ library with other libraries that contain native code into your application, make sure you match the architectures of all native libraries. For example, if third party library has got only ARMv7 and x86 versions, you must use exactly ARMv7 and x86 versions of _PhotoPay_ with that library, but not ARM64. Using these architectures will crash your app at initialization step because JVM will try to load all its native dependencies in same preferred architecture and will fail with `UnsatisfiedLinkError`.
 # <a name="troubleshoot"></a> Troubleshooting
 
-## <a name="integrationTroubleshoot"></a> Integration problems
+### Integration difficulties
 
-In case of problems with integration of the SDK, first make sure that you have tried integrating it into Android Studio by following [integration instructions](#quickIntegration). Although we do provide [Eclipse ADT integration](#eclipseIntegration) instructions, we officially do not support Eclipse ADT anymore. Also, for any other IDEs unfortunately you are on your own.
+In case of problems with SDK integration, first make sure that you have followed [integration instructions](#androidStudioIntegration). If you're still having problems, please contact us at [help.microblink.com](http://help.microblink.com).
 
-If you have followed [Android Studio integration instructions](#quickIntegration) and are still having integration problems, please contact us at [help.microblink.com](http://help.microblink.com).
-
-## <a name="sdkTroubleshoot"></a> SDK problems
-
-In case of problems with using the SDK, you should do as follows:
-
-### Licensing problems
+### Licensing issues
 
 If you are getting "invalid license key" error or having other license-related problems (e.g. some feature is not enabled that should be or there is a watermark on top of camera), first check the ADB logcat. All license-related problems are logged to error log so it is easy to determine what went wrong.
 
@@ -2294,10 +2209,8 @@ If you are having problems with scanning certain items, undesired behaviour on s
 	* please stress out that you are reporting problem related to Android version of _PhotoPay_ SDK
 
 
-## <a name="faq"></a> Frequently asked questions and known problems
-Here is a list of frequently asked questions and solutions for them and also a list of known problems in the SDK and how to work around them.
-
-#### <a name="featureNotSupportedByLicenseKey"></a> In demo everything worked, but after switching to production license I get `InvalidLicenseKeyException` as soon as I construct specific `Recognizer` object
+# <a name="faq"></a> FAQ and known issues
+#### <a name="featureNotSupportedByLicenseKey"></a> After switching from trial to production license I get `InvalidLicenseKeyException` when I construct specific `Recognizer` object
 
 Each license key contains information about which features are allowed to use and which are not. This exception indicates that your production license does not allow using of specific `Recognizer` object. You should contact [support](http://help.microblink.com) to check if provided license is OK and that it really contains all features that you have purchased.
 
@@ -2311,7 +2224,7 @@ This usually happens when you perform integration into [Eclipse project](#eclips
 
 #### <a name="multipleMicroblinkSDKs"></a> When trying to build app, I get error "Unable to merge dex" and "Multiple dex files define XXX"
 
-This error happens when you try to integrate multiple Microblink SDKs into the same application. Multiple Microblink SDKs cannot be integrated into the same application, and there is no need for that because SDKs are organized in the way that each SDK is feature superset of the smaller SDK, except the `PDF417` SDK which is the smallest SDK. For example `BlinkID` SDK contains all features from the `BlinkInput` SDK. Relations between SDKs are: `PDF417` ⊆ `BlinkInput` ⊆ `BlinkID` ⊆ `PhotoPay`.
+This error happens when you try to integrate multiple Microblink SDKs into the same application. Multiple Microblink SDKs cannot be integrated into the same application, and there is no need for that because SDKs are organized in the way that each SDK is feature superset of the smaller SDK, except the `PDF417` SDK which is the smallest SDK.
 
 #### <a name="unsatisfiedLinkError"></a> When my app starts, I get `UnsatisfiedLinkError`
 

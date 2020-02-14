@@ -102,6 +102,7 @@ com.microblink.entities.recognizers.blinkid.unitedArabEmirates
 com.microblink.entities.recognizers.blinkid.usdl
 com.microblink.entities.recognizers.blinkid.visa
 com.microblink.entities.recognizers.blinkinput
+com.microblink.entities.recognizers.blinkinput.documentcapture
 com.microblink.entities.recognizers.classifier
 com.microblink.entities.recognizers.detector
 com.microblink.entities.recognizers.framegrabber
@@ -149,8 +150,11 @@ com.microblink.fragment.overlay.blinkid.reticleui
 com.microblink.fragment.overlay.components
 com.microblink.fragment.overlay.components.debug
 com.microblink.fragment.overlay.components.feedback
+com.microblink.fragment.overlay.components.feedback.view
 com.microblink.fragment.overlay.components.settings
 com.microblink.fragment.overlay.components.statusmsg
+com.microblink.fragment.overlay.documentcapture
+com.microblink.fragment.overlay.documentcapture.detectionui
 com.microblink.fragment.overlay.fieldbyfield
 com.microblink.fragment.overlay.verification
 com.microblink.geometry

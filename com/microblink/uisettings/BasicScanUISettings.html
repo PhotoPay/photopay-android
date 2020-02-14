@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":6,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10};
+var methods = {"i0":10,"i1":6,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -112,7 +112,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../com/microblink/uisettings/options/BeepSoundUIOptions.html" title="interface in com.microblink.uisettings.options">BeepSoundUIOptions</a>, <a href="../../../com/microblink/uisettings/options/CameraSettingsUIOptions.html" title="interface in com.microblink.uisettings.options">CameraSettingsUIOptions</a>, <a href="../../../com/microblink/uisettings/options/DebugImageListenerUIOptions.html" title="interface in com.microblink.uisettings.options">DebugImageListenerUIOptions</a>, <a href="../../../com/microblink/uisettings/options/HelpIntentUIOptions.html" title="interface in com.microblink.uisettings.options">HelpIntentUIOptions</a>, <a href="../../../com/microblink/uisettings/options/HighResSuccessFrameCaptureUIOptions.html" title="interface in com.microblink.uisettings.options">HighResSuccessFrameCaptureUIOptions</a>, <a href="../../../com/microblink/uisettings/options/SplashScreenUIOptions.html" title="interface in com.microblink.uisettings.options">SplashScreenUIOptions</a></dd>
+<dd><a href="../../../com/microblink/uisettings/options/BeepSoundUIOptions.html" title="interface in com.microblink.uisettings.options">BeepSoundUIOptions</a>, <a href="../../../com/microblink/uisettings/options/DebugImageListenerUIOptions.html" title="interface in com.microblink.uisettings.options">DebugImageListenerUIOptions</a>, <a href="../../../com/microblink/uisettings/options/HelpIntentUIOptions.html" title="interface in com.microblink.uisettings.options">HelpIntentUIOptions</a>, <a href="../../../com/microblink/uisettings/options/HighResSuccessFrameCaptureUIOptions.html" title="interface in com.microblink.uisettings.options">HighResSuccessFrameCaptureUIOptions</a>, <a href="../../../com/microblink/uisettings/options/SplashScreenUIOptions.html" title="interface in com.microblink.uisettings.options">SplashScreenUIOptions</a></dd>
 </dl>
 <dl>
 <dt>Direct Known Subclasses:</dt>
@@ -122,7 +122,7 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public abstract class <span class="typeNameLabel">BasicScanUISettings</span>
 extends <a href="../../../com/microblink/uisettings/UISettings.html" title="class in com.microblink.uisettings">UISettings</a>
-implements <a href="../../../com/microblink/uisettings/options/DebugImageListenerUIOptions.html" title="interface in com.microblink.uisettings.options">DebugImageListenerUIOptions</a>, <a href="../../../com/microblink/uisettings/options/SplashScreenUIOptions.html" title="interface in com.microblink.uisettings.options">SplashScreenUIOptions</a>, <a href="../../../com/microblink/uisettings/options/CameraSettingsUIOptions.html" title="interface in com.microblink.uisettings.options">CameraSettingsUIOptions</a>, <a href="../../../com/microblink/uisettings/options/BeepSoundUIOptions.html" title="interface in com.microblink.uisettings.options">BeepSoundUIOptions</a>, <a href="../../../com/microblink/uisettings/options/HighResSuccessFrameCaptureUIOptions.html" title="interface in com.microblink.uisettings.options">HighResSuccessFrameCaptureUIOptions</a>, <a href="../../../com/microblink/uisettings/options/HelpIntentUIOptions.html" title="interface in com.microblink.uisettings.options">HelpIntentUIOptions</a></pre>
+implements <a href="../../../com/microblink/uisettings/options/DebugImageListenerUIOptions.html" title="interface in com.microblink.uisettings.options">DebugImageListenerUIOptions</a>, <a href="../../../com/microblink/uisettings/options/SplashScreenUIOptions.html" title="interface in com.microblink.uisettings.options">SplashScreenUIOptions</a>, <a href="../../../com/microblink/uisettings/options/BeepSoundUIOptions.html" title="interface in com.microblink.uisettings.options">BeepSoundUIOptions</a>, <a href="../../../com/microblink/uisettings/options/HighResSuccessFrameCaptureUIOptions.html" title="interface in com.microblink.uisettings.options">HighResSuccessFrameCaptureUIOptions</a>, <a href="../../../com/microblink/uisettings/options/HelpIntentUIOptions.html" title="interface in com.microblink.uisettings.options">HelpIntentUIOptions</a></pre>
 </li>
 </ul>
 </div>
@@ -202,84 +202,46 @@ implements <a href="../../../com/microblink/uisettings/options/DebugImageListene
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BasicScanUISettings.html#setCameraAspectMode-com.microblink.view.CameraAspectMode-">setCameraAspectMode</a></span>(<a href="../../../com/microblink/view/CameraAspectMode.html" title="class in com.microblink.view">CameraAspectMode</a>&nbsp;cameraAspectMode)</code>
-<div class="block">Defines which camera aspect mode will be used.</div>
-</td>
-</tr>
-<tr id="i7" class="rowColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BasicScanUISettings.html#setCameraOptimizedForNearScanning-boolean-">setCameraOptimizedForNearScanning</a></span>(boolean&nbsp;cameraOptimizedForNearScanning)</code>
-<div class="block">Defines whether camera parameters should be optimized for near object scanning.</div>
-</td>
-</tr>
-<tr id="i8" class="altColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BasicScanUISettings.html#setCameraType-com.microblink.hardware.camera.CameraType-">setCameraType</a></span>(<a href="../../../com/microblink/hardware/camera/CameraType.html" title="class in com.microblink.hardware.camera">CameraType</a>&nbsp;cameraType)</code>
-<div class="block">Sets type of camera that will be used.</div>
-</td>
-</tr>
-<tr id="i9" class="rowColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BasicScanUISettings.html#setCameraVideoPreset-com.microblink.hardware.camera.VideoResolutionPreset-">setCameraVideoPreset</a></span>(<a href="../../../com/microblink/hardware/camera/VideoResolutionPreset.html" title="class in com.microblink.hardware.camera">VideoResolutionPreset</a>&nbsp;cameraVideoPreset)</code>
-<div class="block">Sets the video resolution preset that will be used when choosing camera resolution
- for scanning.</div>
-</td>
-</tr>
-<tr id="i10" class="altColor">
-<td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BasicScanUISettings.html#setDebugImageListener-com.microblink.image.DebugImageListener-">setDebugImageListener</a></span>(<a href="../../../com/microblink/image/DebugImageListener.html" title="interface in com.microblink.image">DebugImageListener</a>&nbsp;debugImageListener)</code>
 <div class="block">Sets implementation of <a href="../../../com/microblink/image/DebugImageListener.html" title="interface in com.microblink.image"><code>DebugImageListener</code></a> interface that will obtain images that are
  being processed.</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BasicScanUISettings.html#setForcedOrientation-com.microblink.uisettings.options.OverlayOrientation-">setForcedOrientation</a></span>(<a href="../../../com/microblink/uisettings/options/OverlayOrientation.html" title="class in com.microblink.uisettings.options">OverlayOrientation</a>&nbsp;orientation)</code>
 <div class="block">Defines forced overlay orientation.</div>
 </td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BasicScanUISettings.html#setHelpIntent-android.content.Intent-">setHelpIntent</a></span>(android.content.Intent&nbsp;helpIntent)</code>
 <div class="block">Defines intent for help activity called when help should be shown.</div>
 </td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BasicScanUISettings.html#setPinchToZoomAllowed-boolean-">setPinchToZoomAllowed</a></span>(boolean&nbsp;pinchToZoomAllowed)</code>
 <div class="block">Defines whether pinch to zoom will be allowed on camera activity, default is <code>false</code>.</div>
 </td>
 </tr>
-<tr id="i14" class="altColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BasicScanUISettings.html#setPreferredCameraSurface-CameraSurface-">setPreferredCameraSurface</a></span>(CameraSurface&nbsp;preferredCameraSurface)</code>
-<div class="block">Defines which view will be used for displaying camera preview.</div>
-</td>
-</tr>
-<tr id="i15" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BasicScanUISettings.html#setRegionOfInterestRotatable-boolean-">setRegionOfInterestRotatable</a></span>(boolean&nbsp;regionOfInterestRotatable)</code>
 <div class="block">Defines whether ROI (Region of Interest) will be rotated with user interface.</div>
 </td>
 </tr>
-<tr id="i16" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BasicScanUISettings.html#setScanRegionOfInterest-com.microblink.geometry.Rectangle-">setScanRegionOfInterest</a></span>(<a href="../../../com/microblink/geometry/Rectangle.html" title="class in com.microblink.geometry">Rectangle</a>&nbsp;scanRegionOfInterest)</code>
 <div class="block">Sets the scanning ROI (Region of Interest) that will be scanned.</div>
 </td>
 </tr>
-<tr id="i17" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BasicScanUISettings.html#setSplashScreenLayoutResourceID-int-">setSplashScreenLayoutResourceID</a></span>(int&nbsp;splashScreenLayoutResourceID)</code>
 <div class="block">Defines the ID of the layout resource that will be used as camera splash screen displayed
  while camera is being initialized.</div>
-</td>
-</tr>
-<tr id="i18" class="altColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BasicScanUISettings.html#setUsingLegacyCameraAPI-boolean-">setUsingLegacyCameraAPI</a></span>(boolean&nbsp;usingLegacyCameraAPI)</code>
-<div class="block">Sets whether legacy camera API should be used even on Lollipop devices that support
- newer Camera2 API.</div>
 </td>
 </tr>
 </table>
@@ -288,7 +250,7 @@ implements <a href="../../../com/microblink/uisettings/options/DebugImageListene
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;com.microblink.uisettings.<a href="../../../com/microblink/uisettings/UISettings.html" title="class in com.microblink.uisettings">UISettings</a></h3>
-<code><a href="../../../com/microblink/uisettings/UISettings.html#getTargetActivity--">getTargetActivity</a>, <a href="../../../com/microblink/uisettings/UISettings.html#getUsingFlagSecure--">getUsingFlagSecure</a>, <a href="../../../com/microblink/uisettings/UISettings.html#setUsingFlagSecure-boolean-">setUsingFlagSecure</a></code></li>
+<code><a href="../../../com/microblink/uisettings/UISettings.html#getActivityTheme--">getActivityTheme</a>, <a href="../../../com/microblink/uisettings/UISettings.html#getTargetActivity--">getTargetActivity</a>, <a href="../../../com/microblink/uisettings/UISettings.html#getUsingFlagSecure--">getUsingFlagSecure</a>, <a href="../../../com/microblink/uisettings/UISettings.html#setActivityTheme-int-">setActivityTheme</a>, <a href="../../../com/microblink/uisettings/UISettings.html#setCameraSettings-com.microblink.uisettings.CameraSettings-">setCameraSettings</a>, <a href="../../../com/microblink/uisettings/UISettings.html#setUsingFlagSecure-boolean-">setUsingFlagSecure</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
@@ -373,39 +335,6 @@ public&nbsp;<a href="../../../com/microblink/entities/recognizers/RecognizerBund
 <dd><code><a href="../../../com/microblink/uisettings/UISettings.html#saveToIntent-android.content.Intent-">saveToIntent</a></code>&nbsp;in class&nbsp;<code><a href="../../../com/microblink/uisettings/UISettings.html" title="class in com.microblink.uisettings">UISettings</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>intent</code> - Intent to which this scan activity settings should be saved.</dd>
-</dl>
-</li>
-</ul>
-<a name="setCameraType-com.microblink.hardware.camera.CameraType-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>setCameraType</h4>
-<pre>public final&nbsp;void&nbsp;setCameraType(@Nullable
-                                <a href="../../../com/microblink/hardware/camera/CameraType.html" title="class in com.microblink.hardware.camera">CameraType</a>&nbsp;cameraType)</pre>
-<div class="block">Sets type of camera that will be used.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>cameraType</code> - type of camera that will be used.</dd>
-</dl>
-</li>
-</ul>
-<a name="setCameraAspectMode-com.microblink.view.CameraAspectMode-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>setCameraAspectMode</h4>
-<pre>public final&nbsp;void&nbsp;setCameraAspectMode(@Nullable
-                                      <a href="../../../com/microblink/view/CameraAspectMode.html" title="class in com.microblink.view">CameraAspectMode</a>&nbsp;cameraAspectMode)</pre>
-<div class="block">Defines which camera aspect mode will be used. If set to <a href="../../../com/microblink/view/CameraAspectMode.html#ASPECT_FIT"><code>CameraAspectMode.ASPECT_FIT</code></a>
- (default), then camera preview will be letterboxed inside available view space.
- If set to <a href="../../../com/microblink/view/CameraAspectMode.html#ASPECT_FILL"><code>CameraAspectMode.ASPECT_FILL</code></a>, camera preview will be zoomed and cropped
- to use the entire view space.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>cameraAspectMode</code> - camera aspect mode that will be used.</dd>
 </dl>
 </li>
 </ul>
@@ -495,27 +424,6 @@ public&nbsp;<a href="../../../com/microblink/entities/recognizers/RecognizerBund
 </dl>
 </li>
 </ul>
-<a name="setCameraOptimizedForNearScanning-boolean-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>setCameraOptimizedForNearScanning</h4>
-<pre>public final&nbsp;void&nbsp;setCameraOptimizedForNearScanning(boolean&nbsp;cameraOptimizedForNearScanning)</pre>
-<div class="block">Defines whether camera parameters should be optimized for near object scanning.
- When camera parameters are optimized for near object scanning, macro focus mode will be
- preferred over autofocus mode. Thus, camera will have easier time focusing on to near objects,
- but might have harder time focusing on far objects. If you expect that most of your scans
- will be performed by holding the device very near the object, turn on that parameter.
- By default, this parameter is set to <code>false</code>, except in cases when from other settings
- it can be safely concluded that it is better to turn it on.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>cameraOptimizedForNearScanning</code> - whether camera parameters should be optimized for near
-                                      object scanning.</dd>
-</dl>
-</li>
-</ul>
 <a name="setDebugImageListener-com.microblink.image.DebugImageListener-">
 <!--   -->
 </a>
@@ -534,62 +442,6 @@ public&nbsp;<a href="../../../com/microblink/entities/recognizers/RecognizerBund
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>debugImageListener</code> - Implementation of debug image listener or <code>null</code> to clear listener
                            that has been set previously.</dd>
-</dl>
-</li>
-</ul>
-<a name="setCameraVideoPreset-com.microblink.hardware.camera.VideoResolutionPreset-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>setCameraVideoPreset</h4>
-<pre>public final&nbsp;void&nbsp;setCameraVideoPreset(@Nullable
-                                       <a href="../../../com/microblink/hardware/camera/VideoResolutionPreset.html" title="class in com.microblink.hardware.camera">VideoResolutionPreset</a>&nbsp;cameraVideoPreset)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../com/microblink/uisettings/options/CameraSettingsUIOptions.html#setCameraVideoPreset-com.microblink.hardware.camera.VideoResolutionPreset-">CameraSettingsUIOptions</a></code></span></div>
-<div class="block">Sets the video resolution preset that will be used when choosing camera resolution
- for scanning.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../com/microblink/uisettings/options/CameraSettingsUIOptions.html#setCameraVideoPreset-com.microblink.hardware.camera.VideoResolutionPreset-">setCameraVideoPreset</a></code>&nbsp;in interface&nbsp;<code><a href="../../../com/microblink/uisettings/options/CameraSettingsUIOptions.html" title="interface in com.microblink.uisettings.options">CameraSettingsUIOptions</a></code></dd>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>cameraVideoPreset</code> - video resolution preset that will be used
-                          when choosing camera resolution for scanning.</dd>
-</dl>
-</li>
-</ul>
-<a name="setUsingLegacyCameraAPI-boolean-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>setUsingLegacyCameraAPI</h4>
-<pre>public final&nbsp;void&nbsp;setUsingLegacyCameraAPI(boolean&nbsp;usingLegacyCameraAPI)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../com/microblink/uisettings/options/CameraSettingsUIOptions.html#setUsingLegacyCameraAPI-boolean-">CameraSettingsUIOptions</a></code></span></div>
-<div class="block">Sets whether legacy camera API should be used even on Lollipop devices that support
- newer Camera2 API. Default is <code>false</code>;</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../com/microblink/uisettings/options/CameraSettingsUIOptions.html#setUsingLegacyCameraAPI-boolean-">setUsingLegacyCameraAPI</a></code>&nbsp;in interface&nbsp;<code><a href="../../../com/microblink/uisettings/options/CameraSettingsUIOptions.html" title="interface in com.microblink.uisettings.options">CameraSettingsUIOptions</a></code></dd>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>usingLegacyCameraAPI</code> - <code>true</code> to use legacy camera API, <code>false</code> otherwise.</dd>
-</dl>
-</li>
-</ul>
-<a name="setPreferredCameraSurface-CameraSurface-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>setPreferredCameraSurface</h4>
-<pre>public final&nbsp;void&nbsp;setPreferredCameraSurface(@Nullable
-                                            CameraSurface&nbsp;preferredCameraSurface)</pre>
-<div class="block">Defines which view will be used for displaying camera preview.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>preferredCameraSurface</code> - camera surface which view will be used for displaying
-                              camera preview.</dd>
-<dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="../../../com/microblink/view/BaseCameraView.html#setRequestedSurfaceViewForCameraDisplay-CameraSurface-"><code>BaseCameraView.setRequestedSurfaceViewForCameraDisplay(CameraSurface)</code></a></dd>
 </dl>
 </li>
 </ul>

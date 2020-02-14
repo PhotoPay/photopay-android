@@ -1,5 +1,67 @@
 # Release notes
 
+## 7.7.0
+
+### Major API changes:
+
+- SDK has been migrated to **AndroidX** dependencies - previous SDK dependency com.android.support:appcompat-v7 has been replaced with  **androidx.appcompat:appcompat**
+
+### New features:
+
+- added support for capturing cropped images (without data extraction) of documents of any format:
+    - use `DocumentCaptureRecognizer` and `DocumentCaptureUISettings`
+    - `DocumentCaptureUISettings` launches activity that uses `DocumentCaptureOverlayController`, which is designed for taking **high resolution** document images and guides the user through the image capturing process. It can be used only with `DocumentCaptureRecognizer`.
+- `BlinkIdRecognizer` and `BlinkIdCombinedRecognizer` now support new document types from different countries, all supported document types are listed in [`documentation/BlinkIDRecognizer.md`](documentation/BlinkIDRecognizer.md)
+- Updated `BelgiumCombinedRecognizer`:
+    - added `nationalRegisterNumber` to result
+- added support for reading front and back side of Nigerian Voter ID card - use `NigeriaCombinedRecognizer`
+- new options in `BlinkIdUISettings`, `DocumentUISettings`, `DocumentVerificationUISettings` and `BlinkIdOverlaySettings`:
+    - option to disable displaying of "Document Not Supported" dialog when `BlinkIdRecognizer` or `BlinkIdCombinedRecognizer` is used in combination with other recognizers - use method `setShowNotSupportedDialog`
+    - option to configure back side scanning timeout - use `setBackSideScanningTimeoutMs`
+- it is possible to set theme that will be used by activity, launched from the UISettings - use UISettings.setActivityTheme
+
+### Improvements:
+
+- **overall size impact on application reduced for almost 5 MB** when PhotoPay  SDK v7.7 is used, relative to size impact of the previous v7.5
+- improved `SwitzerlandSlipRecognizer`:
+    - new result member `ocrLineResult` which returns raw OCR line
+- improved `BelgiumSlipRecognizer`:
+    - better `amount` and `reference` extraction
+    - now it is possible to enable/disable reading of free form, unstructured references - use `BelgiumSlipRecognizer.setFreeFormReferenceEnabled`
+- improved `BlinkCardRecognizer`:
+    - now extracts IBAN from the Payment / Debit card
+- added option to anonymize Netherlands MRZ area in document image returned by the `PassportRecognizer` - use `PassportRecognizer.setAnonymizeNetherlandsMrz(true)`
+- enabled setting `MrzFilter` on `MrtdCombinedRecognizer`:
+    - determines whether document should be processed or it is filtered out, based on its MRZ (Machine Readable Zone)
+    - this feature is also available for `MrtdRecognizer`
+- added property `localizedName` to `BlinkIdRecognizer.Result`, `BlinkIdCombinedRecognizer.Result` and `HongKongIdFrontRecognizer.Result` (CCC to chinese alphabet conversion for Hong Kong ID)
+- enabled digital signing of `BlinkIdCombinedRecognizer.Result`
+- improved `VinParser`:
+    - added support for Renewal Identification Number (RIN) - DMV California format
+- added new fields in `MrzResult`:
+    - `sanitizedDocumentCode`
+    - `sanitizedDocumentNumber`
+- improved `BlinkIdRecognizer` and `BlinkIdCombinedRecognizer`:
+    - introduced blur filter that discards blurred frames and prevents reading data from them. This option is enabled by default, it can be disabled by using `BlinkIdRecognizer.setAllowBlurFilter(false)` and `BlinkIdCombinedRecognizer.setAllowBlurFilter(false)` 
+- improved camera performance on some Samsung devices
+
+### Minor API changes:
+
+- `MrzFilter` now accepts `MrzResult` for filtering, previously filtering has been performed based on the given `MrtdRecognizer` result.
+- `RecognizerRunner.getSingletonInstance()` does not throw `FeatureNotSupportedException` anymore
+- all scan activity classes are final now
+- in combined recognizers results, `documentDataMatch` value is now returned as `DataMatchResult` enum with three possible values: `NotPerformed`,  `Failed` and `Success`
+- new API for configuring camera options on `UISettings` -  use `UISettings.setCameraSettings`, which accepts object of `CameraSettings` type
+
+
+### Bug fixes:
+
+- fixed issue with utf8 encoding in SloveniaQrCodePaymentRecognizer
+- fixed problems with aspect ratio of camera preview on Huawei Mate 10
+- fixed bug in `BlinkCardRecognizer`:
+    - `anonymizeCvv` now works independently of any other anonymization setting
+- `BlinkIdCombinedRecognizer` - fixed issue when the front side of a document was returned as a back side
+
 ## 7.5.0
 
 ### New features:

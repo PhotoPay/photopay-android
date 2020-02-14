@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10};
+var methods = {"i0":10,"i1":10,"i2":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -196,6 +196,18 @@ extends &lt;any&gt;</pre>
 <td class="colFirst"><code><a href="../../../../../../../com/microblink/entities/recognizers/photopay/belgium/slip/BelgiumSlipRecognizer.html" title="class in com.microblink.entities.recognizers.photopay.belgium.slip">BelgiumSlipRecognizer</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/belgium/slip/BelgiumSlipRecognizer.html#clone--">clone</a></span>()</code>&nbsp;</td>
 </tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/belgium/slip/BelgiumSlipRecognizer.html#isFreeFormReferenceEnabled--">isFreeFormReferenceEnabled</a></span>()</code>
+<div class="block">Returns <code>true</code>, if reading of free form reference is enabled, <code>false</code> otherwise.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/recognizers/photopay/belgium/slip/BelgiumSlipRecognizer.html#setFreeFormReferenceEnabled-boolean-">setFreeFormReferenceEnabled</a></span>(boolean&nbsp;freeFormReferenceEnabled)</code>
+<div class="block">Sets whether reading of free form, unstructured references is enabled.</div>
+</td>
+</tr>
 </table>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
@@ -255,10 +267,41 @@ extends &lt;any&gt;</pre>
 <a name="clone--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>clone</h4>
 <pre>public&nbsp;<a href="../../../../../../../com/microblink/entities/recognizers/photopay/belgium/slip/BelgiumSlipRecognizer.html" title="class in com.microblink.entities.recognizers.photopay.belgium.slip">BelgiumSlipRecognizer</a>&nbsp;clone()</pre>
+</li>
+</ul>
+<a name="setFreeFormReferenceEnabled-boolean-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setFreeFormReferenceEnabled</h4>
+<pre>public&nbsp;void&nbsp;setFreeFormReferenceEnabled(boolean&nbsp;freeFormReferenceEnabled)</pre>
+<div class="block">Sets whether reading of free form, unstructured references is enabled.
+  Setting this to 'false' may improve accuracy, but won't return references in non-standard
+  formats. By default, this is set to 'true'.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>freeFormReferenceEnabled</code> - <code>true</code> to enable reading of free form reference,
+                                  <code>false</code> otherwise.</dd>
+</dl>
+</li>
+</ul>
+<a name="isFreeFormReferenceEnabled--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>isFreeFormReferenceEnabled</h4>
+<pre>public&nbsp;boolean&nbsp;isFreeFormReferenceEnabled()</pre>
+<div class="block">Returns <code>true</code>, if reading of free form reference is enabled, <code>false</code> otherwise.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>true</code>, if reading of free form reference is enabled, <code>false</code> otherwise.</dd>
+</dl>
 </li>
 </ul>
 </li>

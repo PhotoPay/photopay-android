@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -112,13 +112,13 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../com/microblink/uisettings/options/CameraSettingsUIOptions.html" title="interface in com.microblink.uisettings.options">CameraSettingsUIOptions</a>, <a href="../../../com/microblink/uisettings/options/CurrentImageListenerUIOptions.html" title="interface in com.microblink.uisettings.options">CurrentImageListenerUIOptions</a>, <a href="../../../com/microblink/uisettings/options/DebugImageListenerUIOptions.html" title="interface in com.microblink.uisettings.options">DebugImageListenerUIOptions</a>, <a href="../../../com/microblink/uisettings/options/HelpIntentUIOptions.html" title="interface in com.microblink.uisettings.options">HelpIntentUIOptions</a>, <a href="../../../com/microblink/uisettings/options/OcrResultDisplayUIOptions.html" title="interface in com.microblink.uisettings.options">OcrResultDisplayUIOptions</a>, <a href="../../../com/microblink/uisettings/options/SplashScreenUIOptions.html" title="interface in com.microblink.uisettings.options">SplashScreenUIOptions</a>, <a href="../../../com/microblink/uisettings/options/SuccessfulImageListenerUIOptions.html" title="interface in com.microblink.uisettings.options">SuccessfulImageListenerUIOptions</a></dd>
+<dd><a href="../../../com/microblink/uisettings/options/CurrentImageListenerUIOptions.html" title="interface in com.microblink.uisettings.options">CurrentImageListenerUIOptions</a>, <a href="../../../com/microblink/uisettings/options/DebugImageListenerUIOptions.html" title="interface in com.microblink.uisettings.options">DebugImageListenerUIOptions</a>, <a href="../../../com/microblink/uisettings/options/HelpIntentUIOptions.html" title="interface in com.microblink.uisettings.options">HelpIntentUIOptions</a>, <a href="../../../com/microblink/uisettings/options/OcrResultDisplayUIOptions.html" title="interface in com.microblink.uisettings.options">OcrResultDisplayUIOptions</a>, <a href="../../../com/microblink/uisettings/options/SplashScreenUIOptions.html" title="interface in com.microblink.uisettings.options">SplashScreenUIOptions</a>, <a href="../../../com/microblink/uisettings/options/SuccessfulImageListenerUIOptions.html" title="interface in com.microblink.uisettings.options">SuccessfulImageListenerUIOptions</a></dd>
 </dl>
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">FieldByFieldUISettings</span>
 extends <a href="../../../com/microblink/uisettings/UISettings.html" title="class in com.microblink.uisettings">UISettings</a>
-implements <a href="../../../com/microblink/uisettings/options/HelpIntentUIOptions.html" title="interface in com.microblink.uisettings.options">HelpIntentUIOptions</a>, <a href="../../../com/microblink/uisettings/options/OcrResultDisplayUIOptions.html" title="interface in com.microblink.uisettings.options">OcrResultDisplayUIOptions</a>, <a href="../../../com/microblink/uisettings/options/DebugImageListenerUIOptions.html" title="interface in com.microblink.uisettings.options">DebugImageListenerUIOptions</a>, <a href="../../../com/microblink/uisettings/options/CurrentImageListenerUIOptions.html" title="interface in com.microblink.uisettings.options">CurrentImageListenerUIOptions</a>, <a href="../../../com/microblink/uisettings/options/SuccessfulImageListenerUIOptions.html" title="interface in com.microblink.uisettings.options">SuccessfulImageListenerUIOptions</a>, <a href="../../../com/microblink/uisettings/options/CameraSettingsUIOptions.html" title="interface in com.microblink.uisettings.options">CameraSettingsUIOptions</a>, <a href="../../../com/microblink/uisettings/options/SplashScreenUIOptions.html" title="interface in com.microblink.uisettings.options">SplashScreenUIOptions</a></pre>
+implements <a href="../../../com/microblink/uisettings/options/HelpIntentUIOptions.html" title="interface in com.microblink.uisettings.options">HelpIntentUIOptions</a>, <a href="../../../com/microblink/uisettings/options/OcrResultDisplayUIOptions.html" title="interface in com.microblink.uisettings.options">OcrResultDisplayUIOptions</a>, <a href="../../../com/microblink/uisettings/options/DebugImageListenerUIOptions.html" title="interface in com.microblink.uisettings.options">DebugImageListenerUIOptions</a>, <a href="../../../com/microblink/uisettings/options/CurrentImageListenerUIOptions.html" title="interface in com.microblink.uisettings.options">CurrentImageListenerUIOptions</a>, <a href="../../../com/microblink/uisettings/options/SuccessfulImageListenerUIOptions.html" title="interface in com.microblink.uisettings.options">SuccessfulImageListenerUIOptions</a>, <a href="../../../com/microblink/uisettings/options/SplashScreenUIOptions.html" title="interface in com.microblink.uisettings.options">SplashScreenUIOptions</a></pre>
 <div class="block">Scan settings for <a href="../../../com/microblink/activity/FieldByFieldScanActivity.html" title="class in com.microblink.activity"><code>FieldByFieldScanActivity</code></a>.</div>
 </li>
 </ul>
@@ -186,62 +186,48 @@ implements <a href="../../../com/microblink/uisettings/options/HelpIntentUIOptio
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/FieldByFieldUISettings.html#setCameraVideoPreset-com.microblink.hardware.camera.VideoResolutionPreset-">setCameraVideoPreset</a></span>(<a href="../../../com/microblink/hardware/camera/VideoResolutionPreset.html" title="class in com.microblink.hardware.camera">VideoResolutionPreset</a>&nbsp;cameraVideoPreset)</code>
-<div class="block">Sets the video resolution preset that will be used when choosing camera resolution
- for scanning.</div>
-</td>
-</tr>
-<tr id="i5" class="rowColor">
-<td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/FieldByFieldUISettings.html#setCurrentImageListener-com.microblink.image.CurrentImageListener-">setCurrentImageListener</a></span>(<a href="../../../com/microblink/image/CurrentImageListener.html" title="interface in com.microblink.image">CurrentImageListener</a>&nbsp;currentImageListener)</code>
 <div class="block">Sets implementation of <a href="../../../com/microblink/image/CurrentImageListener.html" title="interface in com.microblink.image"><code>CurrentImageListener</code></a> interface that will obtain images that
  are currently being processed.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/FieldByFieldUISettings.html#setDebugImageListener-com.microblink.image.DebugImageListener-">setDebugImageListener</a></span>(<a href="../../../com/microblink/image/DebugImageListener.html" title="interface in com.microblink.image">DebugImageListener</a>&nbsp;debugImageListener)</code>
 <div class="block">Sets implementation of <a href="../../../com/microblink/image/DebugImageListener.html" title="interface in com.microblink.image"><code>DebugImageListener</code></a> interface that will obtain images that are
  being processed.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/FieldByFieldUISettings.html#setHelpIntent-android.content.Intent-">setHelpIntent</a></span>(android.content.Intent&nbsp;helpIntent)</code>
 <div class="block">Defines intent for help activity called when help should be shown.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/FieldByFieldUISettings.html#setInfiniteLoopScan-boolean-">setInfiniteLoopScan</a></span>(boolean&nbsp;infiniteLoopScan)</code>
 <div class="block">If set to <code>true</code>, scan activity will never return.</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/FieldByFieldUISettings.html#setOcrResultDisplayMode-com.microblink.uisettings.options.OcrResultDisplayMode-">setOcrResultDisplayMode</a></span>(<a href="../../../com/microblink/uisettings/options/OcrResultDisplayMode.html" title="class in com.microblink.uisettings.options">OcrResultDisplayMode</a>&nbsp;ocrResultDisplayMode)</code>
 <div class="block">Defines mode in which OCR result will be drawn on camera preview.</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/FieldByFieldUISettings.html#setSplashScreenLayoutResourceID-int-">setSplashScreenLayoutResourceID</a></span>(int&nbsp;splashScreenLayoutResourceID)</code>
 <div class="block">Defines the ID of the layout resource that will be used as camera splash screen displayed
  while camera is being initialized.</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/FieldByFieldUISettings.html#setSuccessfulImageListener-com.microblink.image.SuccessfulImageListener-">setSuccessfulImageListener</a></span>(<a href="../../../com/microblink/image/SuccessfulImageListener.html" title="interface in com.microblink.image">SuccessfulImageListener</a>&nbsp;successfulImageListener)</code>
 <div class="block">Sets implementation of <a href="../../../com/microblink/image/SuccessfulImageListener.html" title="interface in com.microblink.image"><code>SuccessfulImageListener</code></a> interface that will obtain images from the
  successful scan.</div>
-</td>
-</tr>
-<tr id="i12" class="altColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/FieldByFieldUISettings.html#setUsingLegacyCameraAPI-boolean-">setUsingLegacyCameraAPI</a></span>(boolean&nbsp;usingLegacyCameraAPI)</code>
-<div class="block">Sets whether legacy camera API should be used even on Lollipop devices that support
- newer Camera2 API.</div>
 </td>
 </tr>
 </table>
@@ -250,7 +236,7 @@ implements <a href="../../../com/microblink/uisettings/options/HelpIntentUIOptio
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;com.microblink.uisettings.<a href="../../../com/microblink/uisettings/UISettings.html" title="class in com.microblink.uisettings">UISettings</a></h3>
-<code><a href="../../../com/microblink/uisettings/UISettings.html#getUsingFlagSecure--">getUsingFlagSecure</a>, <a href="../../../com/microblink/uisettings/UISettings.html#setUsingFlagSecure-boolean-">setUsingFlagSecure</a></code></li>
+<code><a href="../../../com/microblink/uisettings/UISettings.html#getActivityTheme--">getActivityTheme</a>, <a href="../../../com/microblink/uisettings/UISettings.html#getUsingFlagSecure--">getUsingFlagSecure</a>, <a href="../../../com/microblink/uisettings/UISettings.html#setActivityTheme-int-">setActivityTheme</a>, <a href="../../../com/microblink/uisettings/UISettings.html#setCameraSettings-com.microblink.uisettings.CameraSettings-">setCameraSettings</a>, <a href="../../../com/microblink/uisettings/UISettings.html#setUsingFlagSecure-boolean-">setUsingFlagSecure</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
@@ -449,44 +435,6 @@ public&nbsp;<a href="../../../com/microblink/entities/parsers/config/fieldbyfiel
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>successfulImageListener</code> - Implementation of image listener or <code>null</code> to clear
                                 listener that has been set previously.</dd>
-</dl>
-</li>
-</ul>
-<a name="setCameraVideoPreset-com.microblink.hardware.camera.VideoResolutionPreset-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>setCameraVideoPreset</h4>
-<pre>public&nbsp;void&nbsp;setCameraVideoPreset(@Nullable
-                                 <a href="../../../com/microblink/hardware/camera/VideoResolutionPreset.html" title="class in com.microblink.hardware.camera">VideoResolutionPreset</a>&nbsp;cameraVideoPreset)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../com/microblink/uisettings/options/CameraSettingsUIOptions.html#setCameraVideoPreset-com.microblink.hardware.camera.VideoResolutionPreset-">CameraSettingsUIOptions</a></code></span></div>
-<div class="block">Sets the video resolution preset that will be used when choosing camera resolution
- for scanning.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../com/microblink/uisettings/options/CameraSettingsUIOptions.html#setCameraVideoPreset-com.microblink.hardware.camera.VideoResolutionPreset-">setCameraVideoPreset</a></code>&nbsp;in interface&nbsp;<code><a href="../../../com/microblink/uisettings/options/CameraSettingsUIOptions.html" title="interface in com.microblink.uisettings.options">CameraSettingsUIOptions</a></code></dd>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>cameraVideoPreset</code> - video resolution preset that will be used
-                          when choosing camera resolution for scanning.</dd>
-</dl>
-</li>
-</ul>
-<a name="setUsingLegacyCameraAPI-boolean-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>setUsingLegacyCameraAPI</h4>
-<pre>public&nbsp;void&nbsp;setUsingLegacyCameraAPI(boolean&nbsp;usingLegacyCameraAPI)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../com/microblink/uisettings/options/CameraSettingsUIOptions.html#setUsingLegacyCameraAPI-boolean-">CameraSettingsUIOptions</a></code></span></div>
-<div class="block">Sets whether legacy camera API should be used even on Lollipop devices that support
- newer Camera2 API. Default is <code>false</code>;</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../com/microblink/uisettings/options/CameraSettingsUIOptions.html#setUsingLegacyCameraAPI-boolean-">setUsingLegacyCameraAPI</a></code>&nbsp;in interface&nbsp;<code><a href="../../../com/microblink/uisettings/options/CameraSettingsUIOptions.html" title="interface in com.microblink.uisettings.options">CameraSettingsUIOptions</a></code></dd>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>usingLegacyCameraAPI</code> - <code>true</code> to use legacy camera API, <code>false</code> otherwise.</dd>
 </dl>
 </li>
 </ul>
