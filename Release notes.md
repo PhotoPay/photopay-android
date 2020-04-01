@@ -68,7 +68,7 @@
 
 - added `BlinkIdRecognizer` for scanning front side of ID cards and `BlinkIdCombinedRecognizer` for combined scanning of front and back side of ID cards
     - for now, these recognizers classify and extract data from **87** different classes of **United States driver's licenses and IDs** (front and back side)
-    - list of all supported document types can be found [here](https://github.com/PhotoPay/photopay-android/blob/master/BlinkIDRecognizer.md)
+    - list of all supported document types can be found [here](https://github.com/PhotoPay/photopay-android/blob/0bfd5f791520af013357c8c686e9fee1c0f5d75a/BlinkIDRecognizer.md)
     - in the upcoming releases, we are planning to add support for more document types from different countries
 - completely new UX for scanning ID cards with new scan activity and overlay: `BlinkIdActivity` and `BlinkIdOverlayController`:
     -  best suited for scanning with `BlinkIdRecognizer` and `BlinkIdCombinedRecognizer`
