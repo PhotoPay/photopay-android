@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -196,29 +196,35 @@ implements <a href="../../../../../../com/microblink/fragment/overlay/documentca
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/fragment/overlay/documentcapture/detectionui/DetectionOverlayView.html#onScanStarted--">onScanStarted</a></span>()</code>
+<div class="block">Performs UI modifications when scanning is started.</div>
+</td>
+</tr>
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/fragment/overlay/documentcapture/detectionui/DetectionOverlayView.html#onTorchStateChanged-boolean-">onTorchStateChanged</a></span>(boolean&nbsp;torchOn)</code>
 <div class="block">Called when torch state is changed, when it is turned off or on.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/fragment/overlay/documentcapture/detectionui/DetectionOverlayView.html#onTorchSupportStatusAvailable-boolean-">onTorchSupportStatusAvailable</a></span>(boolean&nbsp;cameraSupportsTorch)</code>
 <div class="block">Called when camera device torch support status is available.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/fragment/overlay/documentcapture/detectionui/DetectionOverlayView.html#showAction-com.microblink.fragment.overlay.documentcapture.DocumentCaptureAction-">showAction</a></span>(<a href="../../../../../../com/microblink/fragment/overlay/documentcapture/DocumentCaptureAction.html" title="class in com.microblink.fragment.overlay.documentcapture">DocumentCaptureAction</a>&nbsp;action)</code>
 <div class="block">Displays some action message the to user.</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/fragment/overlay/documentcapture/detectionui/DetectionOverlayView.html#showDetection-com.microblink.metadata.detection.quad.DisplayableQuadDetection-">showDetection</a></span>(<a href="../../../../../../com/microblink/metadata/detection/quad/DisplayableQuadDetection.html" title="class in com.microblink.metadata.detection.quad">DisplayableQuadDetection</a>&nbsp;quadDetection)</code>
 <div class="block">Displays given detection to the user.</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/fragment/overlay/documentcapture/detectionui/DetectionOverlayView.html#showScanSuccess-com.microblink.fragment.overlay.documentcapture.DocumentCaptureContract.UiUpdateListener-">showScanSuccess</a></span>(<a href="../../../../../../com/microblink/fragment/overlay/documentcapture/DocumentCaptureContract.UiUpdateListener.html" title="interface in com.microblink.fragment.overlay.documentcapture">DocumentCaptureContract.UiUpdateListener</a>&nbsp;uiUpdateListener)</code>
 <div class="block">Displays the scan success.</div>
@@ -397,6 +403,21 @@ public&nbsp;void&nbsp;createLayout(@NonNull
 <dd><code><a href="../../../../../../com/microblink/fragment/overlay/documentcapture/DocumentCaptureContract.OverlayView.html#showDetection-com.microblink.metadata.detection.quad.DisplayableQuadDetection-">showDetection</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../com/microblink/fragment/overlay/documentcapture/DocumentCaptureContract.OverlayView.html" title="interface in com.microblink.fragment.overlay.documentcapture">DocumentCaptureContract.OverlayView</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>quadDetection</code> - detection location with status.</dd>
+</dl>
+</li>
+</ul>
+<a name="onScanStarted--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>onScanStarted</h4>
+<pre>public&nbsp;void&nbsp;onScanStarted()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../../com/microblink/fragment/overlay/documentcapture/DocumentCaptureContract.OverlayView.html#onScanStarted--">DocumentCaptureContract.OverlayView</a></code></span></div>
+<div class="block">Performs UI modifications when scanning is started.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../../com/microblink/fragment/overlay/documentcapture/DocumentCaptureContract.OverlayView.html#onScanStarted--">onScanStarted</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../com/microblink/fragment/overlay/documentcapture/DocumentCaptureContract.OverlayView.html" title="interface in com.microblink.fragment.overlay.documentcapture">DocumentCaptureContract.OverlayView</a></code></dd>
 </dl>
 </li>
 </ul>

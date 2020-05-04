@@ -1,5 +1,84 @@
 # Release notes
 
+## 7.8.0
+
+### New features:
+
+- We added a new recognizer specialized for scanning and parsing barcodes on various identity cards - `IdBarcodeRecognizer`. Supported document types are:
+    - AAMVA compliant (US DL, Canada DL, etc.)
+    - Argentina ID
+    - Panama ID
+    - Colombia ID
+    - South Africa ID
+    - Nigeria Voter ID and driver license
+- We added age verification feature:
+    - Now you can more easily obtain the age of the document owner in years and check whether it is above some age limit.
+    - Use `age` and `ageLimitStatus` helper methods in `MrzResult`, `BlinkIdRecognizer.Result`, `BlinkIdCombinedRecognizer.Result`, `UsdlRecognizer.Result`, `UsdlCombinedRecognizer.Result`, and `IdBarcodeRecognizer.Result`.
+- We added the option to disable Microblink logs in the console output. Use `LoggingSettings.disableMicroblinkLogging()`. Be careful with this option. We need full log outputs from the application for support purposes. In case of having problems with scanning certain items, undesired behavior on the specific device(s), crashes inside SDK or anything unmentioned, we will need a full log from your side. If you disable Microblink logging, you won't be able to provide us this information. Hence support might be limited.
+
+### Improvements:
+
+- We have translated complete SDK to following languages: **Croatian**, **Czech**, **English**, **French**, **German**, **Italian**, **Portuguese**, **Slovak**, and **Spanish**.
+- We added support for non-standard (floating point) amounts in QR code
+- We enabled reading of ITF barcodes with length 4
+- We added support for new document types in `BlinkIdCombinedRecognizer` and `BlinkIdRecognizer`:
+    - Australia - Australian Capital Territory - Driving licence / front only
+    - Australia - Northern Territory - Driving licence / BETA
+    - Australia - Tasmania - Driving licence / front only / BETA
+    - Canada - Alberta - ID card / BETA
+    - Canada - British Columbia - Driver license / Public services card (Combined) 
+    - Canada - British Columbia - ID card / BETA
+    - Canada - British Columbia - Public services card
+    - Canada - New Brunswick - Driving license
+    - Canada - Nova Scotia - Driving license / BETA
+    - Canada - Yukon - Driving license / BETA
+    - Panama - Driving license / front only / BETA
+    - Panama - ID card / front only
+    - Singapore - Work permit / BETA
+    - Taiwan - ID card / front only / BETA
+    - USA - Alabama - ID card
+    - USA - Alaska - ID card / BETA
+    - USA - District Of Columbia - Driver license / BETA
+    - USA - Idaho - ID card / BETA
+    - USA - Indiana - ID card / BETA
+    - USA - Kentucky - ID card / BETA
+    - USA - Massachusetts - ID card
+    - USA - Oregon - ID card
+    - USA - Washington - ID card
+    - We added support for back side to:
+        - Australia - Western Australia - Driving licence
+        - Mexico - Voter ID
+        - Netherlands - Driving licence
+- Additional improvements in `BlinkIdCombinedRecognizer` and `BlinkIdRecognizer`:
+    - When the back side of the document is not fully supported by the `BlinkIdCombinedRecognizer`, we will capture and return the back side image without performing data extraction. You can disable this behaviour by using `BlinkIdCombinedRecognizer.setSkipUnsupportedBack(true)`.
+    - We are now returning color status for the scanned document (black and white or color) in the following result fields:
+        - `documentImageColorStatus` in `BlinkIdRecognizer.Result`.
+        - `documentFrontImageColorStatus` and `documentBackImageColorStatus` in `BlinkIdCombinedRecognizer.Result`.
+    - We are now returning `ClassInfo` which holds the following information about the scanned document: `Country`, `Region`, and `Type` of the document. Use  `BlinkIdRecognizer.Result.getClassInfo()` and `BlinkIdCombinedRecognizer.Result.getClassInfo()`.
+    - We introduced `ClassFilter` which determines whether a document should be processed or is filtered out, based on its `ClassInfo`. Use  `BlinkIdRecognizer.setClassFilter` and `BlinkIdCombinedRecognizer.setClassFilter` to enable it.
+    - To improve the scanning performance, we added additional feedback for users that ensures a detected document is entirely inside the frame. When a document is too close to the edge of the camera frame, we will display an appropriate message to the user in `BlinkIdOverlayController`. You can configure the minimum distance from the edge of the frame by using the `paddingEdge` settings method.
+    - We added new recognizer options: `allowUnparsedMrzResults` and `allowUnverifiedMrzResults`
+    - We added new result field: `dateOfExpiryPermanent`
+- We added new result fields in `MrzResult`, returned by all recognizers which scan MRZ (Machine Readable Zone):
+    - `issuerName`
+    - `nationalityName`
+
+- Improvements in `BlinkIdOverlayController`:
+    - When a document is too close to the edge of the camera frame, we display *`Move the document from the edge`* message.
+    - We added better user instructions when barcodes are being scanned in `UsdlCombinedRecognizer`. We display *`Scan the barcode`* message.
+- We improved document detection with `DocumentCaptureRecognizer`.
+- We are now delivering the complete list of open source dependencies used in the SDK. Please check the `open-source-software-used` directory.
+
+### Minor API changes:
+
+- We removed `RecognizerRunnerView` custom attributes: `mb_initialOrientation` and `mb_aspectMode`. Use `RecognizerRunnerView.setInitialOrientation` and `RecognizerRunnerView.setAspectMode` to configure the attributes in the code.
+- All provided scan activities extend `AppCompatActivity`
+
+### Bug fixes:
+
+- We fixed bug in `BlinkIdOverlayController` which caused that `MrtdRecognizer.Result` is cleared after scanning is done and empty result is returned.
+- We fixed crash when using Direct API on high resolution `com.microblink.image.Image` from `HighResImageWrapper
+
 ## 7.7.0
 
 ### Major API changes:
@@ -11,7 +90,7 @@
 - added support for capturing cropped images (without data extraction) of documents of any format:
     - use `DocumentCaptureRecognizer` and `DocumentCaptureUISettings`
     - `DocumentCaptureUISettings` launches activity that uses `DocumentCaptureOverlayController`, which is designed for taking **high resolution** document images and guides the user through the image capturing process. It can be used only with `DocumentCaptureRecognizer`.
-- `BlinkIdRecognizer` and `BlinkIdCombinedRecognizer` now support new document types from different countries, all supported document types are listed in [`documentation/BlinkIDRecognizer.md`](documentation/BlinkIDRecognizer.md)
+- `BlinkIdRecognizer` and `BlinkIdCombinedRecognizer` now support new document types from different countries, all supported document types are listed [here](https://github.com/PhotoPay/photopay-android/blob/a8ba6b1efd9314212477e4c702fed7f4de53d1fb/documentation/BlinkIDRecognizer.md)
 - Updated `BelgiumCombinedRecognizer`:
     - added `nationalRegisterNumber` to result
 - added support for reading front and back side of Nigerian Voter ID card - use `NigeriaCombinedRecognizer`

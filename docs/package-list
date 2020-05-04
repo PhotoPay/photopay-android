@@ -71,8 +71,10 @@ com.microblink.entities.recognizers.blinkid.documentface
 com.microblink.entities.recognizers.blinkid.egypt
 com.microblink.entities.recognizers.blinkid.eudl
 com.microblink.entities.recognizers.blinkid.generic
+com.microblink.entities.recognizers.blinkid.generic.classinfo
 com.microblink.entities.recognizers.blinkid.germany
 com.microblink.entities.recognizers.blinkid.hongkong
+com.microblink.entities.recognizers.blinkid.idbarcode
 com.microblink.entities.recognizers.blinkid.imageoptions
 com.microblink.entities.recognizers.blinkid.imageoptions.dpi
 com.microblink.entities.recognizers.blinkid.imageoptions.encode
