@@ -1,8 +1,8 @@
 ## PhotoPay SDK size report
 
-This is SDK size report for all supported ABIs. Sizes are calculated by using Android official [**apkanalyzer**](https://developer.android.com/studio/command-line/apkanalyzer) command line tool.
+This SDK size report is for all supported ABIs. We use the Android official [**apkanalyzer**](https://developer.android.com/studio/command-line/apkanalyzer) command line tool to calculate the sizes.
 
-**NOTE**: Presented APK sizes are sums of `base APK size` + `size of our SDK`. Roughly, `base APK size` is about `1MB`, which means that APK size increase caused by our SDK in your application will be less than presented for approximately `1MB`.
+**NOTE**: Presented APK sizes are sums of the `base APK size` + the `size of our SDK`. Roughly, the `base APK size` is about `1MB`, which means that APK size increase caused by our SDK in your application will be approximately `1MB` less than presented.
 
 | ABI | APK file size | APK download size |
 | --- |:-------------:| :----------------:|
