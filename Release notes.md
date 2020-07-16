@@ -1,5 +1,149 @@
 # Release notes
 
+## 7.9.0
+
+### New features:
+
+- In `BlinkIdCombinedRecognizer` and `BlinkIdRecognizer` we added:
+    - Support for obtaining full document image for IDs with barcodes. Now you can capture document image and extract barcode data with a single scan.
+    - Scanning & data extraction for  travel visas and passports.
+    - Field validation - we validate if the results from certain fields match predefined character sets.
+        - If validation fails, the recognizer's state is `Recognizer.Result.State.Uncertain`.
+        - Use `setValidateResultCharacters()`to enable or disable validation.
+
+    - Support for US documents with **vertical** orientations:
+        - Alabama DL
+        - Arizona DL
+        - California DL
+        - Colorado DL
+        - Connecticut DL
+        - Georgia DL
+        - Illinois DL
+        - Iowa DL
+        - Kansas DL
+        - Kentucky DL
+        - Maryland DL
+        - Massachusetts DL
+        - Minnesota DL
+        - Missouri DL
+        - New Jersey DL
+        - Ohio DL
+        - Pennsylvania DL
+        - South Carolina DL
+        - Tennessee DL
+        - Texas DL
+        - Utah DL
+        - Washington DL
+        - Wisconsin DL
+        
+    - Support for new document types:
+        - Australia New South Wales - ID Card / Front only / BETA
+        - Brazil - Driver License / BETA
+        - Brunei - Military ID / BETA
+        - Brunei - Residence Permit / BETA
+        - Brunei - Temporary Residence Permit / BETA
+        - Croatia Health Insurance Card / front side / BETA
+        - Ecuador ID / front side
+        - El Salvador ID / BETA
+        - Ghana - Driver License / Front only
+        - Latvia - ID Card
+        - Norway - Driving Licence / Front only / BETA
+        - Oman - ID Card
+        - Saudi Arabia - ID Card / BETA
+        - Sri Lanka ID / BETA
+        - Sweden - Social Security Card / Front only
+        - USA - Social Security Card / BETA
+        - Back side supported:
+            - Malaysia - MyTentera
+
+    - No longer BETA:
+        - Australia Tasmania - Driving Licence
+        - Canada British Columbia - ID Card
+        - Canada Nova Scotia DL
+        - Canada Yukon DL        - Germany - Residence Permit
+        - Morocco - ID Card
+        - Nigeria - Voter ID
+        - Norway DL
+        - Singapore - Work Permit
+        - USA Alaska - ID Card
+        - USA District Of Columbia - Driver License
+        - USA Indiana - ID Card
+        - USA Kentucky - ID Card
+    
+    - Back side support:
+        - Kenya ID
+        
+    - Barcode scanning on the following documents:
+        - Argentina ID
+        - Colombia ID
+        - Nigeria Voter ID
+        - South Africa ID
+
+    - **Result anonymization** - with this option enabled, results are not returned for protected fields on documents listed here. The full document image will also have this data blacked out.
+        - Protected fields are:
+            - Document number on Hong Kong ID
+            - MRZ on Hong Kong passports
+            - Personal ID number on Netherlands DL
+            - Personal ID number and MRZ on Netherlands ID
+            - MRZ on Netherlands passports
+            - Document number on Singapore DL, ID, Fin Card, Resident ID
+            - Personal ID number on Singapore Employment Pass
+            - Document number and personal ID number on Singapore Work Permit
+            - MRZ on Singapore passports.
+        - By using `setAnonymizationMode` method, you can choose the `AnonymizationMode` : `ImageOnly`, `ResultFieldsOnly`, `FullResult` or `None`.
+        - `FullResult` anonymization (both images and data) is set by default.
+
+- We added support for new **MRZ** formats:
+    - Guatemala ID
+    - Kenya ID
+
+### Improvements for existing features:
+
+- Improvements in `BlinkIdCombinedRecognizer` and `BlinkIdRecognizer`:
+    - Documents discarded with the class filter are now reported as not supported
+        - `ClassifierCallback.onDocumentSupportStatus(false)` will be called if a documents is filtered out by the `ClassFilter`
+    - For Malaysian MyKad we are now returning if a Moire pattern is present on the scanned document (detected or not detected).
+        - use `getImageAnalysisResult().getDocumentImageMoireStatus()` in `BlinkIdRecognizer`.
+        - use `getFrontImageAnalysisResult().getDocumentImageMoireStatus()` and `getBackImageAnalysisResult().getDocumentImageMoireStatus()` in `BlinkIdCombinedRecognizer `.
+
+- We made changes to the result structure of `BlinkIdCombinedRecognizer` and `BlinkIdRecognizer`:
+    - Barcode data is now encapsulated in its own result structure: `BarcodeResult`.
+    - Data from all OCR-ed fields, without MRZ data, is now encapsulated in a `VizResult` structure, representing the "Visual Inspection Zone" data. In `BlinkIdCombinedRecognizer`, front side data is available in its own structure (`frontVizResult`), back side data in its own (`backVizResult`), so you can now **access data from each side separately**.
+    - The main part of the result, outside these structures, is filled according to these rules:
+        - Document number is filled with data from the MRZ, if present.
+        - Remaining data is then filled with barcode data.
+        - Remaining data is filled from the back side's visual inspection zone (OCR data outside of MRZ).
+        - Remaining data is filled from the front side's visual inspection zone.
+        - Remaining data is filled with data from the MRZ.
+
+- We added digital signature support to `PassportRecognizer`. 
+- We updated `IdBarcodeRecognizer.Result` with specific driving license info.
+    - Use `getRestrictions()`, `getEndorsements()` and `getVehicleClass()`.
+- We updated `UsdlRecognizer.Result` and `IdBarcodeRecognizer.Result` with additional address fields:
+    - `street`, `postalCode`, `city` and `jurisdiction` 
+- We added `isExpired()` method to `BlinkIdRecognizer.Result`, `BlinkIdCombinedRecognizer.Result` and `IdBarcodeRecognizer.Result`.
+    - It compares the current time on the device with the date of expiry and checks whether the document has expired or not. 
+- We enabled usage of combined recognizers through the Direct API:
+    - Recognition state is not automatically reset with every image that comes to the recognition through the Direct API. If reset is required, you should call `RecognizerRunner.resetRecognitionState()`
+
+### Minor API changes:
+
+- We renamed `EMailParser` to `EmailParser`.
+- We renamed some methods:
+    - In `LicensePlatesParser`: `getLicensePlateString` to `getLicensePlate`.
+    - In `RegexParser`: `isUsingSieve` to `shouldUseSieve`, `setMustStartWithWhitespace ` to `setStartWithWhitespace `, `isMustStartWithWhitespace ` to `shouldStartWithWhitespace `, `setMustEndWithWhitespace ` to `setEndWithWhitespace `, `isMustEndWithWhitespace ` to `shouldEndWithWhitespace `.
+    - In `RawParser`: `isUsingSieve` to `shouldUseSieve`.
+- We moved `BlinkIdRecognizer.Result` member `colorStatus` to the result's `imageAnalysisResult` (`frontImageAnalysisResult` and `backImageAnalysisResult` in `BlinkIDCombinedRecognizer.Result`).
+- We changed default `IntentDataTransferMode` to `IntentDataTransferMode.PERSISTED_OPTIMISED`. It can be configured by using `MicroblinkSDK.setIntentDataTransferMode`.
+
+### Bug fixes:
+
+- We fixed bug in IBAN parsing which caused that reference number was sometimes read as part of the IBAN number.
+- We fixed amount extraction in `SerbiaQrCodePaymentRecognizer` and `SerbiaPdf417PaymentRecognizer`.
+- We fixed bug in `BlinkIdCombinedRecognizer` and `BlinkIdRecognizer` which caused that dates on Belgian ID cards are not parsed correctly in cases when month is July.
+- We fixed US driver's license address extraction (Oregon, Mississippi, Rhode Island).
+- We fixed a bug which caused that, in some cases, camera has not been resumed after the device screen was turned OFF and back ON.
+
 ## 7.8.0
 
 ### New features:
@@ -880,46 +1024,46 @@ For any questions, you might have, we stand at your service.
 ### Minor API changes:
 
 - `RegexParserSettings` and `RawParserSettings` now work with `AbstractOCREngineOptions`, which is a base class of `BlinkOCREngineOptions`
-	- default engine options returned by method `getOcrEngineOptions` for both parser settings return instance of `BlinkOCREngineOptions`
+    - default engine options returned by method `getOcrEngineOptions` for both parser settings return instance of `BlinkOCREngineOptions`
 - `BlinkOCRRecognizerSettings` is now deprecated and will be removed in `v7.0.0`
-	- use `DetectorRecognizerSettings` to perform scanning of templated documents 
-	- use `BlinkInputRecognizerSettings` for segment scan or for full-screen OCR 
-	- until `v7.0.0`, `BlinkOCRRecognizerSettings` will behave as before, however you are encouraged to update your code not to use it anymore
+    - use `DetectorRecognizerSettings` to perform scanning of templated documents 
+    - use `BlinkInputRecognizerSettings` for segment scan or for full-screen OCR 
+    - until `v7.0.0`, `BlinkOCRRecognizerSettings` will behave as before, however you are encouraged to update your code not to use it anymore
 - `DocumentClassifier` interface is moved from `com.microblink.recognizers.blinkocr` to `com.microblink.recognizers.detector` package and `DocumentClassifier.classifyDocument()` now accepts `DetectorRecognitionResult` as parameter for document classification
 - `Slovak ID Recognizers`:
-	- result getters `getPersonalIdentificationNumber()` and `getIssuingAuthority()` are renamed to `getPersonalNumber()` and `getIssuedBy()`
+    - result getters `getPersonalIdentificationNumber()` and `getIssuingAuthority()` are renamed to `getPersonalNumber()` and `getIssuedBy()`
 - Renamed `RomanianIDFrontSideRecognitionResult` element getters for Sex and Nationality outside of the MRZ to `getNonMRZNationality()` and `getNonMRZSex()`
 
 ### Improvements for existing features
 
 - improved address parsing on Malaysian iKad documents
-	- affects only iKad recognizer (represented by `IKadRecognizerSettings`)
+    - affects only iKad recognizer (represented by `IKadRecognizerSettings`)
 - added support for scanning non-expiring Croatian ID documents
-	- affects:
-		- Croatian ID front recognizer (represented by `CroatianIDFrontSideRecognizerSettings`) - date of expiry is keyword **TRAJNO**
-		- Croatian ID back recognizer (represented by `CroatianIDBackSideRecognizerSettings`) - date of expiry inside MRZ is `991231`
-		- Croatian ID combined recognizer (represented by `CroatianIDCombinedRecognizerSettings`)
+    - affects:
+        - Croatian ID front recognizer (represented by `CroatianIDFrontSideRecognizerSettings`) - date of expiry is keyword **TRAJNO**
+        - Croatian ID back recognizer (represented by `CroatianIDBackSideRecognizerSettings`) - date of expiry inside MRZ is `991231`
+        - Croatian ID combined recognizer (represented by `CroatianIDCombinedRecognizerSettings`)
 - improved date parsing:
-	- affects date parser and all recognizers which perform date parsing
+    - affects date parser and all recognizers which perform date parsing
 - added support for reading mirrored QR codes:
-	- affects all recognizers that perform QR code scanning
+    - affects all recognizers that perform QR code scanning
 - improved `IKadRecognizer`:
-	- added support for long addresses and employer names
+    - added support for long addresses and employer names
 - improved `Singapore ID Recognizers`:
-	- tuned reading positions
-	- more accurate reading of name and blood type fields
+    - tuned reading positions
+    - more accurate reading of name and blood type fields
 - improved `Slovak ID Recognizers`:
-	- tuned reading positions of ID elements
-	- improved reading precision of address, place of birth, last name and issuing authority
-	- added options to disable/enable extraction of certain fields in recognizer settings
+    - tuned reading positions of ID elements
+    - improved reading precision of address, place of birth, last name and issuing authority
+    - added options to disable/enable extraction of certain fields in recognizer settings
 - for `Austrian ID Recognizers` added options to disable/enable extraction of certain fields in recognizer settings
 
 ### Bug fixes:
 
 - fixed occassional crash in MRTD detection algorithm
-	- this affects both _MRTD Recognizer_ (represented by `MRTDRecognizerSettings`) and _MRTD Detector_ (represented by `MRTDDetectorSettings`)
+    - this affects both _MRTD Recognizer_ (represented by `MRTDRecognizerSettings`) and _MRTD Detector_ (represented by `MRTDDetectorSettings`)
 - fixed `SlovakQRCodeRecognizer` (Slovak pay by square):
-	- parsing of amounts with less than 2 decimals
+    - parsing of amounts with less than 2 decimals
 
 ## 6.8.1
 
@@ -959,10 +1103,10 @@ For any questions, you might have, we stand at your service.
 - added USDL, MyKad, iKad, EUDL and Singapore ID recognizers
 - although new recognizers have been added, we managed to reduce final binary size a bit
 - introduced ability to create minimum-size AAR
-	- a separate static library distribution now exists which contains a script that you can configure with features you need and it creates a AAR file which only contains features you need - this includes minimum-size native binary and only required assets. The rest (resources and java classes) can be thrown-away by ProGuard.
+    - a separate static library distribution now exists which contains a script that you can configure with features you need and it creates a AAR file which only contains features you need - this includes minimum-size native binary and only required assets. The rest (resources and java classes) can be thrown-away by ProGuard.
 - `LibPhotoPay` is now fully ProGuard-compatible, i.e. you no longer need to exclude `com.microblink.**` classes in your ProGuard configuration
 - removed support for Android 2.3 and Android 4.0 - minimum required Android version is now Android 4.1 (API level 16)
-	- devices with Android 4.0 and earlier take [less than 2% of market share](https://developer.android.com/about/dashboards/index.html#Platform) and is very costly to support them
+    - devices with Android 4.0 and earlier take [less than 2% of market share](https://developer.android.com/about/dashboards/index.html#Platform) and is very costly to support them
 - prefixed custom attributes to avoid name collisions with attributes from other libraries:
     - `CameraViewGroup`: renamed animateRotation to `mb_animateRotation`, animationDuration to `mb_animationDuration`, rotatable to `mb_rotatable`
     - `BaseCameraView`:  renamed initialOrientation to `mb_initialOrientation`, aspectMode to `mb_aspectMode`
@@ -1146,7 +1290,7 @@ For any questions, you might have, we stand at your service.
     - set ideal (expected) number of digits before decimal point
 - Added factory method `createFromPreset` to generic AmountParserSettings that creates the settings from one of the available presets (`GENERIC`, `LARGE_AMOUNT`) 
 - added support for DetectorRecognizer - a recognizer which can perform detection of various documents
-	- see `PhotoPayDetectorDemo` app for example on how detectors can be used
+    - see `PhotoPayDetectorDemo` app for example on how detectors can be used
 - initial support for Slovak PAY by square QR codes
 - initial support for Czech payment QR codes
 - default scan activity for Dutch OCR line has been replaced with `ScanFovWithInfo` activity
@@ -1202,7 +1346,7 @@ For any questions, you might have, we stand at your service.
 ## 5.3.0
 - added support for scanning RF references in slovenian payslips
 - support for detecting on activity flip event with OnActivityFlipListener
-	- this listener can inform you when activity flip has happened. This is a event which is not notified by Android OS and happens when activity with sensor orientation changes its orientation from landscape to reverse landscape or vice versa
+    - this listener can inform you when activity flip has happened. This is a event which is not notified by Android OS and happens when activity with sensor orientation changes its orientation from landscape to reverse landscape or vice versa
 - fixed crash in RecognizerCompatibility class on ARMv7 without NEON
 - added RecognizerCompatibility class to javadoc
 - added Sony Xperia L to OpenGL blacklist
@@ -1223,8 +1367,8 @@ For any questions, you might have, we stand at your service.
 ## 5.1.1
 - fixed `NullPointerException` that could occur sometimes in recognition result parcelisation
 - fixed occasional ANR on Nexus 4
-	- this bug was introduced with Android 5.0.0 update on Nexus 4, it was not present on KitKat and older Android versions
-	- other devices were not affected
+    - this bug was introduced with Android 5.0.0 update on Nexus 4, it was not present on KitKat and older Android versions
+    - other devices were not affected
 - fixed bug on Sony and HTC which made it impossible to select and copy text scanned with `BlinkOcrActivity`
 
 ## 5.1.0
@@ -1235,39 +1379,39 @@ For any questions, you might have, we stand at your service.
 - silenced annoying "Point array is null" debug log output
 - fixed bug that caused nondeterministic refusal to scan anything (this bug occurred mostly on high-end devices)
 - fixed bug in scanning 1D barcodes with ZXing when scanning region was set
-	- the bug caused not to honor set region
+    - the bug caused not to honor set region
 - fixed wrong icon size on `BlinkOCRActivity` on some devices
 - when embedding `RecognizerView` into custom scan activity, you no longer need to take care of whether runtime permissions are set or not. You can now simply pass all lifecycle events to `RecognizerView` and if camera permission is denied, a new callback method `onCameraPermissionDenied` of `CameraEventsListener` will be invoked to give you chance to ask user for permissions
-	- please refer to updated demo apps for example of new callback
+    - please refer to updated demo apps for example of new callback
 - **IMPORTANT** - `onScanningDone` callback method does not automatically pause scanning loop anymore. As soon as `onScanningDone` method ends, scanning will be automatically resumed without resetting state
-	- if you need to reset state, please call `resetRecognitionState` in your implementation of `onScanningDone`
-	- if you need to have scanning paused after `onScanningDone` ends, please call `pauseScanning` in your implementation of `onScanningDone`. Do not forget to call `resumeScanning` to resume scanning after it has been paused.
+    - if you need to reset state, please call `resetRecognitionState` in your implementation of `onScanningDone`
+    - if you need to have scanning paused after `onScanningDone` ends, please call `pauseScanning` in your implementation of `onScanningDone`. Do not forget to call `resumeScanning` to resume scanning after it has been paused.
 - `pauseScanning` and `resumeScanning` calls are now counted, i.e. if you call `pauseScanning` twice, you will also need to call `resumeScanning` twice to actually resume scanning
-	- this is practical if you show multiple onboarding views over camera and you want the scanning paused while each is shown and you do not know in which order they will be dismissed. Now you can simply call `pauseScanning` on showing the onboarding view and `resumeScanning` on dismissing it, regardless of how many onboarding views you have
-	- if you want to show onboarding help first time your scan activity starts, you can call `setInitialScanningPaused(true)` which will ensure that first time camera is started, the scanning will not automatically start - you will need to call `resumeScanning` to start scanning after your onboarding view is dismissed
+    - this is practical if you show multiple onboarding views over camera and you want the scanning paused while each is shown and you do not know in which order they will be dismissed. Now you can simply call `pauseScanning` on showing the onboarding view and `resumeScanning` on dismissing it, regardless of how many onboarding views you have
+    - if you want to show onboarding help first time your scan activity starts, you can call `setInitialScanningPaused(true)` which will ensure that first time camera is started, the scanning will not automatically start - you will need to call `resumeScanning` to start scanning after your onboarding view is dismissed
 - added support for `x86_64` architecture
 
 ## 5.0.0
 - new API which is easier to understand, but is not backward compatible. Please check [README](README.md) and updated demo applications for more information.
 - removed support for ARMv7 devices which do not support NEON SIMD
-	- this enabled us to increase recognition speed at cost of not supporting old devices like those using NVIDIA Tegra 2
-	- you can check [this article](https://microblink.zendesk.com/hc/en-us/articles/206113151-Removing-support-for-devices-without-NEON-SIMD-extensions) for more information about NEON and why we use it
+    - this enabled us to increase recognition speed at cost of not supporting old devices like those using NVIDIA Tegra 2
+    - you can check [this article](https://microblink.zendesk.com/hc/en-us/articles/206113151-Removing-support-for-devices-without-NEON-SIMD-extensions) for more information about NEON and why we use it
 - removed support for ARMv6 devices 
 - added official support for Android 6.0 and it's runtime camera permissions
-	- if using provided activities, the logic behind asking user to give camera permission is handled internally
-	- if integrating using custom UI, you are required to ask user to give you permission to use camera. To make this easier, we have provided a _CameraPermissionManager_ class which does all heavylifting code about managing states when asking user for camera permission. Refer to demo apps to see how it is used.
+    - if using provided activities, the logic behind asking user to give camera permission is handled internally
+    - if integrating using custom UI, you are required to ask user to give you permission to use camera. To make this easier, we have provided a _CameraPermissionManager_ class which does all heavylifting code about managing states when asking user for camera permission. Refer to demo apps to see how it is used.
 - PhotoPay now depends on appcompat-v7 library, instead of full android-support library.
-	- even older versions of PhotoPay required only features from appcompat-v7 so we now decided to make appcompat-v7 as dependency because it is much smaller than full support library and is also default dependency of all new Android apps.
+    - even older versions of PhotoPay required only features from appcompat-v7 so we now decided to make appcompat-v7 as dependency because it is much smaller than full support library and is also default dependency of all new Android apps.
 - added support for new STUZZA QR codes used in Austria
-	- newly supported version is STUZZA version 2.0 which allows empty BIC field in QR code
+    - newly supported version is STUZZA version 2.0 which allows empty BIC field in QR code
 - added support for scanning Austrian reference number with SegmentScan
-	- supported reference number is 12-digit reference number (Kundendaten) as found on Austrian payment slips
+    - supported reference number is 12-digit reference number (Kundendaten) as found on Austrian payment slips
 - added support for scanning German reference number with SegmentScan
-	- supported reference numbers is 13-digit reference number with ISO 7064 checkdigit and RF-reference numbers
+    - supported reference numbers is 13-digit reference number with ISO 7064 checkdigit and RF-reference numbers
 - added support for Bosnian SegmentScan
-	- it is now possible to scan account numbers and reference numbers from bills issued in Bosnia and Herzegovina
+    - it is now possible to scan account numbers and reference numbers from bills issued in Bosnia and Herzegovina
 - completely rewritten JNI layer which now gives much lower overhead in communication between Java and native code
-	- in our internal tests, this yielded up to 3 times better performance in OCR intensive tasks
+    - in our internal tests, this yielded up to 3 times better performance in OCR intensive tasks
 - fixed issue with Nexus 5X upside down camera
 - when using DirectAPI, recognized Bitmap is not recycled anymore so it can be reused
 - added support for reading white hungarian slips
@@ -1275,18 +1419,18 @@ For any questions, you might have, we stand at your service.
 
 ## 4.10.1
 - fixed bug in slovenian reference parser
-	- now supporting slovenian references with more than 20 characters
-	- allow dashes inside slovenian reference number
+    - now supporting slovenian references with more than 20 characters
+    - allow dashes inside slovenian reference number
 
 ## 4.10.0
 - fixed autofocus issue on devices that do not support continuous autofocus
 - improved OCR quality when scanning documents with Machine Readable Zone
 - improved support for belgian payslips
-	- added support for reading recipient name on belgian payslips
-	- improved scanning quality of other elements (IBAN, amount, reference) on belgian payslips
+    - added support for reading recipient name on belgian payslips
+    - improved scanning quality of other elements (IBAN, amount, reference) on belgian payslips
 - support for defining camera video resolution preset
-	- to define video resolution preset via Intent, use `ScanActivity.EXTRAS_CAMERA_VIDEO_PRESET`
-	- to define video resolution preset on `RecognizerView`, use method `setVideoResolutionPreset`
+    - to define video resolution preset via Intent, use `ScanActivity.EXTRAS_CAMERA_VIDEO_PRESET`
+    - to define video resolution preset on `RecognizerView`, use method `setVideoResolutionPreset`
 
 ## 4.9.0
 - added support for reading `Recipient name` in Hungary
@@ -1311,10 +1455,10 @@ For any questions, you might have, we stand at your service.
 - when calling `onDisplayOcrResult` callback, make sure OCR char recognition variants are not sent to Java - this is both slow and not required
 - fixed behaviour of method `getParsedAmount` - it now returns correct decimal value
 - reorganized integration demo apps
-	- `PhotoPayDemo` has been expanded and now also shows how to perform segment scan, ID scan and barcode scan via Intent
-	- `PhotoPayDemoCustomUI` has remained as it was - it shows how to perform scanning of Croatian payment slips from within custom scanning activity
-	- `PhotoPayDemoCustomSegmentScan` is a new demo app similar to `PhotoPayDemoCustomUI`, except it shows how to perform scanning of segments from within custom scanning activity
-	- `PhotoPayDirectAPIDemo` shows how to perform scanning of [Android Bitmaps](https://developer.android.com/reference/android/graphics/Bitmap.html) without using Camera
+    - `PhotoPayDemo` has been expanded and now also shows how to perform segment scan, ID scan and barcode scan via Intent
+    - `PhotoPayDemoCustomUI` has remained as it was - it shows how to perform scanning of Croatian payment slips from within custom scanning activity
+    - `PhotoPayDemoCustomSegmentScan` is a new demo app similar to `PhotoPayDemoCustomUI`, except it shows how to perform scanning of segments from within custom scanning activity
+    - `PhotoPayDirectAPIDemo` shows how to perform scanning of [Android Bitmaps](https://developer.android.com/reference/android/graphics/Bitmap.html) without using Camera
 
 ## 4.7.0
 - when scanning Croatian QR code, use slower, but more thorough QR code scanning algorithm (this can be disabled via settings)
@@ -1323,9 +1467,9 @@ For any questions, you might have, we stand at your service.
 
 ## 4.6.0
 - new and improved camera management
-	- use of Camera2 API on devices that support it
-	- new algorithm for choosing best possible frame to be processed
-	- support defining camera metering areas on devices that support it
+    - use of Camera2 API on devices that support it
+    - new algorithm for choosing best possible frame to be processed
+    - support defining camera metering areas on devices that support it
 - added support for ARM64 processor ABI
 
 ## 4.5.0

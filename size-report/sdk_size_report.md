@@ -2,12 +2,12 @@
 
 This SDK size report is for all supported ABIs. We use the Android official [**apkanalyzer**](https://developer.android.com/studio/command-line/apkanalyzer) command line tool to calculate the sizes.
 
-**NOTE**: Presented APK sizes are sums of the `base APK size` + the `size of our SDK`. Roughly, the `base APK size` is about `1MB`, which means that APK size increase caused by our SDK in your application will be approximately `1MB` less than presented.
+**NOTE**: Presented APK sizes are sums of the `base APK size` + `size of our SDK`. Roughly, the `base APK size` is about `1 MB`, which means that the APK size increase caused by our SDK in your application will be approximately `1 MB` less than presented.
 
 | ABI | APK file size | APK download size |
 | --- |:-------------:| :----------------:|
-| armeabi-v7a | 24MB | 19.6MB |
-| arm64-v8a | 25.8MB | 20.1MB |
-| x86 | 29.1MB | 21.2MB |
-| x86_64 | 26.8MB | 20.3MB |
+| armeabi-v7a | 22.6MB | 18.6MB |
+| arm64-v8a | 24.4MB | 19.1MB |
+| x86 | 27.8MB | 20.2MB |
+| x86_64 | 25.5MB | 19.3MB |
 
