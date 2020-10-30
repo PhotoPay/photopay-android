@@ -200,7 +200,7 @@ You can also create your own scanning UI - you just need to embed `RecognizerRun
     ```
     dependencies {
         implementation project(':LibPhotoPay')
-        implementation "androidx.appcompat:appcompat:1.1.0"
+        implementation "androidx.appcompat:appcompat:1.2.0"
     }
     ```
     
@@ -939,7 +939,7 @@ The [`VisaRecognizer`](https://photopay.github.io/photopay-android/com/microblin
 You can find information about usage context at the beginning of [this section](#blinkid_recognizers).
 
 ### <a name="idBarcodeRecognizer"></a> ID barcode recognizer
-The [`IdBarcodeRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/idbarcode/IdBarcodeRecognizer.html) is used for scanning barcodes from various ID cards. Check [`IdBarcodeDocumentType`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/idbarcode/IdBarcodeDocumentType.html) enum to see the list of supported document types.
+The [`IdBarcodeRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/idbarcode/IdBarcodeRecognizer.html) is used for scanning barcodes from various ID cards. Check [this document](documentation/IdBarcodeRecognizer.md) to see the list of supported document types.
 
 You can find information about usage context at the beginning of [this section](#blinkid_recognizers).
 
@@ -1484,7 +1484,9 @@ This recognizer can be used in any context. It is used internally in the impleme
 
 ## <a name="detectorRecognizer"></a> Detector recognizer
 
-The [`DetectorRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/detector/DetectorRecognizer.html) is recognizer for scanning generic documents using custom `Detector`. You can find more about `Detector` in [The Detector concept](#detectorConcept) section. `DetectorRecognizer` can be used simply for document detection and obtaining its image. The more interesting use case is data extraction from the custom document type. `DetectorRecognizer` performs document detection and can be configured to extract fields of interest from the scanned document by using **Templating API**. You can find more about Templating API in [this](#detectorTemplating) section.  
+The [`DetectorRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/detector/DetectorRecognizer.html) is recognizer for document detection by using custom `Detector` and data extraction from the custom document type. You can find more about `Detector` in [The Detector concept](#detectorConcept) section. `DetectorRecognizer` performs document detection and can be configured to extract fields of interest from the scanned document by using **Templating API**. You can find more about Templating API in [this](#detectorTemplating) section.  
+
+If you don't need data extraction, but only want to take cropped document images, use [DocumentCaptureRecognizer](#documentCaptureRecognizer) instead.
 
 This recognizer can be used in any context, but it works best with the activity which has UI suited for document scanning.
 ## <a name="blinkcard_recognizers"></a> BlinkCard recognizers
@@ -1994,10 +1996,8 @@ For the list of all available configuration methods see [`MRTDDetector`](https:/
 
 
 # <a name="embedAAR"></a> Embedding _PhotoPay_ inside another SDK
-
-To integrate _PhotoPay_ inside your SDK, contact us at [help.microblink.com](http://help.microblink.com) to get a special licence that is not bound to package name and can be used in multiple different apps.
 	
-You'll also need to ensure that the final app gets all resources required by _PhotoPay_. At the time of writing this documentation, [Android does not have support for combining multiple AAR libraries into single fat AAR](https://stackoverflow.com/questions/20700581/android-studio-how-to-package-single-aar-from-multiple-library-projects/20715155#20715155). The problem is that resource merging is done while building application, not while building AAR, so application must be aware of all its dependencies. **There is no official Android way of "hiding" third party AAR within your AAR.**
+You need to ensure that the final app gets all resources required by _PhotoPay_. At the time of writing this documentation, [Android does not have support for combining multiple AAR libraries into single fat AAR](https://stackoverflow.com/questions/20700581/android-studio-how-to-package-single-aar-from-multiple-library-projects/20715155#20715155). The problem is that resource merging is done while building application, not while building AAR, so application must be aware of all its dependencies. **There is no official Android way of "hiding" third party AAR within your AAR.**
 
 This problem is usually solved with transitive Maven dependencies, i.e. when publishing your AAR to Maven you specify dependencies of your AAR so they are automatically referenced by app using your AAR. Besides this, there are also several other approaches you can try:
 

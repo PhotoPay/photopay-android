@@ -1,5 +1,92 @@
 # Release notes
 
+## 7.10.0
+
+### New features:
+
+- We added support for data extraction from **Hungary** QR code:
+    - New `HungaryQrCodePaymentRecognizer`
+    - Support for the Hungary QR code payment standard
+- We have improved parsing of **Serbia** Barcode:
+    - We improved parsing for the recipient name, sender’s name and address fields
+
+- We translated complete SDK to the following additional languages: **Malay**, **Dutch**, **Hungarian**, **Slovenian**, **Indonesian**, **Arabic(UAE)**, **Romanian**, **Chinese traditional**, **Chinese simplified**, **Thai**, **Hewrew**, **Vietnamese**, **Filipino**.
+
+- We added user feedback when turning ON the flashlight on `BlinkIdOverlayController`:
+    - It warns the user to watch out for flashlight glare.
+    - It can be disabled by using `BlinkIdUISettings.setShowFlashlightWarning(false)` option.
+
+- New features and updates in BlinkId(Combined)Recognizer:
+    - We added `signatureImage` to the result.
+    - We enabled extraction of the **date of birth** from the **NRIC** from Malaysian documents.
+
+- `BlinkIdRecognizer` and `BlinkIdCombinedRecognizer` now support new document types from different countries.
+    - All supported document types are listed in `documentation/BlinkIDRecognizer.md`. Also check `documentation/BlinkIDRecognizerResult.md` for complete list of fields that we are extracting.
+
+- We added the field `middleName` to `BlinkId(Combined)Recognizer`, `IdBarcodeRecognizer` and `Usdl(Combined)Recognizer` results. This field is extracted from AAMVA standard compliant barcodes, whenever available.
+
+### Improvements to existing features:
+
+- We have improved parsing of **MRZ** formats deviating from the ISO/IEC 7501 standard:
+    - Document discriminator was in place of the document number on driver licenses and IDs from:
+        - **New York** 
+        - **Michigan** 
+        - **Canada**
+    - Different check digit calculation for **Mexico** (Consular) ID
+    - Recognition of the unofficial `XCT` country code for Northern **Cyprus** ID
+    - Recognition of different country codes and check digit calculation on **China** Mainland Travel Permit for Hong Kong and Macao Residents
+    
+- We have made some improvements to the **BlinkID(Combined)Recognizer**
+   - We improved MRZ data extraction on **Russia Passport**.
+   - We added anonymization support for more documents.
+    - You can now see `ProcessingStatus` in the results to inspect potential processing errors, such as when barcode detection fails, a mandatory field is missing, etc. 
+    - You can now also see a more detailed `ImageAnalysisResult` showing you when: 
+        - Face image is detected
+        - MRZ is detected
+        - Barcode is detected
+    - We added a `RecognitionModeFilter` settings group. You can toggle flags on this object to control the recognition mode of the recognizer:
+        - `enableMrzId` lets you scan MRZ on all identity documents except visas and passports.
+        - `enableMrzVisa` lets you scan MRZ on visa documents.
+        - `enableMrzPassport` lets you scan MRZ on passports.
+        - `enablePhotoId` lets you scan photo IDs. Use it to enable or disable document and face image extraction on unsupported documents.
+        - `enableFullRecognition` lets you scan all data from our supported documents.
+        - Your license key still controls which of the above recognition modes are allowed.
+    - We have added a `RecognitionMode` result member describing which recognition mode was used to produce the results.
+    -  We are now retrieving sex and nationality fields from the MRZ in cases where those two fields cannot be found in the document’s VIZ. Previously, we only used to do this for dates, name fields and document numbers. 
+    - We are now preserving the original string (raw data) of the dates we couldn’t parse.
+    
+- We have improved the thresholds for card detection feedback messages ("move closer" and "move farther"). This will improve the UX when scanning in landscape mode as the document can now be closer to the camera.
+
+### Deprecated recognizers
+
+We have deprecated the following recognizers:
+
+- `PassportRecognizer`, `VisaRecognizer`, `AustraliaDlFrontRecognizer`, `AustriaDlFrontRecognizer`, `AustriaIdFrontRecognizer`, `BelgiumIdFrontRecognizer`, `BruneiIdFrontRecognizer`, `ColombiaDlFrontRecognizer`, `ColombiaIdFrontRecognizer`, `CyprusIdFrontRecognizer`, `CyprusOldIdFrontRecognizer`, `EgyptIdFrontRecognizer`, `EudlRecognizer`, `HongKongIdFrontRecognizer`, `IndonesiaIdFrontRecognizer`, `IrelandDlFrontRecognizer`, `ItalyDlFrontRecognizer`, `JordanIdFrontRecognizer`, `KuwaitIdFrontRecognizer`, `MalaysiaDlFrontRecognizer`, `MalaysiaIkadFrontRecognizer`, `MalaysiaMyKadFrontRecognizer`, `MalaysiaMyPrFrontRecognizer`, `MalaysiaMyTenteraFrontRecognizer`, `MexicoVoterIdFrontRecognizer`, `MoroccoIdFrontRecognizer`, `NewZealandDlFrontRecognizer`, `PolandIdFrontRecognizer`, `RomaniaIdFrontRecognizer`, `SingaporeDlFrontRecognizer`, `SingaporeIdFrontRecognizer`, `SloveniaIdFrontRecognizer`, `SpainDlFrontRecognizer`, `SwedenDlFrontRecognizer`, `SwitzerlandIdFrontRecognizer`, `UnitedArabEmiratesIdFrontRecognizer`, `UnitedArabEmiratesDlFrontRecognizer ` - **use `BlinkIdCombinedRecognizer` or `BlinkIdRecognizer` instead**
+
+- `DocumentFaceRecognizer`, `MrtdRecognizer` - **use `BlinkIdRecognizer` instead**
+
+- `MrtdCombinedRecognizer`, `AustraliaDlBackRecognizer`, `AustriaCombinedRecognizer`, `AustriaIdBackRecognizer`, `BelgiumCombinedRecognizer`, `BelgiumIdBackRecognizer`, `BruneiIdBackRecognizer`, `ColombiaIdBackRecognizer`, `CyprusIdBackRecognizer`, `CyprusOldIdBackRecognizer`, `JordanCombinedRecognizer`, `JordanIdBackRecognizer`, `KuwaitIdBackRecognizer`, `MalaysiaMyKadBackRecognizer`, `MoroccoIdBackRecognizer`, `NigeriaCombinedRecognizer`, `NigeriaVoterIdBackRecognizer`, `PolandCombinedRecognizer`, `PolandIdBackRecognizer`, `SingaporeCombinedRecognizer`, `SingaporeIdBackRecognizer`, `SloveniaCombinedRecognizer`, `SloveniaIdBackRecognizer`, `SwitzerlandIdBackRecognizer`, `UnitedArabEmiratesIdBackRecognizer` - **use `BlinkIdCombinedRecognizer` instead**
+
+### Major API change
+
+`ScanResultListener` interface now has an additional method called when the scanning cannot continue because of an unrecoverable error. You have to implement `onUnrecoverableError` method.
+If you’re using built-in activities, when `onActivityResult` is called with `RESULT_CANCELED` result code, the exception will be available via `ActivityRunner.EXTRA_SCAN_EXCEPTION` intent extra. If the user canceled the scan, the exception would be `null`.
+
+### Minor API Changes
+
+- We have made some changes to the `BlinkIDRecognizer` and `BlinkIDCombinedRecognizer`:
+    - We renamed `DocumentImageMoireStatus` to `ImageAnalysisDetectionStatus`
+    - We grouped the `conditions` member from the results with the `DriverLicenseDetailedInfo` structure
+- We renamed `RecogitionMode` to `RecognitionDebugMode` in `RecognizerBundle`.
+
+### Fixes
+
+- We improved the data match logic for **Guatemala Consular ID** in BlinkId(Combined)Recognizer.
+- We fixed race conditions in camera management, which in some cases caused that the camera was unable to resume after it has been paused.
+- We fixed an issue in default UI that was causing reticle to reappear while card flip animation was showing.
+- We fixed an issue that was causing some methods marked with `@NonNull` to return `null`.
+- We made camera permission handling update for Android 11.
+
 ## 7.9.0
 
 ### New features:

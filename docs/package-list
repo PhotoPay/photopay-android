@@ -121,6 +121,7 @@ com.microblink.entities.recognizers.photopay.czechia.qr
 com.microblink.entities.recognizers.photopay.czechia.slip
 com.microblink.entities.recognizers.photopay.germany
 com.microblink.entities.recognizers.photopay.germany.slip
+com.microblink.entities.recognizers.photopay.hungary
 com.microblink.entities.recognizers.photopay.hungary.slip
 com.microblink.entities.recognizers.photopay.kosovo
 com.microblink.entities.recognizers.photopay.kosovo.slip
@@ -152,6 +153,7 @@ com.microblink.fragment.overlay.blinkid
 com.microblink.fragment.overlay.blinkid.document
 com.microblink.fragment.overlay.blinkid.documentverification
 com.microblink.fragment.overlay.blinkid.reticleui
+com.microblink.fragment.overlay.blinkid.reticleui.snackbar
 com.microblink.fragment.overlay.components
 com.microblink.fragment.overlay.components.debug
 com.microblink.fragment.overlay.components.feedback
@@ -171,6 +173,8 @@ com.microblink.hardware.orientation
 com.microblink.image
 com.microblink.image.highres
 com.microblink.intent
+com.microblink.licence
+com.microblink.licence.exception
 com.microblink.locale
 com.microblink.metadata
 com.microblink.metadata.detection
