@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -171,64 +171,113 @@ implements <a href="../../../com/microblink/uisettings/options/BeepSoundUIOption
 </td>
 </tr>
 <tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="../../../com/microblink/activity/edit/BlinkCardEditFieldConfiguration.html" title="class in com.microblink.activity.edit">BlinkCardEditFieldConfiguration</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BlinkCardUISettings.html#getEditScreenFieldConfiguration--">getEditScreenFieldConfiguration</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code><a href="../../../com/microblink/activity/edit/BlinkCardEditStrings.html" title="class in com.microblink.activity.edit">BlinkCardEditStrings</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BlinkCardUISettings.html#getEditScreenStrings-android.content.Context-">getEditScreenStrings</a></span>(android.content.Context&nbsp;context)</code>&nbsp;</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BlinkCardUISettings.html#getEditScreenTheme--">getEditScreenTheme</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../../../com/microblink/entities/recognizers/RecognizerBundle.html" title="class in com.microblink.entities.recognizers">RecognizerBundle</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BlinkCardUISettings.html#getRecognizerBundle--">getRecognizerBundle</a></span>()</code>
 <div class="block">Returns the <a href="../../../com/microblink/entities/recognizers/RecognizerBundle.html" title="class in com.microblink.entities.recognizers"><code>RecognizerBundle</code></a> containing recognizers that will be used for processing.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>java.lang.Class</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BlinkCardUISettings.html#getTargetActivity--">getTargetActivity</a></span>()</code>
 <div class="block">Returns target activity.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BlinkCardUISettings.html#isEditScreenEnabled--">isEditScreenEnabled</a></span>()</code>
+<div class="block">Returns whether edit scan results screen will be shown after scanning.</div>
+</td>
+</tr>
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BlinkCardUISettings.html#saveToIntent-android.content.Intent-">saveToIntent</a></span>(android.content.Intent&nbsp;intent)</code>
 <div class="block">Saves this scan activity settings to <code>Intent</code> so it can be passed to the
  corresponding scan activity.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BlinkCardUISettings.html#setBeepSoundResourceID-int-">setBeepSoundResourceID</a></span>(int&nbsp;beepSoundResourceID)</code>
 <div class="block">Defines the resource ID of the sound to be played when recognition is successful.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BlinkCardUISettings.html#setCurrentImageListener-com.microblink.image.CurrentImageListener-">setCurrentImageListener</a></span>(<a href="../../../com/microblink/image/CurrentImageListener.html" title="interface in com.microblink.image">CurrentImageListener</a>&nbsp;currentImageListener)</code>
 <div class="block">Sets implementation of <a href="../../../com/microblink/image/CurrentImageListener.html" title="interface in com.microblink.image"><code>CurrentImageListener</code></a> interface that will obtain images that
  are currently being processed.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BlinkCardUISettings.html#setDebugImageListener-com.microblink.image.DebugImageListener-">setDebugImageListener</a></span>(<a href="../../../com/microblink/image/DebugImageListener.html" title="interface in com.microblink.image">DebugImageListener</a>&nbsp;debugImageListener)</code>
 <div class="block">Sets implementation of <a href="../../../com/microblink/image/DebugImageListener.html" title="interface in com.microblink.image"><code>DebugImageListener</code></a> interface that will obtain images that are
  being processed.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i12" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BlinkCardUISettings.html#setEditScreenEnabled-boolean-">setEditScreenEnabled</a></span>(boolean&nbsp;enabled)</code>
+<div class="block">If set to true, additional screen that allows user to edit scan results will be show after
+ scanning.</div>
+</td>
+</tr>
+<tr id="i13" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BlinkCardUISettings.html#setEditScreenFieldConfiguration-com.microblink.activity.edit.BlinkCardEditFieldConfiguration-">setEditScreenFieldConfiguration</a></span>(<a href="../../../com/microblink/activity/edit/BlinkCardEditFieldConfiguration.html" title="class in com.microblink.activity.edit">BlinkCardEditFieldConfiguration</a>&nbsp;fieldConfiguration)</code>
+<div class="block">Configures which fields are available on edit scan results screen.</div>
+</td>
+</tr>
+<tr id="i14" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BlinkCardUISettings.html#setEditScreenStrings-com.microblink.activity.edit.BlinkCardEditStrings-">setEditScreenStrings</a></span>(<a href="../../../com/microblink/activity/edit/BlinkCardEditStrings.html" title="class in com.microblink.activity.edit">BlinkCardEditStrings</a>&nbsp;strings)</code>
+<div class="block">Sets strings that will be used in edit scan results screen.</div>
+</td>
+</tr>
+<tr id="i15" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BlinkCardUISettings.html#setEditScreenTheme-int-">setEditScreenTheme</a></span>(int&nbsp;editScreenResourceID)</code>
+<div class="block">Provide your own theme to style edit screen.</div>
+</td>
+</tr>
+<tr id="i16" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BlinkCardUISettings.html#setOcrResultDisplayMode-com.microblink.uisettings.options.OcrResultDisplayMode-">setOcrResultDisplayMode</a></span>(<a href="../../../com/microblink/uisettings/options/OcrResultDisplayMode.html" title="class in com.microblink.uisettings.options">OcrResultDisplayMode</a>&nbsp;ocrResultDisplayMode)</code>
 <div class="block">Defines mode in which OCR result will be drawn on camera preview.</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BlinkCardUISettings.html#setOverlayViewStyle-int-">setOverlayViewStyle</a></span>(int&nbsp;styleResourceID)</code>
 <div class="block">Provide your own style to replace default icons and colors.</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i18" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BlinkCardUISettings.html#setShowGlareWarning-boolean-">setShowGlareWarning</a></span>(boolean&nbsp;showFlashlightWarning)</code>
+<div class="block">Defines whether glare warning will be displayed in UI, when flashlight is turned ON.</div>
+</td>
+</tr>
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BlinkCardUISettings.html#setSplashScreenLayoutResourceID-int-">setSplashScreenLayoutResourceID</a></span>(int&nbsp;splashScreenLayoutResourceID)</code>
 <div class="block">Defines the ID of the layout resource that will be used as camera splash screen displayed
  while camera is being initialized.</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i20" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/microblink/uisettings/BlinkCardUISettings.html#setStrings-com.microblink.fragment.overlay.blinkcard.scanlineui.ScanLineOverlayStrings-">setStrings</a></span>(<a href="../../../com/microblink/fragment/overlay/blinkcard/scanlineui/ScanLineOverlayStrings.html" title="class in com.microblink.fragment.overlay.blinkcard.scanlineui">ScanLineOverlayStrings</a>&nbsp;strings)</code>
 <div class="block">Sets strings that will be used in the UI.</div>
@@ -240,7 +289,7 @@ implements <a href="../../../com/microblink/uisettings/options/BeepSoundUIOption
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;com.microblink.uisettings.<a href="../../../com/microblink/uisettings/UISettings.html" title="class in com.microblink.uisettings">UISettings</a></h3>
-<code><a href="../../../com/microblink/uisettings/UISettings.html#getActivityTheme--">getActivityTheme</a>, <a href="../../../com/microblink/uisettings/UISettings.html#getUsingFlagSecure--">getUsingFlagSecure</a>, <a href="../../../com/microblink/uisettings/UISettings.html#setActivityTheme-int-">setActivityTheme</a>, <a href="../../../com/microblink/uisettings/UISettings.html#setCameraSettings-com.microblink.uisettings.CameraSettings-">setCameraSettings</a>, <a href="../../../com/microblink/uisettings/UISettings.html#setUsingFlagSecure-boolean-">setUsingFlagSecure</a></code></li>
+<code><a href="../../../com/microblink/uisettings/UISettings.html#getActivityTheme--">getActivityTheme</a>, <a href="../../../com/microblink/uisettings/UISettings.html#getFilterTouchesWhenObscured--">getFilterTouchesWhenObscured</a>, <a href="../../../com/microblink/uisettings/UISettings.html#getUsingFlagSecure--">getUsingFlagSecure</a>, <a href="../../../com/microblink/uisettings/UISettings.html#setActivityTheme-int-">setActivityTheme</a>, <a href="../../../com/microblink/uisettings/UISettings.html#setCameraSettings-com.microblink.uisettings.CameraSettings-">setCameraSettings</a>, <a href="../../../com/microblink/uisettings/UISettings.html#setFilterTouchesWhenObscured-boolean-">setFilterTouchesWhenObscured</a>, <a href="../../../com/microblink/uisettings/UISettings.html#setUsingFlagSecure-boolean-">setUsingFlagSecure</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
@@ -453,6 +502,120 @@ public&nbsp;<a href="../../../com/microblink/entities/recognizers/RecognizerBund
 <dd><code><a href="../../../com/microblink/uisettings/options/OcrResultDisplayUIOptions.html#setOcrResultDisplayMode-com.microblink.uisettings.options.OcrResultDisplayMode-">setOcrResultDisplayMode</a></code>&nbsp;in interface&nbsp;<code><a href="../../../com/microblink/uisettings/options/OcrResultDisplayUIOptions.html" title="interface in com.microblink.uisettings.options">OcrResultDisplayUIOptions</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>ocrResultDisplayMode</code> - mode in which OCR result will be drawn on camera preview.</dd>
+</dl>
+</li>
+</ul>
+<a name="setEditScreenEnabled-boolean-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setEditScreenEnabled</h4>
+<pre>public&nbsp;void&nbsp;setEditScreenEnabled(boolean&nbsp;enabled)</pre>
+<div class="block">If set to true, additional screen that allows user to edit scan results will be show after
+ scanning.</div>
+</li>
+</ul>
+<a name="isEditScreenEnabled--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isEditScreenEnabled</h4>
+<pre>public&nbsp;boolean&nbsp;isEditScreenEnabled()</pre>
+<div class="block">Returns whether edit scan results screen will be shown after scanning.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>true if edit screen is enabled</dd>
+</dl>
+</li>
+</ul>
+<a name="setEditScreenTheme-int-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setEditScreenTheme</h4>
+<pre>public&nbsp;void&nbsp;setEditScreenTheme(@StyleRes
+                               int&nbsp;editScreenResourceID)</pre>
+<div class="block">Provide your own theme to style edit screen.
+ Either extend @style/MB_theme_blink_card_edit_screen or extend any AppCompat theme.
+ If you don't extend our theme,
+ make sure to provide all attributes from R.styleable.BlinkCardEditScreen.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>editScreenResourceID</code> - your theme</dd>
+</dl>
+</li>
+</ul>
+<a name="getEditScreenTheme--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getEditScreenTheme</h4>
+<pre>@StyleRes
+public&nbsp;int&nbsp;getEditScreenTheme()</pre>
+</li>
+</ul>
+<a name="setEditScreenFieldConfiguration-com.microblink.activity.edit.BlinkCardEditFieldConfiguration-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setEditScreenFieldConfiguration</h4>
+<pre>public&nbsp;void&nbsp;setEditScreenFieldConfiguration(<a href="../../../com/microblink/activity/edit/BlinkCardEditFieldConfiguration.html" title="class in com.microblink.activity.edit">BlinkCardEditFieldConfiguration</a>&nbsp;fieldConfiguration)</pre>
+<div class="block">Configures which fields are available on edit scan results screen.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>fieldConfiguration</code> - your configuration</dd>
+</dl>
+</li>
+</ul>
+<a name="getEditScreenFieldConfiguration--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getEditScreenFieldConfiguration</h4>
+<pre>public&nbsp;<a href="../../../com/microblink/activity/edit/BlinkCardEditFieldConfiguration.html" title="class in com.microblink.activity.edit">BlinkCardEditFieldConfiguration</a>&nbsp;getEditScreenFieldConfiguration()</pre>
+</li>
+</ul>
+<a name="setEditScreenStrings-com.microblink.activity.edit.BlinkCardEditStrings-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setEditScreenStrings</h4>
+<pre>public&nbsp;void&nbsp;setEditScreenStrings(<a href="../../../com/microblink/activity/edit/BlinkCardEditStrings.html" title="class in com.microblink.activity.edit">BlinkCardEditStrings</a>&nbsp;strings)</pre>
+<div class="block">Sets strings that will be used in edit scan results screen.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>strings</code> - your custom strings</dd>
+</dl>
+</li>
+</ul>
+<a name="getEditScreenStrings-android.content.Context-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getEditScreenStrings</h4>
+<pre>public&nbsp;<a href="../../../com/microblink/activity/edit/BlinkCardEditStrings.html" title="class in com.microblink.activity.edit">BlinkCardEditStrings</a>&nbsp;getEditScreenStrings(android.content.Context&nbsp;context)</pre>
+</li>
+</ul>
+<a name="setShowGlareWarning-boolean-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setShowGlareWarning</h4>
+<pre>public&nbsp;void&nbsp;setShowGlareWarning(boolean&nbsp;showFlashlightWarning)</pre>
+<div class="block">Defines whether glare warning will be displayed in UI, when flashlight is turned ON.
+ Default is <code>true</code>.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>showFlashlightWarning</code> - whether glare warning will be displayed in UI.</dd>
 </dl>
 </li>
 </ul>

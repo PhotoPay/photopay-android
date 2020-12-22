@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -251,6 +251,18 @@ extends <a href="../../../../../../../com/microblink/entities/parsers/Parser.htm
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/parsers/photopay/croatia/reference/CroatiaReferenceParser.html#serializeNativeSettings--">serializeNativeSettings</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i6" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/parsers/photopay/croatia/reference/CroatiaReferenceParser.html#setAllowUnverifiedReferences-boolean-">setAllowUnverifiedReferences</a></span>(boolean&nbsp;allowUnverifiedReferences)</code>
+<div class="block">Whether returning of unverified results is allowed.</div>
+</td>
+</tr>
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/parsers/photopay/croatia/reference/CroatiaReferenceParser.html#shouldAllowUnverifiedReferences--">shouldAllowUnverifiedReferences</a></span>()</code>
+<div class="block">Whether returning of unverified results is allowed.</div>
+</td>
+</tr>
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>protected void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../com/microblink/entities/parsers/photopay/croatia/reference/CroatiaReferenceParser.html#terminateNative-long-">terminateNative</a></span>(long&nbsp;nativeContext)</code>&nbsp;</td>
 </tr>
@@ -324,6 +336,30 @@ extends <a href="../../../../../../../com/microblink/entities/parsers/Parser.htm
 <!--   -->
 </a>
 <h3>Method Detail</h3>
+<a name="setAllowUnverifiedReferences-boolean-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setAllowUnverifiedReferences</h4>
+<pre>public&nbsp;void&nbsp;setAllowUnverifiedReferences(boolean&nbsp;allowUnverifiedReferences)</pre>
+<div class="block">Whether returning of unverified results is allowed.
+ Unverified result is result that is parsed, but check digits are incorrect.
+ By default, this is set to 'false'.</div>
+</li>
+</ul>
+<a name="shouldAllowUnverifiedReferences--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>shouldAllowUnverifiedReferences</h4>
+<pre>public&nbsp;boolean&nbsp;shouldAllowUnverifiedReferences()</pre>
+<div class="block">Whether returning of unverified results is allowed.
+ Unverified result is result that is parsed, but check digits are incorrect.
+ By default, this is set to 'false'.</div>
+</li>
+</ul>
 <a name="terminateNative-long-">
 <!--   -->
 </a>

@@ -13,7 +13,7 @@
         * [Using Direct API for recognition of Android Bitmaps and custom camera frames](#directAPI_images)
         * [Using Direct API for `String` recognition (parsing)](#directAPI_strings)
         * [Understanding DirectAPI's state machine](#directAPIStateMachine)
-        * [Using DirectAPI while RecognizerRunnerView is active](#directAPIWithRecognizer)
+        * [Using Direct API while RecognizerRunnerView is active](#directAPIWithRecognizer)
         * [Using Direct API with combined recognizers ](#directAPI_combined_recognizers)
 * [Available activities and overlays](#builtInUIComponents)
     * [New: `BlinkIdUISettings` and `BlinkIdOverlayController`](#blinkidUiComponent)
@@ -99,8 +99,9 @@
     * [BlinkInput recognizer](#blinkInputRecognizer)
     * [Detector recognizer](#detectorRecognizer)
     * [BlinkCard recognizers](#blinkcard_recognizers)
-        * [BlinkCard recognizer](#blink_card_combined)
-        * [BlinkCardElite recognizer](#elite_blink_card_combined)
+        * [BlinkCard recognizer](#blink_card_recognizer)
+        * [LegacyBlinkCardRecognizer (deprecated)](#legacy_blink_card_recognizer)
+        * [LegacyBlinkCardEliteRecognizer (deprecated)](#legacy_blink_card_elite_recognizer)
 * [`Field by field` scanning feature](#fieldByFieldFeature)
     * [Performing your first `field by field` scan](#quickScan_field_by_field)
 * [`Processor` and `Parser`](#processorsAndParsers)
@@ -357,7 +358,7 @@ You can integrate _PhotoPay_ into your app in four different ways, depending on 
 1. Built-in activities (`UISettings`) - SDK handles everything and you just need to start our built-in activity and handle result, customisation options are limited
 2. Built-in fragment (`RecognizerRunnerFragment`) - reuse scanning UX from our built-in activities in your own activity
 3. Custom UX (`RecognizerRunnerView`) - SDK handles camera management while you have to implement completely custom scanning UX
-4. DirectApi (`RecognizerRunner`) - SKD only handles recognition while you have to provide it with the images, either from camera or from a file
+4. Direct Api (`RecognizerRunner`) - SKD only handles recognition while you have to provide it with the images, either from camera or from a file
 
 ## <a name="runBuiltinActivity"></a> Built-in activities (`UISettings`)
 
@@ -458,6 +459,8 @@ public class MyScanActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
         // create CroatiaSlipRecognizer
         mRecognizer = new CroatiaSlipRecognizer();
 
@@ -477,7 +480,6 @@ public class MyScanActivity extends AppCompatActivity {
         // camera events listener will be notified about camera lifecycle and errors
         mRecognizerRunnerView.setCameraEventsListener(mCameraEventsListener);
 
-        mRecognizerRunnerView.create();
         setContentView(mRecognizerRunnerView);
     }
 
@@ -710,7 +712,7 @@ The only difference is that one of the [RecognizerRunner singleton](https://phot
 
 ### <a name="directAPIStateMachine"></a> Understanding DirectAPI's state machine
 
-DirectAPI's `RecognizerRunner` singleton is a state machine that can be in one of 3 states: `OFFLINE`, `READY` and `WORKING`. 
+Direct API's `RecognizerRunner` singleton is a state machine that can be in one of 3 states: `OFFLINE`, `READY` and `WORKING`.
 
 - When you obtain the reference to `RecognizerRunner` singleton, it will be in `OFFLINE` state. 
 - You can initialize `RecognizerRunner` by calling [initialize](https://photopay.github.io/photopay-android/com/microblink/directApi/RecognizerRunner.html#initialize-android.content.Context-com.microblink.entities.recognizers.RecognizerBundle-com.microblink.directApi.DirectApiErrorListener-) method. If you call `initialize` method while `RecognizerRunner` is not in `OFFLINE` state, you will get `IllegalStateException`.
@@ -723,7 +725,7 @@ DirectAPI's `RecognizerRunner` singleton is a state machine that can be in one o
 - `terminate` method can be called from any `RecognizerRunner` singleton's state
 - You can observe `RecognizerRunner` singleton's state with method [`getCurrentState`](https://photopay.github.io/photopay-android/com/microblink/directApi/RecognizerRunner.html#getCurrentState--)
 
-### <a name="directAPIWithRecognizer"></a> Using DirectAPI while RecognizerRunnerView is active
+### <a name="directAPIWithRecognizer"></a> Using Direct API while RecognizerRunnerView is active
 Both [RecognizerRunnerView](#recognizerRunnerView) and `RecognizerRunner` use the same internal singleton that manages native code. This singleton handles initialization and termination of native library and propagating recognizers to native library. It is possible to use `RecognizerRunnerView` and `RecognizerRunner` together, as internal singleton will make sure correct synchronization and correct recognition settings are used. If you run into problems while using `RecognizerRunner` in combination with `RecognizerRunnerView`, [let us know](http://help.microblink.com)!
 
 
@@ -753,6 +755,55 @@ The new UI allows the user to scan the document at an any angle, in any orientat
 
 To launch a built-in activity that uses `BlinkIdOverlayController` use [`BlinkIdUISettings`](https://photopay.github.io/photopay-android/com/microblink/uisettings/BlinkIdUISettings.html).
 
+### Scan overlay theming
+<p align="center" >
+  <img src="https://raw.githubusercontent.com/wiki/blinkid/blinkid-android/images/reticle_overlay_customisation_1.png" alt="BlinkID SDK">
+</p>
+<p align="center" >
+  <img src="https://raw.githubusercontent.com/wiki/blinkid/blinkid-android/images/reticle_overlay_customisation_2.png" alt="BlinkID SDK">
+</p>
+
+To customise overlay, provide your custom style resource via [`BlinkIdUISettings.setOverlayViewStyle()`](https://photopay.github.io/photopay-android/com/microblink/uisettings/BlinkIdUISettings.html#setOverlayViewStyle-int-) method or via [`ReticleOverlayView `](https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/blinkid/reticleui/ReticleOverlayView.html) constructor. You can customise elements labeled on screenshots above by providing the following attributes in your style:
+
+**exit**
+
+* `mb_exitScanDrawable` - icon drawable
+
+**torch**
+
+* `mb_torchOnDrawable` - icon drawable that is shown when the torch is enabled
+* `mb_torchOffDrawable` - icon drawable that is show when the torch is disabled
+
+**instructions**
+
+* `mb_instructionsTextAppearance` - style that will be used as `android:textAppearance`
+* `mb_instructionsBackgroundDrawable` - drawable used for background
+
+**flashlight warning**
+
+* `mb_flashlightWarningTextAppearance` - style that will be used as `android:textAppearance`
+* `mb_flashlightWarningBackgroundDrawable` - drawable used for background
+* note that you can disable this element by using [`BlinkIdUISettings.setShowFlashlightWarning(false)`](https://photopay.github.io/photopay-android/com/microblink/uisettings/BlinkIdUISettings.html#setShowFlashlightWarning-boolean-)
+
+**card icon**
+
+* `mb_cardFrontDrawable` - icon drawable shown during card flip animation, representing front side of the card
+* `mb_cardBackDrawable` - icon drawable shown during card flip animation, representing back side of the card
+
+**reticle**
+
+* `mb_reticleDefaultDrawable` - drawable shown when reticle is in neutral state
+* `mb_reticleSuccessDrawable` - drawable shown when reticle is in success state (scanning was successful)
+* `mb_reticleErrorDrawable` - drawable shown when reticle is in error state
+
+**pulse**
+
+* `mb_pulseColor` - color of the pulse animation that is active before a card is detected
+
+**progress**
+
+* `mb_progressDrawable` - drawable used as indeterminate drawable for progress bar, shown inside reticle while recognition is in progress
+
 ## <a name="documentUiComponent"></a> `DocumentUISettings`
 
 [`DocumentUISettings `](https://photopay.github.io/photopay-android/com/microblink/uisettings/DocumentUISettings.html) launches activity that uses `BlinkIdOverlayController` with alternative UI. It is best suited for scanning single document side of various card documents and it shouldn't be used with combined recognizers as it provides no user instructions on when to switch to the back side.
@@ -765,6 +816,94 @@ To launch a built-in activity that uses `BlinkIdOverlayController` use [`BlinkId
 [`BlinkCardOverlayController`](https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/blinkcard/BlinkCardOverlayController.html) is an overlay best suited for scanning payment cards. It can be used for other card documents like ID cards, passports, driver's licenses, etc. This overlay also supports **combined recognizers**, because it manages scanning of multiple document sides in the single camera opening and guides the user through the scanning process.
 
 To launch a built-in activity that uses `BlinkCardOverlayController` use [`BlinkCardUISettings`](https://photopay.github.io/photopay-android/com/microblink/uisettings/BlinkCardUISettings.html).
+
+### Scan overlay theming
+<p align="center" >
+  <img src="https://raw.githubusercontent.com/wiki/blinkcard/blinkcard-android/images/scan_screen_customisation.png" alt="BlinkID SDK">
+</p>
+
+To customise overlay, provide your custom style resource via [`BlinkCardUISettings.setOverlayViewStyle()`](https://photopay.github.io/photopay-android/com/microblink/uisettings/BlinkCardUISettings.html#setOverlayViewStyle-int-) method or via [`ScanLineOverlayView `](https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/blinkcard/scanlineui/ScanLineOverlayView.html) constructor. You can customise elements labeled on the screenshot above by providing the following attributes in your style:
+
+**exit**
+
+* `mb_exitScanDrawable` - icon drawable
+
+**torch**
+
+* `mb_torchOnDrawable` - icon drawable that is shown when the torch is enabled
+* `mb_torchOffDrawable` - icon drawable that is show when the torch is disabled
+
+**instructions text**
+
+* `mb_instructionsTextAppearance` - style that will be used as `android:textAppearance`
+
+**glare warning**
+
+* `mb_glareWarningTextAppearance` - style that will be used as TextAppearance
+* `mb_glareWarningBackgroundDrawable` - drawable used for background
+* note that you can disable this element by using [`BlinkCardUISettings.setShowGlareWarning(false)`](https://photopay.github.io/photopay-android/com/microblink/uisettings/BlinkCardUISettings.html#setShowGlareWarning-boolean-)
+
+### Edit results screen
+SDK also provides an activity that allows users to edit scanned results and input data that wasn't scanned. Note that this activity works only with `BlinkCardRecognizer`.
+
+If you are using `BlinkCardUISettings`, enable edit screen by calling `BlinkCardUISettings.setEditScreenEnabled(true)`, otherwise, launch it by building an intent with `BlinkCardEditActivity.buildIntent()` and save scanned results to the intent by using `RecognizerBundle.saveToIntent(intent)`.  
+
+If edit screen is enabled, in your `onActivityResult(int requestCode, int resultCode, Intent data)` method, intent will contain the original scanned results (`RecognizerBundle.loadFromIntent(data)`) and also user-edited fields (`BlinkCardEditResultBundle.createFromIntent(data)`).
+
+Edit results activity can be customised in several ways:
+
+* to configure which fields should be displayed use `BlinkCardUISettings.setEditScreenFieldConfiguration()`
+* set your custom theme with `BlinkCardUISettings.setEditScreenTheme()` method
+* change default strings by using `BlinkCardUISettings.setEditScreenStrings()`
+
+### Edit screen theming
+
+<p align="center" >
+  <img src="https://raw.githubusercontent.com/wiki/blinkcard/blinkcard-android/images/edit_screen_customisation.png" alt="BlinkID SDK">
+</p>
+
+To customise edit results activity, provide your custom theme resource via [`BlinkCardUISettings.setEditScreenTheme()`](https://photopay.github.io/photopay-android/com/microblink/uisettings/BlinkCardUISettings.html#setEditScreenTheme-int-). Your custom theme can either:
+
+1. extend our default theme `MB_theme_blink_card_edit_screen` and override just specific attributes
+2. extend any of the AppCompat themes and define all attributes listed below
+
+Our default theme extends `Theme.AppCompat.Light` so if you want to use a dark theme you'll need to go with option number 2.
+
+**toolbar**
+
+* `mb_blinkcardEditToolbarTheme` - style that will be used as toolbar theme
+* `mb_blinkcardEditToolbarBackground` - toolbar background color
+
+**label**
+
+* `mb_blinkcardEditLabelTextAppearance` - style that will be used as `android:textAppearance`
+* `mb_blinkcardEditLabelTextColor` - text color used when the field is not in focus or in error state
+* `mb_blinkcardEditErrorColor` - text color used in case of an error
+* `colorAccent` - text color used when the field is focused
+
+**value**
+
+* `mb_blinkcardEditValueTextAppearance` - style that will be used as `android:textAppearance`
+* `mb_blinkcardEditValueTextColor` - color for inputed value text
+* `mb_blinkcardEditValueHintColor` - color for hint text
+
+**divider**
+
+* `mb_glareWarningTextAppearance` - style that will be used as `android:textAppearance`
+* `mb_blinkcardEditDividerColor` - background color used when the field is not in focus or in error state
+* `mb_blinkcardEditErrorColor` - background color used when the field is in error state
+* `colorAccent` - background color used when the field is focused
+
+**error**
+
+* `mb_blinkcardEditErrorTextAppearance` - style that will be used as `android:textAppearance`
+* `mb_blinkcardEditErrorColor ` - text color
+
+**confirm button**
+
+* `mb_blinkcardEditConfirmButtonStyle` - button style
+
+
 ## <a name="documentCaptureUiComponent"></a> `DocumentCaptureUISettings` and `DocumentCaptureOverlayController`
 
 [`DocumentCaptureUISettings`](https://photopay.github.io/photopay-android/com/microblink/uisettings/DocumentCaptureUISettings.html) launches activity that uses [`DocumentCaptureOverlayController`]((https://photopay.github.io/photopay-android/com/microblink/fragment/overlay/documentcapture/DocumentCaptureOverlayController.html)), which is designed for taking **high resolution** document images and guides the user through the image capturing process. It can be used only with [DocumentCaptureRecognizer](#documentCaptureRecognizer).
@@ -836,11 +975,11 @@ List of all available `Recognizer` objects, with a brief description of each `Re
 
 The [Recognizer](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/Recognizer.html) is the basic unit of processing within the _PhotoPay_ SDK. Its main purpose is to process the image and extract meaningful information from it. As you will see [later](#recognizerList), the _PhotoPay_ SDK has lots of different `Recognizer` objects that have various purposes.
 
-Each `Recognizer` has a `Result` object, which contains the data that was extracted from the image. The `Result` object is a member of corresponding `Recognizer` object its lifetime is bound to the lifetime of its parent `Recognizer` object. If you need your `Result` object to outlive its parent `Recognizer` object, you must make a copy of it by calling its method [`clone()`](https://photopay.github.io/photopay-android/com/microblink/entities/Entity.Result.html#clone--).
+Each `Recognizer` has a `Result` object, which contains the data that was extracted from the image. The `Result` object is a member of corresponding `Recognizer` object and its lifetime is bound to the lifetime of its parent `Recognizer` object. If you need your `Result` object to outlive its parent `Recognizer` object, you must make a copy of it by calling its method [`clone()`](https://photopay.github.io/photopay-android/com/microblink/entities/Entity.Result.html#clone--).
 
 Every `Recognizer` is a stateful object, that can be in two states: _idle state_ and _working state_. While in _idle state_, you can tweak `Recognizer` object's properties via its getters and setters. After you bundle it into a `RecognizerBundle` and use either [RecognizerRunner](https://photopay.github.io/photopay-android/com/microblink/directApi/RecognizerRunner.html) or [RecognizerRunnerView](https://photopay.github.io/photopay-android/com/microblink/view/recognition/RecognizerRunnerView.html) to _run_ the processing with all `Recognizer` objects bundled within `RecognizerBundle`, it will change to _working state_ where the `Recognizer` object is being used for processing. While being in _working state_, you cannot tweak `Recognizer` object's properties. If you need to, you have to create a copy of the `Recognizer` object by calling its [`clone()`](https://photopay.github.io/photopay-android/com/microblink/entities/Entity.html#clone--), then tweak that copy, bundle it into a new `RecognizerBundle` and use [`reconfigureRecognizers`](https://photopay.github.io/photopay-android/com/microblink/view/recognition/RecognizerRunnerView.html#reconfigureRecognizers-com.microblink.entities.recognizers.RecognizerBundle-) to ensure new bundle gets used on processing thread.
 
-While `Recognizer` object works, it changes its internal state and its result. The `Recognizer` object's `Result` always starts in [Empty state](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/Recognizer.Result.State.html#Empty). When corresponding `Recognizer` object performs the recognition of given image, its `Result` can either stay in `Empty` state (in case `Recognizer` failed to perform recognition), move to [Uncertain state](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/Recognizer.Result.State.html#Uncertain) (in case `Recognizer` performed the recognition, but not all mandatory information was extracted) or move to [Valid state](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/Recognizer.Result.State.html#Valid) (in case `Recognizer` performed recognition and all mandatory information was successfully extracted from the image).
+While `Recognizer` object works, it changes its internal state and its result. The `Recognizer` object's `Result` always starts in [Empty state](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/Recognizer.Result.State.html#Empty). When corresponding `Recognizer` object performs the recognition of given image, its `Result` can either stay in `Empty` state (in case `Recognizer` failed to perform recognition), move to [Uncertain state](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/Recognizer.Result.State.html#Uncertain) (in case `Recognizer` performed the recognition, but not all mandatory information was extracted), move to [StageValid state](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/Recognizer.Result.State.html#StageValid) (in case `Recognizer` successfully scanned one part/side of the document and there are more fields to extract) or move to [Valid state](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/Recognizer.Result.State.html#Valid) (in case `Recognizer` performed recognition and all mandatory information was successfully extracted from the image).
 
 As soon as one `Recognizer` object's `Result` within `RecognizerBundle` given to `RecognizerRunner` or `RecognizerRunnerView` changes to `Valid` state, the [`onScanningDone`](https://photopay.github.io/photopay-android/com/microblink/view/recognition/ScanResultListener.html#onScanningDone-RecognitionSuccessType-) callback will be invoked on same thread that performs the background processing and you will have the opportunity to inspect each of your `Recognizer` objects' `Results` to see which one has moved to `Valid` state.
 
@@ -1491,13 +1630,20 @@ If you don't need data extraction, but only want to take cropped document images
 This recognizer can be used in any context, but it works best with the activity which has UI suited for document scanning.
 ## <a name="blinkcard_recognizers"></a> BlinkCard recognizers
 
-BlinkCard recognizers work best with the [`BlinkCardActivity`](#blinkcardUiComponent), which has UI best suited for payment / debit card scanning. 
+BlinkCard recognizers work best with the [`BlinkCardActivity`](#blinkcardUiComponent), which has UI best suited for credit card scanning. 
 
-### <a name="blink_card_combined"></a> BlinkCard recognizer
-The [`BlinkCardRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkcard/BlinkCardRecognizer.html) scans back side of Payment / Debit card after scanning the front side and combines data from both sides. 
+### <a name="blink_card_recognizer"></a> BlinkCard recognizer
+The [`BlinkCardRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkcard/BlinkCardRecognizer.html) extracts the **card number** (PAN), **expiry date**, **owner** information (name or company title), **IBAN**, and **CVV**, from a large range of different card layouts. 
 
-### <a name="elite_blink_card_combined"></a> BlinkCardElite recognizer
-The [`BlinkCardEliteRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkcard/BlinkCardEliteRecognizer.html) scans back side of elite Payment / Debit card after scanning the front side and combines data from both sides.
+`BlinkCardRecognizer` is a Combined recognizer, which means it's designed for scanning **both sides of a card**. However, if all required data is found on the first side, we do not wait for second side scanning. We can return the result early. A set of required fields is defined through the recognizer's settings.
+
+"Front side" and "back side" are terms more suited to ID scanning. We start the scanning process with the **side containing the card number**. This makes the UX easier for users with cards where all data is on the back side.
+
+### <a name="legacy_blink_card_recognizer"></a> LegacyBlinkCardRecognizer (deprecated)
+The [`LegacyBlinkCardRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkcard/legacy/LegacyBlinkCardRecognizer.html) scans back side of Payment / Debit card after scanning the front side and combines data from both sides.
+
+### <a name="legacy_blink_card_elite_recognizer"></a> LegacyBlinkCardEliteRecognizer (deprecated)
+The [`LegacyBlinkCardEliteRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkcard/legacy/LegacyBlinkCardEliteRecognizer.html) scans back side of elite Payment / Debit card after scanning the front side and combines data from both sides.
 # <a name="fieldByFieldFeature"></a> `Field by field` scanning feature
 
 [`Field by field`](#fieldByFieldFeature) scanning feature is designed for scanning small text fields which are called scan elements. Elements are scanned in the predefined order. For each scan element, specific [`Parser`](#parserConcept) that will extract structured data of interest from the OCR result is defined. Focusing on the small text fields which are scanned one by one enables implementing support for the **free-form documents** because field detection is not required. The user is responsible for positioning the field of interest inside the scanning window and the scanning process guides him. When implementing support for the custom document, only fields of interest has to be defined.
@@ -1650,11 +1796,11 @@ Before performing the OCR, the best possible OCR engine options are calculated b
 
 Because of that, if multiple parsers and multiple parser group processors are used during the scan, it is very important to group parsers carefully.
 
-Let's see this on an example: assume that we have two parsers at our disposal: `AmountParser` and `EMailParser`. `AmountParser` knows how to extract amount's from OCR result and requires from OCR only to recognize digits, periods and commas and ignore letters. On the other hand, `EMailParser` knows how to extract e-mails from OCR result and requires from OCR to recognize letters, digits, '@' characters and periods, but not commas. 
+Let's see this on an example: assume that we have two parsers at our disposal: `AmountParser` and `EmailParser`. `AmountParser` knows how to extract amount's from OCR result and requires from OCR only to recognize digits, periods and commas and ignore letters. On the other hand, `EMailParser` knows how to extract e-mails from OCR result and requires from OCR to recognize letters, digits, '@' characters and periods, but not commas.
 
-If we put both `AmountParser` and `EMailParser` into the same `ParserGroupProcessor`, the merged OCR engine settings will require recognition of all letters, all digits, '@' character, both period and comma. Such OCR result will contain all characters for `EMailParser` to properly parse e-mail, but might confuse `AmountParser` if OCR misclassifies some characters into digits.
+If we put both `AmountParser` and `EmailParser` into the same `ParserGroupProcessor`, the merged OCR engine settings will require recognition of all letters, all digits, '@' character, both period and comma. Such OCR result will contain all characters for `EMailParser` to properly parse e-mail, but might confuse `AmountParser` if OCR misclassifies some characters into digits.
 
-If we put `AmountParser` in one `ParserGroupProcessor` and `EMailParser` in another `ParserGroupProcessor`, OCR will be performed for each parser group independently, thus preventing the `AmountParser` confusion, but two OCR passes of the image will be performed, which can have a performance impact.
+If we put `AmountParser` in one `ParserGroupProcessor` and `EmailParser` in another `ParserGroupProcessor`, OCR will be performed for each parser group independently, thus preventing the `AmountParser` confusion, but two OCR passes of the image will be performed, which can have a performance impact.
 
 `ParserGroupProcessor` is most commonly used `Processor`. It is used whenever the OCR is needed. After the OCR is performed and all parsers are run, parsed results can be obtained through parser objects that are enclosed in the group. `ParserGroupProcessor` instance also has associated inner `ParserGroupProcessor.Result` whose state is updated during processing and its method [`getOcrResult()`](https://photopay.github.io/photopay-android/com/microblink/entities/processors/parserGroup/ParserGroupProcessor.Result.html#getOcrResult--) can be used to obtain the raw [`OCRResult`](https://photopay.github.io/photopay-android/com/microblink/results/ocr/OcrResult.html) that was used for parsing data.
 
@@ -1682,7 +1828,7 @@ There are a lot of different `Parsers` for extracting most common fields which a
 
 ### <a name="emailParser"></a> EMail Parser
 
-[`EMailParser`](https://photopay.github.io/photopay-android/com/microblink/entities/parsers/email/EMailParser.html) is used for extracting e-mail addresses from the OCR result. For available result getters please check [javadoc](https://photopay.github.io/photopay-android/com/microblink/entities/parsers/email/EMailParser.html).
+[`EmailParser`](https://photopay.github.io/photopay-android/com/microblink/entities/parsers/email/EmailParser.html) is used for extracting e-mail addresses from the OCR result. For available result getters please check [javadoc](https://photopay.github.io/photopay-android/com/microblink/entities/parsers/email/EmailParser.html).
 
 ### <a name="ibanParser"></a> IBAN Parser
 
@@ -2250,13 +2396,9 @@ Whenever you construct any `Recognizer` object or any other object that derives 
 
 This usually happens when you perform integration into [Eclipse project](#eclipseIntegration) and you forget to add resources or native libraries into the project. You must alway take care that same versions of both resources, assets, java library and native libraries are used in combination. Combining different versions of resources, assets, java and native libraries will trigger crash in SDK. This problem can also occur when you have performed improper integration of _PhotoPay_ SDK into your SDK. Please read how to [embed _PhotoPay_ inside another SDK](#embedAAR).
 
-#### <a name="multipleMicroblinkSDKs"></a> When trying to build app, I get error "Unable to merge dex" and "Multiple dex files define XXX"
-
-This error happens when you try to integrate multiple Microblink SDKs into the same application. Multiple Microblink SDKs cannot be integrated into the same application, and there is no need for that because SDKs are organized in the way that each SDK is feature superset of the smaller SDK, except the `PDF417` SDK which is the smallest SDK.
-
 #### <a name="unsatisfiedLinkError"></a> When my app starts, I get `UnsatisfiedLinkError`
 
-This error happens when JVM fails to load some native method from native library. If performing integration into [Eclipse project](#eclipseIntegration) make sure you have the same version of all native libraries and java wrapper. If performing integration [into Android studio](quickIntegration) and this error happens, make sure that you have correctly combined _PhotoPay_ SDK with [third party SDKs that contain native code](#combineNativeLibraries). If this error also happens in our integration demo apps, then it may indicate a bug in the SDK that is manifested on specific device. Please report that to our [support team](http://help.microblink.com).
+This error happens when JVM fails to load some native method from native library If performing integration [into Android studio](quickIntegration) and this error happens, make sure that you have correctly combined _PhotoPay_ SDK with [third party SDKs that contain native code](#combineNativeLibraries). If this error also happens in our integration sample apps, then it may indicate a bug in the SDK that is manifested on specific device. Please report that to our [support team](http://help.microblink.com).
 
 #### <a name="lateMetadata1"></a> I've added my callback to `MetadataCallbacks` object, but it is not being called
 

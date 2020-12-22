@@ -1,5 +1,225 @@
 # Release notes
 
+## 7.11.0
+
+### New features:
+- We’ve updated SDK's Android **target API level to 30**.
+- We’ve translated the complete SDK to the **Serbian** language.
+- We’ve  made the SDK safe from **tapjacking**, a form of attack where a user is tricked into tapping something he or she didn’t intend to tap. We did this by adding a new security option that prompts the SDK to discard touches when the activity's window is obscured by another visible window. To activate it, use `UISettings.setFilterTouchesWhenObscured(true)`.
+- We’ve added a new feedback message to users, reminding them to keep a document fully visible in case they accidentally cover a part of it with their finger or an object. 
+    - It appears while scanning the document by using `BlinkIdUISettings` and `BlinkIdOverlayController`:
+    - It will display an error message "Keep the document fully visible".
+    - This message is displayed only when using `BlinkIdRecognizer` or `BlinkIdCombinedRecognizer` for scanning.
+- We’ve introduced a new `FrameRecognitionCallback` callback for the `RecognizerRunnerView`, which is invoked each time a camera frame from a video stream is recognized. Use `RecognizerRunnerView.setFrameRecognitionCallback` method to set the callback.
+- We’ve added support for a new Top Up format, for A1 Croatia.
+
+### Newly supported identity documents
+
+- 53 documents added:
+	- ALBANIA - DL (front)
+	- BELGIUM - RESIDENCE PERMIT (front, back)
+	- BOLIVIA - ID (front, back)
+	- BOSNIA AND HERZEGOVINA - PASSPORT
+	- CAMBODIA - PASSPORT
+	- CANADA - RESIDENCE PERMIT (front, back)
+	- CANADA - MANITOBA - ID (front)
+	- CANADA - ONTARIO - HEALTH INSURANCE CARD (front)
+	- CHILE - ALIEN ID (front, back)
+	- CHINA - ID (front, back)
+	- COLOMBIA - MINORS ID (front, back)
+	- CYPRUS - RESIDENCE PERMIT (front, back)
+	- CZECHIA - PASSPORT
+	- GREECE - ID (front)
+	- HAITI - ID (front, back)
+	- ITALY - RESIDENCE PERMIT (front, back)
+	- LATVIA - DL (front)
+	- LATVIA - PASSPORT
+	- LITHUANIA - PASSPORT
+	- LUXEMBOURG - DL (front)
+	- MONTENEGRO - DL (front)
+	- MONTENEGRO - ID (front, back)
+	- MONTENEGRO - PASSPORT
+	- NETHERLANDS - RESIDENCE PERMIT (front, back)
+	- NICARAGUA - ID (front, back)
+	- NIGERIA - ID (front, back)
+	- NORWAY - RESIDENCE PERMIT (front, back)
+	- OMAN - RESIDENT ID (front, back)
+	- PARAGUAY - DL (front, back)
+	- PERU - DL (front, back)
+	- PHILIPPINES - SOCIAL SECURITY CARD (front)
+	- ROMANIA - PASSPORT
+	- RUSSIA - PASSPORT
+	- SERBIA - PASSPORT
+	- SLOVAKIA - PASSPORT
+	- SLOVENIA - PASSPORT
+	- SOUTH KOREA - DL (front)
+	- SPAIN - RESIDENCE PERMIT (front, back)
+	- SWEDEN - RESIDENCE PERMIT (front, back)
+	- THAILAND - PASSPORT
+	- UKRAINE - DL (front)
+	- UKRAINE - PASSPORT
+	- USA - ARKANSAS - ID (front, back)
+	- USA - CONNECTICUT - ID (front, back)
+	- USA - GREEN CARD (front, back)
+	- USA - MARYLAND - ID (front, back)
+	- USA - MINNESOTA - ID (front, back)
+	- USA - NEVADA - ID (front, back)
+	- USA - NEW YORK CITY - ID (front, back)
+	- USA - TEXAS - WEAPON PERMIT (front)
+	- USA - VIRGINIA - ID (front, back)
+	- VENEZUELA - DL (front)
+	- VENEZUELA - PASSPORT
+
+- Beta support added for 46 documents:
+	- ALBANIA - PASSPORT
+	- BAHAMAS - DL (front)
+	- BERMUDA - DL (front)
+	- BOLIVIA - DL (front)
+	- CHILE - DL (front)
+	- COLOMBIA - ALIEN ID (front)
+	- DENMARK - RESIDENCE PERMIT (front, back)
+	- DOMINICAN REPUBLIC - DL (front, back)
+	- ECUADOR - DL (front)
+	- EL SALVADOR - DL (front, back)
+	- ESTONIA - RESIDENCE PERMIT (front, back)
+	- GUATEMALA - DL (front, back)
+	- HAITI - DL (front)
+	- HONDURAS - DL (front, back)
+	- HONDURAS - ID (front, back)
+	- HUNGARY - ADDRESS CARD (front, back)
+	- HUNGARY - RESIDENCE PERMIT (front)
+	- ICELAND - DL (front)
+	- ISRAEL - ID (front, back)
+	- JAPAN - DL (front)
+	- JORDAN - DL (front)
+	- LATVIA - ALIEN PASSPORT
+	- LATVIA - RESIDENCE PERMIT (front, back)
+	- LUXEMBOURG - RESIDENCE PERMIT (front)
+	- MALTA - RESIDENCE PERMIT (front, back)
+	- MEXICO - BAJA CALIFORNIA - DL (front)
+	- MEXICO - CHIHUAHUA - DL (front)
+	- MEXICO - CIUDAD DE MEXICO - DL (front)
+	- MEXICO - PROFESSIONAL DL (front)
+	- MEXICO - GUANAJUATO - DL (front)
+	- MEXICO - MICHOACAN - DL (front)
+	- MEXICO - TAMAULIPAS - DL (front, back)
+	- MEXICO - VERACRUZ - DL (front, back)
+	- PHILIPPINES - TAX ID (front)
+	- PHILIPPINES - VOTER ID (front)
+	- POLAND - RESIDENCE PERMIT (front, back)
+	- PORTUGAL - RESIDENCE PERMIT (front, back)
+	- PUERTO RICO - VOTER ID (front)
+	- SLOVAKIA - RESIDENCE PERMIT (front, back)
+	- SOUTH KOREA - ID (front)
+	- SWITZERLAND - RESIDENCE PERMIT (front, back)
+	- TAIWAN - TEMPORARY RESIDENCE PERMIT (front)
+	- TURKEY - RESIDENCE PERMIT (front)
+	- USA - KANSAS - ID (front, back)
+	- VENEZUELA - ID (front)
+	- VIETNAM - DL (front)
+
+- Added back side support for 7 documents:
+	- ARGENTINA - ID
+	- ECUADOR - ID
+	- FINLAND - ID
+	- NIGERIA - DL
+	- QATAR - RESIDENCE PERMIT
+	- URUGUAY - ID
+	- USA - NEW YORK - DL
+
+- 9 documents are no longer beta:
+	- BRAZIL - DL
+	- CANADA - ALBERTA - ID
+	- MALAYSIA - MyKAS
+	- MEXICO - NUEVO LEON - DL
+	- PANAMA - DL
+	- PORTUGAL - DL
+	- SAUDI ARABIA - ID
+	- SRI LANKA - ID
+	- USA - IDAHO - ID
+
+
+### New features and updates to the `BlinkIdRecognizer` and `BlinkIdCombinedRecognizer`
+
+- We’re now able to read partial MRZ formats (2.5 lines), like the ones found on Switzerland and Liechtenstein DLs.
+- We’ve added `documentOptionalAdditionalNumber` to the main part of the result, as well as front and back side VIZ results.
+- We’ve expanded the set of possible recognizer states with `StageValid`. This state fixes `BlinkIDCombinedRecognizer` timeout issues, and enables better control of the Combined scanning pipeline. It activates when the first side of a document has been successfully scanned and scanning of the second side is required.
+
+### New features and updates to the `BlinkCard`
+
+- `BlinkCardRecognizer` is a Combined recognizer, which means it's designed for scanning **both sides of a card**. However, if all required data is found on the first side, we do not wait for second side scanning. We can return the result early. A set of required fields is defined through the recognizer's settings.
+
+- "Front side" and "back side" are terms more suited to ID scanning. We start the scanning process with the **side containing the card number**. This makes the UX easier for users with cards where all data is on the back side.
+
+- We've expanded the set of possible recognizer states with **StageValid**. This state is set when first side scanning completes with valid data, and second side scanning is required.
+
+- Available `BlinkCardRecognizer` **settings**:
+	- You can toggle mandatory **extraction** of all fields except the PAN.
+	- You can enable the **blur filter**. When blur filtering is enabled, blurred frames are discarded. Otherwise, we process the blurred frames but set the blur indicator result member.
+	- You can define required **padding** around the detected document. This ensures some empty space exists between the document and the edge of the frame.
+
+- `BlinkCardRecognizer.Result` structure:
+    - Contains:
+        - The card issuer
+        - PAN
+        - PAN prefix
+        - Expiry date
+        - Owner information
+        - IBAN
+        - CVV
+        - Cropped document images
+        - Blur indicators for both sides
+        - Processing status
+	- **Processing status** can be one of:
+		- Success - if the process ended successfully and data is valid
+		- DetectionFailed - if detection of the document failed
+		- ImagePreprocessingFailed - if preprocessing of the image failed
+		- StabilityTestFailed - if inconsistent results were detected between different video frames (when video processing, we require at least two frames with consistent data, for image processing this isn't applicable)
+		- ScanningWrongSide - if the first side presented in the scanning process does not contain the PAN, or when the user failed to present the second side
+		- FieldIdentificationFailed - if we detected a field, but we're unable to parse it (possible glare issues, or a finger covering the field)
+		- ImageReturnFailed - failed to return requested images
+		- UnsupportedCard - this card layout is currently unsupported.
+
+- We added a new BlinkCard screen that allows users to edit `BlinkCardRecognizer` scan results:
+    - This screen allows users to edit scanned data and input data that wasn't scanned.
+    - Enable it by calling `BlinkCardUISettings.setEditScreenEnabled(true)`.
+    - Configure which fields should be displayed on this screen by using `BlinkCardUISettings.setEditScreenFieldConfiguration()` method.
+    - Set your custom theme with `BlinkCardUISettings.setEditScreenTheme()` method.
+    - Change default strings by using `BlinkCardUISettings.setEditScreenStrings()`.
+    - To get user-edited fields, in your `onActivityResult(int requestCode, int resultCode, Intent data)` method call `BlinkCardEditResultBundle.createFromIntent(data)`.
+    - This feature is available only for `BlinkCardRecognizer`.
+    - If you are using a custom UI, you can launch edit screen by building intent with the following method `BlinkCardEditActivity.buildIntent()`.
+
+- We updated the default BlinkCard scanning screen (`BlinkCardOverlayController`):
+    - Instructions on how to reduce glare will be displayed when the user enables flashlight, you can disable it with `BlinkCardUISettings.setShowGlareWarning(false)`.
+    - If the edit screen is enabled, a new button will show up after 5 seconds of unsuccessful scanning to allow the user to go directly to the edit screen.
+- We have improved recognition timeout logic when using `BlinkCardRecognizer`.
+    - When a credit card has multiple sides to scan, the timeout timer for the second side starts after the second side of the card has been detected. Previously, it has been started immediately after the first side has been scanned.
+    - Timeout duration can be configured by using `RecognizerBundle.setNumMsBeforeTimeout`
+
+### Improvements to existing features
+- `CroatiaReferenceParser`
+    - We’ve improved parsing of Croatian reference strings by adding additional validation of the model and reference fields. You can disable these validations by setting `allowUnverifiedReferences` to `true`.
+
+
+### Deprecated recognizers
+
+We have deprecated the following recognizers:
+
+- `CroatiaIdFrontRecognizer`, `CzechiaIdFrontRecognizer`, `GermanyDlFrontRecognizer`, `GermanyIdFrontRecognizer`, `GermanyIdOldRecognizer`, `MalaysiaMyKasFrontRecognizer`, `SlovakiaIdFrontRecognizer`, `SwitzerlandDlFrontRecognizer` - **use `BlinkIdCombinedRecognizer` or `BlinkIdRecognizer` instead**
+
+- `CroatiaCombinedRecognizer`, `CroatiaIdBackRecognizer`, `CzechiaCombinedRecognizer`, `CzechiaIdBackRecognizer`, `GermanyCombinedRecognizer`, `GermanyIdBackRecognizer`, `SlovakiaCombinedRecognizer`, `SlovakiaIdBackRecognizer` - **use `BlinkIdCombinedRecognizer` instead**
+
+### Minor API changes:
+
+- We have renamed old `BlinkCardRecognizer` and `BlinkCardEliteRecognizer` recognizers to `LegacyBlinkCardRecognizer` and `LegacyBlinkCardEliteRecognizer`. They are now deprecated.
+- Interface `CombinedResult` does not provide the `getDocumentDataMatch()` method anymore, this method is moved to the new interface `CombinedDataMatchResult`.
+
+### Fixes
+
+- We’ve fixed an uncommon bug where you’d get incomplete results upon scanning of the MRZ with the `allowUnparsed` setting enabled. 
+- SDK does not require permission `android.permission.ACCESS_NETWORK_STATE` to unlock itself anymore, in cases when the license key needs online activation.
+
 ## 7.10.0
 
 ### New features:

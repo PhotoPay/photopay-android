@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -132,7 +132,8 @@ implements <a href="../../../../../../com/microblink/fragment/overlay/blinkcard/
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/fragment/overlay/blinkcard/scanlineui/ScanLineOverlayView.html#ScanLineOverlayView-boolean-com.microblink.fragment.overlay.blinkcard.scanlineui.ScanLineOverlayStrings-int-">ScanLineOverlayView</a></span>(boolean&nbsp;shouldShowControlButtons,
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/fragment/overlay/blinkcard/scanlineui/ScanLineOverlayView.html#ScanLineOverlayView-boolean-boolean-com.microblink.fragment.overlay.blinkcard.scanlineui.ScanLineOverlayStrings-int-">ScanLineOverlayView</a></span>(boolean&nbsp;shouldShowControlButtons,
+                   boolean&nbsp;shouldShowGlareWarning,
                    <a href="../../../../../../com/microblink/fragment/overlay/blinkcard/scanlineui/ScanLineOverlayStrings.html" title="class in com.microblink.fragment.overlay.blinkcard.scanlineui">ScanLineOverlayStrings</a>&nbsp;strings,
                    int&nbsp;style)</code>&nbsp;</td>
 </tr>
@@ -166,26 +167,44 @@ implements <a href="../../../../../../com/microblink/fragment/overlay/blinkcard/
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/fragment/overlay/blinkcard/scanlineui/ScanLineOverlayView.html#disableManualEntryButton--">disableManualEntryButton</a></span>()</code>
+<div class="block">Manual entry button should be disabled/hidden from the UI.</div>
+</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/fragment/overlay/blinkcard/scanlineui/ScanLineOverlayView.html#enableManualEntryButton-android.view.View.OnClickListener-">enableManualEntryButton</a></span>(android.view.View.OnClickListener&nbsp;onClickListener)</code>
+<div class="block">Manual entry button should be enabled/shown in the UI.</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/fragment/overlay/blinkcard/scanlineui/ScanLineOverlayView.html#onFirstSideScanStarted--">onFirstSideScanStarted</a></span>()</code>
 <div class="block">Called when scanning of the first side starts.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/fragment/overlay/blinkcard/scanlineui/ScanLineOverlayView.html#onScanningPaused--">onScanningPaused</a></span>()</code>
 <div class="block">Called when scanning is paused.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/fragment/overlay/blinkcard/scanlineui/ScanLineOverlayView.html#onScanningResumed--">onScanningResumed</a></span>()</code>
 <div class="block">Called when scanning is resumed.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/fragment/overlay/blinkcard/scanlineui/ScanLineOverlayView.html#onSecondSideScanStarted--">onSecondSideScanStarted</a></span>()</code>
 <div class="block">Called when scanning of the second side starts.</div>
+</td>
+</tr>
+<tr id="i8" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/microblink/fragment/overlay/blinkcard/scanlineui/ScanLineOverlayView.html#onTorchStateChanged-boolean-">onTorchStateChanged</a></span>(boolean&nbsp;torchOn)</code>
+<div class="block">Called when torch (flashlight) state is updated.</div>
 </td>
 </tr>
 </table>
@@ -210,13 +229,14 @@ implements <a href="../../../../../../com/microblink/fragment/overlay/blinkcard/
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a name="ScanLineOverlayView-boolean-com.microblink.fragment.overlay.blinkcard.scanlineui.ScanLineOverlayStrings-int-">
+<a name="ScanLineOverlayView-boolean-boolean-com.microblink.fragment.overlay.blinkcard.scanlineui.ScanLineOverlayStrings-int-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>ScanLineOverlayView</h4>
 <pre>public&nbsp;ScanLineOverlayView(boolean&nbsp;shouldShowControlButtons,
+                           boolean&nbsp;shouldShowGlareWarning,
                            @NonNull
                            <a href="../../../../../../com/microblink/fragment/overlay/blinkcard/scanlineui/ScanLineOverlayStrings.html" title="class in com.microblink.fragment.overlay.blinkcard.scanlineui">ScanLineOverlayStrings</a>&nbsp;strings,
                            @StyleRes
@@ -324,7 +344,7 @@ public&nbsp;<a href="../../../../../../com/microblink/fragment/overlay/component
 <a name="onScanningResumed--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>onScanningResumed</h4>
 <pre>public&nbsp;void&nbsp;onScanningResumed()</pre>
@@ -333,6 +353,55 @@ public&nbsp;<a href="../../../../../../com/microblink/fragment/overlay/component
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../../com/microblink/fragment/overlay/blinkcard/BlinkCardOverlayView.html#onScanningResumed--">onScanningResumed</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../com/microblink/fragment/overlay/blinkcard/BlinkCardOverlayView.html" title="interface in com.microblink.fragment.overlay.blinkcard">BlinkCardOverlayView</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="enableManualEntryButton-android.view.View.OnClickListener-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>enableManualEntryButton</h4>
+<pre>public&nbsp;void&nbsp;enableManualEntryButton(android.view.View.OnClickListener&nbsp;onClickListener)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../../com/microblink/fragment/overlay/blinkcard/BlinkCardOverlayView.html#enableManualEntryButton-android.view.View.OnClickListener-">BlinkCardOverlayView</a></code></span></div>
+<div class="block">Manual entry button should be enabled/shown in the UI.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../../com/microblink/fragment/overlay/blinkcard/BlinkCardOverlayView.html#enableManualEntryButton-android.view.View.OnClickListener-">enableManualEntryButton</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../com/microblink/fragment/overlay/blinkcard/BlinkCardOverlayView.html" title="interface in com.microblink.fragment.overlay.blinkcard">BlinkCardOverlayView</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>onClickListener</code> - listener to register to manual entry button</dd>
+</dl>
+</li>
+</ul>
+<a name="disableManualEntryButton--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>disableManualEntryButton</h4>
+<pre>public&nbsp;void&nbsp;disableManualEntryButton()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../../com/microblink/fragment/overlay/blinkcard/BlinkCardOverlayView.html#disableManualEntryButton--">BlinkCardOverlayView</a></code></span></div>
+<div class="block">Manual entry button should be disabled/hidden from the UI.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../../com/microblink/fragment/overlay/blinkcard/BlinkCardOverlayView.html#disableManualEntryButton--">disableManualEntryButton</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../com/microblink/fragment/overlay/blinkcard/BlinkCardOverlayView.html" title="interface in com.microblink.fragment.overlay.blinkcard">BlinkCardOverlayView</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="onTorchStateChanged-boolean-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>onTorchStateChanged</h4>
+<pre>public&nbsp;void&nbsp;onTorchStateChanged(boolean&nbsp;torchOn)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../../com/microblink/fragment/overlay/blinkcard/BlinkCardOverlayView.html#onTorchStateChanged-boolean-">BlinkCardOverlayView</a></code></span></div>
+<div class="block">Called when torch (flashlight) state is updated.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../../com/microblink/fragment/overlay/blinkcard/BlinkCardOverlayView.html#onTorchStateChanged-boolean-">onTorchStateChanged</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../com/microblink/fragment/overlay/blinkcard/BlinkCardOverlayView.html" title="interface in com.microblink.fragment.overlay.blinkcard">BlinkCardOverlayView</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>torchOn</code> - <code>true</code> if torch is turned on, <code>false</code> otherwise.</dd>
 </dl>
 </li>
 </ul>

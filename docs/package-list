@@ -1,5 +1,6 @@
 com.microblink
 com.microblink.activity
+com.microblink.activity.edit
 com.microblink.directApi
 com.microblink.entities
 com.microblink.entities.detectors
@@ -57,6 +58,7 @@ com.microblink.entities.recognizers.blinkbarcode.simnumber
 com.microblink.entities.recognizers.blinkbarcode.usdl
 com.microblink.entities.recognizers.blinkbarcode.vin
 com.microblink.entities.recognizers.blinkcard
+com.microblink.entities.recognizers.blinkcard.legacy
 com.microblink.entities.recognizers.blinkid
 com.microblink.entities.recognizers.blinkid.australia
 com.microblink.entities.recognizers.blinkid.austria
@@ -153,12 +155,12 @@ com.microblink.fragment.overlay.blinkid
 com.microblink.fragment.overlay.blinkid.document
 com.microblink.fragment.overlay.blinkid.documentverification
 com.microblink.fragment.overlay.blinkid.reticleui
-com.microblink.fragment.overlay.blinkid.reticleui.snackbar
 com.microblink.fragment.overlay.components
 com.microblink.fragment.overlay.components.debug
 com.microblink.fragment.overlay.components.feedback
 com.microblink.fragment.overlay.components.feedback.view
 com.microblink.fragment.overlay.components.settings
+com.microblink.fragment.overlay.components.snackbar
 com.microblink.fragment.overlay.components.statusmsg
 com.microblink.fragment.overlay.documentcapture
 com.microblink.fragment.overlay.documentcapture.detectionui
