@@ -378,26 +378,26 @@ The `ScanningOverlayBinder` is responsible for returning `non-null` implementati
 Here is the minimum example for activity that hosts the `RecognizerRunnerFragment`:
 
 ```java
-public class MyActivity extends Activity implements RecognizerRunnerFragment.ScanningOverlayBinder {
+public class MyActivity extends AppCompatActivity implements RecognizerRunnerFragment.ScanningOverlayBinder {
     private CroatiaSlipRecognizer mRecognizer;
     private RecognizerBundle mRecognizerBundle;
-    private BasicOverlayController mScanOverlay = createOverlay();
+    private BasicOverlayController mScanOverlay;
     private RecognizerRunnerFragment mRecognizerRunnerFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate();
         setContentView(R.layout.activity_my_activity);
-
+        mScanOverlay = createOverlay();
         if (null == savedInstanceState) {
             // create fragment transaction to replace R.id.recognizer_runner_view_container with RecognizerRunnerFragment
             mRecognizerRunnerFragment = new RecognizerRunnerFragment();
-            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.recognizer_runner_view_container, mRecognizerRunnerFragment);
             fragmentTransaction.commit();
         } else {
             // obtain reference to fragment restored by Android within super.onCreate() call
-            mRecognizerRunnerFragment = (RecognizerRunnerFragment) getFragmentManager().findFragmentById(R.id.recognizer_runner_view_container);
+            mRecognizerRunnerFragment = (RecognizerRunnerFragment) getSupportFragmentManager().findFragmentById(R.id.recognizer_runner_view_container);
         }
     }
 
@@ -433,6 +433,9 @@ public class MyActivity extends Activity implements RecognizerRunnerFragment.Sca
             // removal of RecognizerRunnerFragment - in the time between end of this method
             // and beginning of execution of the transaction. So to ensure result within mRecognizer
             // does not get mutated, ensure calling pauseScanning() as shown above.
+        }
+        @Override
+        public void onUnrecoverableError(@NonNull Throwable throwable) {
         }
     };
     
