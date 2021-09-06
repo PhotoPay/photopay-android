@@ -1,5 +1,368 @@
 # Release notes
 
+## 7.13.0
+
+### Newly supported identity documents:
+
+We’ve added 174 new documents:
+
+#### Europe
+- Albania - Driver Card (front only)
+- Albania - Professional Driver License (front only)
+- Belarus - Driver License (front only, beta)
+- Belgium - Minors ID (beta)
+- Czechia - Residence Permit
+- Finland - Alien ID
+- Finland - Residence Permit (beta)
+- Georgia - Driver License (front only)
+- Greece - Residence Permit
+- Ireland - Passport Card
+- Ireland - Public Services Card (beta)
+- Kosovo - Driver License (front only, beta)
+- Latvia - Alien ID
+- Luxembourg - ID Card
+- Moldova - ID Card (beta)
+- North Macedonia - Driver License (front only)
+- North Macedonia - ID Card
+- Poland - Passport (beta)
+- Slovenia - Residence Permit (beta)
+- Spain - Alien ID
+- UK - Passport (beta)
+- North Macedonia - Polycarbonate Passport
+- Austria - Paper Passport 
+- Belarus - Paper Passport
+- Belgium - Paper Passport (beta)
+- Bulgaria - Paper Passport
+- Estonia - Paper Passport
+- France - Paper Passport (beta)
+- Georgia - Paper Passport (beta)
+- Germany - Paper Passport 
+- Greece - Paper Passport
+- Hungary- Paper Passport
+- Italy - Paper Passport (beta)
+- Kosovo - Paper Passport
+- Moldova - Paper Passport (beta)
+- Poland - Paper Passport
+- Portugal - Paper Passport
+- Spain - Paper Passport
+- Switzerland - Paper Passport
+- UK - Paper Passport
+
+#### Middle East and Africa 
+- Algeria - Driver License
+- Burkina Faso - ID Card
+- Cameroon - ID Card
+- Democratic Republic Of The Congo - Driver License (front only, beta)
+- Egypt - Driver License (beta)
+- Ghana - ID Card
+- Iraq - ID Card
+- Ivory Coast - Driver License (front only, beta)
+- Ivory Coast - ID Card
+- Lebanon - ID Card (beta)
+- Morocco - Driver License
+- Mozambique - Driver License (front only, beta)
+- Oman - Driver License (beta)
+- Rwanda - ID Card (front only)
+- Senegal - ID Card
+- Tanzania - Driver License (front only, beta)
+- Tunisia - Driver License (front only)
+- Uganda - Driver License (front only, beta)
+- Botswana - ID Card
+- Sudan - Polycarbonate Passport
+- Algeria - Paper Passport (beta)
+- Egypt - Paper Passport (beta)
+- Eswatini - Paper Passport 
+- Ghana - Paper Passport
+- Iran - Paper Passport (beta)
+- Iraq - Paper Passport (beta)
+- Israel - Paper Passport (beta)
+- Jordan - Paper Passport (beta)
+- Kenya - Polycarbonate Passport
+- Libya - Polycarbonate Passport (beta)
+- Morocco - Paper Passport (beta)
+- Nigeria - Paper Passport
+- Nigeria - Polycarbonate Passport (beta)
+- Qatar - ID Card (front only, beta)
+- Saudi Arabia - Paper Passport
+- Syria - Paper Passport
+- Tanzania - ID Card (beta)
+- Tanzania - Voter ID (front only, beta)
+- Tunisia - Paper Passport
+- Turkey - Paper Passport
+- Zimbabwe - Paper Passport
+
+#### Latin America & the Caribbean
+- Argentina - Alien ID
+- Bahamas - ID Card (front only, beta)
+- Bolivia - Minors ID
+- Jamaica - Driver License
+- Mexico - Residence Permit (beta)
+- Mexico - Chiapas - Driver License (front only)
+- Mexico - Coahuila - Driver License (beta)
+- Mexico - Durango - Driver License(front only, beta)
+- Mexico - Guerrero-cocula - Driver License (beta)
+- Mexico - Guerrero-juchitan - Driver License (beta)
+- Mexico - Guerrero-tepecoacuilco - Driver License (front only, beta)
+- Mexico - Guerrero-tlacoapa - Driver License (front only, beta)
+- Mexico - Hidalgo - Driver License
+- Mexico - Mexico - Driver License (beta)
+- Mexico - Morelos - Driver License (front only)
+- Mexico - Oaxaca - Driver License
+- Mexico - Puebla - Driver License (front only, beta)
+- Mexico - San Luis Potosi - Driver License (front only)
+- Mexico - Sinaloa - Driver License (front only, beta)
+- Mexico - Sonora - Driver License (beta)
+- Mexico - Tabasco - Driver License (beta)
+- Mexico - Yucatan - Driver License (beta)
+- Mexico - Zacatecas - Driver License (beta)
+- Mexico - Baja California Sur - Driving License (beta)
+- Mexico - Campeche - Driving License (beta)
+- Mexico - Colima - Driving License (beta)
+- Panama - Temporary Residence Permit (beta)
+- Peru - Minors ID (beta)
+- Trinidad And Tobago - Driver License (front only, beta)
+- Trinidad And Tobago - ID Card
+- Argentina - Paper Passport
+- Brazil - Paper Passport (beta)
+- Guatemala - Paper Passport
+- Haiti - Paper Passport
+- Honduras - Paper Passport (beta)
+- Mexico - Paper Passport (beta)
+- Mexico - Nayarit - Driving Licence (beta)
+
+#### Oceania
+- Australia - South Australia - Proof Of Age Card (front only, beta)
+- Australia - Health Insurance Card (front only, beta)
+- Australia - Paper Passport
+
+#### Asia
+- Armenia - ID Card
+- Bangladesh - Driver License (beta)
+- Cambodia - Driver License (front only, beta)
+- India - Gujarat - Driving Licence (front only, beta)
+- India - Karnataka - Driving Licence (front only)
+- India - Kerala - Driving Licence (beta)
+- India - Madhya Pradesh - Driving Licence (front only, beta)
+- India - Punjab - Driving Licence (front only, beta)
+- India - Tamil Nadu - Driving Licence (beta)
+- Kyrgyzstan - ID Card
+- Malaysia - Mypolis (beta)
+- Malaysia - Refugee ID (front only)
+- Myanmar - Driver License (beta)
+- Pakistan - Punjab - Driving Licence (front only)
+- Sri Lanka - Driving Licence (front only)
+- Thailand - Alien ID (front only)
+- Thailand - Driver License (beta)
+- Uzbekistan - Driver License (front only, beta)
+- Azerbaijan - Polycarbonate Passport (beta)
+- Tajikistan - Polycarbonate Passport (beta)
+- Bangladesh - Paper Passport
+- China - Paper Passport (beta)
+- India - Paper Passport
+- Indonesia - Paper Passport
+- Japan - Paper Passport
+- Nepal - Paper Passport
+- Pakistan - Paper Passport
+- Philippines - Paper Passport
+- South Korea - Paper Passport (beta)
+- Sri Lanka - Paper Passport
+- Uzbekistan - Paper Passport
+
+#### Northern America
+- Canada - Tribal ID (beta)
+- Canada - Nova Scotia - ID Card (beta)
+- Canada - Saskatchewan - ID Card (beta)
+- USA - Border Crossing Card (front only)
+- USA - Global Entry Card
+- USA - Nexus Card (beta)
+- USA - Veteran ID (front only)
+- USA - Work Permit
+- USA - Mississippi - ID Card (beta)
+- USA - Montana - ID Card
+- USA - New Mexico - ID Card
+- USA - Wisconsin - ID Card
+- Canada - Citizenship Certificate (beta)
+- Canada - Ontario - Health Insurance Card (front only)
+- Canada - Quebec - Health Insurance Card (front only, beta)
+- USA - Military ID Card 
+- USA - Rhode Island - ID Card
+- USA - South Carolina - ID Card
+- Canada - Paper Passport
+- Canada - Weapon Permit (front only, beta)
+- USA - Paper Passport (beta)
+
+#### Back side support added:
+- Hungary - Residence Permit
+- Luxembourg - Residence Permit (no longer beta)
+- Mauritius - ID Card
+- Colombia - Alien ID (no longer beta)
+- Mexico - Baja California - Driver License
+- Mexico - Chihuahua - Driver License
+- Mexico - Guanajuato - Driver License
+- Mexico - Michoacan - Driver License
+- Malaysia - MyKid
+- Malaysia - MyPR
+- Mexico - Puebla - Driving License 
+- Singapore - S PASS
+- Greece - ID Card
+- Democratic Republic of the Congo - Driving Licence
+- Mexico - Veracruz - Driving Licence
+
+#### No longer beta:
+- Albania - Passport
+- Malta - Residence Permit
+- Switzerland - Residence Permit
+- Bolivia - Driver License
+- Chile - Passport
+- El Salvador - ID Card
+- Peru - ID Card
+- Singapore - S Pass
+- Finland - Polycarbonate Passport
+- Ireland - Polycarbonate Passport
+- Kosovo - Driving License 
+- Latvia - Polycarbonate Alien Passport
+- Latvia - Polycarbonate Passport 
+- Poland - Polycarbonate Passport 
+- Cameroon - ID Card 
+- Ghana - ID Card 
+- Iraq - ID Card 
+- Tanzania - Driving Licence
+- Turkey - Polycarbonate Passport
+- Uganda - Driving Licence
+- Chile - Driving Licence
+- Ecuador - Driving Licence
+- Haiti - Driving Licence
+- Belarus - Driving Licence
+- UK - Polycarbonate Passport
+- Bahamas - Driving Licence
+- Mexico - Durango - Driving Licence
+- Venezuela - ID Card
+- USA - Kansas - ID Card
+
+### Changes to the BlinkId(Combined)Recognizer
+- You can now retrieve an image of the document owner along with cropped images of the document itself whenever you’re scanning an AAMVA-compliant ID: 
+
+	- Using `BarcodeId` as a `RecognitionMode` lets you scan US driver licenses and IDs that BlinkID can’t read from the Visual Inspection Zone (VIZ) alone. Use it to extract:
+		- A face image from the front side
+		- Barcode data from the back side
+		- Cropped document images of both sides
+	- You can disable this `RecognitionMode` by setting `enableBarcodeId` to `false` in the `RecognitionModeFilter`.
+- We've improved data extraction through the MRZ:
+	- We now allow standard M/F values for gender on Mexican documents (along with localized H/M values)
+- We're now converting dates to the Gregorian calendar for:
+	- Taiwan documents with Republic of China (ROC) calendar dates
+	- Saudi documents with Islamic calendar dates
+- We're now auto-filling all ‘partial’ dates found on identity documents (showing year or month-year only):
+	- Date of issue will be converted to the first day of the (first) month
+		- E.g. '1999' will be converted to '01.01.1999.'
+		- E.g. '03.1999.' will be converted to '01.03.1999.'
+	- Date of expiry will be converted to the last day of the (last) month
+		- E.g. '1999' will be converted to '31.12.1999.'
+		- E.g. '03.1999.' will be converted to '31.03.1999.'
+- We've added the parameter `maxAllowedMismatchesPerField` to settings. When this is set to a non-zero value, DataMatch will be successful as long as the number of mismatched characters doesn't exceed the specified value.
+- We've added the parameter `allowUncertainFrontSideScan` to settings. When this parameter is set to true, the Recognizer will proceed scanning the back side of the document even if the front side scanning result `State` is `Uncertain`.
+- We've enabled the return of image and back side data results, even when the `State` is `Uncertain`. Keep in mind that returned images, in this case, might be blurry or low quality.
+	- This applies to all image types: full document image, face and signature image.
+- We've added two separate fields for the processing status in the Recognizer Result: `frontProcessingStatus` and `backProcessingStatus`. They indicate the status of the last recognition process for each side.
+- We’ve renamed the Swaziland country to Eswatini in results and ClassInfo
+- Improved result validation
+    - `FieldIdentificationFailed` processing status is used to indicate if unexpected fields are present on the document. Those fields are then deleted from the result
+- We are filling out COUNTRY and REGION fields in ClassInfo, without the field TYPE of document, when using BarcodeID mode for scanning documents where the Front side is not supported, and back side results are extracted from AAMVA compliant barcodes
+    - This applies only if `ClassInfo` isn’t already prepopulated in some other way and when you’re not in `FullRecognition` mode
+
+### `BlinkId` improvements and fixes:
+- We added support for the Malaysian NRIC numbers that hold an asterisk (*) character.
+- While using `FullRecognitionMode` for scanning unsupported Passports, we are now extracting `ClassInfo` from MRZ 
+- Improved quality of fully cropped vertical images
+- Better parsing of Bermuda Driving License AAMVA-compliant barcode dates
+- Fix for correct calculation of check digit for Saudi Arabia ID Card MRZ
+- We are splitting first and last name from the additional name information (e.g., Nom d’ usage, Epouse, Geb. etc.)  into two different results. The additional name info will be a part of the `name_additional_info` field. This applies to the following documents:
+
+	- France
+		- ID Card
+		- Residence Permit
+	- Germany	
+		- ID Card
+	- Luxembourg
+		- ID Card
+	- Netherlands
+		- Driving License
+		- Polycarbonate Passport
+		
+- We are removing title prefixes (e.g., Mrs., Mr., Ing., etc.) from `full_name`, `first_name` and `last_name` for these documents:
+	- Austria
+		- Driving License
+		- ID Card
+	- Czechia 
+		- Driving License
+	- Germany
+		- ID Card
+	- Thailand 
+		- ID Card
+	- UK 
+		- Driving License
+- We can now extract the date of birth from the document number on the South Korean identity card and from the personal identification number on the driving licence
+
+#### `BlinkId` Anonymization
+- We've added anonymization for new documents:
+	- Document number on Germany Polycarbonate Passport
+	- Document number on Hong Kong Polycarbonate Passport
+	- Document number and personal ID number on Singapore Polycarbonate Passport
+
+
+### `BlinkCard` improvements and fixes:
+- We've added a new feature that lets you anonymize extracted results, images or both:
+	- Choose which fields you want to mask:
+		- Card number
+		- Card number prefix
+		- CVV
+		- Owner
+		- IBAN
+	- Choose a `BlinkCardAnonymizationMode` for each field:
+		- `None`
+		- `ImageOnly` - Black boxes will cover chosen data on the extracted image, results are not anonymized
+		- `ResultFieldsOnly` - String data is redacted from the result, images are not anonymized
+		- `FullResult` - Both images and string data (results) are anonymized
+	- You can customize the way you anonymize the card number through `CardNumberAnonymizationSettings`:
+		- `prefixDigitsVisible` - Defines how many digits at the beginning of the card number remain visible after anonymization
+		- `suffixDigitsVisible` - Defines how many digits at the end of the card number remain visible after anonymization
+- We've added support for new horizontal card layouts
+- We've added support for vertical payment cards.
+- As of this release, BlinkCard supports the Visa Quick Read format (the one where the card number spans through four lines).
+- We've changed the threshold for "Camera too far" and "Camera too near" callbacks. From now on, the card needs to be closer to the camera.
+- We updated the default BlinkCard scanning screen (`BlinkCardOverlayController` and `BlinkCardActivity`) which is activated when using BlinkCardUISettings. Now the UI supports landscape mode. 
+- From now on, BlinkCard reads and extracts the expiry date in MM/YYYY format
+
+
+### Changes to the `PhotoPayRecognizer`:
+- removed the usage of konto_check library which was used for validating German account numbers on non-SEPA payment slips. 
+- Removed support for non-SEPA payment slips in `DePaymentRecognizer`
+- Removed `ACCOUNT_NUMBER` and `BANK_CODE` fields from `SlipRecognizer`
+	- in SEPA payment slips they are part of the IBAN
+
+
+### ImageCapture
+- Added support for including or excluding groups of documents supported by the current license with the `captureModeFilter` setting, which also enables:
+	- Scanning of documents with AAMVA compliant barcodes with BarcodeID mode
+	- Scanning of all licensed documents in BlinkID FullRecognition mode
+
+### Minor breaking API changes
+- `Pdf417Recognizer` has been deprecated - use `BarcodeRecognizer` instead
+- We've changed how `RecognizerRunner` processes images. Now it can treat `Image` objects as either video frame or photo frame. Until now, Direct API always processed images as photo frames, that not giving ability to recognizers to use time-redundant information for yield better recognition quality.
+
+### Breaking change
+
+To optimize our scanning process, we decided to remove support for processors which don't have VFPv4 support because it blocked us from implementing those optimizations.
+This affects only a small number of older devices with armeabi_v7 CPUs. Those devices are rarely used.
+
+### General fixes
+- We’ve fixed camera issues for the following devices: 
+	- Motorola Moto G100 - Camera 2 API wasn’t working
+	- Realme X50 5G - Problem with Camera 2 API in legacy mode
+	- LG K4 - Camera 2 API wasn’t working
+	- Galaxy Tab Active 2 - broken aspect ratio
+
+
 ## 7.12.0
 
 ### Improvements
@@ -14,21 +377,21 @@
     - Saudi Arabia - DL (front)
     - Saudi Arabia - Resident ID (front)
 
-- We've introduced another variant of `resetRecognitionState` method that lets you reset the scanning process in different recognition stages: 
-- If you’re using our Direct API, call `RecognizerRunner.resetRecognitionState(false)` to clear the scanning cache as well as results gathered in a specific recognition step, i.e. after scanning the back side of a document.  
-- If you’re using our built-in UI to scan IDs from the camera stream, call `RecognizerRunnerView.resetRecognitionState(false)` to do the same. 
+- We've introduced another variant of `resetRecognitionState` method that lets you reset the scanning process in different recognition stages:
+- If you’re using our Direct API, call `RecognizerRunner.resetRecognitionState(false)` to clear the scanning cache as well as results gathered in a specific recognition step, i.e. after scanning the back side of a document.
+- If you’re using our built-in UI to scan IDs from the camera stream, call `RecognizerRunnerView.resetRecognitionState(false)` to do the same.
 
 ### Changes to the BlinkId(Combined)Recognizer:
 
 - We're now able to extract the additional address on Hungary Address Cards
 - We've improved data extraction through the MRZ:
-    - We now return the document type through `ClassInfo`, regardless of the `RecognitionMode` you're using (`MrzId`, `MrzPassport` or `MrzVisa`). 
+    - We now return the document type through `ClassInfo`, regardless of the `RecognitionMode` you're using (`MrzId`, `MrzPassport` or `MrzVisa`).
     - This means you can now use `ClassFilter` to filter these documents by their type.
     - We now return the document number on Nigeria IDs complete with its check digit.
     - We now support Italy Residence Permits with a *CR* document code.
 - We've extended the `ClassInfo` structure with helper methods so you can filter documents by country more easily:
     - Use `countryName`, `isoNumericCountryCode`, `isoAlpha2CountryCode` and `isoAlpha3CountryCode` to get the full country names or their representative codes defined by [ISO](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes).
-- We've extended the `BarcodeResult` structure with `extendedElements` 
+- We've extended the `BarcodeResult` structure with `extendedElements`
     - You can find all data from AAMVA-compliant barcodes under their respective `BarcodeElementKey` in the `BarcodeElements` structure
     - For a full list of keys please see `BarcodeElementKey` enum
 - We've added another `ProcessingStatus` called `AwaitingOtherSide`
@@ -42,7 +405,7 @@
 
 ### Changes to the IdBarcodeRecognizer:
 
-- We've extended the results with `extendedElements` 
+- We've extended the results with `extendedElements`
     - You can find all data from AAMVA-compliant barcodes under their respective `BarcodeElementKey` in the `BarcodeElements` structure
     - For a full list of keys please see `BarcodeElementKey` enum
 
@@ -59,7 +422,7 @@
 
 ### Minor API changes
 
-- We've replaced `Using time-limited license!` warning with `Using trial license!` warning. The warning message is displayed when using a trial license key. To disable it, use `MicroblinkSDK.setShowTrialLicenseWarning(false)`.
+- We've replaced `Using time-limited license!` warning with `Using trial license!` warning. The warning message is displayed when using a trial license key.
 - We’ve renamed `MrtdDocumentType.MRTD_TYPE_IDENITY_CARD` enum member to `MrtdDocumentType.MRTD_TYPE_IDENTITY_CARD`.
 
 ### Fixes:
@@ -73,7 +436,7 @@
 - We’ve updated SDK's Android **target API level to 30**.
 - We’ve translated the complete SDK to the **Serbian** language.
 - We’ve  made the SDK safe from **tapjacking**, a form of attack where a user is tricked into tapping something he or she didn’t intend to tap. We did this by adding a new security option that prompts the SDK to discard touches when the activity's window is obscured by another visible window. To activate it, use `UISettings.setFilterTouchesWhenObscured(true)`.
-- We’ve added a new feedback message to users, reminding them to keep a document fully visible in case they accidentally cover a part of it with their finger or an object. 
+- We’ve added a new feedback message to users, reminding them to keep a document fully visible in case they accidentally cover a part of it with their finger or an object.
     - It appears while scanning the document by using `BlinkIdUISettings` and `BlinkIdOverlayController`:
     - It will display an error message "Keep the document fully visible".
     - This message is displayed only when using `BlinkIdRecognizer` or `BlinkIdCombinedRecognizer` for scanning.
@@ -284,7 +647,7 @@ We have deprecated the following recognizers:
 
 ### Fixes
 
-- We’ve fixed an uncommon bug where you’d get incomplete results upon scanning of the MRZ with the `allowUnparsed` setting enabled. 
+- We’ve fixed an uncommon bug where you’d get incomplete results upon scanning of the MRZ with the `allowUnparsed` setting enabled.
 - SDK does not require permission `android.permission.ACCESS_NETWORK_STATE` to unlock itself anymore, in cases when the license key needs online activation.
 
 ## 7.10.0
@@ -316,18 +679,18 @@ We have deprecated the following recognizers:
 
 - We have improved parsing of **MRZ** formats deviating from the ISO/IEC 7501 standard:
     - Document discriminator was in place of the document number on driver licenses and IDs from:
-        - **New York** 
-        - **Michigan** 
+        - **New York**
+        - **Michigan**
         - **Canada**
     - Different check digit calculation for **Mexico** (Consular) ID
     - Recognition of the unofficial `XCT` country code for Northern **Cyprus** ID
     - Recognition of different country codes and check digit calculation on **China** Mainland Travel Permit for Hong Kong and Macao Residents
-    
+
 - We have made some improvements to the **BlinkID(Combined)Recognizer**
    - We improved MRZ data extraction on **Russia Passport**.
    - We added anonymization support for more documents.
-    - You can now see `ProcessingStatus` in the results to inspect potential processing errors, such as when barcode detection fails, a mandatory field is missing, etc. 
-    - You can now also see a more detailed `ImageAnalysisResult` showing you when: 
+    - You can now see `ProcessingStatus` in the results to inspect potential processing errors, such as when barcode detection fails, a mandatory field is missing, etc.
+    - You can now also see a more detailed `ImageAnalysisResult` showing you when:
         - Face image is detected
         - MRZ is detected
         - Barcode is detected
@@ -339,9 +702,9 @@ We have deprecated the following recognizers:
         - `enableFullRecognition` lets you scan all data from our supported documents.
         - Your license key still controls which of the above recognition modes are allowed.
     - We have added a `RecognitionMode` result member describing which recognition mode was used to produce the results.
-    -  We are now retrieving sex and nationality fields from the MRZ in cases where those two fields cannot be found in the document’s VIZ. Previously, we only used to do this for dates, name fields and document numbers. 
+    -  We are now retrieving sex and nationality fields from the MRZ in cases where those two fields cannot be found in the document’s VIZ. Previously, we only used to do this for dates, name fields and document numbers.
     - We are now preserving the original string (raw data) of the dates we couldn’t parse.
-    
+
 - We have improved the thresholds for card detection feedback messages ("move closer" and "move farther"). This will improve the UX when scanning in landscape mode as the document can now be closer to the camera.
 
 ### Deprecated recognizers
@@ -409,7 +772,7 @@ If you’re using built-in activities, when `onActivityResult` is called with `R
         - Utah DL
         - Washington DL
         - Wisconsin DL
-        
+
     - Support for new document types:
         - Australia New South Wales - ID Card / Front only / BETA
         - Brazil - Driver License / BETA
@@ -443,10 +806,10 @@ If you’re using built-in activities, when `onActivityResult` is called with `R
         - USA District Of Columbia - Driver License
         - USA Indiana - ID Card
         - USA Kentucky - ID Card
-    
+
     - Back side support:
         - Kenya ID
-        
+
     - Barcode scanning on the following documents:
         - Argentina ID
         - Colombia ID
@@ -490,13 +853,13 @@ If you’re using built-in activities, when `onActivityResult` is called with `R
         - Remaining data is filled from the front side's visual inspection zone.
         - Remaining data is filled with data from the MRZ.
 
-- We added digital signature support to `PassportRecognizer`. 
+- We added digital signature support to `PassportRecognizer`.
 - We updated `IdBarcodeRecognizer.Result` with specific driving license info.
     - Use `getRestrictions()`, `getEndorsements()` and `getVehicleClass()`.
 - We updated `UsdlRecognizer.Result` and `IdBarcodeRecognizer.Result` with additional address fields:
-    - `street`, `postalCode`, `city` and `jurisdiction` 
+    - `street`, `postalCode`, `city` and `jurisdiction`
 - We added `isExpired()` method to `BlinkIdRecognizer.Result`, `BlinkIdCombinedRecognizer.Result` and `IdBarcodeRecognizer.Result`.
-    - It compares the current time on the device with the date of expiry and checks whether the document has expired or not. 
+    - It compares the current time on the device with the date of expiry and checks whether the document has expired or not.
 - We enabled usage of combined recognizers through the Direct API:
     - Recognition state is not automatically reset with every image that comes to the recognition through the Direct API. If reset is required, you should call `RecognizerRunner.resetRecognitionState()`
 
@@ -544,7 +907,7 @@ If you’re using built-in activities, when `onActivityResult` is called with `R
     - Australia - Northern Territory - Driving licence / BETA
     - Australia - Tasmania - Driving licence / front only / BETA
     - Canada - Alberta - ID card / BETA
-    - Canada - British Columbia - Driver license / Public services card (Combined) 
+    - Canada - British Columbia - Driver license / Public services card (Combined)
     - Canada - British Columbia - ID card / BETA
     - Canada - British Columbia - Public services card
     - Canada - New Brunswick - Driving license
@@ -639,7 +1002,7 @@ If you’re using built-in activities, when `onActivityResult` is called with `R
     - `sanitizedDocumentCode`
     - `sanitizedDocumentNumber`
 - improved `BlinkIdRecognizer` and `BlinkIdCombinedRecognizer`:
-    - introduced blur filter that discards blurred frames and prevents reading data from them. This option is enabled by default, it can be disabled by using `BlinkIdRecognizer.setAllowBlurFilter(false)` and `BlinkIdCombinedRecognizer.setAllowBlurFilter(false)` 
+    - introduced blur filter that discards blurred frames and prevents reading data from them. This option is enabled by default, it can be disabled by using `BlinkIdRecognizer.setAllowBlurFilter(false)` and `BlinkIdCombinedRecognizer.setAllowBlurFilter(false)`
 - improved camera performance on some Samsung devices
 
 ### Minor API changes:
@@ -676,7 +1039,7 @@ If you’re using built-in activities, when `onActivityResult` is called with `R
 
 ### Improvements for existing features:
 
-- improved `MrtdRecognizer`: 
+- improved `MrtdRecognizer`:
     - added support for documents with non-binary gender specification (symbol X)
 - improved `DocumentFaceRecognizer`:
     - improved scanning time (faster scan)
@@ -697,7 +1060,7 @@ If you’re using built-in activities, when `onActivityResult` is called with `R
     - `MalaysiaMyTenteraFrontRecognizer` supports 6-digit army number
     - `MalaysiaIkadFrontRecognizer` - better extraction of the following fields (**DeepOCR** support): date of birth, sector, employer, address and date of expiry
 - United Arab Emirates:
-    - glare detection is disabled by default for `UnitedArabEmiratesIdFrontRecognizer` and `UnitedArabEmiratesIdBackRecognizer` 
+    - glare detection is disabled by default for `UnitedArabEmiratesIdFrontRecognizer` and `UnitedArabEmiratesIdBackRecognizer`
     - `UnitedArabEmiratesIdBackRecognizer` - optimized detection for black backgrounds
 
 ### Minor API changes:
@@ -712,7 +1075,7 @@ If you’re using built-in activities, when `onActivityResult` is called with `R
     - `SloveniaQrCodeRecognizer` to `SloveniaQrCodePaymentRecognizer`
     - `SwitzerlandQrCodeRecognizer` to `SwitzerlandQrCodePaymentRecognizer`
     - `UnitedKingdomQrCodeRecognizer` to `UnitedKingdomQrCodePaymentRecognizer`
-- overlay controllers are no longer using UI settings, they're now using Overlay settings,  you can create Overlay controller from UI settings by calling method `uiSettings.createOverlayController` 
+- overlay controllers are no longer using UI settings, they're now using Overlay settings,  you can create Overlay controller from UI settings by calling method `uiSettings.createOverlayController`
 - `PhotopayOverlayController`, `DocumentOverlayController` and `BarcodeOverlayController` are replaced with single overlay controller - `BasicOverlayController`
 - moved some classes to new packages
 
@@ -941,7 +1304,7 @@ For any questions, you might have, we stand at your service.
     - renamed result member: accountNumber to recipientAccountNumber
 - improved QR code scanning for images
 - improved `MalaysiaDlFrontRecognizer`:
-    - added support for reading Malaysia Dl for foreigners 
+    - added support for reading Malaysia Dl for foreigners
 - improved `UsdlRecognizer`:
     - added support for reading dates on Nigerian Driver's licenses
 - added support for setting full document image extension factors for almost all ID document recognizers, they implement interface `FullDocumentImageExtensionOptions`
@@ -1019,9 +1382,9 @@ For any questions, you might have, we stand at your service.
     - `nricNumber ` to `nric `
 - `MalaysiaMyKadFrontRecognizer` does not extract `armyNumber` anymore, use `MalaysiaMyTenteraFrontRecognizer` for scanning `MyTentera`
 - removed `sex` and `signatureImage` from `MalaysiaMyKadBackRecognizer `
-- `MrtdRecognizer`: 
+- `MrtdRecognizer`:
     - method `setSaveImageDPI` which has been used to set DPI for full document and MRZ image is replaced with methods `setFullDocumentImageDpi` and `setMrzImageDpi`
-- renamed methods in `SwitzerlandIdBackRecognizer` and its `Result`: 
+- renamed methods in `SwitzerlandIdBackRecognizer` and its `Result`:
     - `nonMrzDateOfExpiry` to `dateOfExpiry`
     - `nonMrzSex` to `sex`
 - renamed methods in `SwitzerlandPassportRecognizer` and its `Result`:
@@ -1066,7 +1429,7 @@ For any questions, you might have, we stand at your service.
     - `SwedenDlFrontRecognizer.Result`:
         - `referenceNumber`
     - `MalaysiaIkadFrontRecognizer.Result`:
-        - `passportNumber`    
+        - `passportNumber`
     - `AustriaIdBackRecognizer.Result`:
         - `principalResidence`
         - `height`
@@ -1105,7 +1468,7 @@ For any questions, you might have, we stand at your service.
 ### Bug fixes:
 
 - fixed camera autofocus problems on Samsung S9/S9+ when optimisation for near scanning is enabled
-- fixed autofocus problems in `Field by field` scanning on Huawei P20 pro, Huawei P20 and Huawei P20 lite 
+- fixed autofocus problems in `Field by field` scanning on Huawei P20 pro, Huawei P20 and Huawei P20 lite
 
 ## 7.1.0
 
@@ -1180,7 +1543,7 @@ For any questions, you might have, we stand at your service.
     - `RecognizerView` has been renamed to `RecognizerRunnerView` and `Recognizer` singleton to `RecognizerRunner`
     - `SegmentScanActivity` has been renamed to `FieldByFieldScanActivity`
     - `RandomScanActivity` does not exist anymore
-    - previously internal `Recognizer` objects are not internal anymore - instead of having opaque `RecognizerSettings` and `RecognizerResult` objects, you now have stateful `Recognizer` object that contains its `Result` within and mutates it while performing recognition. 
+    - previously internal `Recognizer` objects are not internal anymore - instead of having opaque `RecognizerSettings` and `RecognizerResult` objects, you now have stateful `Recognizer` object that contains its `Result` within and mutates it while performing recognition.
         - similarly we now have stateful `Parser` and `Detector` objects
         - introduced new `Processor` object type
         - For more information, see [README](README.md) and updated demo applications
@@ -1210,8 +1573,8 @@ For any questions, you might have, we stand at your service.
 
 ### New features:
 
-- added support for reading front side of Sweden Driver's License - use `SwedenDLFrontRecognizerSettings` 
-  
+- added support for reading front side of Sweden Driver's License - use `SwedenDLFrontRecognizerSettings`
+
 ### Improvements for existing features:
 
 - improved `CroatianIDBackSideRecognizer`:
@@ -1237,19 +1600,19 @@ For any questions, you might have, we stand at your service.
 
 ### New features:
 
-- added support for reading front side of Egypt ID - use `EgyptIDFrontRecognizerSettings` 
+- added support for reading front side of Egypt ID - use `EgyptIDFrontRecognizerSettings`
 - added support for reading front and back side of Jordan ID - use `JordanIDFrontRecognizerSettings`,  `JordanIDBackRecognizerSettings` and `JordanIDCombinedRecognizerSettings`
-- added support for reading front side of Hong Kong ID - use `HongKongIDFrontRecognizerSettings` 
+- added support for reading front side of Hong Kong ID - use `HongKongIDFrontRecognizerSettings`
 - added support for reading front side of Malaysian drivers license - use `MalaysianDLFrontRecognizerSettings`
 - added support for reading front and back side of Colombian ID - use `ColombiaIDFrontRecognizerSettings` and `ColombiaIDBackRecognizerSettings`
-- added support for reading front and back side of United Arab Emirates ID - use `UnitedArabEmiratesIDFrontRecognizerSettings` and `UnitedArabEmiratesIDBackRecognizerSettings` 
+- added support for reading front and back side of United Arab Emirates ID - use `UnitedArabEmiratesIDFrontRecognizerSettings` and `UnitedArabEmiratesIDBackRecognizerSettings`
 - added support for reading front side of New Zealand drivers license - use `NewZealandDLFrontRecognizerSettings`
-- added support for reading back side of Malaysian MyKad - use `MyKadBackSideRecognizerSettings` 
+- added support for reading back side of Malaysian MyKad - use `MyKadBackSideRecognizerSettings`
 - added support for reading Malaysian MyTentera documents - use `MyTenteraRecognizerSettings`
-- added support for reading Malaysian MyTentera documents with MyKad recognizer - use `MyKadFrontSideRecognizerSettings` and enable reading of army number 
+- added support for reading Malaysian MyTentera documents with MyKad recognizer - use `MyKadFrontSideRecognizerSettings` and enable reading of army number
 - added support for setting DPI for full document images returned by `MyKadFrontSideRecognizer`, `MyKadBackSideRecognizer`, `MyTenteraRecognizer` and `IKadRecognizer`:
     - use `setFullDocumentImageDPI` on the corresponding recognizer settings
-  
+
 ### Minor API changes:
 
 - renamed `MyKadRecognizerSettings` and `MyKadRecognitionResult` to `MyKadFrontSideRecognizerSettings` and `MyKadFrontSideRecognitionResult` and moved them to `com.microblink.recognizers.blinkid.malaysia.mykad.front` package
@@ -1270,8 +1633,8 @@ For any questions, you might have, we stand at your service.
     - added support for parsing Malaysian Passport IMM13P MRZ type, reading of special characters must be enabled by using `MRTDRecognizerSettings.setAllowSpecialCharacters`
     - enabled reading of MRZ with '-' characters (non-default setting), to enable this use method `MRTDRecognizerSettings.setAllowSpecialCharacters`
     - improved reading of Belgium ID MRZ OPT2 field
-    - added support for reading Belgium MRZ with partial date of birth - `MRTDRecognizerSettings.setAllowUnverifiedResults()` must be set to `true` 
-    - added support for reading Kenya MRZ - `MRTDRecognizerSettings.setAllowUnverifiedResults()` must be set to `true` 
+    - added support for reading Belgium MRZ with partial date of birth - `MRTDRecognizerSettings.setAllowUnverifiedResults()` must be set to `true`
+    - added support for reading Kenya MRZ - `MRTDRecognizerSettings.setAllowUnverifiedResults()` must be set to `true`
 - improved `MyKadFrontSideRecognizer` and `MyTenteraRecognizer`:
     - better reading of name field
     - better reading of address field
@@ -1339,7 +1702,7 @@ For any questions, you might have, we stand at your service.
 - warning for time limited license keys when using provided activities, custom UI integration or Direct API:
     - the goal is to prevent unintentional publishing of application to production with the demo license key that will expire
     - warning toast can be disabled by using `EXTRAS_SHOW_TIME_LIMITED_LICENSE_KEY_WARNING` intent extra, `RecognizerView.setLicenseKeyTimeLimitedWarningEnabled` method when custom UI integration is used and `Recognizer.setLicenseKeyTimeLimitedWarningEnabled` method when Direct API is used
-  
+
 ### Minor API changes:
 - `DocumentSpecification` does not have method `setPhysicalSizeInInches` any more
 - `DocumentDetectorResult` does not contain information about screen orientation any more
@@ -1400,8 +1763,8 @@ For any questions, you might have, we stand at your service.
 - `RegexParserSettings` and `RawParserSettings` now work with `AbstractOCREngineOptions`, which is a base class of `BlinkOCREngineOptions`
     - default engine options returned by method `getOcrEngineOptions` for both parser settings return instance of `BlinkOCREngineOptions`
 - `BlinkOCRRecognizerSettings` is now deprecated and will be removed in `v7.0.0`
-    - use `DetectorRecognizerSettings` to perform scanning of templated documents 
-    - use `BlinkInputRecognizerSettings` for segment scan or for full-screen OCR 
+    - use `DetectorRecognizerSettings` to perform scanning of templated documents
+    - use `BlinkInputRecognizerSettings` for segment scan or for full-screen OCR
     - until `v7.0.0`, `BlinkOCRRecognizerSettings` will behave as before, however you are encouraged to update your code not to use it anymore
 - `DocumentClassifier` interface is moved from `com.microblink.recognizers.blinkocr` to `com.microblink.recognizers.detector` package and `DocumentClassifier.classifyDocument()` now accepts `DetectorRecognitionResult` as parameter for document classification
 - `Slovak ID Recognizers`:
@@ -1491,7 +1854,7 @@ For any questions, you might have, we stand at your service.
     - instead of `GermanIDMRZSideRecognizer`, which was used for scanning front side of the older ID cards and back side of the new ID cards, there are two specialised recognizers:  `GermanIDBackSideRecognizer`  and `GermanOldIDRecognizer`
     - improved scanning accuracy of the `GermanIDFrontSideRecognizer` (name and surname)
     - splitting address from back side of the new German ID (GermanIDBackSideRecognizer) to ZIP code, city, street and house number
-    
+
 - improved Croatian ID recognizers:
     - multiple scans are used for better confidence
 - `TopUpParser` improvements
@@ -1598,7 +1961,7 @@ For any questions, you might have, we stand at your service.
 ## 6.0.0
 - improved `MobileCouponsParser`, added more options to customise parser settings
 - added support for scanning front and back side of Serbian ID cards
-- added option to request setting of `FLAG_SECURE` on activity window, using intent extras, for all built-in scan activities 
+- added option to request setting of `FLAG_SECURE` on activity window, using intent extras, for all built-in scan activities
     - this flag can be used to prevent users from taking screenshots of the activity window content and to prevent content from being viewed on non-secure displays
 - improved support for Czech segment scan:
     - added parser for Czech variabilni symbol
@@ -1662,7 +2025,7 @@ For any questions, you might have, we stand at your service.
     - set parser to Arabic-Indic mode (amounts with Arabic-Indic digits)
     - allow amounts with space separated digit groups (thousands)
     - set ideal (expected) number of digits before decimal point
-- Added factory method `createFromPreset` to generic AmountParserSettings that creates the settings from one of the available presets (`GENERIC`, `LARGE_AMOUNT`) 
+- Added factory method `createFromPreset` to generic AmountParserSettings that creates the settings from one of the available presets (`GENERIC`, `LARGE_AMOUNT`)
 - added support for DetectorRecognizer - a recognizer which can perform detection of various documents
     - see `PhotoPayDetectorDemo` app for example on how detectors can be used
 - initial support for Slovak PAY by square QR codes
@@ -1691,7 +2054,7 @@ For any questions, you might have, we stand at your service.
 - support for parsing PlusGiro numbers in Swedish segment scan
     - existing SweBankGiroParserSettings has been renamed to SweGiroParserSettings
     - SweGiroParser can now parse both BankGiro and PlusGiro
-    - two slip code digits are appended to SweGiroParser result  
+    - two slip code digits are appended to SweGiroParser result
 - fixed missing last digit (check digit) in SweReferenceParser result
 
 
@@ -1770,7 +2133,7 @@ For any questions, you might have, we stand at your service.
 - removed support for ARMv7 devices which do not support NEON SIMD
     - this enabled us to increase recognition speed at cost of not supporting old devices like those using NVIDIA Tegra 2
     - you can check [this article](https://microblink.zendesk.com/hc/en-us/articles/206113151-Removing-support-for-devices-without-NEON-SIMD-extensions) for more information about NEON and why we use it
-- removed support for ARMv6 devices 
+- removed support for ARMv6 devices
 - added official support for Android 6.0 and it's runtime camera permissions
     - if using provided activities, the logic behind asking user to give camera permission is handled internally
     - if integrating using custom UI, you are required to ask user to give you permission to use camera. To make this easier, we have provided a _CameraPermissionManager_ class which does all heavylifting code about managing states when asking user for camera permission. Refer to demo apps to see how it is used.
@@ -1900,7 +2263,7 @@ For any questions, you might have, we stand at your service.
 - fixed race condition at camera initialization on some Android devices (HTC One M8)
 
 ## 3.3.0
-- added support for embedding PhotoPay into custom activity 
+- added support for embedding PhotoPay into custom activity
 - PhotoPayView is now just a camera view that can be embedded anywhere, you just need to pass activity's lifecycle events to it, see README for more details
 
 ## 3.2.1
@@ -1957,7 +2320,7 @@ For any questions, you might have, we stand at your service.
     - you can obtain the list with following snippet:
 
 ```java
-            ArrayList<RecognitionData> dataList = getIntent().getExtras().getParcelableArrayList(BasePhotoPayActivity.EXTRAS_PAYMENT_DATA_LIST);             
+            ArrayList<RecognitionData> dataList = getIntent().getExtras().getParcelableArrayList(BasePhotoPayActivity.EXTRAS_PAYMENT_DATA_LIST);
 ```
 - by default, taking screenshots of camera activity is now allowed (until now it was disabled by default and could be overriden with custom implementation of `onConfigureWindow`)
 - added support for x86 devices
@@ -2006,7 +2369,7 @@ For any questions, you might have, we stand at your service.
 ## 2.2.1
 - Improved OCR for Croatian payslips
 - Added new field for Croatian scanning "Reference number insecure"
-- Fixed issue with returning completely empty results in some cases when scanning timeout occurs 
+- Fixed issue with returning completely empty results in some cases when scanning timeout occurs
 
 ## 2.2.0
 - this version does not use R class for referencing resources from within binary jar - this means that PhotopaySdk library project can now be repackaged
@@ -2071,7 +2434,7 @@ more reliable scanning
 - Sieve algorithm improved, results are not boosted between results
 - Belegart recognition in Austria improved, detection algorithm for non SEPA slips improved
 - Positioning of some elements fixed, especially on wide screen phones
-- In Austria, detection frame is now unmovable. 
+- In Austria, detection frame is now unmovable.
 
 ## 1.7.6
 - Multiple recognitions of receiver name in Austrian slips
@@ -2164,7 +2527,7 @@ more reliable scanning
 ## 1.3.5
 - Using single OpenGL context which additionally speeds up the processing and fixes the hanging bug
 - Added arbitrary text block extractor
-- Updated ACS algorithm 
+- Updated ACS algorithm
 
 ## 1.3.1
 - Further improvements to adaptive contrast stretching
