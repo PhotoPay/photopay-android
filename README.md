@@ -39,8 +39,6 @@
         * [Passport recognizer](#passportRecognizer)
         * [Visa recognizer](#visaRecognizer)
         * [ID barcode recognizer](#idBarcodeRecognizer)
-        * [AAMVA standard barcode recognizer (USA, Canada, Nigeria)](#us_dl_recognizer)
-        * [AAMVA standard combined recognizer (USA, Canada, Nigeria)](#us_dl_combined_recognizer)
         * [Document face recognizer](#documentFaceRecognizer)
         * [EU Driver's License recognizer](#eudlRecognizer)
     * [Country-specific BlinkID recognizers](#blinkid_recognizers_countries)
@@ -193,14 +191,13 @@ You can also create your own scanning UI - you just need to embed `RecognizerRun
 ## <a name="androidStudioIntegration"></a> SDK integration
 #### Adding _PhotoPay_ dependency
 
-1. In Android Studio menu, click _File_, select _New_ and then select _Module_.
-2. In new window, select _Import .JAR or .AAR Package_, and click _Next_.
-3. In _File name_ field, enter the path to _LibPhotoPay.aar_ and click _Finish_.
-4. In your app's `build.gradle`, add dependency to `LibPhotoPay` and appcompat:
+1. Create a `libs` folder in your Android Studio project.
+2. Download the _LibPhotoPay.aar_ file and move it to the created `libs` folder.
+3. In your app's `build.gradle`, add a dependency to `LibPhotoPay` (by using a relative path to the _LibPhotoPay.aar_ file) and appcompat:
 
     ```
     dependencies {
-        implementation project(':LibPhotoPay')
+        implementation files('../libs/LibPhotoPay.aar')
         implementation "androidx.appcompat:appcompat:1.2.0"
     }
     ```
@@ -307,7 +304,7 @@ _PhotoPay_ requires **Android 4.1** (API level **16**) or newer. For best perfor
 
 ### Camera
 
-Camera video preview resolution also matters. In order to perform successful scans, camera preview resolution must be at least 480p. Note that camera preview resolution is not the same as video recording resolution. For example, [Sony Xperia Go](http://www.gsmarena.com/sony_xperia_go-4782.php) supports 720p video recording but preview resolution is only 320p - _PhotoPay_ won't work on that device.
+Camera video preview resolution also matters. In order to perform successful scans, camera preview resolution must be at least 720p. Note that camera preview resolution is not the same as video recording resolution. For example, [Sony Xperia Go](http://www.gsmarena.com/sony_xperia_go-4782.php) supports 720p video recording but preview resolution is only 320p - _PhotoPay_ won't work on that device.
 
 ### Processor architecture
 
@@ -1082,18 +1079,6 @@ You can find information about usage context at the beginning of [this section](
 
 ### <a name="idBarcodeRecognizer"></a> ID barcode recognizer
 The [`IdBarcodeRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/idbarcode/IdBarcodeRecognizer.html) is used for scanning barcodes from various ID cards. Check [this document](documentation/IdBarcodeRecognizer.md) to see the list of supported document types.
-
-You can find information about usage context at the beginning of [this section](#blinkid_recognizers).
-
-### <a name="us_dl_recognizer"></a> AAMVA standard barcode recognizer (USA, Canada, Nigeria)
-The [`UsdlRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkbarcode/usdl/UsdlRecognizer.html) is used for scanning PDF417 barcode from USA ID cards and driver’s licence, Canadian ID cards and driving licence, and Nigerian driving licence.
-
-You can find information about usage context at the beginning of [this section](#blinkid_recognizers).
-
-### <a name="us_dl_combined_recognizer"></a> AAMVA standard combined recognizer (USA, Canada, Nigeria)
-The [`UsdlCombinedRecognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkid/usdl/UsdlCombinedRecognizer.html) first scans the front side of the document to obtain the full document image and face image. It then scans PDF417 barcode from the back side of AAMVA standard documents. This includes USA ID cards and driver’s licence, Canadian ID cards and driving licence, and Nigerian driving licence.
-
-Internally, it uses [DocumentFaceRecognizer](#documentFaceRecognizer) for obtaining full document image and face image as the first step and then [UsdlRecognizer](#us_dl_recognizer) for scanning the PDF417 barcode.
 
 You can find information about usage context at the beginning of [this section](#blinkid_recognizers).
 
@@ -2159,7 +2144,7 @@ This problem is usually solved with transitive Maven dependencies, i.e. when pub
 
 _PhotoPay_ is distributed with **ARMv7**, **ARM64**, **x86** and **x86_64** native library binaries.
 
-**ARMv7** architecture gives the ability to take advantage of hardware accelerated floating point operations and SIMD processing with [NEON](http://www.arm.com/products/processors/technologies/neon.php). This gives _PhotoPay_ a huge performance boost on devices that have ARMv7 processors. Most new devices (all since 2012.) have ARMv7 processor so it makes little sense not to take advantage of performance boosts that those processors can give. Also note that some devices with ARMv7 processors do not support NEON instruction sets, most popular being those based on [NVIDIA Tegra 2](https://en.wikipedia.org/wiki/Tegra#Tegra_2). Since these devices are old by today's standard, _PhotoPay_ does not support them. For the same reason, _PhotoPay_ does not support devices with ARMv5 (`armeabi`) architecture.
+**ARMv7** architecture gives the ability to take advantage of hardware accelerated floating point operations and SIMD processing with [NEON](http://www.arm.com/products/processors/technologies/neon.php). This gives _PhotoPay_ a huge performance boost on devices that have ARMv7 processors. Most new devices (all since 2012.) have ARMv7 processor so it makes little sense not to take advantage of performance boosts that those processors can give. Also note that some devices with ARMv7 processors do not support NEON and VFPv4 instruction sets, most popular being those based on [NVIDIA Tegra 2](https://en.wikipedia.org/wiki/Tegra#Tegra_2), [ARM Cortex A9](https://en.wikipedia.org/wiki/ARM_Cortex-A9) and older. Since these devices are old by today's standard, _PhotoPay_ does not support them. For the same reason, _PhotoPay_ does not support devices with ARMv5 (`armeabi`) architecture.
 
 **ARM64** is the new processor architecture that most new devices use. ARM64 processors are very powerful and also have the possibility to take advantage of new NEON64 SIMD instruction set to quickly process multiple pixels with a single instruction.
 
