@@ -1,5 +1,27 @@
 # Release notes
 
+## 7.14.0
+
+### Back side support added:
+- Thailand - ID Card
+
+### Changes to BlinkID(Combined) Recognizer
+- Added new result members - `fathersName` and `mothersName` both in BlinkID and BlinkIDCombined Recognizers, as well as in VIZ result
+
+### Improvements
+- We can now extract `fathersName` and `mothersName` from Mexico Voter ID Card
+- Australian Driving Licenses for New South Wales, Northern Territory, Queensland, Victoria and Western Australia now have the driver license unique card number field extracted as `document_additional_number`
+
+### Changes to BarcodeRecognizer
+- We’ve removed support for `aztec` and `dataMatrix` barcode formats from BarcodeRecognizer
+
+### Changes to MRTDRecognizer
+- Added `MRTD_TYPE_BORDER_CROSSING_CARD` to MrtdDocumentType enum 
+
+### Fixes
+- Fixed rare NullPointerException that happened only on some devices, caused by a lifecycle issue where the camera error callback was called after the view has already been destroyed
+
+
 ## 7.13.0
 
 ### Newly supported identity documents:

@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10,"i27":10,"i28":10,"i29":10,"i30":10,"i31":10,"i32":10,"i33":10,"i34":10,"i35":10,"i36":10,"i37":10,"i38":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10,"i27":10,"i28":10,"i29":10,"i30":10,"i31":10,"i32":10,"i33":10,"i34":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -141,7 +141,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><code>android.os.Parcelable</code></dd>
+<dd><code>android.os.Parcelable</code>, <code><a href="../../../util/JsonizableEntity.html" title="interface in com.microblink.entities.util">JsonizableEntity</a></code></dd>
 </dl>
 <hr>
 <pre>public final class <span class="typeNameLabel">BarcodeRecognizer</span>
@@ -333,75 +333,61 @@ extends <a href="../../Recognizer.html" title="class in com.microblink.entities.
 </tr>
 <tr id="i12" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setScanAztecCode(boolean)">setScanAztecCode</a></span>&#8203;(boolean&nbsp;scanAztecCode)</code></th>
-<td class="colLast">
-<div class="block">Should Aztec 2D barcode be scanned.</div>
-</td>
-</tr>
-<tr id="i13" class="rowColor">
-<td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setScanCode128(boolean)">setScanCode128</a></span>&#8203;(boolean&nbsp;scanCode128)</code></th>
 <td class="colLast">
 <div class="block">Should Code128 barcode be scanned.</div>
 </td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setScanCode39(boolean)">setScanCode39</a></span>&#8203;(boolean&nbsp;scanCode39)</code></th>
 <td class="colLast">
 <div class="block">Should Code39 barcode be scanned.</div>
 </td>
 </tr>
-<tr id="i15" class="rowColor">
-<td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setScanDataMatrix(boolean)">setScanDataMatrix</a></span>&#8203;(boolean&nbsp;scanDataMatrix)</code></th>
-<td class="colLast">
-<div class="block">Should DataMatrix 2D barcode be scanned.</div>
-</td>
-</tr>
-<tr id="i16" class="altColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setScanEan13(boolean)">setScanEan13</a></span>&#8203;(boolean&nbsp;scanEan13)</code></th>
 <td class="colLast">
 <div class="block">Should EAN13 barcode be scanned.</div>
 </td>
 </tr>
-<tr id="i17" class="rowColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setScanEan8(boolean)">setScanEan8</a></span>&#8203;(boolean&nbsp;scanEan8)</code></th>
 <td class="colLast">
 <div class="block">Should EAN8 barcode be scanned.</div>
 </td>
 </tr>
-<tr id="i18" class="altColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setScanInverse(boolean)">setScanInverse</a></span>&#8203;(boolean&nbsp;scanInverse)</code></th>
 <td class="colLast">
 <div class="block">Enables scanning of barcodes with inverse intensity values (e.g.</div>
 </td>
 </tr>
-<tr id="i19" class="rowColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setScanItf(boolean)">setScanItf</a></span>&#8203;(boolean&nbsp;scanItf)</code></th>
 <td class="colLast">
 <div class="block">Should ITF barcode be scanned.</div>
 </td>
 </tr>
-<tr id="i20" class="altColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setScanPdf417(boolean)">setScanPdf417</a></span>&#8203;(boolean&nbsp;scanPdf417)</code></th>
 <td class="colLast">
 <div class="block">Should PDF417 2D barcode be scanned.</div>
 </td>
 </tr>
-<tr id="i21" class="rowColor">
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setScanQrCode(boolean)">setScanQrCode</a></span>&#8203;(boolean&nbsp;scanQrCode)</code></th>
 <td class="colLast">
 <div class="block">Should QR code be scanned.</div>
 </td>
 </tr>
-<tr id="i22" class="altColor">
+<tr id="i20" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setScanUncertain(boolean)">setScanUncertain</a></span>&#8203;(boolean&nbsp;scanUncertain)</code></th>
 <td class="colLast">
@@ -409,112 +395,98 @@ extends <a href="../../Recognizer.html" title="class in com.microblink.entities.
  guarantee that all data will be read.</div>
 </td>
 </tr>
-<tr id="i23" class="rowColor">
+<tr id="i21" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setScanUpca(boolean)">setScanUpca</a></span>&#8203;(boolean&nbsp;scanUpca)</code></th>
 <td class="colLast">
 <div class="block">Should UPCA barcode be scanned.</div>
 </td>
 </tr>
-<tr id="i24" class="altColor">
+<tr id="i22" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setScanUpce(boolean)">setScanUpce</a></span>&#8203;(boolean&nbsp;scanUpce)</code></th>
 <td class="colLast">
 <div class="block">Should UPCE barcode be scanned.</div>
 </td>
 </tr>
-<tr id="i25" class="rowColor">
+<tr id="i23" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setSlowerThoroughScan(boolean)">setSlowerThoroughScan</a></span>&#8203;(boolean&nbsp;slowerThoroughScan)</code></th>
 <td class="colLast">
 <div class="block">Enable slower, but more thorough scanning, thus giving higher possibility of successful scan.</div>
 </td>
 </tr>
-<tr id="i26" class="altColor">
+<tr id="i24" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#shouldReadCode39AsExtendedData()">shouldReadCode39AsExtendedData</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Enable reading code39 barcode contents as extended data.</div>
 </td>
 </tr>
-<tr id="i27" class="rowColor">
-<td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#shouldScanAztecCode()">shouldScanAztecCode</a></span>()</code></th>
-<td class="colLast">
-<div class="block">Should Aztec 2D barcode be scanned.</div>
-</td>
-</tr>
-<tr id="i28" class="altColor">
+<tr id="i25" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#shouldScanCode128()">shouldScanCode128</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Should Code128 barcode be scanned.</div>
 </td>
 </tr>
-<tr id="i29" class="rowColor">
+<tr id="i26" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#shouldScanCode39()">shouldScanCode39</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Should Code39 barcode be scanned.</div>
 </td>
 </tr>
-<tr id="i30" class="altColor">
-<td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#shouldScanDataMatrix()">shouldScanDataMatrix</a></span>()</code></th>
-<td class="colLast">
-<div class="block">Should DataMatrix 2D barcode be scanned.</div>
-</td>
-</tr>
-<tr id="i31" class="rowColor">
+<tr id="i27" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#shouldScanEan13()">shouldScanEan13</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Should EAN13 barcode be scanned.</div>
 </td>
 </tr>
-<tr id="i32" class="altColor">
+<tr id="i28" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#shouldScanEan8()">shouldScanEan8</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Should EAN8 barcode be scanned.</div>
 </td>
 </tr>
-<tr id="i33" class="rowColor">
+<tr id="i29" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#shouldScanItf()">shouldScanItf</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Should ITF barcode be scanned.</div>
 </td>
 </tr>
-<tr id="i34" class="altColor">
+<tr id="i30" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#shouldScanPdf417()">shouldScanPdf417</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Should PDF417 2D barcode be scanned.</div>
 </td>
 </tr>
-<tr id="i35" class="rowColor">
+<tr id="i31" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#shouldScanQrCode()">shouldScanQrCode</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Should QR code be scanned.</div>
 </td>
 </tr>
-<tr id="i36" class="altColor">
+<tr id="i32" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#shouldScanUpca()">shouldScanUpca</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Should UPCA barcode be scanned.</div>
 </td>
 </tr>
-<tr id="i37" class="rowColor">
+<tr id="i33" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#shouldScanUpce()">shouldScanUpce</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Should UPCE barcode be scanned.</div>
 </td>
 </tr>
-<tr id="i38" class="altColor">
+<tr id="i34" class="altColor">
 <td class="colFirst"><code>protected void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#terminateNative(long)">terminateNative</a></span>&#8203;(long&nbsp;nativeContext)</code></th>
 <td class="colLast">&nbsp;</td>
@@ -525,7 +497,7 @@ extends <a href="../../Recognizer.html" title="class in com.microblink.entities.
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;com.microblink.entities.recognizers.<a href="../../Recognizer.html" title="class in com.microblink.entities.recognizers">Recognizer</a></h3>
-<code><a href="../../Recognizer.html#getName()">getName</a>, <a href="../../Recognizer.html#isExcludedFromPing()">isExcludedFromPing</a>, <a href="../../Recognizer.html#requiresAutofocus()">requiresAutofocus</a>, <a href="../../Recognizer.html#requiresLandscapeMode()">requiresLandscapeMode</a></code></li>
+<code><a href="../../Recognizer.html#getName()">getName</a>, <a href="../../Recognizer.html#isExcludedFromPing()">isExcludedFromPing</a>, <a href="../../Recognizer.html#jsonNativeGet(long)">jsonNativeGet</a>, <a href="../../Recognizer.html#requiresAutofocus()">requiresAutofocus</a>, <a href="../../Recognizer.html#requiresLandscapeMode()">requiresLandscapeMode</a>, <a href="../../Recognizer.html#toJson()">toJson</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a id="methods.inherited.from.class.com.microblink.entities.Entity">
@@ -614,28 +586,6 @@ extends <a href="../../Recognizer.html" title="class in com.microblink.entities.
 <h4>shouldScanCode128</h4>
 <pre class="methodSignature">public&nbsp;boolean&nbsp;shouldScanCode128()</pre>
 <div class="block">Should Code128 barcode be scanned.
- By default, this is set to 'false'</div>
-</li>
-</ul>
-<a id="setScanDataMatrix(boolean)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>setScanDataMatrix</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;setScanDataMatrix&#8203;(boolean&nbsp;scanDataMatrix)</pre>
-<div class="block">Should DataMatrix 2D barcode be scanned.
- By default, this is set to 'false'</div>
-</li>
-</ul>
-<a id="shouldScanDataMatrix()">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>shouldScanDataMatrix</h4>
-<pre class="methodSignature">public&nbsp;boolean&nbsp;shouldScanDataMatrix()</pre>
-<div class="block">Should DataMatrix 2D barcode be scanned.
  By default, this is set to 'false'</div>
 </li>
 </ul>
@@ -942,28 +892,6 @@ extends <a href="../../Recognizer.html" title="class in com.microblink.entities.
 <h4>shouldScanUpca</h4>
 <pre class="methodSignature">public&nbsp;boolean&nbsp;shouldScanUpca()</pre>
 <div class="block">Should UPCA barcode be scanned.
- By default, this is set to 'false'</div>
-</li>
-</ul>
-<a id="setScanAztecCode(boolean)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>setScanAztecCode</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;setScanAztecCode&#8203;(boolean&nbsp;scanAztecCode)</pre>
-<div class="block">Should Aztec 2D barcode be scanned.
- By default, this is set to 'false'</div>
-</li>
-</ul>
-<a id="shouldScanAztecCode()">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>shouldScanAztecCode</h4>
-<pre class="methodSignature">public&nbsp;boolean&nbsp;shouldScanAztecCode()</pre>
-<div class="block">Should Aztec 2D barcode be scanned.
  By default, this is set to 'false'</div>
 </li>
 </ul>
