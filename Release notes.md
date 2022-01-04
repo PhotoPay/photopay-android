@@ -1,5 +1,44 @@
 # Release notes
 
+## 8.0.0
+
+### Major API changes
+- The SDK now includes only `PhotoPay` and `BlinkInput` recognizers. For `BlinkID` recognizers, please import `BlinkID` SDK ([more here](https://github.com/BlinkID/blinkid-android#-sdk-integration)).
+- To ensure compatibility with other Microblink SDKs, we have repackaged all classes. The root package has been renamed from `com.microblink` to `com.microblink.photopay`, which is unique to `PhotoPay` SDK.
+- Removed support for Android 4.1 - 4.3 - minimum required Android version is now Android 4.4 (API level 19).
+
+### Minor API changes
+- Getters for some of the fields have been renamed according to the guidelines we have for all of our recognizers.
+	- For example, `getIban` instead of `getIBAN`, `getBic` instead of `getBIC`, `getBlz` instead of `getBLZ`, etc.
+
+### Changes to the PhotoPayRecognizer
+- We’ve added support for 3 new fields to HungaryQRCodePaymentRecognizer:
+	- `idCode`, `versionNumber`, `characterSet`
+- We’ve added 2 new fields to CzQRCodePaymentRecognizer:
+	- `paymentSituation`, `orderFrequency`
+
+## 7.14.0
+
+### Back side support added:
+- Thailand - ID Card
+
+### Changes to BlinkID(Combined) Recognizer
+- Added new result members - `fathersName` and `mothersName` both in BlinkID and BlinkIDCombined Recognizers, as well as in VIZ result
+
+### Improvements
+- We can now extract `fathersName` and `mothersName` from Mexico Voter ID Card
+- Australian Driving Licenses for New South Wales, Northern Territory, Queensland, Victoria and Western Australia now have the driver license unique card number field extracted as `document_additional_number`
+
+### Changes to BarcodeRecognizer
+- We’ve removed support for `aztec` and `dataMatrix` barcode formats from BarcodeRecognizer
+
+### Changes to MRTDRecognizer
+- Added `MRTD_TYPE_BORDER_CROSSING_CARD` to MrtdDocumentType enum 
+
+### Fixes
+- Fixed rare NullPointerException that happened only on some devices, caused by a lifecycle issue where the camera error callback was called after the view has already been destroyed
+
+
 ## 7.13.0
 
 ### Newly supported identity documents:
