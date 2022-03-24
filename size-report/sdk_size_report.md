@@ -6,8 +6,8 @@ This SDK size report is for all supported ABIs. We use the Android official [**a
 
 | ABI | APK file size | APK download size |
 | --- |:-------------:| :----------------:|
-| armeabi-v7a | 14.3MB | 12.2MB |
-| arm64-v8a | 15.8MB | 12.5MB |
-| x86 | 17.5MB | 13.1MB |
-| x86_64 | 17.1MB | 12.9MB |
+| armeabi-v7a | 15.5MB | 12.7MB |
+| arm64-v8a | 16.7MB | 12.9MB |
+| x86 | 18.7MB | 13.7MB |
+| x86_64 | 18.1MB | 13.4MB |
 

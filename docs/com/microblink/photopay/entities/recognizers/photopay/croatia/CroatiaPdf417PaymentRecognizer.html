@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -268,25 +268,39 @@ extends <a href="../../Recognizer.html" title="class in com.microblink.photopay.
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
+<td class="colFirst"><code>float</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getConversionRate()">getConversionRate</a></span>()</code></th>
+<td class="colLast">
+<div class="block">The rate at which the conversion from EUR to HRK will be made.</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isUncertainDecoding()">isUncertainDecoding</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Uncertain decoding enables scanning of non-standard elements, but there is no guarantee that all data will be read.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>protected byte[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#serializeNativeSettings()">serializeNativeSettings</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setConversionRate(float)">setConversionRate</a></span>&#8203;(float&nbsp;conversionRate)</code></th>
+<td class="colLast">
+<div class="block">The rate at which the conversion from EUR to HRK will be made.</div>
+</td>
+</tr>
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setUncertainDecoding(boolean)">setUncertainDecoding</a></span>&#8203;(boolean&nbsp;uncertainDecoding)</code></th>
 <td class="colLast">
 <div class="block">Uncertain decoding enables scanning of non-standard elements, but there is no guarantee that all data will be read.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>protected void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#terminateNative(long)">terminateNative</a></span>&#8203;(long&nbsp;nativeContext)</code></th>
 <td class="colLast">&nbsp;</td>
@@ -297,7 +311,7 @@ extends <a href="../../Recognizer.html" title="class in com.microblink.photopay.
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;com.microblink.photopay.entities.recognizers.<a href="../../Recognizer.html" title="class in com.microblink.photopay.entities.recognizers">Recognizer</a></h3>
-<code><a href="../../Recognizer.html#getName()">getName</a>, <a href="../../Recognizer.html#isExcludedFromPing()">isExcludedFromPing</a>, <a href="../../Recognizer.html#jsonNativeGet(long)">jsonNativeGet</a>, <a href="../../Recognizer.html#requiresAutofocus()">requiresAutofocus</a>, <a href="../../Recognizer.html#requiresLandscapeMode()">requiresLandscapeMode</a>, <a href="../../Recognizer.html#toJson()">toJson</a></code></li>
+<code><a href="../../Recognizer.html#getName()">getName</a>, <a href="../../Recognizer.html#isExcludedFromPing()">isExcludedFromPing</a>, <a href="../../Recognizer.html#requiresAutofocus()">requiresAutofocus</a>, <a href="../../Recognizer.html#requiresLandscapeMode()">requiresLandscapeMode</a>, <a href="../../Recognizer.html#signedJsonNativeGet(long)">signedJsonNativeGet</a>, <a href="../../Recognizer.html#toSignedJson()">toSignedJson</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a id="methods.inherited.from.class.com.microblink.photopay.entities.Entity">
@@ -389,6 +403,28 @@ extends <a href="../../Recognizer.html" title="class in com.microblink.photopay.
 <div class="block">Uncertain decoding enables scanning of non-standard elements, but there is no guarantee that all data will be read.
  For Pdf417 barcode is used when multiple rows are missing (e.g. not whole barcode is printed).
  By default, this is set to 'true'.</div>
+</li>
+</ul>
+<a id="setConversionRate(float)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setConversionRate</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;setConversionRate&#8203;(float&nbsp;conversionRate)</pre>
+<div class="block">The rate at which the conversion from EUR to HRK will be made.
+ By default, this is set to '7.5345'.</div>
+</li>
+</ul>
+<a id="getConversionRate()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getConversionRate</h4>
+<pre class="methodSignature">public&nbsp;float&nbsp;getConversionRate()</pre>
+<div class="block">The rate at which the conversion from EUR to HRK will be made.
+ By default, this is set to '7.5345'.</div>
 </li>
 </ul>
 <a id="terminateNative(long)">

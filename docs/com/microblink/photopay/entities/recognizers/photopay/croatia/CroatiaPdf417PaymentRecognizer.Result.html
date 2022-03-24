@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10,"i27":10,"i28":10,"i29":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -275,23 +275,23 @@ extends <a href="../../Recognizer.Result.html" title="class in com.microblink.ph
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>int</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getAmount()">getAmount</a></span>()</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getAmountEur()">getAmountEur</a></span>()</code></th>
 <td class="colLast">
-<div class="block">The scanned amount in smallest currency (e.g.</div>
+<div class="block">The scanned amount in smallest EUR monetary unit, i.e.</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code>java.lang.String</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getBankCode()">getBankCode</a></span>()</code></th>
+<td class="colFirst"><code>int</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getAmountHrk()">getAmountHrk</a></span>()</code></th>
 <td class="colLast">
-<div class="block">The bank code of the receiver bank</div>
+<div class="block">The scanned amount in smallest HRK monetary unit, i.e.</div>
 </td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCurrency()">getCurrency</a></span>()</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getBankCode()">getBankCode</a></span>()</code></th>
 <td class="colLast">
-<div class="block">The currency of the payment</div>
+<div class="block">The bank code of the receiver bank</div>
 </td>
 </tr>
 <tr id="i6" class="altColor">
@@ -317,141 +317,113 @@ extends <a href="../../Recognizer.Result.html" title="class in com.microblink.ph
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPayerAccountNumber()">getPayerAccountNumber</a></span>()</code></th>
-<td class="colLast">
-<div class="block">The account number of the payer (available only in some HUB1 barcodes)</div>
-</td>
-</tr>
-<tr id="i10" class="altColor">
-<td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPayerAddress()">getPayerAddress</a></span>()</code></th>
 <td class="colLast">
 <div class="block">The address of the payer</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
-<td class="colFirst"><code>java.lang.String</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPayerBankCode()">getPayerBankCode</a></span>()</code></th>
-<td class="colLast">
-<div class="block">The bank code of the payer bank</div>
-</td>
-</tr>
-<tr id="i12" class="altColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPayerDetailedAddress()">getPayerDetailedAddress</a></span>()</code></th>
 <td class="colLast">
 <div class="block">The detailed address of the payer; available only for HUB3 slips</div>
 </td>
 </tr>
-<tr id="i13" class="rowColor">
-<td class="colFirst"><code>java.lang.String</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPayerIban()">getPayerIban</a></span>()</code></th>
-<td class="colLast">
-<div class="block">The international bank account number of the payer account</div>
-</td>
-</tr>
-<tr id="i14" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPayerName()">getPayerName</a></span>()</code></th>
 <td class="colLast">
 <div class="block">The name of the payer</div>
 </td>
 </tr>
-<tr id="i15" class="rowColor">
-<td class="colFirst"><code>java.lang.String</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPayerReference()">getPayerReference</a></span>()</code></th>
-<td class="colLast">
-<div class="block">The payer reference number (available only on HUB1 barcodes)</div>
-</td>
-</tr>
-<tr id="i16" class="altColor">
-<td class="colFirst"><code>java.lang.String</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPayerReferenceModel()">getPayerReferenceModel</a></span>()</code></th>
-<td class="colLast">
-<div class="block">The payer reference model (available only on HUB1 barcodes)</div>
-</td>
-</tr>
-<tr id="i17" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPaymentDescription()">getPaymentDescription</a></span>()</code></th>
 <td class="colLast">
 <div class="block">The description of the payment</div>
 </td>
 </tr>
-<tr id="i18" class="altColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPaymentDescriptionCode()">getPaymentDescriptionCode</a></span>()</code></th>
 <td class="colLast">
 <div class="block">The description code of the payment</div>
 </td>
 </tr>
-<tr id="i19" class="rowColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPurposeCode()">getPurposeCode</a></span>()</code></th>
 <td class="colLast">
 <div class="block">The purpose code of the payment</div>
 </td>
 </tr>
-<tr id="i20" class="altColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getRecipientAddress()">getRecipientAddress</a></span>()</code></th>
 <td class="colLast">
 <div class="block">The address of the payment receiver</div>
 </td>
 </tr>
-<tr id="i21" class="rowColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getRecipientDetailedAddress()">getRecipientDetailedAddress</a></span>()</code></th>
 <td class="colLast">
 <div class="block">The detailed address of the payment receiver; available only for HUB3 slips</div>
 </td>
 </tr>
-<tr id="i22" class="altColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getRecipientName()">getRecipientName</a></span>()</code></th>
 <td class="colLast">
 <div class="block">The name of the receiving side</div>
 </td>
 </tr>
-<tr id="i23" class="rowColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getReference()">getReference</a></span>()</code></th>
 <td class="colLast">
 <div class="block">The reference of the payment</div>
 </td>
 </tr>
-<tr id="i24" class="altColor">
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getReferenceModel()">getReferenceModel</a></span>()</code></th>
 <td class="colLast">
 <div class="block">The reference model of the payment</div>
 </td>
 </tr>
-<tr id="i25" class="rowColor">
+<tr id="i20" class="altColor">
 <td class="colFirst"><code><a href="CroatiaBarcodeSlipIdType.html" title="enum in com.microblink.photopay.entities.recognizers.photopay.croatia">CroatiaBarcodeSlipIdType</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getSlipId()">getSlipId</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Slip ID (e.g HUB3_BARCODE)</div>
 </td>
 </tr>
-<tr id="i26" class="altColor">
+<tr id="i21" class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isConversionToEurPerformed()">isConversionToEurPerformed</a></span>()</code></th>
+<td class="colLast">
+<div class="block">The information if the conversion from HRK to EUR is performed or not</div>
+</td>
+</tr>
+<tr id="i22" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isUncertain()">isUncertain</a></span>()</code></th>
 <td class="colLast">
 <div class="block">True if returned result is uncertain, i.e.</div>
 </td>
 </tr>
-<tr id="i27" class="rowColor">
+<tr id="i23" class="rowColor">
 <td class="colFirst"><code>protected byte[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#serializeToByteArray()">serializeToByteArray</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i28" class="altColor">
+<tr id="i24" class="altColor">
 <td class="colFirst"><code>protected void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#terminateNative(long)">terminateNative</a></span>&#8203;(long&nbsp;nativeContext)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i29" class="rowColor">
+<tr id="i25" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toString()">toString</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
@@ -532,6 +504,37 @@ extends <a href="../../Recognizer.Result.html" title="class in com.microblink.ph
 <!--   -->
 </a>
 <h3>Method Detail</h3>
+<a id="getBankCode()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getBankCode</h4>
+<pre class="methodSignature">@NonNull
+public&nbsp;java.lang.String&nbsp;getBankCode()</pre>
+<div class="block">The bank code of the receiver bank</div>
+</li>
+</ul>
+<a id="getAmountHrk()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getAmountHrk</h4>
+<pre class="methodSignature">public&nbsp;int&nbsp;getAmountHrk()</pre>
+<div class="block">The scanned amount in smallest HRK monetary unit, i.e. lipa, 0 if nothing was scanned.</div>
+</li>
+</ul>
+<a id="getAmountEur()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getAmountEur</h4>
+<pre class="methodSignature">public&nbsp;int&nbsp;getAmountEur()</pre>
+<div class="block">The scanned amount in smallest EUR monetary unit, i.e. cent, 0 if nothing was scanned.</div>
+</li>
+</ul>
 <a id="getDueDate()">
 <!--   -->
 </a>
@@ -541,6 +544,17 @@ extends <a href="../../Recognizer.Result.html" title="class in com.microblink.ph
 <pre class="methodSignature">@NonNull
 public&nbsp;<a href="../../../../results/date/DateResult.html" title="class in com.microblink.photopay.results.date">DateResult</a>&nbsp;getDueDate()</pre>
 <div class="block">The due date for payment; available only for HUB3 slips</div>
+</li>
+</ul>
+<a id="getAccountNumber()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getAccountNumber</h4>
+<pre class="methodSignature">@NonNull
+public&nbsp;java.lang.String&nbsp;getAccountNumber()</pre>
+<div class="block">The account number to which the payment goes</div>
 </li>
 </ul>
 <a id="isUncertain()">
@@ -554,15 +568,15 @@ public&nbsp;<a href="../../../../results/date/DateResult.html" title="class in c
  (i.e. has parts of it missing).</div>
 </li>
 </ul>
-<a id="getPayerBankCode()">
+<a id="getPaymentDescription()">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>getPayerBankCode</h4>
+<h4>getPaymentDescription</h4>
 <pre class="methodSignature">@NonNull
-public&nbsp;java.lang.String&nbsp;getPayerBankCode()</pre>
-<div class="block">The bank code of the payer bank</div>
+public&nbsp;java.lang.String&nbsp;getPaymentDescription()</pre>
+<div class="block">The description of the payment</div>
 </li>
 </ul>
 <a id="getReference()">
@@ -576,17 +590,6 @@ public&nbsp;java.lang.String&nbsp;getReference()</pre>
 <div class="block">The reference of the payment</div>
 </li>
 </ul>
-<a id="getPayerAccountNumber()">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getPayerAccountNumber</h4>
-<pre class="methodSignature">@NonNull
-public&nbsp;java.lang.String&nbsp;getPayerAccountNumber()</pre>
-<div class="block">The account number of the payer (available only in some HUB1 barcodes)</div>
-</li>
-</ul>
 <a id="getPaymentDescriptionCode()">
 <!--   -->
 </a>
@@ -598,15 +601,47 @@ public&nbsp;java.lang.String&nbsp;getPaymentDescriptionCode()</pre>
 <div class="block">The description code of the payment</div>
 </li>
 </ul>
-<a id="getPayerReference()">
+<a id="getPayerAddress()">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>getPayerReference</h4>
+<h4>getPayerAddress</h4>
 <pre class="methodSignature">@NonNull
-public&nbsp;java.lang.String&nbsp;getPayerReference()</pre>
-<div class="block">The payer reference number (available only on HUB1 barcodes)</div>
+public&nbsp;java.lang.String&nbsp;getPayerAddress()</pre>
+<div class="block">The address of the payer</div>
+</li>
+</ul>
+<a id="isConversionToEurPerformed()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isConversionToEurPerformed</h4>
+<pre class="methodSignature">public&nbsp;boolean&nbsp;isConversionToEurPerformed()</pre>
+<div class="block">The information if the conversion from HRK to EUR is performed or not</div>
+</li>
+</ul>
+<a id="getIban()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getIban</h4>
+<pre class="methodSignature">@NonNull
+public&nbsp;java.lang.String&nbsp;getIban()</pre>
+<div class="block">The International bank account number of the account to which the payment goes</div>
+</li>
+</ul>
+<a id="getPurposeCode()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getPurposeCode</h4>
+<pre class="methodSignature">@NonNull
+public&nbsp;java.lang.String&nbsp;getPurposeCode()</pre>
+<div class="block">The purpose code of the payment</div>
 </li>
 </ul>
 <a id="getPayerName()">
@@ -629,17 +664,6 @@ public&nbsp;java.lang.String&nbsp;getPayerName()</pre>
 <pre class="methodSignature">@NonNull
 public&nbsp;java.lang.String&nbsp;getRecipientName()</pre>
 <div class="block">The name of the receiving side</div>
-</li>
-</ul>
-<a id="getCurrency()">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getCurrency</h4>
-<pre class="methodSignature">@NonNull
-public&nbsp;java.lang.String&nbsp;getCurrency()</pre>
-<div class="block">The currency of the payment</div>
 </li>
 </ul>
 <a id="getRecipientDetailedAddress()">
@@ -695,104 +719,6 @@ public&nbsp;java.lang.String&nbsp;getReferenceModel()</pre>
 <pre class="methodSignature">@NonNull
 public&nbsp;java.lang.String&nbsp;getPayerDetailedAddress()</pre>
 <div class="block">The detailed address of the payer; available only for HUB3 slips</div>
-</li>
-</ul>
-<a id="getBankCode()">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getBankCode</h4>
-<pre class="methodSignature">@NonNull
-public&nbsp;java.lang.String&nbsp;getBankCode()</pre>
-<div class="block">The bank code of the receiver bank</div>
-</li>
-</ul>
-<a id="getAmount()">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getAmount</h4>
-<pre class="methodSignature">public&nbsp;int&nbsp;getAmount()</pre>
-<div class="block">The scanned amount in smallest currency (e.g. cents), 0 if nothing was scanned.</div>
-</li>
-</ul>
-<a id="getAccountNumber()">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getAccountNumber</h4>
-<pre class="methodSignature">@NonNull
-public&nbsp;java.lang.String&nbsp;getAccountNumber()</pre>
-<div class="block">The account number to which the payment goes</div>
-</li>
-</ul>
-<a id="getPayerIban()">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getPayerIban</h4>
-<pre class="methodSignature">@NonNull
-public&nbsp;java.lang.String&nbsp;getPayerIban()</pre>
-<div class="block">The international bank account number of the payer account</div>
-</li>
-</ul>
-<a id="getPaymentDescription()">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getPaymentDescription</h4>
-<pre class="methodSignature">@NonNull
-public&nbsp;java.lang.String&nbsp;getPaymentDescription()</pre>
-<div class="block">The description of the payment</div>
-</li>
-</ul>
-<a id="getPayerAddress()">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getPayerAddress</h4>
-<pre class="methodSignature">@NonNull
-public&nbsp;java.lang.String&nbsp;getPayerAddress()</pre>
-<div class="block">The address of the payer</div>
-</li>
-</ul>
-<a id="getIban()">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getIban</h4>
-<pre class="methodSignature">@NonNull
-public&nbsp;java.lang.String&nbsp;getIban()</pre>
-<div class="block">The International bank account number of the account to which the payment goes</div>
-</li>
-</ul>
-<a id="getPayerReferenceModel()">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getPayerReferenceModel</h4>
-<pre class="methodSignature">@NonNull
-public&nbsp;java.lang.String&nbsp;getPayerReferenceModel()</pre>
-<div class="block">The payer reference model (available only on HUB1 barcodes)</div>
-</li>
-</ul>
-<a id="getPurposeCode()">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getPurposeCode</h4>
-<pre class="methodSignature">@NonNull
-public&nbsp;java.lang.String&nbsp;getPurposeCode()</pre>
-<div class="block">The purpose code of the payment</div>
 </li>
 </ul>
 <a id="getOptionalData()">
