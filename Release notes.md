@@ -5,7 +5,7 @@
 ### Major API changes
 - Updates for `CroatiaPdf417PaymentRecognizer` and `CroatiaQrCodePaymentRecognizer` to enable conversion from HRK to EUR.
 	-  We've added new result members: `amountHRK`, `amountEUR` and`conversionToEurPerformed`.
-	-  We've added new setting member called `conversionRate` with the default value of 7,53540.
+	-  We've added new setting member called `conversionRate` with the default value of 7,53450.
 		-  We will make conversion to EUR only in the case when the currency in the barcode is HRK; `conversionToEurPerformed` will be `true` in that case, and `false` otherwise. Conversion from EUR to HRK will never be performed.
 - We have removed HUB1 payment slip support from the `CroatiaPdf417PaymentRecognizer` and `CroatiaQrCodePaymentRecognizer` where these result members are no longer available:
 	- `amount`,
