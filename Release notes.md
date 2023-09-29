@@ -1,11 +1,29 @@
 # Release notes
 
+## 9.0.0
+
+### API changes
+- We have added back `BarcodeRecognizer` and `RegexParser` to the PhotoPay SDK.
+
+#### Recognizer changes
+- Added `lastDateOfTheStandingOrder` result to `CzechiaQrCodeRecognizer.Result`
+- Added `url` result to `HungaryQrCodeRecognizer.Result`
+
+### Breaking changes
+
+#### Minimum supported SDK version
+- Minimum supported SDK version has been updated from 19 to 21. This means that the devices that have an Android version lower than Android 5.0 (Lollipop) will no longer support PhotoPay SDK - all of the devices with Android 5.0 and above are still supported.
+
+#### Removed support for x86 architecture
+- Devices that are based on the Intel x86 architecture, rather than ARMv7, are no longer supported. x86 and x86_64 architectures are used on very few devices today with most of them being manufactured before 2015, and only a few after that (e.g. Asus Zenfone 4). According to the Device catalog on Google Play Console, these devices make up about 1% of all Android devices (223 out of 22074 devices that have an API level of 21 and above support this architecture).
+
+
 ## 8.1.0.
 
 ### Major API changes
 - Updates for `CroatiaPdf417PaymentRecognizer` and `CroatiaQrCodePaymentRecognizer` to enable conversion from HRK to EUR.
 	-  We've added new result members: `amountHRK`, `amountEUR` and`conversionToEurPerformed`.
-	-  We've added new setting member called `conversionRate` with the default value of 7,53450.
+	-  We've added new setting member called `conversionRate` with the default value of 7,53540.
 		-  We will make conversion to EUR only in the case when the currency in the barcode is HRK; `conversionToEurPerformed` will be `true` in that case, and `false` otherwise. Conversion from EUR to HRK will never be performed.
 - We have removed HUB1 payment slip support from the `CroatiaPdf417PaymentRecognizer` and `CroatiaQrCodePaymentRecognizer` where these result members are no longer available:
 	- `amount`,
@@ -24,7 +42,7 @@
 ## 8.0.0
 
 ### Major API changes
-- The SDK now includes only `PhotoPay` and `BlinkInput` recognizers. For `BlinkID` recognizers, please import `BlinkID` SDK ([more here](https://github.com/BlinkID/blinkid-android#-sdk-integration)).
+- The SDK now includes only `PhotoPay` recognizers and `BlinkInput` recognizer. For `BlinkID` recognizers, please import `BlinkID` SDK ([more here](https://github.com/BlinkID/blinkid-android#-sdk-integration)).
 - To ensure compatibility with other Microblink SDKs, we have repackaged all classes. The root package has been renamed from `com.microblink` to `com.microblink.photopay`, which is unique to `PhotoPay` SDK.
 - Removed support for Android 4.1 - 4.3 - minimum required Android version is now Android 4.4 (API level 19).
 
