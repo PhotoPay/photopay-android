@@ -1,5 +1,7 @@
 com.microblink.photopay
 com.microblink.photopay.activity
+com.microblink.photopay.activity.result
+com.microblink.photopay.activity.result.contract
 com.microblink.photopay.directApi
 com.microblink.photopay.entities
 com.microblink.photopay.entities.ocrengine
@@ -37,9 +39,12 @@ com.microblink.photopay.entities.parsers.photopay.sweden.giro
 com.microblink.photopay.entities.parsers.photopay.sweden.reference
 com.microblink.photopay.entities.parsers.photopay.sweden.slipcode
 com.microblink.photopay.entities.parsers.raw
+com.microblink.photopay.entities.parsers.regex
 com.microblink.photopay.entities.processors
 com.microblink.photopay.entities.processors.parserGroup
 com.microblink.photopay.entities.recognizers
+com.microblink.photopay.entities.recognizers.blinkbarcode
+com.microblink.photopay.entities.recognizers.blinkbarcode.barcode
 com.microblink.photopay.entities.recognizers.blinkinput
 com.microblink.photopay.entities.recognizers.framegrabber
 com.microblink.photopay.entities.recognizers.photopay
@@ -70,7 +75,6 @@ com.microblink.photopay.entities.recognizers.photopay.switzerland.slip
 com.microblink.photopay.entities.recognizers.photopay.uk.slip
 com.microblink.photopay.entities.recognizers.photopay.unitedkingdom
 com.microblink.photopay.entities.recognizers.successframe
-com.microblink.photopay.entities.settings
 com.microblink.photopay.entities.util
 com.microblink.photopay.fragment
 com.microblink.photopay.fragment.overlay
@@ -98,12 +102,10 @@ com.microblink.photopay.metadata
 com.microblink.photopay.metadata.detection
 com.microblink.photopay.metadata.detection.points
 com.microblink.photopay.metadata.detection.quad
-com.microblink.photopay.metadata.glare
 com.microblink.photopay.metadata.image
 com.microblink.photopay.metadata.ocr
 com.microblink.photopay.metadata.text
 com.microblink.photopay.recognition
-com.microblink.photopay.results
 com.microblink.photopay.results.date
 com.microblink.photopay.results.ocr
 com.microblink.photopay.uisettings

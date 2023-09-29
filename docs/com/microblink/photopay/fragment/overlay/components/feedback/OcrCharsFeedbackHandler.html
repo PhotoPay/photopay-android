@@ -6,15 +6,16 @@
 <title>OcrCharsFeedbackHandler (LibPhotoPay API)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="../../../../../../../stylesheet.css" title="Style">
-<link rel="stylesheet" type="text/css" href="../../../../../../../jquery/jquery-ui.css" title="Style">
+<link rel="stylesheet" type="text/css" href="../../../../../../../jquery/jquery-ui.min.css" title="Style">
+<link rel="stylesheet" type="text/css" href="../../../../../../../jquery-ui.overrides.css" title="Style">
 <script type="text/javascript" src="../../../../../../../script.js"></script>
 <script type="text/javascript" src="../../../../../../../jquery/jszip/dist/jszip.min.js"></script>
 <script type="text/javascript" src="../../../../../../../jquery/jszip-utils/dist/jszip-utils.min.js"></script>
 <!--[if IE]>
 <script type="text/javascript" src="../../../../../../../jquery/jszip-utils/dist/jszip-utils-ie.min.js"></script>
 <![endif]-->
-<script type="text/javascript" src="../../../../../../../jquery/jquery-3.5.1.js"></script>
-<script type="text/javascript" src="../../../../../../../jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../../../../../../../jquery/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="../../../../../../../jquery/jquery-ui.min.js"></script>
 </head>
 <body>
 <script type="text/javascript"><!--
@@ -144,7 +145,7 @@ implements <a href="RecognitionFeedbackHandler.html" title="interface in com.mic
 <ul class="blockList">
 <li class="blockList">
 <!-- =========== FIELD SUMMARY =========== -->
-<section role="region">
+<section>
 <ul class="blockList">
 <li class="blockList"><a id="field.summary">
 <!--   -->
@@ -161,7 +162,7 @@ implements <a href="RecognitionFeedbackHandler.html" title="interface in com.mic
 </ul>
 </section>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
-<section role="region">
+<section>
 <ul class="blockList">
 <li class="blockList"><a id="constructor.summary">
 <!--   -->
@@ -182,7 +183,7 @@ implements <a href="RecognitionFeedbackHandler.html" title="interface in com.mic
 </ul>
 </section>
 <!-- ========== METHOD SUMMARY =========== -->
-<section role="region">
+<section>
 <ul class="blockList">
 <li class="blockList"><a id="method.summary">
 <!--   -->
@@ -213,8 +214,7 @@ implements <a href="RecognitionFeedbackHandler.html" title="interface in com.mic
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#onPointsDetection(com.microblink.photopay.metadata.detection.points.DisplayablePointsDetection,android.graphics.RectF)">onPointsDetection</a></span>&#8203;(<a href="../../../../metadata/detection/points/DisplayablePointsDetection.html" title="class in com.microblink.photopay.metadata.detection.points">DisplayablePointsDetection</a>&nbsp;pointsDetection,
-                 android.graphics.RectF&nbsp;detectionRelativeDestination)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#onPointsDetection(com.microblink.photopay.metadata.detection.points.DisplayablePointsDetection)">onPointsDetection</a></span>&#8203;(<a href="../../../../metadata/detection/points/DisplayablePointsDetection.html" title="class in com.microblink.photopay.metadata.detection.points">DisplayablePointsDetection</a>&nbsp;pointsDetection)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 </table>
@@ -235,7 +235,7 @@ implements <a href="RecognitionFeedbackHandler.html" title="interface in com.mic
 <ul class="blockList">
 <li class="blockList">
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
-<section role="region">
+<section>
 <ul class="blockList">
 <li class="blockList"><a id="constructor.detail">
 <!--   -->
@@ -254,7 +254,7 @@ implements <a href="RecognitionFeedbackHandler.html" title="interface in com.mic
 </ul>
 </section>
 <!-- ============ METHOD DETAIL ========== -->
-<section role="region">
+<section>
 <ul class="blockList">
 <li class="blockList"><a id="method.detail">
 <!--   -->
@@ -277,19 +277,17 @@ public&nbsp;android.view.View&nbsp;createView&#8203;(@NonNull
 </dl>
 </li>
 </ul>
-<a id="onPointsDetection(com.microblink.photopay.metadata.detection.points.DisplayablePointsDetection,android.graphics.RectF)">
+<a id="onPointsDetection(com.microblink.photopay.metadata.detection.points.DisplayablePointsDetection)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>onPointsDetection</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;onPointsDetection&#8203;(@NonNull
-                              <a href="../../../../metadata/detection/points/DisplayablePointsDetection.html" title="class in com.microblink.photopay.metadata.detection.points">DisplayablePointsDetection</a>&nbsp;pointsDetection,
-                              @Nullable
-                              android.graphics.RectF&nbsp;detectionRelativeDestination)</pre>
+                              <a href="../../../../metadata/detection/points/DisplayablePointsDetection.html" title="class in com.microblink.photopay.metadata.detection.points">DisplayablePointsDetection</a>&nbsp;pointsDetection)</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="RecognitionFeedbackHandler.html#onPointsDetection(com.microblink.photopay.metadata.detection.points.DisplayablePointsDetection,android.graphics.RectF)">onPointsDetection</a></code>&nbsp;in interface&nbsp;<code><a href="RecognitionFeedbackHandler.html" title="interface in com.microblink.photopay.fragment.overlay.components.feedback">RecognitionFeedbackHandler</a></code></dd>
+<dd><code><a href="RecognitionFeedbackHandler.html#onPointsDetection(com.microblink.photopay.metadata.detection.points.DisplayablePointsDetection)">onPointsDetection</a></code>&nbsp;in interface&nbsp;<code><a href="RecognitionFeedbackHandler.html" title="interface in com.microblink.photopay.fragment.overlay.components.feedback">RecognitionFeedbackHandler</a></code></dd>
 </dl>
 </li>
 </ul>

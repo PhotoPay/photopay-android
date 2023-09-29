@@ -6,15 +6,16 @@
 <title>Class Hierarchy (LibPhotoPay API)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="stylesheet.css" title="Style">
-<link rel="stylesheet" type="text/css" href="jquery/jquery-ui.css" title="Style">
+<link rel="stylesheet" type="text/css" href="jquery/jquery-ui.min.css" title="Style">
+<link rel="stylesheet" type="text/css" href="jquery-ui.overrides.css" title="Style">
 <script type="text/javascript" src="script.js"></script>
 <script type="text/javascript" src="jquery/jszip/dist/jszip.min.js"></script>
 <script type="text/javascript" src="jquery/jszip-utils/dist/jszip-utils.min.js"></script>
 <!--[if IE]>
 <script type="text/javascript" src="jquery/jszip-utils/dist/jszip-utils-ie.min.js"></script>
 <![endif]-->
-<script type="text/javascript" src="jquery/jquery-3.5.1.js"></script>
-<script type="text/javascript" src="jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="jquery/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="jquery/jquery-ui.min.js"></script>
 </head>
 <body>
 <script type="text/javascript"><!--
@@ -97,6 +98,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <ul class="horizontal">
 <li><a href="com/microblink/photopay/package-tree.html">com.microblink.photopay</a>, </li>
 <li><a href="com/microblink/photopay/activity/package-tree.html">com.microblink.photopay.activity</a>, </li>
+<li><a href="com/microblink/photopay/activity/result/package-tree.html">com.microblink.photopay.activity.result</a>, </li>
+<li><a href="com/microblink/photopay/activity/result/contract/package-tree.html">com.microblink.photopay.activity.result.contract</a>, </li>
 <li><a href="com/microblink/photopay/directApi/package-tree.html">com.microblink.photopay.directApi</a>, </li>
 <li><a href="com/microblink/photopay/entities/package-tree.html">com.microblink.photopay.entities</a>, </li>
 <li><a href="com/microblink/photopay/entities/ocrengine/package-tree.html">com.microblink.photopay.entities.ocrengine</a>, </li>
@@ -134,9 +137,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li><a href="com/microblink/photopay/entities/parsers/photopay/sweden/reference/package-tree.html">com.microblink.photopay.entities.parsers.photopay.sweden.reference</a>, </li>
 <li><a href="com/microblink/photopay/entities/parsers/photopay/sweden/slipcode/package-tree.html">com.microblink.photopay.entities.parsers.photopay.sweden.slipcode</a>, </li>
 <li><a href="com/microblink/photopay/entities/parsers/raw/package-tree.html">com.microblink.photopay.entities.parsers.raw</a>, </li>
+<li><a href="com/microblink/photopay/entities/parsers/regex/package-tree.html">com.microblink.photopay.entities.parsers.regex</a>, </li>
 <li><a href="com/microblink/photopay/entities/processors/package-tree.html">com.microblink.photopay.entities.processors</a>, </li>
 <li><a href="com/microblink/photopay/entities/processors/parserGroup/package-tree.html">com.microblink.photopay.entities.processors.parserGroup</a>, </li>
 <li><a href="com/microblink/photopay/entities/recognizers/package-tree.html">com.microblink.photopay.entities.recognizers</a>, </li>
+<li><a href="com/microblink/photopay/entities/recognizers/blinkbarcode/package-tree.html">com.microblink.photopay.entities.recognizers.blinkbarcode</a>, </li>
+<li><a href="com/microblink/photopay/entities/recognizers/blinkbarcode/barcode/package-tree.html">com.microblink.photopay.entities.recognizers.blinkbarcode.barcode</a>, </li>
 <li><a href="com/microblink/photopay/entities/recognizers/blinkinput/package-tree.html">com.microblink.photopay.entities.recognizers.blinkinput</a>, </li>
 <li><a href="com/microblink/photopay/entities/recognizers/framegrabber/package-tree.html">com.microblink.photopay.entities.recognizers.framegrabber</a>, </li>
 <li><a href="com/microblink/photopay/entities/recognizers/photopay/package-tree.html">com.microblink.photopay.entities.recognizers.photopay</a>, </li>
@@ -167,7 +173,6 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li><a href="com/microblink/photopay/entities/recognizers/photopay/uk/slip/package-tree.html">com.microblink.photopay.entities.recognizers.photopay.uk.slip</a>, </li>
 <li><a href="com/microblink/photopay/entities/recognizers/photopay/unitedkingdom/package-tree.html">com.microblink.photopay.entities.recognizers.photopay.unitedkingdom</a>, </li>
 <li><a href="com/microblink/photopay/entities/recognizers/successframe/package-tree.html">com.microblink.photopay.entities.recognizers.successframe</a>, </li>
-<li><a href="com/microblink/photopay/entities/settings/package-tree.html">com.microblink.photopay.entities.settings</a>, </li>
 <li><a href="com/microblink/photopay/entities/util/package-tree.html">com.microblink.photopay.entities.util</a>, </li>
 <li><a href="com/microblink/photopay/fragment/package-tree.html">com.microblink.photopay.fragment</a>, </li>
 <li><a href="com/microblink/photopay/fragment/overlay/package-tree.html">com.microblink.photopay.fragment.overlay</a>, </li>
@@ -195,12 +200,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li><a href="com/microblink/photopay/metadata/detection/package-tree.html">com.microblink.photopay.metadata.detection</a>, </li>
 <li><a href="com/microblink/photopay/metadata/detection/points/package-tree.html">com.microblink.photopay.metadata.detection.points</a>, </li>
 <li><a href="com/microblink/photopay/metadata/detection/quad/package-tree.html">com.microblink.photopay.metadata.detection.quad</a>, </li>
-<li><a href="com/microblink/photopay/metadata/glare/package-tree.html">com.microblink.photopay.metadata.glare</a>, </li>
 <li><a href="com/microblink/photopay/metadata/image/package-tree.html">com.microblink.photopay.metadata.image</a>, </li>
 <li><a href="com/microblink/photopay/metadata/ocr/package-tree.html">com.microblink.photopay.metadata.ocr</a>, </li>
 <li><a href="com/microblink/photopay/metadata/text/package-tree.html">com.microblink.photopay.metadata.text</a>, </li>
 <li><a href="com/microblink/photopay/recognition/package-tree.html">com.microblink.photopay.recognition</a>, </li>
-<li><a href="com/microblink/photopay/results/package-tree.html">com.microblink.photopay.results</a>, </li>
 <li><a href="com/microblink/photopay/results/date/package-tree.html">com.microblink.photopay.results.date</a>, </li>
 <li><a href="com/microblink/photopay/results/ocr/package-tree.html">com.microblink.photopay.results.ocr</a>, </li>
 <li><a href="com/microblink/photopay/uisettings/package-tree.html">com.microblink.photopay.uisettings</a>, </li>
@@ -214,7 +217,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </ul>
 </div>
 <div class="contentContainer">
-<section role="region">
+<section>
 <h2 title="Class Hierarchy">Class Hierarchy</h2>
 <ul>
 <li class="circle">java.lang.Object
@@ -223,6 +226,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <ul>
 <li class="circle">com.microblink.photopay.entities.ocrengine.legacy.<a href="com/microblink/photopay/entities/ocrengine/legacy/BlinkOCREngineOptions.html" title="class in com.microblink.photopay.entities.ocrengine.legacy"><span class="typeNameLink">BlinkOCREngineOptions</span></a></li>
 <li class="circle">com.microblink.photopay.entities.ocrengine.deep.<a href="com/microblink/photopay/entities/ocrengine/deep/DeepOCREngineOptions.html" title="class in com.microblink.photopay.entities.ocrengine.deep"><span class="typeNameLink">DeepOCREngineOptions</span></a></li>
+</ul>
+</li>
+<li class="circle">androidx.activity.result.contract.ActivityResultContract&lt;I,&#8203;O&gt;
+<ul>
+<li class="circle">com.microblink.photopay.activity.result.contract.<a href="com/microblink/photopay/activity/result/contract/MbScan.html" title="class in com.microblink.photopay.activity.result.contract"><span class="typeNameLink">MbScan</span></a></li>
 </ul>
 </li>
 <li class="circle">com.microblink.photopay.uisettings.<a href="com/microblink/photopay/uisettings/ActivityRunner.html" title="class in com.microblink.photopay.uisettings"><span class="typeNameLink">ActivityRunner</span></a></li>
@@ -248,6 +256,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="circle">com.microblink.photopay.fragment.overlay.fieldbyfield.<a href="com/microblink/photopay/fragment/overlay/fieldbyfield/FieldByFieldOverlayController.html" title="class in com.microblink.photopay.fragment.overlay.fieldbyfield"><span class="typeNameLink">FieldByFieldOverlayController</span></a> (implements com.microblink.photopay.view.<a href="com/microblink/photopay/view/OnActivityFlipListener.html" title="interface in com.microblink.photopay.view">OnActivityFlipListener</a>)</li>
 </ul>
 </li>
+<li class="circle">com.microblink.photopay.activity.result.<a href="com/microblink/photopay/activity/result/BaseScanResult.html" title="class in com.microblink.photopay.activity.result"><span class="typeNameLink">BaseScanResult</span></a>&lt;T&gt;
+<ul>
+<li class="circle">com.microblink.photopay.activity.result.<a href="com/microblink/photopay/activity/result/ScanResult.html" title="class in com.microblink.photopay.activity.result"><span class="typeNameLink">ScanResult</span></a></li>
+</ul>
+</li>
 <li class="circle">com.microblink.photopay.fragment.overlay.basic.<a href="com/microblink/photopay/fragment/overlay/basic/BasicOverlaySettings.html" title="class in com.microblink.photopay.fragment.overlay.basic"><span class="typeNameLink">BasicOverlaySettings</span></a></li>
 <li class="circle">com.microblink.photopay.fragment.overlay.basic.<a href="com/microblink/photopay/fragment/overlay/basic/BasicOverlaySettings.Builder.html" title="class in com.microblink.photopay.fragment.overlay.basic"><span class="typeNameLink">BasicOverlaySettings.Builder</span></a></li>
 <li class="circle">com.microblink.photopay.entities.ocrengine.legacy.<a href="com/microblink/photopay/entities/ocrengine/legacy/BlinkOCRCharKey.html" title="class in com.microblink.photopay.entities.ocrengine.legacy"><span class="typeNameLink">BlinkOCRCharKey</span></a></li>
@@ -271,6 +284,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <ul>
 <li class="circle">androidx.appcompat.app.AppCompatActivity (implements androidx.appcompat.app.ActionBarDrawerToggle.DelegateProvider, androidx.appcompat.app.AppCompatCallback, androidx.core.app.TaskStackBuilder.SupportParentable)
 <ul>
+<li class="circle">com.microblink.photopay.activity.<a href="com/microblink/photopay/activity/BarcodeScanActivity.html" title="class in com.microblink.photopay.activity"><span class="typeNameLink">BarcodeScanActivity</span></a></li>
 <li class="circle">com.microblink.photopay.activity.<a href="com/microblink/photopay/activity/FieldByFieldScanActivity.html" title="class in com.microblink.photopay.activity"><span class="typeNameLink">FieldByFieldScanActivity</span></a></li>
 <li class="circle">com.microblink.photopay.activity.<a href="com/microblink/photopay/activity/OcrLineScanActivity.html" title="class in com.microblink.photopay.activity"><span class="typeNameLink">OcrLineScanActivity</span></a></li>
 <li class="circle">com.microblink.photopay.activity.<a href="com/microblink/photopay/activity/PhotopayActivity.html" title="class in com.microblink.photopay.activity"><span class="typeNameLink">PhotopayActivity</span></a></li>
@@ -291,8 +305,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </ul>
 </li>
 <li class="circle">com.microblink.photopay.fragment.overlay.components.settings.<a href="com/microblink/photopay/fragment/overlay/components/settings/ControlsLayoutConfig.html" title="class in com.microblink.photopay.fragment.overlay.components.settings"><span class="typeNameLink">ControlsLayoutConfig</span></a></li>
-<li class="circle">com.microblink.photopay.results.date.<a href="com/microblink/photopay/results/date/Date.html" title="class in com.microblink.photopay.results.date"><span class="typeNameLink">Date</span></a></li>
-<li class="circle">com.microblink.photopay.results.date.<a href="com/microblink/photopay/results/date/DateResult.html" title="class in com.microblink.photopay.results.date"><span class="typeNameLink">DateResult</span></a> (implements android.os.Parcelable, com.microblink.photopay.results.<a href="com/microblink/photopay/results/Result.html" title="interface in com.microblink.photopay.results">Result</a>)</li>
+<li class="circle">com.microblink.photopay.results.date.<a href="com/microblink/photopay/results/date/Date.html" title="class in com.microblink.photopay.results.date"><span class="typeNameLink">Date</span></a> (implements android.os.Parcelable, com.microblink.photopay.results.date.<a href="com/microblink/photopay/results/date/SimpleDateResult.html" title="interface in com.microblink.photopay.results.date">SimpleDateResult</a>)</li>
 <li class="circle">com.microblink.photopay.results.date.<a href="com/microblink/photopay/results/date/DateUtils.html" title="class in com.microblink.photopay.results.date"><span class="typeNameLink">DateUtils</span></a></li>
 <li class="circle">com.microblink.photopay.fragment.overlay.components.debug.<a href="com/microblink/photopay/fragment/overlay/components/debug/DebugViewHandler.html" title="class in com.microblink.photopay.fragment.overlay.components.debug"><span class="typeNameLink">DebugViewHandler</span></a></li>
 <li class="circle">com.microblink.photopay.metadata.<a href="com/microblink/photopay/metadata/DisplayableObject.html" title="class in com.microblink.photopay.metadata"><span class="typeNameLink">DisplayableObject</span></a>
@@ -333,6 +346,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="circle">com.microblink.photopay.entities.parsers.photopay.montenegro.account.<a href="com/microblink/photopay/entities/parsers/photopay/montenegro/account/MontenegroAccountParser.html" title="class in com.microblink.photopay.entities.parsers.photopay.montenegro.account"><span class="typeNameLink">MontenegroAccountParser</span></a></li>
 <li class="circle">com.microblink.photopay.entities.parsers.photopay.montenegro.reference.<a href="com/microblink/photopay/entities/parsers/photopay/montenegro/reference/MontenegroReferenceParser.html" title="class in com.microblink.photopay.entities.parsers.photopay.montenegro.reference"><span class="typeNameLink">MontenegroReferenceParser</span></a></li>
 <li class="circle">com.microblink.photopay.entities.parsers.raw.<a href="com/microblink/photopay/entities/parsers/raw/RawParser.html" title="class in com.microblink.photopay.entities.parsers.raw"><span class="typeNameLink">RawParser</span></a></li>
+<li class="circle">com.microblink.photopay.entities.parsers.regex.<a href="com/microblink/photopay/entities/parsers/regex/RegexParser.html" title="class in com.microblink.photopay.entities.parsers.regex"><span class="typeNameLink">RegexParser</span></a></li>
 <li class="circle">com.microblink.photopay.entities.parsers.photopay.serbia.account.<a href="com/microblink/photopay/entities/parsers/photopay/serbia/account/SerbiaAccountParser.html" title="class in com.microblink.photopay.entities.parsers.photopay.serbia.account"><span class="typeNameLink">SerbiaAccountParser</span></a></li>
 <li class="circle">com.microblink.photopay.entities.parsers.photopay.serbia.reference.<a href="com/microblink/photopay/entities/parsers/photopay/serbia/reference/SerbiaReferenceParser.html" title="class in com.microblink.photopay.entities.parsers.photopay.serbia.reference"><span class="typeNameLink">SerbiaReferenceParser</span></a></li>
 <li class="circle">com.microblink.photopay.entities.parsers.photopay.slovenia.reference.<a href="com/microblink/photopay/entities/parsers/photopay/slovenia/reference/SloveniaReferenceParser.html" title="class in com.microblink.photopay.entities.parsers.photopay.slovenia.reference"><span class="typeNameLink">SloveniaReferenceParser</span></a></li>
@@ -351,6 +365,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <ul>
 <li class="circle">com.microblink.photopay.entities.recognizers.photopay.austria.<a href="com/microblink/photopay/entities/recognizers/photopay/austria/AustriaQrCodePaymentRecognizer.html" title="class in com.microblink.photopay.entities.recognizers.photopay.austria"><span class="typeNameLink">AustriaQrCodePaymentRecognizer</span></a></li>
 <li class="circle">com.microblink.photopay.entities.recognizers.photopay.austria.slip.<a href="com/microblink/photopay/entities/recognizers/photopay/austria/slip/AustriaSlipRecognizer.html" title="class in com.microblink.photopay.entities.recognizers.photopay.austria.slip"><span class="typeNameLink">AustriaSlipRecognizer</span></a></li>
+<li class="circle">com.microblink.photopay.entities.recognizers.blinkbarcode.barcode.<a href="com/microblink/photopay/entities/recognizers/blinkbarcode/barcode/BarcodeRecognizer.html" title="class in com.microblink.photopay.entities.recognizers.blinkbarcode.barcode"><span class="typeNameLink">BarcodeRecognizer</span></a></li>
 <li class="circle">com.microblink.photopay.entities.recognizers.photopay.belgium.slip.<a href="com/microblink/photopay/entities/recognizers/photopay/belgium/slip/BelgiumSlipRecognizer.html" title="class in com.microblink.photopay.entities.recognizers.photopay.belgium.slip"><span class="typeNameLink">BelgiumSlipRecognizer</span></a></li>
 <li class="circle">com.microblink.photopay.entities.recognizers.blinkinput.<a href="com/microblink/photopay/entities/recognizers/blinkinput/BlinkInputRecognizer.html" title="class in com.microblink.photopay.entities.recognizers.blinkinput"><span class="typeNameLink">BlinkInputRecognizer</span></a></li>
 <li class="circle">com.microblink.photopay.entities.recognizers.photopay.croatia.<a href="com/microblink/photopay/entities/recognizers/photopay/croatia/CroatiaPdf417PaymentRecognizer.html" title="class in com.microblink.photopay.entities.recognizers.photopay.croatia"><span class="typeNameLink">CroatiaPdf417PaymentRecognizer</span></a></li>
@@ -411,6 +426,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="circle">com.microblink.photopay.entities.parsers.photopay.montenegro.account.<a href="com/microblink/photopay/entities/parsers/photopay/montenegro/account/MontenegroAccountParser.Result.html" title="class in com.microblink.photopay.entities.parsers.photopay.montenegro.account"><span class="typeNameLink">MontenegroAccountParser.Result</span></a></li>
 <li class="circle">com.microblink.photopay.entities.parsers.photopay.montenegro.reference.<a href="com/microblink/photopay/entities/parsers/photopay/montenegro/reference/MontenegroReferenceParser.Result.html" title="class in com.microblink.photopay.entities.parsers.photopay.montenegro.reference"><span class="typeNameLink">MontenegroReferenceParser.Result</span></a></li>
 <li class="circle">com.microblink.photopay.entities.parsers.raw.<a href="com/microblink/photopay/entities/parsers/raw/RawParser.Result.html" title="class in com.microblink.photopay.entities.parsers.raw"><span class="typeNameLink">RawParser.Result</span></a></li>
+<li class="circle">com.microblink.photopay.entities.parsers.regex.<a href="com/microblink/photopay/entities/parsers/regex/RegexParser.Result.html" title="class in com.microblink.photopay.entities.parsers.regex"><span class="typeNameLink">RegexParser.Result</span></a></li>
 <li class="circle">com.microblink.photopay.entities.parsers.photopay.serbia.account.<a href="com/microblink/photopay/entities/parsers/photopay/serbia/account/SerbiaAccountParser.Result.html" title="class in com.microblink.photopay.entities.parsers.photopay.serbia.account"><span class="typeNameLink">SerbiaAccountParser.Result</span></a></li>
 <li class="circle">com.microblink.photopay.entities.parsers.photopay.serbia.reference.<a href="com/microblink/photopay/entities/parsers/photopay/serbia/reference/SerbiaReferenceParser.Result.html" title="class in com.microblink.photopay.entities.parsers.photopay.serbia.reference"><span class="typeNameLink">SerbiaReferenceParser.Result</span></a></li>
 <li class="circle">com.microblink.photopay.entities.parsers.photopay.slovenia.reference.<a href="com/microblink/photopay/entities/parsers/photopay/slovenia/reference/SloveniaReferenceParser.Result.html" title="class in com.microblink.photopay.entities.parsers.photopay.slovenia.reference"><span class="typeNameLink">SloveniaReferenceParser.Result</span></a></li>
@@ -429,6 +445,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <ul>
 <li class="circle">com.microblink.photopay.entities.recognizers.photopay.austria.<a href="com/microblink/photopay/entities/recognizers/photopay/austria/AustriaQrCodePaymentRecognizer.Result.html" title="class in com.microblink.photopay.entities.recognizers.photopay.austria"><span class="typeNameLink">AustriaQrCodePaymentRecognizer.Result</span></a></li>
 <li class="circle">com.microblink.photopay.entities.recognizers.photopay.austria.slip.<a href="com/microblink/photopay/entities/recognizers/photopay/austria/slip/AustriaSlipRecognizer.Result.html" title="class in com.microblink.photopay.entities.recognizers.photopay.austria.slip"><span class="typeNameLink">AustriaSlipRecognizer.Result</span></a></li>
+<li class="circle">com.microblink.photopay.entities.recognizers.blinkbarcode.barcode.<a href="com/microblink/photopay/entities/recognizers/blinkbarcode/barcode/BarcodeRecognizer.Result.html" title="class in com.microblink.photopay.entities.recognizers.blinkbarcode.barcode"><span class="typeNameLink">BarcodeRecognizer.Result</span></a></li>
 <li class="circle">com.microblink.photopay.entities.recognizers.photopay.belgium.slip.<a href="com/microblink/photopay/entities/recognizers/photopay/belgium/slip/BelgiumSlipRecognizer.Result.html" title="class in com.microblink.photopay.entities.recognizers.photopay.belgium.slip"><span class="typeNameLink">BelgiumSlipRecognizer.Result</span></a></li>
 <li class="circle">com.microblink.photopay.entities.recognizers.blinkinput.<a href="com/microblink/photopay/entities/recognizers/blinkinput/BlinkInputRecognizer.Result.html" title="class in com.microblink.photopay.entities.recognizers.blinkinput"><span class="typeNameLink">BlinkInputRecognizer.Result</span></a></li>
 <li class="circle">com.microblink.photopay.entities.recognizers.photopay.croatia.<a href="com/microblink/photopay/entities/recognizers/photopay/croatia/CroatiaPdf417PaymentRecognizer.Result.html" title="class in com.microblink.photopay.entities.recognizers.photopay.croatia"><span class="typeNameLink">CroatiaPdf417PaymentRecognizer.Result</span></a></li>
@@ -505,6 +522,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="circle">com.microblink.photopay.fragment.overlay.components.settings.<a href="com/microblink/photopay/fragment/overlay/components/settings/ScanRegionOfInterestSettings.html" title="class in com.microblink.photopay.fragment.overlay.components.settings"><span class="typeNameLink">ScanRegionOfInterestSettings</span></a></li>
 <li class="circle">com.microblink.photopay.fragment.overlay.components.<a href="com/microblink/photopay/fragment/overlay/components/ScanSoundPlayer.html" title="class in com.microblink.photopay.fragment.overlay.components"><span class="typeNameLink">ScanSoundPlayer</span></a></li>
 <li class="circle">com.microblink.photopay.entities.recognizers.<a href="com/microblink/photopay/entities/recognizers/SignedPayload.html" title="class in com.microblink.photopay.entities.recognizers"><span class="typeNameLink">SignedPayload</span></a></li>
+<li class="circle">com.microblink.photopay.results.date.<a href="com/microblink/photopay/results/date/SimpleDate.html" title="class in com.microblink.photopay.results.date"><span class="typeNameLink">SimpleDate</span></a></li>
 <li class="circle">com.microblink.photopay.entities.recognizers.photopay.slovakia.qr.<a href="com/microblink/photopay/entities/recognizers/photopay/slovakia/qr/SlovakiaQrPaymentInformation.html" title="class in com.microblink.photopay.entities.recognizers.photopay.slovakia.qr"><span class="typeNameLink">SlovakiaQrPaymentInformation</span></a></li>
 <li class="circle">com.microblink.photopay.fragment.overlay.components.snackbar.<a href="com/microblink/photopay/fragment/overlay/components/snackbar/SnackbarManager.html" title="class in com.microblink.photopay.fragment.overlay.components.snackbar"><span class="typeNameLink">SnackbarManager</span></a></li>
 <li class="circle">com.microblink.photopay.fragment.overlay.components.statusmsg.<a href="com/microblink/photopay/fragment/overlay/components/statusmsg/StatusTextManager.html" title="class in com.microblink.photopay.fragment.overlay.components.statusmsg"><span class="typeNameLink">StatusTextManager</span></a></li>
@@ -533,6 +551,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <ul>
 <li class="circle">com.microblink.photopay.uisettings.<a href="com/microblink/photopay/uisettings/BasicScanUISettings.html" title="class in com.microblink.photopay.uisettings"><span class="typeNameLink">BasicScanUISettings</span></a> (implements com.microblink.photopay.uisettings.options.<a href="com/microblink/photopay/uisettings/options/BeepSoundUIOptions.html" title="interface in com.microblink.photopay.uisettings.options">BeepSoundUIOptions</a>, com.microblink.photopay.uisettings.options.<a href="com/microblink/photopay/uisettings/options/DebugImageListenerUIOptions.html" title="interface in com.microblink.photopay.uisettings.options">DebugImageListenerUIOptions</a>, com.microblink.photopay.uisettings.options.<a href="com/microblink/photopay/uisettings/options/HelpIntentUIOptions.html" title="interface in com.microblink.photopay.uisettings.options">HelpIntentUIOptions</a>, com.microblink.photopay.uisettings.options.<a href="com/microblink/photopay/uisettings/options/HighResSuccessFrameCaptureUIOptions.html" title="interface in com.microblink.photopay.uisettings.options">HighResSuccessFrameCaptureUIOptions</a>, com.microblink.photopay.uisettings.options.<a href="com/microblink/photopay/uisettings/options/SplashScreenUIOptions.html" title="interface in com.microblink.photopay.uisettings.options">SplashScreenUIOptions</a>)
 <ul>
+<li class="circle">com.microblink.photopay.uisettings.<a href="com/microblink/photopay/uisettings/BarcodeUISettings.html" title="class in com.microblink.photopay.uisettings"><span class="typeNameLink">BarcodeUISettings</span></a></li>
 <li class="circle">com.microblink.photopay.uisettings.<a href="com/microblink/photopay/uisettings/PhotopayUISettings.html" title="class in com.microblink.photopay.uisettings"><span class="typeNameLink">PhotopayUISettings</span></a> (implements com.microblink.photopay.uisettings.options.<a href="com/microblink/photopay/uisettings/options/OcrResultDisplayUIOptions.html" title="interface in com.microblink.photopay.uisettings.options">OcrResultDisplayUIOptions</a>)
 <ul>
 <li class="circle">com.microblink.photopay.uisettings.<a href="com/microblink/photopay/uisettings/OcrLineUISettings.html" title="class in com.microblink.photopay.uisettings"><span class="typeNameLink">OcrLineUISettings</span></a></li>
@@ -573,7 +592,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </li>
 </ul>
 </section>
-<section role="region">
+<section>
 <h2 title="Interface Hierarchy">Interface Hierarchy</h2>
 <ul>
 <li class="circle">com.microblink.photopay.hardware.camera.<a href="com/microblink/photopay/hardware/camera/AutofocusListener.html" title="interface in com.microblink.photopay.hardware.camera"><span class="typeNameLink">AutofocusListener</span></a>
@@ -585,6 +604,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </li>
 </ul>
 </li>
+<li class="circle">com.microblink.photopay.view.<a href="com/microblink/photopay/view/BaseCameraView.VisiblePartUpdateListener.html" title="interface in com.microblink.photopay.view"><span class="typeNameLink">BaseCameraView.VisiblePartUpdateListener</span></a></li>
 <li class="circle">com.microblink.photopay.uisettings.options.<a href="com/microblink/photopay/uisettings/options/BeepSoundUIOptions.html" title="interface in com.microblink.photopay.uisettings.options"><span class="typeNameLink">BeepSoundUIOptions</span></a></li>
 <li class="circle">com.microblink.photopay.uisettings.options.<a href="com/microblink/photopay/uisettings/options/CurrentImageListenerUIOptions.html" title="interface in com.microblink.photopay.uisettings.options"><span class="typeNameLink">CurrentImageListenerUIOptions</span></a></li>
 <li class="circle">com.microblink.photopay.metadata.image.<a href="com/microblink/photopay/metadata/image/DebugImageCallback.html" title="interface in com.microblink.photopay.metadata.image"><span class="typeNameLink">DebugImageCallback</span></a>
@@ -596,8 +616,6 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="circle">com.microblink.photopay.metadata.text.<a href="com/microblink/photopay/metadata/text/DebugTextCallback.html" title="interface in com.microblink.photopay.metadata.text"><span class="typeNameLink">DebugTextCallback</span></a></li>
 <li class="circle">com.microblink.photopay.directApi.<a href="com/microblink/photopay/directApi/DirectApiErrorListener.html" title="interface in com.microblink.photopay.directApi"><span class="typeNameLink">DirectApiErrorListener</span></a></li>
 <li class="circle">com.microblink.photopay.metadata.detection.<a href="com/microblink/photopay/metadata/detection/FailedDetectionCallback.html" title="interface in com.microblink.photopay.metadata.detection"><span class="typeNameLink">FailedDetectionCallback</span></a></li>
-<li class="circle">com.microblink.photopay.metadata.glare.<a href="com/microblink/photopay/metadata/glare/GlareCallback.html" title="interface in com.microblink.photopay.metadata.glare"><span class="typeNameLink">GlareCallback</span></a></li>
-<li class="circle">com.microblink.photopay.entities.settings.<a href="com/microblink/photopay/entities/settings/GlareDetectorOptions.html" title="interface in com.microblink.photopay.entities.settings"><span class="typeNameLink">GlareDetectorOptions</span></a></li>
 <li class="circle">com.microblink.photopay.uisettings.options.<a href="com/microblink/photopay/uisettings/options/HelpIntentUIOptions.html" title="interface in com.microblink.photopay.uisettings.options"><span class="typeNameLink">HelpIntentUIOptions</span></a></li>
 <li class="circle">com.microblink.photopay.uisettings.options.<a href="com/microblink/photopay/uisettings/options/HighResSuccessFrameCaptureUIOptions.html" title="interface in com.microblink.photopay.uisettings.options"><span class="typeNameLink">HighResSuccessFrameCaptureUIOptions</span></a></li>
 <li class="circle">com.microblink.photopay.view.viewfinder.IDetectionView
@@ -633,7 +651,6 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="circle">com.microblink.photopay.view.viewfinder.quadview.<a href="com/microblink/photopay/view/viewfinder/quadview/QuadViewAnimationListener.html" title="interface in com.microblink.photopay.view.viewfinder.quadview"><span class="typeNameLink">QuadViewAnimationListener</span></a></li>
 <li class="circle">com.microblink.photopay.fragment.overlay.components.feedback.<a href="com/microblink/photopay/fragment/overlay/components/feedback/RecognitionFeedbackHandler.html" title="interface in com.microblink.photopay.fragment.overlay.components.feedback"><span class="typeNameLink">RecognitionFeedbackHandler</span></a></li>
 <li class="circle">com.microblink.photopay.fragment.<a href="com/microblink/photopay/fragment/RecognizerRunnerFragment.ScanningOverlayBinder.html" title="interface in com.microblink.photopay.fragment"><span class="typeNameLink">RecognizerRunnerFragment.ScanningOverlayBinder</span></a></li>
-<li class="circle">com.microblink.photopay.results.<a href="com/microblink/photopay/results/Result.html" title="interface in com.microblink.photopay.results"><span class="typeNameLink">Result</span></a></li>
 <li class="circle">com.microblink.photopay.view.recognition.<a href="com/microblink/photopay/view/recognition/ScanResultListener.html" title="interface in com.microblink.photopay.view.recognition"><span class="typeNameLink">ScanResultListener</span></a>
 <ul>
 <li class="circle">com.microblink.photopay.view.recognition.<a href="com/microblink/photopay/view/recognition/ParcelableScanResultListener.html" title="interface in com.microblink.photopay.view.recognition"><span class="typeNameLink">ParcelableScanResultListener</span></a> (also extends android.os.Parcelable)</li>
@@ -641,6 +658,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </ul>
 </li>
 <li class="circle">com.microblink.photopay.hardware.accelerometer.<a href="com/microblink/photopay/hardware/accelerometer/ShakeCallback.html" title="interface in com.microblink.photopay.hardware.accelerometer"><span class="typeNameLink">ShakeCallback</span></a></li>
+<li class="circle">com.microblink.photopay.results.date.<a href="com/microblink/photopay/results/date/SimpleDateResult.html" title="interface in com.microblink.photopay.results.date"><span class="typeNameLink">SimpleDateResult</span></a></li>
 <li class="circle">com.microblink.photopay.uisettings.options.<a href="com/microblink/photopay/uisettings/options/SplashScreenUIOptions.html" title="interface in com.microblink.photopay.uisettings.options"><span class="typeNameLink">SplashScreenUIOptions</span></a></li>
 <li class="circle">com.microblink.photopay.fragment.overlay.components.statusmsg.<a href="com/microblink/photopay/fragment/overlay/components/statusmsg/StatusMessageTranslator.html" title="interface in com.microblink.photopay.fragment.overlay.components.statusmsg"><span class="typeNameLink">StatusMessageTranslator</span></a></li>
 <li class="circle">com.microblink.photopay.fragment.overlay.components.statusmsg.<a href="com/microblink/photopay/fragment/overlay/components/statusmsg/StatusTextStyler.html" title="interface in com.microblink.photopay.fragment.overlay.components.statusmsg"><span class="typeNameLink">StatusTextStyler</span></a></li>
@@ -650,13 +668,14 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="circle">com.microblink.photopay.uisettings.options.<a href="com/microblink/photopay/uisettings/options/SuccessfulImageListenerUIOptions.html" title="interface in com.microblink.photopay.uisettings.options"><span class="typeNameLink">SuccessfulImageListenerUIOptions</span></a></li>
 </ul>
 </section>
-<section role="region">
+<section>
 <h2 title="Enum Hierarchy">Enum Hierarchy</h2>
 <ul>
 <li class="circle">java.lang.Object
 <ul>
 <li class="circle">java.lang.Enum&lt;E&gt; (implements java.lang.Comparable&lt;T&gt;, java.io.Serializable)
 <ul>
+<li class="circle">com.microblink.photopay.entities.recognizers.blinkbarcode.<a href="com/microblink/photopay/entities/recognizers/blinkbarcode/BarcodeType.html" title="enum in com.microblink.photopay.entities.recognizers.blinkbarcode"><span class="typeNameLink">BarcodeType</span></a></li>
 <li class="circle">com.microblink.photopay.view.<a href="com/microblink/photopay/view/BaseCameraView.CameraViewState.html" title="enum in com.microblink.photopay.view"><span class="typeNameLink">BaseCameraView.CameraViewState</span></a></li>
 <li class="circle">com.microblink.photopay.view.<a href="com/microblink/photopay/view/CameraAspectMode.html" title="enum in com.microblink.photopay.view"><span class="typeNameLink">CameraAspectMode</span></a> (implements android.os.Parcelable)</li>
 <li class="circle">com.microblink.photopay.hardware.camera.<a href="com/microblink/photopay/hardware/camera/CameraType.html" title="enum in com.microblink.photopay.hardware.camera"><span class="typeNameLink">CameraType</span></a> (implements android.os.Parcelable)</li>
@@ -689,6 +708,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="circle">com.microblink.photopay.entities.recognizers.<a href="com/microblink/photopay/entities/recognizers/RecognizerBundle.RecognitionDebugMode.html" title="enum in com.microblink.photopay.entities.recognizers"><span class="typeNameLink">RecognizerBundle.RecognitionDebugMode</span></a></li>
 <li class="circle">com.microblink.photopay.util.<a href="com/microblink/photopay/util/RecognizerCompatibilityStatus.html" title="enum in com.microblink.photopay.util"><span class="typeNameLink">RecognizerCompatibilityStatus</span></a></li>
 <li class="circle">com.microblink.photopay.directApi.<a href="com/microblink/photopay/directApi/RecognizerRunner.State.html" title="enum in com.microblink.photopay.directApi"><span class="typeNameLink">RecognizerRunner.State</span></a></li>
+<li class="circle">com.microblink.photopay.activity.result.<a href="com/microblink/photopay/activity/result/ResultStatus.html" title="enum in com.microblink.photopay.activity.result"><span class="typeNameLink">ResultStatus</span></a></li>
 <li class="circle">com.microblink.photopay.fragment.overlay.components.statusmsg.<a href="com/microblink/photopay/fragment/overlay/components/statusmsg/StatusMessageTranslator.Event.html" title="enum in com.microblink.photopay.fragment.overlay.components.statusmsg"><span class="typeNameLink">StatusMessageTranslator.Event</span></a></li>
 <li class="circle">com.microblink.photopay.hardware.camera.<a href="com/microblink/photopay/hardware/camera/VideoResolutionPreset.html" title="enum in com.microblink.photopay.hardware.camera"><span class="typeNameLink">VideoResolutionPreset</span></a> (implements android.os.Parcelable)</li>
 </ul>

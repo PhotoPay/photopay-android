@@ -6,15 +6,16 @@
 <title>CzechiaQrCodeRecognizer.Result (LibPhotoPay API)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="../../../../../../../../stylesheet.css" title="Style">
-<link rel="stylesheet" type="text/css" href="../../../../../../../../jquery/jquery-ui.css" title="Style">
+<link rel="stylesheet" type="text/css" href="../../../../../../../../jquery/jquery-ui.min.css" title="Style">
+<link rel="stylesheet" type="text/css" href="../../../../../../../../jquery-ui.overrides.css" title="Style">
 <script type="text/javascript" src="../../../../../../../../script.js"></script>
 <script type="text/javascript" src="../../../../../../../../jquery/jszip/dist/jszip.min.js"></script>
 <script type="text/javascript" src="../../../../../../../../jquery/jszip-utils/dist/jszip-utils.min.js"></script>
 <!--[if IE]>
 <script type="text/javascript" src="../../../../../../../../jquery/jszip-utils/dist/jszip-utils-ie.min.js"></script>
 <![endif]-->
-<script type="text/javascript" src="../../../../../../../../jquery/jquery-3.5.1.js"></script>
-<script type="text/javascript" src="../../../../../../../../jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="../../../../../../../../jquery/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="../../../../../../../../jquery/jquery-ui.min.js"></script>
 </head>
 <body>
 <script type="text/javascript"><!--
@@ -26,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -157,7 +158,7 @@ extends <a href="../../../Recognizer.Result.html" title="class in com.microblink
 <ul class="blockList">
 <li class="blockList">
 <!-- ======== NESTED CLASS SUMMARY ======== -->
-<section role="region">
+<section>
 <ul class="blockList">
 <li class="blockList"><a id="nested.class.summary">
 <!--   -->
@@ -181,7 +182,7 @@ extends <a href="../../../Recognizer.Result.html" title="class in com.microblink
 </ul>
 </section>
 <!-- =========== FIELD SUMMARY =========== -->
-<section role="region">
+<section>
 <ul class="blockList">
 <li class="blockList"><a id="field.summary">
 <!--   -->
@@ -218,7 +219,7 @@ extends <a href="../../../Recognizer.Result.html" title="class in com.microblink
 </ul>
 </section>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
-<section role="region">
+<section>
 <ul class="blockList">
 <li class="blockList"><a id="constructor.summary">
 <!--   -->
@@ -241,7 +242,7 @@ extends <a href="../../../Recognizer.Result.html" title="class in com.microblink
 </ul>
 </section>
 <!-- ========== METHOD SUMMARY =========== -->
-<section role="region">
+<section>
 <ul class="blockList">
 <li class="blockList"><a id="method.summary">
 <!--   -->
@@ -302,7 +303,7 @@ extends <a href="../../../Recognizer.Result.html" title="class in com.microblink
 </td>
 </tr>
 <tr id="i7" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../results/date/DateResult.html" title="class in com.microblink.photopay.results.date">DateResult</a></code></td>
+<td class="colFirst"><code><a href="../../../../../results/date/Date.html" title="class in com.microblink.photopay.results.date">Date</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getDueDate()">getDueDate</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the due date of the payment.</div>
@@ -316,79 +317,86 @@ extends <a href="../../../Recognizer.Result.html" title="class in com.microblink
 </td>
 </tr>
 <tr id="i9" class="rowColor">
+<td class="colFirst"><code><a href="../../../../../results/date/Date.html" title="class in com.microblink.photopay.results.date">Date</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getLastDateOfTheStandingOrder()">getLastDateOfTheStandingOrder</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns the last date of the standing order.</div>
+</td>
+</tr>
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getOrderFrequency()">getOrderFrequency</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the frequency of the standing order</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>java.math.BigDecimal</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getParsedAmount()">getParsedAmount</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the scanned amount as big decimal value in normal currency (e.g.</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPaymentDescription()">getPaymentDescription</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns description of the payment</div>
 </td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPaymentSituation()">getPaymentSituation</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the payment situation in which QR Code was generated</div>
 </td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPaymentType()">getPaymentType</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the type of payment.</div>
 </td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getRecipientName()">getRecipientName</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the name of the receiving side</div>
 </td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getReference()">getReference</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the reference of the payment</div>
 </td>
 </tr>
-<tr id="i16" class="altColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getSpecificSymbol()">getSpecificSymbol</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the specific symbol.</div>
 </td>
 </tr>
-<tr id="i17" class="rowColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getVariableSymbol()">getVariableSymbol</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the variable symbol.</div>
 </td>
 </tr>
-<tr id="i18" class="altColor">
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code>protected byte[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#serializeToByteArray()">serializeToByteArray</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i19" class="rowColor">
+<tr id="i20" class="altColor">
 <td class="colFirst"><code>protected void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#terminateNative(long)">terminateNative</a></span>&#8203;(long&nbsp;nativeContext)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i20" class="altColor">
+<tr id="i21" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toString()">toString</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
@@ -425,7 +433,7 @@ extends <a href="../../../Recognizer.Result.html" title="class in com.microblink
 <ul class="blockList">
 <li class="blockList">
 <!-- ============ FIELD DETAIL =========== -->
-<section role="region">
+<section>
 <ul class="blockList">
 <li class="blockList"><a id="field.detail">
 <!--   -->
@@ -444,7 +452,7 @@ extends <a href="../../../Recognizer.Result.html" title="class in com.microblink
 </ul>
 </section>
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
-<section role="region">
+<section>
 <ul class="blockList">
 <li class="blockList"><a id="constructor.detail">
 <!--   -->
@@ -463,7 +471,7 @@ extends <a href="../../../Recognizer.Result.html" title="class in com.microblink
 </ul>
 </section>
 <!-- ============ METHOD DETAIL ========== -->
-<section role="region">
+<section>
 <ul class="blockList">
 <li class="blockList"><a id="method.detail">
 <!--   -->
@@ -490,11 +498,26 @@ extends <a href="../../../Recognizer.Result.html" title="class in com.microblink
 <li class="blockList">
 <h4>getDueDate</h4>
 <pre class="methodSignature">@Nullable
-public&nbsp;<a href="../../../../../results/date/DateResult.html" title="class in com.microblink.photopay.results.date">DateResult</a>&nbsp;getDueDate()</pre>
+public&nbsp;<a href="../../../../../results/date/Date.html" title="class in com.microblink.photopay.results.date">Date</a>&nbsp;getDueDate()</pre>
 <div class="block">Returns the due date of the payment.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the due date of the payment.</dd>
+</dl>
+</li>
+</ul>
+<a id="getLastDateOfTheStandingOrder()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getLastDateOfTheStandingOrder</h4>
+<pre class="methodSignature">@Nullable
+public&nbsp;<a href="../../../../../results/date/Date.html" title="class in com.microblink.photopay.results.date">Date</a>&nbsp;getLastDateOfTheStandingOrder()</pre>
+<div class="block">Returns the last date of the standing order.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the last date of the standing order</dd>
 </dl>
 </li>
 </ul>
