@@ -37,7 +37,6 @@
         * [Date Parser](#dateParser)
         * [IBAN Parser](#ibanParser)
         * [Raw Parser](#rawParser)
-    * [PDF417 recognizer](#pdf417Recognizer)
     * [Barcode recognizer](#barcodeRecognizer)
 * [Embedding _PhotoPay_ inside another SDK](#embed-aar)
 * [Processor architecture considerations](#archConsider)
@@ -1246,11 +1245,6 @@ The [`SwedenReferenceParser`](https://photopay.github.io/photopay-android/com/mi
 #### <a name="photopay_parsers_sweden_slipcode"></a> Swedish slip code number parser
 
 The [`SwedenSlipCodeParser`](https://photopay.github.io/photopay-android/com/microblink/entities/parsers/photopay/sweden/slipcode/SwedenSlipCodeParser.html) is used for scanning slip code number on swedish payment slip.
-## <a name="pdf417Recognizer"></a> PDF417 recognizer
-
-The [`Pdf417Recognizer`](https://photopay.github.io/photopay-android/com/microblink/entities/recognizers/blinkbarcode/pdf417/Pdf417Recognizer.html) is recognizer specialised for scanning [PDF417 2D barcodes](https://en.wikipedia.org/wiki/PDF417). This recognizer can recognize only PDF417 2D barcodes - for recognition of other barcodes, please refer to [BarcodeRecognizer](#barcodeRecognizer).
-
-This recognizer can be used in any context, but it works best with the [`BarcodeScanActivity`](https://photopay.github.io/photopay-android/com/microblink/activity/BarcodeScanActivity.html), which has UI best suited for barcode scanning.
 
 ## <a name="barcodeRecognizer"></a> Barcode recognizer
 
