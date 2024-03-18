@@ -20,6 +20,11 @@
     - if provided Bitmap is not in `ARGB_8888` config, it will be automatically converted into `ARGB_8888` config
     - only if the conversion is not possible, then the exception will be thrown
 
+### Other changes
+
+- native code is now built using NDK r26c and uses dynamic c++ runtime (`libc++_shared.so`)
+    - in case when multiple different dependencies use the same runtime in the same app, the latest available version of the library should be packaged into the app
+
 ## 9.0.0
 
 ### API changes
