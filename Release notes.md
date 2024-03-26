@@ -1,5 +1,19 @@
 # Release notes
 
+## 9.1.1 
+
+### Bug fixes
+
+- fixed URL of the server performing online license check when it's enabled
+    - in v9.1.0 the URL depended on the `BUILD_TYPE` property, pointing to production server only when `BUILD_TYPE` was set to `distribute`. However, apparently the `BUILD_TYPE` is not a compile-time property on Android like it's on other platforms and native code, so it was affected by the setting of the app that was integrating the SDK and that caused the SDK to call to a dev server which is unavailable from the external network.
+
+### Other changes
+
+- Add option to change Ping URL for Ping proxy feature through `MicroblinkSDK.setPingProxyUrl()`
+- minor improvements in the default UI w.r.t. accessibility
+- added `android.permission.INTERNET` permission to the manifest of `LibPhotoPay`
+    - this permission is needed in order to correctly perform license key validation for licenses that require that
+
 ## 9.1.0 
 
 ### Minor API changes
