@@ -1,5 +1,10 @@
 # Release notes
 
+## 9.1.2
+
+### Bug fixes
+- fixed Ping server URL error when using proguard-android-optimize.txt default proguard file
+
 ## 9.1.1 
 
 ### Bug fixes
