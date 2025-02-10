@@ -1,5 +1,25 @@
 # Release notes
 
+## 9.2.0
+
+### API changes
+
+- `SlovakiaQRPaymentInformation` now additionally contains `standingOrderInfo`, which optionally exists on some pyBySquare payment QR codes.
+- The `standingOrderInfo` contains `day`, `months`, `periodicity`,  and `lastDate`
+    - `day` indicates day in week or month (depending on periodicity) when payment needs to be done.
+    - `months` indicate multiple months when payment needs to be done. Depending on periodicity, it may also be empty.
+    - `periodicity` defines the period of payment.
+    - `lastDate` defines the date when standing order stops.
+
+### Bug fixes
+
+- Fixed parsing of recipient name from Slovak payBySquare QR codes that contain it, but don’t contain recipient address.
+- Resolved an issue where UI elements could be obscured by system bars when using edge-to-edge mode. The SDK now properly applies insets to prevent overlap, ensuring content remains fully visible
+
+**Other changes**
+
+- The SDK is now supported on Android 15 16KB page size devices.
+
 ## 9.1.2
 
 ### Bug fixes
