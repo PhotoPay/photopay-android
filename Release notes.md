@@ -1,5 +1,17 @@
 # Release notes
 
+## v9.2.1
+
+### Improvements
+
+- Enhanced support for Montenegro account numbers and references
+	- added support for account numbers starting with the `907` prefix
+	- improved parsing of references containing alphabetic characters
+
+### Other changes
+
+- Replaced `Bundle.getParcelable()` function calls with `BundleCompat.getParcelable()`
+
 ## 9.2.0
 
 ### API changes
